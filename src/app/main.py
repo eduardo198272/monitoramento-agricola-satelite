@@ -1,39 +1,21 @@
-import argparse
+import streamlit as st
 from config import APP_NAME, VERSION
 
+st.set_page_config(
+    page_title=APP_NAME,
+    layout="wide"
+)
 
-def parse_args():
-    parser = argparse.ArgumentParser(description=APP_NAME)
+st.title(APP_NAME)
+st.write(f"Versão: {VERSION}")
 
-    parser.add_argument(
-        "--area",
-        type=str,
-        required=False,
-        help="Nome da area de analise"
-    )
+st.subheader("Interface inicial")
 
-    parser.add_argument(
-        "--periodo",
-        type=str,
-        required=False,
-        help="Periodo da analise"
-    )
+area = st.text_input("Nome da área de análise")
+periodo = st.text_input("Período da análise")
 
-    return parser.parse_args()
+if area:
+    st.write(f"Área: {area}")
 
-
-def main():
-    args = parse_args()
-
-    print(APP_NAME)
-    print("Versao:", VERSION)
-
-    if args.area:
-        print("Area:", args.area)
-
-    if args.periodo:
-        print("Periodo:", args.periodo)
-
-
-if __name__ == "__main__":
-    main()
+if periodo:
+    st.write(f"Período: {periodo}")
