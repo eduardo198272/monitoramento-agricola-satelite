@@ -1,5 +1,6 @@
 import streamlit as st
-from config import APP_NAME, VERSION
+
+from src.app.config import APP_NAME, VERSION
 
 st.set_page_config(
     page_title=APP_NAME,
