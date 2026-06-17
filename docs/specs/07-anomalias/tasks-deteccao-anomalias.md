@@ -9,3 +9,5 @@ Referência: `docs/specs/07-anomalias/spec-deteccao-anomalias.md`
 | SPEC-07-03 | Escrever testes mockados: série com anomalia, sem anomalia, desvio zero, poucos pontos | 4+ testes passando | 1h |
 | SPEC-07-04 | Implementar `generate_alert(anomalies, index_name)` | Retorna string "ALERTA: N anomalias em: datas" ou None | 30min |
 | SPEC-07-05 | Escrever testes: alerta com anomalias, alerta sem anomalias | 2 testes passando | 30min |
+| SPEC-07-06 | Implementar `compute_trend(time_series)` com regressão linear | Retorna "crescente", "estável" ou "decrescente" | 1h |
+| SPEC-07-07 | Escrever testes: tendência crescente, decrescente, estável, poucos pontos | 4+ testes passando | 1h |

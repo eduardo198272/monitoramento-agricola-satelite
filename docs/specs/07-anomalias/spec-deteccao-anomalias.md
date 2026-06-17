@@ -10,7 +10,7 @@ Fornecer funções para detectar anomalias na série temporal do índice de vege
 def detect_anomalies(
     time_series: list[dict],
     window_size: int = 3,
-    std_threshold: float = 1.5
+    std_threshold: float = 1.0
 ) -> list[dict]
 ```
 
@@ -18,7 +18,7 @@ def detect_anomalies(
 |---|---|---|
 | `time_series` | `list[dict]` | Série temporal `[{"date": ..., "value": ...}]` |
 | `window_size` | `int` | Janela móvel para calcular média/desvio (dias, default 3) |
-| `std_threshold` | `float` | Número de desvios padrão para considerar anomalia (default 1.5) |
+| `std_threshold` | `float` | Número de desvios padrão para considerar anomalia (default 1.0 — 1 sigma conforme metodologia) |
 
 **Retorno**: `list[dict]` — lista de pontos marcados com `{"date": ..., "value": ..., "anomaly": bool, "z_score": float}`.
 
@@ -59,6 +59,33 @@ def generate_alert(anomalies: list[dict], index_name: str) -> str | None
 
 1. Dado anomalias detectadas, quando gerar alerta, então retorna string com N e datas
 2. Dado nenhuma anomalia, quando gerar alerta, então retorna None
+
+## Análise de Tendência
+
+```python
+def compute_trend(time_series: list[dict]) -> str
+```
+
+| Parâmetro | Tipo | Descrição |
+|---|---|---|
+| `time_series` | `list[dict]` | Série temporal `[{"date": ..., "value": ...}]` |
+
+**Retorno**: `str` — "crescente", "estável" ou "decrescente".
+
+## Regras de Negócio (Tendência)
+
+- Calcular coeficiente angular (inclinação) via regressão linear simples dos valores ao longo do tempo
+- Se inclinação > 0.01: "crescente"
+- Se inclinação < -0.01: "decrescente"
+- Caso contrário: "estável"
+- Se menos de 2 pontos na série, retornar "estável" (dados insuficientes)
+
+## Critérios de Aceitação (Tendência)
+
+1. Dado série com valores crescentes, quando computar tendência, então retorna "crescente"
+2. Dado série com valores decrescentes, quando computar tendência, então retorna "decrescente"
+3. Dado série sem tendência clara, quando computar, então retorna "estável"
+4. Dado série com menos de 2 pontos, quando computar, então retorna "estável"
 
 ## Tasks Relacionadas
 

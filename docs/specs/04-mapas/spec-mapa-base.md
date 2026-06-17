@@ -30,7 +30,7 @@ def create_base_map(center: list = None, zoom: int = 10) -> geemap.Map
 
 1. Dado center e zoom, quando criar mapa, então mapa é centralizado nas coordenadas fornecidas
 2. Dado center=None, quando criar mapa, então usa centro padrão
-3. Mapa deve ser renderizável no Streamlit via `st.map()` ou `geemap.Map.to_streamlit()`
+3. Mapa retornado é instância de `geemap.Map` e renderizável via `to_streamlit()`
 4. Mapa deve conter controle de camadas visível
 
 ## Tasks Relacionadas

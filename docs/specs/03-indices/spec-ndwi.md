@@ -2,7 +2,7 @@
 
 ## Propósito
 
-Fornecer função para calcular o Normalized Difference Water Index (NDWI) a partir de imagens Sentinel-2. NDWI detecta corpos d'água e mede o teor de umidade da vegetação usando as bandas verde (Green) e infravermelho próximo (NIR).
+Fornecer função para calcular o Normalized Difference Water Index (NDWI) a partir de imagens Sentinel-2. NDWI mede o teor de umidade da vegetação usando as bandas do infravermelho próximo (NIR) e infravermelho de ondas curtas (SWIR), conforme Gao (1996).
 
 ## Interface
 
@@ -18,23 +18,24 @@ def calculate_ndwi(image: ee.Image) -> ee.Image
 
 ## Regras de Negócio
 
-- Fórmula: `NDWI = (Green - NIR) / (Green + NIR)`
-- Para Sentinel-2: Green = banda `B3`, NIR = banda `B8`
-- Usar `image.normalizedDifference(["B3", "B8"])` do Earth Engine
+- Fórmula: `NDWI = (NIR - SWIR) / (NIR + SWIR)` (Gao, 1996)
+- Para Sentinel-2: NIR = banda `B8`, SWIR = banda `B11`
+- Usar `image.normalizedDifference(["B8", "B11"])` do Earth Engine
 - Valores NDWI:
-  - > 0: superfície com água
-  - 0 a -0.2: umidade no solo/vegetação
-  - < -0.2: superfície seca
+  - > 0.3: vegetação com alto teor de umidade
+  - 0 a 0.3: vegetação com umidade moderada
+  - -0.3 a 0: vegetação seca ou solo exposto
+  - < -0.3: superfície sem vegetação ou água
 - Retornar imagem com nome da banda `"NDWI"`
 - Deve funcionar tanto para `ee.Image` individual quanto aplicada via `.map()` em `ee.ImageCollection`
 
 ## Critérios de Aceitação
 
-1. Dado image com bandas B3 e B8, quando calcular NDWI, então retorna imagem com banda "NDWI"
-2. Dado pixel com Green > NIR, quando calcular, então NDWI > 0 (água)
-3. Dado pixel com Green = NIR, quando calcular, então NDWI = 0
-4. Dado pixel com Green < NIR, quando calcular, então NDWI < 0 (seco)
-5. Dado imagem sem bandas B3 ou B8, quando calcular, então lança erro apropriado
+1. Dado image com bandas B8 e B11, quando calcular NDWI, então retorna imagem com banda "NDWI"
+2. Dado pixel com NIR > SWIR, quando calcular, então NDWI > 0 (vegetação úmida)
+3. Dado pixel com NIR = SWIR, quando calcular, então NDWI = 0
+4. Dado pixel com NIR < SWIR, quando calcular, então NDWI < 0 (seco)
+5. Dado imagem sem bandas B8 ou B11, quando calcular, então lança erro apropriado
 
 ## Exemplos de Uso
 

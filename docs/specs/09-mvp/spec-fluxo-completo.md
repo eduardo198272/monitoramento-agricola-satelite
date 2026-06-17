@@ -82,6 +82,16 @@ def test_full_pipeline():
     # Verificar que alertas estão no formato correto
 ```
 
+## Cenários de Validação por Cultura
+
+O MVP deve ser validado com geometrias representativas das 3 culturas-alvo definidas na metodologia:
+
+| Cultura | Característica NDVI | Período típico |
+|---------|-------------------|----------------|
+| Soja | Ciclo ~120 dias, NDVI 0.2 → 0.9 → 0.3 | Out-Nov a Fev-Mar |
+| Milho | Ciclo ~150 dias, NDVI 0.2 → 0.9 → 0.4 | Set-Out a Fev-Mar |
+| Pastagem | NDVI estável 0.6-0.8, variações sazonais | Ano todo |
+
 ## Tasks Relacionadas
 
 - TASK-043 — Fluxo completo

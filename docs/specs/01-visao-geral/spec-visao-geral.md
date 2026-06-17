@@ -36,7 +36,7 @@ O sistema segue arquitetura de 3 camadas:
 
 ## Fluxo de Dados (End-to-End)
 
-1. Usuário desenha polígono no mapa → coordenadas GeoJSON
+1. Usuário desenha polígono no mapa ou seleciona área pré-definida → coordenadas GeoJSON
 2. Usuário seleciona data inicial/final
 3. Usuário seleciona índice (NDVI/NDWI)
 4. Sistema busca imagens Sentinel-2 na área/período via Earth Engine
@@ -48,13 +48,35 @@ O sistema segue arquitetura de 3 camadas:
 10. Sistema busca dados climáticos (NASA POWER) para o período
 11. Sistema exibe alertas se anomalias detectadas
 
+## Escopo MVP
+
+O MVP cobre exclusivamente:
+- Imagens **Sentinel-2** (Landsat 8/9 e MODIS são escopo futuro)
+- Índices **NDVI**, **NDWI** e **NDMI** (EVI é escopo futuro)
+- Dados climáticos via **NASA POWER** (INMET e NOAA são escopo futuro)
+- Foco em **monocultura** (soja, milho, pastagem como cenários de teste)
+- **Sem autenticação de usuário**, sem banco de dados, sem mobile
+
+## Requisitos Não-Funcionais (NFR)
+
+| ID | Descrição | Verificação |
+|----|-----------|-------------|
+| RNF01 | Dados de satélite e clima gratuitos | Uso exclusivo de APIs gratuitas (GEE, NASA POWER) |
+| RNF02 | Execução local sem servidor | App executa via `streamlit run` na máquina do usuário |
+| RNF03 | Interface simples e intuitiva | Mapa + controles visíveis sem scroll horizontal |
+| RNF04 | Reprodutibilidade | Testes automatizados com pytest, seed fixo |
+| RNF05 | Código modular | Separação em módulos por responsabilidade (ee, indices, mapas, ui) |
+| RNF06 | Tempo de resposta aceitável | Processamento < 30s para área de até 1000 ha (a validar) |
+| RNF07 | Baixo consumo de recursos | Sem download de imagens locais; processamento via GEE |
+
 ## Convenções
 
 - **TDD primeiro**: todo código deve ter teste escrito antes da implementação
 - **Earth Engine**: autenticação via `ee.Initialize(project=...)` lendo de `os.getenv("EE_PROJECT_ID")`
 - **Coordenadas**: formato GeoJSON (Polygon)
 - **NDVI**: `(NIR - Red) / (NIR + Red)`, onde NIR = B8, Red = B4 (Sentinel-2)
-- **NDWI**: `(Green - NIR) / (Green + NIR)`, onde Green = B3, NIR = B8 (Sentinel-2)
+- **NDWI (Gao, 1996)**: `(NIR - SWIR) / (NIR + SWIR)`, onde NIR = B8, SWIR = B11 (Sentinel-2)
+- **Bandas Sentinel-2**: B2 (azul), B3 (verde), B4 (vermelho), B8 (NIR), B11 (SWIR), QA60 (nuvens)
 
 ## Estrutura de Diretórios
 

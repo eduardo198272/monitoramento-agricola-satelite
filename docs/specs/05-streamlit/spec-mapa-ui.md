@@ -15,6 +15,7 @@ def display_summary(
     index_name: str,
     mean_value: float,
     area_ha: float,
+    trend: str,
     alert: str = None
 ) -> None
 ```
@@ -28,6 +29,7 @@ def display_summary(
   - Nome do índice selecionado
   - Valor médio do índice na área
   - Área analisada em hectares
+  - Tendência: "crescente" (verde), "estável" (azul) ou "decrescente" (vermelho)
   - Alerta se anomalia detectada (vermelho) ou "Normal" (verde)
 - Se ocorrer erro no processamento, exibir mensagem de erro com `st.error()`
 

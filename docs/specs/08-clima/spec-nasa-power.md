@@ -2,7 +2,7 @@
 
 ## Propósito
 
-Fornecer funções para buscar dados climáticos históricos da API NASA POWER para a área e período selecionados, incluindo precipitação e temperatura.
+Fornecer funções para buscar dados climáticos históricos da API NASA POWER para a área e período selecionados, incluindo precipitação, temperatura e radiação solar.
 
 ## Interface
 
@@ -20,9 +20,9 @@ def fetch_climate_data(
 | `geometry` | `ee.Geometry` | Área de interesse (para extrair coordenadas centrais) |
 | `start_date` | `str` | Data inicial "YYYY-MM-DD" |
 | `end_date` | `str` | Data final "YYYY-MM-DD" |
-| `parameters` | `list[str]` ou `None` | Parâmetros POWER. Default: `["PRECTOTCORR", "T2M"]` |
+| `parameters` | `list[str]` ou `None` | Parâmetros POWER. Default: `["PRECTOTCORR", "T2M", "ALLSKY_SFC_SW_DWN"]` |
 
-**Retorno**: `pd.DataFrame` — colunas: `date`, `precipitation`, `temperature`.
+**Retorno**: `pd.DataFrame` — colunas: `date`, `precipitation`, `temperature`, `solar_radiation`.
 
 ## Regras de Negócio
 
@@ -34,6 +34,7 @@ def fetch_climate_data(
   - `T2M`: temperatura média diária a 2m (°C)
   - `T2M_MAX`: temperatura máxima diária (°C)
   - `T2M_MIN`: temperatura mínima diária (°C)
+  - `ALLSKY_SFC_SW_DWN`: radiação solar de superfície (kWh/m²/dia)
 - Converter resposta JSON para DataFrame com colunas padronizadas
 - Valores nulos na API (código -999) devem ser convertidos para `None`
 - Se API retornar erro, lançar exceção descritiva
@@ -48,6 +49,10 @@ def plot_climate_data(climate_df: pd.DataFrame) -> plotly.graph_objects.Figure
 
 **Retorno**: `plotly.graph_objects.Figure` — gráfico de barras + linha.
 
+## Fontes Futuras
+
+As fontes INMET (estações meteorológicas) e NOAA (modelos globais) são reconhecidas como alternativas/complementos ao NASA POWER, mas estão fora do escopo do MVP. Podem ser integradas em versões futuras.
+
 ## Regras de Negócio (Plotagem)
 
 - Usar Plotly
@@ -60,7 +65,7 @@ def plot_climate_data(climate_df: pd.DataFrame) -> plotly.graph_objects.Figure
 ## Critérios de Aceitação
 
 1. Dado geometry com coordenadas válidas, quando buscar clima, então retorna DataFrame não vazio
-2. DataFrame contém colunas "date", "precipitation", "temperature"
+2. DataFrame contém colunas "date", "precipitation", "temperature", "solar_radiation"
 3. Dado geometry sem coordenadas, quando buscar, então lança ValueError
 4. Dado parâmetros personalizados, quando buscar, então retorna colunas adicionais
 5. Dado climate_df não vazio, quando plotar, então retorna Figure com barras e linha
