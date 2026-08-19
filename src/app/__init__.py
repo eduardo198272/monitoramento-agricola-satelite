@@ -25,6 +25,12 @@ from src.app.time_series import (
     plot_time_series,
 )
 
+from src.app.anomalies import (
+    detect_anomalies,
+    generate_alert,
+    compute_trend,
+)
+
 __all__ = [
     "filter_by_date",
     "filter_by_area",
@@ -42,4 +48,7 @@ __all__ = [
     "load_predefined_area",
     "compute_time_series",
     "plot_time_series",
+    "detect_anomalies",
+    "generate_alert",
+    "compute_trend",
 ]
