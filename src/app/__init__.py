@@ -20,6 +20,11 @@ from src.app.maps import (
     load_predefined_area,
 )
 
+from src.app.time_series import (
+    compute_time_series,
+    plot_time_series,
+)
+
 __all__ = [
     "filter_by_date",
     "filter_by_area",
@@ -35,4 +40,6 @@ __all__ = [
     "get_drawn_geometry",
     "get_predefined_areas",
     "load_predefined_area",
+    "compute_time_series",
+    "plot_time_series",
 ]
