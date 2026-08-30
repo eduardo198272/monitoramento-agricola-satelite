@@ -26,6 +26,9 @@ Spec-Driven Development (SDD) é a prática de escrever especificações detalha
 | 07 | `07-anomalias/` | `spec-deteccao-anomalias.md` | TASK-035 a TASK-038 | `tasks-deteccao-anomalias.md` |
 | 08 | `08-clima/` | `spec-nasa-power.md` | TASK-039 a TASK-042 | `tasks-nasa-power.md` |
 | 09 | `09-mvp/` | `spec-fluxo-completo.md` | TASK-043 a TASK-045 | `tasks-fluxo-completo.md` |
+| 10 | `10-mapas-interacao/` | `spec-mapa-interacao.md` | SPEC-10-01 a SPEC-10-14 | `tasks-mapa-interacao.md` |
+| 11 | `11-unidades-area/` | `spec-unidades-area.md` | SPEC-11-01 a SPEC-11-09 | `tasks-unidades-area.md` |
+| 12 | `12-interface-resultados/` | `spec-interface-resultados.md` | SPEC-12-01 a SPEC-12-10 | `tasks-interface-resultados.md` |
 
 ## Sub-tasks breakdown
 
@@ -36,18 +39,21 @@ Cada spec possui um arquivo `tasks-*.md` com a quebra em sub-tasks implementáve
 | SPEC-01-01 a SPEC-01-04 | Visão Geral | Arquitetura, stack, fluxo, convenções | 4h30 |
 | SPEC-02-01 a SPEC-02-13 | Earth Engine | Imagem, nuvem, data/área + testes | 10h |
 | SPEC-03-01 a SPEC-03-12 | Índices | NDVI, NDWI, NDMI + testes | 8h |
-| SPEC-04-01 a SPEC-04-17 | Mapas | Base, índice, legenda, área (desenho + pré-definida) + testes | 12h |
+| SPEC-04-01 a SPEC-04-17 | Mapas | Base, índice, legenda e seleção por desenho + testes | 12h |
 | SPEC-05-01 a SPEC-05-14 | Streamlit | App, controles, UI + testes | 10h |
 | SPEC-06-01 a SPEC-06-06 | Série Temporal | Computar, plotar + testes | 5h30 |
 | SPEC-07-01 a SPEC-07-07 | Anomalias | Detectar, alertar, tendência + testes | 7h |
 | SPEC-08-01 a SPEC-08-06 | Clima | NASA POWER, plotar + testes | 5h |
 | SPEC-09-01 a SPEC-09-07 | MVP | Pipeline, integração, validação | 11h30 |
+| SPEC-10-01 a SPEC-10-14 | Mapa interativo | Pesquisa, seleção, centralização, bloqueio e limpeza | 13h30 |
+| SPEC-11-01 a SPEC-11-09 | Unidades de área | Conversão e exibição em hectares ou acres | 6h30 |
+| SPEC-12-01 a SPEC-12-10 | Interface de resultados | Layout, alertas e testes de apresentação | 7h45 |
 
 ## Requisitos Funcionais (RF) mapeados
 
 | RF | Descrição | Specs relacionadas |
 |---|---|---|
-| RF01 | Selecionar área geográfica (desenho + áreas pré-definidas) | `04-mapas/spec-selecao-area.md` |
+| RF01 | Selecionar área geográfica por desenho de polígono | `04-mapas/spec-selecao-area.md`, `10-mapas-interacao/spec-mapa-interacao.md` |
 | RF02 | Selecionar período de datas | `02-earth-engine/spec-filtro-data-area.md`, `05-streamlit/spec-controles.md` |
 | RF03 | Buscar imagens Sentinel-2 | `02-earth-engine/spec-busca-imagem.md` |
 | RF04 | Calcular NDVI | `03-indices/spec-ndvi.md` |
@@ -57,3 +63,11 @@ Cada spec possui um arquivo `tasks-*.md` com a quebra em sub-tasks implementáve
 | RF08 | Detectar anomalias | `07-anomalias/spec-deteccao-anomalias.md` |
 | RF09 | Integrar dados climáticos | `08-clima/spec-nasa-power.md` |
 | RF10 | Exibir resumo (índice médio, tendência, alerta) | `05-streamlit/spec-mapa-ui.md` |
+| RF11 | Pesquisar e centralizar localidades no mapa | `10-mapas-interacao/spec-mapa-interacao.md` |
+| RF12 | Bloquear e liberar navegação após seleção do polígono | `10-mapas-interacao/spec-mapa-interacao.md` |
+| RF13 | Exibir área em hectares ou acres | `11-unidades-area/spec-unidades-area.md` |
+| RF14 | Organizar resultados e alertas na interface | `12-interface-resultados/spec-interface-resultados.md` |
+| RF11 | Pesquisar e centralizar localidades no mapa | `10-mapas-interacao/spec-mapa-interacao.md` |
+| RF12 | Bloquear e liberar navegação após seleção do polígono | `10-mapas-interacao/spec-mapa-interacao.md` |
+| RF13 | Exibir área em hectares ou acres | `11-unidades-area/spec-unidades-area.md` |
+| RF14 | Organizar resultados e alertas na interface | `12-interface-resultados/spec-interface-resultados.md` |

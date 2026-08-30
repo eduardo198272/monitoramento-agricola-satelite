@@ -16,8 +16,10 @@ from src.app.maps import (
     add_colorbar,
     enable_area_draw,
     get_drawn_geometry,
-    get_predefined_areas,
-    load_predefined_area,
+    create_selection_map,
+    geojson_to_ee_geometry,
+    DEFAULT_CENTER,
+    DEFAULT_ZOOM,
 )
 
 from src.app.time_series import (
@@ -44,8 +46,10 @@ __all__ = [
     "add_colorbar",
     "enable_area_draw",
     "get_drawn_geometry",
-    "get_predefined_areas",
-    "load_predefined_area",
+    "create_selection_map",
+    "geojson_to_ee_geometry",
+    "DEFAULT_CENTER",
+    "DEFAULT_ZOOM",
     "compute_time_series",
     "plot_time_series",
     "detect_anomalies",

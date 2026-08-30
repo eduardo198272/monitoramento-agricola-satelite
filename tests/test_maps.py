@@ -7,8 +7,7 @@ from src.app.maps import (
     add_colorbar,
     enable_area_draw,
     get_drawn_geometry,
-    get_predefined_areas,
-    load_predefined_area,
+    geojson_to_ee_geometry,
     DEFAULT_CENTER,
     DEFAULT_ZOOM,
     NDVI_PALETTE,
@@ -27,7 +26,7 @@ class TestCreateBaseMap:
 
         mock_geemap.Map.assert_called_once_with(center=[-20.0, -45.0], zoom=12)
         mock_map.add_layer_control.assert_called_once()
-        mock_map.add_scale_bar.assert_called_once()
+        assert result == mock_map
         assert result == mock_map
 
     @patch("src.app.maps.geemap")
@@ -210,41 +209,6 @@ class TestAddColorbar:
         assert call_kwargs["vis_params"]["max"] == 0.5
 
 
-class TestPredefinedAreas:
-    def test_get_predefined_areas_returns_list_of_dicts(self):
-        areas = get_predefined_areas()
-
-        assert isinstance(areas, list)
-        assert len(areas) >= 3
-        for area in areas:
-            assert "name" in area
-            assert "geometry" in area
-            assert isinstance(area["name"], str)
-
-    def test_get_predefined_areas_contains_expected_names(self):
-        areas = get_predefined_areas()
-        names = {area["name"] for area in areas}
-
-        assert "Talhão A" in names
-        assert "Talhão B" in names
-        assert "Talhão C" in names
-
-    def test_load_predefined_area_valid_name(self):
-        area = load_predefined_area("Talhão A")
-
-        assert area is not None
-
-    def test_load_predefined_area_case_insensitive(self):
-        area = load_predefined_area("talhao a")
-
-        assert area is not None
-
-    def test_load_predefined_area_invalid_name_returns_none(self):
-        area = load_predefined_area("Área Inexistente")
-
-        assert area is None
-
-
 class TestEnableAreaDraw:
     @patch("src.app.maps.geemap")
     def test_enable_area_draw_polygon(self, mock_geemap):
@@ -252,29 +216,31 @@ class TestEnableAreaDraw:
         mock_draw_control = MagicMock()
         mock_map.draw_control = mock_draw_control
 
-        enable_area_draw(mock_map, "polygon")
+        enable_area_draw(mock_map)
 
-        mock_map.add_draw_control.assert_called_once()
-        assert mock_draw_control.polygon is True
-        assert mock_draw_control.rectangle is False
+        mock_map.add_draw_control_lite.assert_called_once()
 
-    @patch("src.app.maps.geemap")
-    def test_enable_area_draw_rectangle(self, mock_geemap):
-        mock_map = MagicMock()
-        mock_draw_control = MagicMock()
-        mock_map.draw_control = mock_draw_control
+class TestGeojsonToEeGeometry:
+    @patch("src.app.maps.ee")
+    def test_converts_polygon(self, mock_ee):
+        geojson = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                                  [-52.0, -28.1], [-52.1, -28.0]]],
+            },
+        }
 
-        enable_area_draw(mock_map, "rectangle")
+        geojson_to_ee_geometry(geojson)
 
-        mock_map.add_draw_control.assert_called_once()
-        assert mock_draw_control.polygon is False
-        assert mock_draw_control.rectangle is True
+        mock_ee.Geometry.Polygon.assert_called_once_with(
+            geojson["geometry"]["coordinates"]
+        )
 
-    def test_enable_area_draw_invalid_type_raises_error(self):
-        mock_map = MagicMock()
-
-        with pytest.raises(ValueError, match="draw_type deve ser 'polygon' ou 'rectangle'"):
-            enable_area_draw(mock_map, "circle")
+    def test_rejects_non_polygon(self):
+        with pytest.raises(ValueError, match="usando um polígono"):
+            geojson_to_ee_geometry({"type": "Point", "coordinates": [-52, -28]})
 
 
 class TestGetDrawnGeometry:

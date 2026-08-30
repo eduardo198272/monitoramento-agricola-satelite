@@ -2,7 +2,7 @@
 
 ## Propósito
 
-Integrar o mapa interativo e os resultados da análise na área principal do Streamlit, exibindo o mapa temático após o processamento.
+Integrar o mapa de seleção, o mapa temático e os resultados da análise na área principal do Streamlit, mantendo os indicadores principais acessíveis após o processamento. A organização detalhada dos resultados está em `12-interface-resultados/spec-interface-resultados.md`.
 
 ## Interface
 
@@ -14,23 +14,23 @@ def display_map(map_obj: geemap.Map) -> None
 def display_summary(
     index_name: str,
     mean_value: float,
-    area_ha: float,
+    area_value: float,
+    area_unit: str,
     trend: str,
-    alert: str = None
 ) -> None
 ```
 
 ## Regras de Negócio
 
-- Usar `geemap.Map.to_streamlit(height=600)` para renderizar o mapa no Streamlit
-- O mapa só deve ser exibido após o botão "Analisar" ser clicado e o processamento concluído
+- Usar `streamlit-folium` para o mapa de seleção e `geemap.Map.to_streamlit()` para o mapa temático
+- O mapa de seleção deve estar disponível antes da análise
 - Exibir spinner/loading durante o processamento (`st.spinner("Processando...")`)
 - Abaixo do mapa, exibir painel de resumo com:
   - Nome do índice selecionado
   - Valor médio do índice na área
-  - Área analisada em hectares
+  - Área analisada na unidade selecionada
   - Tendência: "crescente" (verde), "estável" (azul) ou "decrescente" (vermelho)
-  - Alerta se anomalia detectada (vermelho) ou "Normal" (verde)
+- Exibir anomalias separadamente com `st.warning()`
 - Se ocorrer erro no processamento, exibir mensagem de erro com `st.error()`
 
 ## Critérios de Aceitação
@@ -39,7 +39,8 @@ def display_summary(
 2. Dado mapa sendo carregado, então spinner é exibido
 3. Dado resultado da análise, então painel de resumo aparece abaixo do mapa
 4. Dado erro no processamento, então mensagem de erro é exibida
-5. Antes de qualquer análise, área principal mostra mensagem "Selecione uma área e clique em Analisar"
+5. Antes de qualquer análise, área principal mostra orientação para desenhar um polígono
+6. Dado uma anomalia detectada, então ela aparece uma única vez em amarelo
 
 ## Tasks Relacionadas
 

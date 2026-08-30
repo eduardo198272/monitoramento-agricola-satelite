@@ -199,11 +199,15 @@ class TestCalculateNDVI:
         mock_ndvi = MagicMock()
         mock_image.normalizedDifference.return_value = mock_ndvi
         mock_ndvi.rename.return_value = mock_ndvi
+        mock_ndvi.copyProperties.return_value = mock_ndvi
 
         result = calculate_ndvi(mock_image)
 
         mock_image.normalizedDifference.assert_called_once_with(["B8", "B4"])
         mock_ndvi.rename.assert_called_once_with("NDVI")
+        mock_ndvi.copyProperties.assert_called_once_with(
+            mock_image, ["system:time_start", "system:index"]
+        )
         assert result == mock_ndvi
 
     @patch("src.app.earth_engine.ee")
@@ -265,11 +269,15 @@ class TestCalculateNDWI:
         mock_ndwi = MagicMock()
         mock_image.normalizedDifference.return_value = mock_ndwi
         mock_ndwi.rename.return_value = mock_ndwi
+        mock_ndwi.copyProperties.return_value = mock_ndwi
 
         result = calculate_ndwi(mock_image)
 
         mock_image.normalizedDifference.assert_called_once_with(["B8", "B11"])
         mock_ndwi.rename.assert_called_once_with("NDWI")
+        mock_ndwi.copyProperties.assert_called_once_with(
+            mock_image, ["system:time_start", "system:index"]
+        )
         assert result == mock_ndwi
 
     @patch("src.app.earth_engine.ee")
@@ -331,11 +339,15 @@ class TestCalculateNDMI:
         mock_ndmi = MagicMock()
         mock_image.normalizedDifference.return_value = mock_ndmi
         mock_ndmi.rename.return_value = mock_ndmi
+        mock_ndmi.copyProperties.return_value = mock_ndmi
 
         result = calculate_ndmi(mock_image)
 
         mock_image.normalizedDifference.assert_called_once_with(["B8A", "B11"])
         mock_ndmi.rename.assert_called_once_with("NDMI")
+        mock_ndmi.copyProperties.assert_called_once_with(
+            mock_image, ["system:time_start", "system:index"]
+        )
         assert result == mock_ndmi
 
     @patch("src.app.earth_engine.ee")

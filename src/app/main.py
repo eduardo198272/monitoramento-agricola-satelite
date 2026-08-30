@@ -1,7 +1,10 @@
+import ee
 import streamlit as st
 from datetime import date, timedelta
+from streamlit_folium import st_folium
 
 from src.app.config import APP_NAME, VERSION
+from src.app.ee_auth import initialize_earth_engine
 from src.app.earth_engine import (
     get_image_collection,
     calculate_ndvi,
@@ -13,12 +16,27 @@ from src.app.maps import (
     create_base_map,
     add_index_layer,
     add_colorbar,
-    get_predefined_areas,
-    load_predefined_area,
+    enable_area_draw,
+    create_selection_map,
+    geojson_to_ee_geometry,
+    DEFAULT_CENTER,
+    DEFAULT_ZOOM,
 )
+from src.app.time_series import compute_time_series, plot_time_series
+from src.app.anomalies import detect_anomalies, generate_alert, compute_trend
+from src.app.climate import fetch_climate_data, plot_climate_data
 
 DEFAULT_START = date.today() - timedelta(days=365)
 DEFAULT_END = date.today()
+
+
+@st.cache_resource
+def init_earth_engine():
+    try:
+        initialize_earth_engine()
+        return True, None
+    except Exception as e:
+        return False, str(e)
 
 
 def display_map(map_obj) -> None:
@@ -52,78 +70,79 @@ def display_summary(
         st.markdown(f"**Alerta:** :{alert_color}[{alert}]")
 
 
-def compute_index_image(collection, index_name: str):
-    if index_name == "NDVI":
-        return collection.map(calculate_ndvi)
-    elif index_name == "NDWI":
-        return collection.map(calculate_ndwi)
-    elif index_name == "NDMI":
-        return collection.map(calculate_ndmi)
-    raise ValueError(f"Índice não suportado: {index_name}")
-
-
-def compute_statistics(index_image, geometry, index_name: str):
-    band_name = index_name
-    stats = index_image.select(band_name).reduceRegion(
-        reducer=ee.Reducer.mean(),
-        geometry=geometry,
-        scale=10,
-        maxPixels=1e9
-    ).getInfo()
-
-    mean_value = stats.get(band_name, 0)
-
-    area_ha = geometry.area().divide(10000).getInfo()
-
-    trend = "estável"
-    if mean_value > 0.5:
-        trend = "crescente"
-    elif mean_value < 0.2:
-        trend = "decrescente"
-
-    alert = "Normal"
-    if mean_value < 0:
-        alert = "Possível água/nuvem"
-
-    return mean_value, area_ha, trend, alert
-
-
 def run_analysis(geometry, start_date, end_date, index_name):
-    collection = get_image_collection(geometry, str(start_date), str(end_date))
+    try:
+        collection = get_image_collection(geometry, str(start_date), str(end_date))
 
-    if collection.size().getInfo() == 0:
-        raise ValueError("Nenhuma imagem encontrada para o período e área selecionados")
+        if collection.size().getInfo() == 0:
+            return {
+                "success": False,
+                "error": "Nenhuma imagem encontrada para o período e área selecionados"
+            }
 
-    collection = collection.map(mask_clouds)
+        collection = collection.map(mask_clouds)
 
-    index_collection = compute_index_image(collection, index_name)
+        if index_name == "NDVI":
+            index_collection = collection.map(calculate_ndvi)
+        elif index_name == "NDWI":
+            index_collection = collection.map(calculate_ndwi)
+        elif index_name == "NDMI":
+            index_collection = collection.map(calculate_ndmi)
+        else:
+            return {
+                "success": False,
+                "error": f"Índice não suportado: {index_name}"
+            }
 
-    mean_index = index_collection.mean()
+        index_map = index_collection.median()
 
-    mean_value, area_ha, trend, alert = compute_statistics(
-        mean_index, geometry, index_name
-    )
+        band_name = index_name
+        stats = index_map.select(band_name).reduceRegion(
+            reducer=ee.Reducer.mean(),
+            geometry=geometry,
+            scale=10,
+            maxPixels=1e9
+        ).getInfo()
 
-    m = create_base_map(
-        center=[geometry.centroid().coordinates().getInfo()[1],
-                geometry.centroid().coordinates().getInfo()[0]],
-        zoom=12
-    )
+        mean_value = stats.get(band_name)
 
-    if index_name == "NDVI":
-        palette = ["blue", "white", "green"]
-    elif index_name == "NDWI":
-        palette = ["brown", "white", "blue"]
-    else:
-        palette = ["red", "yellow", "blue"]
+        area_ha = geometry.area().divide(10000).getInfo()
 
-    m = add_index_layer(m, mean_index, index_name, palette=palette)
-    add_colorbar(m, palette, index_name)
+        time_series = compute_time_series(
+            index_collection, geometry, index_name, scale=10
+        )
 
-    return m, mean_value, area_ha, trend, alert
+        time_series_plot = plot_time_series(time_series, index_name) if time_series else None
 
+        anomalies = detect_anomalies(time_series, window_size=3, std_threshold=1.0)
+        alert = generate_alert(anomalies, index_name)
 
-import ee
+        try:
+            climate_df = fetch_climate_data(geometry, start_date, end_date)
+        except Exception:
+            climate_df = None
+
+        climate_plot = plot_climate_data(climate_df) if climate_df is not None and not climate_df.empty else None
+
+        return {
+            "success": True,
+            "index_name": index_name,
+            "index_map": index_map,
+            "time_series": time_series,
+            "time_series_plot": time_series_plot,
+            "anomalies": anomalies,
+            "alert": alert,
+            "climate_data": climate_df,
+            "climate_plot": climate_plot,
+            "mean_value": mean_value,
+            "area_ha": area_ha,
+        }
+
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
 
 
 def main():
@@ -133,6 +152,12 @@ def main():
     )
 
     st.title("Monitoramento Agrícola por Imagens de Satélite")
+
+    ee_ok, ee_error = init_earth_engine()
+    if not ee_ok:
+        st.error(f"Erro ao inicializar Earth Engine: {ee_error}")
+        st.info("Configure a variável EE_PROJECT_ID no arquivo .env")
+        return
 
     with st.sidebar:
         st.header("Parâmetros de Análise")
@@ -146,17 +171,7 @@ def main():
         index_name = st.selectbox("Índice", options=["NDVI", "NDWI", "NDMI"])
 
         st.subheader("Seleção de Área")
-        area_option = st.radio("Tipo de seleção", ["Desenhar no mapa", "Área pré-definida"])
-
-        drawn_geometry = None
-        predefined_geometry = None
-
-        if area_option == "Área pré-definida":
-            areas = get_predefined_areas()
-            area_names = [a["name"] for a in areas]
-            selected_area = st.selectbox("Área pré-definida", options=area_names)
-            if selected_area:
-                predefined_geometry = load_predefined_area(selected_area)
+        st.info("Desenhe um polígono no mapa para definir a área de interesse")
 
         analyze = st.button("Analisar", disabled=(end_date < start_date))
 
@@ -164,52 +179,93 @@ def main():
         st.session_state.map_obj = None
         st.session_state.analysis_result = None
         st.session_state.error = None
-
-    if area_option == "Desenhar no mapa" and st.session_state.map_obj is not None:
-        pass
+        st.session_state.drawn_geometry = None
+        st.session_state.drawn_geojson = None
 
     col_main = st.container()
 
     with col_main:
+        st.subheader("Desenhe a área de interesse no mapa")
+        selection_map = create_selection_map(
+            center=DEFAULT_CENTER,
+            zoom=DEFAULT_ZOOM,
+            geojson=st.session_state.drawn_geojson,
+        )
+        map_data = st_folium(
+            selection_map,
+            key="area_selection_map",
+            height=600,
+            returned_objects=["last_active_drawing"],
+            use_container_width=True,
+        )
+
+        drawn_geojson = map_data.get("last_active_drawing") if map_data else None
+        if drawn_geojson:
+            try:
+                st.session_state.drawn_geometry = geojson_to_ee_geometry(drawn_geojson)
+                st.session_state.drawn_geojson = drawn_geojson
+                st.success("Área desenhada capturada! Clique em Analisar.")
+            except ValueError as error:
+                st.session_state.drawn_geometry = None
+                st.error(str(error))
+        elif st.session_state.drawn_geometry is None:
+            st.info("Desenhe um polígono no mapa para definir a área.")
+
         if analyze and end_date >= start_date:
-            geometry = predefined_geometry if area_option == "Área pré-definida" else None
+            geometry = st.session_state.drawn_geometry
 
             if geometry is None:
-                st.error("Selecione ou desenhe uma área antes de analisar")
+                st.error("Desenhe uma área no mapa antes de analisar")
             else:
                 with st.spinner("Processando..."):
-                    try:
-                        m, mean_value, area_ha, trend, alert = run_analysis(
-                            geometry, start_date, end_date, index_name
+                    result = run_analysis(geometry, start_date, end_date, index_name)
+                    if result["success"]:
+                        st.session_state.analysis_result = result
+                        m = create_base_map(
+                            center=[geometry.centroid().coordinates().getInfo()[1],
+                                    geometry.centroid().coordinates().getInfo()[0]],
+                            zoom=12
                         )
+                        if index_name == "NDVI":
+                            palette = ["blue", "white", "green"]
+                        elif index_name == "NDWI":
+                            palette = ["brown", "white", "blue"]
+                        else:
+                            palette = ["red", "yellow", "blue"]
+
+                        m = add_index_layer(m, result["index_map"], index_name, palette=palette)
+                        add_colorbar(m, palette, index_name)
                         st.session_state.map_obj = m
-                        st.session_state.analysis_result = {
-                            "index_name": index_name,
-                            "mean_value": mean_value,
-                            "area_ha": area_ha,
-                            "trend": trend,
-                            "alert": alert
-                        }
                         st.session_state.error = None
-                    except Exception as e:
-                        st.session_state.error = str(e)
+                    else:
+                        st.session_state.error = result["error"]
                         st.session_state.map_obj = None
                         st.session_state.analysis_result = None
 
         if st.session_state.error:
             st.error(st.session_state.error)
         elif st.session_state.map_obj and st.session_state.analysis_result:
-            display_map(st.session_state.map_obj)
             res = st.session_state.analysis_result
+
+            display_map(st.session_state.map_obj)
             display_summary(
-                res["index_name"],
+                res.get("index_name", index_name),
                 res["mean_value"],
                 res["area_ha"],
-                res["trend"],
+                compute_trend(res["time_series"]) if res["time_series"] else "estável",
                 res["alert"]
             )
-        else:
-            st.info("Selecione uma área e clique em Analisar")
+
+            if res["time_series_plot"]:
+                st.subheader(f"Série Temporal de {index_name}")
+                st.plotly_chart(res["time_series_plot"], use_container_width=True)
+
+            if res["climate_plot"]:
+                st.subheader("Dados Climáticos (NASA POWER)")
+                st.plotly_chart(res["climate_plot"], use_container_width=True)
+
+            if res["alert"]:
+                st.warning(res["alert"])
 
 
 if __name__ == "__main__":

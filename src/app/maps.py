@@ -1,5 +1,7 @@
 import geemap
 import ee
+import folium
+from folium.plugins import Draw
 
 
 DEFAULT_CENTER = [-28.0, -52.0]
@@ -18,7 +20,6 @@ def create_base_map(center: list = None, zoom: int = DEFAULT_ZOOM) -> geemap.Map
 
     m = geemap.Map(center=center, zoom=zoom)
     m.add_layer_control()
-    m.add_scale_bar()
     return m
 
 
@@ -71,70 +72,66 @@ def add_colorbar(
     )
 
 
-PREDEFINED_AREAS_RAW = {
-    "Talhão A": [[
-        [-52.1, -28.0],
-        [-52.05, -28.0],
-        [-52.05, -28.05],
-        [-52.1, -28.05],
-        [-52.1, -28.0]
-    ]],
-    "Talhão B": [[
-        [-52.2, -28.1],
-        [-52.15, -28.1],
-        [-52.15, -28.15],
-        [-52.2, -28.15],
-        [-52.2, -28.1]
-    ]],
-    "Talhão C": [[
-        [-52.3, -27.9],
-        [-52.25, -27.9],
-        [-52.25, -27.95],
-        [-52.3, -27.95],
-        [-52.3, -27.9]
-    ]],
-}
+def create_selection_map(
+    center: list = None,
+    zoom: int = DEFAULT_ZOOM,
+    geojson: dict = None,
+) -> folium.Map:
+    """Create the interactive map used to select the area of interest."""
+    if center is None:
+        center = DEFAULT_CENTER
+    if not isinstance(zoom, int) or zoom < 1 or zoom > 20:
+        raise ValueError("zoom deve ser inteiro entre 1 e 20")
 
-_cached_geometries = {}
+    selection_map = folium.Map(location=center, zoom_start=zoom, control_scale=True)
+    Draw(
+        export=False,
+        draw_options={
+            "polyline": False,
+            "rectangle": False,
+            "circle": False,
+            "marker": False,
+            "circlemarker": False,
+            "polygon": True,
+        },
+        edit_options={"edit": True, "remove": True},
+    ).add_to(selection_map)
 
+    if geojson:
+        folium.GeoJson(
+            geojson,
+            name="Área selecionada",
+            style_function=lambda _: {
+                "color": "#ff7800",
+                "weight": 3,
+                "fillColor": "#ff7800",
+                "fillOpacity": 0.2,
+            },
+        ).add_to(selection_map)
 
-def _get_geometry(name: str) -> ee.Geometry:
-    if name not in _cached_geometries:
-        _cached_geometries[name] = ee.Geometry.Polygon(PREDEFINED_AREAS_RAW[name])
-    return _cached_geometries[name]
-
-
-def get_predefined_areas() -> list[dict]:
-    return [
-        {"name": name, "geometry": _get_geometry(name)}
-        for name in PREDEFINED_AREAS_RAW
-    ]
-
-
-def load_predefined_area(area_name: str) -> ee.Geometry | None:
-    import unicodedata
-
-    def normalize(s: str) -> str:
-        return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn').lower()
-
-    normalized_input = normalize(area_name)
-    for name in PREDEFINED_AREAS_RAW:
-        if normalize(name) == normalized_input:
-            return _get_geometry(name)
-    return None
+    return selection_map
 
 
-def enable_area_draw(map_obj: geemap.Map, draw_type: str = "polygon") -> None:
-    if draw_type not in ("polygon", "rectangle"):
-        raise ValueError("draw_type deve ser 'polygon' ou 'rectangle'")
+def geojson_to_ee_geometry(geojson: dict) -> ee.Geometry:
+    """Convert a drawn GeoJSON geometry into an Earth Engine geometry."""
+    if not isinstance(geojson, dict):
+        raise ValueError("A área desenhada não possui um formato GeoJSON válido")
 
-    map_obj.add_draw_control()
-    if draw_type == "rectangle":
-        map_obj.draw_control.rectangle = True
-        map_obj.draw_control.polygon = False
-    else:
-        map_obj.draw_control.rectangle = False
-        map_obj.draw_control.polygon = True
+    geometry = geojson.get("geometry", geojson)
+    geometry_type = geometry.get("type")
+    coordinates = geometry.get("coordinates")
+
+    if geometry_type != "Polygon" or not coordinates:
+        raise ValueError("Desenhe uma área usando um polígono")
+
+    if len(coordinates[0]) < 4:
+        raise ValueError("O polígono precisa ter pelo menos três vértices")
+
+    return ee.Geometry.Polygon(coordinates)
+
+
+def enable_area_draw(map_obj: geemap.Map) -> None:
+    map_obj.add_draw_control_lite()
 
 
 def get_drawn_geometry(map_obj: geemap.Map) -> ee.Geometry | None:
