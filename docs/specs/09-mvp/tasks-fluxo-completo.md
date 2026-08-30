@@ -9,6 +9,6 @@ Referência: `docs/specs/09-mvp/spec-fluxo-completo.md`
 | SPEC-09-03 | Calcular valor médio do índice na área | Campo mean_value entre -1 e 1 | 30min | ✅ |
 | SPEC-09-04 | Tratar erros intermediários: retornar dict com success=False + campo error | Pipeline não quebra, retorna erro descritivo | 1h | ✅ |
 | SPEC-09-05 | Escrever teste de integração do pipeline completo com dados mockados | Teste valida todas as chaves do retorno | 2h | ✅ |
-| SPEC-09-06 | Corrigir bugs identificados nos testes de integração | Todos os testes do pipeline passando | 2h | ⏳ |
-| SPEC-09-07 | Validar MVP com cenário real (geometria pequena, período curto) | Execução completa sem erros | 2h | ⏳ |
+| SPEC-09-06 | Corrigir bugs identificados nos testes de integração | Todos os testes do pipeline passando | 2h | ✅ |
+| SPEC-09-07 | Validar MVP com cenário real (geometria pequena, período curto) | Execução completa sem erros | 2h | ✅ |
 | SPEC-09-08 | Adicionar cenários de validação por cultura (soja, milho, pastagem) | 3 cenários documentados e testáveis | 1h | ⏳ |
