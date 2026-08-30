@@ -71,48 +71,56 @@ def add_colorbar(
     )
 
 
-PREDEFINED_AREAS = {
-    "Talhão A": ee.Geometry.Polygon([[
+PREDEFINED_AREAS_RAW = {
+    "Talhão A": [[
         [-52.1, -28.0],
         [-52.05, -28.0],
         [-52.05, -28.05],
         [-52.1, -28.05],
         [-52.1, -28.0]
-    ]]),
-    "Talhão B": ee.Geometry.Polygon([[
+    ]],
+    "Talhão B": [[
         [-52.2, -28.1],
         [-52.15, -28.1],
         [-52.15, -28.15],
         [-52.2, -28.15],
         [-52.2, -28.1]
-    ]]),
-    "Talhão C": ee.Geometry.Polygon([[
+    ]],
+    "Talhão C": [[
         [-52.3, -27.9],
         [-52.25, -27.9],
         [-52.25, -27.95],
         [-52.3, -27.95],
         [-52.3, -27.9]
-    ]]),
+    ]],
 }
+
+_cached_geometries = {}
+
+
+def _get_geometry(name: str) -> ee.Geometry:
+    if name not in _cached_geometries:
+        _cached_geometries[name] = ee.Geometry.Polygon(PREDEFINED_AREAS_RAW[name])
+    return _cached_geometries[name]
 
 
 def get_predefined_areas() -> list[dict]:
     return [
-        {"name": name, "geometry": geom}
-        for name, geom in PREDEFINED_AREAS.items()
+        {"name": name, "geometry": _get_geometry(name)}
+        for name in PREDEFINED_AREAS_RAW
     ]
 
 
 def load_predefined_area(area_name: str) -> ee.Geometry | None:
     import unicodedata
-    
+
     def normalize(s: str) -> str:
         return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn').lower()
-    
+
     normalized_input = normalize(area_name)
-    for name, geom in PREDEFINED_AREAS.items():
+    for name in PREDEFINED_AREAS_RAW:
         if normalize(name) == normalized_input:
-            return geom
+            return _get_geometry(name)
     return None
 
 

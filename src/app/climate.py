@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 
 NASA_POWER_API = "https://power.larc.nasa.gov/api/temporal/daily/point"
 
+COMMUNITY = "ag"
+
 DEFAULT_PARAMETERS = ["PRECTOTCORR", "T2M", "ALLSKY_SFC_SW_DWN"]
 
 PARAMETER_NAMES = {
@@ -33,6 +35,7 @@ def fetch_climate_data(
     longitude, latitude = coords[0], coords[1]
 
     params = {
+        "community": COMMUNITY,
         "parameters": ",".join(parameters),
         "start": start_date.replace("-", ""),
         "end": end_date.replace("-", ""),
