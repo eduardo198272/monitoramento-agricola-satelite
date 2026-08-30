@@ -51,15 +51,15 @@ def _validate_date_format(date_str: str) -> None:
 
 
 def calculate_ndvi(image: ee.Image) -> ee.Image:
-    ndvi = image.normalizedDifference(["B8", "B4"])
-    return ndvi.rename("NDVI")
+    ndvi = image.normalizedDifference(["B8", "B4"]).rename("NDVI")
+    return ndvi.copyProperties(image, ["system:time_start", "system:index"])
 
 
 def calculate_ndwi(image: ee.Image) -> ee.Image:
-    ndwi = image.normalizedDifference(["B8", "B11"])
-    return ndwi.rename("NDWI")
+    ndwi = image.normalizedDifference(["B8", "B11"]).rename("NDWI")
+    return ndwi.copyProperties(image, ["system:time_start", "system:index"])
 
 
 def calculate_ndmi(image: ee.Image) -> ee.Image:
-    ndmi = image.normalizedDifference(["B8A", "B11"])
-    return ndmi.rename("NDMI")
+    ndmi = image.normalizedDifference(["B8A", "B11"]).rename("NDMI")
+    return ndmi.copyProperties(image, ["system:time_start", "system:index"])
