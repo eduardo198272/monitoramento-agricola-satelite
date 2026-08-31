@@ -24,6 +24,19 @@ class TestAppStructure:
 
 
 class TestSidebarControls:
+    def test_sidebar_has_location_search_input(self, app):
+        search_input = next(
+            (text_input for text_input in app.text_input
+             if text_input.label == "Pesquisar localidade"),
+            None,
+        )
+        assert search_input is not None
+
+    def test_sidebar_has_location_search_button(self, app):
+        buttons = app.button
+        search_button = next((b for b in buttons if b.label == "Pesquisar"), None)
+        assert search_button is not None
+
     def test_sidebar_has_date_inputs(self, app):
         date_inputs = app.date_input
         assert len(date_inputs) >= 2

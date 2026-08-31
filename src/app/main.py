@@ -19,6 +19,8 @@ from src.app.maps import (
     enable_area_draw,
     create_selection_map,
     geojson_to_ee_geometry,
+    search_location,
+    calculate_map_zoom,
     DEFAULT_CENTER,
     DEFAULT_ZOOM,
 )
@@ -153,6 +155,16 @@ def main():
 
     st.title("Monitoramento Agrícola por Imagens de Satélite")
 
+    if "map_obj" not in st.session_state:
+        st.session_state.map_obj = None
+        st.session_state.analysis_result = None
+        st.session_state.error = None
+        st.session_state.drawn_geometry = None
+        st.session_state.drawn_geojson = None
+    st.session_state.setdefault("location_center", DEFAULT_CENTER)
+    st.session_state.setdefault("location_zoom", DEFAULT_ZOOM)
+    st.session_state.setdefault("location_result", None)
+
     ee_ok, ee_error = init_earth_engine()
     if not ee_ok:
         st.error(f"Erro ao inicializar Earth Engine: {ee_error}")
@@ -161,6 +173,34 @@ def main():
 
     with st.sidebar:
         st.header("Parâmetros de Análise")
+
+        location_query = st.text_input(
+            "Pesquisar localidade",
+            key="location_query",
+            placeholder="Cidade, município ou endereço",
+        )
+        search = st.button("Pesquisar")
+
+        if search:
+            location = search_location(location_query)
+            if location is None:
+                st.warning("Localidade não encontrada ou serviço indisponível.")
+                st.session_state.location_result = None
+            else:
+                st.session_state.location_center = [
+                    location["latitude"],
+                    location["longitude"],
+                ]
+                st.session_state.location_zoom = calculate_map_zoom(
+                    location["boundingbox"]
+                )
+                st.session_state.location_result = location
+
+        if st.session_state.location_result:
+            st.success(
+                f"Localidade encontrada: "
+                f"{st.session_state.location_result['display_name']}"
+            )
 
         start_date = st.date_input("Data inicial", value=DEFAULT_START)
         end_date = st.date_input("Data final", value=DEFAULT_END)
@@ -175,20 +215,13 @@ def main():
 
         analyze = st.button("Analisar", disabled=(end_date < start_date))
 
-    if "map_obj" not in st.session_state:
-        st.session_state.map_obj = None
-        st.session_state.analysis_result = None
-        st.session_state.error = None
-        st.session_state.drawn_geometry = None
-        st.session_state.drawn_geojson = None
-
     col_main = st.container()
 
     with col_main:
         st.subheader("Desenhe a área de interesse no mapa")
         selection_map = create_selection_map(
-            center=DEFAULT_CENTER,
-            zoom=DEFAULT_ZOOM,
+            center=st.session_state.location_center,
+            zoom=st.session_state.location_zoom,
             geojson=st.session_state.drawn_geojson,
         )
         map_data = st_folium(
