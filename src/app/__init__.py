@@ -18,6 +18,8 @@ from src.app.maps import (
     get_drawn_geometry,
     create_selection_map,
     geojson_to_ee_geometry,
+    search_location,
+    calculate_map_zoom,
     DEFAULT_CENTER,
     DEFAULT_ZOOM,
 )
@@ -48,6 +50,8 @@ __all__ = [
     "get_drawn_geometry",
     "create_selection_map",
     "geojson_to_ee_geometry",
+    "search_location",
+    "calculate_map_zoom",
     "DEFAULT_CENTER",
     "DEFAULT_ZOOM",
     "compute_time_series",

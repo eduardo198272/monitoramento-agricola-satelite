@@ -1,15 +1,80 @@
+import math
+
 import geemap
 import ee
 import folium
+import requests
 from folium.plugins import Draw
 
 
 DEFAULT_CENTER = [-28.0, -52.0]
 DEFAULT_ZOOM = 10
+NOMINATIM_SEARCH_URL = "https://nominatim.openstreetmap.org/search"
+NOMINATIM_TIMEOUT = 10
+NOMINATIM_USER_AGENT = "monitoramento-agricola-satelite/1.0"
 
 NDVI_PALETTE = ["blue", "white", "green"]
 NDWI_PALETTE = ["brown", "white", "blue"]
 NDMI_PALETTE = ["red", "yellow", "blue"]
+
+
+def search_location(query: str) -> dict | None:
+    """Search for a location using the Nominatim geocoding service."""
+    normalized_query = " ".join(query.split())
+    if not normalized_query:
+        return None
+
+    try:
+        response = requests.get(
+            NOMINATIM_SEARCH_URL,
+            params={"q": normalized_query, "format": "jsonv2", "limit": 1},
+            headers={"User-Agent": NOMINATIM_USER_AGENT},
+            timeout=NOMINATIM_TIMEOUT,
+        )
+        response.raise_for_status()
+        results = response.json()
+
+        if not results:
+            return None
+
+        location = results[0]
+        return {
+            "display_name": location["display_name"],
+            "latitude": float(location["lat"]),
+            "longitude": float(location["lon"]),
+            "boundingbox": location["boundingbox"],
+        }
+    except (
+        requests.exceptions.RequestException,
+        ValueError,
+        TypeError,
+        KeyError,
+        IndexError,
+    ):
+        return None
+
+
+def calculate_map_zoom(boundingbox: list[str]) -> int:
+    """Calculate a map zoom level from a Nominatim bounding box."""
+    if not isinstance(boundingbox, (list, tuple)) or len(boundingbox) != 4:
+        raise ValueError("boundingbox deve conter quatro limites")
+
+    try:
+        south, north, west, east = (float(value) for value in boundingbox)
+    except (TypeError, ValueError):
+        raise ValueError("boundingbox deve conter valores numéricos") from None
+
+    if not all(math.isfinite(value) for value in (south, north, west, east)):
+        raise ValueError("boundingbox deve conter valores finitos")
+    if south > north or west > east:
+        raise ValueError("boundingbox possui limites inválidos")
+
+    extent = max(north - south, east - west)
+    if extent == 0:
+        return 20
+
+    zoom = round(math.log2(360 / extent))
+    return max(1, min(20, zoom))
 
 
 def create_base_map(center: list = None, zoom: int = DEFAULT_ZOOM) -> geemap.Map:

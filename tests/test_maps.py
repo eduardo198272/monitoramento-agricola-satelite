@@ -1,4 +1,5 @@
 import pytest
+import requests
 from unittest.mock import MagicMock, patch
 
 from src.app.maps import (
@@ -13,6 +14,8 @@ from src.app.maps import (
     NDVI_PALETTE,
     NDWI_PALETTE,
     NDMI_PALETTE,
+    search_location,
+    calculate_map_zoom,
 )
 
 
@@ -60,6 +63,127 @@ class TestCreateBaseMap:
     def test_create_base_map_invalid_zoom_float(self):
         with pytest.raises(ValueError, match="zoom deve ser inteiro entre 1 e 20"):
             create_base_map(center=[0, 0], zoom=10.5)
+
+
+class TestSearchLocation:
+    @pytest.mark.parametrize("query", ["", "   ", "\t\n"])
+    @patch("src.app.maps.requests.get")
+    def test_search_location_ignores_empty_query(self, mock_get, query):
+        assert search_location(query) is None
+        mock_get.assert_not_called()
+
+    @patch("src.app.maps.requests.get")
+    def test_search_location_returns_first_result(self, mock_get):
+        response = MagicMock()
+        response.json.return_value = [{
+            "display_name": "Passo Fundo, Rio Grande do Sul, Brasil",
+            "lat": "-28.2628",
+            "lon": "-52.4068",
+            "boundingbox": ["-28.4", "-28.1", "-52.6", "-52.2"],
+        }]
+        mock_get.return_value = response
+
+        result = search_location("Passo Fundo, RS")
+
+        mock_get.assert_called_once()
+        request = mock_get.call_args
+        assert request.args[0] == "https://nominatim.openstreetmap.org/search"
+        assert request.kwargs["params"] == {
+            "q": "Passo Fundo, RS",
+            "format": "jsonv2",
+            "limit": 1,
+        }
+        assert "User-Agent" in request.kwargs["headers"]
+        assert request.kwargs["timeout"] > 0
+        assert result == {
+            "display_name": "Passo Fundo, Rio Grande do Sul, Brasil",
+            "latitude": -28.2628,
+            "longitude": -52.4068,
+            "boundingbox": ["-28.4", "-28.1", "-52.6", "-52.2"],
+        }
+
+    @patch("src.app.maps.requests.get")
+    def test_search_location_normalizes_query(self, mock_get):
+        response = MagicMock()
+        response.json.return_value = []
+        mock_get.return_value = response
+
+        assert search_location("  Passo   Fundo,   RS  ") is None
+
+        request = mock_get.call_args
+        assert request.kwargs["params"]["q"] == "Passo Fundo, RS"
+
+    @pytest.mark.parametrize(
+        "error",
+        [
+            requests.exceptions.Timeout(),
+            requests.exceptions.ConnectionError(),
+            requests.exceptions.HTTPError(),
+        ],
+    )
+    @patch("src.app.maps.requests.get")
+    def test_search_location_handles_request_errors(self, mock_get, error):
+        mock_get.side_effect = error
+
+        assert search_location("Passo Fundo, RS") is None
+
+
+    @patch("src.app.maps.requests.get")
+    def test_search_location_handles_http_error(self, mock_get):
+        response = MagicMock()
+        response.raise_for_status.side_effect = requests.exceptions.HTTPError()
+        mock_get.return_value = response
+
+        assert search_location("Passo Fundo, RS") is None
+
+    @patch("src.app.maps.requests.get")
+    def test_search_location_handles_invalid_json(self, mock_get):
+        response = MagicMock()
+        response.json.side_effect = ValueError("invalid JSON")
+        mock_get.return_value = response
+
+        assert search_location("Passo Fundo, RS") is None
+
+    @pytest.mark.parametrize(
+        "payload",
+        [{"display_name": "Passo Fundo"}, [{"lat": "invalid"}]],
+    )
+    @patch("src.app.maps.requests.get")
+    def test_search_location_handles_malformed_result(self, mock_get, payload):
+        response = MagicMock()
+        response.json.return_value = payload
+        mock_get.return_value = response
+
+        assert search_location("Passo Fundo, RS") is None
+
+
+class TestCalculateMapZoom:
+    def test_returns_higher_zoom_for_smaller_area(self):
+        small_area = ["-28.01", "-28.00", "-52.01", "-52.00"]
+        large_area = ["-30.0", "-20.0", "-60.0", "-50.0"]
+
+        assert calculate_map_zoom(small_area) > calculate_map_zoom(large_area)
+
+    def test_clamps_zoom_to_minimum(self):
+        assert calculate_map_zoom(["-90", "90", "-180", "180"]) == 1
+
+    def test_clamps_zoom_to_maximum(self):
+        assert calculate_map_zoom(["-28.000001", "-28", "-52.000001", "-52"]) == 20
+
+    @pytest.mark.parametrize(
+        "boundingbox",
+        [
+            None,
+            [],
+            ["-28", "-27", "-52"],
+            ["south", "-27", "-52", "-51"],
+            ["-28", "-27", "-52", "-51", "extra"],
+            ["-27", "-28", "-52", "-51"],
+        ],
+    )
+    def test_rejects_invalid_boundingbox(self, boundingbox):
+        with pytest.raises(ValueError, match="boundingbox"):
+            calculate_map_zoom(boundingbox)
 
 
 class TestAddIndexLayer:
