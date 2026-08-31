@@ -4,8 +4,8 @@ Referência: `docs/specs/13-cobertura-testes/spec-cobertura-testes.md`
 
 | ID | Descrição | Critério de Aceitação | Esforço | Status |
 |---|---|---|---|---|
-| SPEC-13-01 | Gerar baseline de cobertura com linhas e branches por módulo | Relatório inicial registrado, incluindo lacunas de `main.py`, scripts e módulos parcialmente cobertos | 30min | ⬜ |
-| SPEC-13-02 | Criar fixtures compartilhadas para HTTP, Earth Engine, séries e DataFrames | Fixtures determinísticas e reutilizáveis sem chamadas externas | 1h30 | ⬜ |
+| SPEC-13-01 | Gerar baseline de cobertura com linhas e branches por módulo | Relatório inicial registrado, incluindo lacunas de `main.py`, scripts e módulos parcialmente cobertos | 30min | ✅ |
+| SPEC-13-02 | Criar fixtures compartilhadas para HTTP, Earth Engine, séries e DataFrames | Fixtures determinísticas e reutilizáveis sem chamadas externas | 1h30 | ✅ |
 | SPEC-13-03 | Cobrir branches residuais de `climate.py` | API, coordenadas inválidas, parâmetros customizados, valores `-999`, DataFrame vazio e gráficos parciais cobertos | 45min | ⬜ |
 | SPEC-13-04 | Completar cobertura de `time_series.py` | Coleção vazia, valores nulos, ordenação, redução e gráficos com dados e sem dados cobertos | 45min | ⬜ |
 | SPEC-13-05 | Completar cobertura de `maps.py` | Validações de zoom, GeoJSON, índices, palettes, desenho, busca, respostas inválidas e exceções cobertas | 1h | ⬜ |
