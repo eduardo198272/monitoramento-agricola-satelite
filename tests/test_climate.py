@@ -122,6 +122,46 @@ class TestFetchClimateData:
         assert result.iloc[0]["temperature_max"] == 30.0
         assert result.iloc[0]["temperature_min"] == 20.0
 
+        mock_get.assert_called_once_with(
+            "https://power.larc.nasa.gov/api/temporal/daily/point",
+            params={
+                "community": "ag",
+                "parameters": "T2M_MAX,T2M_MIN",
+                "start": "20240101",
+                "end": "20240102",
+                "latitude": -20.0,
+                "longitude": -45.0,
+                "format": "JSON",
+            },
+            timeout=30,
+        )
+
+    def test_fetch_climate_data_with_empty_parameter_data(self):
+        geometry = MockGeometry(coords=[-45.0, -20.0])
+
+        with patch("src.app.climate.requests.get") as mock_get:
+            mock_get.return_value = make_mock_response({"properties": {}})
+
+            result = fetch_climate_data(
+                geometry,
+                "2024-01-01",
+                "2024-01-03",
+                parameters=["UNKNOWN_PARAMETER"],
+            )
+
+        assert isinstance(result, pd.DataFrame)
+        assert result.empty
+        assert list(result.columns) == []
+
+    def test_fetch_climate_data_propagates_http_error(self):
+        geometry = MockGeometry(coords=[-45.0, -20.0])
+        response = make_mock_response({})
+        response.raise_for_status.side_effect = RuntimeError("HTTP Error")
+
+        with patch("src.app.climate.requests.get", return_value=response):
+            with pytest.raises(RuntimeError, match="HTTP Error"):
+                fetch_climate_data(geometry, "2024-01-01", "2024-01-03")
+
     def test_fetch_climate_data_invalid_geometry(self):
         geometry = MockGeometry(coords=None)
 
