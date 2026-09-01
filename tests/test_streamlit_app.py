@@ -1,5 +1,8 @@
 import pytest
+from unittest.mock import MagicMock, patch
 from streamlit.testing.v1 import AppTest
+
+from src.app.main import display_map, display_summary
 
 
 @pytest.fixture
@@ -95,3 +98,69 @@ class TestInitialState:
     def test_initial_message_displayed(self, app):
         info_messages = [el.value for el in app.info]
         assert any("Desenhe um polígono" in msg for msg in info_messages)
+
+
+class TestPresentation:
+    def test_display_map_uses_expected_height(self):
+        map_obj = MagicMock()
+
+        display_map(map_obj)
+
+        map_obj.to_streamlit.assert_called_once_with(height=600)
+
+    @pytest.mark.parametrize(
+        "trend, expected_color",
+        [
+            ("crescente", "green"),
+            ("estável", "blue"),
+            ("decrescente", "red"),
+            ("sem dados", "gray"),
+        ],
+    )
+    def test_display_summary_renders_metrics_and_trend(self, trend, expected_color):
+        columns = [MagicMock() for _ in range(4)]
+
+        with patch("src.app.main.st") as mock_st:
+            mock_st.columns.return_value = columns
+
+            display_summary("NDVI", 0.62543, 12.5, trend)
+
+        mock_st.columns.assert_called_once_with(4)
+        assert [call.kwargs for call in mock_st.metric.call_args_list] == [
+            {"label": "Índice", "value": "NDVI"},
+            {"label": "Valor Médio", "value": "0.6254"},
+            {"label": "Área (ha)", "value": "12.50"},
+        ]
+        mock_st.markdown.assert_called_once_with(
+            f"**Tendência:** :{expected_color}[{trend}]"
+        )
+
+    @pytest.mark.parametrize(
+        "alert, expected_color",
+        [("normal", "green"), ("ALERTA: queda", "red")],
+    )
+    def test_display_summary_renders_alert_with_semantic_color(
+        self, alert, expected_color
+    ):
+        columns = [MagicMock() for _ in range(4)]
+
+        with patch("src.app.main.st") as mock_st:
+            mock_st.columns.return_value = columns
+
+            display_summary("NDVI", 0.5, 10.0, "estável", alert)
+
+        assert mock_st.markdown.call_args_list == [
+            (("**Tendência:** :blue[estável]",),),
+            ((f"**Alerta:** :{expected_color}[{alert}]",),),
+        ]
+
+    def test_display_summary_does_not_render_alert_when_absent(self):
+        columns = [MagicMock() for _ in range(4)]
+
+        with patch("src.app.main.st") as mock_st:
+            mock_st.columns.return_value = columns
+
+            display_summary("NDVI", 0.5, 10.0, "estável", None)
+
+        assert mock_st.markdown.call_count == 1
+        mock_st.markdown.assert_called_once_with("**Tendência:** :blue[estável]")
