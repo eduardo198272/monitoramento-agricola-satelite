@@ -16,6 +16,7 @@ from src.app.maps import (
     NDMI_PALETTE,
     search_location,
     calculate_map_zoom,
+    create_selection_map,
 )
 
 
@@ -185,6 +186,17 @@ class TestCalculateMapZoom:
         with pytest.raises(ValueError, match="boundingbox"):
             calculate_map_zoom(boundingbox)
 
+    @pytest.mark.parametrize("boundingbox", [
+        ["nan", "-27", "-52", "-51"],
+        ["-28", "inf", "-52", "-51"],
+    ])
+    def test_rejects_non_finite_boundingbox(self, boundingbox):
+        with pytest.raises(ValueError, match="valores finitos"):
+            calculate_map_zoom(boundingbox)
+
+    def test_returns_maximum_zoom_for_zero_extent(self):
+        assert calculate_map_zoom(["-28", "-28", "-52", "-52"]) == 20
+
 
 class TestAddIndexLayer:
     @patch("src.app.maps.ee")
@@ -304,6 +316,40 @@ class TestAddIndexLayer:
         with pytest.raises(ValueError, match="Índice desconhecido: INVALID"):
             add_index_layer(mock_map, mock_image, "INVALID")
 
+    @pytest.mark.parametrize(
+        "index_name, palette",
+        [("NDWI", ["purple", "white", "cyan"]),
+         ("NDMI", ["black", "gray", "white"])],
+    )
+    @patch("src.app.maps.ee")
+    @patch("src.app.maps.geemap")
+    def test_add_index_layer_uses_custom_palette_for_other_indices(
+        self, mock_geemap, mock_ee, index_name, palette
+    ):
+        mock_map = MagicMock()
+        mock_image = MagicMock()
+        mock_contains = MagicMock()
+        mock_contains.getInfo.return_value = True
+        mock_image.bandNames.return_value.contains.return_value = mock_contains
+
+        add_index_layer(mock_map, mock_image, index_name, palette=palette)
+
+        assert mock_map.addLayer.call_args[0][1]["palette"] == palette
+
+    @pytest.mark.parametrize("index_name", ["NDWI", "NDMI"])
+    @patch("src.app.maps.ee")
+    def test_add_index_layer_rejects_missing_band_for_other_indices(
+        self, mock_ee, index_name
+    ):
+        mock_map = MagicMock()
+        mock_image = MagicMock()
+        mock_contains = MagicMock()
+        mock_contains.getInfo.return_value = False
+        mock_image.bandNames.return_value.contains.return_value = mock_contains
+
+        with pytest.raises(ValueError, match=f"Imagem não contém banda {index_name}"):
+            add_index_layer(mock_map, mock_image, index_name)
+
 
 class TestAddColorbar:
     @patch("src.app.maps.geemap")
@@ -344,6 +390,42 @@ class TestEnableAreaDraw:
 
         mock_map.add_draw_control_lite.assert_called_once()
 
+
+class TestCreateSelectionMap:
+    def test_creates_map_with_default_center_and_zoom(self):
+        result = create_selection_map()
+
+        assert result.location == DEFAULT_CENTER
+        assert result.options["zoom"] == DEFAULT_ZOOM
+
+    def test_creates_map_with_custom_center_and_zoom(self):
+        result = create_selection_map(center=[-20.0, -45.0], zoom=12)
+
+        assert result.location == [-20.0, -45.0]
+        assert result.options["zoom"] == 12
+
+    @pytest.mark.parametrize("zoom", [0, 21, 10.5])
+    def test_rejects_invalid_zoom(self, zoom):
+        with pytest.raises(ValueError, match="zoom deve ser inteiro entre 1 e 20"):
+            create_selection_map(zoom=zoom)
+
+    def test_adds_selected_geojson(self):
+        geojson = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                                  [-52.0, -28.1], [-52.1, -28.0]]],
+            },
+        }
+
+        result = create_selection_map(geojson=geojson)
+
+        assert any(
+            type(child).__name__ == "GeoJson"
+            for child in result._children.values()
+        )
+
 class TestGeojsonToEeGeometry:
     @patch("src.app.maps.ee")
     def test_converts_polygon(self, mock_ee):
@@ -365,6 +447,20 @@ class TestGeojsonToEeGeometry:
     def test_rejects_non_polygon(self):
         with pytest.raises(ValueError, match="usando um polígono"):
             geojson_to_ee_geometry({"type": "Point", "coordinates": [-52, -28]})
+
+    @pytest.mark.parametrize(
+        "geojson, message",
+        [
+            (None, "formato GeoJSON válido"),
+            ({}, "usando um polígono"),
+            ({"type": "Polygon", "coordinates": []}, "usando um polígono"),
+            ({"type": "Polygon", "coordinates": [[[0, 0], [1, 1], [0, 0]]]},
+             "pelo menos três vértices"),
+        ],
+    )
+    def test_rejects_invalid_polygon_payload(self, geojson, message):
+        with pytest.raises(ValueError, match=message):
+            geojson_to_ee_geometry(geojson)
 
 
 class TestGetDrawnGeometry:

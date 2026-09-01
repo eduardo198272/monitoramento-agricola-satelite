@@ -8,7 +8,7 @@ Referência: `docs/specs/13-cobertura-testes/spec-cobertura-testes.md`
 | SPEC-13-02 | Criar fixtures compartilhadas para HTTP, Earth Engine, séries e DataFrames | Fixtures determinísticas e reutilizáveis sem chamadas externas | 1h30 | ✅ |
 | SPEC-13-03 | Cobrir branches residuais de `climate.py` | API, coordenadas inválidas, parâmetros customizados, valores `-999`, DataFrame vazio e gráficos parciais cobertos | 45min | ✅ |
 | SPEC-13-04 | Completar cobertura de `time_series.py` | Coleção vazia, valores nulos, ordenação, redução e gráficos com dados e sem dados cobertos | 45min | ✅ |
-| SPEC-13-05 | Completar cobertura de `maps.py` | Validações de zoom, GeoJSON, índices, palettes, desenho, busca, respostas inválidas e exceções cobertas | 1h | ⬜ |
+| SPEC-13-05 | Completar cobertura de `maps.py` | Validações de zoom, GeoJSON, índices, palettes, desenho, busca, respostas inválidas e exceções cobertas | 1h | ✅ |
 | SPEC-13-06 | Completar cobertura de `pipeline.py` | NDVI, NDWI, NDMI, índice inválido, coleção vazia, falha geral, falha climática e resultados opcionais cobertos | 1h | ⬜ |
 | SPEC-13-07 | Testar funções de apresentação de `main.py` | `display_map` e `display_summary` cobrem tendências, cores, alertas e ausência de alerta | 1h | ⬜ |
 | SPEC-13-08 | Testar `run_analysis()` de `main.py` | Sucesso, erro, ausência de imagens, índices, séries, clima, mapas e alertas cobertos | 2h | ⬜ |
