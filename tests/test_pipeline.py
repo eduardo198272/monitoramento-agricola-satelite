@@ -7,6 +7,66 @@ from src.app.pipeline import run_analysis
 
 
 class TestRunAnalysis:
+    @pytest.mark.parametrize(
+        "index_name, calculation_name",
+        [("NDWI", "calculate_ndwi"), ("NDMI", "calculate_ndmi")],
+    )
+    @patch("src.app.pipeline.plot_climate_data")
+    @patch("src.app.pipeline.fetch_climate_data")
+    @patch("src.app.pipeline.generate_alert")
+    @patch("src.app.pipeline.detect_anomalies")
+    @patch("src.app.pipeline.plot_time_series")
+    @patch("src.app.pipeline.compute_time_series")
+    @patch("src.app.pipeline.mask_clouds")
+    @patch("src.app.pipeline.get_image_collection")
+    @patch("src.app.pipeline.ee")
+    def test_run_analysis_supported_non_ndvi_indices(
+        self,
+        mock_ee,
+        mock_get_col,
+        mock_mask_clouds,
+        mock_compute_ts,
+        mock_plot_ts,
+        mock_detect_anomalies,
+        mock_generate_alert,
+        mock_fetch_climate,
+        mock_climate_plot,
+        index_name,
+        calculation_name,
+    ):
+        geometry = MagicMock()
+        geometry.area.return_value.divide.return_value.getInfo.return_value = 25.0
+
+        collection = MagicMock()
+        collection.size.return_value.getInfo.return_value = 1
+        masked_collection = MagicMock()
+        index_collection = MagicMock()
+        index_image = MagicMock()
+        collection.map.return_value = masked_collection
+        masked_collection.map.return_value = index_collection
+        index_collection.median.return_value = index_image
+        index_image.select.return_value.reduceRegion.return_value.getInfo.return_value = {
+            index_name: 0.4
+        }
+        mock_get_col.return_value = collection
+        mock_compute_ts.return_value = []
+        mock_detect_anomalies.return_value = []
+        mock_generate_alert.return_value = None
+        mock_fetch_climate.return_value = pd.DataFrame()
+        mock_ee.Reducer.mean.return_value = "mean_reducer"
+
+        with patch(f"src.app.pipeline.{calculation_name}") as mock_calculation:
+            result = run_analysis(
+                geometry, "2024-01-01", "2024-01-31", index_name
+            )
+
+        assert result["success"] is True
+        assert result["mean_value"] == 0.4
+        assert result["time_series"] == []
+        assert result["time_series_plot"] is None
+        assert result["climate_plot"] is None
+        masked_collection.map.assert_called_once_with(mock_calculation)
+
     @patch("src.app.pipeline.ee")
     @patch("src.app.pipeline.get_image_collection")
     @patch("src.app.pipeline.mask_clouds")
