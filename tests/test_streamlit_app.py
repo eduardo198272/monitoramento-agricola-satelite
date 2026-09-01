@@ -2,7 +2,15 @@ import pytest
 from unittest.mock import MagicMock, patch
 from streamlit.testing.v1 import AppTest
 
+import src.app.main as main_module
 from src.app.main import display_map, display_summary
+
+
+def app_script():
+    """Keep AppTest execution in the same module namespace as the app."""
+    import src.app.main as app_main
+
+    app_main.main()
 
 
 @pytest.fixture
@@ -98,6 +106,197 @@ class TestInitialState:
     def test_initial_message_displayed(self, app):
         info_messages = [el.value for el in app.info]
         assert any("Desenhe um polígono" in msg for msg in info_messages)
+
+
+@pytest.fixture
+def function_app(monkeypatch):
+    """Run the app with its external and map integrations isolated."""
+    monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+    monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+    monkeypatch.setattr(main_module, "st_folium", lambda *args, **kwargs: {})
+
+    app = AppTest.from_function(app_script)
+    app.run()
+    return app
+
+
+class TestApplicationFlow:
+    def test_valid_location_search_updates_state_and_message(
+        self, function_app, monkeypatch
+    ):
+        location = {
+            "display_name": "Passo Fundo, RS",
+            "latitude": -28.26,
+            "longitude": -52.41,
+            "boundingbox": ["-28.3", "-28.2", "-52.5", "-52.3"],
+        }
+        search = MagicMock(return_value=location)
+        monkeypatch.setattr(main_module, "search_location", search)
+        monkeypatch.setattr(main_module, "calculate_map_zoom", lambda _: 11)
+
+        function_app.text_input[0].set_value("Passo Fundo").run()
+        next(button for button in function_app.button if button.label == "Pesquisar").click().run()
+
+        search.assert_called_once_with("Passo Fundo")
+        assert function_app.session_state["location_center"] == [-28.26, -52.41]
+        assert function_app.session_state["location_zoom"] == 11
+        assert any(
+            "Localidade encontrada: Passo Fundo, RS" in success.value
+            for success in function_app.success
+        )
+
+    def test_location_search_without_result_shows_warning(
+        self, function_app, monkeypatch
+    ):
+        search = MagicMock(return_value=None)
+        monkeypatch.setattr(main_module, "search_location", search)
+
+        function_app.text_input[0].set_value("Localidade inexistente").run()
+        next(button for button in function_app.button if button.label == "Pesquisar").click().run()
+
+        search.assert_called_once_with("Localidade inexistente")
+        assert any("Localidade não encontrada" in warning.value for warning in function_app.warning)
+        assert function_app.session_state["location_result"] is None
+
+    def test_empty_location_search_does_not_call_service(
+        self, function_app, monkeypatch
+    ):
+        search = MagicMock()
+        monkeypatch.setattr(main_module, "search_location", search)
+
+        function_app.text_input[0].set_value("   ").run()
+        next(button for button in function_app.button if button.label == "Pesquisar").click().run()
+
+        search.assert_not_called()
+        assert any("Informe uma localidade" in warning.value for warning in function_app.warning)
+
+    def test_invalid_dates_block_analysis(self, function_app):
+        start = next(item for item in function_app.date_input if item.label == "Data inicial")
+        end = next(item for item in function_app.date_input if item.label == "Data final")
+
+        start.set_value("2026-12-31").run()
+        end.set_value("2026-01-01").run()
+
+        analyze = next(button for button in function_app.button if button.label == "Analisar")
+        assert analyze.disabled is True
+        assert any("Data final não pode ser anterior" in error.value for error in function_app.error)
+
+    def test_analysis_without_area_shows_error(self, function_app, monkeypatch):
+        run_analysis = MagicMock()
+        monkeypatch.setattr(main_module, "run_analysis", run_analysis)
+
+        next(button for button in function_app.button if button.label == "Analisar").click().run()
+
+        run_analysis.assert_not_called()
+        assert any("Desenhe uma área no mapa" in error.value for error in function_app.error)
+
+    def test_invalid_drawn_area_shows_error_and_is_not_analyzed(self, monkeypatch):
+        geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
+        run_analysis = MagicMock()
+
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {"last_active_drawing": geojson},
+        )
+        monkeypatch.setattr(
+            main_module,
+            "geojson_to_ee_geometry",
+            MagicMock(side_effect=ValueError("Polígono inválido")),
+        )
+        monkeypatch.setattr(main_module, "run_analysis", run_analysis)
+
+        app = AppTest.from_function(app_script)
+        app.run()
+
+        assert any("Polígono inválido" in error.value for error in app.error)
+        assert app.session_state["drawn_geometry"] is None
+        run_analysis.assert_not_called()
+
+    def test_failed_analysis_shows_pipeline_error(self, monkeypatch):
+        geometry = MagicMock()
+        geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
+        failure = {"success": False, "error": "Nenhuma imagem encontrada"}
+
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {"last_active_drawing": geojson},
+        )
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        run_analysis = MagicMock(return_value=failure)
+        monkeypatch.setattr(main_module, "run_analysis", run_analysis)
+
+        app = AppTest.from_function(app_script)
+        app.run()
+        next(button for button in app.button if button.label == "Analisar").click().run()
+
+        run_analysis.assert_called_once()
+        assert app.session_state["analysis_result"] is None
+        assert app.session_state["map_obj"] is None
+        assert any("Nenhuma imagem encontrada" in error.value for error in app.error)
+
+    def test_successful_analysis_renders_outputs(self, monkeypatch):
+        geometry = MagicMock()
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [
+            -52.41,
+            -28.26,
+        ]
+        geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
+        result = {
+            "success": True,
+            "index_name": "NDVI",
+            "index_map": MagicMock(),
+            "time_series": [],
+            "time_series_plot": None,
+            "climate_plot": None,
+            "alert": None,
+            "mean_value": 0.65,
+            "area_ha": 12.5,
+        }
+
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {"last_active_drawing": geojson},
+        )
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        run_analysis = MagicMock(return_value=result)
+        monkeypatch.setattr(main_module, "run_analysis", run_analysis)
+        monkeypatch.setattr(main_module, "create_base_map", MagicMock())
+        monkeypatch.setattr(main_module, "add_index_layer", MagicMock())
+        monkeypatch.setattr(main_module, "add_colorbar", MagicMock())
+
+        app = AppTest.from_function(app_script)
+        app.run()
+        next(button for button in app.button if button.label == "Analisar").click().run()
+
+        run_analysis.assert_called_once()
+        assert app.session_state["analysis_result"] == result
+        assert len(app.metric) == 3
+
+    def test_successful_search_survives_rerun(self, function_app, monkeypatch):
+        location = {
+            "display_name": "Passo Fundo, RS",
+            "latitude": -28.26,
+            "longitude": -52.41,
+            "boundingbox": ["-28.3", "-28.2", "-52.5", "-52.3"],
+        }
+        monkeypatch.setattr(main_module, "search_location", lambda _: location)
+        monkeypatch.setattr(main_module, "calculate_map_zoom", lambda _: 11)
+
+        function_app.text_input[0].set_value("Passo Fundo").run()
+        next(button for button in function_app.button if button.label == "Pesquisar").click().run()
+        function_app.run()
+
+        assert function_app.session_state["location_result"] == location
+        assert any("Localidade encontrada" in success.value for success in function_app.success)
 
 
 class TestPresentation:

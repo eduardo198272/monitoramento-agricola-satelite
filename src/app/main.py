@@ -182,19 +182,22 @@ def main():
         search = st.button("Pesquisar")
 
         if search:
-            location = search_location(location_query)
-            if location is None:
-                st.warning("Localidade não encontrada ou serviço indisponível.")
-                st.session_state.location_result = None
+            if not location_query.strip():
+                st.warning("Informe uma localidade para pesquisar.")
             else:
-                st.session_state.location_center = [
-                    location["latitude"],
-                    location["longitude"],
-                ]
-                st.session_state.location_zoom = calculate_map_zoom(
-                    location["boundingbox"]
-                )
-                st.session_state.location_result = location
+                location = search_location(location_query)
+                if location is None:
+                    st.warning("Localidade não encontrada ou serviço indisponível.")
+                    st.session_state.location_result = None
+                else:
+                    st.session_state.location_center = [
+                        location["latitude"],
+                        location["longitude"],
+                    ]
+                    st.session_state.location_zoom = calculate_map_zoom(
+                        location["boundingbox"]
+                    )
+                    st.session_state.location_result = location
 
         if st.session_state.location_result:
             st.success(

@@ -12,7 +12,7 @@ Referência: `docs/specs/13-cobertura-testes/spec-cobertura-testes.md`
 | SPEC-13-06 | Completar cobertura de `pipeline.py` | NDVI, NDWI, NDMI, índice inválido, coleção vazia, falha geral, falha climática e resultados opcionais cobertos | 1h | ✅ |
 | SPEC-13-07 | Testar funções de apresentação de `main.py` | `display_map` e `display_summary` cobrem tendências, cores, alertas e ausência de alerta | 1h | ✅ |
 | SPEC-13-08 | Testar `run_analysis()` de `main.py` | Sucesso, erro, ausência de imagens, índices, séries, clima, mapas e alertas cobertos | 2h | ✅ |
-| SPEC-13-09 | Testar o fluxo Streamlit com `AppTest` | Estado inicial, pesquisa válida, pesquisa sem resultado, datas inválidas, seleção, análise e rerun cobertos | 2h | ⬜ |
+| SPEC-13-09 | Testar o fluxo Streamlit com `AppTest` | Estado inicial, pesquisa válida, pesquisa sem resultado, datas inválidas, seleção, análise e rerun cobertos | 2h | ✅ |
 | SPEC-13-10 | Cobrir `validate_apis.py` sem rede | Sucesso, HTTP diferente de 200, JSON incompleto, timeout, conexão, erro genérico, imports e autenticação cobertos | 2h | ⬜ |
 | SPEC-13-11 | Cobrir `validate_scenarios.py` sem Earth Engine real | Geometria, três culturas, dados insuficientes, critérios inválidos, exceções e resumo final cobertos | 2h | ⬜ |
 | SPEC-13-12 | Cobrir branches residuais identificados pelo relatório | `coverage report -m` não apresenta linhas ou branches pendentes nos módulos de produção | 1h | ⬜ |
