@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import MagicMock, patch
 from streamlit.testing.v1 import AppTest
+import plotly.graph_objects as go
 
 import src.app.main as main_module
 from src.app.main import display_map, display_summary
@@ -121,6 +122,31 @@ def function_app(monkeypatch):
 
 
 class TestApplicationFlow:
+    def test_earth_engine_initialization_failure_returns_error(self, monkeypatch):
+        monkeypatch.setattr(
+            main_module,
+            "initialize_earth_engine",
+            MagicMock(side_effect=RuntimeError("credenciais ausentes")),
+        )
+        main_module.init_earth_engine.clear()
+
+        assert main_module.init_earth_engine() == (False, "credenciais ausentes")
+
+        main_module.init_earth_engine.clear()
+
+    def test_app_shows_earth_engine_initialization_error(self, monkeypatch):
+        monkeypatch.setattr(
+            main_module,
+            "init_earth_engine",
+            lambda: (False, "credenciais ausentes"),
+        )
+
+        app = AppTest.from_function(app_script)
+        app.run()
+
+        assert any("Erro ao inicializar Earth Engine" in error.value for error in app.error)
+        assert any("EE_PROJECT_ID" in info.value for info in app.info)
+
     def test_valid_location_search_updates_state_and_message(
         self, function_app, monkeypatch
     ):
@@ -280,6 +306,106 @@ class TestApplicationFlow:
         run_analysis.assert_called_once()
         assert app.session_state["analysis_result"] == result
         assert len(app.metric) == 3
+
+    @pytest.mark.parametrize(
+        "index_name, expected_palette",
+        [
+            ("NDWI", ["brown", "white", "blue"]),
+            ("NDMI", ["red", "yellow", "blue"]),
+        ],
+    )
+    def test_successful_analysis_uses_index_palette(
+        self, monkeypatch, index_name, expected_palette
+    ):
+        geometry = MagicMock()
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [
+            -52.41,
+            -28.26,
+        ]
+        geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
+        result = {
+            "success": True,
+            "index_name": index_name,
+            "index_map": MagicMock(),
+            "time_series": [],
+            "time_series_plot": None,
+            "climate_plot": None,
+            "alert": None,
+            "mean_value": 0.2,
+            "area_ha": 12.5,
+        }
+        add_index_layer = MagicMock()
+
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {"last_active_drawing": geojson},
+        )
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        monkeypatch.setattr(main_module, "run_analysis", MagicMock(return_value=result))
+        monkeypatch.setattr(main_module, "create_base_map", MagicMock())
+        monkeypatch.setattr(main_module, "add_index_layer", add_index_layer)
+        monkeypatch.setattr(main_module, "add_colorbar", MagicMock())
+
+        app = AppTest.from_function(app_script)
+        app.run()
+        next(selectbox for selectbox in app.selectbox if selectbox.label == "Índice").set_value(index_name).run()
+        next(button for button in app.button if button.label == "Analisar").click().run()
+
+        assert add_index_layer.call_args.kwargs["palette"] == expected_palette
+
+    def test_existing_geometry_skips_empty_selection_message(self, function_app):
+        function_app.session_state["drawn_geometry"] = MagicMock()
+        function_app.session_state["drawn_geojson"] = None
+        function_app.run()
+
+        assert not any(
+            message.value.endswith("Desenhe um polígono no mapa para definir a área.")
+            for message in function_app.info
+        )
+
+    def test_successful_analysis_renders_time_series_climate_and_alert(self, monkeypatch):
+        geometry = MagicMock()
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [
+            -52.41,
+            -28.26,
+        ]
+        geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
+        result = {
+            "success": True,
+            "index_name": "NDVI",
+            "index_map": MagicMock(),
+            "time_series": [{"date": "2026-01-01", "value": 0.5}],
+            "time_series_plot": go.Figure(),
+            "climate_plot": go.Figure(),
+            "alert": "ALERTA: queda detectada",
+            "mean_value": 0.5,
+            "area_ha": 12.5,
+        }
+
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {"last_active_drawing": geojson},
+        )
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        monkeypatch.setattr(main_module, "run_analysis", MagicMock(return_value=result))
+        monkeypatch.setattr(main_module, "create_base_map", MagicMock())
+        monkeypatch.setattr(main_module, "add_index_layer", MagicMock())
+        monkeypatch.setattr(main_module, "add_colorbar", MagicMock())
+        monkeypatch.setattr(main_module.st, "plotly_chart", MagicMock())
+
+        app = AppTest.from_function(app_script)
+        app.run()
+        next(button for button in app.button if button.label == "Analisar").click().run()
+
+        assert any("Série Temporal de NDVI" in item.value for item in app.subheader)
+        assert any("Dados Climáticos" in item.value for item in app.subheader)
+        assert any("ALERTA: queda detectada" in item.value for item in app.warning)
 
     def test_successful_search_survives_rerun(self, function_app, monkeypatch):
         location = {

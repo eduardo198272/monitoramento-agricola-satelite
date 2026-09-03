@@ -40,3 +40,15 @@ antes da execução das tarefas SPEC-13-02 em diante.
 3. Cobrir as funções de apresentação e o fluxo Streamlit de `main.py`.
 4. Cobrir `validate_apis.py` e `validate_scenarios.py` sem rede ou Earth Engine real.
 5. Reexecutar `coverage report -m` para fechar os branches restantes.
+
+## Validação após SPEC-13-12 e SPEC-13-13
+
+- Data: 2026-09-03
+- Comando executado: `py -m pytest`
+- Testes coletados: 245
+- Testes aprovados: 245
+- Cobertura total de linhas: 100%
+- Branches: 208 no total, com 0 parcialmente cobertos
+- Resultado: suíte concluída com código de saída 0
+
+Todas as linhas e branches dos módulos de produção em `src/app` estão cobertos.
