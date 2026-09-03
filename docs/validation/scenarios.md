@@ -4,6 +4,29 @@
 
 Este documento define 3 cenários de validação para o sistema de monitoramento agrícola, representando as principais culturas-alvo do projeto.
 
+## Protocolo executável
+
+Os cenários são executados pelo script `src/app/validate_scenarios.py` usando o ano-safra
+2025/2026. Cada execução cria uma geometria quadrada em torno da coordenada central,
+consulta o Sentinel-2, aplica máscara de nuvens, calcula o NDVI e avalia a série temporal.
+
+| Cultura | Período executado | Centro | Tamanho da geometria |
+|---|---|---|---:|
+| Soja | 2025-10-01 a 2026-03-31 | -50.5, -15.5 | 1,0 km |
+| Milho | 2025-09-01 a 2026-03-31 | -52.0, -25.0 | 0,7 km |
+| Pastagem | 2025-01-01 a 2025-12-31 | -50.0, -16.5 | 0,5 km |
+
+Para executar e salvar os resultados estruturados em JSON:
+
+```powershell
+$env:VALIDATION_OUTPUT = "docs/validation/results-2025-2026.json"
+py src/app/validate_scenarios.py
+```
+
+O arquivo gerado registra os parâmetros usados, o resultado geral, as métricas calculadas,
+os critérios avaliados e os erros encontrados. A ausência de imagens ou dados suficientes
+faz o cenário falhar explicitamente, sem ocultar o motivo.
+
 ---
 
 ## Cenário 1: Soja
@@ -14,8 +37,8 @@ Este documento define 3 cenários de validação para o sistema de monitoramento
 |-----------|-------|
 | **Cultura** | Soja (Glycine max) |
 | **Ciclo** | ~120 dias |
-| **Período de Plantio** | Outono (Outubro-Novembro) |
-| **Período de Colheita** | Verão (Fevereiro-Março) |
+| **Período de Plantio** | Primavera (Outubro-Novembro) |
+| **Período de Colheita** | Outono (Fevereiro-Março) |
 
 ### Localização
 

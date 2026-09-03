@@ -1,4 +1,5 @@
 import runpy
+import json
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -74,6 +75,28 @@ def test_create_test_geometry_uses_center_and_size():
     coordinates = polygon.call_args.args[0][0]
     assert coordinates[0] == pytest.approx([-50.0 - 2 / 111, -15.0 - 2 / 111])
     assert coordinates[-1] == coordinates[0]
+
+
+def test_result_helpers_and_json_output(tmp_path):
+    result = validate_scenarios._scenario_result(
+        "Soja", validate_scenarios.SOJA_CENTER, 1.0, validate_scenarios.SOJA_PERIOD
+    )
+    validate_scenarios._finish_result(
+        result, True, {"mean": 0.7}, {"mean": True}, error="ignored"
+    )
+    assert result["success"] is True
+    assert result["metrics"] == {"mean": 0.7}
+    assert result["checks"] == {"mean": True}
+    assert result["error"] == "ignored"
+
+    validate_scenarios._finish_result(None, False)
+    empty_result = validate_scenarios._scenario_result(
+        "Milho", validate_scenarios.MILHO_CENTER, 0.7, validate_scenarios.MILHO_PERIOD
+    )
+    validate_scenarios._finish_result(empty_result, False, {}, {}, error="")
+    output = tmp_path / "nested" / "results.json"
+    validate_scenarios.write_results(output, {"Soja": result})
+    assert json.loads(output.read_text(encoding="utf-8"))["Soja"]["success"] is True
 
 
 def test_validate_soja_success():
@@ -236,6 +259,24 @@ def test_main_returns_one_when_a_scenario_fails(capsys):
     assert "ALGUNS CENARIOS NAO VALIDARAM" in output
 
 
+def test_main_writes_structured_results(tmp_path, monkeypatch):
+    output = tmp_path / "results.json"
+    monkeypatch.setenv("VALIDATION_OUTPUT", str(output))
+    with patch.multiple(
+        validate_scenarios,
+        validate_soja=MagicMock(return_value=True),
+        validate_milho=MagicMock(return_value=True),
+        validate_pastagem=MagicMock(return_value=True),
+    ):
+        assert validate_scenarios.main() == 0
+
+    saved = json.loads(output.read_text(encoding="utf-8"))
+    assert saved["Soja"]["period"] == {
+        "start": validate_scenarios.SOJA_PERIOD[0],
+        "end": validate_scenarios.SOJA_PERIOD[1],
+    }
+
+
 def test_script_main_block_exits_without_external_services():
     collection = configured_collection()
     points = points_with_values([0.6] * 10)
@@ -248,4 +289,4 @@ def test_script_main_block_exits_without_external_services():
     ), patch("sys.exit") as exit_mock:
         runpy.run_path(validate_scenarios.__file__, run_name="__main__")
 
-    exit_mock.assert_called_once_with(0)
+        exit_mock.assert_called_once_with(1)
