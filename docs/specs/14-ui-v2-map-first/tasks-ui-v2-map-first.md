@@ -4,7 +4,7 @@ Referência: `docs/specs/14-ui-v2-map-first/spec-ui-v2-map-first.md`
 
 | ID | Descrição | Critério de Aceitação | Esforço | Status |
 |---|---|---|---|---|
-| SPEC-14-01 | Registrar baseline da UI e contratos atuais | Conflitos entre UI atual, specs antigas e UI V2 documentados sem alterar o comportamento ainda | 30min | Não iniciado |
+| SPEC-14-01 | Registrar baseline da UI e contratos atuais | Conflitos entre UI atual, specs antigas e UI V2 documentados sem alterar o comportamento ainda | 30min | Concluído |
 | SPEC-14-02 | Definir modelo de estado da UI V2 | Estado inicial, seleção, análise, erro e rerun usam chaves previsíveis e uma fonte de verdade | 1h | Não iniciado |
 | SPEC-14-03 | Criar CSS centralizado e tokens visuais | Cores, espaçamentos, inputs, botões, cards e responsividade ficam em um ponto central | 1h | Não iniciado |
 | SPEC-14-04 | Implementar header e estrutura map-first | Header compacto, subtítulo, status do serviço e mapa rapidamente visível aparecem sem sidebar obrigatória | 45min | Não iniciado |
