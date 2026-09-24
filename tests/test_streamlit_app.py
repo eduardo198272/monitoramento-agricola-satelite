@@ -4,7 +4,7 @@ from streamlit.testing.v1 import AppTest
 import plotly.graph_objects as go
 
 import src.app.main as main_module
-from src.app.main import display_map, display_summary
+from src.app.main import display_map, display_summary, UI_STATE_DEFAULTS
 
 
 def app_script():
@@ -104,6 +104,18 @@ class TestValidation:
 
 
 class TestInitialState:
+    def test_ui_v2_state_has_single_source_of_truth(self, app):
+        expected_keys = set(UI_STATE_DEFAULTS)
+
+        assert all(key in app.session_state for key in expected_keys)
+        assert app.session_state["analysis_status"] == "idle"
+        assert app.session_state["analysis_mode"] == "single"
+        assert app.session_state["visible_index"] == "NDVI"
+        assert app.session_state["analysis_results"] == {}
+        assert app.session_state["aoi_geojson"] is None
+        assert app.session_state["aoi_geometry"] is None
+        assert app.session_state["aoi_area_ha"] is None
+
     def test_initial_message_displayed(self, app):
         info_messages = [el.value for el in app.info]
         assert any("Desenhe um polígono" in msg for msg in info_messages)
@@ -238,7 +250,7 @@ class TestApplicationFlow:
         app.run()
 
         assert any("Polígono inválido" in error.value for error in app.error)
-        assert app.session_state["drawn_geometry"] is None
+        assert app.session_state["aoi_geometry"] is None
         run_analysis.assert_not_called()
 
     def test_failed_analysis_shows_pipeline_error(self, monkeypatch):
@@ -262,9 +274,36 @@ class TestApplicationFlow:
         next(button for button in app.button if button.label == "Analisar").click().run()
 
         run_analysis.assert_called_once()
-        assert app.session_state["analysis_result"] is None
-        assert app.session_state["map_obj"] is None
+        assert app.session_state["analysis_results"] == {}
+        assert app.session_state["analysis_map"] is None
+        assert app.session_state["analysis_status"] == "no_data"
+        assert app.session_state["analysis_error"] == "Nenhuma imagem encontrada"
         assert any("Nenhuma imagem encontrada" in error.value for error in app.error)
+
+    def test_generic_analysis_failure_sets_error_status(self, monkeypatch):
+        geometry = MagicMock()
+        geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
+
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {"last_active_drawing": geojson},
+        )
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        monkeypatch.setattr(
+            main_module,
+            "run_analysis",
+            MagicMock(return_value={"success": False, "error": "Earth Engine indisponível"}),
+        )
+
+        app = AppTest.from_function(app_script)
+        app.run()
+        next(button for button in app.button if button.label == "Analisar").click().run()
+
+        assert app.session_state["analysis_status"] == "error"
+        assert app.session_state["analysis_error"] == "Earth Engine indisponível"
 
     def test_successful_analysis_renders_outputs(self, monkeypatch):
         geometry = MagicMock()
@@ -304,7 +343,10 @@ class TestApplicationFlow:
         next(button for button in app.button if button.label == "Analisar").click().run()
 
         run_analysis.assert_called_once()
-        assert app.session_state["analysis_result"] == result
+        assert app.session_state["analysis_results"] == {"NDVI": result}
+        assert app.session_state["visible_index"] == "NDVI"
+        assert app.session_state["analysis_status"] == "success"
+        assert app.session_state["aoi_area_ha"] == 12.5
         assert len(app.metric) == 3
 
     @pytest.mark.parametrize(
@@ -357,8 +399,8 @@ class TestApplicationFlow:
         assert add_index_layer.call_args.kwargs["palette"] == expected_palette
 
     def test_existing_geometry_skips_empty_selection_message(self, function_app):
-        function_app.session_state["drawn_geometry"] = MagicMock()
-        function_app.session_state["drawn_geojson"] = None
+        function_app.session_state["aoi_geometry"] = MagicMock()
+        function_app.session_state["aoi_geojson"] = None
         function_app.run()
 
         assert not any(

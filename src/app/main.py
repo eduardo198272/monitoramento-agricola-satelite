@@ -27,9 +27,41 @@ from src.app.maps import (
 from src.app.time_series import compute_time_series, plot_time_series
 from src.app.anomalies import detect_anomalies, generate_alert, compute_trend
 from src.app.climate import fetch_climate_data, plot_climate_data
+from src.app.styles import load_styles
 
 DEFAULT_START = date.today() - timedelta(days=365)
 DEFAULT_END = date.today()
+
+UI_STATE_DEFAULTS = {
+    "location_center": DEFAULT_CENTER,
+    "location_zoom": DEFAULT_ZOOM,
+    "location_result": None,
+    "aoi_geojson": None,
+    "aoi_geometry": None,
+    "aoi_area_ha": None,
+    "analysis_mode": "single",
+    "visible_index": "NDVI",
+    "analysis_results": {},
+    "analysis_status": "idle",
+    "analysis_error": None,
+    "analysis_map": None,
+}
+
+
+def initialize_ui_state() -> None:
+    """Initialize the UI state without overwriting values during reruns."""
+    for key, default in UI_STATE_DEFAULTS.items():
+        if key not in st.session_state:
+            st.session_state[key] = default.copy() if isinstance(default, list) else default
+
+
+def clear_analysis_state() -> None:
+    """Clear results that no longer match the current area or request."""
+    st.session_state.analysis_results = {}
+    st.session_state.analysis_map = None
+    st.session_state.analysis_status = "idle"
+    st.session_state.analysis_error = None
+    st.session_state.aoi_area_ha = None
 
 
 @st.cache_resource
@@ -152,18 +184,11 @@ def main():
         page_title="Monitoramento Agrícola por Imagens de Satélite",
         layout="wide"
     )
+    load_styles()
 
     st.title("Monitoramento Agrícola por Imagens de Satélite")
 
-    if "map_obj" not in st.session_state:
-        st.session_state.map_obj = None
-        st.session_state.analysis_result = None
-        st.session_state.error = None
-        st.session_state.drawn_geometry = None
-        st.session_state.drawn_geojson = None
-    st.session_state.setdefault("location_center", DEFAULT_CENTER)
-    st.session_state.setdefault("location_zoom", DEFAULT_ZOOM)
-    st.session_state.setdefault("location_result", None)
+    initialize_ui_state()
 
     ee_ok, ee_error = init_earth_engine()
     if not ee_ok:
@@ -225,7 +250,7 @@ def main():
         selection_map = create_selection_map(
             center=st.session_state.location_center,
             zoom=st.session_state.location_zoom,
-            geojson=st.session_state.drawn_geojson,
+            geojson=st.session_state.aoi_geojson,
         )
         map_data = st_folium(
             selection_map,
@@ -238,25 +263,33 @@ def main():
         drawn_geojson = map_data.get("last_active_drawing") if map_data else None
         if drawn_geojson:
             try:
-                st.session_state.drawn_geometry = geojson_to_ee_geometry(drawn_geojson)
-                st.session_state.drawn_geojson = drawn_geojson
+                if drawn_geojson != st.session_state.aoi_geojson:
+                    st.session_state.aoi_geometry = geojson_to_ee_geometry(drawn_geojson)
+                    st.session_state.aoi_geojson = drawn_geojson
+                    clear_analysis_state()
                 st.success("Área desenhada capturada! Clique em Analisar.")
             except ValueError as error:
-                st.session_state.drawn_geometry = None
+                st.session_state.aoi_geometry = None
+                st.session_state.aoi_geojson = None
+                clear_analysis_state()
                 st.error(str(error))
-        elif st.session_state.drawn_geometry is None:
+        elif st.session_state.aoi_geometry is None:
             st.info("Desenhe um polígono no mapa para definir a área.")
 
         if analyze and end_date >= start_date:
-            geometry = st.session_state.drawn_geometry
+            geometry = st.session_state.aoi_geometry
 
             if geometry is None:
                 st.error("Desenhe uma área no mapa antes de analisar")
             else:
+                st.session_state.analysis_status = "processing"
+                st.session_state.analysis_error = None
                 with st.spinner("Processando..."):
                     result = run_analysis(geometry, start_date, end_date, index_name)
                     if result["success"]:
-                        st.session_state.analysis_result = result
+                        st.session_state.analysis_results = {index_name: result}
+                        st.session_state.visible_index = index_name
+                        st.session_state.aoi_area_ha = result.get("area_ha")
                         m = create_base_map(
                             center=[geometry.centroid().coordinates().getInfo()[1],
                                     geometry.centroid().coordinates().getInfo()[0]],
@@ -271,19 +304,25 @@ def main():
 
                         m = add_index_layer(m, result["index_map"], index_name, palette=palette)
                         add_colorbar(m, palette, index_name)
-                        st.session_state.map_obj = m
-                        st.session_state.error = None
+                        st.session_state.analysis_map = m
+                        st.session_state.analysis_status = "success"
+                        st.session_state.analysis_error = None
                     else:
-                        st.session_state.error = result["error"]
-                        st.session_state.map_obj = None
-                        st.session_state.analysis_result = None
+                        st.session_state.analysis_error = result["error"]
+                        st.session_state.analysis_map = None
+                        st.session_state.analysis_results = {}
+                        st.session_state.analysis_status = (
+                            "no_data"
+                            if "Nenhuma imagem" in result["error"]
+                            else "error"
+                        )
 
-        if st.session_state.error:
-            st.error(st.session_state.error)
-        elif st.session_state.map_obj and st.session_state.analysis_result:
-            res = st.session_state.analysis_result
+        if st.session_state.analysis_error:
+            st.error(st.session_state.analysis_error)
+        elif st.session_state.analysis_map and st.session_state.analysis_results:
+            res = st.session_state.analysis_results[st.session_state.visible_index]
 
-            display_map(st.session_state.map_obj)
+            display_map(st.session_state.analysis_map)
             display_summary(
                 res.get("index_name", index_name),
                 res["mean_value"],
