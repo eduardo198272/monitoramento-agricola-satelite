@@ -34,9 +34,20 @@ class TestAppStructure:
         assert len(app.title) > 0
         assert "Monitoramento Agrícola" in app.title[0].value
 
+    def test_map_first_header_displays_operational_context(self, app):
+        assert app.title[0].value == "Monitoramento Agrícola"
+        assert any(
+            "imagens de satélite" in item.value
+            for item in app.caption
+        )
+        assert any(
+            "Earth Engine conectado" in item.value
+            for item in app.success
+        )
 
-class TestSidebarControls:
-    def test_sidebar_has_location_search_input(self, app):
+
+class TestWorkspaceControls:
+    def test_workspace_has_location_search_input(self, app):
         search_input = next(
             (text_input for text_input in app.text_input
              if text_input.label == "Pesquisar localidade"),
@@ -44,36 +55,36 @@ class TestSidebarControls:
         )
         assert search_input is not None
 
-    def test_sidebar_has_location_search_button(self, app):
+    def test_workspace_has_location_search_button(self, app):
         buttons = app.button
         search_button = next((b for b in buttons if b.label == "Pesquisar"), None)
         assert search_button is not None
 
-    def test_sidebar_has_date_inputs(self, app):
+    def test_workspace_has_date_inputs(self, app):
         date_inputs = app.date_input
         assert len(date_inputs) >= 2
 
-    def test_sidebar_date_input_labels(self, app):
+    def test_workspace_date_input_labels(self, app):
         date_inputs = app.date_input
         labels = [di.label for di in date_inputs]
         assert "Data inicial" in labels
         assert "Data final" in labels
 
-    def test_sidebar_default_start_date(self, app):
+    def test_workspace_default_start_date(self, app):
         start_input = next(di for di in app.date_input if di.label == "Data inicial")
         assert start_input.value is not None
 
-    def test_sidebar_default_end_date(self, app):
+    def test_workspace_default_end_date(self, app):
         end_input = next(di for di in app.date_input if di.label == "Data final")
         assert end_input.value is not None
 
-    def test_sidebar_has_index_selectbox(self, app):
+    def test_workspace_has_index_selectbox(self, app):
         selectboxes = app.selectbox
         index_select = next(sb for sb in selectboxes if sb.label == "Índice")
         assert index_select is not None
         assert set(index_select.options) == {"NDVI", "NDWI", "NDMI"}
 
-    def test_sidebar_has_analyze_button(self, app):
+    def test_workspace_has_analyze_button(self, app):
         buttons = app.button
         analyze_btn = next((b for b in buttons if b.label == "Analisar"), None)
         assert analyze_btn is not None
@@ -318,7 +329,7 @@ class TestApplicationFlow:
             "index_map": MagicMock(),
             "time_series": [],
             "time_series_plot": None,
-            "climate_plot": None,
+            "climate_plot": go.Figure(),
             "alert": None,
             "mean_value": 0.65,
             "area_ha": 12.5,

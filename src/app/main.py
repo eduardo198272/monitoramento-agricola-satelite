@@ -186,158 +186,163 @@ def main():
     )
     load_styles()
 
-    st.title("Monitoramento Agrícola por Imagens de Satélite")
+    st.title("Monitoramento Agrícola")
+    st.caption("Analise a condição da vegetação usando imagens de satélite e dados climáticos.")
 
     initialize_ui_state()
 
     ee_ok, ee_error = init_earth_engine()
     if not ee_ok:
+        st.error("Status do serviço: Earth Engine indisponível")
         st.error(f"Erro ao inicializar Earth Engine: {ee_error}")
         st.info("Configure a variável EE_PROJECT_ID no arquivo .env")
         return
 
-    with st.sidebar:
-        st.header("Parâmetros de Análise")
+    st.success("Status do serviço: Earth Engine conectado")
 
+    st.subheader("Localizar área")
+    search_col, search_button_col = st.columns([4, 1])
+    with search_col:
         location_query = st.text_input(
             "Pesquisar localidade",
             key="location_query",
             placeholder="Cidade, município ou endereço",
         )
+    with search_button_col:
+        st.write("")
         search = st.button("Pesquisar")
 
-        if search:
-            if not location_query.strip():
-                st.warning("Informe uma localidade para pesquisar.")
+    if search:
+        if not location_query.strip():
+            st.warning("Informe uma localidade para pesquisar.")
+        else:
+            location = search_location(location_query)
+            if location is None:
+                st.warning("Localidade não encontrada ou serviço indisponível.")
+                st.session_state.location_result = None
             else:
-                location = search_location(location_query)
-                if location is None:
-                    st.warning("Localidade não encontrada ou serviço indisponível.")
-                    st.session_state.location_result = None
-                else:
-                    st.session_state.location_center = [
-                        location["latitude"],
-                        location["longitude"],
-                    ]
-                    st.session_state.location_zoom = calculate_map_zoom(
-                        location["boundingbox"]
-                    )
-                    st.session_state.location_result = location
+                st.session_state.location_center = [
+                    location["latitude"],
+                    location["longitude"],
+                ]
+                st.session_state.location_zoom = calculate_map_zoom(
+                    location["boundingbox"]
+                )
+                st.session_state.location_result = location
 
-        if st.session_state.location_result:
-            st.success(
-                f"Localidade encontrada: "
-                f"{st.session_state.location_result['display_name']}"
-            )
+    if st.session_state.location_result:
+        st.success(
+            f"Localidade encontrada: "
+            f"{st.session_state.location_result['display_name']}"
+        )
 
+    st.subheader("Área de interesse")
+    st.info("Desenhe um polígono no mapa para definir a área de interesse")
+    selection_map = create_selection_map(
+        center=st.session_state.location_center,
+        zoom=st.session_state.location_zoom,
+        geojson=st.session_state.aoi_geojson,
+    )
+    map_data = st_folium(
+        selection_map,
+        key="area_selection_map",
+        height=600,
+        returned_objects=["last_active_drawing"],
+        use_container_width=True,
+    )
+
+    drawn_geojson = map_data.get("last_active_drawing") if map_data else None
+    if drawn_geojson:
+        try:
+            if drawn_geojson != st.session_state.aoi_geojson:
+                st.session_state.aoi_geometry = geojson_to_ee_geometry(drawn_geojson)
+                st.session_state.aoi_geojson = drawn_geojson
+                clear_analysis_state()
+            st.success("Área desenhada capturada! Clique em Analisar.")
+        except ValueError as error:
+            st.session_state.aoi_geometry = None
+            st.session_state.aoi_geojson = None
+            clear_analysis_state()
+            st.error(str(error))
+    elif st.session_state.aoi_geometry is None:
+        st.info("Desenhe um polígono no mapa para definir a área.")
+
+    st.subheader("Configurar análise")
+    date_start_col, date_end_col, index_col = st.columns(3)
+    with date_start_col:
         start_date = st.date_input("Data inicial", value=DEFAULT_START)
+    with date_end_col:
         end_date = st.date_input("Data final", value=DEFAULT_END)
-
-        if end_date < start_date:
-            st.error("Data final não pode ser anterior à data inicial")
-
+    with index_col:
         index_name = st.selectbox("Índice", options=["NDVI", "NDWI", "NDMI"])
 
-        st.subheader("Seleção de Área")
-        st.info("Desenhe um polígono no mapa para definir a área de interesse")
+    if end_date < start_date:
+        st.error("Data final não pode ser anterior à data inicial")
 
-        analyze = st.button("Analisar", disabled=(end_date < start_date))
+    analyze = st.button("Analisar", disabled=(end_date < start_date))
 
-    col_main = st.container()
+    if analyze and end_date >= start_date:
+        geometry = st.session_state.aoi_geometry
 
-    with col_main:
-        st.subheader("Desenhe a área de interesse no mapa")
-        selection_map = create_selection_map(
-            center=st.session_state.location_center,
-            zoom=st.session_state.location_zoom,
-            geojson=st.session_state.aoi_geojson,
-        )
-        map_data = st_folium(
-            selection_map,
-            key="area_selection_map",
-            height=600,
-            returned_objects=["last_active_drawing"],
-            use_container_width=True,
-        )
-
-        drawn_geojson = map_data.get("last_active_drawing") if map_data else None
-        if drawn_geojson:
-            try:
-                if drawn_geojson != st.session_state.aoi_geojson:
-                    st.session_state.aoi_geometry = geojson_to_ee_geometry(drawn_geojson)
-                    st.session_state.aoi_geojson = drawn_geojson
-                    clear_analysis_state()
-                st.success("Área desenhada capturada! Clique em Analisar.")
-            except ValueError as error:
-                st.session_state.aoi_geometry = None
-                st.session_state.aoi_geojson = None
-                clear_analysis_state()
-                st.error(str(error))
-        elif st.session_state.aoi_geometry is None:
-            st.info("Desenhe um polígono no mapa para definir a área.")
-
-        if analyze and end_date >= start_date:
-            geometry = st.session_state.aoi_geometry
-
-            if geometry is None:
-                st.error("Desenhe uma área no mapa antes de analisar")
-            else:
-                st.session_state.analysis_status = "processing"
-                st.session_state.analysis_error = None
-                with st.spinner("Processando..."):
-                    result = run_analysis(geometry, start_date, end_date, index_name)
-                    if result["success"]:
-                        st.session_state.analysis_results = {index_name: result}
-                        st.session_state.visible_index = index_name
-                        st.session_state.aoi_area_ha = result.get("area_ha")
-                        m = create_base_map(
-                            center=[geometry.centroid().coordinates().getInfo()[1],
-                                    geometry.centroid().coordinates().getInfo()[0]],
-                            zoom=12
-                        )
-                        if index_name == "NDVI":
-                            palette = ["blue", "white", "green"]
-                        elif index_name == "NDWI":
-                            palette = ["brown", "white", "blue"]
-                        else:
-                            palette = ["red", "yellow", "blue"]
-
-                        m = add_index_layer(m, result["index_map"], index_name, palette=palette)
-                        add_colorbar(m, palette, index_name)
-                        st.session_state.analysis_map = m
-                        st.session_state.analysis_status = "success"
-                        st.session_state.analysis_error = None
+        if geometry is None:
+            st.error("Desenhe uma área no mapa antes de analisar")
+        else:
+            st.session_state.analysis_status = "processing"
+            st.session_state.analysis_error = None
+            with st.spinner("Processando..."):
+                result = run_analysis(geometry, start_date, end_date, index_name)
+                if result["success"]:
+                    st.session_state.analysis_results = {index_name: result}
+                    st.session_state.visible_index = index_name
+                    st.session_state.aoi_area_ha = result.get("area_ha")
+                    m = create_base_map(
+                        center=[geometry.centroid().coordinates().getInfo()[1],
+                                geometry.centroid().coordinates().getInfo()[0]],
+                        zoom=12
+                    )
+                    if index_name == "NDVI":
+                        palette = ["blue", "white", "green"]
+                    elif index_name == "NDWI":
+                        palette = ["brown", "white", "blue"]
                     else:
-                        st.session_state.analysis_error = result["error"]
-                        st.session_state.analysis_map = None
-                        st.session_state.analysis_results = {}
-                        st.session_state.analysis_status = (
-                            "no_data"
-                            if "Nenhuma imagem" in result["error"]
-                            else "error"
-                        )
+                        palette = ["red", "yellow", "blue"]
 
-        if st.session_state.analysis_error:
-            st.error(st.session_state.analysis_error)
-        elif st.session_state.analysis_map and st.session_state.analysis_results:
-            res = st.session_state.analysis_results[st.session_state.visible_index]
+                    m = add_index_layer(m, result["index_map"], index_name, palette=palette)
+                    add_colorbar(m, palette, index_name)
+                    st.session_state.analysis_map = m
+                    st.session_state.analysis_status = "success"
+                    st.session_state.analysis_error = None
+                else:
+                    st.session_state.analysis_error = result["error"]
+                    st.session_state.analysis_map = None
+                    st.session_state.analysis_results = {}
+                    st.session_state.analysis_status = (
+                        "no_data"
+                        if "Nenhuma imagem" in result["error"]
+                        else "error"
+                    )
 
-            display_map(st.session_state.analysis_map)
-            display_summary(
-                res.get("index_name", index_name),
-                res["mean_value"],
-                res["area_ha"],
-                compute_trend(res["time_series"]) if res["time_series"] else "estável",
-                res["alert"]
-            )
+    if st.session_state.analysis_error:
+        st.error(st.session_state.analysis_error)
+    elif st.session_state.analysis_map and st.session_state.analysis_results:
+        res = st.session_state.analysis_results[st.session_state.visible_index]
 
-            if res["time_series_plot"]:
-                st.subheader(f"Série Temporal de {index_name}")
-                st.plotly_chart(res["time_series_plot"], use_container_width=True)
+        display_map(st.session_state.analysis_map)
+        display_summary(
+            res.get("index_name", index_name),
+            res["mean_value"],
+            res["area_ha"],
+            compute_trend(res["time_series"]) if res["time_series"] else "estável",
+            res["alert"]
+        )
 
-            if res["climate_plot"]:
-                st.subheader("Dados Climáticos (NASA POWER)")
-                st.plotly_chart(res["climate_plot"], use_container_width=True)
+        if res["time_series_plot"]:
+            st.subheader(f"Série Temporal de {index_name}")
+            st.plotly_chart(res["time_series_plot"], use_container_width=True)
+
+        if res["climate_plot"]:
+            st.subheader("Dados Climáticos (NASA POWER)")
+            st.plotly_chart(res["climate_plot"], use_container_width=True)
 
             if res["alert"]:
                 st.warning(res["alert"])
