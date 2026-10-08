@@ -1,3 +1,5 @@
+import math
+
 import ee
 import streamlit as st
 from datetime import date, timedelta
@@ -61,7 +63,14 @@ def clear_analysis_state() -> None:
     st.session_state.analysis_map = None
     st.session_state.analysis_status = "idle"
     st.session_state.analysis_error = None
+
+
+def clear_area_selection_state() -> None:
+    """Clear the selected area and every value derived from it."""
+    st.session_state.aoi_geojson = None
+    st.session_state.aoi_geometry = None
     st.session_state.aoi_area_ha = None
+    clear_analysis_state()
 
 
 @st.cache_resource
@@ -216,18 +225,17 @@ def main():
         if not location_query.strip():
             st.warning("Informe uma localidade para pesquisar.")
         else:
-            location = search_location(location_query)
-            if location is None:
+            try:
+                location = search_location(location_query)
+                if location is None:
+                    raise ValueError("Localidade não encontrada")
+                center = [location["latitude"], location["longitude"]]
+                zoom = calculate_map_zoom(location["boundingbox"])
+            except Exception:
                 st.warning("Localidade não encontrada ou serviço indisponível.")
-                st.session_state.location_result = None
             else:
-                st.session_state.location_center = [
-                    location["latitude"],
-                    location["longitude"],
-                ]
-                st.session_state.location_zoom = calculate_map_zoom(
-                    location["boundingbox"]
-                )
+                st.session_state.location_center = center
+                st.session_state.location_zoom = zoom
                 st.session_state.location_result = location
 
     if st.session_state.location_result:
@@ -247,25 +255,48 @@ def main():
         selection_map,
         key="area_selection_map",
         height=600,
-        returned_objects=["last_active_drawing"],
+        returned_objects=["last_active_drawing", "all_drawings"],
         use_container_width=True,
     )
 
-    drawn_geojson = map_data.get("last_active_drawing") if map_data else None
-    if drawn_geojson:
+    map_data = map_data or {}
+    drawn_geojson = map_data.get("last_active_drawing")
+    drawings_removed = (
+        "all_drawings" in map_data
+        and isinstance(map_data["all_drawings"], list)
+        and not map_data["all_drawings"]
+        and st.session_state.aoi_geojson is not None
+    )
+    if drawings_removed:
+        clear_area_selection_state()
+        st.info("Desenhe um polígono no mapa para definir a área.")
+    elif drawn_geojson:
         try:
             if drawn_geojson != st.session_state.aoi_geojson:
-                st.session_state.aoi_geometry = geojson_to_ee_geometry(drawn_geojson)
+                geometry = geojson_to_ee_geometry(drawn_geojson)
+                area_ha = geometry.area().divide(10000).getInfo()
+                if (
+                    not isinstance(area_ha, (int, float))
+                    or not math.isfinite(area_ha)
+                    or area_ha <= 0
+                ):
+                    raise ValueError("Não foi possível calcular uma área válida em hectares.")
+                st.session_state.aoi_geometry = geometry
                 st.session_state.aoi_geojson = drawn_geojson
+                st.session_state.aoi_area_ha = area_ha
                 clear_analysis_state()
-            st.success("Área desenhada capturada! Clique em Analisar.")
-        except ValueError as error:
-            st.session_state.aoi_geometry = None
-            st.session_state.aoi_geojson = None
-            clear_analysis_state()
+            st.success(f"Área selecionada: {st.session_state.aoi_area_ha:.2f} ha")
+        except Exception as error:
             st.error(str(error))
     elif st.session_state.aoi_geometry is None:
         st.info("Desenhe um polígono no mapa para definir a área.")
+    else:
+        area_ha = st.session_state.aoi_area_ha
+        st.success(
+            f"Área selecionada: {area_ha:.2f} ha"
+            if area_ha is not None
+            else "Área selecionada."
+        )
 
     st.subheader("Configurar análise")
     date_start_col, date_end_col, index_col = st.columns(3)

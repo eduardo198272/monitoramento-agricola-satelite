@@ -14,6 +14,15 @@ def app_script():
     app_main.main()
 
 
+def make_geometry(area_ha=12.5):
+    geometry = MagicMock()
+    geometry.area.return_value.divide.return_value.getInfo.return_value = area_ha
+    geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [
+        -52.41, -28.26,
+    ]
+    return geometry
+
+
 @pytest.fixture
 def app():
     app = AppTest.from_file("src/app/main.py")
@@ -182,6 +191,11 @@ class TestApplicationFlow:
         search = MagicMock(return_value=location)
         monkeypatch.setattr(main_module, "search_location", search)
         monkeypatch.setattr(main_module, "calculate_map_zoom", lambda _: 11)
+        selected_geojson = {"type": "Feature", "properties": {"selected": True}}
+        selected_geometry = {"geometry": "existing-area"}
+        function_app.session_state["aoi_geojson"] = selected_geojson
+        function_app.session_state["aoi_geometry"] = selected_geometry
+        function_app.session_state["aoi_area_ha"] = 12.5
 
         function_app.text_input[0].set_value("Passo Fundo").run()
         next(button for button in function_app.button if button.label == "Pesquisar").click().run()
@@ -189,6 +203,9 @@ class TestApplicationFlow:
         search.assert_called_once_with("Passo Fundo")
         assert function_app.session_state["location_center"] == [-28.26, -52.41]
         assert function_app.session_state["location_zoom"] == 11
+        assert function_app.session_state["aoi_geojson"] == selected_geojson
+        assert function_app.session_state["aoi_geometry"] == selected_geometry
+        assert function_app.session_state["aoi_area_ha"] == 12.5
         assert any(
             "Localidade encontrada: Passo Fundo, RS" in success.value
             for success in function_app.success
@@ -206,6 +223,37 @@ class TestApplicationFlow:
         search.assert_called_once_with("Localidade inexistente")
         assert any("Localidade não encontrada" in warning.value for warning in function_app.warning)
         assert function_app.session_state["location_result"] is None
+
+    def test_location_search_failure_preserves_map_and_selected_area(
+        self, function_app, monkeypatch
+    ):
+        search = MagicMock(side_effect=RuntimeError("serviço indisponível"))
+        monkeypatch.setattr(main_module, "search_location", search)
+        selected_geojson = {"type": "Feature", "properties": {"selected": True}}
+        selected_geometry = {"geometry": "existing-area"}
+        function_app.session_state["location_center"] = [-27.0, -51.0]
+        function_app.session_state["location_zoom"] = 8
+        function_app.session_state["location_result"] = {"display_name": "Local anterior"}
+        function_app.session_state["aoi_geojson"] = selected_geojson
+        function_app.session_state["aoi_geometry"] = selected_geometry
+        function_app.session_state["aoi_area_ha"] = 12.5
+        create_map = MagicMock()
+        monkeypatch.setattr(main_module, "create_selection_map", create_map)
+
+        function_app.text_input[0].set_value("Nova localidade").run()
+        next(button for button in function_app.button if button.label == "Pesquisar").click().run()
+
+        search.assert_called_once_with("Nova localidade")
+        assert any("serviço indisponível" in warning.value for warning in function_app.warning)
+        assert function_app.session_state["location_center"] == [-27.0, -51.0]
+        assert function_app.session_state["location_zoom"] == 8
+        assert function_app.session_state["location_result"] == {"display_name": "Local anterior"}
+        assert function_app.session_state["aoi_geojson"] == selected_geojson
+        assert function_app.session_state["aoi_geometry"] == selected_geometry
+        assert function_app.session_state["aoi_area_ha"] == 12.5
+        assert create_map.call_args.kwargs["center"] == [-27.0, -51.0]
+        assert create_map.call_args.kwargs["zoom"] == 8
+        assert create_map.call_args.kwargs["geojson"] == selected_geojson
 
     def test_empty_location_search_does_not_call_service(
         self, function_app, monkeypatch
@@ -264,8 +312,124 @@ class TestApplicationFlow:
         assert app.session_state["aoi_geometry"] is None
         run_analysis.assert_not_called()
 
+    def test_invalid_redraw_preserves_previously_selected_area(self, monkeypatch):
+        drawn_geojson = {
+            "type": "Feature",
+            "geometry": {"type": "Polygon", "coordinates": []},
+        }
+        previous_geojson = {"type": "Feature", "properties": {"valid": True}}
+        previous_geometry = MagicMock(name="previous_geometry")
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {"last_active_drawing": drawn_geojson},
+        )
+        app = AppTest.from_function(app_script)
+        app.session_state["aoi_geojson"] = previous_geojson
+        app.session_state["aoi_geometry"] = previous_geometry
+        app.session_state["aoi_area_ha"] = 7.5
+
+        app.run()
+
+        assert any("usando um polígono" in error.value for error in app.error)
+        assert app.session_state["aoi_geojson"] == previous_geojson
+        assert app.session_state["aoi_geometry"] is previous_geometry
+        assert app.session_state["aoi_area_ha"] == 7.5
+
+    def test_area_is_calculated_when_drawing_is_captured(self, monkeypatch):
+        geometry = make_geometry(area_ha=3.25)
+        geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {"last_active_drawing": geojson},
+        )
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+
+        app = AppTest.from_function(app_script)
+        app.run()
+
+        geometry.area.assert_called_once_with()
+        geometry.area.return_value.divide.assert_called_once_with(10000)
+        assert app.session_state["aoi_geojson"] == geojson
+        assert app.session_state["aoi_geometry"] is geometry
+        assert app.session_state["aoi_area_ha"] == 3.25
+        assert any("3.25 ha" in success.value for success in app.success)
+
+    def test_area_calculation_failure_does_not_partially_replace_selection(self, monkeypatch):
+        geometry = make_geometry(area_ha=0)
+        new_geojson = {"type": "Feature", "properties": {"new": True}}
+        old_geojson = {"type": "Feature", "properties": {"old": True}}
+        old_geometry = MagicMock(name="old_geometry")
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {"last_active_drawing": new_geojson},
+        )
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        app = AppTest.from_function(app_script)
+        app.session_state["aoi_geojson"] = old_geojson
+        app.session_state["aoi_geometry"] = old_geometry
+        app.session_state["aoi_area_ha"] = 7.5
+
+        app.run()
+
+        assert any("área válida em hectares" in error.value for error in app.error)
+        assert app.session_state["aoi_geojson"] == old_geojson
+        assert app.session_state["aoi_geometry"] is old_geometry
+        assert app.session_state["aoi_area_ha"] == 7.5
+
+    def test_explicit_drawing_removal_clears_area_and_analysis_state(self, monkeypatch):
+        monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(
+            main_module,
+            "st_folium",
+            lambda *args, **kwargs: {
+                "all_drawings": [],
+                "last_active_drawing": {"type": "Feature", "properties": {"stale": True}},
+            },
+        )
+        app = AppTest.from_function(app_script)
+        app.session_state["aoi_geojson"] = {"type": "Feature"}
+        app.session_state["aoi_geometry"] = MagicMock(name="selected_geometry")
+        app.session_state["aoi_area_ha"] = 7.5
+        app.session_state["analysis_results"] = {"NDVI": {"success": True}}
+        app.session_state["analysis_map"] = MagicMock(name="analysis_map")
+        app.session_state["analysis_status"] = "success"
+        app.session_state["analysis_error"] = "stale error"
+
+        app.run()
+
+        assert app.session_state["aoi_geojson"] is None
+        assert app.session_state["aoi_geometry"] is None
+        assert app.session_state["aoi_area_ha"] is None
+        assert app.session_state["analysis_results"] == {}
+        assert app.session_state["analysis_map"] is None
+        assert app.session_state["analysis_status"] == "idle"
+        assert app.session_state["analysis_error"] is None
+
+    def test_rerun_without_map_update_preserves_area_state(self, function_app):
+        geojson = {"type": "Feature", "properties": {"selected": True}}
+        geometry = make_geometry()
+        function_app.session_state["aoi_geojson"] = geojson
+        function_app.session_state["aoi_geometry"] = geometry
+        function_app.session_state["aoi_area_ha"] = 4.5
+
+        function_app.run()
+
+        assert function_app.session_state["aoi_geojson"] == geojson
+        assert function_app.session_state["aoi_geometry"] is geometry
+        assert function_app.session_state["aoi_area_ha"] == 4.5
+
     def test_failed_analysis_shows_pipeline_error(self, monkeypatch):
-        geometry = MagicMock()
+        geometry = make_geometry()
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
         failure = {"success": False, "error": "Nenhuma imagem encontrada"}
 
@@ -292,7 +456,7 @@ class TestApplicationFlow:
         assert any("Nenhuma imagem encontrada" in error.value for error in app.error)
 
     def test_generic_analysis_failure_sets_error_status(self, monkeypatch):
-        geometry = MagicMock()
+        geometry = make_geometry()
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
 
         monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
@@ -317,11 +481,7 @@ class TestApplicationFlow:
         assert app.session_state["analysis_error"] == "Earth Engine indisponível"
 
     def test_successful_analysis_renders_outputs(self, monkeypatch):
-        geometry = MagicMock()
-        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [
-            -52.41,
-            -28.26,
-        ]
+        geometry = make_geometry()
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
         result = {
             "success": True,
@@ -370,11 +530,7 @@ class TestApplicationFlow:
     def test_successful_analysis_uses_index_palette(
         self, monkeypatch, index_name, expected_palette
     ):
-        geometry = MagicMock()
-        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [
-            -52.41,
-            -28.26,
-        ]
+        geometry = make_geometry()
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
         result = {
             "success": True,
@@ -420,11 +576,7 @@ class TestApplicationFlow:
         )
 
     def test_successful_analysis_renders_time_series_climate_and_alert(self, monkeypatch):
-        geometry = MagicMock()
-        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [
-            -52.41,
-            -28.26,
-        ]
+        geometry = make_geometry()
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
         result = {
             "success": True,

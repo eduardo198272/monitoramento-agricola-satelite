@@ -183,16 +183,79 @@ def geojson_to_ee_geometry(geojson: dict) -> ee.Geometry:
         raise ValueError("A área desenhada não possui um formato GeoJSON válido")
 
     geometry = geojson.get("geometry", geojson)
+    if not isinstance(geometry, dict):
+        raise ValueError("A geometria GeoJSON está malformada")
     geometry_type = geometry.get("type")
     coordinates = geometry.get("coordinates")
 
     if geometry_type != "Polygon" or not coordinates:
         raise ValueError("Desenhe uma área usando um polígono")
 
-    if len(coordinates[0]) < 4:
-        raise ValueError("O polígono precisa ter pelo menos três vértices")
+    if not isinstance(coordinates, (list, tuple)) or not coordinates:
+        raise ValueError("O polígono precisa conter pelo menos um anel válido")
+
+    for ring in coordinates:
+        _validate_polygon_ring(ring)
 
     return ee.Geometry.Polygon(coordinates)
+
+
+def _validate_polygon_ring(ring: list) -> None:
+    if not isinstance(ring, (list, tuple)):
+        raise ValueError("O anel do polígono está malformado")
+
+    try:
+        points = [tuple(point) for point in ring]
+    except (TypeError, ValueError):
+        raise ValueError("As coordenadas do polígono estão malformadas") from None
+
+    if any(
+        len(point) < 2
+        or not all(isinstance(value, (int, float)) and math.isfinite(value) for value in point[:2])
+        or not -180 <= point[0] <= 180
+        or not -90 <= point[1] <= 90
+        for point in points
+    ):
+        raise ValueError("As coordenadas devem ser finitas e estar dentro dos limites geográficos")
+
+    if len(points) < 4 or points[0] != points[-1]:
+        raise ValueError("O polígono deve ter pelo menos três vértices distintos e um anel fechado")
+
+    vertices = points[:-1]
+    if len(set(vertices)) < 3:
+        raise ValueError("O polígono deve ter pelo menos três vértices distintos")
+
+    signed_area = sum(
+        x1 * y2 - x2 * y1
+        for (x1, y1), (x2, y2) in zip(points, points[1:])
+    )
+    if math.isclose(signed_area, 0.0, abs_tol=1e-12):
+        raise ValueError("O polígono não pode ter área zero")
+
+    if _ring_has_self_intersection(vertices):
+        raise ValueError("O polígono é inválido: seus lados não podem se cruzar")
+
+
+def _ring_has_self_intersection(vertices: list[tuple]) -> bool:
+    def orientation(a, b, c):
+        return (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
+
+    def intersects(a, b, c, d):
+        return (
+            orientation(a, b, c) * orientation(a, b, d) < 0
+            and orientation(c, d, a) * orientation(c, d, b) < 0
+        )
+
+    count = len(vertices)
+    for first in range(count):
+        a, b = vertices[first], vertices[(first + 1) % count]
+        for second in range(first + 1, count):
+            if second == first or second == (first + 1) % count or (second + 1) % count == first:
+                continue
+            c, d = vertices[second], vertices[(second + 1) % count]
+            if intersects(a, b, c, d):
+                return True
+    return False
 
 
 def enable_area_draw(map_obj: geemap.Map) -> None:

@@ -104,6 +104,22 @@ def test_api_error(mock_get):
     ...
 ```
 
+## Manutenção
+
+Toda alteração em `src/app` deve incluir ou atualizar testes para os novos caminhos
+de execução. A verificação mínima antes de integrar uma alteração é:
+
+```powershell
+py -m pytest
+py -m coverage report -m
+```
+
+Os testes devem continuar isolados de rede, credenciais e serviços Earth Engine.
+Quando a alteração envolver a interface Streamlit, também deve ser validado o
+fluxo correspondente com `AppTest`. Se a cobertura cair, corrigir os testes ou a
+implementação antes de aceitar a alteração; não remover módulos da medição nem
+usar exclusões para atingir o limite configurado.
+
 ## Tasks Relacionadas
 
 - SPEC-13-01 a SPEC-13-14 — `tasks-cobertura-testes.md`

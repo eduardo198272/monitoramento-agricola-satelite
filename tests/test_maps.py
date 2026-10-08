@@ -444,6 +444,16 @@ class TestGeojsonToEeGeometry:
             geojson["geometry"]["coordinates"]
         )
 
+    @patch("src.app.maps.ee")
+    def test_converts_valid_concave_polygon(self, mock_ee):
+        coordinates = [[
+            [0, 0], [3, 0], [3, 3], [2, 1], [0, 3], [0, 0],
+        ]]
+
+        geojson_to_ee_geometry({"type": "Polygon", "coordinates": coordinates})
+
+        mock_ee.Geometry.Polygon.assert_called_once_with(coordinates)
+
     def test_rejects_non_polygon(self):
         with pytest.raises(ValueError, match="usando um polígono"):
             geojson_to_ee_geometry({"type": "Point", "coordinates": [-52, -28]})
@@ -455,7 +465,24 @@ class TestGeojsonToEeGeometry:
             ({}, "usando um polígono"),
             ({"type": "Polygon", "coordinates": []}, "usando um polígono"),
             ({"type": "Polygon", "coordinates": [[[0, 0], [1, 1], [0, 0]]]},
-             "pelo menos três vértices"),
+             "três vértices distintos"),
+            ({"type": "Polygon", "coordinates": [[[0, 0], [1, 0], [1, 1], [0, 1]]]},
+             "anel fechado"),
+            ({"type": "Polygon", "coordinates": [[[0, 0], [1, 0], [2, 0], [0, 0]]]},
+             "área zero"),
+            ({"type": "Polygon", "coordinates": [[[0, 0], [4, 3], [0, 4], [3, 0], [0, 0]]]},
+             "lados não podem se cruzar"),
+            ({"type": "Polygon", "coordinates": {"ring": []}}, "anel válido"),
+            ({"type": "Polygon", "coordinates": [1]}, "anel do polígono está malformado"),
+            ({"type": "Polygon", "coordinates": [[0, [1, 2], [2, 2], [0, 0]]]},
+             "coordenadas do polígono estão malformadas"),
+            ({"type": "Polygon", "coordinates": [[[0, 0], [1, 0], [0, 0], [0, 0]]]},
+             "três vértices distintos"),
+            ({"type": "Polygon", "coordinates": [[[0, 0], [float("nan"), 1], [1, 1], [0, 0]]]},
+             "finitas"),
+            ({"type": "Polygon", "coordinates": [[[0, 0], [181, 0], [1, 1], [0, 0]]]},
+             "limites geográficos"),
+            ({"type": "Feature", "geometry": None}, "geometria GeoJSON está malformada"),
         ],
     )
     def test_rejects_invalid_polygon_payload(self, geojson, message):

@@ -8,9 +8,9 @@ Referência: `docs/specs/14-ui-v2-map-first/spec-ui-v2-map-first.md`
 | SPEC-14-02 | Definir modelo de estado da UI V2 | Estado inicial, seleção, análise, erro e rerun usam chaves previsíveis e uma fonte de verdade | 1h | Concluído |
 | SPEC-14-03 | Criar CSS centralizado e tokens visuais | Cores, espaçamentos, inputs, botões, cards e responsividade ficam em um ponto central | 1h | Concluído |
 | SPEC-14-04 | Implementar header e estrutura map-first | Header compacto, subtítulo, status do serviço e mapa rapidamente visível aparecem sem sidebar obrigatória | 45min | Concluído |
-| SPEC-14-05 | Integrar busca à workspace geográfica | Busca válida atualiza centro e zoom, não cria área e preserva seleção existente | 45min | Não iniciado |
-| SPEC-14-06 | Melhorar validação do GeoJSON | Polígono aberto, degenerado, inválido ou sem área são rejeitados com mensagem orientativa | 1h | Não iniciado |
-| SPEC-14-07 | Persistir, calcular e limpar a área | Geometria, GeoJSON e hectares permanecem em reruns e são limpos juntos | 1h | Não iniciado |
+| SPEC-14-05 | Integrar busca à workspace geográfica | Busca válida atualiza centro e zoom, não cria área e preserva seleção existente | 45min | Concluído |
+| SPEC-14-06 | Melhorar validação do GeoJSON | Polígono aberto, degenerado, inválido ou sem área são rejeitados com mensagem orientativa | 1h | Concluído |
+| SPEC-14-07 | Persistir, calcular e limpar a área | Geometria, GeoJSON e hectares permanecem em reruns e são limpos juntos | 1h | Concluído |
 | SPEC-14-08 | Adicionar indicação de desenho da área | O mapa mantém o controle nativo e exibe uma instrução curta sem botão falso | 30min | Não iniciado |
 | SPEC-14-09 | Implementar barra compacta de período | Datas ficam integradas à área principal, com defaults e validação de intervalo | 45min | Não iniciado |
 | SPEC-14-10 | Implementar seletor horizontal de índices | `Todos`, `NDVI`, `NDWI` e `NDMI` aparecem sem dropdown principal | 45min | Não iniciado |

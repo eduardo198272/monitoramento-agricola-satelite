@@ -17,7 +17,7 @@ Referência: `docs/specs/13-cobertura-testes/spec-cobertura-testes.md`
 | SPEC-13-11 | Cobrir `validate_scenarios.py` sem Earth Engine real | Geometria, três culturas, dados insuficientes, critérios inválidos, exceções e resumo final cobertos | 2h | ✅ |
 | SPEC-13-12 | Cobrir branches residuais identificados pelo relatório | `coverage report -m` não apresenta linhas ou branches pendentes nos módulos de produção | 1h | ✅ |
 | SPEC-13-13 | Executar a suíte completa e corrigir regressões | `py -m pytest` termina com código 0 e cobertura de 100% | 1h | ✅ |
-| SPEC-13-14 | Documentar a estratégia e o procedimento de manutenção | Spec, tasks e instruções de execução estão atualizadas e reproduzíveis | 30min | ⬜ |
+| SPEC-13-14 | Documentar a estratégia e o procedimento de manutenção | Spec, tasks e instruções de execução estão atualizadas e reproduzíveis | 30min | ✅ |
 
 ## Ordem de Execução
 
