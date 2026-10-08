@@ -4,7 +4,13 @@ from streamlit.testing.v1 import AppTest
 import plotly.graph_objects as go
 
 import src.app.main as main_module
-from src.app.main import display_map, display_summary, UI_STATE_DEFAULTS
+from src.app.main import (
+    DEFAULT_END,
+    DEFAULT_START,
+    UI_STATE_DEFAULTS,
+    display_map,
+    display_summary,
+)
 
 
 def app_script():
@@ -54,6 +60,13 @@ class TestAppStructure:
             for item in app.success
         )
 
+    def test_area_workspace_shows_drawing_instruction_without_fake_button(self, app):
+        assert any(
+            "Use a ferramenta de polígono no mapa" in item.value
+            for item in app.info
+        )
+        assert all(button.label != "Desenhar área" for button in app.button)
+
 
 class TestWorkspaceControls:
     def test_workspace_has_location_search_input(self, app):
@@ -72,6 +85,8 @@ class TestWorkspaceControls:
     def test_workspace_has_date_inputs(self, app):
         date_inputs = app.date_input
         assert len(date_inputs) >= 2
+        assert any(item.value == DEFAULT_START for item in date_inputs)
+        assert any(item.value == DEFAULT_END for item in date_inputs)
 
     def test_workspace_date_input_labels(self, app):
         date_inputs = app.date_input
@@ -87,16 +102,44 @@ class TestWorkspaceControls:
         end_input = next(di for di in app.date_input if di.label == "Data final")
         assert end_input.value is not None
 
-    def test_workspace_has_index_selectbox(self, app):
-        selectboxes = app.selectbox
-        index_select = next(sb for sb in selectboxes if sb.label == "Índice")
-        assert index_select is not None
-        assert set(index_select.options) == {"NDVI", "NDWI", "NDMI"}
+    def test_workspace_has_horizontal_index_radio(self, app):
+        index_selector = next(radio for radio in app.radio if radio.label == "Índice")
+        assert index_selector is not None
+        assert index_selector.options == ["Todos", "NDVI", "NDWI", "NDMI"]
+        assert not any(item.label == "Índice" for item in app.selectbox)
+
+    @pytest.mark.parametrize(
+        "selection, expected_mode, expected_indices",
+        [
+            ("NDVI", "single", ["NDVI"]),
+            ("NDWI", "single", ["NDWI"]),
+            ("NDMI", "single", ["NDMI"]),
+            ("Todos", "multi", ["NDVI", "NDWI", "NDMI"]),
+        ],
+    )
+    def test_index_selection_updates_mode_and_supported_indices(
+        self, app, selection, expected_mode, expected_indices
+    ):
+        next(radio for radio in app.radio if radio.label == "Índice").set_value(selection).run()
+
+        assert app.session_state["analysis_mode"] == expected_mode
+        assert app.session_state["selected_indices"] == expected_indices
 
     def test_workspace_has_analyze_button(self, app):
         buttons = app.button
         analyze_btn = next((b for b in buttons if b.label == "Analisar"), None)
         assert analyze_btn is not None
+
+    def test_todos_does_not_call_single_index_pipeline(self, app, monkeypatch):
+        run_analysis = MagicMock()
+        monkeypatch.setattr(main_module, "run_analysis", run_analysis)
+        app.session_state["aoi_geometry"] = make_geometry()
+
+        next(radio for radio in app.radio if radio.label == "Índice").set_value("Todos").run()
+        next(button for button in app.button if button.label == "Analisar").click().run()
+
+        run_analysis.assert_not_called()
+        assert any("pipeline multiíndice" in item.value for item in app.info)
 
 
 
@@ -122,6 +165,20 @@ class TestValidation:
         assert analyze_btn is not None
         assert analyze_btn.disabled is True
 
+    def test_same_day_is_a_valid_analysis_period(self, app):
+        start_input = next(di for di in app.date_input if di.label == "Data inicial")
+        end_input = next(di for di in app.date_input if di.label == "Data final")
+        same_date = "2026-06-15"
+
+        start_input.set_value(same_date).run()
+        end_input.set_value(same_date).run()
+
+        assert not any("Data final não pode ser anterior" in item.value for item in app.error)
+        assert app.session_state["analysis_start_date"] == app.session_state["analysis_end_date"]
+
+    def test_period_bar_is_visible_in_main_workspace(self, app):
+        assert any(item.value == "Período da análise" for item in app.caption)
+
 
 class TestInitialState:
     def test_ui_v2_state_has_single_source_of_truth(self, app):
@@ -138,7 +195,7 @@ class TestInitialState:
 
     def test_initial_message_displayed(self, app):
         info_messages = [el.value for el in app.info]
-        assert any("Desenhe um polígono" in msg for msg in info_messages)
+        assert any("ferramenta de polígono no mapa" in msg for msg in info_messages)
 
 
 @pytest.fixture
@@ -560,7 +617,7 @@ class TestApplicationFlow:
 
         app = AppTest.from_function(app_script)
         app.run()
-        next(selectbox for selectbox in app.selectbox if selectbox.label == "Índice").set_value(index_name).run()
+        next(radio for radio in app.radio if radio.label == "Índice").set_value(index_name).run()
         next(button for button in app.button if button.label == "Analisar").click().run()
 
         assert add_index_layer.call_args.kwargs["palette"] == expected_palette

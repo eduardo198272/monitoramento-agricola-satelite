@@ -30,9 +30,12 @@ from src.app.time_series import compute_time_series, plot_time_series
 from src.app.anomalies import detect_anomalies, generate_alert, compute_trend
 from src.app.climate import fetch_climate_data, plot_climate_data
 from src.app.styles import load_styles
+from src.app.utils import normalize_date
 
 DEFAULT_START = date.today() - timedelta(days=365)
 DEFAULT_END = date.today()
+SUPPORTED_INDICES = ["NDVI", "NDWI", "NDMI"]
+INDEX_SELECTION_OPTIONS = ["Todos", *SUPPORTED_INDICES]
 
 UI_STATE_DEFAULTS = {
     "location_center": DEFAULT_CENTER,
@@ -42,6 +45,7 @@ UI_STATE_DEFAULTS = {
     "aoi_geometry": None,
     "aoi_area_ha": None,
     "analysis_mode": "single",
+    "selected_indices": ["NDVI"],
     "visible_index": "NDVI",
     "analysis_results": {},
     "analysis_status": "idle",
@@ -115,7 +119,9 @@ def display_summary(
 
 def run_analysis(geometry, start_date, end_date, index_name):
     try:
-        collection = get_image_collection(geometry, str(start_date), str(end_date))
+        start_date = normalize_date(start_date)
+        end_date = normalize_date(end_date)
+        collection = get_image_collection(geometry, start_date, end_date)
 
         if collection.size().getInfo() == 0:
             return {
@@ -245,7 +251,7 @@ def main():
         )
 
     st.subheader("Área de interesse")
-    st.info("Desenhe um polígono no mapa para definir a área de interesse")
+    st.info("Use a ferramenta de polígono no mapa para desenhar a área de interesse.")
     selection_map = create_selection_map(
         center=st.session_state.location_center,
         zoom=st.session_state.location_zoom,
@@ -269,7 +275,6 @@ def main():
     )
     if drawings_removed:
         clear_area_selection_state()
-        st.info("Desenhe um polígono no mapa para definir a área.")
     elif drawn_geojson:
         try:
             if drawn_geojson != st.session_state.aoi_geojson:
@@ -288,9 +293,7 @@ def main():
             st.success(f"Área selecionada: {st.session_state.aoi_area_ha:.2f} ha")
         except Exception as error:
             st.error(str(error))
-    elif st.session_state.aoi_geometry is None:
-        st.info("Desenhe um polígono no mapa para definir a área.")
-    else:
+    elif st.session_state.aoi_geometry is not None:
         area_ha = st.session_state.aoi_area_ha
         st.success(
             f"Área selecionada: {area_ha:.2f} ha"
@@ -298,14 +301,43 @@ def main():
             else "Área selecionada."
         )
 
+    with st.container(border=True):
+        st.caption("Período da análise")
+        date_start_col, date_end_col = st.columns(2)
+        with date_start_col:
+            start_date = st.date_input(
+                "Data inicial",
+                value=DEFAULT_START,
+                key="analysis_start_date",
+                format="DD/MM/YYYY",
+            )
+        with date_end_col:
+            end_date = st.date_input(
+                "Data final",
+                value=DEFAULT_END,
+                key="analysis_end_date",
+                format="DD/MM/YYYY",
+            )
+
     st.subheader("Configurar análise")
-    date_start_col, date_end_col, index_col = st.columns(3)
-    with date_start_col:
-        start_date = st.date_input("Data inicial", value=DEFAULT_START)
-    with date_end_col:
-        end_date = st.date_input("Data final", value=DEFAULT_END)
-    with index_col:
-        index_name = st.selectbox("Índice", options=["NDVI", "NDWI", "NDMI"])
+    selected_index = st.radio(
+        "Índice",
+        options=INDEX_SELECTION_OPTIONS,
+        index=INDEX_SELECTION_OPTIONS.index("NDVI"),
+        horizontal=True,
+        key="index_selection",
+    )
+    st.session_state.analysis_mode = "multi" if selected_index == "Todos" else "single"
+    st.session_state.selected_indices = (
+        SUPPORTED_INDICES.copy()
+        if selected_index == "Todos"
+        else [selected_index]
+    )
+    index_name = (
+        selected_index
+        if selected_index in SUPPORTED_INDICES
+        else st.session_state.visible_index
+    )
 
     if end_date < start_date:
         st.error("Data final não pode ser anterior à data inicial")
@@ -317,6 +349,11 @@ def main():
 
         if geometry is None:
             st.error("Desenhe uma área no mapa antes de analisar")
+        elif selected_index == "Todos":
+            st.info(
+                "A análise conjunta dos índices estará disponível após a integração "
+                "do pipeline multiíndice."
+            )
         else:
             st.session_state.analysis_status = "processing"
             st.session_state.analysis_error = None

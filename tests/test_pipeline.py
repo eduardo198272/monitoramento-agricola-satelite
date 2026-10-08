@@ -2,6 +2,7 @@ import pytest
 from unittest.mock import MagicMock, patch
 import pandas as pd
 import plotly.graph_objects as go
+from datetime import date
 
 from src.app.pipeline import run_analysis
 
@@ -57,7 +58,7 @@ class TestRunAnalysis:
 
         with patch(f"src.app.pipeline.{calculation_name}") as mock_calculation:
             result = run_analysis(
-                geometry, "2024-01-01", "2024-01-31", index_name
+                geometry, date(2024, 1, 1), date(2024, 1, 31), index_name
             )
 
         assert result["success"] is True
@@ -66,6 +67,10 @@ class TestRunAnalysis:
         assert result["time_series_plot"] is None
         assert result["climate_plot"] is None
         masked_collection.map.assert_called_once_with(mock_calculation)
+        mock_get_col.assert_called_once_with(geometry, "2024-01-01", "2024-01-31")
+        mock_fetch_climate.assert_called_once_with(
+            geometry, "2024-01-01", "2024-01-31"
+        )
 
     @patch("src.app.pipeline.ee")
     @patch("src.app.pipeline.get_image_collection")

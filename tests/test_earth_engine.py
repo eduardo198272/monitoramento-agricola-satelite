@@ -1,4 +1,5 @@
 import pytest
+from datetime import date
 from unittest.mock import MagicMock, patch
 from src.app.earth_engine import (
     filter_by_date,
@@ -48,6 +49,13 @@ class TestFilterByDate:
         mock_ee.Filter.date.return_value = "date_filter"
         result = filter_by_date(mock_collection, "2026-01-15", "2026-01-15")
         assert result == mock_filtered
+
+    @patch("src.app.earth_engine.ee")
+    def test_filter_by_date_accepts_date_objects(self, mock_ee):
+        collection = MagicMock()
+        filter_by_date(collection, date(2026, 1, 1), date(2026, 1, 31))
+
+        mock_ee.Filter.date.assert_called_once_with("2026-01-01", "2026-01-31")
 
 
 class TestFilterByArea:

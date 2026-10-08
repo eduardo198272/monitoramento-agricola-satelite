@@ -11,10 +11,10 @@ Referência: `docs/specs/14-ui-v2-map-first/spec-ui-v2-map-first.md`
 | SPEC-14-05 | Integrar busca à workspace geográfica | Busca válida atualiza centro e zoom, não cria área e preserva seleção existente | 45min | Concluído |
 | SPEC-14-06 | Melhorar validação do GeoJSON | Polígono aberto, degenerado, inválido ou sem área são rejeitados com mensagem orientativa | 1h | Concluído |
 | SPEC-14-07 | Persistir, calcular e limpar a área | Geometria, GeoJSON e hectares permanecem em reruns e são limpos juntos | 1h | Concluído |
-| SPEC-14-08 | Adicionar indicação de desenho da área | O mapa mantém o controle nativo e exibe uma instrução curta sem botão falso | 30min | Não iniciado |
-| SPEC-14-09 | Implementar barra compacta de período | Datas ficam integradas à área principal, com defaults e validação de intervalo | 45min | Não iniciado |
-| SPEC-14-10 | Implementar seletor horizontal de índices | `Todos`, `NDVI`, `NDWI` e `NDMI` aparecem sem dropdown principal | 45min | Não iniciado |
-| SPEC-14-11 | Normalizar datas para serviços externos | Strings e `datetime.date` são aceitos pelo pipeline e NASA POWER | 30min | Não iniciado |
+| SPEC-14-08 | Adicionar indicação de desenho da área | O mapa mantém o controle nativo e exibe uma instrução curta sem botão falso | 30min | Concluído |
+| SPEC-14-09 | Implementar barra compacta de período | Datas ficam integradas à área principal, com defaults e validação de intervalo | 45min | Concluído |
+| SPEC-14-10 | Implementar seletor horizontal de índices | `Todos`, `NDVI`, `NDWI` e `NDMI` aparecem sem dropdown principal | 45min | Concluído |
+| SPEC-14-11 | Normalizar datas para serviços externos | Strings e `datetime.date` são aceitos pelo pipeline e NASA POWER | 30min | Concluído |
 | SPEC-14-12 | Corrigir bandas necessárias ao NDMI | A coleção seleciona todas as bandas da fórmula adotada e o contrato é testado | 45min | Não iniciado |
 | SPEC-14-13 | Consolidar `run_analysis` no pipeline | A UI não mantém cópia duplicada do processamento existente | 1h | Não iniciado |
 | SPEC-14-14 | Implementar `run_multi_analysis` | Um fluxo calcula os índices selecionados e compartilha coleção, máscara, área, imagens e clima | 2h30 | Não iniciado |

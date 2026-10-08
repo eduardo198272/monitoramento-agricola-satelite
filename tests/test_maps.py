@@ -404,6 +404,26 @@ class TestCreateSelectionMap:
         assert result.location == [-20.0, -45.0]
         assert result.options["zoom"] == 12
 
+    @patch("src.app.maps.Draw")
+    def test_keeps_native_polygon_draw_control_without_other_draw_tools(
+        self, draw_control
+    ):
+        create_selection_map()
+
+        draw_control.assert_called_once_with(
+            export=False,
+            draw_options={
+                "polyline": False,
+                "rectangle": False,
+                "circle": False,
+                "marker": False,
+                "circlemarker": False,
+                "polygon": True,
+            },
+            edit_options={"edit": True, "remove": True},
+        )
+        draw_control.return_value.add_to.assert_called_once()
+
     @pytest.mark.parametrize("zoom", [0, 21, 10.5])
     def test_rejects_invalid_zoom(self, zoom):
         with pytest.raises(ValueError, match="zoom deve ser inteiro entre 1 e 20"):

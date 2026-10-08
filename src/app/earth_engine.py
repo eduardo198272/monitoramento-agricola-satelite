@@ -1,10 +1,16 @@
 import ee
-from datetime import datetime
+from datetime import date
+
+from src.app.utils import normalize_date
 
 
-def filter_by_date(collection: ee.ImageCollection, start_date: str, end_date: str) -> ee.ImageCollection:
-    _validate_date_format(start_date)
-    _validate_date_format(end_date)
+def filter_by_date(
+    collection: ee.ImageCollection,
+    start_date: str | date,
+    end_date: str | date,
+) -> ee.ImageCollection:
+    start_date = normalize_date(start_date)
+    end_date = normalize_date(end_date)
     if start_date > end_date:
         raise ValueError("start_date deve ser menor ou igual a end_date")
     return collection.filter(ee.Filter.date(start_date, end_date))
@@ -18,8 +24,8 @@ def filter_by_area(collection: ee.ImageCollection, geometry: ee.Geometry) -> ee.
 
 def get_image_collection(
     geometry: ee.Geometry,
-    start_date: str,
-    end_date: str,
+    start_date: str | date,
+    end_date: str | date,
     cloud_cover_max: int = 20
 ) -> ee.ImageCollection:
     if geometry is None:
@@ -41,13 +47,6 @@ def mask_clouds(image: ee.Image) -> ee.Image:
     cirrus_mask = qa60.bitwiseAnd(1 << 11).eq(0)
     mask = cloud_mask.And(cirrus_mask)
     return image.updateMask(mask)
-
-
-def _validate_date_format(date_str: str) -> None:
-    try:
-        datetime.strptime(date_str, "%Y-%m-%d")
-    except ValueError:
-        raise ValueError(f"Data inválida: {date_str}. Use formato YYYY-MM-DD")
 
 
 def calculate_ndvi(image: ee.Image) -> ee.Image:

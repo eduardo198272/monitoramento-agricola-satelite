@@ -1,5 +1,6 @@
 import ee
 import pandas as pd
+from datetime import date
 
 from src.app.earth_engine import (
     get_image_collection,
@@ -11,15 +12,18 @@ from src.app.earth_engine import (
 from src.app.time_series import compute_time_series, plot_time_series
 from src.app.anomalies import detect_anomalies, generate_alert, compute_trend
 from src.app.climate import fetch_climate_data, plot_climate_data
+from src.app.utils import normalize_date
 
 
 def run_analysis(
     geometry: ee.Geometry,
-    start_date: str,
-    end_date: str,
+    start_date: str | date,
+    end_date: str | date,
     index_name: str
 ) -> dict:
     try:
+        start_date = normalize_date(start_date)
+        end_date = normalize_date(end_date)
         collection = get_image_collection(geometry, start_date, end_date)
 
         if collection.size().getInfo() == 0:

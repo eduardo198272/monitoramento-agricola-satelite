@@ -1,4 +1,5 @@
 import pytest
+from datetime import date
 from unittest.mock import MagicMock, patch
 import pandas as pd
 
@@ -47,6 +48,16 @@ def make_mock_response(data):
 
 
 class TestFetchClimateData:
+    def test_fetch_climate_data_formats_date_objects_for_nasa_power(self):
+        geometry = MockGeometry(coords=[-45.0, -20.0])
+
+        with patch("src.app.climate.requests.get") as mock_get:
+            mock_get.return_value = make_mock_response({"properties": {"parameter": {}}})
+            fetch_climate_data(geometry, date(2024, 1, 2), date(2024, 1, 3))
+
+        assert mock_get.call_args.kwargs["params"]["start"] == "20240102"
+        assert mock_get.call_args.kwargs["params"]["end"] == "20240103"
+
     def test_fetch_climate_data_success(self):
         geometry = MockGeometry(coords=[-45.0, -20.0])
 

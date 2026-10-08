@@ -2,6 +2,9 @@ import ee
 import requests
 import pandas as pd
 import plotly.graph_objects as go
+from datetime import date
+
+from src.app.utils import normalize_date
 
 NASA_POWER_API = "https://power.larc.nasa.gov/api/temporal/daily/point"
 
@@ -20,10 +23,12 @@ PARAMETER_NAMES = {
 
 def fetch_climate_data(
     geometry: ee.Geometry,
-    start_date: str,
-    end_date: str,
+    start_date: str | date,
+    end_date: str | date,
     parameters: list[str] = None
 ) -> pd.DataFrame:
+    start_date = normalize_date(start_date)
+    end_date = normalize_date(end_date)
     if parameters is None:
         parameters = DEFAULT_PARAMETERS.copy()
 
