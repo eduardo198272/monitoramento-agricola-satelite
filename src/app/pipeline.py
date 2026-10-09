@@ -1,5 +1,4 @@
 import ee
-import pandas as pd
 from datetime import date
 
 from src.app.earth_engine import (
@@ -10,7 +9,7 @@ from src.app.earth_engine import (
     mask_clouds,
 )
 from src.app.time_series import compute_time_series, plot_time_series
-from src.app.anomalies import detect_anomalies, generate_alert, compute_trend
+from src.app.anomalies import detect_anomalies, generate_alert
 from src.app.climate import fetch_climate_data, plot_climate_data
 from src.app.utils import normalize_date
 
@@ -72,12 +71,17 @@ def run_analysis(
         try:
             climate_df = fetch_climate_data(geometry, start_date, end_date)
         except Exception:
-            climate_df = pd.DataFrame()
+            climate_df = None
 
-        climate_plot = plot_climate_data(climate_df) if not climate_df.empty else None
+        climate_plot = (
+            plot_climate_data(climate_df)
+            if climate_df is not None and not climate_df.empty
+            else None
+        )
 
         return {
             "success": True,
+            "index_name": index_name,
             "index_map": index_map,
             "time_series": time_series,
             "time_series_plot": time_series_plot,

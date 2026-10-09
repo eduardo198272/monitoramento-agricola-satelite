@@ -37,7 +37,7 @@ def get_image_collection(
     collection = filter_by_area(collection, geometry)
     collection = filter_by_date(collection, start_date, end_date)
     collection = collection.filter(ee.Filter.lt("CLOUD_COVERAGE_ASSESSMENT", cloud_cover_max))
-    collection = collection.select(["B2", "B3", "B4", "B8", "QA60"])
+    collection = collection.select(["B2", "B3", "B4", "B8", "B8A", "B11", "QA60"])
     return collection
 
 

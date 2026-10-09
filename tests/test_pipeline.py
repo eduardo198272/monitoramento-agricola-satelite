@@ -62,6 +62,7 @@ class TestRunAnalysis:
             )
 
         assert result["success"] is True
+        assert result["index_name"] == index_name
         assert result["mean_value"] == 0.4
         assert result["time_series"] == []
         assert result["time_series_plot"] is None
@@ -127,6 +128,7 @@ class TestRunAnalysis:
         result = run_analysis(mock_geometry, "2024-01-01", "2024-01-31", "NDVI")
 
         assert result["success"] is True
+        assert result["index_name"] == "NDVI"
         assert "index_map" in result
         assert "time_series" in result
         assert "time_series_plot" in result
@@ -223,7 +225,7 @@ class TestRunAnalysis:
         result = run_analysis(mock_geometry, "2024-01-01", "2024-01-31", "NDVI")
 
         assert result["success"] is True
-        assert result["climate_data"].empty
+        assert result["climate_data"] is None
         assert result["climate_plot"] is None
 
     @patch("src.app.pipeline.ee")

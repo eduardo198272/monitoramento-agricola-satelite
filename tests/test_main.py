@@ -12,7 +12,7 @@ from src.app.main import run_analysis
 def main_analysis_mocks():
     with ExitStack() as stack:
         mocks = {
-            name: stack.enter_context(patch(f"src.app.main.{name}"))
+            name: stack.enter_context(patch(f"src.app.pipeline.{name}"))
             for name in (
                 "get_image_collection",
                 "mask_clouds",

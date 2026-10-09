@@ -81,7 +81,9 @@ class TestFilterByArea:
 
 class TestGetImageCollection:
     @patch("src.app.earth_engine.ee")
-    def test_get_image_collection_valid_inputs(self, mock_ee):
+    def test_get_image_collection_selects_bands_required_by_indices_and_cloud_mask(
+        self, mock_ee
+    ):
         mock_geometry = MagicMock()
         mock_collection = MagicMock()
         mock_filtered = MagicMock()
@@ -95,7 +97,9 @@ class TestGetImageCollection:
         result = get_image_collection(mock_geometry, "2026-01-01", "2026-01-31", 20)
 
         mock_ee.ImageCollection.assert_called_once_with("COPERNICUS/S2_SR_HARMONIZED")
-        mock_filtered.select.assert_called_once_with(["B2", "B3", "B4", "B8", "QA60"])
+        mock_filtered.select.assert_called_once_with(
+            ["B2", "B3", "B4", "B8", "B8A", "B11", "QA60"]
+        )
         assert result == mock_selected
 
     @patch("src.app.earth_engine.ee")
