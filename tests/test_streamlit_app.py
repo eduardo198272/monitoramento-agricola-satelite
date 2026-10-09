@@ -127,19 +127,67 @@ class TestWorkspaceControls:
 
     def test_workspace_has_analyze_button(self, app):
         buttons = app.button
-        analyze_btn = next((b for b in buttons if b.label == "Analisar"), None)
+        analyze_btn = next((b for b in buttons if b.label == "Analisar área"), None)
         assert analyze_btn is not None
+        assert analyze_btn.disabled is True
 
-    def test_todos_does_not_call_single_index_pipeline(self, app, monkeypatch):
+    def test_analyze_button_is_enabled_when_area_and_dates_are_valid(self, function_app):
+        function_app.session_state["aoi_geometry"] = make_geometry()
+
+        function_app.run()
+
+        analyze_btn = next(
+            button for button in function_app.button if button.label == "Analisar área"
+        )
+        assert analyze_btn.disabled is False
+
+    def test_todos_calls_multi_index_pipeline(self, function_app, monkeypatch):
         run_analysis = MagicMock()
+        index_results = {name: {"mean_value": 0.2} for name in ("NDVI", "NDWI", "NDMI")}
+        run_multi_analysis = MagicMock(
+            return_value={
+                "success": True,
+                "indices": index_results,
+                "area_ha": 12.5,
+                "image_count": 3,
+                "climate_data": None,
+                "climate_plot": None,
+            }
+        )
         monkeypatch.setattr(main_module, "run_analysis", run_analysis)
-        app.session_state["aoi_geometry"] = make_geometry()
+        monkeypatch.setattr(main_module, "run_multi_analysis", run_multi_analysis)
+        function_app.session_state["aoi_geometry"] = make_geometry()
 
-        next(radio for radio in app.radio if radio.label == "Índice").set_value("Todos").run()
-        next(button for button in app.button if button.label == "Analisar").click().run()
+        next(
+            radio for radio in function_app.radio if radio.label == "Índice"
+        ).set_value("Todos").run()
+        next(
+            button
+            for button in function_app.button
+            if button.label == "Analisar área"
+        ).click().run()
 
         run_analysis.assert_not_called()
-        assert any("pipeline multiíndice" in item.value for item in app.info)
+        run_multi_analysis.assert_called_once_with(
+            function_app.session_state["aoi_geometry"],
+            function_app.session_state["analysis_start_date"],
+            function_app.session_state["analysis_end_date"],
+            ["NDVI", "NDWI", "NDMI"],
+        )
+        assert function_app.session_state["analysis_status"] == "success"
+        assert function_app.session_state["analysis_results"] == index_results
+        assert function_app.session_state["analysis_metadata"] == {
+            "area_ha": 12.5,
+            "image_count": 3,
+            "climate_data": None,
+            "climate_plot": None,
+        }
+
+        function_app.run()
+
+        run_multi_analysis.assert_called_once()
+        assert function_app.session_state["analysis_results"] == index_results
+        assert function_app.session_state["analysis_metadata"]["image_count"] == 3
 
 
 
@@ -161,7 +209,7 @@ class TestValidation:
         start_input.set_value("2026-12-31").run()
         end_input.set_value("2026-01-01").run()
 
-        analyze_btn = next((b for b in app.button if b.label == "Analisar"), None)
+        analyze_btn = next((b for b in app.button if b.label == "Analisar área"), None)
         assert analyze_btn is not None
         assert analyze_btn.disabled is True
 
@@ -189,6 +237,7 @@ class TestInitialState:
         assert app.session_state["analysis_mode"] == "single"
         assert app.session_state["visible_index"] == "NDVI"
         assert app.session_state["analysis_results"] == {}
+        assert app.session_state["analysis_metadata"] == {}
         assert app.session_state["aoi_geojson"] is None
         assert app.session_state["aoi_geometry"] is None
         assert app.session_state["aoi_area_ha"] is None
@@ -331,18 +380,42 @@ class TestApplicationFlow:
         start.set_value("2026-12-31").run()
         end.set_value("2026-01-01").run()
 
-        analyze = next(button for button in function_app.button if button.label == "Analisar")
+        analyze = next(button for button in function_app.button if button.label == "Analisar área")
         assert analyze.disabled is True
         assert any("Data final não pode ser anterior" in error.value for error in function_app.error)
 
-    def test_analysis_without_area_shows_error(self, function_app, monkeypatch):
+    def test_analysis_without_area_is_disabled(self, function_app, monkeypatch):
+        run_analysis = MagicMock()
+        run_multi_analysis = MagicMock()
+        monkeypatch.setattr(main_module, "run_analysis", run_analysis)
+        monkeypatch.setattr(main_module, "run_multi_analysis", run_multi_analysis)
+
+        analyze = next(
+            button for button in function_app.button if button.label == "Analisar área"
+        )
+
+        assert analyze.disabled is True
+        run_analysis.assert_not_called()
+        run_multi_analysis.assert_not_called()
+
+    def test_analysis_event_without_area_is_rejected_defensively(
+        self, function_app, monkeypatch
+    ):
         run_analysis = MagicMock()
         monkeypatch.setattr(main_module, "run_analysis", run_analysis)
+        monkeypatch.setattr(
+            main_module.st,
+            "button",
+            lambda label, *args, **kwargs: label == "Analisar área",
+        )
 
-        next(button for button in function_app.button if button.label == "Analisar").click().run()
+        function_app.run()
 
         run_analysis.assert_not_called()
-        assert any("Desenhe uma área no mapa" in error.value for error in function_app.error)
+        assert any(
+            "Desenhe uma área no mapa antes de analisar" in error.value
+            for error in function_app.error
+        )
 
     def test_invalid_drawn_area_shows_error_and_is_not_analyzed(self, monkeypatch):
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
@@ -458,6 +531,7 @@ class TestApplicationFlow:
         app.session_state["aoi_geometry"] = MagicMock(name="selected_geometry")
         app.session_state["aoi_area_ha"] = 7.5
         app.session_state["analysis_results"] = {"NDVI": {"success": True}}
+        app.session_state["analysis_metadata"] = {"image_count": 5}
         app.session_state["analysis_map"] = MagicMock(name="analysis_map")
         app.session_state["analysis_status"] = "success"
         app.session_state["analysis_error"] = "stale error"
@@ -468,6 +542,7 @@ class TestApplicationFlow:
         assert app.session_state["aoi_geometry"] is None
         assert app.session_state["aoi_area_ha"] is None
         assert app.session_state["analysis_results"] == {}
+        assert app.session_state["analysis_metadata"] == {}
         assert app.session_state["analysis_map"] is None
         assert app.session_state["analysis_status"] == "idle"
         assert app.session_state["analysis_error"] is None
@@ -478,12 +553,18 @@ class TestApplicationFlow:
         function_app.session_state["aoi_geojson"] = geojson
         function_app.session_state["aoi_geometry"] = geometry
         function_app.session_state["aoi_area_ha"] = 4.5
+        saved_results = {"NDVI": {"mean_value": 0.5}}
+        saved_metadata = {"area_ha": 4.5, "image_count": 2}
+        function_app.session_state["analysis_results"] = saved_results
+        function_app.session_state["analysis_metadata"] = saved_metadata
 
         function_app.run()
 
         assert function_app.session_state["aoi_geojson"] == geojson
         assert function_app.session_state["aoi_geometry"] is geometry
         assert function_app.session_state["aoi_area_ha"] == 4.5
+        assert function_app.session_state["analysis_results"] == saved_results
+        assert function_app.session_state["analysis_metadata"] == saved_metadata
 
     def test_failed_analysis_shows_pipeline_error(self, monkeypatch):
         geometry = make_geometry()
@@ -503,14 +584,44 @@ class TestApplicationFlow:
 
         app = AppTest.from_function(app_script)
         app.run()
-        next(button for button in app.button if button.label == "Analisar").click().run()
+        next(button for button in app.button if button.label == "Analisar área").click().run()
 
-        run_analysis.assert_called_once()
+        run_analysis.assert_called_once_with(
+            geometry,
+            app.session_state["analysis_start_date"],
+            app.session_state["analysis_end_date"],
+            "NDVI",
+        )
         assert app.session_state["analysis_results"] == {}
         assert app.session_state["analysis_map"] is None
         assert app.session_state["analysis_status"] == "no_data"
         assert app.session_state["analysis_error"] == "Nenhuma imagem encontrada"
         assert any("Nenhuma imagem encontrada" in error.value for error in app.error)
+
+    def test_failed_multi_analysis_sets_no_data_status(self, function_app, monkeypatch):
+        geometry = make_geometry()
+        failure = {"success": False, "error": "Nenhuma imagem encontrada"}
+        run_multi_analysis = MagicMock(return_value=failure)
+        monkeypatch.setattr(main_module, "run_multi_analysis", run_multi_analysis)
+        function_app.session_state["aoi_geometry"] = geometry
+
+        next(radio for radio in function_app.radio if radio.label == "Índice").set_value(
+            "Todos"
+        ).run()
+        next(
+            button for button in function_app.button if button.label == "Analisar área"
+        ).click().run()
+
+        run_multi_analysis.assert_called_once_with(
+            geometry,
+            function_app.session_state["analysis_start_date"],
+            function_app.session_state["analysis_end_date"],
+            ["NDVI", "NDWI", "NDMI"],
+        )
+        assert function_app.session_state["analysis_status"] == "no_data"
+        assert function_app.session_state["analysis_results"] == {}
+        assert function_app.session_state["analysis_metadata"] == {}
+        assert function_app.session_state["analysis_map"] is None
 
     def test_generic_analysis_failure_sets_error_status(self, monkeypatch):
         geometry = make_geometry()
@@ -532,7 +643,7 @@ class TestApplicationFlow:
 
         app = AppTest.from_function(app_script)
         app.run()
-        next(button for button in app.button if button.label == "Analisar").click().run()
+        next(button for button in app.button if button.label == "Analisar área").click().run()
 
         assert app.session_state["analysis_status"] == "error"
         assert app.session_state["analysis_error"] == "Earth Engine indisponível"
@@ -568,10 +679,19 @@ class TestApplicationFlow:
 
         app = AppTest.from_function(app_script)
         app.run()
-        next(button for button in app.button if button.label == "Analisar").click().run()
+        next(button for button in app.button if button.label == "Analisar área").click().run()
 
-        run_analysis.assert_called_once()
+        run_analysis.assert_called_once_with(
+            geometry,
+            app.session_state["analysis_start_date"],
+            app.session_state["analysis_end_date"],
+            "NDVI",
+        )
         assert app.session_state["analysis_results"] == {"NDVI": result}
+        assert app.session_state["analysis_metadata"] == {
+            "area_ha": 12.5,
+            "climate_plot": result["climate_plot"],
+        }
         assert app.session_state["visible_index"] == "NDVI"
         assert app.session_state["analysis_status"] == "success"
         assert app.session_state["aoi_area_ha"] == 12.5
@@ -618,7 +738,7 @@ class TestApplicationFlow:
         app = AppTest.from_function(app_script)
         app.run()
         next(radio for radio in app.radio if radio.label == "Índice").set_value(index_name).run()
-        next(button for button in app.button if button.label == "Analisar").click().run()
+        next(button for button in app.button if button.label == "Analisar área").click().run()
 
         assert add_index_layer.call_args.kwargs["palette"] == expected_palette
 
@@ -663,7 +783,7 @@ class TestApplicationFlow:
 
         app = AppTest.from_function(app_script)
         app.run()
-        next(button for button in app.button if button.label == "Analisar").click().run()
+        next(button for button in app.button if button.label == "Analisar área").click().run()
 
         assert any("Série Temporal de NDVI" in item.value for item in app.subheader)
         assert any("Dados Climáticos" in item.value for item in app.subheader)

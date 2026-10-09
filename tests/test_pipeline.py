@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from datetime import date
 
-from src.app.pipeline import run_analysis
+from src.app.pipeline import run_analysis, run_multi_analysis
 
 
 class TestRunAnalysis:
@@ -338,3 +338,153 @@ class TestRunAnalysis:
 
         assert result["success"] is True
         assert result["area_ha"] == 100.0
+
+
+class TestRunMultiAnalysis:
+    def test_run_multi_analysis_reuses_shared_inputs_for_selected_indices(self):
+        from contextlib import ExitStack
+
+        with ExitStack() as stack:
+            patch_names = (
+                "get_image_collection",
+                "mask_clouds",
+                "calculate_ndvi",
+                "calculate_ndwi",
+                "calculate_ndmi",
+                "compute_time_series",
+                "fetch_climate_data",
+                "plot_climate_data",
+                "ee",
+            )
+            mocks = {
+                name: stack.enter_context(patch(f"src.app.pipeline.{name}"))
+                for name in patch_names
+            }
+
+            geometry = MagicMock()
+            geometry.area.return_value.divide.return_value.getInfo.return_value = 42.5
+            collection = MagicMock()
+            collection.size.return_value.getInfo.return_value = 7
+            mocks["get_image_collection"].return_value = collection
+            masked_collection = MagicMock()
+            collection.map.return_value = masked_collection
+            index_collections = [MagicMock(), MagicMock(), MagicMock()]
+            masked_collection.map.side_effect = index_collections
+
+            for index_name, index_collection, mean_value in zip(
+                ("NDVI", "NDWI", "NDMI"), index_collections, (0.6, 0.2, 0.4)
+            ):
+                index_map = MagicMock()
+                index_collection.median.return_value = index_map
+                index_map.select.return_value.reduceRegion.return_value.getInfo.return_value = {
+                    index_name: mean_value
+                }
+
+            time_series = [
+                {"date": "2024-01-01", "value": 0.2},
+                {"date": "2024-01-02", "value": 0.4},
+            ]
+            mocks["compute_time_series"].return_value = time_series
+            climate_data = pd.DataFrame(
+                {"date": ["2024-01-01"], "precipitation": [2.0], "temperature": [22.0]}
+            )
+            mocks["fetch_climate_data"].return_value = climate_data
+            mocks["ee"].Reducer.mean.return_value = "mean_reducer"
+
+            result = run_multi_analysis(
+                geometry,
+                date(2024, 1, 1),
+                date(2024, 1, 31),
+                ["NDVI", "NDWI", "NDMI"],
+            )
+
+        assert result["success"] is True
+        assert list(result["indices"]) == ["NDVI", "NDWI", "NDMI"]
+        assert result["area_ha"] == 42.5
+        assert result["image_count"] == 7
+        assert result["climate_data"] is climate_data
+        assert result["climate_plot"] is not None
+        assert result["indices"]["NDVI"]["mean_value"] == 0.6
+        assert result["indices"]["NDVI"]["trend"] == "crescente"
+        assert result["indices"]["NDVI"]["time_series"] == time_series
+        mocks["get_image_collection"].assert_called_once_with(
+            geometry, "2024-01-01", "2024-01-31"
+        )
+        collection.map.assert_called_once_with(mocks["mask_clouds"])
+        assert masked_collection.map.call_count == 3
+        geometry.area.assert_called_once_with()
+        mocks["fetch_climate_data"].assert_called_once_with(
+            geometry, "2024-01-01", "2024-01-31"
+        )
+        assert mocks["compute_time_series"].call_count == 3
+
+    @pytest.mark.parametrize("index_names", [[], ["INVALID"], ["NDVI", "INVALID"]])
+    def test_run_multi_analysis_rejects_empty_or_unsupported_indices(self, index_names):
+        with patch("src.app.pipeline.get_image_collection") as mock_get_collection:
+            result = run_multi_analysis(
+                MagicMock(), "2024-01-01", "2024-01-31", index_names
+            )
+
+        assert result["success"] is False
+        assert "error" in result
+        mock_get_collection.assert_not_called()
+
+    def test_run_multi_analysis_returns_error_when_no_images_are_found(self):
+        collection = MagicMock()
+        collection.size.return_value.getInfo.return_value = 0
+
+        with patch(
+            "src.app.pipeline.get_image_collection", return_value=collection
+        ) as mock_get_collection, patch("src.app.pipeline.mask_clouds") as mock_mask:
+            result = run_multi_analysis(
+                MagicMock(), "2024-01-01", "2024-01-31", ["NDVI", "NDMI"]
+            )
+
+        assert result["success"] is False
+        assert "Nenhuma imagem encontrada" in result["error"]
+        mock_get_collection.assert_called_once()
+        mock_mask.assert_not_called()
+
+    def test_run_multi_analysis_continues_when_climate_fetch_fails(self):
+        collection = MagicMock()
+        collection.size.return_value.getInfo.return_value = 1
+        masked_collection = MagicMock()
+        collection.map.return_value = masked_collection
+        index_collection = MagicMock()
+        masked_collection.map.return_value = index_collection
+        index_map = MagicMock()
+        index_collection.median.return_value = index_map
+        index_map.select.return_value.reduceRegion.return_value.getInfo.return_value = {
+            "NDVI": 0.3
+        }
+        geometry = MagicMock()
+        geometry.area.return_value.divide.return_value.getInfo.return_value = 1.0
+
+        with patch(
+            "src.app.pipeline.get_image_collection", return_value=collection
+        ), patch("src.app.pipeline.compute_time_series", return_value=[]), patch(
+            "src.app.pipeline.fetch_climate_data", side_effect=RuntimeError("offline")
+        ) as mock_fetch_climate, patch("src.app.pipeline.ee") as mock_ee:
+            result = run_multi_analysis(
+                geometry, "2024-01-01", "2024-01-31", ["NDVI"]
+            )
+
+        assert result["success"] is True
+        assert result["climate_data"] is None
+        assert result["climate_plot"] is None
+        mock_fetch_climate.assert_called_once()
+        mock_ee.Reducer.mean.assert_called_once_with()
+
+    def test_run_multi_analysis_returns_error_when_pipeline_fails(self):
+        with patch(
+            "src.app.pipeline.get_image_collection",
+            side_effect=RuntimeError("Earth Engine unavailable"),
+        ):
+            result = run_multi_analysis(
+                MagicMock(), "2024-01-01", "2024-01-31", ["NDVI"]
+            )
+
+        assert result == {
+            "success": False,
+            "error": "Earth Engine unavailable",
+        }

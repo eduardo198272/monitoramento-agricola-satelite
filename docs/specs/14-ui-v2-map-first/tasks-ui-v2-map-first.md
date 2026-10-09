@@ -17,9 +17,9 @@ Referência: `docs/specs/14-ui-v2-map-first/spec-ui-v2-map-first.md`
 | SPEC-14-11 | Normalizar datas para serviços externos | Strings e `datetime.date` são aceitos pelo pipeline e NASA POWER | 30min | Concluído |
 | SPEC-14-12 | Corrigir bandas necessárias ao NDMI | A coleção seleciona todas as bandas da fórmula adotada e o contrato é testado | 45min | Concluído |
 | SPEC-14-13 | Consolidar `run_analysis` no pipeline | A UI não mantém cópia duplicada do processamento existente | 1h | Concluído |
-| SPEC-14-14 | Implementar `run_multi_analysis` | Um fluxo calcula os índices selecionados e compartilha coleção, máscara, área, imagens e clima | 2h30 | Não iniciado |
-| SPEC-14-15 | Integrar botão `Analisar área` | Botão fica desabilitado sem área ou com datas inválidas e dispara o pipeline correto | 1h | Não iniciado |
-| SPEC-14-16 | Persistir resultados por índice | Resultados de cada índice ficam organizados em estado sem sobrescrever uns aos outros | 1h | Não iniciado |
+| SPEC-14-14 | Implementar `run_multi_analysis` | Um fluxo calcula os índices selecionados e compartilha coleção, máscara, área, imagens e clima | 2h30 | Concluído |
+| SPEC-14-15 | Integrar botão `Analisar área` | Botão fica desabilitado sem área ou com datas inválidas e dispara o pipeline correto | 1h | Concluído |
+| SPEC-14-16 | Persistir resultados por índice | Resultados de cada índice ficam organizados em estado sem sobrescrever uns aos outros | 1h | Concluído |
 | SPEC-14-17 | Implementar mapa temático por índice | O mapa usa o índice visível, mantém área e legenda e troca camada sem nova análise completa | 1h30 | Não iniciado |
 | SPEC-14-18 | Implementar visão geral multiíndice | Cards exibem métricas reais, tendências disponíveis e quantidade real de imagens | 1h30 | Não iniciado |
 | SPEC-14-19 | Organizar séries, anomalias e clima | Conteúdo aparece abaixo do mapa, na mesma página e sem duplicar alertas | 1h | Não iniciado |

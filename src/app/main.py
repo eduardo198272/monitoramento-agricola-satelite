@@ -20,7 +20,7 @@ from src.app.maps import (
 )
 from src.app.anomalies import compute_trend
 from src.app.styles import load_styles
-from src.app.pipeline import run_analysis
+from src.app.pipeline import run_analysis, run_multi_analysis
 
 DEFAULT_START = date.today() - timedelta(days=365)
 DEFAULT_END = date.today()
@@ -38,6 +38,7 @@ UI_STATE_DEFAULTS = {
     "selected_indices": ["NDVI"],
     "visible_index": "NDVI",
     "analysis_results": {},
+    "analysis_metadata": {},
     "analysis_status": "idle",
     "analysis_error": None,
     "analysis_map": None,
@@ -48,12 +49,15 @@ def initialize_ui_state() -> None:
     """Initialize the UI state without overwriting values during reruns."""
     for key, default in UI_STATE_DEFAULTS.items():
         if key not in st.session_state:
-            st.session_state[key] = default.copy() if isinstance(default, list) else default
+            st.session_state[key] = (
+                default.copy() if isinstance(default, (list, dict)) else default
+            )
 
 
 def clear_analysis_state() -> None:
     """Clear results that no longer match the current area or request."""
     st.session_state.analysis_results = {}
+    st.session_state.analysis_metadata = {}
     st.session_state.analysis_map = None
     st.session_state.analysis_status = "idle"
     st.session_state.analysis_error = None
@@ -255,48 +259,75 @@ def main():
     if end_date < start_date:
         st.error("Data final não pode ser anterior à data inicial")
 
-    analyze = st.button("Analisar", disabled=(end_date < start_date))
+    analysis_disabled = (
+        st.session_state.aoi_geometry is None or end_date < start_date
+    )
+    analyze = st.button("Analisar área", disabled=analysis_disabled)
 
     if analyze and end_date >= start_date:
         geometry = st.session_state.aoi_geometry
 
         if geometry is None:
             st.error("Desenhe uma área no mapa antes de analisar")
-        elif selected_index == "Todos":
-            st.info(
-                "A análise conjunta dos índices estará disponível após a integração "
-                "do pipeline multiíndice."
-            )
         else:
             st.session_state.analysis_status = "processing"
             st.session_state.analysis_error = None
+            st.session_state.analysis_results = {}
+            st.session_state.analysis_metadata = {}
+            st.session_state.analysis_map = None
+            selected_indices = st.session_state.selected_indices
             with st.spinner("Processando..."):
-                result = run_analysis(geometry, start_date, end_date, index_name)
-                if result["success"]:
-                    st.session_state.analysis_results = {index_name: result}
-                    st.session_state.visible_index = index_name
-                    st.session_state.aoi_area_ha = result.get("area_ha")
-                    m = create_base_map(
-                        center=[geometry.centroid().coordinates().getInfo()[1],
-                                geometry.centroid().coordinates().getInfo()[0]],
-                        zoom=12
+                if st.session_state.analysis_mode == "multi":
+                    result = run_multi_analysis(
+                        geometry, start_date, end_date, selected_indices
                     )
-                    if index_name == "NDVI":
-                        palette = ["blue", "white", "green"]
-                    elif index_name == "NDWI":
-                        palette = ["brown", "white", "blue"]
-                    else:
-                        palette = ["red", "yellow", "blue"]
+                else:
+                    result = run_analysis(
+                        geometry, start_date, end_date, selected_indices[0]
+                    )
 
-                    m = add_index_layer(m, result["index_map"], index_name, palette=palette)
-                    add_colorbar(m, palette, index_name)
-                    st.session_state.analysis_map = m
+                if result["success"]:
+                    st.session_state.aoi_area_ha = result.get("area_ha")
+                    st.session_state.analysis_metadata = {
+                        key: result[key]
+                        for key in (
+                            "area_ha",
+                            "image_count",
+                            "climate_data",
+                            "climate_plot",
+                        )
+                        if key in result
+                    }
+                    if st.session_state.analysis_mode == "multi":
+                        st.session_state.analysis_results = result["indices"]
+                        st.session_state.visible_index = selected_indices[0]
+                    else:
+                        st.session_state.analysis_results = {index_name: result}
+                        st.session_state.visible_index = index_name
+                        m = create_base_map(
+                            center=[geometry.centroid().coordinates().getInfo()[1],
+                                    geometry.centroid().coordinates().getInfo()[0]],
+                            zoom=12
+                        )
+                        if index_name == "NDVI":
+                            palette = ["blue", "white", "green"]
+                        elif index_name == "NDWI":
+                            palette = ["brown", "white", "blue"]
+                        else:
+                            palette = ["red", "yellow", "blue"]
+
+                        m = add_index_layer(
+                            m, result["index_map"], index_name, palette=palette
+                        )
+                        add_colorbar(m, palette, index_name)
+                        st.session_state.analysis_map = m
                     st.session_state.analysis_status = "success"
                     st.session_state.analysis_error = None
                 else:
                     st.session_state.analysis_error = result["error"]
                     st.session_state.analysis_map = None
                     st.session_state.analysis_results = {}
+                    st.session_state.analysis_metadata = {}
                     st.session_state.analysis_status = (
                         "no_data"
                         if "Nenhuma imagem" in result["error"]
