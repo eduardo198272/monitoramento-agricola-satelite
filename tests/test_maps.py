@@ -6,6 +6,7 @@ from src.app.maps import (
     create_base_map,
     add_index_layer,
     add_colorbar,
+    create_thematic_map,
     enable_area_draw,
     get_drawn_geometry,
     geojson_to_ee_geometry,
@@ -377,6 +378,65 @@ class TestAddColorbar:
         call_kwargs = mock_map.add_colorbar.call_args[1]
         assert call_kwargs["vis_params"]["min"] == -0.5
         assert call_kwargs["vis_params"]["max"] == 0.5
+
+
+class TestCreateThematicMap:
+    @pytest.mark.parametrize(
+        "index_name, expected_palette",
+        [
+            ("NDVI", NDVI_PALETTE),
+            ("NDWI", NDWI_PALETTE),
+            ("NDMI", NDMI_PALETTE),
+        ],
+    )
+    def test_creates_thematic_layer_legend_and_area_outline(
+        self, monkeypatch, index_name, expected_palette
+    ):
+        index_image = MagicMock(name="cached_index_image")
+        geometry = {"type": "Feature", "geometry": {"type": "Polygon"}}
+        map_obj = MagicMock()
+        add_index = MagicMock()
+        add_legend = MagicMock()
+        monkeypatch.setattr("src.app.maps.create_base_map", MagicMock(return_value=map_obj))
+        monkeypatch.setattr("src.app.maps.add_index_layer", add_index)
+        monkeypatch.setattr("src.app.maps.add_colorbar", add_legend)
+
+        result = create_thematic_map(
+            index_image,
+            index_name,
+            center=[-28.0, -52.0],
+            zoom=12,
+            geojson=geometry,
+        )
+
+        assert result is map_obj
+        add_index.assert_called_once_with(
+            map_obj,
+            index_image,
+            index_name,
+            palette=expected_palette,
+            validate_band=False,
+        )
+        add_legend.assert_called_once_with(map_obj, expected_palette, index_name)
+        map_obj.add_geojson.assert_called_once_with(
+            geometry,
+            layer_name="Área selecionada",
+            style={"color": "#ff7800", "weight": 3, "fillOpacity": 0},
+        )
+
+    def test_creates_map_without_area_overlay_when_geojson_is_absent(self, monkeypatch):
+        map_obj = MagicMock()
+        monkeypatch.setattr("src.app.maps.create_base_map", MagicMock(return_value=map_obj))
+        monkeypatch.setattr("src.app.maps.add_index_layer", MagicMock())
+        monkeypatch.setattr("src.app.maps.add_colorbar", MagicMock())
+
+        create_thematic_map(MagicMock(), "NDVI")
+
+        map_obj.add_geojson.assert_not_called()
+
+    def test_rejects_unknown_index(self):
+        with pytest.raises(ValueError, match="Índice desconhecido: INVALID"):
+            create_thematic_map(MagicMock(), "INVALID")
 
 
 class TestEnableAreaDraw:

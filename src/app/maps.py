@@ -93,22 +93,23 @@ def add_index_layer(
     index_image: ee.Image,
     index_name: str,
     palette: list = None,
-    opacity: float = 0.7
+    opacity: float = 0.7,
+    validate_band: bool = True,
 ) -> geemap.Map:
     if index_name.upper() == "NDVI":
         if palette is None:
             palette = NDVI_PALETTE
-        if not index_image.bandNames().contains("NDVI").getInfo():
+        if validate_band and not index_image.bandNames().contains("NDVI").getInfo():
             raise ValueError("Imagem não contém banda NDVI")
     elif index_name.upper() == "NDWI":
         if palette is None:
             palette = NDWI_PALETTE
-        if not index_image.bandNames().contains("NDWI").getInfo():
+        if validate_band and not index_image.bandNames().contains("NDWI").getInfo():
             raise ValueError("Imagem não contém banda NDWI")
     elif index_name.upper() == "NDMI":
         if palette is None:
             palette = NDMI_PALETTE
-        if not index_image.bandNames().contains("NDMI").getInfo():
+        if validate_band and not index_image.bandNames().contains("NDMI").getInfo():
             raise ValueError("Imagem não contém banda NDMI")
     else:
         raise ValueError(f"Índice desconhecido: {index_name}")
@@ -121,6 +122,44 @@ def add_index_layer(
     }
     map_obj.addLayer(index_image, vis_params, index_name)
     return map_obj
+
+
+def create_thematic_map(
+    index_image: ee.Image,
+    index_name: str,
+    center: list = None,
+    zoom: int = DEFAULT_ZOOM,
+    geojson: dict = None,
+) -> geemap.Map:
+    """Create a thematic map from an already-computed index image."""
+    palettes = {
+        "NDVI": NDVI_PALETTE,
+        "NDWI": NDWI_PALETTE,
+        "NDMI": NDMI_PALETTE,
+    }
+    normalized_index = index_name.upper()
+    if normalized_index not in palettes:
+        raise ValueError(f"Índice desconhecido: {index_name}")
+
+    thematic_map = create_base_map(center=center, zoom=zoom)
+    palette = palettes[normalized_index]
+    add_index_layer(
+        thematic_map,
+        index_image,
+        normalized_index,
+        palette=palette,
+        validate_band=False,
+    )
+    add_colorbar(thematic_map, palette, normalized_index)
+
+    if geojson:
+        thematic_map.add_geojson(
+            geojson,
+            layer_name="Área selecionada",
+            style={"color": "#ff7800", "weight": 3, "fillOpacity": 0},
+        )
+
+    return thematic_map
 
 
 def add_colorbar(

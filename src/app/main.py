@@ -7,9 +7,7 @@ from streamlit_folium import st_folium
 from src.app.config import APP_NAME, VERSION
 from src.app.ee_auth import initialize_earth_engine
 from src.app.maps import (
-    create_base_map,
-    add_index_layer,
-    add_colorbar,
+    create_thematic_map,
     enable_area_draw,
     create_selection_map,
     geojson_to_ee_geometry,
@@ -42,6 +40,7 @@ UI_STATE_DEFAULTS = {
     "analysis_status": "idle",
     "analysis_error": None,
     "analysis_map": None,
+    "analysis_map_center": None,
 }
 
 
@@ -59,6 +58,7 @@ def clear_analysis_state() -> None:
     st.session_state.analysis_results = {}
     st.session_state.analysis_metadata = {}
     st.session_state.analysis_map = None
+    st.session_state.analysis_map_center = None
     st.session_state.analysis_status = "idle"
     st.session_state.analysis_error = None
 
@@ -109,6 +109,38 @@ def display_summary(
     if alert:
         alert_color = "red" if alert.lower() != "normal" else "green"
         st.markdown(f"**Alerta:** :{alert_color}[{alert}]")
+
+
+def display_multi_index_overview(
+    index_results: dict, image_count: int | None
+) -> None:
+    """Render real per-index metrics from a completed multi-index analysis."""
+    st.subheader("Visão geral multiíndice")
+    st.metric(
+        label="Imagens analisadas",
+        value=image_count if image_count is not None else "Indisponível",
+    )
+
+    columns = st.columns(len(index_results))
+    for column, (index_name, result) in zip(columns, index_results.items()):
+        mean_value = result.get("mean_value")
+        mean_label = (
+            f"{mean_value:.4f}"
+            if isinstance(mean_value, (int, float)) and math.isfinite(mean_value)
+            else "Indisponível"
+        )
+        time_series = result.get("time_series") or []
+        trend = (
+            result.get("trend") or compute_trend(time_series)
+            if len(time_series) >= 2
+            else "Indisponível"
+        )
+
+        with column:
+            with st.container(border=True):
+                st.markdown(f"**{index_name}**")
+                st.metric(label="Valor médio", value=mean_label)
+                st.metric(label="Tendência", value=trend)
 
 
 def main():
@@ -304,23 +336,8 @@ def main():
                     else:
                         st.session_state.analysis_results = {index_name: result}
                         st.session_state.visible_index = index_name
-                        m = create_base_map(
-                            center=[geometry.centroid().coordinates().getInfo()[1],
-                                    geometry.centroid().coordinates().getInfo()[0]],
-                            zoom=12
-                        )
-                        if index_name == "NDVI":
-                            palette = ["blue", "white", "green"]
-                        elif index_name == "NDWI":
-                            palette = ["brown", "white", "blue"]
-                        else:
-                            palette = ["red", "yellow", "blue"]
-
-                        m = add_index_layer(
-                            m, result["index_map"], index_name, palette=palette
-                        )
-                        add_colorbar(m, palette, index_name)
-                        st.session_state.analysis_map = m
+                    centroid = geometry.centroid().coordinates().getInfo()
+                    st.session_state.analysis_map_center = [centroid[1], centroid[0]]
                     st.session_state.analysis_status = "success"
                     st.session_state.analysis_error = None
                 else:
@@ -336,25 +353,53 @@ def main():
 
     if st.session_state.analysis_error:
         st.error(st.session_state.analysis_error)
-    elif st.session_state.analysis_map and st.session_state.analysis_results:
-        res = st.session_state.analysis_results[st.session_state.visible_index]
+    elif st.session_state.analysis_status == "success" and st.session_state.analysis_results:
+        available_indices = list(st.session_state.analysis_results)
+        if st.session_state.visible_index not in available_indices:
+            st.session_state.visible_index = available_indices[0]
+        if st.session_state.get("visible_index_control") not in available_indices:
+            st.session_state.visible_index_control = st.session_state.visible_index
 
+        st.radio(
+            "Índice no mapa",
+            options=available_indices,
+            horizontal=True,
+            key="visible_index_control",
+        )
+        st.session_state.visible_index = st.session_state.visible_index_control
+        visible_index = st.session_state.visible_index
+        res = st.session_state.analysis_results[visible_index]
+        st.session_state.analysis_map = create_thematic_map(
+            res["index_map"],
+            visible_index,
+            center=st.session_state.analysis_map_center,
+            zoom=12,
+            geojson=st.session_state.aoi_geojson,
+        )
         display_map(st.session_state.analysis_map)
+        if len(available_indices) > 1:
+            display_multi_index_overview(
+                st.session_state.analysis_results,
+                st.session_state.analysis_metadata.get("image_count"),
+            )
         display_summary(
-            res.get("index_name", index_name),
+            visible_index,
             res["mean_value"],
-            res["area_ha"],
+            res.get("area_ha", st.session_state.analysis_metadata.get("area_ha")),
             compute_trend(res["time_series"]) if res["time_series"] else "estável",
             res["alert"]
         )
 
         if res["time_series_plot"]:
-            st.subheader(f"Série Temporal de {index_name}")
+            st.subheader(f"Série Temporal de {visible_index}")
             st.plotly_chart(res["time_series_plot"], use_container_width=True)
 
-        if res["climate_plot"]:
+        climate_plot = res.get(
+            "climate_plot", st.session_state.analysis_metadata.get("climate_plot")
+        )
+        if climate_plot:
             st.subheader("Dados Climáticos (NASA POWER)")
-            st.plotly_chart(res["climate_plot"], use_container_width=True)
+            st.plotly_chart(climate_plot, use_container_width=True)
 
             if res["alert"]:
                 st.warning(res["alert"])

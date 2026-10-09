@@ -9,6 +9,7 @@ from src.app.main import (
     DEFAULT_START,
     UI_STATE_DEFAULTS,
     display_map,
+    display_multi_index_overview,
     display_summary,
 )
 
@@ -673,9 +674,10 @@ class TestApplicationFlow:
         monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
         run_analysis = MagicMock(return_value=result)
         monkeypatch.setattr(main_module, "run_analysis", run_analysis)
-        monkeypatch.setattr(main_module, "create_base_map", MagicMock())
-        monkeypatch.setattr(main_module, "add_index_layer", MagicMock())
-        monkeypatch.setattr(main_module, "add_colorbar", MagicMock())
+        thematic_map = MagicMock()
+        monkeypatch.setattr(
+            main_module, "create_thematic_map", MagicMock(return_value=thematic_map)
+        )
 
         app = AppTest.from_function(app_script)
         app.run()
@@ -698,15 +700,13 @@ class TestApplicationFlow:
         assert len(app.metric) == 3
 
     @pytest.mark.parametrize(
-        "index_name, expected_palette",
+        "index_name",
         [
-            ("NDWI", ["brown", "white", "blue"]),
-            ("NDMI", ["red", "yellow", "blue"]),
+            "NDWI",
+            "NDMI",
         ],
     )
-    def test_successful_analysis_uses_index_palette(
-        self, monkeypatch, index_name, expected_palette
-    ):
+    def test_successful_analysis_renders_selected_index(self, monkeypatch, index_name):
         geometry = make_geometry()
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
         result = {
@@ -720,8 +720,6 @@ class TestApplicationFlow:
             "mean_value": 0.2,
             "area_ha": 12.5,
         }
-        add_index_layer = MagicMock()
-
         monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
         monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
         monkeypatch.setattr(
@@ -731,16 +729,77 @@ class TestApplicationFlow:
         )
         monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
         monkeypatch.setattr(main_module, "run_analysis", MagicMock(return_value=result))
-        monkeypatch.setattr(main_module, "create_base_map", MagicMock())
-        monkeypatch.setattr(main_module, "add_index_layer", add_index_layer)
-        monkeypatch.setattr(main_module, "add_colorbar", MagicMock())
+        create_thematic_map = MagicMock(return_value=MagicMock())
+        monkeypatch.setattr(main_module, "create_thematic_map", create_thematic_map)
 
         app = AppTest.from_function(app_script)
         app.run()
         next(radio for radio in app.radio if radio.label == "Índice").set_value(index_name).run()
         next(button for button in app.button if button.label == "Analisar área").click().run()
 
-        assert add_index_layer.call_args.kwargs["palette"] == expected_palette
+        create_thematic_map.assert_called_once()
+        assert create_thematic_map.call_args.args[1] == index_name
+
+    def test_switching_visible_index_uses_cached_map_without_running_pipeline(
+        self, function_app, monkeypatch
+    ):
+        ndvi_image = MagicMock(name="ndvi_image")
+        ndwi_image = MagicMock(name="ndwi_image")
+        results = {
+            index_name: {
+                "index_map": image,
+                "mean_value": 0.25,
+                "time_series": [
+                    {"date": "2026-01-01", "value": 0.1},
+                    {"date": "2026-02-01", "value": 0.5},
+                ],
+                "time_series_plot": None,
+                "alert": None,
+            }
+            for index_name, image in (("NDVI", ndvi_image), ("NDWI", ndwi_image))
+        }
+        results["NDVI"]["trend"] = "decrescente"
+        geometry = make_geometry()
+        geojson = {
+            "type": "Feature",
+            "geometry": {"type": "Polygon", "coordinates": []},
+        }
+        function_app.session_state["aoi_geometry"] = geometry
+        function_app.session_state["aoi_geojson"] = geojson
+        function_app.session_state["analysis_results"] = results
+        function_app.session_state["analysis_metadata"] = {
+            "area_ha": 12.5,
+            "image_count": 8,
+        }
+        function_app.session_state["analysis_map_center"] = [-28.26, -52.41]
+        function_app.session_state["analysis_status"] = "success"
+        function_app.session_state["visible_index"] = "NDMI"
+
+        run_analysis = MagicMock()
+        run_multi_analysis = MagicMock()
+        create_thematic_map = MagicMock(return_value=MagicMock())
+        monkeypatch.setattr(main_module, "run_analysis", run_analysis)
+        monkeypatch.setattr(main_module, "run_multi_analysis", run_multi_analysis)
+        monkeypatch.setattr(main_module, "create_thematic_map", create_thematic_map)
+
+        function_app.run()
+        next(
+            radio
+            for radio in function_app.radio
+            if radio.label == "Índice no mapa"
+        ).set_value("NDWI").run()
+
+        assert function_app.session_state["visible_index"] == "NDWI"
+        assert create_thematic_map.call_args.args[:2] == (ndwi_image, "NDWI")
+        assert create_thematic_map.call_args.kwargs["geojson"] == geojson
+        assert create_thematic_map.call_args.kwargs["center"] == [-28.26, -52.41]
+        metric_values = [(metric.label, metric.value) for metric in function_app.metric]
+        assert ("Imagens analisadas", "8") in metric_values
+        assert metric_values.count(("Valor médio", "0.2500")) == 2
+        assert ("Tendência", "decrescente") in metric_values
+        assert ("Tendência", "crescente") in metric_values
+        run_analysis.assert_not_called()
+        run_multi_analysis.assert_not_called()
 
     def test_existing_geometry_skips_empty_selection_message(self, function_app):
         function_app.session_state["aoi_geometry"] = MagicMock()
@@ -776,9 +835,9 @@ class TestApplicationFlow:
         )
         monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
         monkeypatch.setattr(main_module, "run_analysis", MagicMock(return_value=result))
-        monkeypatch.setattr(main_module, "create_base_map", MagicMock())
-        monkeypatch.setattr(main_module, "add_index_layer", MagicMock())
-        monkeypatch.setattr(main_module, "add_colorbar", MagicMock())
+        monkeypatch.setattr(
+            main_module, "create_thematic_map", MagicMock(return_value=MagicMock())
+        )
         monkeypatch.setattr(main_module.st, "plotly_chart", MagicMock())
 
         app = AppTest.from_function(app_script)
@@ -814,6 +873,20 @@ class TestPresentation:
         display_map(map_obj)
 
         map_obj.to_streamlit.assert_called_once_with(height=600)
+
+    def test_multi_index_overview_marks_missing_metrics_as_unavailable(self):
+        columns = [MagicMock()]
+        with patch("src.app.main.st") as mock_st:
+            mock_st.columns.return_value = columns
+            display_multi_index_overview(
+                {"NDMI": {"mean_value": None, "time_series": []}}, None
+            )
+
+        assert [call.kwargs for call in mock_st.metric.call_args_list] == [
+            {"label": "Imagens analisadas", "value": "Indisponível"},
+            {"label": "Valor médio", "value": "Indisponível"},
+            {"label": "Tendência", "value": "Indisponível"},
+        ]
 
     @pytest.mark.parametrize(
         "trend, expected_color",

@@ -20,8 +20,8 @@ Referência: `docs/specs/14-ui-v2-map-first/spec-ui-v2-map-first.md`
 | SPEC-14-14 | Implementar `run_multi_analysis` | Um fluxo calcula os índices selecionados e compartilha coleção, máscara, área, imagens e clima | 2h30 | Concluído |
 | SPEC-14-15 | Integrar botão `Analisar área` | Botão fica desabilitado sem área ou com datas inválidas e dispara o pipeline correto | 1h | Concluído |
 | SPEC-14-16 | Persistir resultados por índice | Resultados de cada índice ficam organizados em estado sem sobrescrever uns aos outros | 1h | Concluído |
-| SPEC-14-17 | Implementar mapa temático por índice | O mapa usa o índice visível, mantém área e legenda e troca camada sem nova análise completa | 1h30 | Não iniciado |
-| SPEC-14-18 | Implementar visão geral multiíndice | Cards exibem métricas reais, tendências disponíveis e quantidade real de imagens | 1h30 | Não iniciado |
+| SPEC-14-17 | Implementar mapa temático por índice | O mapa usa o índice visível, mantém área e legenda e troca camada sem nova análise completa | 1h30 | Concluído |
+| SPEC-14-18 | Implementar visão geral multiíndice | Cards exibem métricas reais, tendências disponíveis e quantidade real de imagens | 1h30 | Concluído |
 | SPEC-14-19 | Organizar séries, anomalias e clima | Conteúdo aparece abaixo do mapa, na mesma página e sem duplicar alertas | 1h | Não iniciado |
 | SPEC-14-20 | Implementar estados de processamento e erro | Loading, ausência de imagens, erro de geocodificação e erro Earth Engine têm mensagens distintas | 1h | Não iniciado |
 | SPEC-14-21 | Adicionar logging técnico | Falhas são registradas sem expor stack trace cru ao usuário | 30min | Não iniciado |
