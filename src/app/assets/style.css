@@ -59,17 +59,64 @@ body,
     color: var(--color-muted);
 }
 
+[data-testid="stAppViewBlockContainer"],
+[data-testid="stMainBlockContainer"],
+[data-testid="stHorizontalBlock"],
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"],
+[data-testid="stPlotlyChart"] {
+    min-width: 0;
+    max-width: 100%;
+}
+
+[data-testid="stCustomComponentV1"],
+[data-testid="stIFrame"] iframe {
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+}
+
 @media (max-width: 768px) {
     [data-testid="stHorizontalBlock"] {
         flex-wrap: wrap;
+        align-items: stretch;
         gap: var(--space-sm);
     }
 
     [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+        flex: 1 1 min(100%, 18rem);
         min-width: min(100%, 18rem);
+        max-width: 100%;
     }
 
     [data-testid="stButton"] button {
         width: 100%;
+    }
+
+    [data-testid="stRadio"] [role="radiogroup"] {
+        flex-wrap: wrap;
+        gap: var(--space-xs) var(--space-sm);
+    }
+
+    [data-testid="stPlotlyChart"] {
+        width: 100%;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    [data-testid="stAppViewBlockContainer"],
+    [data-testid="stMainBlockContainer"] {
+        padding-left: var(--space-sm);
+        padding-right: var(--space-sm);
+    }
+
+    [data-testid="stCustomComponentV1"],
+    [data-testid="stIFrame"] iframe {
+        height: clamp(22rem, 65vh, 37.5rem) !important;
+    }
+
+    [data-testid="stTextInput"] input,
+    [data-testid="stDateInput"] input {
+        max-width: 100%;
     }
 }

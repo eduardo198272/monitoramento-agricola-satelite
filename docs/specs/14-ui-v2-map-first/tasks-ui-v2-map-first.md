@@ -22,13 +22,13 @@ Referência: `docs/specs/14-ui-v2-map-first/spec-ui-v2-map-first.md`
 | SPEC-14-16 | Persistir resultados por índice | Resultados de cada índice ficam organizados em estado sem sobrescrever uns aos outros | 1h | Concluído |
 | SPEC-14-17 | Implementar mapa temático por índice | O mapa usa o índice visível, mantém área e legenda e troca camada sem nova análise completa | 1h30 | Concluído |
 | SPEC-14-18 | Implementar visão geral multiíndice | Cards exibem métricas reais, tendências disponíveis e quantidade real de imagens | 1h30 | Concluído |
-| SPEC-14-19 | Organizar séries, anomalias e clima | Conteúdo aparece abaixo do mapa, na mesma página e sem duplicar alertas | 1h | Não iniciado |
-| SPEC-14-20 | Implementar estados de processamento e erro | Loading, ausência de imagens, erro de geocodificação e erro Earth Engine têm mensagens distintas | 1h | Não iniciado |
-| SPEC-14-21 | Adicionar logging técnico | Falhas são registradas sem expor stack trace cru ao usuário | 30min | Não iniciado |
-| SPEC-14-22 | Atualizar testes de backend e mapas | NDMI, bandas, datas, multiíndice, área, limpeza e reutilização de chamadas são cobertos | 2h30 | Não iniciado |
-| SPEC-14-23 | Atualizar testes Streamlit com `AppTest` | Layout, estado inicial, busca, área, controles, análise, rerun e troca visual são cobertos | 2h30 | Não iniciado |
-| SPEC-14-24 | Executar cobertura e corrigir regressões | `py -m pytest` passa e a exigência de cobertura configurada permanece atendida | 1h30 | Não iniciado |
-| SPEC-14-25 | Validar responsividade e integração visual | Desktop e larguras menores não apresentam overflow e o mapa permanece utilizável | 45min | Não iniciado |
+| SPEC-14-19 | Organizar séries, anomalias e clima | Conteúdo aparece abaixo do mapa, na mesma página e sem duplicar alertas | 1h | Concluído |
+| SPEC-14-20 | Implementar estados de processamento e erro | Loading, ausência de imagens, erro de geocodificação e erro Earth Engine têm mensagens distintas | 1h | Concluído |
+| SPEC-14-21 | Adicionar logging técnico | Falhas são registradas sem expor stack trace cru ao usuário | 30min | Concluído |
+| SPEC-14-22 | Atualizar testes de backend e mapas | NDMI, bandas, datas, multiíndice, área, limpeza e reutilização de chamadas são cobertos | 2h30 | Concluído |
+| SPEC-14-23 | Atualizar testes Streamlit com `AppTest` | Layout, estado inicial, busca, área, controles, análise, rerun e troca visual são cobertos | 2h30 | Concluído |
+| SPEC-14-24 | Executar cobertura e corrigir regressões | `py -m pytest` passa e a exigência de cobertura configurada permanece atendida | 1h30 | Concluído |
+| SPEC-14-25 | Validar responsividade e integração visual | Desktop e larguras menores não apresentam overflow e o mapa permanece utilizável | 45min | Concluído |
 | SPEC-14-26 | Revisar diff e documentar limitações | Não há lógica duplicada, chamadas desnecessárias ou funcionalidades existentes removidas | 45min | Não iniciado |
 
 ## Ordem de Execução

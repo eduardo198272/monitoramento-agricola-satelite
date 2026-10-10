@@ -1,10 +1,13 @@
 import math
+import logging
 
 import geemap
 import ee
 import folium
 import requests
 from folium.plugins import Draw
+
+logger = logging.getLogger(__name__)
 
 
 DEFAULT_CENTER = [-28.0, -52.0]
@@ -51,6 +54,10 @@ def search_location(query: str) -> dict | None:
         KeyError,
         IndexError,
     ):
+        logger.warning(
+            "Location geocoding request failed or returned invalid data",
+            exc_info=True,
+        )
         return None
 
 

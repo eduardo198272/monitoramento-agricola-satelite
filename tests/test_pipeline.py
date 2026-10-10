@@ -141,7 +141,7 @@ class TestRunAnalysis:
 
     @patch("src.app.pipeline.ee")
     @patch("src.app.pipeline.get_image_collection")
-    def test_run_analysis_no_images(self, mock_get_col, mock_ee):
+    def test_run_analysis_no_images(self, mock_get_col, mock_ee, caplog):
         mock_geometry = MagicMock()
 
         mock_collection = MagicMock()
@@ -153,6 +153,7 @@ class TestRunAnalysis:
         assert result["success"] is False
         assert "error" in result
         assert "Nenhuma imagem encontrada" in result["error"]
+        assert not [record for record in caplog.records if record.exc_info]
 
     @patch("src.app.pipeline.ee")
     @patch("src.app.pipeline.get_image_collection")
@@ -170,7 +171,7 @@ class TestRunAnalysis:
         assert "Índice não suportado" in result["error"]
 
     @patch("src.app.pipeline.get_image_collection")
-    def test_run_analysis_exception_handling(self, mock_get_col):
+    def test_run_analysis_exception_handling(self, mock_get_col, caplog):
         mock_geometry = MagicMock()
 
         mock_get_col.side_effect = Exception("Connection error")
@@ -180,6 +181,13 @@ class TestRunAnalysis:
         assert result["success"] is False
         assert "error" in result
         assert "Connection error" in result["error"]
+        record = next(
+            record for record in caplog.records
+            if record.name == "src.app.pipeline"
+        )
+        assert record.getMessage() == "Single-index analysis failed"
+        assert record.index_name == "NDVI"
+        assert record.exc_info is not None
 
     @patch("src.app.pipeline.ee")
     @patch("src.app.pipeline.get_image_collection")
@@ -200,7 +208,8 @@ class TestRunAnalysis:
         mock_compute_ts,
         mock_mask_clouds,
         mock_get_col,
-        mock_ee
+        mock_ee,
+        caplog,
     ):
         mock_geometry = MagicMock()
         mock_geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-45.0, -20.0]
@@ -222,11 +231,17 @@ class TestRunAnalysis:
         mock_collection.map.return_value.median.return_value = mock_index_map
         mock_index_map.select.return_value.reduceRegion.return_value.getInfo.return_value = {"NDVI": 0.65}
 
-        result = run_analysis(mock_geometry, "2024-01-01", "2024-01-31", "NDVI")
+        with caplog.at_level("WARNING", logger="src.app.pipeline"):
+            result = run_analysis(mock_geometry, "2024-01-01", "2024-01-31", "NDVI")
 
         assert result["success"] is True
         assert result["climate_data"] is None
         assert result["climate_plot"] is None
+        climate_record = next(
+            record for record in caplog.records
+            if record.getMessage() == "Climate data unavailable during single-index analysis"
+        )
+        assert climate_record.exc_info is not None
 
     @patch("src.app.pipeline.ee")
     @patch("src.app.pipeline.get_image_collection")
@@ -395,7 +410,7 @@ class TestRunMultiAnalysis:
                 geometry,
                 date(2024, 1, 1),
                 date(2024, 1, 31),
-                ["NDVI", "NDWI", "NDMI"],
+                ["NDVI", "NDWI", "NDMI", "NDVI"],
             )
 
         assert result["success"] is True
@@ -445,7 +460,7 @@ class TestRunMultiAnalysis:
         mock_get_collection.assert_called_once()
         mock_mask.assert_not_called()
 
-    def test_run_multi_analysis_continues_when_climate_fetch_fails(self):
+    def test_run_multi_analysis_continues_when_climate_fetch_fails(self, caplog):
         collection = MagicMock()
         collection.size.return_value.getInfo.return_value = 1
         masked_collection = MagicMock()
@@ -465,26 +480,40 @@ class TestRunMultiAnalysis:
         ), patch("src.app.pipeline.compute_time_series", return_value=[]), patch(
             "src.app.pipeline.fetch_climate_data", side_effect=RuntimeError("offline")
         ) as mock_fetch_climate, patch("src.app.pipeline.ee") as mock_ee:
-            result = run_multi_analysis(
-                geometry, "2024-01-01", "2024-01-31", ["NDVI"]
-            )
+            with caplog.at_level("WARNING", logger="src.app.pipeline"):
+                result = run_multi_analysis(
+                    geometry, "2024-01-01", "2024-01-31", ["NDVI"]
+                )
 
         assert result["success"] is True
         assert result["climate_data"] is None
         assert result["climate_plot"] is None
         mock_fetch_climate.assert_called_once()
         mock_ee.Reducer.mean.assert_called_once_with()
+        assert any(
+            record.getMessage() == "Climate data unavailable during multi-index analysis"
+            and record.exc_info is not None
+            for record in caplog.records
+        )
 
-    def test_run_multi_analysis_returns_error_when_pipeline_fails(self):
+    def test_run_multi_analysis_returns_error_when_pipeline_fails(self, caplog):
         with patch(
             "src.app.pipeline.get_image_collection",
             side_effect=RuntimeError("Earth Engine unavailable"),
         ):
-            result = run_multi_analysis(
-                MagicMock(), "2024-01-01", "2024-01-31", ["NDVI"]
-            )
+            with caplog.at_level("ERROR", logger="src.app.pipeline"):
+                result = run_multi_analysis(
+                    MagicMock(), "2024-01-01", "2024-01-31", ["NDVI"]
+                )
 
         assert result == {
             "success": False,
             "error": "Earth Engine unavailable",
         }
+        record = next(
+            record for record in caplog.records
+            if record.name == "src.app.pipeline"
+        )
+        assert record.getMessage() == "Multi-index analysis failed"
+        assert record.index_names == ("NDVI",)
+        assert record.exc_info is not None

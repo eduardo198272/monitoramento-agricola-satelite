@@ -124,10 +124,16 @@ class TestSearchLocation:
         ],
     )
     @patch("src.app.maps.requests.get")
-    def test_search_location_handles_request_errors(self, mock_get, error):
+    def test_search_location_handles_request_errors(self, mock_get, error, caplog):
         mock_get.side_effect = error
 
-        assert search_location("Passo Fundo, RS") is None
+        with caplog.at_level("WARNING", logger="src.app.maps"):
+            assert search_location("Passo Fundo, RS") is None
+
+        record = next(record for record in caplog.records if record.name == "src.app.maps")
+        assert record.getMessage() == "Location geocoding request failed or returned invalid data"
+        assert record.exc_info is not None
+        assert "Passo Fundo, RS" not in record.getMessage()
 
 
     @patch("src.app.maps.requests.get")

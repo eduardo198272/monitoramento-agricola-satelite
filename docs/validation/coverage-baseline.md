@@ -52,3 +52,13 @@ antes da execução das tarefas SPEC-13-02 em diante.
 - Resultado: suíte concluída com código de saída 0
 
 Todas as linhas e branches dos módulos de produção em `src/app` estão cobertos.
+
+## Validação SPEC-14-24
+
+- Data: 2026-10-09
+- Comando executado: `py -m pytest`
+- Testes coletados: 307
+- Testes aprovados: 307
+- Cobertura total de linhas: 100%
+- Branches: 280 no total, com 0 parcialmente cobertos
+- Resultado: suíte concluída com código de saída 0; requisito `--cov-fail-under=100` atendido

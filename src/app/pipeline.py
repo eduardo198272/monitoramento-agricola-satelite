@@ -1,4 +1,5 @@
 import ee
+import logging
 from datetime import date
 
 from src.app.earth_engine import (
@@ -12,6 +13,8 @@ from src.app.time_series import compute_time_series, plot_time_series
 from src.app.anomalies import compute_trend, detect_anomalies, generate_alert
 from src.app.climate import fetch_climate_data, plot_climate_data
 from src.app.utils import normalize_date
+
+logger = logging.getLogger(__name__)
 
 
 def run_analysis(
@@ -71,6 +74,11 @@ def run_analysis(
         try:
             climate_df = fetch_climate_data(geometry, start_date, end_date)
         except Exception:
+            logger.warning(
+                "Climate data unavailable during single-index analysis",
+                exc_info=True,
+                extra={"index_name": index_name},
+            )
             climate_df = None
 
         climate_plot = (
@@ -94,6 +102,14 @@ def run_analysis(
         }
 
     except Exception as e:
+        logger.exception(
+            "Single-index analysis failed",
+            extra={
+                "index_name": index_name,
+                "start_date": str(start_date),
+                "end_date": str(end_date),
+            },
+        )
         return {
             "success": False,
             "error": str(e)
@@ -146,6 +162,11 @@ def run_multi_analysis(
         try:
             climate_data = fetch_climate_data(geometry, start_date, end_date)
         except Exception:
+            logger.warning(
+                "Climate data unavailable during multi-index analysis",
+                exc_info=True,
+                extra={"index_names": tuple(dict.fromkeys(index_names))},
+            )
             climate_data = None
 
         climate_plot = (
@@ -194,6 +215,14 @@ def run_multi_analysis(
             "climate_plot": climate_plot,
         }
     except Exception as e:
+        logger.exception(
+            "Multi-index analysis failed",
+            extra={
+                "index_names": tuple(dict.fromkeys(index_names)),
+                "start_date": str(start_date),
+                "end_date": str(end_date),
+            },
+        )
         return {
             "success": False,
             "error": str(e),

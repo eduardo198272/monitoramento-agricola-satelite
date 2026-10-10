@@ -1,5 +1,7 @@
-import pytest
+from contextlib import contextmanager
 from unittest.mock import MagicMock, patch
+
+import pytest
 from streamlit.testing.v1 import AppTest
 import plotly.graph_objects as go
 
@@ -8,6 +10,7 @@ from src.app.main import (
     DEFAULT_END,
     DEFAULT_START,
     UI_STATE_DEFAULTS,
+    display_analysis_details,
     display_map,
     display_multi_index_overview,
     display_summary,
@@ -261,7 +264,7 @@ def function_app(monkeypatch):
 
 
 class TestApplicationFlow:
-    def test_earth_engine_initialization_failure_returns_error(self, monkeypatch):
+    def test_earth_engine_initialization_failure_returns_error(self, monkeypatch, caplog):
         monkeypatch.setattr(
             main_module,
             "initialize_earth_engine",
@@ -269,7 +272,12 @@ class TestApplicationFlow:
         )
         main_module.init_earth_engine.clear()
 
-        assert main_module.init_earth_engine() == (False, "credenciais ausentes")
+        with caplog.at_level("ERROR", logger="src.app.main"):
+            assert main_module.init_earth_engine() == (False, "credenciais ausentes")
+
+        record = next(record for record in caplog.records if record.name == "src.app.main")
+        assert record.getMessage() == "Earth Engine initialization failed"
+        assert record.exc_info is not None
 
         main_module.init_earth_engine.clear()
 
@@ -283,8 +291,9 @@ class TestApplicationFlow:
         app = AppTest.from_function(app_script)
         app.run()
 
-        assert any("Erro ao inicializar Earth Engine" in error.value for error in app.error)
+        assert any("Google Earth Engine indisponível" in error.value for error in app.error)
         assert any("EE_PROJECT_ID" in info.value for info in app.info)
+        assert all("credenciais ausentes" not in error.value for error in app.error)
 
     def test_valid_location_search_updates_state_and_message(
         self, function_app, monkeypatch
@@ -351,7 +360,10 @@ class TestApplicationFlow:
         next(button for button in function_app.button if button.label == "Pesquisar").click().run()
 
         search.assert_called_once_with("Nova localidade")
-        assert any("serviço indisponível" in warning.value for warning in function_app.warning)
+        assert any(
+            "geocodificação indisponível" in warning.value
+            for warning in function_app.warning
+        )
         assert function_app.session_state["location_center"] == [-27.0, -51.0]
         assert function_app.session_state["location_zoom"] == 8
         assert function_app.session_state["location_result"] == {"display_name": "Local anterior"}
@@ -567,6 +579,51 @@ class TestApplicationFlow:
         assert function_app.session_state["analysis_results"] == saved_results
         assert function_app.session_state["analysis_metadata"] == saved_metadata
 
+    def test_completed_analysis_survives_regular_rerun_without_pipeline(
+        self, function_app, monkeypatch
+    ):
+        geometry = make_geometry()
+        geojson = {"type": "Feature", "properties": {"selected": True}}
+        result = {
+            "index_map": MagicMock(name="cached_ndvi_image"),
+            "mean_value": 0.625,
+            "time_series": [{"date": "2026-01-01", "value": 0.625}],
+            "time_series_plot": None,
+            "anomalies": [],
+            "alert": None,
+            "area_ha": 12.5,
+        }
+        run_analysis = MagicMock()
+        run_multi_analysis = MagicMock()
+        create_thematic_map = MagicMock(return_value=MagicMock())
+        monkeypatch.setattr(main_module, "run_analysis", run_analysis)
+        monkeypatch.setattr(main_module, "run_multi_analysis", run_multi_analysis)
+        monkeypatch.setattr(main_module, "create_thematic_map", create_thematic_map)
+        function_app.session_state["aoi_geometry"] = geometry
+        function_app.session_state["aoi_geojson"] = geojson
+        function_app.session_state["aoi_area_ha"] = 12.5
+        function_app.session_state["analysis_results"] = {"NDVI": result}
+        function_app.session_state["analysis_metadata"] = {"area_ha": 12.5}
+        function_app.session_state["analysis_map_center"] = [-28.26, -52.41]
+        function_app.session_state["analysis_status"] = "success"
+        function_app.session_state["visible_index"] = "NDVI"
+
+        function_app.run()
+        function_app.run()
+
+        assert function_app.session_state["analysis_results"] == {"NDVI": result}
+        assert function_app.session_state["analysis_status"] == "success"
+        assert function_app.session_state["aoi_geometry"] is geometry
+        assert function_app.session_state["aoi_geojson"] == geojson
+        assert function_app.session_state["aoi_area_ha"] == 12.5
+        assert create_thematic_map.call_count == 2
+        assert all(
+            call.args[0] is result["index_map"]
+            for call in create_thematic_map.call_args_list
+        )
+        run_analysis.assert_not_called()
+        run_multi_analysis.assert_not_called()
+
     def test_failed_analysis_shows_pipeline_error(self, monkeypatch):
         geometry = make_geometry()
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
@@ -596,8 +653,12 @@ class TestApplicationFlow:
         assert app.session_state["analysis_results"] == {}
         assert app.session_state["analysis_map"] is None
         assert app.session_state["analysis_status"] == "no_data"
-        assert app.session_state["analysis_error"] == "Nenhuma imagem encontrada"
-        assert any("Nenhuma imagem encontrada" in error.value for error in app.error)
+        assert app.session_state["analysis_error"] == (
+            "Nenhuma imagem Sentinel-2 disponível para o período e a área "
+            "selecionados. Amplie o período ou revise a área e tente novamente."
+        )
+        assert any("Amplie o período" in warning.value for warning in app.warning)
+        assert not app.error
 
     def test_failed_multi_analysis_sets_no_data_status(self, function_app, monkeypatch):
         geometry = make_geometry()
@@ -620,6 +681,7 @@ class TestApplicationFlow:
             ["NDVI", "NDWI", "NDMI"],
         )
         assert function_app.session_state["analysis_status"] == "no_data"
+        assert "Amplie o período" in function_app.session_state["analysis_error"]
         assert function_app.session_state["analysis_results"] == {}
         assert function_app.session_state["analysis_metadata"] == {}
         assert function_app.session_state["analysis_map"] is None
@@ -627,6 +689,14 @@ class TestApplicationFlow:
     def test_generic_analysis_failure_sets_error_status(self, monkeypatch):
         geometry = make_geometry()
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
+        spinner_messages = []
+
+        @contextmanager
+        def capture_spinner(message):
+            spinner_messages.append(message)
+            yield
+
+        monkeypatch.setattr(main_module.st, "spinner", capture_spinner)
 
         monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
         monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
@@ -636,10 +706,11 @@ class TestApplicationFlow:
             lambda *args, **kwargs: {"last_active_drawing": geojson},
         )
         monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        technical_error = "Earth Engine indisponível: sensitive internal detail"
         monkeypatch.setattr(
             main_module,
             "run_analysis",
-            MagicMock(return_value={"success": False, "error": "Earth Engine indisponível"}),
+            MagicMock(return_value={"success": False, "error": technical_error}),
         )
 
         app = AppTest.from_function(app_script)
@@ -647,7 +718,14 @@ class TestApplicationFlow:
         next(button for button in app.button if button.label == "Analisar área").click().run()
 
         assert app.session_state["analysis_status"] == "error"
-        assert app.session_state["analysis_error"] == "Earth Engine indisponível"
+        assert "Google Earth Engine" in app.session_state["analysis_error"]
+        assert technical_error not in app.session_state["analysis_error"]
+        assert any("Google Earth Engine" in error.value for error in app.error)
+        assert all("sensitive internal detail" not in error.value for error in app.error)
+        assert spinner_messages == [
+            "Buscando imagens Sentinel-2, aplicando máscara de nuvens "
+            "e calculando os índices..."
+        ]
 
     def test_successful_analysis_renders_outputs(self, monkeypatch):
         geometry = make_geometry()
@@ -821,6 +899,9 @@ class TestApplicationFlow:
             "time_series": [{"date": "2026-01-01", "value": 0.5}],
             "time_series_plot": go.Figure(),
             "climate_plot": go.Figure(),
+            "anomalies": [
+                {"date": "2026-01-01", "value": 0.5, "anomaly": True}
+            ],
             "alert": "ALERTA: queda detectada",
             "mean_value": 0.5,
             "area_ha": 12.5,
@@ -845,8 +926,12 @@ class TestApplicationFlow:
         next(button for button in app.button if button.label == "Analisar área").click().run()
 
         assert any("Série Temporal de NDVI" in item.value for item in app.subheader)
+        assert any("Anomalias de NDVI" in item.value for item in app.subheader)
         assert any("Dados Climáticos" in item.value for item in app.subheader)
-        assert any("ALERTA: queda detectada" in item.value for item in app.warning)
+        rendered_markdown = [item.value for item in app.markdown]
+        assert sum("ALERTA: queda detectada" in item for item in rendered_markdown) == 1
+        assert not any("ALERTA: queda detectada" in item.value for item in app.warning)
+        assert any("2026-01-01: valor 0.5000" in item for item in rendered_markdown)
 
     def test_successful_search_survives_rerun(self, function_app, monkeypatch):
         location = {
@@ -887,6 +972,22 @@ class TestPresentation:
             {"label": "Valor médio", "value": "Indisponível"},
             {"label": "Tendência", "value": "Indisponível"},
         ]
+
+    def test_analysis_details_show_empty_states_when_data_is_missing(self):
+        with patch("src.app.main.st") as mock_st:
+            display_analysis_details("NDWI", {}, None)
+
+        assert mock_st.subheader.call_args_list == [
+            (("Série Temporal de NDWI",),),
+            (("Anomalias de NDWI",),),
+            (("Dados Climáticos (NASA POWER)",),),
+        ]
+        assert [call.args[0] for call in mock_st.info.call_args_list] == [
+            "Série temporal de NDWI indisponível para este período.",
+            "Nenhuma anomalia detectada no NDWI para este período.",
+            "Dados climáticos indisponíveis para este período.",
+        ]
+        mock_st.plotly_chart.assert_not_called()
 
     @pytest.mark.parametrize(
         "trend, expected_color",

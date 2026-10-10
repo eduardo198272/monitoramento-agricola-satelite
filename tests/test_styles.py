@@ -18,6 +18,11 @@ def test_stylesheet_defines_component_and_responsive_rules():
     assert "[data-testid=\"stButton\"]" in css
     assert ".ui-card" in css
     assert "@media (max-width: 768px)" in css
+    assert "@media (max-width: 480px)" in css
+    assert '[data-testid="stMainBlockContainer"]' in css
+    assert '[data-testid="stRadio"] [role="radiogroup"]' in css
+    assert '[data-testid="stCustomComponentV1"]' in css
+    assert "height: clamp(22rem, 65vh, 37.5rem)" in css
 
 
 def test_load_styles_injects_css_from_any_working_directory():

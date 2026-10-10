@@ -1,4 +1,5 @@
 import math
+import logging
 
 import streamlit as st
 from datetime import date, timedelta
@@ -19,6 +20,8 @@ from src.app.maps import (
 from src.app.anomalies import compute_trend
 from src.app.styles import load_styles
 from src.app.pipeline import run_analysis, run_multi_analysis
+
+logger = logging.getLogger(__name__)
 
 DEFAULT_START = date.today() - timedelta(days=365)
 DEFAULT_END = date.today()
@@ -71,12 +74,34 @@ def clear_area_selection_state() -> None:
     clear_analysis_state()
 
 
+def is_no_images_error(error: str) -> bool:
+    """Recognize the pipeline's no-imagery response without matching case."""
+    normalized_error = str(error or "").casefold()
+    return "nenhuma imagem" in normalized_error or "no image" in normalized_error
+
+
+def public_analysis_error(error: str) -> tuple[str, str]:
+    """Return a stable UI status and a user-friendly message for a pipeline error."""
+    if is_no_images_error(error):
+        return (
+            "no_data",
+            "Nenhuma imagem Sentinel-2 disponível para o período e a área "
+            "selecionados. Amplie o período ou revise a área e tente novamente.",
+        )
+    return (
+        "error",
+        "Não foi possível concluir a análise no Google Earth Engine. "
+        "Verifique a conexão e a configuração do serviço e tente novamente.",
+    )
+
+
 @st.cache_resource
 def init_earth_engine():
     try:
         initialize_earth_engine()
         return True, None
     except Exception as e:
+        logger.exception("Earth Engine initialization failed")
         return False, str(e)
 
 
@@ -143,6 +168,37 @@ def display_multi_index_overview(
                 st.metric(label="Tendência", value=trend)
 
 
+def display_analysis_details(
+    index_name: str, result: dict, climate_plot
+) -> None:
+    """Render time-series, anomaly, and shared climate details below the map."""
+    st.subheader(f"Série Temporal de {index_name}")
+    time_series_plot = result.get("time_series_plot")
+    if time_series_plot is not None:
+        st.plotly_chart(time_series_plot, use_container_width=True)
+    else:
+        st.info(f"Série temporal de {index_name} indisponível para este período.")
+
+    st.subheader(f"Anomalias de {index_name}")
+    anomalies = [
+        point
+        for point in result.get("anomalies", [])
+        if point.get("anomaly", False)
+    ]
+    if anomalies:
+        st.markdown("Possíveis variações observadas:")
+        for point in anomalies:
+            st.markdown(f"- {point['date']}: valor {point['value']:.4f}")
+    else:
+        st.info(f"Nenhuma anomalia detectada no {index_name} para este período.")
+
+    st.subheader("Dados Climáticos (NASA POWER)")
+    if climate_plot is not None:
+        st.plotly_chart(climate_plot, use_container_width=True)
+    else:
+        st.info("Dados climáticos indisponíveis para este período.")
+
+
 def main():
     st.set_page_config(
         page_title="Monitoramento Agrícola por Imagens de Satélite",
@@ -155,11 +211,13 @@ def main():
 
     initialize_ui_state()
 
-    ee_ok, ee_error = init_earth_engine()
+    ee_ok, _ = init_earth_engine()
     if not ee_ok:
-        st.error("Status do serviço: Earth Engine indisponível")
-        st.error(f"Erro ao inicializar Earth Engine: {ee_error}")
-        st.info("Configure a variável EE_PROJECT_ID no arquivo .env")
+        st.error("Google Earth Engine indisponível. Não é possível executar análises agora.")
+        st.info(
+            "Verifique as credenciais e a configuração da variável EE_PROJECT_ID. "
+            "Tente novamente quando o serviço estiver disponível."
+        )
         return
 
     st.success("Status do serviço: Earth Engine conectado")
@@ -182,16 +240,25 @@ def main():
         else:
             try:
                 location = search_location(location_query)
-                if location is None:
-                    raise ValueError("Localidade não encontrada")
-                center = [location["latitude"], location["longitude"]]
-                zoom = calculate_map_zoom(location["boundingbox"])
+                if location is not None:
+                    center = [location["latitude"], location["longitude"]]
+                    zoom = calculate_map_zoom(location["boundingbox"])
             except Exception:
-                st.warning("Localidade não encontrada ou serviço indisponível.")
+                logger.exception("Location search or map centering failed")
+                st.warning(
+                    "Localidade não encontrada ou serviço de geocodificação "
+                    "indisponível. Confira o nome e tente novamente."
+                )
             else:
-                st.session_state.location_center = center
-                st.session_state.location_zoom = zoom
-                st.session_state.location_result = location
+                if location is None:
+                    st.warning(
+                        "Localidade não encontrada ou serviço de geocodificação "
+                        "indisponível. Confira o nome e tente novamente."
+                    )
+                else:
+                    st.session_state.location_center = center
+                    st.session_state.location_zoom = zoom
+                    st.session_state.location_result = location
 
     if st.session_state.location_result:
         st.success(
@@ -241,6 +308,7 @@ def main():
                 clear_analysis_state()
             st.success(f"Área selecionada: {st.session_state.aoi_area_ha:.2f} ha")
         except Exception as error:
+            logger.exception("Failed to validate or calculate selected area")
             st.error(str(error))
     elif st.session_state.aoi_geometry is not None:
         area_ha = st.session_state.aoi_area_ha
@@ -308,7 +376,10 @@ def main():
             st.session_state.analysis_metadata = {}
             st.session_state.analysis_map = None
             selected_indices = st.session_state.selected_indices
-            with st.spinner("Processando..."):
+            with st.spinner(
+                "Buscando imagens Sentinel-2, aplicando máscara de nuvens "
+                "e calculando os índices..."
+            ):
                 if st.session_state.analysis_mode == "multi":
                     result = run_multi_analysis(
                         geometry, start_date, end_date, selected_indices
@@ -341,17 +412,16 @@ def main():
                     st.session_state.analysis_status = "success"
                     st.session_state.analysis_error = None
                 else:
-                    st.session_state.analysis_error = result["error"]
+                    status, message = public_analysis_error(result.get("error"))
+                    st.session_state.analysis_error = message
                     st.session_state.analysis_map = None
                     st.session_state.analysis_results = {}
                     st.session_state.analysis_metadata = {}
-                    st.session_state.analysis_status = (
-                        "no_data"
-                        if "Nenhuma imagem" in result["error"]
-                        else "error"
-                    )
+                    st.session_state.analysis_status = status
 
-    if st.session_state.analysis_error:
+    if st.session_state.analysis_status == "no_data":
+        st.warning(st.session_state.analysis_error)
+    elif st.session_state.analysis_status == "error":
         st.error(st.session_state.analysis_error)
     elif st.session_state.analysis_status == "success" and st.session_state.analysis_results:
         available_indices = list(st.session_state.analysis_results)
@@ -390,19 +460,10 @@ def main():
             res["alert"]
         )
 
-        if res["time_series_plot"]:
-            st.subheader(f"Série Temporal de {visible_index}")
-            st.plotly_chart(res["time_series_plot"], use_container_width=True)
-
-        climate_plot = res.get(
-            "climate_plot", st.session_state.analysis_metadata.get("climate_plot")
-        )
-        if climate_plot:
-            st.subheader("Dados Climáticos (NASA POWER)")
-            st.plotly_chart(climate_plot, use_container_width=True)
-
-            if res["alert"]:
-                st.warning(res["alert"])
+        climate_plot = res.get("climate_plot")
+        if climate_plot is None:
+            climate_plot = st.session_state.analysis_metadata.get("climate_plot")
+        display_analysis_details(visible_index, res, climate_plot)
 
 
 if __name__ == "__main__":
