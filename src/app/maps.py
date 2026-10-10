@@ -12,6 +12,14 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_CENTER = [-28.0, -52.0]
 DEFAULT_ZOOM = 10
+ESRI_WORLD_IMAGERY_URL = (
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/"
+    "MapServer/tile/{z}/{y}/{x}"
+)
+ESRI_WORLD_IMAGERY_ATTRIBUTION = (
+    "Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, "
+    "and the GIS User Community"
+)
 NOMINATIM_SEARCH_URL = "https://nominatim.openstreetmap.org/search"
 NOMINATIM_TIMEOUT = 10
 NOMINATIM_USER_AGENT = "monitoramento-agricola-satelite/1.0"
@@ -194,7 +202,20 @@ def create_selection_map(
     if not isinstance(zoom, int) or zoom < 1 or zoom > 20:
         raise ValueError("zoom deve ser inteiro entre 1 e 20")
 
-    selection_map = folium.Map(location=center, zoom_start=zoom, control_scale=True)
+    selection_map = folium.Map(
+        location=center,
+        zoom_start=zoom,
+        control_scale=True,
+        tiles=None,
+    )
+    folium.TileLayer(
+        tiles=ESRI_WORLD_IMAGERY_URL,
+        attr=ESRI_WORLD_IMAGERY_ATTRIBUTION,
+        name="Satélite (Esri)",
+        overlay=False,
+        control=True,
+    ).add_to(selection_map)
+    folium.LayerControl(collapsed=True).add_to(selection_map)
     Draw(
         export=False,
         draw_options={
