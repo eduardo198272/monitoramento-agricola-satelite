@@ -1,5 +1,6 @@
 import pytest
 import requests
+import folium
 from unittest.mock import MagicMock, patch
 
 from src.app.maps import (
@@ -458,6 +459,42 @@ class TestEnableAreaDraw:
 
 
 class TestCreateSelectionMap:
+    def test_uses_esri_world_imagery_as_base_layer_with_attribution(self):
+        result = create_selection_map()
+
+        tile_layers = [
+            child
+            for child in result._children.values()
+            if isinstance(child, folium.TileLayer)
+        ]
+
+        assert len(tile_layers) == 1
+        tile_layer = tile_layers[0]
+        assert tile_layer.tiles == (
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/"
+            "MapServer/tile/{z}/{y}/{x}"
+        )
+        assert tile_layer.options["attribution"] == (
+            "Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, "
+            "and the GIS User Community"
+        )
+        assert tile_layer.layer_name == "Satélite (Esri)"
+        assert tile_layer.overlay is False
+        assert tile_layer.control is True
+
+    def test_keeps_scale_control(self):
+        result = create_selection_map()
+
+        assert result.control_scale is True
+
+    def test_exposes_base_layer_in_layer_control(self):
+        result = create_selection_map()
+
+        assert any(
+            type(child).__name__ == "LayerControl"
+            for child in result._children.values()
+        )
+
     def test_creates_map_with_default_center_and_zoom(self):
         result = create_selection_map()
 
