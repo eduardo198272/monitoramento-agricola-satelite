@@ -2,6 +2,9 @@ import ee
 import logging
 from datetime import date
 
+import pandas as pd
+import plotly.graph_objects as go
+
 from src.app.earth_engine import (
     get_image_collection,
     calculate_ndvi,
@@ -17,18 +20,48 @@ from src.app.utils import normalize_date
 logger = logging.getLogger(__name__)
 
 
+def _fetch_climate_context(
+    geometry: ee.Geometry,
+    start_date: str,
+    end_date: str,
+    log_message: str,
+    log_context: dict,
+) -> tuple[pd.DataFrame | None, go.Figure | None, list[float] | None]:
+    """Fetch shared climate data and return its centroid for map positioning."""
+    map_center = None
+    try:
+        longitude, latitude = geometry.centroid().coordinates().getInfo()
+        map_center = [latitude, longitude]
+        coordinates = (longitude, latitude)
+        climate_data = fetch_climate_data(
+            geometry, start_date, end_date, coordinates=coordinates
+        )
+    except Exception:
+        logger.warning(log_message, exc_info=True, extra=log_context)
+        return None, None, map_center
+
+    climate_plot = (
+        plot_climate_data(climate_data)
+        if climate_data is not None and not climate_data.empty
+        else None
+    )
+    return climate_data, climate_plot, map_center
+
+
 def run_analysis(
     geometry: ee.Geometry,
     start_date: str | date,
     end_date: str | date,
-    index_name: str
+    index_name: str,
+    area_ha: float | None = None,
 ) -> dict:
     try:
         start_date = normalize_date(start_date)
         end_date = normalize_date(end_date)
         collection = get_image_collection(geometry, start_date, end_date)
 
-        if collection.size().getInfo() == 0:
+        image_count = collection.size().getInfo()
+        if image_count == 0:
             return {
                 "success": False,
                 "error": "Nenhuma imagem encontrada para o período e área selecionados"
@@ -60,10 +93,12 @@ def run_analysis(
 
         mean_value = stats.get(band_name)
 
-        area_ha = geometry.area().divide(10000).getInfo()
+        if area_ha is None:
+            area_ha = geometry.area().divide(10000).getInfo()
 
         time_series = compute_time_series(
-            index_collection, geometry, index_name, scale=10
+            index_collection, geometry, index_name, scale=10,
+            image_count=image_count,
         )
 
         time_series_plot = plot_time_series(time_series, index_name) if time_series else None
@@ -71,20 +106,12 @@ def run_analysis(
         anomalies = detect_anomalies(time_series, window_size=3, std_threshold=1.0)
         alert = generate_alert(anomalies, index_name)
 
-        try:
-            climate_df = fetch_climate_data(geometry, start_date, end_date)
-        except Exception:
-            logger.warning(
-                "Climate data unavailable during single-index analysis",
-                exc_info=True,
-                extra={"index_name": index_name},
-            )
-            climate_df = None
-
-        climate_plot = (
-            plot_climate_data(climate_df)
-            if climate_df is not None and not climate_df.empty
-            else None
+        climate_df, climate_plot, map_center = _fetch_climate_context(
+            geometry,
+            start_date,
+            end_date,
+            "Climate data unavailable during single-index analysis",
+            {"index_name": index_name},
         )
 
         return {
@@ -99,6 +126,7 @@ def run_analysis(
             "climate_plot": climate_plot,
             "mean_value": mean_value,
             "area_ha": area_ha,
+            "map_center": map_center,
         }
 
     except Exception as e:
@@ -121,6 +149,7 @@ def run_multi_analysis(
     start_date: str | date,
     end_date: str | date,
     index_names: list[str],
+    area_ha: float | None = None,
 ) -> dict:
     index_calculators = {
         "NDVI": calculate_ndvi,
@@ -157,22 +186,15 @@ def run_multi_analysis(
             }
 
         masked_collection = collection.map(mask_clouds)
-        area_ha = geometry.area().divide(10000).getInfo()
+        if area_ha is None:
+            area_ha = geometry.area().divide(10000).getInfo()
 
-        try:
-            climate_data = fetch_climate_data(geometry, start_date, end_date)
-        except Exception:
-            logger.warning(
-                "Climate data unavailable during multi-index analysis",
-                exc_info=True,
-                extra={"index_names": tuple(dict.fromkeys(index_names))},
-            )
-            climate_data = None
-
-        climate_plot = (
-            plot_climate_data(climate_data)
-            if climate_data is not None and not climate_data.empty
-            else None
+        climate_data, climate_plot, map_center = _fetch_climate_context(
+            geometry,
+            start_date,
+            end_date,
+            "Climate data unavailable during multi-index analysis",
+            {"index_names": tuple(dict.fromkeys(index_names))},
         )
 
         index_results = {}
@@ -186,7 +208,8 @@ def run_multi_analysis(
                 maxPixels=1e9,
             ).getInfo()
             time_series = compute_time_series(
-                index_collection, geometry, index_name, scale=10
+                index_collection, geometry, index_name, scale=10,
+                image_count=image_count,
             )
             anomalies = detect_anomalies(
                 time_series, window_size=3, std_threshold=1.0
@@ -213,6 +236,7 @@ def run_multi_analysis(
             "image_count": image_count,
             "climate_data": climate_data,
             "climate_plot": climate_plot,
+            "map_center": map_center,
         }
     except Exception as e:
         logger.exception(

@@ -25,19 +25,21 @@ def fetch_climate_data(
     geometry: ee.Geometry,
     start_date: str | date,
     end_date: str | date,
-    parameters: list[str] = None
+    parameters: list[str] = None,
+    coordinates: tuple[float, float] | None = None,
 ) -> pd.DataFrame:
     start_date = normalize_date(start_date)
     end_date = normalize_date(end_date)
     if parameters is None:
         parameters = DEFAULT_PARAMETERS.copy()
 
-    centroid = geometry.centroid()
-    coords = centroid.coordinates().getInfo()
-    if coords is None:
+    if coordinates is None:
+        centroid = geometry.centroid()
+        coordinates = centroid.coordinates().getInfo()
+    if coordinates is None:
         raise ValueError("Geometry does not have valid coordinates")
 
-    longitude, latitude = coords[0], coords[1]
+    longitude, latitude = coordinates[0], coordinates[1]
 
     params = {
         "community": COMMUNITY,

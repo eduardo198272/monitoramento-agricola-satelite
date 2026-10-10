@@ -30,6 +30,9 @@ def main_analysis_mocks():
         }
 
         geometry = MagicMock(name="geometry")
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [
+            -45.0, -20.0
+        ]
         geometry.area.return_value.divide.return_value.getInfo.return_value = 12.5
 
         collection = MagicMock(name="collection")
@@ -87,7 +90,11 @@ def test_run_analysis_supports_all_indices(
     masked_collection.map.assert_called_once_with(mocks[calculation_name])
     index_image.select.assert_called_once_with(index_name)
     mocks["compute_time_series"].assert_called_once_with(
-        masked_collection.map.return_value, geometry, index_name, scale=10
+        masked_collection.map.return_value,
+        geometry,
+        index_name,
+        scale=10,
+        image_count=3,
     )
 
 
@@ -161,7 +168,10 @@ def test_run_analysis_includes_time_series_and_climate_plots(main_analysis_mocks
     )
     mocks["generate_alert"].assert_called_once_with(anomalies, "NDVI")
     mocks["fetch_climate_data"].assert_called_once_with(
-        geometry, "2026-01-01", "2026-01-31"
+        geometry,
+        "2026-01-01",
+        "2026-01-31",
+        coordinates=(-45.0, -20.0),
     )
     mocks["plot_climate_data"].assert_called_once_with(climate_data)
 

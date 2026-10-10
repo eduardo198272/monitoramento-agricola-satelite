@@ -48,6 +48,22 @@ def make_mock_response(data):
 
 
 class TestFetchClimateData:
+    def test_fetch_climate_data_reuses_precomputed_coordinates(self):
+        geometry = MagicMock()
+
+        with patch("src.app.climate.requests.get") as mock_get:
+            mock_get.return_value = make_mock_response({"properties": {"parameter": {}}})
+            fetch_climate_data(
+                geometry,
+                "2024-01-02",
+                "2024-01-03",
+                coordinates=(-45.0, -20.0),
+            )
+
+        geometry.centroid.assert_not_called()
+        assert mock_get.call_args.kwargs["params"]["longitude"] == -45.0
+        assert mock_get.call_args.kwargs["params"]["latitude"] == -20.0
+
     def test_fetch_climate_data_formats_date_objects_for_nasa_power(self):
         geometry = MockGeometry(coords=[-45.0, -20.0])
 

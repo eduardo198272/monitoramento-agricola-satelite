@@ -382,11 +382,19 @@ def main():
             ):
                 if st.session_state.analysis_mode == "multi":
                     result = run_multi_analysis(
-                        geometry, start_date, end_date, selected_indices
+                        geometry,
+                        start_date,
+                        end_date,
+                        selected_indices,
+                        area_ha=st.session_state.aoi_area_ha,
                     )
                 else:
                     result = run_analysis(
-                        geometry, start_date, end_date, selected_indices[0]
+                        geometry,
+                        start_date,
+                        end_date,
+                        selected_indices[0],
+                        area_ha=st.session_state.aoi_area_ha,
                     )
 
                 if result["success"]:
@@ -407,8 +415,9 @@ def main():
                     else:
                         st.session_state.analysis_results = {index_name: result}
                         st.session_state.visible_index = index_name
-                    centroid = geometry.centroid().coordinates().getInfo()
-                    st.session_state.analysis_map_center = [centroid[1], centroid[0]]
+                    st.session_state.analysis_map_center = (
+                        result.get("map_center") or st.session_state.location_center
+                    )
                     st.session_state.analysis_status = "success"
                     st.session_state.analysis_error = None
                 else:

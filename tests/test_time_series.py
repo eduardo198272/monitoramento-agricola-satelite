@@ -67,6 +67,8 @@ class TestComputeTimeSeries:
         )
         assert first_image.reduceRegion.return_value.get.call_args.args == ("NDVI",)
         assert second_image.reduceRegion.return_value.get.call_args.args == ("NDVI",)
+        mock_collection.size.assert_called_once_with()
+        feature_list.size.assert_not_called()
 
     @patch("src.app.time_series.ee")
     def test_compute_time_series_with_data(self, mock_ee):
@@ -94,7 +96,9 @@ class TestComputeTimeSeries:
         mock_ee.Image.return_value = MagicMock()
         mock_ee.Reducer.mean.return_value = "mean_reducer"
 
-        result = compute_time_series(mock_collection, mock_geometry, "NDVI")
+        result = compute_time_series(
+            mock_collection, mock_geometry, "NDVI", image_count=3
+        )
 
         assert len(result) == 3
         assert result[0]["date"] == "2026-01-01"
@@ -103,6 +107,7 @@ class TestComputeTimeSeries:
         assert result[1]["value"] == 0.6
         assert result[2]["date"] == "2026-03-01"
         assert result[2]["value"] == 0.7
+        mock_collection.size.assert_not_called()
 
     @patch("src.app.time_series.ee")
     def test_compute_time_series_empty_collection(self, mock_ee):

@@ -156,6 +156,7 @@ class TestWorkspaceControls:
                 "image_count": 3,
                 "climate_data": None,
                 "climate_plot": None,
+                "map_center": [-20.0, -45.0],
             }
         )
         monkeypatch.setattr(main_module, "run_analysis", run_analysis)
@@ -177,9 +178,11 @@ class TestWorkspaceControls:
             function_app.session_state["analysis_start_date"],
             function_app.session_state["analysis_end_date"],
             ["NDVI", "NDWI", "NDMI"],
+            area_ha=None,
         )
         assert function_app.session_state["analysis_status"] == "success"
         assert function_app.session_state["analysis_results"] == index_results
+        assert function_app.session_state["analysis_map_center"] == [-20.0, -45.0]
         assert function_app.session_state["analysis_metadata"] == {
             "area_ha": 12.5,
             "image_count": 3,
@@ -649,6 +652,7 @@ class TestApplicationFlow:
             app.session_state["analysis_start_date"],
             app.session_state["analysis_end_date"],
             "NDVI",
+            area_ha=12.5,
         )
         assert app.session_state["analysis_results"] == {}
         assert app.session_state["analysis_map"] is None
@@ -679,6 +683,7 @@ class TestApplicationFlow:
             function_app.session_state["analysis_start_date"],
             function_app.session_state["analysis_end_date"],
             ["NDVI", "NDWI", "NDMI"],
+            area_ha=None,
         )
         assert function_app.session_state["analysis_status"] == "no_data"
         assert "Amplie o período" in function_app.session_state["analysis_error"]
@@ -740,6 +745,7 @@ class TestApplicationFlow:
             "alert": None,
             "mean_value": 0.65,
             "area_ha": 12.5,
+            "map_center": [-20.0, -45.0],
         }
 
         monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
@@ -766,6 +772,7 @@ class TestApplicationFlow:
             app.session_state["analysis_start_date"],
             app.session_state["analysis_end_date"],
             "NDVI",
+            area_ha=12.5,
         )
         assert app.session_state["analysis_results"] == {"NDVI": result}
         assert app.session_state["analysis_metadata"] == {
@@ -775,6 +782,8 @@ class TestApplicationFlow:
         assert app.session_state["visible_index"] == "NDVI"
         assert app.session_state["analysis_status"] == "success"
         assert app.session_state["aoi_area_ha"] == 12.5
+        assert app.session_state["analysis_map_center"] == [-20.0, -45.0]
+        geometry.centroid.assert_not_called()
         assert len(app.metric) == 3
 
     @pytest.mark.parametrize(

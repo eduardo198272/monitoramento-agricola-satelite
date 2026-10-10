@@ -7,7 +7,60 @@ from datetime import date
 from src.app.pipeline import run_analysis, run_multi_analysis
 
 
+def geometry_with_centroid():
+    geometry = MagicMock()
+    geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [
+        -45.0, -20.0
+    ]
+    return geometry
+
+
 class TestRunAnalysis:
+    @patch("src.app.pipeline.compute_time_series", return_value=[])
+    @patch("src.app.pipeline.get_image_collection")
+    def test_run_analysis_reuses_image_count_and_precomputed_area(
+        self, mock_get_collection, mock_compute_time_series
+    ):
+        geometry = geometry_with_centroid()
+        collection = MagicMock()
+        collection.size.return_value.getInfo.return_value = 2
+        masked_collection = MagicMock()
+        index_collection = MagicMock()
+        index_image = MagicMock()
+        collection.map.return_value = masked_collection
+        masked_collection.map.return_value = index_collection
+        index_collection.median.return_value = index_image
+        index_image.select.return_value.reduceRegion.return_value.getInfo.return_value = {
+            "NDVI": 0.5
+        }
+        mock_get_collection.return_value = collection
+
+        with patch("src.app.pipeline.ee") as mock_ee, patch(
+            "src.app.pipeline.fetch_climate_data", return_value=None
+        ), patch("src.app.pipeline.plot_climate_data", return_value=None), patch(
+            "src.app.pipeline.plot_time_series", return_value=None
+        ), patch("src.app.pipeline.detect_anomalies", return_value=[]), patch(
+            "src.app.pipeline.generate_alert", return_value=None
+        ):
+            mock_ee.Reducer.mean.return_value = "mean_reducer"
+            result = run_analysis(
+                geometry, "2024-01-01", "2024-01-31", "NDVI", area_ha=12.5
+            )
+
+        assert result["success"] is True
+        assert result["area_ha"] == 12.5
+        assert result["map_center"] == [-20.0, -45.0]
+        geometry.area.assert_not_called()
+        geometry.centroid.return_value.coordinates.return_value.getInfo.assert_called_once_with()
+        collection.size.assert_called_once_with()
+        mock_compute_time_series.assert_called_once_with(
+            index_collection,
+            geometry,
+            "NDVI",
+            scale=10,
+            image_count=2,
+        )
+
     @pytest.mark.parametrize(
         "index_name, calculation_name",
         [("NDWI", "calculate_ndwi"), ("NDMI", "calculate_ndmi")],
@@ -35,7 +88,7 @@ class TestRunAnalysis:
         index_name,
         calculation_name,
     ):
-        geometry = MagicMock()
+        geometry = geometry_with_centroid()
         geometry.area.return_value.divide.return_value.getInfo.return_value = 25.0
 
         collection = MagicMock()
@@ -70,7 +123,10 @@ class TestRunAnalysis:
         masked_collection.map.assert_called_once_with(mock_calculation)
         mock_get_col.assert_called_once_with(geometry, "2024-01-01", "2024-01-31")
         mock_fetch_climate.assert_called_once_with(
-            geometry, "2024-01-01", "2024-01-31"
+            geometry,
+            "2024-01-01",
+            "2024-01-31",
+            coordinates=(-45.0, -20.0),
         )
 
     @patch("src.app.pipeline.ee")
@@ -94,8 +150,7 @@ class TestRunAnalysis:
         mock_get_col,
         mock_ee
     ):
-        mock_geometry = MagicMock()
-        mock_geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-45.0, -20.0]
+        mock_geometry = geometry_with_centroid()
         mock_geometry.area.return_value.divide.return_value.getInfo.return_value = 100.0
 
         mock_collection = MagicMock()
@@ -211,8 +266,7 @@ class TestRunAnalysis:
         mock_ee,
         caplog,
     ):
-        mock_geometry = MagicMock()
-        mock_geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-45.0, -20.0]
+        mock_geometry = geometry_with_centroid()
         mock_geometry.area.return_value.divide.return_value.getInfo.return_value = 100.0
 
         mock_collection = MagicMock()
@@ -264,8 +318,7 @@ class TestRunAnalysis:
         mock_get_col,
         mock_ee
     ):
-        mock_geometry = MagicMock()
-        mock_geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-45.0, -20.0]
+        mock_geometry = geometry_with_centroid()
         mock_geometry.area.return_value.divide.return_value.getInfo.return_value = 100.0
 
         mock_index_image = MagicMock()
@@ -328,8 +381,7 @@ class TestRunAnalysis:
         mock_get_col,
         mock_ee
     ):
-        mock_geometry = MagicMock()
-        mock_geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-45.0, -20.0]
+        mock_geometry = geometry_with_centroid()
         mock_geometry.area.return_value.divide.return_value.getInfo.return_value = 100.0
 
         mock_collection = MagicMock()
@@ -376,7 +428,7 @@ class TestRunMultiAnalysis:
                 for name in patch_names
             }
 
-            geometry = MagicMock()
+            geometry = geometry_with_centroid()
             geometry.area.return_value.divide.return_value.getInfo.return_value = 42.5
             collection = MagicMock()
             collection.size.return_value.getInfo.return_value = 7
@@ -411,6 +463,7 @@ class TestRunMultiAnalysis:
                 date(2024, 1, 1),
                 date(2024, 1, 31),
                 ["NDVI", "NDWI", "NDMI", "NDVI"],
+                area_ha=42.5,
             )
 
         assert result["success"] is True
@@ -419,6 +472,7 @@ class TestRunMultiAnalysis:
         assert result["image_count"] == 7
         assert result["climate_data"] is climate_data
         assert result["climate_plot"] is not None
+        assert result["map_center"] == [-20.0, -45.0]
         assert result["indices"]["NDVI"]["mean_value"] == 0.6
         assert result["indices"]["NDVI"]["trend"] == "crescente"
         assert result["indices"]["NDVI"]["time_series"] == time_series
@@ -427,11 +481,19 @@ class TestRunMultiAnalysis:
         )
         collection.map.assert_called_once_with(mocks["mask_clouds"])
         assert masked_collection.map.call_count == 3
-        geometry.area.assert_called_once_with()
+        geometry.area.assert_not_called()
+        geometry.centroid.return_value.coordinates.return_value.getInfo.assert_called_once_with()
         mocks["fetch_climate_data"].assert_called_once_with(
-            geometry, "2024-01-01", "2024-01-31"
+            geometry,
+            "2024-01-01",
+            "2024-01-31",
+            coordinates=(-45.0, -20.0),
         )
         assert mocks["compute_time_series"].call_count == 3
+        assert all(
+            call.kwargs["image_count"] == 7
+            for call in mocks["compute_time_series"].call_args_list
+        )
 
     @pytest.mark.parametrize("index_names", [[], ["INVALID"], ["NDVI", "INVALID"]])
     def test_run_multi_analysis_rejects_empty_or_unsupported_indices(self, index_names):
@@ -472,7 +534,7 @@ class TestRunMultiAnalysis:
         index_map.select.return_value.reduceRegion.return_value.getInfo.return_value = {
             "NDVI": 0.3
         }
-        geometry = MagicMock()
+        geometry = geometry_with_centroid()
         geometry.area.return_value.divide.return_value.getInfo.return_value = 1.0
 
         with patch(
@@ -488,6 +550,7 @@ class TestRunMultiAnalysis:
         assert result["success"] is True
         assert result["climate_data"] is None
         assert result["climate_plot"] is None
+        assert result["map_center"] == [-20.0, -45.0]
         mock_fetch_climate.assert_called_once()
         mock_ee.Reducer.mean.assert_called_once_with()
         assert any(

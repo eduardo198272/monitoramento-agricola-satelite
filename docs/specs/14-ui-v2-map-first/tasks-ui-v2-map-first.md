@@ -29,7 +29,7 @@ Referência: `docs/specs/14-ui-v2-map-first/spec-ui-v2-map-first.md`
 | SPEC-14-23 | Atualizar testes Streamlit com `AppTest` | Layout, estado inicial, busca, área, controles, análise, rerun e troca visual são cobertos | 2h30 | Concluído |
 | SPEC-14-24 | Executar cobertura e corrigir regressões | `py -m pytest` passa e a exigência de cobertura configurada permanece atendida | 1h30 | Concluído |
 | SPEC-14-25 | Validar responsividade e integração visual | Desktop e larguras menores não apresentam overflow e o mapa permanece utilizável | 45min | Concluído |
-| SPEC-14-26 | Revisar diff e documentar limitações | Não há lógica duplicada, chamadas desnecessárias ou funcionalidades existentes removidas | 45min | Não iniciado |
+| SPEC-14-26 | Revisar diff e documentar limitações | Não há lógica duplicada, chamadas desnecessárias ou funcionalidades existentes removidas | 45min | Concluído |
 
 ## Ordem de Execução
 

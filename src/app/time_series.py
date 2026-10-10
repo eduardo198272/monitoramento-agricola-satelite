@@ -6,9 +6,12 @@ def compute_time_series(
     collection: ee.ImageCollection,
     geometry: ee.Geometry,
     index_name: str,
-    scale: int = 10
+    scale: int = 10,
+    image_count: int | None = None,
 ) -> list[dict]:
-    if collection.size().getInfo() == 0:
+    if image_count is None:
+        image_count = collection.size().getInfo()
+    if image_count == 0:
         return []
 
     def reduce_image(img):
@@ -24,12 +27,10 @@ def compute_time_series(
         return ee.Feature(None, {"date": date_str, "value": value})
 
     features = collection.map(reduce_image)
-    features_list = features.toList(features.size())
+    features_list = features.toList(image_count)
 
     result = []
-    size = features_list.size().getInfo()
-
-    for i in range(size):
+    for i in range(image_count):
         feat = ee.Feature(features_list.get(i))
         props = feat.toDictionary().getInfo()
         val = props.get("value")
