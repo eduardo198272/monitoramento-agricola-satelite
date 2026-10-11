@@ -338,3 +338,52 @@ def get_drawn_geometry(map_obj: geemap.Map) -> ee.Geometry | None:
         return ee.Geometry(geom)
     except Exception:
         return None
+
+
+def calculate_area_context(geometry: ee.Geometry) -> dict:
+    """
+    Calculate area (ha), perimeter (km), and centroid (lat, lon) from an EE geometry.
+
+    Args:
+        geometry: Earth Engine geometry object.
+
+    Returns:
+        Dictionary with keys "area_ha", "perimeter_km", "centroid" (tuple of lat, lon).
+
+    Raises:
+        ValueError: If geometry is invalid or metrics are not finite/positive.
+    """
+    if geometry is None:
+        raise ValueError("Geometria inválida: None")
+
+    try:
+        area_m2 = geometry.area().getInfo()
+        perimeter_m = geometry.perimeter().getInfo()
+        centroid_coords = geometry.centroid().coordinates().getInfo()
+
+        if not all(isinstance(v, (int, float)) and math.isfinite(v) for v in (area_m2, perimeter_m)):
+            raise ValueError("Área ou perímetro não são valores finitos válidos")
+
+        if area_m2 <= 0:
+            raise ValueError("Não foi possível calcular uma área válida em hectares (área <= 0)")
+
+        if perimeter_m <= 0:
+            raise ValueError("Não foi possível calcular um perímetro válido em km (perímetro <= 0)")
+
+        if not (isinstance(centroid_coords, (list, tuple)) and len(centroid_coords) == 2):
+            raise ValueError("Centroide inválido: coordenadas ausentes ou malformadas")
+
+        lon, lat = centroid_coords
+        if not all(isinstance(v, (int, float)) and math.isfinite(v) for v in (lon, lat)):
+            raise ValueError("Centroide contém valores não finitos")
+
+        return {
+            "area_ha": area_m2 / 10000.0,
+            "perimeter_km": perimeter_m / 1000.0,
+            "centroid": (lat, lon),
+        }
+
+    except ValueError:
+        raise
+    except Exception as e:
+        raise ValueError(f"Falha ao calcular contexto geográfico: {e}") from e

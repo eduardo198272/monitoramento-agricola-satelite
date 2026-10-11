@@ -654,3 +654,124 @@ class TestGetDrawnGeometry:
         result = get_drawn_geometry(mock_map)
 
         assert result is None
+
+
+class TestCalculateAreaContext:
+    @pytest.fixture
+    def mock_ee_geometry(self):
+        """Create an Earth Engine-like geometry with area, perimeter and centroid methods."""
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = 2500000.0  # 250 ha in m²
+        geometry.perimeter.return_value.getInfo.return_value = 20000.0  # 20 km in m
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-52.4, -28.3]
+        return geometry
+
+    @patch("src.app.maps.ee")
+    def test_calculate_area_context_returns_all_metrics(self, mock_ee, mock_ee_geometry):
+        from src.app.maps import calculate_area_context
+
+        result = calculate_area_context(mock_ee_geometry)
+
+        assert result["area_ha"] == 250.0
+        assert result["perimeter_km"] == 20.0
+        assert result["centroid"] == (-28.3, -52.4)
+
+    @patch("src.app.maps.ee")
+    def test_calculate_area_context_area_conversion_m2_to_ha(self, mock_ee):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = 1000000.0  # 100 ha in m²
+        geometry.perimeter.return_value.getInfo.return_value = 10000.0  # 10 km in m
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-50.0, -20.0]
+
+        result = calculate_area_context(geometry)
+
+        assert result["area_ha"] == 100.0
+
+    @patch("src.app.maps.ee")
+    def test_calculate_area_context_perimeter_conversion_m_to_km(self, mock_ee):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = 2500000.0
+        geometry.perimeter.return_value.getInfo.return_value = 15000.0  # 15 km in m
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-50.0, -20.0]
+
+        result = calculate_area_context(geometry)
+
+        assert result["perimeter_km"] == 15.0
+
+    @patch("src.app.maps.ee")
+    def test_calculate_area_context_centroid_order_lat_lon(self, mock_ee):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = 125000.0  # 12.5 ha in m²
+        geometry.perimeter.return_value.getInfo.return_value = 5000.0  # 5 km in m
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-52.41, -28.26]
+
+        result = calculate_area_context(geometry)
+
+        assert result["centroid"] == (-28.26, -52.41)
+
+    def test_calculate_area_context_raises_for_invalid_area(self):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = float("nan")
+        geometry.perimeter.return_value.getInfo.return_value = 5000.0
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-52.4, -28.3]
+
+        with pytest.raises(ValueError, match="valores finitos"):
+            calculate_area_context(geometry)
+
+    def test_calculate_area_context_raises_for_zero_area(self):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = 0.0
+        geometry.perimeter.return_value.getInfo.return_value = 5000.0
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-52.4, -28.3]
+
+        with pytest.raises(ValueError, match="área <= 0"):
+            calculate_area_context(geometry)
+
+    def test_calculate_area_context_raises_for_negative_area(self):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = -10000.0
+        geometry.perimeter.return_value.getInfo.return_value = 5000.0
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-52.4, -28.3]
+
+        with pytest.raises(ValueError, match="área <= 0"):
+            calculate_area_context(geometry)
+
+    def test_calculate_area_context_raises_for_invalid_perimeter(self):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = 125000.0
+        geometry.perimeter.return_value.getInfo.return_value = float("inf")
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-52.4, -28.3]
+
+        with pytest.raises(ValueError, match="valores finitos"):
+            calculate_area_context(geometry)
+
+    def test_calculate_area_context_raises_for_invalid_centroid(self):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = 125000.0
+        geometry.perimeter.return_value.getInfo.return_value = 5000.0
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [float("nan"), -28.3]
+
+        with pytest.raises(ValueError, match="Centroide contém valores não finitos"):
+            calculate_area_context(geometry)
+
+    def test_calculate_area_context_raises_for_none_geometry(self):
+        from src.app.maps import calculate_area_context
+
+        with pytest.raises(ValueError, match="Geometria inválida"):
+            calculate_area_context(None)

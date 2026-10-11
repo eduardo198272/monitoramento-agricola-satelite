@@ -14,6 +14,7 @@ from src.app.maps import (
     geojson_to_ee_geometry,
     search_location,
     calculate_map_zoom,
+    calculate_area_context,
     DEFAULT_CENTER,
     DEFAULT_ZOOM,
 )
@@ -35,6 +36,8 @@ UI_STATE_DEFAULTS = {
     "aoi_geojson": None,
     "aoi_geometry": None,
     "aoi_area_ha": None,
+    "aoi_perimeter_km": None,
+    "aoi_centroid": None,
     "analysis_mode": "single",
     "selected_indices": ["NDVI"],
     "visible_index": "NDVI",
@@ -71,6 +74,8 @@ def clear_area_selection_state() -> None:
     st.session_state.aoi_geojson = None
     st.session_state.aoi_geometry = None
     st.session_state.aoi_area_ha = None
+    st.session_state.aoi_perimeter_km = None
+    st.session_state.aoi_centroid = None
     clear_analysis_state()
 
 
@@ -276,6 +281,7 @@ def render_controls_bar() -> tuple[bool, bool]:
         selected_index = st.radio(
             "Índice",
             options=INDEX_SELECTION_OPTIONS,
+            index=1,
             horizontal=True,
             key="index_selection",
             label_visibility="collapsed",
@@ -367,28 +373,39 @@ def render_selection_map_area() -> None:
         try:
             if drawn_geojson != st.session_state.aoi_geojson:
                 geometry = geojson_to_ee_geometry(drawn_geojson)
-                area_ha = geometry.area().divide(10000).getInfo()
-                if (
-                    not isinstance(area_ha, (int, float))
-                    or not math.isfinite(area_ha)
-                    or area_ha <= 0
-                ):
-                    raise ValueError("Não foi possível calcular uma área válida em hectares.")
+                context = calculate_area_context(geometry)
                 st.session_state.aoi_geometry = geometry
                 st.session_state.aoi_geojson = drawn_geojson
-                st.session_state.aoi_area_ha = area_ha
+                st.session_state.aoi_area_ha = context["area_ha"]
+                st.session_state.aoi_perimeter_km = context["perimeter_km"]
+                st.session_state.aoi_centroid = context["centroid"]
                 clear_analysis_state()
-            st.success(f"Área selecionada: {st.session_state.aoi_area_ha:.2f} ha")
+            lat, lon = st.session_state.aoi_centroid
+            st.success(
+                f"Área selecionada: {st.session_state.aoi_area_ha:.2f} ha  |  "
+                f"Perímetro: {st.session_state.aoi_perimeter_km:.2f} km  |  "
+                f"Centroide: {lat:.4f}, {lon:.4f}"
+            )
         except Exception as error:
             logger.exception("Failed to validate or calculate selected area")
             st.error(str(error))
     elif st.session_state.aoi_geometry is not None:
         area_ha = st.session_state.aoi_area_ha
-        st.success(
-            f"Área selecionada: {area_ha:.2f} ha"
-            if area_ha is not None
-            else "Área selecionada."
-        )
+        perimeter_km = st.session_state.aoi_perimeter_km
+        centroid = st.session_state.aoi_centroid
+        if area_ha is not None and perimeter_km is not None and centroid is not None:
+            lat, lon = centroid
+            st.success(
+                f"Área selecionada: {area_ha:.2f} ha  |  "
+                f"Perímetro: {perimeter_km:.2f} km  |  "
+                f"Centroide: {lat:.4f}, {lon:.4f}"
+            )
+        else:
+            st.success(
+                f"Área selecionada: {area_ha:.2f} ha"
+                if area_ha is not None
+                else "Área selecionada."
+            )
 
 
 def render_results_panels() -> None:
@@ -503,6 +520,7 @@ def main():
                         st.session_state.analysis_results = result["indices"]
                         st.session_state.visible_index = selected_indices[0]
                     else:
+                        st.session_state.visible_index = selected_indices[0]
                         st.session_state.analysis_results = {st.session_state.visible_index: result}
                     st.session_state.analysis_map_center = (
                         result.get("map_center") or st.session_state.location_center
