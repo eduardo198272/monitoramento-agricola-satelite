@@ -34,8 +34,13 @@ def make_geometry(area_ha=12.5):
 
 
 @pytest.fixture
-def app():
-    app = AppTest.from_file("src/app/main.py")
+def app(monkeypatch):
+    """Run the app with its external and map integrations isolated."""
+    monkeypatch.setattr(main_module, "init_earth_engine", lambda: (True, None))
+    monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+    monkeypatch.setattr(main_module, "st_folium", lambda *args, **kwargs: {})
+
+    app = AppTest.from_function(app_script)
     app.run()
     return app
 
@@ -958,6 +963,102 @@ class TestApplicationFlow:
 
         assert function_app.session_state["location_result"] == location
         assert any("Localidade encontrada" in success.value for success in function_app.success)
+
+
+class TestHeaderBar:
+    def test_header_shows_product_identity(self, function_app):
+        assert function_app.title[0].value == "Monitoramento Agrícola"
+        assert any("satélite" in c.value.lower() for c in function_app.caption)
+
+    def test_header_shows_earth_engine_status_when_connected(self, function_app):
+        assert any("Earth Engine conectado" in s.value for s in function_app.success)
+
+    def test_header_shows_earth_engine_error_when_disconnected(self, monkeypatch):
+        mock_init = MagicMock(return_value=(False, "fail"))
+        monkeypatch.setattr(main_module, "init_earth_engine", mock_init)
+        monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+        monkeypatch.setattr(main_module, "st_folium", lambda *args, **kwargs: {})
+        app = AppTest.from_function(app_script)
+        app.run()
+        assert any("Earth Engine indisponível" in e.value for e in app.error)
+        assert app.title[0].value == "Monitoramento Agrícola"
+
+
+class TestControlsBar:
+    def test_controls_bar_has_search_input_and_button(self, function_app):
+        search_input = next(t for t in function_app.text_input if t.label == "Localidade")
+        search_btn = next(b for b in function_app.button if b.label == "🔍 Pesquisar")
+        assert search_input is not None
+        assert search_btn is not None
+
+    def test_controls_bar_has_start_and_end_date_inputs(self, function_app):
+        date_inputs = function_app.date_input
+        assert len(date_inputs) >= 2
+        labels = [d.label for d in date_inputs]
+        assert "Data inicial" in labels
+        assert "Data final" in labels
+
+    def test_controls_bar_has_horizontal_index_radio(self, function_app):
+        radio = next(r for r in function_app.radio if r.label == "Índice")
+        assert radio.options == ["Todos", "NDVI", "NDWI", "NDMI"]
+
+    def test_controls_bar_has_analyze_button(self, function_app):
+        btn = next(b for b in function_app.button if b.label == "Analisar área")
+        assert btn is not None
+        assert btn.disabled is True
+
+    def test_controls_bar_date_validation_inline(self, function_app):
+        start = next(d for d in function_app.date_input if d.label == "Data inicial")
+        end = next(d for d in function_app.date_input if d.label == "Data final")
+        start.set_value("2026-12-31").run()
+        end.set_value("2026-01-01").run()
+        assert any("Data final não pode ser anterior" in e.value for e in function_app.error)
+        analyze_btn = next(b for b in function_app.button if b.label == "Analisar área")
+        assert analyze_btn.disabled is True
+
+    def test_controls_bar_enables_analyze_when_area_and_dates_valid(self, function_app):
+        function_app.session_state["aoi_geometry"] = make_geometry()
+        function_app.run()
+        analyze_btn = next(b for b in function_app.button if b.label == "Analisar área")
+        assert analyze_btn.disabled is False
+
+    def test_index_selection_updates_mode_and_selected_indices(self, function_app):
+        radio = next(r for r in function_app.radio if r.label == "Índice")
+        radio.set_value("Todos").run()
+        assert function_app.session_state["analysis_mode"] == "multi"
+        assert function_app.session_state["selected_indices"] == ["NDVI", "NDWI", "NDMI"]
+        radio.set_value("NDWI").run()
+        assert function_app.session_state["analysis_mode"] == "single"
+        assert function_app.session_state["selected_indices"] == ["NDWI"]
+
+
+class TestLayoutOrder:
+    def test_header_renders_before_controls_bar(self, function_app):
+        # Check that title exists
+        titles = function_app.get("title")
+        assert any("Monitoramento Agrícola" in el.value for el in titles)
+        # Check that search input exists
+        search_inputs = function_app.get("text_input")
+        assert any(el.label == "Localidade" for el in search_inputs)
+
+    def test_controls_bar_renders_before_map(self, function_app):
+        search_idx = None
+        map_idx = None
+        for i, el in enumerate(function_app.get("text_input")):
+            if el.label == "Localidade":
+                search_idx = i
+                break
+        for i, el in enumerate(function_app.get("markdown")):
+            if "st_folium" in str(type(el)) or "folium" in str(type(el)).lower():
+                map_idx = i
+                break
+        if search_idx is not None and map_idx is not None:
+            assert search_idx < map_idx
+
+    def test_results_panels_render_only_after_success(self, function_app):
+        assert not any("Série Temporal" in s.value for s in function_app.subheader)
+        assert not any("Anomalias" in s.value for s in function_app.subheader)
+        assert not any("Dados Climáticos" in s.value for s in function_app.subheader)
 
 
 class TestPresentation:
