@@ -30,7 +30,9 @@ class TestCreateBaseMap:
 
         result = create_base_map(center=[-20.0, -45.0], zoom=12)
 
-        mock_geemap.Map.assert_called_once_with(center=[-20.0, -45.0], zoom=12)
+        mock_geemap.Map.assert_called_once_with(
+            center=[-20.0, -45.0], zoom=12, basemap="Esri.WorldImagery"
+        )
         mock_map.add_layer_control.assert_called_once()
         assert result == mock_map
         assert result == mock_map
@@ -42,7 +44,9 @@ class TestCreateBaseMap:
 
         result = create_base_map()
 
-        mock_geemap.Map.assert_called_once_with(center=DEFAULT_CENTER, zoom=DEFAULT_ZOOM)
+        mock_geemap.Map.assert_called_once_with(
+            center=DEFAULT_CENTER, zoom=DEFAULT_ZOOM, basemap="Esri.WorldImagery"
+        )
         assert result == mock_map
 
     @patch("src.app.maps.geemap")
@@ -52,7 +56,9 @@ class TestCreateBaseMap:
 
         result = create_base_map(center=None, zoom=DEFAULT_ZOOM)
 
-        mock_geemap.Map.assert_called_once_with(center=DEFAULT_CENTER, zoom=DEFAULT_ZOOM)
+        mock_geemap.Map.assert_called_once_with(
+            center=DEFAULT_CENTER, zoom=DEFAULT_ZOOM, basemap="Esri.WorldImagery"
+        )
         assert result == mock_map
 
     def test_create_base_map_invalid_zoom_too_low(self):

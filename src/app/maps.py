@@ -98,7 +98,7 @@ def create_base_map(center: list = None, zoom: int = DEFAULT_ZOOM) -> geemap.Map
     if not isinstance(zoom, int) or zoom < 1 or zoom > 20:
         raise ValueError("zoom deve ser inteiro entre 1 e 20")
 
-    m = geemap.Map(center=center, zoom=zoom)
+    m = geemap.Map(center=center, zoom=zoom, basemap="Esri.WorldImagery")
     m.add_layer_control()
     return m
 
