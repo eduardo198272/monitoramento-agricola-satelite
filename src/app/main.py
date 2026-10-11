@@ -199,40 +199,104 @@ def display_analysis_details(
         st.info("Dados climáticos indisponíveis para este período.")
 
 
-def main():
-    st.set_page_config(
-        page_title="Monitoramento Agrícola por Imagens de Satélite",
-        layout="wide"
+def render_header_bar() -> None:
+    """Render compact header bar: identity | EE status | auxiliary actions."""
+    col_identity, col_status, col_actions = st.columns([3, 2, 1])
+
+    with col_identity:
+        st.title("Monitoramento Agrícola")
+        st.caption(
+            "Analise a condição da vegetação usando imagens de satélite e dados climáticos."
+        )
+
+    with col_status:
+        ee_ok, _ = init_earth_engine()
+        if ee_ok:
+            st.success("Earth Engine conectado", icon="✅")
+        else:
+            st.error("Earth Engine indisponível", icon="❌")
+            st.info(
+                "Verifique as credenciais e a configuração da variável EE_PROJECT_ID. "
+                "Tente novamente quando o serviço estiver disponível."
+            )
+            st.stop()
+
+    with col_actions:
+        with st.popover("⋮", use_container_width=True):
+            st.markdown("**Ações**")
+            try:
+                st.page_link("pages/about.py", label="Sobre", icon="ℹ️")
+            except Exception:
+                pass
+            try:
+                st.page_link("pages/help.py", label="Ajuda", icon="❓")
+            except Exception:
+                pass
+
+
+def render_controls_bar() -> tuple[bool, bool]:
+    """Render compact controls bar: search | period | index | analyze.
+    Returns (analyze_clicked, analysis_disabled).
+    """
+    col_search, col_period_start, col_period_end, col_index, col_analyze = st.columns(
+        [2.5, 1.2, 1.2, 1.8, 1.3]
     )
-    load_styles()
 
-    st.title("Monitoramento Agrícola")
-    st.caption("Analise a condição da vegetação usando imagens de satélite e dados climáticos.")
+    with col_search:
+        search_col, btn_col = st.columns([4, 1])
+        with search_col:
+            location_query = st.text_input(
+                "Localidade",
+                placeholder="Cidade, município...",
+                label_visibility="collapsed",
+                key="location_query",
+            )
+        with btn_col:
+            search = st.button("🔍 Pesquisar", use_container_width=True)
 
-    initialize_ui_state()
-
-    ee_ok, _ = init_earth_engine()
-    if not ee_ok:
-        st.error("Google Earth Engine indisponível. Não é possível executar análises agora.")
-        st.info(
-            "Verifique as credenciais e a configuração da variável EE_PROJECT_ID. "
-            "Tente novamente quando o serviço estiver disponível."
+    with col_period_start:
+        start_date = st.date_input(
+            "Data inicial",
+            value=DEFAULT_START,
+            key="analysis_start_date",
+            format="DD/MM/YYYY",
+            label_visibility="collapsed",
         )
-        return
 
-    st.success("Status do serviço: Earth Engine conectado")
-
-    st.subheader("Localizar área")
-    search_col, search_button_col = st.columns([4, 1])
-    with search_col:
-        location_query = st.text_input(
-            "Pesquisar localidade",
-            key="location_query",
-            placeholder="Cidade, município ou endereço",
+    with col_period_end:
+        end_date = st.date_input(
+            "Data final",
+            value=DEFAULT_END,
+            key="analysis_end_date",
+            format="DD/MM/YYYY",
+            label_visibility="collapsed",
         )
-    with search_button_col:
-        st.write("")
-        search = st.button("Pesquisar")
+
+    with col_index:
+        selected_index = st.radio(
+            "Índice",
+            options=INDEX_SELECTION_OPTIONS,
+            horizontal=True,
+            key="index_selection",
+            label_visibility="collapsed",
+        )
+        st.session_state.analysis_mode = "multi" if selected_index == "Todos" else "single"
+        st.session_state.selected_indices = (
+            SUPPORTED_INDICES.copy()
+            if selected_index == "Todos"
+            else [selected_index]
+        )
+
+    with col_analyze:
+        analysis_disabled = (
+            st.session_state.aoi_geometry is None or end_date < start_date
+        )
+        analyze = st.button(
+            "Analisar área",
+            type="primary",
+            use_container_width=True,
+            disabled=analysis_disabled,
+        )
 
     if search:
         if not location_query.strip():
@@ -266,6 +330,14 @@ def main():
             f"{st.session_state.location_result['display_name']}"
         )
 
+    if end_date < start_date:
+        st.error("Data final não pode ser anterior à data inicial")
+
+    return analyze, analysis_disabled
+
+
+def render_selection_map_area() -> None:
+    """Render the selection map and handle area drawing/editing."""
     st.subheader("Área de interesse")
     st.info("Use a ferramenta de polígono no mapa para desenhar a área de interesse.")
     selection_map = create_selection_map(
@@ -318,54 +390,72 @@ def main():
             else "Área selecionada."
         )
 
-    with st.container(border=True):
-        st.caption("Período da análise")
-        date_start_col, date_end_col = st.columns(2)
-        with date_start_col:
-            start_date = st.date_input(
-                "Data inicial",
-                value=DEFAULT_START,
-                key="analysis_start_date",
-                format="DD/MM/YYYY",
-            )
-        with date_end_col:
-            end_date = st.date_input(
-                "Data final",
-                value=DEFAULT_END,
-                key="analysis_end_date",
-                format="DD/MM/YYYY",
-            )
 
-    st.subheader("Configurar análise")
-    selected_index = st.radio(
-        "Índice",
-        options=INDEX_SELECTION_OPTIONS,
-        index=INDEX_SELECTION_OPTIONS.index("NDVI"),
+def render_results_panels() -> None:
+    """Render results panels after successful analysis."""
+    available_indices = list(st.session_state.analysis_results)
+    if st.session_state.visible_index not in available_indices:
+        st.session_state.visible_index = available_indices[0]
+    if st.session_state.get("visible_index_control") not in available_indices:
+        st.session_state.visible_index_control = st.session_state.visible_index
+
+    st.radio(
+        "Índice no mapa",
+        options=available_indices,
         horizontal=True,
-        key="index_selection",
+        key="visible_index_control",
     )
-    st.session_state.analysis_mode = "multi" if selected_index == "Todos" else "single"
-    st.session_state.selected_indices = (
-        SUPPORTED_INDICES.copy()
-        if selected_index == "Todos"
-        else [selected_index]
+    st.session_state.visible_index = st.session_state.visible_index_control
+    visible_index = st.session_state.visible_index
+    res = st.session_state.analysis_results[visible_index]
+
+    st.session_state.analysis_map = create_thematic_map(
+        res["index_map"],
+        visible_index,
+        center=st.session_state.analysis_map_center,
+        zoom=12,
+        geojson=st.session_state.aoi_geojson,
     )
-    index_name = (
-        selected_index
-        if selected_index in SUPPORTED_INDICES
-        else st.session_state.visible_index
+    display_map(st.session_state.analysis_map)
+
+    if len(available_indices) > 1:
+        display_multi_index_overview(
+            st.session_state.analysis_results,
+            st.session_state.analysis_metadata.get("image_count"),
+        )
+
+    display_summary(
+        visible_index,
+        res["mean_value"],
+        res.get("area_ha", st.session_state.analysis_metadata.get("area_ha")),
+        compute_trend(res["time_series"]) if res["time_series"] else "estável",
+        res.get("alert"),
     )
 
-    if end_date < start_date:
-        st.error("Data final não pode ser anterior à data inicial")
+    climate_plot = res.get("climate_plot")
+    if climate_plot is None:
+        climate_plot = st.session_state.analysis_metadata.get("climate_plot")
+    display_analysis_details(visible_index, res, climate_plot)
 
-    analysis_disabled = (
-        st.session_state.aoi_geometry is None or end_date < start_date
+
+def main():
+    st.set_page_config(
+        page_title="Monitoramento Agrícola por Imagens de Satélite",
+        layout="wide",
     )
-    analyze = st.button("Analisar área", disabled=analysis_disabled)
+    load_styles()
 
-    if analyze and end_date >= start_date:
+    initialize_ui_state()
+
+    render_header_bar()
+    analyze, analysis_disabled = render_controls_bar()
+
+    render_selection_map_area()
+
+    if analyze and not analysis_disabled:
         geometry = st.session_state.aoi_geometry
+        start_date = st.session_state.analysis_start_date
+        end_date = st.session_state.analysis_end_date
 
         if geometry is None:
             st.error("Desenhe uma área no mapa antes de analisar")
@@ -413,8 +503,7 @@ def main():
                         st.session_state.analysis_results = result["indices"]
                         st.session_state.visible_index = selected_indices[0]
                     else:
-                        st.session_state.analysis_results = {index_name: result}
-                        st.session_state.visible_index = index_name
+                        st.session_state.analysis_results = {st.session_state.visible_index: result}
                     st.session_state.analysis_map_center = (
                         result.get("map_center") or st.session_state.location_center
                     )
@@ -433,46 +522,7 @@ def main():
     elif st.session_state.analysis_status == "error":
         st.error(st.session_state.analysis_error)
     elif st.session_state.analysis_status == "success" and st.session_state.analysis_results:
-        available_indices = list(st.session_state.analysis_results)
-        if st.session_state.visible_index not in available_indices:
-            st.session_state.visible_index = available_indices[0]
-        if st.session_state.get("visible_index_control") not in available_indices:
-            st.session_state.visible_index_control = st.session_state.visible_index
-
-        st.radio(
-            "Índice no mapa",
-            options=available_indices,
-            horizontal=True,
-            key="visible_index_control",
-        )
-        st.session_state.visible_index = st.session_state.visible_index_control
-        visible_index = st.session_state.visible_index
-        res = st.session_state.analysis_results[visible_index]
-        st.session_state.analysis_map = create_thematic_map(
-            res["index_map"],
-            visible_index,
-            center=st.session_state.analysis_map_center,
-            zoom=12,
-            geojson=st.session_state.aoi_geojson,
-        )
-        display_map(st.session_state.analysis_map)
-        if len(available_indices) > 1:
-            display_multi_index_overview(
-                st.session_state.analysis_results,
-                st.session_state.analysis_metadata.get("image_count"),
-            )
-        display_summary(
-            visible_index,
-            res["mean_value"],
-            res.get("area_ha", st.session_state.analysis_metadata.get("area_ha")),
-            compute_trend(res["time_series"]) if res["time_series"] else "estável",
-            res["alert"]
-        )
-
-        climate_plot = res.get("climate_plot")
-        if climate_plot is None:
-            climate_plot = st.session_state.analysis_metadata.get("climate_plot")
-        display_analysis_details(visible_index, res, climate_plot)
+        render_results_panels()
 
 
 if __name__ == "__main__":
