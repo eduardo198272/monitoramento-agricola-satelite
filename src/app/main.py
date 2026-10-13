@@ -117,9 +117,9 @@ def display_map(map_obj) -> None:
 def display_summary(
     index_name: str,
     mean_value: float,
-    area_ha: float,
+    area_value: float,
+    area_unit: str,
     trend: str,
-    alert: str = None
 ) -> None:
     col1, col2, col3, col4 = st.columns(4)
 
@@ -128,7 +128,7 @@ def display_summary(
     with col2:
         st.metric(label="Valor Médio", value=f"{mean_value:.4f}")
     with col3:
-        st.metric(label="Área (ha)", value=f"{area_ha:.2f}")
+        st.metric(label=f"Área ({area_unit})", value=f"{area_value:.2f}")
 
     trend_colors = {"crescente": "green", "estável": "blue", "decrescente": "red"}
     trend_color = trend_colors.get(trend.lower(), "gray")
@@ -136,9 +136,10 @@ def display_summary(
     with col4:
         st.markdown(f"**Tendência:** :{trend_color}[{trend}]")
 
+
+def display_anomaly_alert(alert: str | None) -> None:
     if alert:
-        alert_color = "red" if alert.lower() != "normal" else "green"
-        st.markdown(f"**Alerta:** :{alert_color}[{alert}]")
+        st.warning(alert)
 
 
 def display_multi_index_overview(
@@ -451,6 +452,16 @@ def render_results_panels() -> None:
     visible_index = st.session_state.visible_index
     res = st.session_state.analysis_results[visible_index]
 
+    display_summary(
+        visible_index,
+        res["mean_value"],
+        res.get("area_ha", st.session_state.analysis_metadata.get("area_ha")),
+        "ha",
+        compute_trend(res["time_series"]) if res["time_series"] else "estável",
+    )
+
+    display_anomaly_alert(res.get("alert"))
+
     st.session_state.analysis_map = create_thematic_map(
         res["index_map"],
         visible_index,
@@ -465,14 +476,6 @@ def render_results_panels() -> None:
             st.session_state.analysis_results,
             st.session_state.analysis_metadata.get("image_count"),
         )
-
-    display_summary(
-        visible_index,
-        res["mean_value"],
-        res.get("area_ha", st.session_state.analysis_metadata.get("area_ha")),
-        compute_trend(res["time_series"]) if res["time_series"] else "estável",
-        res.get("alert"),
-    )
 
     climate_plot = res.get("climate_plot")
     if climate_plot is None:
