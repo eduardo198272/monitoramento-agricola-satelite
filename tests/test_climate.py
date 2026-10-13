@@ -7,6 +7,7 @@ from src.app.climate import (
     fetch_climate_data,
     plot_climate_data,
     DEFAULT_PARAMETERS,
+    summarize_climate_data,
 )
 
 
@@ -251,3 +252,154 @@ class TestPlotClimateData:
         assert fig is not None
         assert len(fig.data) == 1
         assert fig.data[0].type == "bar"
+
+
+class TestSummarizeClimateData:
+    def test_summarize_climate_data_complete_dataframe(self):
+        climate_df = pd.DataFrame({
+            "date": ["2024-01-01", "2024-01-02", "2024-01-03"],
+            "precipitation": [5.0, 2.0, 3.5],
+            "temperature": [25.0, 26.5, 27.0],
+            "solar_radiation": [6.0, 5.5, 7.0],  # kWh/m²/dia
+        })
+
+        result = summarize_climate_data(climate_df)
+
+        assert result["total_precipitation_mm"] == pytest.approx(10.5)
+        assert result["mean_temperature_c"] == pytest.approx(26.166666666666668)
+        assert result["mean_solar_radiation_mj_m2_day"] == pytest.approx(22.2)  # (6.0+5.5+7.0)/3 * 3.6
+
+    def test_summarize_climate_data_with_none_values(self):
+        climate_df = pd.DataFrame({
+            "date": ["2024-01-01", "2024-01-02", "2024-01-03"],
+            "precipitation": [5.0, None, 3.5],
+            "temperature": [25.0, 26.5, None],
+            "solar_radiation": [6.0, None, 7.0],
+        })
+
+        result = summarize_climate_data(climate_df)
+
+        assert result["total_precipitation_mm"] == pytest.approx(8.5)
+        assert result["mean_temperature_c"] == pytest.approx(25.75)
+        assert result["mean_solar_radiation_mj_m2_day"] == pytest.approx(23.4)  # (6.0+7.0)/2 * 3.6
+
+    def test_summarize_climate_data_with_nan_values(self):
+        climate_df = pd.DataFrame({
+            "date": ["2024-01-01", "2024-01-02", "2024-01-03"],
+            "precipitation": [5.0, float("nan"), 3.5],
+            "temperature": [25.0, float("nan"), 27.0],
+            "solar_radiation": [6.0, float("nan"), 7.0],
+        })
+
+        result = summarize_climate_data(climate_df)
+
+        assert result["total_precipitation_mm"] == pytest.approx(8.5)
+        assert result["mean_temperature_c"] == pytest.approx(26.0)
+        assert result["mean_solar_radiation_mj_m2_day"] == pytest.approx(23.4)
+
+    def test_summarize_climate_data_empty_dataframe(self):
+        climate_df = pd.DataFrame()
+
+        result = summarize_climate_data(climate_df)
+
+        assert result == {
+            "total_precipitation_mm": None,
+            "mean_temperature_c": None,
+            "mean_solar_radiation_mj_m2_day": None,
+        }
+
+    def test_summarize_climate_data_missing_precipitation_column(self):
+        climate_df = pd.DataFrame({
+            "date": ["2024-01-01", "2024-01-02"],
+            "temperature": [25.0, 26.5],
+            "solar_radiation": [6.0, 5.5],
+        })
+
+        result = summarize_climate_data(climate_df)
+
+        assert result["total_precipitation_mm"] is None
+        assert result["mean_temperature_c"] == pytest.approx(25.75)
+        assert result["mean_solar_radiation_mj_m2_day"] == pytest.approx(20.7)  # (6.0+5.5)/2 * 3.6
+
+    def test_summarize_climate_data_missing_temperature_column(self):
+        climate_df = pd.DataFrame({
+            "date": ["2024-01-01", "2024-01-02"],
+            "precipitation": [5.0, 3.5],
+            "solar_radiation": [6.0, 5.5],
+        })
+
+        result = summarize_climate_data(climate_df)
+
+        assert result["total_precipitation_mm"] == pytest.approx(8.5)
+        assert result["mean_temperature_c"] is None
+        assert result["mean_solar_radiation_mj_m2_day"] == pytest.approx(20.7)
+
+    def test_summarize_climate_data_missing_solar_radiation_column(self):
+        climate_df = pd.DataFrame({
+            "date": ["2024-01-01", "2024-01-02"],
+            "precipitation": [5.0, 3.5],
+            "temperature": [25.0, 26.5],
+        })
+
+        result = summarize_climate_data(climate_df)
+
+        assert result["total_precipitation_mm"] == pytest.approx(8.5)
+        assert result["mean_temperature_c"] == pytest.approx(25.75)
+        assert result["mean_solar_radiation_mj_m2_day"] is None
+
+    def test_summarize_climate_data_all_none_values(self):
+        climate_df = pd.DataFrame({
+            "date": ["2024-01-01", "2024-01-02"],
+            "precipitation": [None, None],
+            "temperature": [None, None],
+            "solar_radiation": [None, None],
+        })
+
+        result = summarize_climate_data(climate_df)
+
+        assert result == {
+            "total_precipitation_mm": None,
+            "mean_temperature_c": None,
+            "mean_solar_radiation_mj_m2_day": None,
+        }
+
+    def test_summarize_climate_data_does_not_mutate_input(self):
+        original_df = pd.DataFrame({
+            "date": ["2024-01-01", "2024-01-02"],
+            "precipitation": [5.0, 3.5],
+            "temperature": [25.0, 26.5],
+            "solar_radiation": [6.0, 5.5],
+        })
+        original_copy = original_df.copy()
+
+        summarize_climate_data(original_df)
+
+        pd.testing.assert_frame_equal(original_df, original_copy)
+
+    def test_summarize_climate_data_single_row(self):
+        climate_df = pd.DataFrame({
+            "date": ["2024-01-01"],
+            "precipitation": [10.0],
+            "temperature": [30.0],
+            "solar_radiation": [8.0],
+        })
+
+        result = summarize_climate_data(climate_df)
+
+        assert result["total_precipitation_mm"] == pytest.approx(10.0)
+        assert result["mean_temperature_c"] == pytest.approx(30.0)
+        assert result["mean_solar_radiation_mj_m2_day"] == pytest.approx(28.8)  # 8.0 * 3.6
+
+    def test_summarize_climate_data_zero_values(self):
+        climate_df = pd.DataFrame({
+            "date": ["2024-01-01", "2024-01-02"],
+            "precipitation": [0.0, 0.0],
+            "temperature": [0.0, 0.0],
+            "solar_radiation": [0.0, 0.0],
+        })
+
+        result = summarize_climate_data(climate_df)
+
+        assert result["total_precipitation_mm"] == pytest.approx(0.0)
+        assert result["mean_temperature_c"] == pytest.approx(0.0)
+        assert result["mean_solar_radiation_mj_m2_day"] == pytest.approx(0.0)

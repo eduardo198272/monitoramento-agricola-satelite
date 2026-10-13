@@ -131,3 +131,50 @@ def plot_climate_data(climate_df: pd.DataFrame) -> go.Figure:
     )
 
     return fig
+
+
+def summarize_climate_data(climate_df: pd.DataFrame) -> dict:
+    """
+    Retorna resumo agregado dos dados climáticos.
+
+    Args:
+        climate_df: DataFrame com colunas opcionais 'precipitation', 'temperature',
+                    'solar_radiation' (em kWh/m²/dia).
+
+    Returns:
+        Dicionário com chaves:
+        - total_precipitation_mm: soma de precipitação válida (mm)
+        - mean_temperature_c: média de temperatura válida (°C)
+        - mean_solar_radiation_mj_m2_day: média de radiação válida convertida para MJ/m²/dia
+          (NASA POWER entrega em kWh/m²/dia, fator 3.6).
+        Valores ausentes ou sem dados válidos resultam em None.
+    """
+    if climate_df is None or climate_df.empty:
+        return {
+            "total_precipitation_mm": None,
+            "mean_temperature_c": None,
+            "mean_solar_radiation_mj_m2_day": None,
+        }
+
+    result = {
+        "total_precipitation_mm": None,
+        "mean_temperature_c": None,
+        "mean_solar_radiation_mj_m2_day": None,
+    }
+
+    if "precipitation" in climate_df.columns:
+        valid_precip = climate_df["precipitation"].dropna()
+        if not valid_precip.empty:
+            result["total_precipitation_mm"] = float(valid_precip.sum())
+
+    if "temperature" in climate_df.columns:
+        valid_temp = climate_df["temperature"].dropna()
+        if not valid_temp.empty:
+            result["mean_temperature_c"] = float(valid_temp.mean())
+
+    if "solar_radiation" in climate_df.columns:
+        valid_rad = climate_df["solar_radiation"].dropna()
+        if not valid_rad.empty:
+            result["mean_solar_radiation_mj_m2_day"] = float(valid_rad.mean() * 3.6)
+
+    return result
