@@ -14,7 +14,7 @@ from src.app.earth_engine import (
 )
 from src.app.time_series import compute_time_series, plot_time_series
 from src.app.anomalies import compute_trend, detect_anomalies, generate_alert
-from src.app.climate import fetch_climate_data, plot_climate_data
+from src.app.climate import fetch_climate_data, plot_climate_data, summarize_climate_data
 from src.app.utils import normalize_date
 
 logger = logging.getLogger(__name__)
@@ -26,7 +26,7 @@ def _fetch_climate_context(
     end_date: str,
     log_message: str,
     log_context: dict,
-) -> tuple[pd.DataFrame | None, go.Figure | None, list[float] | None]:
+) -> tuple[pd.DataFrame | None, go.Figure | None, dict | None, list[float] | None]:
     """Fetch shared climate data and return its centroid for map positioning."""
     map_center = None
     try:
@@ -38,14 +38,23 @@ def _fetch_climate_context(
         )
     except Exception:
         logger.warning(log_message, exc_info=True, extra=log_context)
-        return None, None, map_center
+        return None, None, None, map_center
 
     climate_plot = (
         plot_climate_data(climate_data)
         if climate_data is not None and not climate_data.empty
         else None
     )
-    return climate_data, climate_plot, map_center
+    climate_summary = (
+        summarize_climate_data(climate_data)
+        if climate_data is not None and not climate_data.empty
+        else {
+            "total_precipitation_mm": None,
+            "mean_temperature_c": None,
+            "mean_solar_radiation_mj_m2_day": None,
+        }
+    )
+    return climate_data, climate_plot, climate_summary, map_center
 
 
 def run_analysis(
@@ -106,7 +115,7 @@ def run_analysis(
         anomalies = detect_anomalies(time_series, window_size=3, std_threshold=1.0)
         alert = generate_alert(anomalies, index_name)
 
-        climate_df, climate_plot, map_center = _fetch_climate_context(
+        climate_df, climate_plot, climate_summary, map_center = _fetch_climate_context(
             geometry,
             start_date,
             end_date,
@@ -124,6 +133,7 @@ def run_analysis(
             "alert": alert,
             "climate_data": climate_df,
             "climate_plot": climate_plot,
+            "climate_summary": climate_summary,
             "mean_value": mean_value,
             "area_ha": area_ha,
             "map_center": map_center,
@@ -189,7 +199,7 @@ def run_multi_analysis(
         if area_ha is None:
             area_ha = geometry.area().divide(10000).getInfo()
 
-        climate_data, climate_plot, map_center = _fetch_climate_context(
+        climate_data, climate_plot, climate_summary, map_center = _fetch_climate_context(
             geometry,
             start_date,
             end_date,
@@ -236,6 +246,7 @@ def run_multi_analysis(
             "image_count": image_count,
             "climate_data": climate_data,
             "climate_plot": climate_plot,
+            "climate_summary": climate_summary,
             "map_center": map_center,
         }
     except Exception as e:

@@ -203,6 +203,31 @@ def display_analysis_details(
     else:
         st.info("Dados climáticos indisponíveis para este período.")
 
+    climate_summary = result.get("climate_summary")
+    if climate_summary is not None:
+        has_summary = any(v is not None for v in climate_summary.values())
+        if has_summary:
+            st.markdown("**Resumo Climático**")
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                precip = climate_summary.get("total_precipitation_mm")
+                if precip is not None:
+                    st.metric("Precipitação total", f"{precip:.1f} mm")
+                else:
+                    st.metric("Precipitação total", "Indisponível")
+            with col2:
+                temp = climate_summary.get("mean_temperature_c")
+                if temp is not None:
+                    st.metric("Temperatura média", f"{temp:.1f} °C")
+                else:
+                    st.metric("Temperatura média", "Indisponível")
+            with col3:
+                rad = climate_summary.get("mean_solar_radiation_mj_m2_day")
+                if rad is not None:
+                    st.metric("Radiação solar média", f"{rad:.1f} MJ/m²/dia")
+                else:
+                    st.metric("Radiação solar média", "Indisponível")
+
 
 def render_header_bar() -> None:
     """Render compact header bar: identity | EE status | auxiliary actions."""
