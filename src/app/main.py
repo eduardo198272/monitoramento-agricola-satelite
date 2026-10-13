@@ -233,8 +233,8 @@ def display_analysis_details(
 
 
 def render_header_bar() -> None:
-    """Render compact header bar: identity | EE status | auxiliary actions."""
-    col_identity, col_status, col_actions = st.columns([3, 2, 1])
+    """Render the compact header with product identity and Earth Engine status."""
+    col_identity, col_status = st.columns([3, 2])
 
     with col_identity:
         st.title("Monitoramento Agrícola")
@@ -253,18 +253,6 @@ def render_header_bar() -> None:
                 "Tente novamente quando o serviço estiver disponível."
             )
             st.stop()
-
-    with col_actions:
-        with st.popover("⋮", use_container_width=True):
-            st.markdown("**Ações**")
-            try:
-                st.page_link("pages/about.py", label="Sobre", icon="ℹ️")
-            except Exception:
-                pass
-            try:
-                st.page_link("pages/help.py", label="Ajuda", icon="❓")
-            except Exception:
-                pass
 
 
 def render_controls_bar() -> tuple[bool, bool]:
