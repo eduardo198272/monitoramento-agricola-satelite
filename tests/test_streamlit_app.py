@@ -1087,6 +1087,12 @@ class TestHeaderBar:
     def test_header_shows_earth_engine_status_when_connected(self, function_app):
         assert any("Earth Engine conectado" in s.value for s in function_app.success)
 
+    def test_header_does_not_show_unavailable_actions_menu(self, function_app):
+        assert not any(
+            "expand_more" in button.label or "⋮" in button.label
+            for button in function_app.button
+        )
+
     def test_header_shows_earth_engine_error_when_disconnected(self, monkeypatch):
         mock_init = MagicMock(return_value=(False, "fail"))
         monkeypatch.setattr(main_module, "init_earth_engine", mock_init)
