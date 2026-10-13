@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -1180,7 +1181,23 @@ class TestPresentation:
 
         display_map(map_obj)
 
-        map_obj.to_streamlit.assert_called_once_with(height=600)
+        map_obj.to_streamlit.assert_called_once_with(height=main_module.MAP_HEIGHT)
+
+    def test_selection_map_keeps_expected_height_after_rerun(self):
+        with patch("src.app.main.st") as mock_st:
+            mock_st.session_state = SimpleNamespace(
+                location_center=[0, 0],
+                location_zoom=5,
+                aoi_geojson=None,
+                aoi_geometry=None,
+            )
+            with patch("src.app.main.create_selection_map") as create_map:
+                with patch("src.app.main.st_folium", return_value={}) as folium:
+                    main_module.render_selection_map_area()
+
+        create_map.assert_called_once_with(center=[0, 0], zoom=5, geojson=None)
+        assert folium.call_args.kwargs["height"] == main_module.MAP_HEIGHT
+        assert folium.call_args.kwargs["key"] == "area_selection_map"
 
     def test_multi_index_overview_marks_missing_metrics_as_unavailable(self):
         columns = [MagicMock()]

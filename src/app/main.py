@@ -24,6 +24,8 @@ from src.app.pipeline import run_analysis, run_multi_analysis
 
 logger = logging.getLogger(__name__)
 
+MAP_HEIGHT = 520
+
 DEFAULT_START = date.today() - timedelta(days=365)
 DEFAULT_END = date.today()
 SUPPORTED_INDICES = ["NDVI", "NDWI", "NDMI"]
@@ -111,7 +113,7 @@ def init_earth_engine():
 
 
 def display_map(map_obj) -> None:
-    map_obj.to_streamlit(height=600)
+    map_obj.to_streamlit(height=MAP_HEIGHT)
 
 
 def display_summary(
@@ -380,7 +382,7 @@ def render_selection_map_area() -> None:
     map_data = st_folium(
         selection_map,
         key="area_selection_map",
-        height=600,
+        height=MAP_HEIGHT,
         returned_objects=["last_active_drawing", "all_drawings"],
         use_container_width=True,
     )

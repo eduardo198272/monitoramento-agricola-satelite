@@ -75,6 +75,15 @@ body,
     max-width: 100%;
 }
 
+[data-testid="stCustomComponentV1"] {
+    min-height: 520px;
+}
+
+[data-testid="stCustomComponentV1"] iframe {
+    height: 520px !important;
+    min-height: 520px !important;
+}
+
 @media (max-width: 768px) {
     [data-testid="stHorizontalBlock"] {
         flex-wrap: wrap;
@@ -101,6 +110,15 @@ body,
         width: 100%;
         overflow-x: auto;
     }
+
+    [data-testid="stCustomComponentV1"] iframe {
+        height: 440px !important;
+        min-height: 440px !important;
+    }
+
+    [data-testid="stCustomComponentV1"] {
+        min-height: 440px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -110,9 +128,13 @@ body,
         padding-right: var(--space-sm);
     }
 
-    [data-testid="stCustomComponentV1"],
-    [data-testid="stIFrame"] iframe {
-        height: clamp(22rem, 65vh, 37.5rem) !important;
+    [data-testid="stCustomComponentV1"] iframe {
+        height: 360px !important;
+        min-height: 360px !important;
+    }
+
+    [data-testid="stCustomComponentV1"] {
+        min-height: 360px;
     }
 
     [data-testid="stTextInput"] input,
