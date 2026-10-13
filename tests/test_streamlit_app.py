@@ -11,6 +11,7 @@ from src.app.main import (
     DEFAULT_START,
     UI_STATE_DEFAULTS,
     display_analysis_details,
+    display_anomaly_alert,
     display_map,
     display_multi_index_overview,
     display_summary,
@@ -953,10 +954,9 @@ class TestApplicationFlow:
         assert any("Série Temporal de NDVI" in item.value for item in app.subheader)
         assert any("Anomalias de NDVI" in item.value for item in app.subheader)
         assert any("Dados Climáticos" in item.value for item in app.subheader)
-        rendered_markdown = [item.value for item in app.markdown]
-        assert sum("ALERTA: queda detectada" in item for item in rendered_markdown) == 1
-        assert not any("ALERTA: queda detectada" in item.value for item in app.warning)
-        assert any("2026-01-01: valor 0.5000" in item for item in rendered_markdown)
+        rendered_warnings = [item.value for item in app.warning]
+        assert sum("ALERTA: queda detectada" in item for item in rendered_warnings) == 1
+        assert not any("ALERTA: queda detectada" in item.value for item in app.markdown)
 
     def test_successful_search_survives_rerun(self, function_app, monkeypatch):
         location = {
@@ -1227,7 +1227,7 @@ class TestPresentation:
         with patch("src.app.main.st") as mock_st:
             mock_st.columns.return_value = columns
 
-            display_summary("NDVI", 0.62543, 12.5, trend)
+            display_summary("NDVI", 0.62543, 12.5, "ha", trend)
 
         mock_st.columns.assert_called_once_with(4)
         assert [call.kwargs for call in mock_st.metric.call_args_list] == [
@@ -1239,32 +1239,33 @@ class TestPresentation:
             f"**Tendência:** :{expected_color}[{trend}]"
         )
 
-    @pytest.mark.parametrize(
-        "alert, expected_color",
-        [("normal", "green"), ("ALERTA: queda", "red")],
-    )
-    def test_display_summary_renders_alert_with_semantic_color(
-        self, alert, expected_color
-    ):
+    def test_display_summary_renders_area_with_custom_unit(self):
         columns = [MagicMock() for _ in range(4)]
 
         with patch("src.app.main.st") as mock_st:
             mock_st.columns.return_value = columns
 
-            display_summary("NDVI", 0.5, 10.0, "estável", alert)
+            display_summary("NDVI", 0.5, 25.0, "acres", "estável")
 
-        assert mock_st.markdown.call_args_list == [
-            (("**Tendência:** :blue[estável]",),),
-            ((f"**Alerta:** :{expected_color}[{alert}]",),),
-        ]
+        metric_calls = [call.kwargs for call in mock_st.metric.call_args_list]
+        assert metric_calls[2] == {"label": "Área (acres)", "value": "25.00"}
 
-    def test_display_summary_does_not_render_alert_when_absent(self):
-        columns = [MagicMock() for _ in range(4)]
 
+class TestDisplayAnomalyAlert:
+    def test_display_anomaly_alert_renders_warning(self):
         with patch("src.app.main.st") as mock_st:
-            mock_st.columns.return_value = columns
+            display_anomaly_alert("ALERTA: 2 anomalia(s) detectada(s) no NDVI")
 
-            display_summary("NDVI", 0.5, 10.0, "estável", None)
+        mock_st.warning.assert_called_once_with("ALERTA: 2 anomalia(s) detectada(s) no NDVI")
 
-        assert mock_st.markdown.call_count == 1
-        mock_st.markdown.assert_called_once_with("**Tendência:** :blue[estável]")
+    def test_display_anomaly_alert_does_not_render_when_none(self):
+        with patch("src.app.main.st") as mock_st:
+            display_anomaly_alert(None)
+
+        mock_st.warning.assert_not_called()
+
+    def test_display_anomaly_alert_does_not_render_when_empty(self):
+        with patch("src.app.main.st") as mock_st:
+            display_anomaly_alert("")
+
+        mock_st.warning.assert_not_called()
