@@ -70,10 +70,7 @@ class TestAppStructure:
             "imagens de satélite" in item.value
             for item in app.caption
         )
-        assert any(
-            "Earth Engine conectado" in item.value
-            for item in app.success
-        )
+        assert not any("Earth Engine conectado" in item.value for item in app.success)
 
     def test_area_workspace_shows_drawing_instruction_without_fake_button(self, app):
         assert any(
@@ -94,7 +91,7 @@ class TestWorkspaceControls:
 
     def test_workspace_has_location_search_button(self, app):
         buttons = app.button
-        search_button = next((b for b in buttons if b.label == "🔍 Pesquisar"), None)
+        search_button = next((b for b in buttons if b.label == "🔍"), None)
         assert search_button is not None
 
     def test_workspace_has_date_inputs(self, app):
@@ -139,6 +136,32 @@ class TestWorkspaceControls:
 
         assert app.session_state["analysis_mode"] == expected_mode
         assert app.session_state["selected_indices"] == expected_indices
+
+    def test_switching_analysis_mode_keeps_drawn_area_on_selection_map(
+        self, app, monkeypatch
+    ):
+        selected_geojson = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                                 [-52.0, -28.1], [-52.1, -28.0]]],
+            },
+        }
+        geometry = make_geometry()
+        app.session_state["aoi_geojson"] = selected_geojson
+        app.session_state["aoi_geometry"] = geometry
+        app.session_state["aoi_area_ha"] = 12.5
+        app.session_state["aoi_perimeter_km"] = 5.0
+        app.session_state["aoi_centroid"] = (-28.26, -52.41)
+        create_map = MagicMock()
+        monkeypatch.setattr(main_module, "create_selection_map", create_map)
+
+        next(radio for radio in app.radio if radio.label == "Índice").set_value("Todos").run()
+
+        assert app.session_state["aoi_geojson"] == selected_geojson
+        assert app.session_state["aoi_geometry"] is geometry
+        assert create_map.call_args.kwargs["geojson"] == selected_geojson
 
     def test_workspace_has_analyze_button(self, app):
         buttons = app.button
@@ -325,7 +348,7 @@ class TestApplicationFlow:
         function_app.session_state["aoi_area_ha"] = 12.5
 
         function_app.text_input[0].set_value("Passo Fundo").run()
-        next(button for button in function_app.button if button.label == "🔍 Pesquisar").click().run()
+        next(button for button in function_app.button if button.label == "🔍").click().run()
 
         search.assert_called_once_with("Passo Fundo")
         assert function_app.session_state["location_center"] == [-28.26, -52.41]
@@ -345,7 +368,7 @@ class TestApplicationFlow:
         monkeypatch.setattr(main_module, "search_location", search)
 
         function_app.text_input[0].set_value("Localidade inexistente").run()
-        next(button for button in function_app.button if button.label == "🔍 Pesquisar").click().run()
+        next(button for button in function_app.button if button.label == "🔍").click().run()
 
         search.assert_called_once_with("Localidade inexistente")
         assert any("Localidade não encontrada" in warning.value for warning in function_app.warning)
@@ -368,7 +391,7 @@ class TestApplicationFlow:
         monkeypatch.setattr(main_module, "create_selection_map", create_map)
 
         function_app.text_input[0].set_value("Nova localidade").run()
-        next(button for button in function_app.button if button.label == "🔍 Pesquisar").click().run()
+        next(button for button in function_app.button if button.label == "🔍").click().run()
 
         search.assert_called_once_with("Nova localidade")
         assert any(
@@ -392,7 +415,7 @@ class TestApplicationFlow:
         monkeypatch.setattr(main_module, "search_location", search)
 
         function_app.text_input[0].set_value("   ").run()
-        next(button for button in function_app.button if button.label == "🔍 Pesquisar").click().run()
+        next(button for button in function_app.button if button.label == "🔍").click().run()
 
         search.assert_not_called()
         assert any("Informe uma localidade" in warning.value for warning in function_app.warning)
@@ -970,7 +993,7 @@ class TestApplicationFlow:
         monkeypatch.setattr(main_module, "calculate_map_zoom", lambda _: 11)
 
         function_app.text_input[0].set_value("Passo Fundo").run()
-        next(button for button in function_app.button if button.label == "🔍 Pesquisar").click().run()
+        next(button for button in function_app.button if button.label == "🔍").click().run()
         function_app.run()
 
         assert function_app.session_state["location_result"] == location
@@ -1084,8 +1107,8 @@ class TestHeaderBar:
         assert function_app.title[0].value == "Monitoramento Agrícola"
         assert any("satélite" in c.value.lower() for c in function_app.caption)
 
-    def test_header_shows_earth_engine_status_when_connected(self, function_app):
-        assert any("Earth Engine conectado" in s.value for s in function_app.success)
+    def test_header_hides_earth_engine_status_when_connected(self, function_app):
+        assert not any("Earth Engine conectado" in s.value for s in function_app.success)
 
     def test_header_does_not_show_unavailable_actions_menu(self, function_app):
         assert not any(
@@ -1107,7 +1130,7 @@ class TestHeaderBar:
 class TestControlsBar:
     def test_controls_bar_has_search_input_and_button(self, function_app):
         search_input = next(t for t in function_app.text_input if t.label == "Localidade")
-        search_btn = next(b for b in function_app.button if b.label == "🔍 Pesquisar")
+        search_btn = next(b for b in function_app.button if b.label == "🔍")
         assert search_input is not None
         assert search_btn is not None
 
@@ -1187,7 +1210,9 @@ class TestPresentation:
 
         display_map(map_obj)
 
-        map_obj.to_streamlit.assert_called_once_with(height=main_module.MAP_HEIGHT)
+        map_obj.to_streamlit.assert_called_once_with(
+            height=main_module.RESULTS_MAP_HEIGHT
+        )
 
     def test_selection_map_keeps_expected_height_after_rerun(self):
         with patch("src.app.main.st") as mock_st:

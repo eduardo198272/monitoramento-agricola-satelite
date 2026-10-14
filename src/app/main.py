@@ -25,6 +25,7 @@ from src.app.pipeline import run_analysis, run_multi_analysis
 logger = logging.getLogger(__name__)
 
 MAP_HEIGHT = 520
+RESULTS_MAP_HEIGHT = 320
 
 DEFAULT_START = date.today() - timedelta(days=365)
 DEFAULT_END = date.today()
@@ -113,7 +114,7 @@ def init_earth_engine():
 
 
 def display_map(map_obj) -> None:
-    map_obj.to_streamlit(height=MAP_HEIGHT)
+    map_obj.to_streamlit(height=RESULTS_MAP_HEIGHT)
 
 
 def display_summary(
@@ -233,47 +234,59 @@ def display_analysis_details(
 
 
 def render_header_bar() -> None:
-    """Render the compact header with product identity and Earth Engine status."""
-    col_identity, col_status = st.columns([3, 2])
+    with st.container(key="app-header"):
+        _render_header_content()
 
-    with col_identity:
-        st.title("Monitoramento Agrícola")
-        st.caption(
-            "Analise a condição da vegetação usando imagens de satélite e dados climáticos."
+
+def _render_header_content() -> None:
+    """Render product identity and report Earth Engine errors only when needed."""
+    st.title("Monitoramento Agrícola")
+    st.caption(
+        "Analise a condição da vegetação usando imagens de satélite e dados climáticos."
+    )
+
+    ee_ok, _ = init_earth_engine()
+    if not ee_ok:
+        st.error("Earth Engine indisponível", icon="❌")
+        st.info(
+            "Verifique as credenciais e a configuração da variável EE_PROJECT_ID. "
+            "Tente novamente quando o serviço estiver disponível."
         )
-
-    with col_status:
-        ee_ok, _ = init_earth_engine()
-        if ee_ok:
-            st.success("Earth Engine conectado", icon="✅")
-        else:
-            st.error("Earth Engine indisponível", icon="❌")
-            st.info(
-                "Verifique as credenciais e a configuração da variável EE_PROJECT_ID. "
-                "Tente novamente quando o serviço estiver disponível."
-            )
-            st.stop()
+        st.stop()
 
 
 def render_controls_bar() -> tuple[bool, bool]:
+    with st.container(key="controls-bar"):
+        return _render_controls_content()
+
+
+def _render_controls_content() -> tuple[bool, bool]:
     """Render compact controls bar: search | period | index | analyze.
     Returns (analyze_clicked, analysis_disabled).
     """
     col_search, col_period_start, col_period_end, col_index, col_analyze = st.columns(
-        [2.5, 1.2, 1.2, 1.8, 1.3]
+        [2.6, 1.15, 1.15, 2.8, 1.3], vertical_alignment="center"
     )
 
     with col_search:
-        search_col, btn_col = st.columns([4, 1])
-        with search_col:
-            location_query = st.text_input(
-                "Localidade",
-                placeholder="Cidade, município...",
-                label_visibility="collapsed",
-                key="location_query",
+        with st.container(key="search-control"):
+            search_col, btn_col = st.columns(
+                [1, 0.16], vertical_alignment="center", gap="small"
             )
-        with btn_col:
-            search = st.button("🔍 Pesquisar", use_container_width=True)
+            with search_col:
+                location_query = st.text_input(
+                    "Localidade",
+                    placeholder="Cidade, município...",
+                    label_visibility="collapsed",
+                    key="location_query",
+                )
+            with btn_col:
+                search = st.button(
+                    "🔍",
+                    help="Pesquisar localidade",
+                    key="search_location_button",
+                    use_container_width=True,
+                )
 
     with col_period_start:
         start_date = st.date_input(

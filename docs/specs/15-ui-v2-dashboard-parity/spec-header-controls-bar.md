@@ -11,14 +11,14 @@ datas, geocodificação e semântica de análise existentes.
 
 Baseline: `assets/dashboard-reference.png` (viewport desktop 1536 × 1024 px).
 A referência mostra duas faixas no topo:
-1. **Cabeçalho** — identidade do produto, status do Earth Engine, ações auxiliares
+1. **Cabeçalho** — identidade do produto
 2. **Barra de controles** — busca, botão Pesquisar, período (inicial/final), escolha
    Todos/NDVI/NDWI/NDMI, botão Analisar área
 
 ## Escopo
 
 Incluído:
-- Função `render_header_bar()` — faixa 1: título, caption, status EE, popover de ações
+- Função `render_header_bar()` — faixa 1: título e caption
 - Função `render_controls_bar()` — faixa 2: busca + botão, data inicial, data final,
   radio horizontal de índice, botão Analisar área (primary)
 - Reordenação do `main()` para renderizar: header → controls → mapa → painéis condicionais
@@ -54,20 +54,20 @@ Mantidos inalterados:
 
 ### Cabeçalho (Faixa 1)
 
-- Layout horizontal em 3 colunas proporcionais: identidade (~50%), status EE (~30%),
-  ações (~20%)
+- Layout do cabeçalho sem coluna de status técnico; inicialização silenciosa do serviço
 - Identidade: título "Monitoramento Agrícola" + caption "Analise a condição da
   vegetação usando imagens de satélite e dados climáticos."
-- Status EE: `st.success("Earth Engine conectado")` se `init_earth_engine()` retorna
-  `True`; `st.error("Earth Engine indisponível")` + `st.stop()` se `False`
-- Ações: `st.popover("⋮")` com `st.page_link` para Sobre/Ajuda (se páginas existirem)
+- Inicialização: nenhuma mensagem quando `init_earth_engine()` retorna `True`; em caso
+  de falha, exibir `st.error("Earth Engine indisponível")`, instrução de configuração e
+  interromper a aplicação para não oferecer análise impossível.
+- O status não deve ocupar toda a largura da coluna em telas desktop.
 
 ### Barra de controles (Faixa 2)
 
 - Layout horizontal em 5 colunas: busca (input+botão), data inicial, data final,
   índice (radio horizontal), botão Analisar
 - Busca: `st.text_input` label "Localidade" (collapsed) + placeholder "Cidade,
-  município..." + `st.button("🔍 Pesquisar", use_container_width=True)`
+  município..." + botão compacto `🔍` com tooltip "Pesquisar localidade".
 - Período: dois `st.date_input` label "Data inicial"/"Data final" (collapsed),
   format="DD/MM/YYYY", defaults `DEFAULT_START`/`DEFAULT_END`
 - Índice: `st.radio` horizontal, options `["Todos", "NDVI", "NDWI", "NDMI"]`,
@@ -92,7 +92,7 @@ Mantidos inalterados:
 
 ## Critérios de aceitação
 
-1. Cabeçalho renderiza em faixa horizontal: identidade | status EE | ações
+1. Cabeçalho renderiza a identidade do produto sem status operacional de sucesso.
 2. Barra de controles renderiza em faixa horizontal: busca | período | índice | analisar
 3. Busca integrada ao geocodificador existente funciona
 4. Validação de datas inline (erro se `end < start`) funciona
@@ -101,10 +101,13 @@ Mantidos inalterados:
 7. Mapa de seleção renderiza **após** as duas faixas
 8. Painéis de resultado **não** renderizam antes de sucesso
 9. Painéis de resultado renderizam após sucesso com dados reais
-10. Layout desktop (1536×1024) visualmente próximo da referência
-11. Mobile (≤768px) empilha sem overflow horizontal
-12. `python -m pytest` passa com cobertura configurada (≥100%)
-13. `git diff --check` passa
+10. Layout desktop (1536×1024) visualmente próximo da referência e as quatro opções de
+    índice cabem em uma linha.
+11. Tablet (769–1100px) reorganiza os controles em linhas sem comprimir campos.
+12. Mobile (≤768px) empilha cabeçalho/controles; busca permanece em linha com botão
+    compacto e opções de índice em grade 2×2, sem overflow horizontal.
+13. `python -m pytest` passa com cobertura configurada (≥100%)
+14. `git diff --check` passa
 
 ## Estratégia de validação visual
 

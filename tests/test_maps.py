@@ -521,6 +521,7 @@ class TestCreateSelectionMap:
 
         draw_control.assert_called_once_with(
             export=False,
+            feature_group=draw_control.call_args.kwargs["feature_group"],
             draw_options={
                 "polyline": False,
                 "rectangle": False,
@@ -530,6 +531,9 @@ class TestCreateSelectionMap:
                 "polygon": True,
             },
             edit_options={"edit": True, "remove": True},
+        )
+        assert isinstance(
+            draw_control.call_args.kwargs["feature_group"], folium.FeatureGroup
         )
         draw_control.return_value.add_to.assert_called_once()
 
@@ -550,10 +554,21 @@ class TestCreateSelectionMap:
 
         result = create_selection_map(geojson=geojson)
 
+        drawn_items = next(
+            child
+            for child in result._children.values()
+            if isinstance(child, folium.FeatureGroup)
+        )
         assert any(
             type(child).__name__ == "GeoJson"
-            for child in result._children.values()
+            for child in drawn_items._children.values()
         )
+        draw_control = next(
+            child
+            for child in result._children.values()
+            if getattr(child, "feature_group", None) is drawn_items
+        )
+        assert draw_control.feature_group is drawn_items
 
 class TestGeojsonToEeGeometry:
     @patch("src.app.maps.ee")

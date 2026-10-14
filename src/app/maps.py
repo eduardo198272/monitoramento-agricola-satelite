@@ -215,9 +215,24 @@ def create_selection_map(
         overlay=False,
         control=True,
     ).add_to(selection_map)
-    folium.LayerControl(collapsed=True).add_to(selection_map)
+    drawn_items = folium.FeatureGroup(name="Área selecionada", show=True)
+    drawn_items.add_to(selection_map)
+
+    if geojson:
+        folium.GeoJson(
+            geojson,
+            name="Geometria da área",
+            style_function=lambda _: {
+                "color": "#ff7800",
+                "weight": 3,
+                "fillColor": "#ff7800",
+                "fillOpacity": 0.2,
+            },
+        ).add_to(drawn_items)
+
     Draw(
         export=False,
+        feature_group=drawn_items,
         draw_options={
             "polyline": False,
             "rectangle": False,
@@ -228,18 +243,7 @@ def create_selection_map(
         },
         edit_options={"edit": True, "remove": True},
     ).add_to(selection_map)
-
-    if geojson:
-        folium.GeoJson(
-            geojson,
-            name="Área selecionada",
-            style_function=lambda _: {
-                "color": "#ff7800",
-                "weight": 3,
-                "fillColor": "#ff7800",
-                "fillOpacity": 0.2,
-            },
-        ).add_to(selection_map)
+    folium.LayerControl(collapsed=True).add_to(selection_map)
 
     return selection_map
 

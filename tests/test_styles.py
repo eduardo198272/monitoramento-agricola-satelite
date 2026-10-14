@@ -18,9 +18,15 @@ def test_stylesheet_defines_component_and_responsive_rules():
     assert "[data-testid=\"stButton\"]" in css
     assert ".ui-card" in css
     assert "@media (max-width: 768px)" in css
+    assert "@media (max-width: 1100px) and (min-width: 769px)" in css
     assert "@media (max-width: 480px)" in css
     assert '[data-testid="stMainBlockContainer"]' in css
     assert '[data-testid="stRadio"] [role="radiogroup"]' in css
+    assert "gap: 0.25rem 0.45rem" in css
+    assert ".st-key-controls-bar" in css
+    assert ".st-key-search-control" in css
+    assert "grid-template-columns: repeat(2, max-content)" in css
+    assert ".st-key-earth-engine-status" not in css
     assert '[data-testid="stCustomComponentV1"]' in css
     assert '[data-testid="stCustomComponentV1"] iframe' in css
     assert "height: 440px !important" in css

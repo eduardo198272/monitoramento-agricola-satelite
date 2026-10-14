@@ -84,6 +84,69 @@ body,
     min-height: 520px !important;
 }
 
+[data-testid="stRadio"] [role="radiogroup"] {
+    gap: var(--space-xs) 0.55rem;
+}
+
+h1 a {
+    display: none;
+}
+
+.st-key-controls-bar [data-testid="stHorizontalBlock"] {
+    align-items: center;
+}
+
+.st-key-controls-bar [data-testid="stRadio"] [role="radiogroup"] {
+    flex-wrap: nowrap;
+    gap: 0.25rem 0.45rem;
+}
+
+.st-key-search-control [data-testid="stHorizontalBlock"] {
+    flex-wrap: nowrap !important;
+    align-items: center;
+}
+
+.st-key-search-control [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+    min-width: 0 !important;
+}
+
+.st-key-search-control [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child {
+    flex: 0 0 3.25rem !important;
+    width: 3.25rem !important;
+}
+
+.st-key-search-control [data-testid="stButton"] button {
+    min-width: 3.25rem;
+    padding: 0 0.4rem;
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+    .st-key-controls-bar [data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    .st-key-controls-bar [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+        flex: 1 1 calc(50% - var(--space-sm)) !important;
+        width: calc(50% - var(--space-sm)) !important;
+        min-width: 17rem;
+    }
+
+    .st-key-search-control [data-testid="stHorizontalBlock"] {
+        flex-wrap: nowrap !important;
+    }
+
+    .st-key-search-control [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child {
+        flex: 1 1 0 !important;
+        width: auto !important;
+    }
+
+    .st-key-search-control [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child {
+        flex: 0 0 3.25rem !important;
+        width: 3.25rem !important;
+    }
+}
+
 @media (max-width: 768px) {
     [data-testid="stHorizontalBlock"] {
         flex-wrap: wrap;
@@ -103,7 +166,7 @@ body,
 
     [data-testid="stRadio"] [role="radiogroup"] {
         flex-wrap: wrap;
-        gap: var(--space-xs) var(--space-sm);
+        gap: var(--space-xs) var(--space-xs);
     }
 
     [data-testid="stPlotlyChart"] {
@@ -118,6 +181,36 @@ body,
 
     [data-testid="stCustomComponentV1"] {
         min-height: 440px;
+    }
+
+    .st-key-app-header [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+    }
+
+    .st-key-controls-bar [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    .st-key-controls-bar [data-testid="stRadio"] [role="radiogroup"] {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        justify-content: start;
+        gap: var(--space-xs) var(--space-md);
+    }
+
+    .st-key-search-control [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:first-child {
+        flex: 1 1 0 !important;
+        width: auto !important;
+        min-width: 0 !important;
+    }
+
+    .st-key-search-control [data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:last-child {
+        flex: 0 0 3.25rem !important;
+        width: 3.25rem !important;
+        min-width: 3.25rem !important;
     }
 }
 
