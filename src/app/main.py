@@ -8,7 +8,6 @@ from streamlit_folium import st_folium
 from src.app.config import APP_NAME, VERSION
 from src.app.ee_auth import initialize_earth_engine
 from src.app.maps import (
-    create_thematic_map,
     enable_area_draw,
     create_selection_map,
     geojson_to_ee_geometry,
@@ -17,7 +16,11 @@ from src.app.maps import (
     calculate_area_context,
     DEFAULT_CENTER,
     DEFAULT_ZOOM,
+    INDEX_PALETTES,
+    get_index_map_tile_url,
+    preload_index_values,
 )
+from src.app.map_interaction import render_index_hover_map
 from src.app.anomalies import compute_trend
 from src.app.styles import load_styles
 from src.app.pipeline import run_analysis, run_multi_analysis
@@ -50,6 +53,9 @@ UI_STATE_DEFAULTS = {
     "analysis_error": None,
     "analysis_map": None,
     "analysis_map_center": None,
+    "index_value_grid": None,
+    "index_preload_error": None,
+    "index_tile_urls": {},
 }
 
 
@@ -68,6 +74,9 @@ def clear_analysis_state() -> None:
     st.session_state.analysis_metadata = {}
     st.session_state.analysis_map = None
     st.session_state.analysis_map_center = None
+    st.session_state.index_value_grid = None
+    st.session_state.index_preload_error = None
+    st.session_state.index_tile_urls = {}
     st.session_state.analysis_status = "idle"
     st.session_state.analysis_error = None
 
@@ -115,6 +124,39 @@ def init_earth_engine():
 
 def display_map(map_obj) -> None:
     map_obj.to_streamlit(height=RESULTS_MAP_HEIGHT)
+
+
+def render_analysis_map(index_image, index_name: str, geojson: dict | None):
+    """Render the selected index using cached tile and pixel-grid data."""
+    preloaded = st.session_state.index_value_grid
+    index_grid = (preloaded or {}).get("indices", {}).get(index_name)
+    if index_grid is None:
+        st.error(
+            st.session_state.index_preload_error
+            or "Os valores do índice ainda não estão disponíveis no mapa."
+        )
+        return
+
+    tile_urls = st.session_state.index_tile_urls
+    if index_name not in tile_urls:
+        tile_urls[index_name] = get_index_map_tile_url(
+            index_image,
+            index_name,
+            st.session_state.aoi_geometry,
+            index_grid["minimum"],
+            index_grid["maximum"],
+        )
+    tile_url = tile_urls[index_name]
+    return render_index_hover_map(
+        tile_url=tile_url,
+        center=st.session_state.analysis_map_center or DEFAULT_CENTER,
+        zoom=12,
+        geojson=geojson,
+        index_name=index_name,
+        palette=INDEX_PALETTES[index_name],
+        value_grid=preloaded,
+        key="thematic-index-map",
+    )
 
 
 def display_summary(
@@ -409,6 +451,8 @@ def render_selection_map_area() -> None:
                 st.session_state.aoi_perimeter_km = context["perimeter_km"]
                 st.session_state.aoi_centroid = context["centroid"]
                 clear_analysis_state()
+                # Re-evaluate the Analyze button against the freshly stored AOI.
+                st.rerun()
             lat, lon = st.session_state.aoi_centroid
             st.success(
                 f"Área selecionada: {st.session_state.aoi_area_ha:.2f} ha  |  "
@@ -465,15 +509,6 @@ def render_results_panels() -> None:
 
     display_anomaly_alert(res.get("alert"))
 
-    st.session_state.analysis_map = create_thematic_map(
-        res["index_map"],
-        visible_index,
-        center=st.session_state.analysis_map_center,
-        zoom=12,
-        geojson=st.session_state.aoi_geojson,
-    )
-    display_map(st.session_state.analysis_map)
-
     if len(available_indices) > 1:
         display_multi_index_overview(
             st.session_state.analysis_results,
@@ -484,6 +519,30 @@ def render_results_panels() -> None:
     if climate_plot is None:
         climate_plot = st.session_state.analysis_metadata.get("climate_plot")
     display_analysis_details(visible_index, res, climate_plot)
+
+
+def render_results_map_area() -> bool:
+    """Show the single dynamic map in place of the area-selection map."""
+    available_indices = list(st.session_state.analysis_results)
+    if not available_indices:
+        return False
+    if st.button("Alterar área", key="edit_analysis_area"):
+        clear_analysis_state()
+        return False
+    selected = st.session_state.get("visible_index_control")
+    visible_index = selected if selected in available_indices else available_indices[0]
+    st.session_state.visible_index = visible_index
+    st.subheader("Mapa do índice")
+    try:
+        render_analysis_map(
+            st.session_state.analysis_results[visible_index]["index_map"],
+            visible_index,
+            st.session_state.aoi_geojson,
+        )
+    except Exception:
+        logger.exception("Failed to render the interactive thematic map")
+        st.error("Não foi possível carregar o mapa temático.")
+    return True
 
 
 def main():
@@ -498,8 +557,6 @@ def main():
     render_header_bar()
     analyze, analysis_disabled = render_controls_bar()
 
-    render_selection_map_area()
-
     if analyze and not analysis_disabled:
         geometry = st.session_state.aoi_geometry
         start_date = st.session_state.analysis_start_date
@@ -513,6 +570,9 @@ def main():
             st.session_state.analysis_results = {}
             st.session_state.analysis_metadata = {}
             st.session_state.analysis_map = None
+            st.session_state.index_tile_urls = {}
+            st.session_state.index_value_grid = None
+            st.session_state.index_preload_error = None
             selected_indices = st.session_state.selected_indices
             with st.spinner(
                 "Buscando imagens Sentinel-2, aplicando máscara de nuvens "
@@ -554,8 +614,24 @@ def main():
                         st.session_state.visible_index = selected_indices[0]
                         st.session_state.analysis_results = {st.session_state.visible_index: result}
                     st.session_state.analysis_map_center = (
-                        result.get("map_center") or st.session_state.location_center
+                        result.get("map_center")
+                        or st.session_state.aoi_centroid
+                        or st.session_state.location_center
                     )
+                    try:
+                        st.session_state.index_value_grid = preload_index_values(
+                            {
+                                name: index_result["index_map"]
+                                for name, index_result
+                                in st.session_state.analysis_results.items()
+                            },
+                            geometry,
+                            st.session_state.analysis_map_center,
+                            scale=10,
+                        )
+                    except Exception as preload_error:
+                        logger.exception("Failed to preload index pixel values")
+                        st.session_state.index_preload_error = str(preload_error)
                     st.session_state.analysis_status = "success"
                     st.session_state.analysis_error = None
                 else:
@@ -566,12 +642,21 @@ def main():
                     st.session_state.analysis_metadata = {}
                     st.session_state.analysis_status = status
 
+    has_result_maps = bool(st.session_state.analysis_results) and all(
+        "index_map" in value for value in st.session_state.analysis_results.values()
+    )
+    if st.session_state.analysis_status == "success" and has_result_maps:
+        if render_results_map_area():
+            render_results_panels()
+        else:
+            render_selection_map_area()
+    else:
+        render_selection_map_area()
+
     if st.session_state.analysis_status == "no_data":
         st.warning(st.session_state.analysis_error)
     elif st.session_state.analysis_status == "error":
         st.error(st.session_state.analysis_error)
-    elif st.session_state.analysis_status == "success" and st.session_state.analysis_results:
-        render_results_panels()
 
 
 if __name__ == "__main__":

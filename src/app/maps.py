@@ -1,9 +1,13 @@
 import math
 import logging
+import base64
+import uuid
+import zlib
 
 import geemap
 import ee
 import folium
+import numpy as np
 import requests
 from folium.plugins import Draw
 
@@ -24,9 +28,17 @@ NOMINATIM_SEARCH_URL = "https://nominatim.openstreetmap.org/search"
 NOMINATIM_TIMEOUT = 10
 NOMINATIM_USER_AGENT = "monitoramento-agricola-satelite/1.0"
 
-NDVI_PALETTE = ["blue", "white", "green"]
-NDWI_PALETTE = ["brown", "white", "blue"]
-NDMI_PALETTE = ["red", "yellow", "blue"]
+NDVI_PALETTE = ["#f7fcf5", "#74c476", "#00441b"]
+NDWI_PALETTE = ["#f7fbff", "#6baed6", "#08306b"]
+NDMI_PALETTE = ["#fff5eb", "#fd8d3c", "#7f2704"]
+INDEX_PALETTES = {
+    "NDVI": NDVI_PALETTE,
+    "NDWI": NDWI_PALETTE,
+    "NDMI": NDMI_PALETTE,
+}
+INDEX_PRELOAD_SCALE_METERS = 10
+MAX_PRELOADED_VALUES = 2_000_000
+INDEX_NODATA = -9999.0
 
 
 def search_location(query: str) -> dict | None:
@@ -147,17 +159,12 @@ def create_thematic_map(
     geojson: dict = None,
 ) -> geemap.Map:
     """Create a thematic map from an already-computed index image."""
-    palettes = {
-        "NDVI": NDVI_PALETTE,
-        "NDWI": NDWI_PALETTE,
-        "NDMI": NDMI_PALETTE,
-    }
     normalized_index = index_name.upper()
-    if normalized_index not in palettes:
+    if normalized_index not in INDEX_PALETTES:
         raise ValueError(f"Índice desconhecido: {index_name}")
 
     thematic_map = create_base_map(center=center, zoom=zoom)
-    palette = palettes[normalized_index]
+    palette = INDEX_PALETTES[normalized_index]
     add_index_layer(
         thematic_map,
         index_image,
@@ -175,6 +182,174 @@ def create_thematic_map(
         )
 
     return thematic_map
+
+
+def get_index_map_tile_url(
+    index_image: ee.Image,
+    index_name: str,
+    geometry: ee.Geometry,
+    min_value: float = -1,
+    max_value: float = 1,
+) -> str:
+    """Create authenticated, AOI-clipped map tiles with a data-driven range."""
+    normalized_index = index_name.upper()
+    if normalized_index not in INDEX_PALETTES:
+        raise ValueError(f"Índice desconhecido: {index_name}")
+
+    if not math.isfinite(min_value) or not math.isfinite(max_value) or min_value >= max_value:
+        min_value, max_value = -1, 1
+    clipped_image = index_image.select(normalized_index).clip(geometry)
+    map_id = clipped_image.getMapId(
+        {
+            "min": min_value,
+            "max": max_value,
+            "palette": INDEX_PALETTES[normalized_index],
+        }
+    )
+    tile_fetcher = map_id.get("tile_fetcher")
+    tile_url = getattr(tile_fetcher, "url_format", None)
+    if not tile_url:
+        raise ValueError("Earth Engine não retornou uma URL para os tiles do índice")
+    return tile_url
+
+
+def _utm_epsg(center: list[float]) -> int:
+    latitude, longitude = center
+    zone = max(1, min(60, int((longitude + 180) // 6) + 1))
+    return (32700 if latitude < 0 else 32600) + zone
+
+
+def _pack_float_grid(values: list) -> str:
+    array = np.asarray(values, dtype="<f4")
+    return base64.b64encode(zlib.compress(array.tobytes())).decode("ascii")
+
+
+def preload_index_values(
+    index_images: dict[str, ee.Image],
+    geometry: ee.Geometry,
+    center: list[float],
+    scale: int = INDEX_PRELOAD_SCALE_METERS,
+) -> dict:
+    """Fetch clipped index pixels once and pack them for browser-local lookup."""
+    if not index_images:
+        raise ValueError("Nenhum índice foi selecionado para pré-carregamento")
+    if not isinstance(scale, int) or scale <= 0:
+        raise ValueError("A escala de pré-carregamento deve ser um inteiro positivo")
+
+    epsg = _utm_epsg(center)
+    projection = ee.Projection(f"EPSG:{epsg}").atScale(scale)
+    projection_info = projection.getInfo()
+    transform = projection_info.get("transform")
+    if not transform or len(transform) != 6:
+        raise ValueError("Não foi possível determinar a grade espacial do raster")
+
+    region = geometry.bounds(1, projection)
+    bounds = region.coordinates().getInfo()
+    ring = bounds
+    while (
+        isinstance(ring, (list, tuple))
+        and ring
+        and isinstance(ring[0], (list, tuple))
+        and ring[0]
+        and isinstance(ring[0][0], (list, tuple))
+    ):
+        ring = ring[0]
+    if (
+        not isinstance(ring, (list, tuple))
+        or not ring
+        or any(
+            not isinstance(point, (list, tuple))
+            or len(point) < 2
+            or not all(isinstance(value, (int, float)) for value in point[:2])
+            for point in ring
+        )
+    ):
+        raise ValueError("A área selecionada não possui uma extensão válida")
+    min_x = min(point[0] for point in ring)
+    max_x = max(point[0] for point in ring)
+    min_y = min(point[1] for point in ring)
+    max_y = max(point[1] for point in ring)
+    estimated_columns = math.ceil((max_x - min_x) / scale) + 2
+    estimated_rows = math.ceil((max_y - min_y) / scale) + 2
+    estimated_values = estimated_columns * estimated_rows * (len(index_images) + 2)
+    if estimated_values > MAX_PRELOADED_VALUES:
+        raise ValueError(
+            "A área é grande demais para pré-carregar todos os pixels em 10 m. "
+            "Reduza a área ou selecione menos índices."
+        )
+
+    names = list(index_images)
+    projected = [
+        index_images[name]
+        .select(name)
+        .reproject(projection)
+        .clip(geometry)
+        .rename(name)
+        .toFloat()
+        for name in names
+    ]
+    image_stack = projected[0]
+    for band in projected[1:]:
+        image_stack = image_stack.addBands(band)
+    pixel_coordinates = ee.Image.pixelCoordinates(projection).rename(
+        ["grid_x", "grid_y"]
+    )
+    image_stack = image_stack.addBands(pixel_coordinates)
+    sampled = image_stack.sampleRectangle(
+        region=region,
+        defaultValue=INDEX_NODATA,
+    ).getInfo()
+    properties = sampled.get("properties", {})
+    grid_x = np.asarray(properties.get("grid_x", []))
+    grid_y = np.asarray(properties.get("grid_y", []))
+    if (
+        grid_x.ndim != 2
+        or grid_y.ndim != 2
+        or grid_x.size == 0
+        or grid_y.size == 0
+        or grid_x.shape != grid_y.shape
+    ):
+        raise ValueError("O pré-carregamento não retornou pixels para a área")
+
+    values_by_index = {}
+    total_values = 0
+    for name in names:
+        pixels = np.asarray(properties.get(name, []), dtype=np.float32)
+        if pixels.ndim != 2 or pixels.size == 0 or pixels.shape != grid_x.shape:
+            raise ValueError(f"Não foi possível carregar os pixels de {name}")
+        total_values += pixels.size
+        if total_values > MAX_PRELOADED_VALUES:
+            raise ValueError(
+                "A área é grande demais para pré-carregar todos os pixels em 10 m. "
+                "Reduza a área ou selecione menos índices."
+            )
+        valid = pixels[np.isfinite(pixels) & (pixels != INDEX_NODATA)]
+        if valid.size:
+            minimum = float(valid.min())
+            maximum = float(valid.max())
+            if math.isclose(minimum, maximum):
+                minimum = max(-1.0, minimum - 0.01)
+                maximum = min(1.0, maximum + 0.01)
+        else:
+            minimum, maximum = -1.0, 1.0
+        values_by_index[name] = {
+            "values": _pack_float_grid(pixels),
+            "rows": int(pixels.shape[0]),
+            "columns": int(pixels.shape[1]),
+            "minimum": minimum,
+            "maximum": maximum,
+        }
+
+    return {
+        "analysis_key": uuid.uuid4().hex,
+        "crs": f"EPSG:{epsg}",
+        "transform": transform,
+        "first_column": int(grid_x.flat[0]),
+        "first_row": int(grid_y.flat[0]),
+        "scale": scale,
+        "nodata": INDEX_NODATA,
+        "indices": values_by_index,
+    }
 
 
 def add_colorbar(

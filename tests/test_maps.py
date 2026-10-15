@@ -1,6 +1,8 @@
 import pytest
 import requests
 import folium
+import base64
+import zlib
 from unittest.mock import MagicMock, patch
 
 from src.app.maps import (
@@ -19,6 +21,8 @@ from src.app.maps import (
     search_location,
     calculate_map_zoom,
     create_selection_map,
+    get_index_map_tile_url,
+    preload_index_values,
 )
 
 
@@ -450,6 +454,82 @@ class TestCreateThematicMap:
     def test_rejects_unknown_index(self):
         with pytest.raises(ValueError, match="Índice desconhecido: INVALID"):
             create_thematic_map(MagicMock(), "INVALID")
+
+
+class TestIndexPixelPreloading:
+    def test_get_index_map_tile_url_clips_and_uses_data_range(self):
+        image = MagicMock()
+        geometry = MagicMock()
+        fetcher = MagicMock()
+        fetcher.url_format = "https://earthengine.example/{z}/{x}/{y}"
+        image.select.return_value.clip.return_value.getMapId.return_value = {
+            "tile_fetcher": fetcher,
+        }
+
+        result = get_index_map_tile_url(image, "NDVI", geometry, 0.2, 0.8)
+
+        assert result == fetcher.url_format
+        image.select.assert_called_once_with("NDVI")
+        image.select.return_value.clip.assert_called_once_with(geometry)
+        params = image.select.return_value.clip.return_value.getMapId.call_args.args[0]
+        assert params["min"] == 0.2
+        assert params["max"] == 0.8
+        assert params["palette"] == NDVI_PALETTE
+
+    @patch("src.app.maps.ee")
+    def test_preloads_clipped_index_grid_for_local_hover(self, mock_ee):
+        geometry = MagicMock()
+        region = MagicMock()
+        geometry.bounds.return_value = region
+        region.coordinates.return_value.getInfo.return_value = [[
+            [0, 0], [20, 0], [20, 20], [0, 20], [0, 0],
+        ]]
+        projection = MagicMock()
+        mock_ee.Projection.return_value.atScale.return_value = projection
+        projection.getInfo.return_value = {"transform": [10, 0, 0, 0, -10, 0]}
+        image = MagicMock()
+        projected_image = image.select.return_value.reproject.return_value.clip.return_value.rename.return_value.toFloat.return_value
+        stack = MagicMock()
+        projected_image.addBands.return_value = stack
+        pixel_coordinates = MagicMock()
+        mock_ee.Image.pixelCoordinates.return_value.rename.return_value = pixel_coordinates
+        stack.sampleRectangle.return_value.getInfo.return_value = {
+            "properties": {
+                "NDVI": [[0.2, 0.4], [0.6, 0.8]],
+                "grid_x": [[100, 101], [100, 101]],
+                "grid_y": [[200, 200], [201, 201]],
+            },
+        }
+
+        result = preload_index_values({"NDVI": image}, geometry, [-28, -52])
+
+        pixels = result["indices"]["NDVI"]
+        raw = zlib.decompress(base64.b64decode(pixels["values"]))
+        assert pixels["rows"] == 2
+        assert pixels["columns"] == 2
+        assert pixels["minimum"] == pytest.approx(0.2)
+        assert pixels["maximum"] == pytest.approx(0.8)
+        assert result["first_column"] == 100
+        assert result["first_row"] == 200
+        assert len(raw) == 4 * 4
+        image.select.assert_called_once_with("NDVI")
+        assert projected_image.addBands.call_count == 1
+        stack.sampleRectangle.assert_called_once_with(region=region, defaultValue=-9999.0)
+
+    @patch("src.app.maps.ee")
+    def test_preload_rejects_grid_exceeding_transfer_limit(self, mock_ee):
+        region = MagicMock()
+        geometry = MagicMock()
+        geometry.bounds.return_value = region
+        region.coordinates.return_value.getInfo.return_value = [[
+            [0, 0], [10000, 0], [10000, 10000], [0, 10000], [0, 0],
+        ]]
+        projection = MagicMock()
+        mock_ee.Projection.return_value.atScale.return_value = projection
+        projection.getInfo.return_value = {"transform": [10, 0, 0, 0, -10, 0]}
+
+        with pytest.raises(ValueError, match="grande demais para pré-carregar"):
+            preload_index_values({"NDVI": MagicMock()}, geometry, [-28, -52])
 
 
 class TestEnableAreaDraw:

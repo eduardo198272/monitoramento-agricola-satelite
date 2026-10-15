@@ -542,6 +542,9 @@ class TestApplicationFlow:
         assert app.session_state["aoi_perimeter_km"] == 5.0
         assert app.session_state["aoi_centroid"] == (-28.26, -52.41)
         assert any("3.25 ha" in success.value for success in app.success)
+        assert not next(
+            button for button in app.button if button.label == "Analisar área"
+        ).disabled
 
     def test_area_calculation_failure_does_not_partially_replace_selection(self, monkeypatch):
         geometry = make_geometry(area_ha=0)
@@ -635,10 +638,10 @@ class TestApplicationFlow:
         }
         run_analysis = MagicMock()
         run_multi_analysis = MagicMock()
-        create_thematic_map = MagicMock(return_value=MagicMock())
+        render_analysis_map = MagicMock(return_value=None)
         monkeypatch.setattr(main_module, "run_analysis", run_analysis)
         monkeypatch.setattr(main_module, "run_multi_analysis", run_multi_analysis)
-        monkeypatch.setattr(main_module, "create_thematic_map", create_thematic_map)
+        monkeypatch.setattr(main_module, "render_analysis_map", render_analysis_map)
         function_app.session_state["aoi_geometry"] = geometry
         function_app.session_state["aoi_geojson"] = geojson
         function_app.session_state["aoi_area_ha"] = 12.5
@@ -656,10 +659,10 @@ class TestApplicationFlow:
         assert function_app.session_state["aoi_geometry"] is geometry
         assert function_app.session_state["aoi_geojson"] == geojson
         assert function_app.session_state["aoi_area_ha"] == 12.5
-        assert create_thematic_map.call_count == 2
+        assert render_analysis_map.call_count == 2
         assert all(
             call.args[0] is result["index_map"]
-            for call in create_thematic_map.call_args_list
+            for call in render_analysis_map.call_args_list
         )
         run_analysis.assert_not_called()
         run_multi_analysis.assert_not_called()
@@ -769,6 +772,45 @@ class TestApplicationFlow:
             "e calculando os índices..."
         ]
 
+    def test_render_analysis_map_passes_selected_index_to_hover_component(
+        self, monkeypatch
+    ):
+        image = MagicMock(name="cached-index")
+        grid = {
+            "analysis_key": "analysis-1",
+            "indices": {"NDVI": {"minimum": 0.1, "maximum": 0.9}},
+        }
+        geometry = MagicMock(name="aoi-geometry")
+        monkeypatch.setattr(
+            main_module.st,
+            "session_state",
+            SimpleNamespace(
+                analysis_map_center=[-28.1, -52.2],
+                index_value_grid=grid,
+                index_tile_urls={},
+                aoi_geometry=geometry,
+            ),
+        )
+        get_tile_url = MagicMock(return_value="https://ee.example/tiles/{z}/{x}/{y}")
+        render_component = MagicMock(return_value=None)
+        monkeypatch.setattr(main_module, "get_index_map_tile_url", get_tile_url)
+        monkeypatch.setattr(main_module, "render_index_hover_map", render_component)
+        geojson = {"type": "Feature", "geometry": {"type": "Polygon"}}
+
+        main_module.render_analysis_map(image, "NDVI", geojson)
+
+        get_tile_url.assert_called_once_with(image, "NDVI", geometry, 0.1, 0.9)
+        render_component.assert_called_once_with(
+            tile_url="https://ee.example/tiles/{z}/{x}/{y}",
+            center=[-28.1, -52.2],
+            zoom=12,
+            geojson=geojson,
+            index_name="NDVI",
+            palette=main_module.INDEX_PALETTES["NDVI"],
+            value_grid=grid,
+            key="thematic-index-map",
+        )
+
     def test_successful_analysis_renders_outputs(self, monkeypatch):
         geometry = make_geometry()
         geojson = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": []}}
@@ -795,9 +837,9 @@ class TestApplicationFlow:
         monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
         run_analysis = MagicMock(return_value=result)
         monkeypatch.setattr(main_module, "run_analysis", run_analysis)
-        thematic_map = MagicMock()
+        render_analysis_map = MagicMock(return_value=None)
         monkeypatch.setattr(
-            main_module, "create_thematic_map", MagicMock(return_value=thematic_map)
+            main_module, "render_analysis_map", render_analysis_map
         )
 
         app = AppTest.from_function(app_script)
@@ -853,8 +895,8 @@ class TestApplicationFlow:
         )
         monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
         monkeypatch.setattr(main_module, "run_analysis", MagicMock(return_value=result))
-        create_thematic_map = MagicMock(return_value=MagicMock())
-        monkeypatch.setattr(main_module, "create_thematic_map", create_thematic_map)
+        render_analysis_map = MagicMock(return_value=None)
+        monkeypatch.setattr(main_module, "render_analysis_map", render_analysis_map)
 
         app = AppTest.from_function(app_script)
         app.run()
@@ -865,8 +907,8 @@ class TestApplicationFlow:
         app.run()
         next(button for button in app.button if button.label == "Analisar área").click().run()
 
-        create_thematic_map.assert_called_once()
-        assert create_thematic_map.call_args.args[1] == index_name
+        render_analysis_map.assert_called_once()
+        assert render_analysis_map.call_args.args[1] == index_name
 
     def test_switching_visible_index_uses_cached_map_without_running_pipeline(
         self, function_app, monkeypatch
@@ -905,10 +947,10 @@ class TestApplicationFlow:
 
         run_analysis = MagicMock()
         run_multi_analysis = MagicMock()
-        create_thematic_map = MagicMock(return_value=MagicMock())
+        render_analysis_map = MagicMock(return_value=None)
         monkeypatch.setattr(main_module, "run_analysis", run_analysis)
         monkeypatch.setattr(main_module, "run_multi_analysis", run_multi_analysis)
-        monkeypatch.setattr(main_module, "create_thematic_map", create_thematic_map)
+        monkeypatch.setattr(main_module, "render_analysis_map", render_analysis_map)
 
         function_app.run()
         next(
@@ -918,9 +960,7 @@ class TestApplicationFlow:
         ).set_value("NDWI").run()
 
         assert function_app.session_state["visible_index"] == "NDWI"
-        assert create_thematic_map.call_args.args[:2] == (ndwi_image, "NDWI")
-        assert create_thematic_map.call_args.kwargs["geojson"] == geojson
-        assert create_thematic_map.call_args.kwargs["center"] == [-28.26, -52.41]
+        assert render_analysis_map.call_args.args == (ndwi_image, "NDWI", geojson)
         metric_values = [(metric.label, metric.value) for metric in function_app.metric]
         assert ("Imagens analisadas", "8") in metric_values
         assert metric_values.count(("Valor médio", "0.2500")) == 2
@@ -967,7 +1007,7 @@ class TestApplicationFlow:
         monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
         monkeypatch.setattr(main_module, "run_analysis", MagicMock(return_value=result))
         monkeypatch.setattr(
-            main_module, "create_thematic_map", MagicMock(return_value=MagicMock())
+            main_module, "render_analysis_map", MagicMock(return_value=None)
         )
         monkeypatch.setattr(main_module.st, "plotly_chart", MagicMock())
 
