@@ -31,6 +31,7 @@ Spec-Driven Development (SDD) é a prática de escrever especificações detalha
 | 12 | `12-interface-resultados/` | `spec-interface-resultados.md` | SPEC-12-01 a SPEC-12-10 | `tasks-interface-resultados.md` |
 | 13 | `13-cobertura-testes/` | `spec-cobertura-testes.md` | SPEC-13-01 a SPEC-13-14 | `tasks-cobertura-testes.md` |
 | 14 | `14-ui-v2-map-first/` | `spec-ui-v2-map-first.md` | SPEC-14-01 a SPEC-14-26 | `tasks-ui-v2-map-first.md` |
+| 15 | `15-ui-v2-dashboard-parity/` | `spec-ui-dashboard-parity.md` | SPEC-15-01 a SPEC-15-10 | `tasks-ui-dashboard-parity.md` |
 
 ## Sub-tasks breakdown
 
@@ -52,6 +53,7 @@ Cada spec possui um arquivo `tasks-*.md` com a quebra em sub-tasks implementáve
 | SPEC-12-01 a SPEC-12-10 | Interface de resultados | Layout, alertas e testes de apresentação | 7h45 |
 | SPEC-13-01 a SPEC-13-14 | Cobertura de testes | Fixtures, testes de processamento, UI, scripts e validação de 100% | 16h |
 | SPEC-14-01 a SPEC-14-26 | UI V2 Map-First | Refatoração incremental da interface, pipeline multiíndice, estados, estilo e testes | 25h |
+| SPEC-15-01 a SPEC-15-10 | UI V2 Dashboard Parity | Mapa de satélite, dashboard visual de referência, clima real, responsividade e validação | A estimar |
 
 ## Requisitos Funcionais (RF) mapeados
 
