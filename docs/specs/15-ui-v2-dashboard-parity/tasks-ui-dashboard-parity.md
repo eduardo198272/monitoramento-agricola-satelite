@@ -12,8 +12,8 @@ Referência: `spec-ui-dashboard-parity.md`.
 | SPEC-15-06 | Implementar agregadores puros para NASA POWER | Precipitação acumulada, temperatura média e radiação média/conversão com nulos e unidades testados | SPEC-15-01 | Concluída |
 | SPEC-15-07 | Reorganizar painéis de resultados após sucesso | Cards, série, clima, mapa temático e anomalias só renderizam após sucesso e usam dados reais | SPEC-15-04, SPEC-15-05, SPEC-15-06 | Concluída |
 | SPEC-15-08 | Implementar estados single-index e multiíndice | Single mostra somente índice analisado; Todos mostra índices retornados; troca visual não repete pipeline | SPEC-15-07 | Concluída |
-| SPEC-15-09 | Aplicar fidelidade visual e responsividade | Comparação desktop contra imagem e layout mobile sem overflow; CSS centralizado | SPEC-15-04, SPEC-15-07 | Não iniciado |
-| SPEC-15-10 | Cobrir regressões, executar validação e registrar limitações | Testes isolados passam, cobertura configurada é mantida e checklist visual está documentado | SPEC-15-02 a SPEC-15-09 | Não iniciado |
+| SPEC-15-09 | Aplicar fidelidade visual e responsividade | Comparação desktop contra imagem e layout mobile sem overflow; CSS centralizado | SPEC-15-04, SPEC-15-07 | Concluída |
+| SPEC-15-10 | Cobrir regressões, executar validação e registrar limitações | Testes isolados passam, cobertura configurada é mantida e checklist visual está documentado | SPEC-15-02 a SPEC-15-09 | Concluída |
 
 ## Ordem de execução
 
