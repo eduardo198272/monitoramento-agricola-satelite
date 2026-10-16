@@ -1,8 +1,11 @@
 """Validation and normalization for a completed multi-index export snapshot."""
 
-from datetime import date
+from copy import deepcopy
+from datetime import date, datetime
 from math import isfinite
 from typing import Any
+
+import pandas as pd
 
 from src.app.utils import normalize_date
 
@@ -11,6 +14,52 @@ SUPPORTED_INDICES = ("NDVI", "NDWI", "NDMI")
 
 class ExportContextError(ValueError):
     """Raised when the current analysis cannot be exported as a full snapshot."""
+
+
+_NON_COPYABLE_FIELDS = {"index_map", "time_series_plot", "climate_plot"}
+
+
+def _normalize_tabular_date(value: Any) -> Any:
+    if value is None:
+        return value
+    if not isinstance(value, str):
+        try:
+            if bool(pd.isna(value)):
+                return value
+        except (TypeError, ValueError):
+            pass
+    if isinstance(value, str) and len(value) == 8 and value.isdigit():
+        try:
+            return datetime.strptime(value, "%Y%m%d").date().isoformat()
+        except ValueError as error:
+            raise ExportContextError(f"Data tabular inválida: {value}") from error
+    try:
+        return normalize_date(value)
+    except (TypeError, ValueError) as error:
+        raise ExportContextError(f"Data tabular inválida: {value}") from error
+
+
+def _copy_export_value(value: Any, field_name: str | None = None) -> Any:
+    """Detach mutable data while retaining opaque pipeline/rendering objects."""
+    if field_name in _NON_COPYABLE_FIELDS:
+        return value
+    if isinstance(value, pd.DataFrame):
+        result = value.copy(deep=True)
+        if "date" in result.columns:
+            result["date"] = result["date"].map(_normalize_tabular_date)
+        return result
+    if field_name == "date":
+        return _normalize_tabular_date(value)
+    if isinstance(value, dict):
+        return {
+            key: _copy_export_value(item, key if isinstance(key, str) else None)
+            for key, item in value.items()
+        }
+    if isinstance(value, list):
+        return [_copy_export_value(item) for item in value]
+    if isinstance(value, tuple):
+        return tuple(_copy_export_value(item) for item in value)
+    return deepcopy(value)
 
 
 def _validate_geometry(geometry_geojson: Any) -> dict:
@@ -97,18 +146,21 @@ def build_export_context(
     if normalized_end < normalized_start:
         raise ExportContextError("Período inválido: a data inicial é posterior à data final")
 
-    geometry = _validate_geometry(geometry_geojson)
-    return {
+    geometry = _copy_export_value(_validate_geometry(geometry_geojson))
+    context = {
         "period": {"start_date": normalized_start, "end_date": normalized_end},
         "geometry_geojson": geometry,
-        "area_ha": analysis.get("area_ha"),
-        "map_center": list(analysis["map_center"])
-        if isinstance(analysis.get("map_center"), (list, tuple))
-        else analysis.get("map_center"),
+        "area_ha": _copy_export_value(analysis.get("area_ha")),
+        "map_center": _copy_export_value(analysis.get("map_center")),
         "indices": {
-            name: dict(indices[name]) for name in SUPPORTED_INDICES
+            name: _copy_export_value(indices[name]) for name in SUPPORTED_INDICES
         },
-        "image_count": analysis.get("image_count"),
-        "climate_data": analysis.get("climate_data"),
-        "climate_summary": analysis.get("climate_summary"),
+        "image_count": _copy_export_value(analysis.get("image_count")),
+        "climate_data": _copy_export_value(analysis.get("climate_data")),
+        "climate_summary": _copy_export_value(analysis.get("climate_summary")),
     }
+    if "collection_metadata" in analysis:
+        context["collection_metadata"] = _copy_export_value(
+            analysis["collection_metadata"]
+        )
+    return context
