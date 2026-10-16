@@ -5,7 +5,7 @@ Referência: `spec-ui-dashboard-parity.md`.
 | ID | Descrição | Critério de aceite | Dependências | Status |
 |---|---|---|---|---|
 | SPEC-15-01 | Versionar a imagem-base e fechar contratos visuais/dados | A imagem enviada está em `assets/dashboard-reference.png`; viewport (1536 × 1024) e campos exibidos estão identificados sem métricas sem fonte | Arquivo original fornecido | Concluída |
-| SPEC-15-02 | Especificar e configurar tiles Esri no mapa de seleção | `create_selection_map` configura World Imagery explicitamente, atribuição e escala; teste confirma tile layer | SPEC-15-01 | Não iniciado |
+| SPEC-15-02 | Especificar e configurar tiles Esri no mapa de seleção | `create_selection_map` configura World Imagery explicitamente, atribuição e escala; teste confirma tile layer | SPEC-15-01 | Concluída |
 | SPEC-15-03 | Preservar base satélite no mapa temático | `create_thematic_map` exibe a base satélite sob camada temática translúcida e mantém polígono/legenda | SPEC-15-02 | Não iniciado |
 | SPEC-15-04 | Construir cabeçalho e barra compacta de controles | Busca, período, índices e análise organizados conforme baseline, mantendo contratos de estado e validação | SPEC-15-01 | Não iniciado |
 | SPEC-15-05 | Exibir contexto geográfico da área real | Área em ha; perímetro/centroide somente se calculados geoespacialmente e sem consultas redundantes | SPEC-15-02 | Não iniciado |
