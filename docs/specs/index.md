@@ -32,6 +32,8 @@ Spec-Driven Development (SDD) é a prática de escrever especificações detalha
 | 13 | `13-cobertura-testes/` | `spec-cobertura-testes.md` | SPEC-13-01 a SPEC-13-14 | `tasks-cobertura-testes.md` |
 | 14 | `14-ui-v2-map-first/` | `spec-ui-v2-map-first.md` | SPEC-14-01 a SPEC-14-26 | `tasks-ui-v2-map-first.md` |
 | 15 | `15-ui-v2-dashboard-parity/` | `spec-ui-dashboard-parity.md` | SPEC-15-01 a SPEC-15-10 | `tasks-ui-dashboard-parity.md` |
+| 16 | `16-exportacao-resultados/` | `spec-exportacao-resultados.md` | SPEC-16-01 a SPEC-16-10 | `tasks-exportacao-resultados.md` |
+| 17 | `17-localizacoes-salvas/` | `spec-localizacoes-salvas.md` | SPEC-17-01 a SPEC-17-09 | `tasks-localizacoes-salvas.md` |
 
 ## Sub-tasks breakdown
 
@@ -54,6 +56,8 @@ Cada spec possui um arquivo `tasks-*.md` com a quebra em sub-tasks implementáve
 | SPEC-13-01 a SPEC-13-14 | Cobertura de testes | Fixtures, testes de processamento, UI, scripts e validação de 100% | 16h |
 | SPEC-14-01 a SPEC-14-26 | UI V2 Map-First | Refatoração incremental da interface, pipeline multiíndice, estados, estilo e testes | 25h |
 | SPEC-15-01 a SPEC-15-10 | UI V2 Dashboard Parity | Mapa de satélite, dashboard visual de referência, clima real, responsividade e validação | A estimar |
+| SPEC-16-01 a SPEC-16-10 | Exportação de resultados | Snapshot multiíndice, PDF de três páginas, XLSX, CSV ZIP e integração/testes | 24h30 |
+| SPEC-17-01 a SPEC-17-09 | Localizações salvas | Persistência SQLite, polígonos nomeados, restauração no mapa e testes | 17h30 |
 
 ## Requisitos Funcionais (RF) mapeados
 
@@ -73,6 +77,9 @@ Cada spec possui um arquivo `tasks-*.md` com a quebra em sub-tasks implementáve
 | RF12 | Bloquear e liberar navegação após seleção do polígono | `10-mapas-interacao/spec-mapa-interacao.md` |
 | RF13 | Exibir área em hectares ou acres | `11-unidades-area/spec-unidades-area.md` |
 | RF14 | Organizar resultados e alertas na interface | `12-interface-resultados/spec-interface-resultados.md` |
+| RF15 | Exportar análise completa multiíndice em PDF de três páginas | `16-exportacao-resultados/spec-exportacao-resultados.md` |
+| RF16 | Exportar dados analíticos e geográficos para XLSX e CSV | `16-exportacao-resultados/spec-exportacao-resultados.md` |
+| RF17 | Salvar, listar e restaurar localizações geográficas nomeadas | `17-localizacoes-salvas/spec-localizacoes-salvas.md` |
 | RF11 | Pesquisar e centralizar localidades no mapa | `10-mapas-interacao/spec-mapa-interacao.md` |
 | RF12 | Bloquear e liberar navegação após seleção do polígono | `10-mapas-interacao/spec-mapa-interacao.md` |
 | RF13 | Exibir área em hectares ou acres | `11-unidades-area/spec-unidades-area.md` |
