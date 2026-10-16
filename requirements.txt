@@ -57,6 +57,7 @@ matplotlib==3.10.8
 matplotlib-inline==0.2.1
 narwhals==2.18.0
 numpy==2.4.3
+openpyxl==3.1.5
 packaging==26.0
 pandas==2.3.3
 parso==0.8.6
@@ -85,6 +86,9 @@ python-dotenv==1.2.2
 pytz==2026.1.post1
 ratelim==0.1.6
 referencing==0.37.0
+# Export: ReportLab renders PDFs; openpyxl serializes XLSX. Pillow and matplotlib
+# are already pinned above for raster image composition and plot rendering.
+reportlab==4.5.1
 requests==2.32.5
 rpds-py==0.30.0
 scooby==0.11.0
