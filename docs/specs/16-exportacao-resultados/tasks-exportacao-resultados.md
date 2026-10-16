@@ -4,7 +4,7 @@ Referência: `spec-exportacao-resultados.md`.
 
 | ID | Descrição | Critério de aceite | Dependências | Esforço | Status |
 |---|---|---|---|---:|---|
-| SPEC-16-01 | Fechar contrato do snapshot exportável e validar pré-condições multiíndice | Contexto normalizado contém período, área/geometria, três índices, clima, séries e anomalias disponíveis; análise single/incompleta é rejeitada sem serviço remoto | SPEC-15-08, critérios desta spec | 2h | Não iniciado |
+| SPEC-16-01 | Fechar contrato do snapshot exportável e validar pré-condições multiíndice | Contexto normalizado contém período, área/geometria, três índices, clima, séries e anomalias disponíveis; análise single/incompleta é rejeitada sem serviço remoto | SPEC-15-08, critérios desta spec | 2h | Concluída |
 | SPEC-16-02 | Definir/adicionar dependências de renderização e serialização | Bibliotecas para PDF, imagens estáticas e XLSX são justificadas, fixadas em `requirements.txt` e importáveis no ambiente de teste | SPEC-16-01 | 1h | Não iniciado |
 | SPEC-16-03 | Implementar preparação de dados compartilhada para exportação | Normalização pura preserva tipos, ISO dates, nulos, unidades, GeoJSON e dados comuns sem mutar resultados | SPEC-16-01 | 2h | Não iniciado |
 | SPEC-16-04 | Gerar mapa temático estático sobre imagem de satélite para cada índice | Cada índice produz imagem raster com base satélite, overlay temático, contorno da área e legenda; falhas retornam estado explícito e são mockáveis | SPEC-15-02/03, SPEC-16-02/03 | 4h | Não iniciado |
