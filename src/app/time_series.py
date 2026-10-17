@@ -64,6 +64,7 @@ def plot_time_series(data: list[dict], index_name: str) -> go.Figure | None:
     fig.update_layout(
         title=f"Evolução Temporal de {index_name}",
         xaxis_title="Data",
+        xaxis=dict(tickformat="%d-%m-%Y"),
         yaxis_title=index_name,
         yaxis=dict(range=[-1, 1]),
         template="plotly_white",
