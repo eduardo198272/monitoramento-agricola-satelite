@@ -197,6 +197,8 @@ class TestPlotTimeSeries:
         assert fig is not None
         assert hasattr(fig, 'data')
         assert fig.layout.title.text == "Evolução Temporal de NDVI"
+        assert fig.layout.xaxis.tickformat == "%d-%m-%Y"
+        assert list(fig.data[0].x) == ["2026-01-01", "2026-02-01", "2026-03-01"]
         assert list(fig.layout.yaxis.range) == [-1, 1]
 
     def test_plot_time_series_empty_data_returns_none(self):
