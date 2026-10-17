@@ -476,6 +476,59 @@ class TestIndexPixelPreloading:
         assert params["max"] == 0.8
         assert params["palette"] == NDVI_PALETTE
 
+    @pytest.mark.parametrize("minimum, maximum", [(float("nan"), 0.5), (0.8, 0.2)])
+    def test_tile_url_falls_back_to_full_index_range_for_invalid_data_range(
+        self, minimum, maximum
+    ):
+        image = MagicMock()
+        fetcher = MagicMock()
+        fetcher.url_format = "https://earthengine.example/tiles"
+        image.select.return_value.clip.return_value.getMapId.return_value = {
+            "tile_fetcher": fetcher
+        }
+
+        result = get_index_map_tile_url(image, "NDVI", MagicMock(), minimum, maximum)
+
+        assert result == fetcher.url_format
+        params = image.select.return_value.clip.return_value.getMapId.call_args.args[0]
+        assert (params["min"], params["max"]) == (-1, 1)
+
+    def test_tile_url_rejects_unknown_index_and_missing_tile_url(self):
+        with pytest.raises(ValueError, match="Índice desconhecido"):
+            get_index_map_tile_url(MagicMock(), "EVI", MagicMock())
+
+        image = MagicMock()
+        image.select.return_value.clip.return_value.getMapId.return_value = {}
+        with pytest.raises(ValueError, match="não retornou uma URL"):
+            get_index_map_tile_url(image, "NDVI", MagicMock())
+
+    @staticmethod
+    def configure_preload(mock_ee, geometry, *, bounds=None, transform=None,
+                          properties=None):
+        region = MagicMock()
+        geometry.bounds.return_value = region
+        region.coordinates.return_value.getInfo.return_value = bounds or [[
+            [0, 0], [20, 0], [20, 20], [0, 20], [0, 0]
+        ]]
+        projection = MagicMock()
+        mock_ee.Projection.return_value.atScale.return_value = projection
+        projection.getInfo.return_value = {
+            "transform": transform if transform is not None else [10, 0, 0, 0, -10, 0]
+        }
+        stack = MagicMock()
+        stack.addBands.return_value = stack
+        stack.sampleRectangle.return_value.getInfo.return_value = {
+            "properties": properties if properties is not None else {
+                "NDVI": [[0.2, 0.4], [0.6, 0.8]],
+                "grid_x": [[100, 101], [100, 101]],
+                "grid_y": [[200, 200], [201, 201]],
+            }
+        }
+        image = MagicMock()
+        image.select.return_value.reproject.return_value.clip.return_value.rename.return_value.toFloat.return_value = stack
+        mock_ee.Image.pixelCoordinates.return_value.rename.return_value = MagicMock()
+        return image, stack
+
     @patch("src.app.maps.ee")
     def test_preloads_clipped_index_grid_for_local_hover(self, mock_ee):
         geometry = MagicMock()
@@ -530,6 +583,112 @@ class TestIndexPixelPreloading:
 
         with pytest.raises(ValueError, match="grande demais para pré-carregar"):
             preload_index_values({"NDVI": MagicMock()}, geometry, [-28, -52])
+
+    @pytest.mark.parametrize(
+        "images, scale, error",
+        [({}, 10, "Nenhum índice"), ({"NDVI": MagicMock()}, 0, "escala"),
+         ({"NDVI": MagicMock()}, 1.5, "escala")],
+    )
+    @patch("src.app.maps.ee")
+    def test_preload_rejects_empty_images_and_invalid_scales(
+        self, mock_ee, images, scale, error
+    ):
+        with pytest.raises(ValueError, match=error):
+            preload_index_values(images, MagicMock(), [-28, -52], scale=scale)
+        mock_ee.Projection.assert_not_called()
+
+    @patch("src.app.maps.ee")
+    def test_preload_rejects_missing_projection_transform(self, mock_ee):
+        mock_ee.Projection.return_value.atScale.return_value.getInfo.return_value = {}
+
+        with pytest.raises(ValueError, match="grade espacial"):
+            preload_index_values({"NDVI": MagicMock()}, MagicMock(), [-28, -52])
+
+    @pytest.mark.parametrize(
+        "bounds",
+        [[["bad", "bounds"]], [[[["bad", 0], [1, 1]]]]],
+    )
+    @patch("src.app.maps.ee")
+    def test_preload_rejects_invalid_bounds(self, mock_ee, bounds):
+        geometry = MagicMock()
+        self.configure_preload(mock_ee, geometry, bounds=bounds)
+        with pytest.raises(ValueError, match="extensão válida"):
+            preload_index_values({"NDVI": MagicMock()}, geometry, [-28, -52])
+
+    @pytest.mark.parametrize(
+        "properties",
+        [
+            {"NDVI": [[0.2]], "grid_x": [], "grid_y": []},
+            {"NDVI": [[0.2]], "grid_x": [[1]], "grid_y": [[1, 2]]},
+            {"NDVI": [[0.2]], "grid_x": [[1]], "grid_y": [[1]]},
+        ],
+    )
+    @patch("src.app.maps.ee")
+    def test_preload_rejects_empty_or_inconsistent_grid_coordinates(
+        self, mock_ee, properties
+    ):
+        geometry = MagicMock()
+        self.configure_preload(mock_ee, geometry, properties=properties)
+        with pytest.raises(ValueError, match="não retornou pixels"):
+            preload_index_values({"NDVI": MagicMock()}, geometry, [-28, -52])
+
+    @patch("src.app.maps.ee")
+    def test_preload_rejects_invalid_index_pixel_shape(self, mock_ee):
+        geometry = MagicMock()
+        image, _ = self.configure_preload(
+            mock_ee,
+            geometry,
+            properties={
+                "NDVI": [0.2, 0.4],
+                "grid_x": [[1, 2]],
+                "grid_y": [[1, 1]],
+            },
+        )
+        with pytest.raises(ValueError, match="pixels de NDVI"):
+            preload_index_values({"NDVI": image}, geometry, [-28, -52])
+
+    @patch("src.app.maps.ee")
+    def test_preload_handles_empty_values_and_constant_edge_ranges(self, mock_ee):
+        geometry = MagicMock()
+        image, _ = self.configure_preload(
+            mock_ee,
+            geometry,
+            properties={
+                "NDVI": [[-9999.0, float("nan")]],
+                "NDWI": [[-1.0, -1.0]],
+                "NDMI": [[1.0, 1.0]],
+                "grid_x": [[1, 2]],
+                "grid_y": [[1, 1]],
+            },
+        )
+        results = preload_index_values(
+            {"NDVI": image, "NDWI": image, "NDMI": image}, geometry, [-28, -52]
+        )
+
+        assert results["indices"]["NDVI"]["minimum"] == -1.0
+        assert results["indices"]["NDVI"]["maximum"] == 1.0
+        assert results["indices"]["NDWI"]["minimum"] == -1.0
+        assert results["indices"]["NDWI"]["maximum"] == pytest.approx(-0.99)
+        assert results["indices"]["NDMI"]["minimum"] == pytest.approx(0.99)
+        assert results["indices"]["NDMI"]["maximum"] == 1.0
+
+    @patch("src.app.maps.ee")
+    def test_preload_rejects_actual_sample_size_over_transfer_limit(
+        self, mock_ee, monkeypatch
+    ):
+        import src.app.maps as maps_module
+
+        monkeypatch.setattr(maps_module, "MAX_PRELOADED_VALUES", 50)
+        geometry = MagicMock()
+        image, stack = self.configure_preload(mock_ee, geometry)
+        values = [[0.2] * 8 for _ in range(8)]
+        coordinates = [list(range(8)) for _ in range(8)]
+        stack.sampleRectangle.return_value.getInfo.return_value["properties"].update(
+            {"NDVI": values, "grid_x": coordinates, "grid_y": coordinates}
+        )
+
+        with pytest.raises(ValueError, match="grande demais para pré-carregar"):
+            preload_index_values({"NDVI": image}, geometry, [-28, -52])
 
 
 class TestEnableAreaDraw:
@@ -858,6 +1017,37 @@ class TestCalculateAreaContext:
         geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-52.4, -28.3]
 
         with pytest.raises(ValueError, match="valores finitos"):
+            calculate_area_context(geometry)
+
+    def test_calculate_area_context_raises_for_zero_perimeter(self):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = 125000.0
+        geometry.perimeter.return_value.getInfo.return_value = 0.0
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-52.4, -28.3]
+
+        with pytest.raises(ValueError, match="perímetro.*<= 0"):
+            calculate_area_context(geometry)
+
+    def test_calculate_area_context_raises_for_malformed_centroid(self):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.return_value = 125000.0
+        geometry.perimeter.return_value.getInfo.return_value = 5000.0
+        geometry.centroid.return_value.coordinates.return_value.getInfo.return_value = [-52.4]
+
+        with pytest.raises(ValueError, match="Centroide inválido"):
+            calculate_area_context(geometry)
+
+    def test_calculate_area_context_wraps_non_value_errors(self):
+        from src.app.maps import calculate_area_context
+
+        geometry = MagicMock()
+        geometry.area.return_value.getInfo.side_effect = RuntimeError("offline")
+
+        with pytest.raises(ValueError, match="Falha ao calcular contexto geográfico: offline"):
             calculate_area_context(geometry)
 
     def test_calculate_area_context_raises_for_invalid_centroid(self):
