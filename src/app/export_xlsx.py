@@ -6,8 +6,8 @@ import json
 from typing import Any
 
 import openpyxl
-from openpyxl.cell.cell import Cell
-from openpyxl.styles import Alignment, Font, numbers
+from openpyxl.styles import Font
+import pandas as pd
 
 from src.app.export_context import SUPPORTED_INDICES
 
@@ -71,9 +71,9 @@ def _write_resumo_sheet(ws, context: dict, generated_at: date | datetime | None 
         ("area_ha", area_ha, "ha" if area_ha is not None else ""),
         ("imagens_analisadas", image_count, "imagens" if image_count is not None else ""),
         ("data_geracao", generated_at.date().isoformat() if hasattr(generated_at, "date") else generated_at.isoformat(), ""),
-        ("precipitacao_total_mm", climate_summary.get("precipitation_mm"), "mm"),
-        ("temperatura_media_c", climate_summary.get("temperature_c"), "C"),
-        ("radiacao_solar_media_mj_m2_dia", climate_summary.get("solar_radiation_mj_m2_day"), "MJ/m2/dia"),
+        ("precipitacao_total_mm", climate_summary.get("total_precipitation_mm", climate_summary.get("precipitation_mm")), "mm"),
+        ("temperatura_media_c", climate_summary.get("mean_temperature_c", climate_summary.get("temperature_c")), "C"),
+        ("radiacao_solar_media_mj_m2_dia", climate_summary.get("mean_solar_radiation_mj_m2_day", climate_summary.get("solar_radiation_mj_m2_day")), "MJ/m2/dia"),
     ]
 
     for row_idx, (campo, valor, unidade) in enumerate(rows, 2):
@@ -120,11 +120,19 @@ def _write_clima_sheet(ws, climate_data: list[dict]) -> None:
     """Write the Clima sheet with date, precipitation_mm, temperature_c, solar_radiation_mj_m2_day."""
     _write_header(ws, ["date", "precipitation_mm", "temperature_c", "solar_radiation_mj_m2_day"])
 
+    if isinstance(climate_data, pd.DataFrame):
+        climate_data = climate_data.to_dict(orient="records")
+
     for row_idx, record in enumerate(climate_data or [], 2):
         date_value = _to_iso_date(record.get("date"))
-        precip = _format_number_for_cell(record.get("precipitation_mm"))
-        temp = _format_number_for_cell(record.get("temperature_c"))
-        rad = _format_number_for_cell(record.get("solar_radiation_mj_m2_day"))
+        precip = _format_number_for_cell(record.get("precipitation_mm", record.get("precipitation")))
+        temp = _format_number_for_cell(record.get("temperature_c", record.get("temperature")))
+        radiation = record.get("solar_radiation_mj_m2_day")
+        if radiation is None and record.get("solar_radiation") is not None:
+            radiation = _format_number_for_cell(record["solar_radiation"])
+            if radiation is not None:
+                radiation *= 3.6  # NASA POWER provides kWh/m²/day; export uses MJ/m²/day.
+        rad = _format_number_for_cell(radiation)
 
         ws.cell(row=row_idx, column=1, value=date_value)
         cell_precip = ws.cell(row=row_idx, column=2, value=precip)
