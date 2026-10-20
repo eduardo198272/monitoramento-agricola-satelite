@@ -5,7 +5,7 @@ Referência: `spec-localizacoes-salvas.md`.
 | ID | Descrição | Critério de aceite | Dependências | Esforço | Status |
 |---|---|---|---|---:|---|
 | SPEC-17-01 | Definir contrato persistente e configuração SQLite | Caminho configurável/default documentado, tabela/migração inicial e contrato CRUD definidos; nenhum dado salvo em `session_state` como armazenamento primário | Critérios desta spec | 1h30 | Concluída |
-| SPEC-17-02 | Implementar repositório SQLite de localizações | Inicialização idempotente, conexão segura, transações e CRUD operam com banco temporário; erros de I/O convertidos em erros tratáveis | SPEC-17-01 | 2h | Não iniciado |
+| SPEC-17-02 | Implementar repositório SQLite de localizações | Inicialização idempotente, conexão segura, transações e CRUD operam com banco temporário; erros de I/O convertidos em erros tratáveis | SPEC-17-01 | 2h | Concluída |
 | SPEC-17-03 | Validar/normalizar nome e GeoJSON antes de salvar | Trim, tamanho, duplicidade case-insensitive, limites e polígono inválido testados; geometria serializa sem perda | SPEC-10-09, SPEC-17-02 | 2h | Não iniciado |
 | SPEC-17-04 | Implementar operações de salvar, listar, buscar e excluir | Serviço de domínio usa repositório; listagem é determinística; ID inexistente e duplicatas têm semântica documentada | SPEC-17-02/03 | 1h30 | Não iniciado |
 | SPEC-17-05 | Implementar fluxo UI `Salvar localização` em diálogo/modal | Ação só aparece para seleção válida; diálogo confirma/cancela, grava uma vez e fornece feedback acessível | SPEC-17-04 | 2h | Não iniciado |
