@@ -13,7 +13,7 @@ Referência: `spec-exportacao-resultados.md`.
 | SPEC-16-07 | Implementar pacote CSV ZIP equivalente ao XLSX | ZIP contém os sete CSVs definidos, UTF-8, cabeçalhos presentes mesmo sem linhas e sem caminhos/arquivos indevidos | SPEC-16-03/06 | 2h | Concluída |
 | SPEC-16-08 | Integrar ações e downloads Streamlit ao ciclo de análise | PDF/XLSX/CSV ficam disponíveis após sucesso multiíndice; estado inválido e exceções recebem mensagem sem rerun remoto | SPEC-16-05/06/07 | 2h | Concluída |
 | SPEC-16-09 | Cobrir validação, erros, dados ausentes e ausência de chamadas externas | Testes inspecionam páginas/conteúdo PDF, abas/células XLSX, membros/dados CSV, estado single-index e contagem zero de requests externos | SPEC-16-04 a SPEC-16-08 | 3h | Concluída |
-| SPEC-16-10 | Validar artefatos visualmente e documentar limitações/atribuições | PDF revisado em viewer com três páginas/mapas legíveis; fontes e limitações do mapa estático registradas; suíte relevante passa | SPEC-16-09 | 1h30 | Não iniciado |
+| SPEC-16-10 | Validar artefatos visualmente e documentar limitações/atribuições | PDF revisado em viewer com três páginas/mapas legíveis; fontes e limitações do mapa estático registradas; suíte relevante passa | SPEC-16-09 | 1h30 | Concluída |
 
 ## Ordem de execução
 
