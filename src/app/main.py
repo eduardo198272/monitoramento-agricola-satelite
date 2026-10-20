@@ -24,6 +24,10 @@ from src.app.map_interaction import render_index_hover_map
 from src.app.anomalies import compute_trend
 from src.app.styles import load_styles
 from src.app.pipeline import run_analysis, run_multi_analysis
+from src.app.export_context import build_export_context
+from src.app.export_pdf import render_analysis_pdf
+from src.app.export_xlsx import render_analysis_xlsx
+from src.app.export_csv import render_analysis_csv_zip
 
 logger = logging.getLogger(__name__)
 
@@ -49,6 +53,8 @@ UI_STATE_DEFAULTS = {
     "visible_index": "NDVI",
     "analysis_results": {},
     "analysis_metadata": {},
+    "analysis_snapshot": None,
+    "export_payloads": {},
     "analysis_status": "idle",
     "analysis_error": None,
     "analysis_map": None,
@@ -72,6 +78,8 @@ def clear_analysis_state() -> None:
     """Clear results that no longer match the current area or request."""
     st.session_state.analysis_results = {}
     st.session_state.analysis_metadata = {}
+    st.session_state.analysis_snapshot = None
+    st.session_state.export_payloads = {}
     st.session_state.analysis_map = None
     st.session_state.analysis_map_center = None
     st.session_state.index_value_grid = None
@@ -521,6 +529,96 @@ def render_results_panels() -> None:
     display_analysis_details(visible_index, res, climate_plot)
 
 
+EXPORT_FORMATS = {
+    "pdf": {
+        "label": "PDF",
+        "filename": "relatorio-monitoramento.pdf",
+        "mime": "application/pdf",
+        "builder": "render_analysis_pdf",
+    },
+    "xlsx": {
+        "label": "Excel",
+        "filename": "resultados-monitoramento.xlsx",
+        "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "builder": "render_analysis_xlsx",
+    },
+    "csv": {
+        "label": "CSV (ZIP)",
+        "filename": "resultados-monitoramento.zip",
+        "mime": "application/zip",
+        "builder": "render_analysis_csv_zip",
+    },
+}
+
+
+def render_export_actions() -> None:
+    """Render on-demand export actions for the current successful multi-index run."""
+    snapshot = st.session_state.get("analysis_snapshot")
+    if st.session_state.get("analysis_status") != "success":
+        return
+    if st.session_state.get("analysis_mode") != "multi":
+        st.info("Para exportar os resultados, execute a análise multiíndice (Todos).")
+        return
+    if not isinstance(snapshot, dict):
+        st.info("Execute uma nova análise multiíndice antes de exportar os resultados.")
+        return
+
+    analysis = snapshot.get("analysis")
+    indices = analysis.get("indices") if isinstance(analysis, dict) else None
+    geometry = snapshot.get("geometry_geojson")
+    if (
+        not isinstance(analysis, dict)
+        or analysis.get("success") is not True
+        or not isinstance(indices, dict)
+        or any(not isinstance(indices.get(name), dict) for name in SUPPORTED_INDICES)
+        or not isinstance(geometry, dict)
+        or geometry.get("type") != "Polygon"
+        or not geometry.get("coordinates")
+    ):
+        st.info("A análise está incompleta ou sem geometria válida; execute Todos novamente.")
+        return
+
+    matches_current_request = (
+        geometry == st.session_state.get("aoi_geojson")
+        and snapshot.get("start_date") == st.session_state.get("analysis_start_date")
+        and snapshot.get("end_date") == st.session_state.get("analysis_end_date")
+        and st.session_state.get("selected_indices") == SUPPORTED_INDICES
+    )
+    if not matches_current_request:
+        st.info("Os parâmetros mudaram. Execute uma nova análise multiíndice para exportar.")
+        st.session_state.export_payloads = {}
+        return
+
+    st.subheader("Exportar resultados")
+    payloads = st.session_state.setdefault("export_payloads", {})
+    for format_key, details in EXPORT_FORMATS.items():
+        payload = payloads.get(format_key)
+        if payload is None:
+            if st.button(f"Gerar {details['label']}", key=f"generate_export_{format_key}"):
+                try:
+                    context = build_export_context(
+                        analysis,
+                        geometry,
+                        snapshot["start_date"],
+                        snapshot["end_date"],
+                    )
+                    payloads[format_key] = globals()[details["builder"]](context)
+                except Exception:
+                    logger.exception("Failed to generate %s analysis export", format_key)
+                    st.error(
+                        f"Não foi possível gerar o arquivo {details['label']}. "
+                        "Confira os resultados e tente novamente."
+                    )
+        else:
+            st.download_button(
+                f"Baixar {details['label']}",
+                data=payload,
+                file_name=details["filename"],
+                mime=details["mime"],
+                key=f"download_export_{format_key}",
+            )
+
+
 def render_results_map_area() -> bool:
     """Show the single dynamic map in place of the area-selection map."""
     available_indices = list(st.session_state.analysis_results)
@@ -569,6 +667,8 @@ def main():
             st.session_state.analysis_error = None
             st.session_state.analysis_results = {}
             st.session_state.analysis_metadata = {}
+            st.session_state.analysis_snapshot = None
+            st.session_state.export_payloads = {}
             st.session_state.analysis_map = None
             st.session_state.index_tile_urls = {}
             st.session_state.index_value_grid = None
@@ -610,7 +710,14 @@ def main():
                     if st.session_state.analysis_mode == "multi":
                         st.session_state.analysis_results = result["indices"]
                         st.session_state.visible_index = selected_indices[0]
+                        st.session_state.analysis_snapshot = {
+                            "analysis": result,
+                            "geometry_geojson": st.session_state.aoi_geojson,
+                            "start_date": start_date,
+                            "end_date": end_date,
+                        }
                     else:
+                        st.session_state.analysis_snapshot = None
                         st.session_state.visible_index = selected_indices[0]
                         st.session_state.analysis_results = {st.session_state.visible_index: result}
                     st.session_state.analysis_map_center = (
@@ -634,12 +741,15 @@ def main():
                         st.session_state.index_preload_error = str(preload_error)
                     st.session_state.analysis_status = "success"
                     st.session_state.analysis_error = None
+                    st.session_state.export_payloads = {}
                 else:
                     status, message = public_analysis_error(result.get("error"))
                     st.session_state.analysis_error = message
                     st.session_state.analysis_map = None
                     st.session_state.analysis_results = {}
                     st.session_state.analysis_metadata = {}
+                    st.session_state.analysis_snapshot = None
+                    st.session_state.export_payloads = {}
                     st.session_state.analysis_status = status
 
     has_result_maps = bool(st.session_state.analysis_results) and all(
@@ -648,6 +758,7 @@ def main():
     if st.session_state.analysis_status == "success" and has_result_maps:
         if render_results_map_area():
             render_results_panels()
+            render_export_actions()
         else:
             render_selection_map_area()
     else:
