@@ -149,6 +149,59 @@ def test_export_builder_failure_is_reported_and_does_not_remove_analysis(ui, mon
     assert "xlsx" not in state.export_payloads
 
 
+@pytest.mark.parametrize(
+    "clicked_index,format_key,builder_name",
+    [
+        (0, "pdf", "render_analysis_pdf"),
+        (1, "xlsx", "render_analysis_xlsx"),
+        (2, "csv", "render_analysis_csv_zip"),
+    ],
+)
+def test_each_export_format_uses_snapshot_without_pipeline_or_network_calls(
+    ui, monkeypatch, clicked_index, format_key, builder_name
+):
+    import requests
+
+    stub, state = ui
+    context = {"indices": state.analysis_snapshot["analysis"]["indices"]}
+    context_builder = MagicMock(return_value=context)
+    builders = {
+        name: MagicMock(return_value=f"{name}-bytes".encode())
+        for name in ("render_analysis_pdf", "render_analysis_xlsx", "render_analysis_csv_zip")
+    }
+    pipeline_calls = {
+        name: MagicMock()
+        for name in ("run_analysis", "run_multi_analysis")
+    }
+    monkeypatch.setattr(main_module, "build_export_context", context_builder)
+    for name, builder in builders.items():
+        monkeypatch.setattr(main_module, name, builder)
+    for name, pipeline in pipeline_calls.items():
+        monkeypatch.setattr(main_module, name, pipeline)
+    monkeypatch.setattr(
+        requests.sessions.Session,
+        "request",
+        lambda *args, **kwargs: pytest.fail("unexpected external request during export"),
+    )
+    stub.button.side_effect = [index == clicked_index for index in range(3)]
+
+    main_module.render_export_actions()
+
+    context_builder.assert_called_once_with(
+        state.analysis_snapshot["analysis"],
+        state.analysis_snapshot["geometry_geojson"],
+        state.analysis_snapshot["start_date"],
+        state.analysis_snapshot["end_date"],
+    )
+    builders[builder_name].assert_called_once_with(context)
+    for name, builder in builders.items():
+        if name != builder_name:
+            builder.assert_not_called()
+    for pipeline in pipeline_calls.values():
+        pipeline.assert_not_called()
+    assert state.export_payloads[format_key] == f"{builder_name}-bytes".encode()
+
+
 def test_clear_analysis_state_invalidates_export_snapshot(stub_streamlit=None):
     state = SessionState(
         analysis_results={"NDVI": {}}, analysis_metadata={"image_count": 1},
