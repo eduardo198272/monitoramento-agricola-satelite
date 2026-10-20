@@ -223,6 +223,11 @@ class TestWorkspaceControls:
             "climate_data": None,
             "climate_plot": None,
         }
+        snapshot = function_app.session_state["analysis_snapshot"]
+        assert snapshot["analysis"]["indices"] == index_results
+        assert snapshot["geometry_geojson"] == function_app.session_state["aoi_geojson"]
+        assert snapshot["start_date"] == function_app.session_state["analysis_start_date"]
+        assert snapshot["end_date"] == function_app.session_state["analysis_end_date"]
 
         function_app.run()
 
