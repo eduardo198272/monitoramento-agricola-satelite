@@ -94,6 +94,135 @@ class TestWorkspaceControls:
         search_button = next((b for b in buttons if b.label == "🔍"), None)
         assert search_button is not None
 
+    def test_save_location_action_is_hidden_without_valid_selection(self, app):
+        assert all(button.label != "Salvar localização" for button in app.button)
+
+    def test_save_location_action_is_available_for_valid_selection(self, app):
+        app.session_state["aoi_geojson"] = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                             [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        app.session_state["aoi_geometry"] = make_geometry()
+
+        app.run()
+
+        assert any(button.label == "Salvar localização" for button in app.button)
+
+    def test_save_location_dialog_cancel_does_not_persist(self, app, monkeypatch):
+        app.session_state["aoi_geojson"] = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                             [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        app.session_state["aoi_geometry"] = make_geometry()
+        service = MagicMock()
+        monkeypatch.setattr(main_module, "SavedLocationsService", MagicMock(return_value=service), raising=False)
+        app.run()
+
+        next(button for button in app.button if button.label == "Salvar localização").click().run()
+
+        assert any(item.label == "Nome da localização" for item in app.text_input)
+        next(button for button in app.button if button.label == "Cancelar").click().run()
+        service.save_location.assert_not_called()
+
+    def test_save_location_dialog_confirms_once_and_shows_success(self, app, monkeypatch):
+        geojson = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                             [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        app.session_state["aoi_geojson"] = geojson
+        app.session_state["aoi_geometry"] = make_geometry()
+        service = MagicMock()
+        service.save_location.return_value = {"id": "saved-1", "name": "Talhão Norte"}
+        monkeypatch.setattr(main_module, "SavedLocationsService", MagicMock(return_value=service), raising=False)
+        app.run()
+
+        next(button for button in app.button if button.label == "Salvar localização").click().run()
+        next(item for item in app.text_input if item.label == "Nome da localização").set_value("Talhão Norte")
+        next(button for button in app.button if button.label == "Confirmar").click().run()
+
+        service.save_location.assert_called_once_with("Talhão Norte", geojson)
+        assert any("foi salva" in item.value for item in app.success)
+
+    def test_duplicate_location_name_shows_guidance(self, app, monkeypatch):
+        from src.app.saved_locations_service import SavedLocationDuplicateError
+
+        app.session_state["aoi_geojson"] = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                             [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        app.session_state["aoi_geometry"] = make_geometry()
+        service = MagicMock()
+        service.save_location.side_effect = SavedLocationDuplicateError("Já existe")
+        monkeypatch.setattr(main_module, "SavedLocationsService", MagicMock(return_value=service), raising=False)
+        app.run()
+
+        next(button for button in app.button if button.label == "Salvar localização").click().run()
+        next(item for item in app.text_input if item.label == "Nome da localização").set_value("Duplicada")
+        next(button for button in app.button if button.label == "Confirmar").click().run()
+
+        assert any("Já existe" in item.value for item in app.error)
+
+    def test_blank_location_name_shows_validation_message(self, app, monkeypatch):
+        app.session_state["aoi_geojson"] = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                             [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        app.session_state["aoi_geometry"] = make_geometry()
+        service = MagicMock()
+        monkeypatch.setattr(main_module, "SavedLocationsService", MagicMock(return_value=service), raising=False)
+        app.run()
+
+        next(button for button in app.button if button.label == "Salvar localização").click().run()
+        next(button for button in app.button if button.label == "Confirmar").click().run()
+
+        service.save_location.assert_not_called()
+        assert any("Informe um nome" in item.value for item in app.error)
+
+    def test_storage_failure_shows_recoverable_message(self, app, monkeypatch):
+        from src.app.saved_locations_repository import SavedLocationStorageError
+
+        app.session_state["aoi_geojson"] = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                             [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        app.session_state["aoi_geometry"] = make_geometry()
+        service = MagicMock()
+        service.save_location.side_effect = SavedLocationStorageError("internal details")
+        monkeypatch.setattr(main_module, "SavedLocationsService", MagicMock(return_value=service), raising=False)
+        app.run()
+
+        next(button for button in app.button if button.label == "Salvar localização").click().run()
+        next(item for item in app.text_input if item.label == "Nome da localização").set_value("Área")
+        next(button for button in app.button if button.label == "Confirmar").click().run()
+
+        assert any("Tente novamente mais tarde" in item.value for item in app.error)
+        assert all("internal details" not in item.value for item in app.error)
+
+    def test_unexpected_failure_shows_generic_message(self, app, monkeypatch):
+        app.session_state["aoi_geojson"] = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                             [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        app.session_state["aoi_geometry"] = make_geometry()
+        service = MagicMock()
+        service.save_location.side_effect = RuntimeError("secret implementation detail")
+        monkeypatch.setattr(main_module, "SavedLocationsService", MagicMock(return_value=service), raising=False)
+        app.run()
+
+        next(button for button in app.button if button.label == "Salvar localização").click().run()
+        next(item for item in app.text_input if item.label == "Nome da localização").set_value("Área")
+        next(button for button in app.button if button.label == "Confirmar").click().run()
+
+        assert any("Ocorreu um erro ao salvar" in item.value for item in app.error)
+        assert all("secret implementation detail" not in item.value for item in app.error)
+
     def test_workspace_has_date_inputs(self, app):
         date_inputs = app.date_input
         assert len(date_inputs) >= 2

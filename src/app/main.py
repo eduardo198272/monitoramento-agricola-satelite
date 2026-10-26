@@ -28,6 +28,12 @@ from src.app.export_context import build_export_context
 from src.app.export_pdf import render_analysis_pdf
 from src.app.export_xlsx import render_analysis_xlsx
 from src.app.export_csv import render_analysis_csv_zip
+from src.app.saved_locations_repository import SavedLocationStorageError
+from src.app.saved_locations_service import (
+    SavedLocationDuplicateError,
+    SavedLocationsService,
+)
+from src.app.saved_locations_validation import SavedLocationValidationError
 
 logger = logging.getLogger(__name__)
 
@@ -48,6 +54,8 @@ UI_STATE_DEFAULTS = {
     "aoi_area_ha": None,
     "aoi_perimeter_km": None,
     "aoi_centroid": None,
+    "show_save_location_dialog": False,
+    "saved_location_name": "",
     "analysis_mode": "single",
     "selected_indices": ["NDVI"],
     "visible_index": "NDVI",
@@ -97,6 +105,50 @@ def clear_area_selection_state() -> None:
     st.session_state.aoi_perimeter_km = None
     st.session_state.aoi_centroid = None
     clear_analysis_state()
+
+
+@st.dialog("Salvar localização")
+def render_save_location_dialog() -> None:
+    """Ask for a name and persist the currently selected polygon on confirmation."""
+    st.write("Dê um nome para identificar esta área posteriormente.")
+    name = st.text_input(
+        "Nome da localização",
+        max_chars=100,
+        key="saved_location_name",
+    )
+    confirm_col, cancel_col = st.columns(2)
+    with confirm_col:
+        confirm = st.button("Confirmar", type="primary", key="confirm_save_location")
+    with cancel_col:
+        cancel = st.button("Cancelar", key="cancel_save_location")
+
+    if cancel:
+        st.session_state.show_save_location_dialog = False
+        return
+
+    if not confirm:
+        return
+
+    if not name.strip():
+        st.error("Informe um nome para a localização.")
+        return
+
+    try:
+        saved = SavedLocationsService().save_location(
+            name,
+            st.session_state.aoi_geojson,
+        )
+    except (SavedLocationValidationError, SavedLocationDuplicateError) as error:
+        st.error(str(error))
+    except SavedLocationStorageError:
+        logger.exception("Could not persist saved location")
+        st.error("Não foi possível salvar a localização. Tente novamente mais tarde.")
+    except Exception:
+        logger.exception("Unexpected error while saving location")
+        st.error("Ocorreu um erro ao salvar a localização. Tente novamente.")
+    else:
+        st.session_state.show_save_location_dialog = False
+        st.success(f'A localização "{saved["name"]}" foi salva.')
 
 
 def is_no_images_error(error: str) -> bool:
@@ -487,6 +539,23 @@ def render_selection_map_area() -> None:
                 if area_ha is not None
                 else "Área selecionada."
             )
+
+    has_valid_selection = (
+        st.session_state.aoi_geometry is not None
+        and isinstance(st.session_state.aoi_geojson, dict)
+    )
+    if has_valid_selection:
+        if st.button(
+            "Salvar localização",
+            key="open_save_location_dialog",
+            help="Salvar esta área desenhada para reutilizá-la depois",
+        ):
+            st.session_state.show_save_location_dialog = True
+    else:
+        st.session_state.show_save_location_dialog = False
+
+    if has_valid_selection and st.session_state.show_save_location_dialog:
+        render_save_location_dialog()
 
 
 def render_results_panels() -> None:
