@@ -141,12 +141,27 @@ class TestWorkspaceControls:
     def test_selecting_saved_location_does_not_geocode_or_start_analysis(
         self, app, monkeypatch
     ):
+        geojson = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                              [-52.0, -28.1], [-52.1, -28.0]]],
+        }
         service = MagicMock()
         service.list_saved_locations.return_value = [
             {"id": "loc-123", "name": "Fazenda Leste", "center": {"lat": -28, "lon": -52}},
         ]
+        service.get_saved_location.return_value = {
+            "id": "loc-123", "name": "Fazenda Leste", "geojson": geojson,
+        }
         monkeypatch.setattr(
             main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+        geometry = object()
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        monkeypatch.setattr(
+            main_module,
+            "calculate_area_context",
+            lambda _: {"area_ha": 4.0, "perimeter_km": 1.0, "centroid": (-28.05, -52.05)},
         )
         search = MagicMock(side_effect=AssertionError("Nominatim must not be called"))
         single_analysis = MagicMock(side_effect=AssertionError("Analysis must not start"))
@@ -158,12 +173,192 @@ class TestWorkspaceControls:
         next(button for button in app.button if button.label == "📍 Localizações salvas").click().run()
         next(button for button in app.button if button.label == "Fazenda Leste").click().run()
 
-        assert app.session_state["pending_saved_location_id"] == "loc-123"
-        assert app.session_state["pending_saved_location_name"] == "Fazenda Leste"
-        assert any("Localização selecionada" in success.value for success in app.success)
+        assert app.session_state["pending_saved_location_id"] is None
+        assert app.session_state["aoi_geojson"] == geojson
+        assert app.session_state["aoi_geometry"] is geometry
+        assert any("Fazenda Leste" in success.value for success in app.success)
         search.assert_not_called()
         single_analysis.assert_not_called()
         multi_analysis.assert_not_called()
+
+    def test_saved_location_restores_area_and_clears_previous_analysis(
+        self, app, monkeypatch
+    ):
+        geojson = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                              [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        record = {"id": "loc-restore", "name": "Fazenda Centro", "geojson": geojson}
+        service = MagicMock()
+        service.list_saved_locations.return_value = [
+            {"id": record["id"], "name": record["name"], "center": {"lat": -28.05, "lon": -52.05}},
+        ]
+        service.get_saved_location.return_value = record
+        monkeypatch.setattr(
+            main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+        geometry = MagicMock(name="restored-ee-geometry")
+        convert_geometry = MagicMock(return_value=geometry)
+        area_context = {
+            "area_ha": 8.4,
+            "perimeter_km": 1.2,
+            "centroid": (-28.05, -52.05),
+        }
+        calculate_context = MagicMock(return_value=area_context)
+        create_map = MagicMock()
+        geocode = MagicMock(side_effect=AssertionError("Nominatim must not be called"))
+        single_analysis = MagicMock(side_effect=AssertionError("Analysis must not start"))
+        multi_analysis = MagicMock(side_effect=AssertionError("Analysis must not start"))
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", convert_geometry)
+        monkeypatch.setattr(main_module, "calculate_area_context", calculate_context)
+        monkeypatch.setattr(main_module, "create_selection_map", create_map)
+        monkeypatch.setattr(main_module, "search_location", geocode)
+        monkeypatch.setattr(main_module, "run_analysis", single_analysis)
+        monkeypatch.setattr(main_module, "run_multi_analysis", multi_analysis)
+
+        for key, value in {
+            "pending_saved_location_id": record["id"],
+            "pending_saved_location_name": record["name"],
+            "aoi_geojson": {"type": "Polygon", "coordinates": []},
+            "aoi_geometry": object(),
+            "aoi_area_ha": 99.0,
+            "aoi_perimeter_km": 99.0,
+            "aoi_centroid": (0.0, 0.0),
+            "location_result": {"display_name": "Old geocoded result"},
+            "analysis_results": {"NDVI": {"index_map": object()}},
+            "analysis_metadata": {"image_count": 4},
+            "analysis_snapshot": {"analysis": {"success": True}},
+            "export_payloads": {"pdf": b"stale"},
+            "analysis_status": "success",
+        }.items():
+            app.session_state[key] = value
+
+        app.run()
+
+        service.get_saved_location.assert_called_once_with(record["id"])
+        convert_geometry.assert_called_once_with(geojson)
+        calculate_context.assert_called_once_with(geometry)
+        assert app.session_state["aoi_geojson"] == geojson
+        assert app.session_state["aoi_geometry"] is geometry
+        assert app.session_state["aoi_area_ha"] == 8.4
+        assert app.session_state["aoi_perimeter_km"] == 1.2
+        assert app.session_state["aoi_centroid"] == (-28.05, -52.05)
+        assert app.session_state["location_center"] == [-28.05, -52.05]
+        assert app.session_state["location_zoom"] == 12
+        assert app.session_state["location_result"] is None
+        assert app.session_state["pending_saved_location_id"] is None
+        assert app.session_state["pending_saved_location_name"] is None
+        assert app.session_state["analysis_results"] == {}
+        assert app.session_state["analysis_metadata"] == {}
+        assert app.session_state["analysis_snapshot"] is None
+        assert app.session_state["export_payloads"] == {}
+        assert app.session_state["analysis_status"] == "idle"
+        create_map.assert_any_call(center=[-28.05, -52.05], zoom=12, geojson=geojson)
+        assert any("Fazenda Centro" in success.value for success in app.success)
+        geocode.assert_not_called()
+        single_analysis.assert_not_called()
+        multi_analysis.assert_not_called()
+
+    def test_missing_saved_location_preserves_current_area(self, app, monkeypatch):
+        service = MagicMock()
+        service.get_saved_location.return_value = None
+        monkeypatch.setattr(
+            main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+        current_geojson = {"type": "Polygon", "coordinates": [["current"]]}
+        current_geometry = object()
+        for key, value in {
+            "pending_saved_location_id": "deleted-location",
+            "pending_saved_location_name": "Área removida",
+            "aoi_geojson": current_geojson,
+            "aoi_geometry": current_geometry,
+            "aoi_area_ha": 3.0,
+            "analysis_results": {"NDVI": {"mean_value": 0.2}},
+        }.items():
+            app.session_state[key] = value
+
+        app.run()
+
+        assert app.session_state["aoi_geojson"] == current_geojson
+        assert app.session_state["aoi_geometry"] is current_geometry
+        assert app.session_state["aoi_area_ha"] == 3.0
+        assert app.session_state["analysis_results"] == {"NDVI": {"mean_value": 0.2}}
+        assert app.session_state["pending_saved_location_id"] is None
+        assert any("não foi encontrada" in warning.value for warning in app.warning)
+
+    def test_invalid_saved_geojson_preserves_current_selection(self, app, monkeypatch):
+        service = MagicMock()
+        service.get_saved_location.return_value = {
+            "id": "corrupt-location",
+            "name": "Inválida",
+            "geojson": {"type": "Point", "coordinates": [0, 0]},
+        }
+        monkeypatch.setattr(
+            main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+        convert_geometry = MagicMock()
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", convert_geometry)
+        current_geojson = {"type": "Polygon", "coordinates": [["current"]]}
+        current_geometry = object()
+        for key, value in {
+            "pending_saved_location_id": "corrupt-location",
+            "pending_saved_location_name": "Inválida",
+            "aoi_geojson": current_geojson,
+            "aoi_geometry": current_geometry,
+            "aoi_area_ha": 3.0,
+        }.items():
+            app.session_state[key] = value
+
+        app.run()
+
+        assert app.session_state["aoi_geojson"] == current_geojson
+        assert app.session_state["aoi_geometry"] is current_geometry
+        assert app.session_state["aoi_area_ha"] == 3.0
+        convert_geometry.assert_not_called()
+        assert any("geometria inválida" in error.value for error in app.error)
+
+    def test_area_context_failure_does_not_partially_restore_location(
+        self, app, monkeypatch
+    ):
+        geojson = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                              [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        service = MagicMock()
+        service.get_saved_location.return_value = {
+            "id": "location-error", "name": "Área", "geojson": geojson,
+        }
+        monkeypatch.setattr(
+            main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+        geometry = object()
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        monkeypatch.setattr(
+            main_module,
+            "calculate_area_context",
+            MagicMock(side_effect=RuntimeError("remote calculation failed")),
+        )
+        current_geojson = {"type": "Polygon", "coordinates": [["current"]]}
+        current_geometry = object()
+        for key, value in {
+            "pending_saved_location_id": "location-error",
+            "pending_saved_location_name": "Área",
+            "aoi_geojson": current_geojson,
+            "aoi_geometry": current_geometry,
+            "aoi_area_ha": 3.0,
+            "analysis_results": {"NDVI": {"mean_value": 0.2}},
+        }.items():
+            app.session_state[key] = value
+
+        app.run()
+
+        assert app.session_state["aoi_geojson"] == current_geojson
+        assert app.session_state["aoi_geometry"] is current_geometry
+        assert app.session_state["aoi_area_ha"] == 3.0
+        assert app.session_state["analysis_results"] == {"NDVI": {"mean_value": 0.2}}
+        assert any("Não foi possível restaurar" in error.value for error in app.error)
 
     def test_save_location_action_is_hidden_without_valid_selection(self, app):
         assert all(button.label != "Salvar localização" for button in app.button)
@@ -1473,7 +1668,7 @@ class TestPresentation:
 
         create_map.assert_called_once_with(center=[0, 0], zoom=5, geojson=None)
         assert folium.call_args.kwargs["height"] == main_module.MAP_HEIGHT
-        assert folium.call_args.kwargs["key"] == "area_selection_map"
+        assert folium.call_args.kwargs["key"] == "area_selection_map_0"
 
     def test_multi_index_overview_marks_missing_metrics_as_unavailable(self):
         columns = [MagicMock()]

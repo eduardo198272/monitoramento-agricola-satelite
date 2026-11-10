@@ -34,6 +34,7 @@ from src.app.saved_locations_service import (
     SavedLocationsService,
 )
 from src.app.saved_locations_validation import SavedLocationValidationError
+from src.app.saved_locations_validation import validate_saved_location_geojson
 
 logger = logging.getLogger(__name__)
 
@@ -59,6 +60,9 @@ UI_STATE_DEFAULTS = {
     "show_saved_locations": False,
     "pending_saved_location_id": None,
     "pending_saved_location_name": None,
+    "restored_saved_location_name": None,
+    "selection_map_revision": 0,
+    "ignore_next_empty_drawings": False,
     "analysis_mode": "single",
     "selected_indices": ["NDVI"],
     "visible_index": "NDVI",
@@ -108,6 +112,78 @@ def clear_area_selection_state() -> None:
     st.session_state.aoi_perimeter_km = None
     st.session_state.aoi_centroid = None
     clear_analysis_state()
+
+
+def _saved_location_map_view(geojson: dict) -> tuple[list[float], int]:
+    """Calculate a map center and zoom from a validated Polygon or Feature."""
+    geometry = geojson.get("geometry", geojson)
+    positions = [position for ring in geometry["coordinates"] for position in ring]
+    longitudes = [position[0] for position in positions]
+    latitudes = [position[1] for position in positions]
+    bounds = [min(latitudes), max(latitudes), min(longitudes), max(longitudes)]
+    center = [
+        (bounds[0] + bounds[1]) / 2,
+        (bounds[2] + bounds[3]) / 2,
+    ]
+    return center, calculate_map_zoom(bounds)
+
+
+def restore_pending_saved_location() -> bool:
+    """Restore the selected saved location without geocoding or analysis."""
+    location_id = st.session_state.pending_saved_location_id
+    if not location_id:
+        return False
+
+    try:
+        location = SavedLocationsService().get_saved_location(location_id)
+        if location is None:
+            st.session_state.pending_saved_location_id = None
+            st.session_state.pending_saved_location_name = None
+            st.warning("A localização salva não foi encontrada. Atualize a lista e tente novamente.")
+            return False
+
+        geojson = validate_saved_location_geojson(location.get("geojson"))
+        geometry = geojson_to_ee_geometry(geojson)
+        area_context = calculate_area_context(geometry)
+        center, zoom = _saved_location_map_view(geojson)
+    except SavedLocationStorageError:
+        st.session_state.pending_saved_location_id = None
+        st.session_state.pending_saved_location_name = None
+        logger.exception("Could not restore saved location from storage")
+        st.error("Não foi possível recuperar a localização salva. Tente novamente.")
+        return False
+    except SavedLocationValidationError as error:
+        st.session_state.pending_saved_location_id = None
+        st.session_state.pending_saved_location_name = None
+        logger.warning("Saved location contains invalid GeoJSON", exc_info=True)
+        st.error(f"A localização salva contém uma geometria inválida: {error}")
+        return False
+    except Exception:
+        st.session_state.pending_saved_location_id = None
+        st.session_state.pending_saved_location_name = None
+        logger.exception("Unexpected error while restoring saved location")
+        st.error("Não foi possível restaurar a localização salva. Tente novamente.")
+        return False
+
+    # Update the selected area only after the record and all derived values are valid.
+    st.session_state.aoi_geojson = geojson
+    st.session_state.aoi_geometry = geometry
+    st.session_state.aoi_area_ha = area_context["area_ha"]
+    st.session_state.aoi_perimeter_km = area_context["perimeter_km"]
+    st.session_state.aoi_centroid = area_context["centroid"]
+    st.session_state.location_center = center
+    st.session_state.location_zoom = zoom
+    st.session_state.location_result = None
+    st.session_state.restored_saved_location_name = location.get(
+        "name", st.session_state.pending_saved_location_name
+    )
+    st.session_state.pending_saved_location_id = None
+    st.session_state.pending_saved_location_name = None
+    st.session_state.show_saved_locations = False
+    st.session_state.selection_map_revision += 1
+    st.session_state.ignore_next_empty_drawings = True
+    clear_analysis_state()
+    return True
 
 
 def render_saved_locations_picker() -> None:
@@ -531,7 +607,7 @@ def render_selection_map_area() -> None:
     )
     map_data = st_folium(
         selection_map,
-        key="area_selection_map",
+        key=f"area_selection_map_{getattr(st.session_state, 'selection_map_revision', 0)}",
         height=MAP_HEIGHT,
         returned_objects=["last_active_drawing", "all_drawings"],
         use_container_width=True,
@@ -539,11 +615,17 @@ def render_selection_map_area() -> None:
 
     map_data = map_data or {}
     drawn_geojson = map_data.get("last_active_drawing")
+    ignore_empty_drawings = getattr(
+        st.session_state, "ignore_next_empty_drawings", False
+    )
+    if ignore_empty_drawings and "all_drawings" in map_data:
+        st.session_state.ignore_next_empty_drawings = False
     drawings_removed = (
         "all_drawings" in map_data
         and isinstance(map_data["all_drawings"], list)
         and not map_data["all_drawings"]
         and st.session_state.aoi_geojson is not None
+        and not ignore_empty_drawings
     )
     if drawings_removed:
         clear_area_selection_state()
@@ -776,6 +858,14 @@ def main():
 
     render_header_bar()
     analyze, analysis_disabled = render_controls_bar()
+
+    if restore_pending_saved_location():
+        st.rerun()
+
+    restored_location_name = st.session_state.restored_saved_location_name
+    if restored_location_name:
+        st.success(f'Localização "{restored_location_name}" restaurada no mapa.')
+        st.session_state.restored_saved_location_name = None
 
     if analyze and not analysis_disabled:
         geometry = st.session_state.aoi_geometry
