@@ -147,8 +147,6 @@ def restore_pending_saved_location() -> bool:
         area_context = calculate_area_context(geometry)
         center, zoom = _saved_location_map_view(geojson)
     except SavedLocationStorageError:
-        st.session_state.pending_saved_location_id = None
-        st.session_state.pending_saved_location_name = None
         logger.exception("Could not restore saved location from storage")
         st.error("Não foi possível recuperar a localização salva. Tente novamente.")
         return False

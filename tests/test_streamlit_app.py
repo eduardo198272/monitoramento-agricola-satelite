@@ -138,6 +138,57 @@ class TestWorkspaceControls:
         assert all("private path" not in error.value for error in app.error)
         assert not app.exception
 
+    def test_restore_storage_error_preserves_pending_selection_for_retry(
+        self, app, monkeypatch
+    ):
+        from src.app.saved_locations_repository import SavedLocationStorageError
+
+        geojson = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                              [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        service = MagicMock()
+        service.get_saved_location.side_effect = [
+            SavedLocationStorageError("private database details"),
+            {"id": "retry-location", "name": "Fazenda Retry", "geojson": geojson},
+        ]
+        monkeypatch.setattr(
+            main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+        geometry = object()
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        monkeypatch.setattr(
+            main_module,
+            "calculate_area_context",
+            lambda _: {"area_ha": 4.0, "perimeter_km": 1.0, "centroid": (-28.05, -52.05)},
+        )
+        app.session_state["pending_saved_location_id"] = "retry-location"
+        app.session_state["pending_saved_location_name"] = "Fazenda Retry"
+        current_geojson = {"type": "Feature", "properties": {"current": True}}
+        current_geometry = object()
+        app.session_state["aoi_geojson"] = current_geojson
+        app.session_state["aoi_geometry"] = current_geometry
+        app.session_state["analysis_results"] = {"NDVI": {"mean_value": 0.3}}
+
+        app.run()
+
+        assert app.session_state["pending_saved_location_id"] == "retry-location"
+        assert app.session_state["aoi_geojson"] == current_geojson
+        assert app.session_state["aoi_geometry"] is current_geometry
+        assert app.session_state["analysis_results"] == {"NDVI": {"mean_value": 0.3}}
+        assert any("Não foi possível recuperar" in error.value for error in app.error)
+        assert all("private database details" not in error.value for error in app.error)
+
+        app.run()
+
+        assert service.get_saved_location.call_count == 2
+        assert app.session_state["pending_saved_location_id"] is None
+        assert app.session_state["aoi_geojson"] == geojson
+        assert app.session_state["aoi_geometry"] is geometry
+        assert app.session_state["analysis_results"] == {}
+        assert not app.exception
+
     def test_selecting_saved_location_does_not_geocode_or_start_analysis(
         self, app, monkeypatch
     ):
@@ -988,7 +1039,13 @@ class TestApplicationFlow:
         app.session_state["aoi_area_ha"] = 7.5
         app.session_state["analysis_results"] = {"NDVI": {"success": True}}
         app.session_state["analysis_metadata"] = {"image_count": 5}
+        app.session_state["analysis_snapshot"] = {"geometry_geojson": {"stale": True}}
+        app.session_state["export_payloads"] = {"pdf": b"stale"}
         app.session_state["analysis_map"] = MagicMock(name="analysis_map")
+        app.session_state["analysis_map_center"] = [-28.0, -52.0]
+        app.session_state["index_value_grid"] = {"NDVI": "stale"}
+        app.session_state["index_preload_error"] = "stale error"
+        app.session_state["index_tile_urls"] = {"NDVI": "stale-url"}
         app.session_state["analysis_status"] = "success"
         app.session_state["analysis_error"] = "stale error"
 
@@ -999,7 +1056,13 @@ class TestApplicationFlow:
         assert app.session_state["aoi_area_ha"] is None
         assert app.session_state["analysis_results"] == {}
         assert app.session_state["analysis_metadata"] == {}
+        assert app.session_state["analysis_snapshot"] is None
+        assert app.session_state["export_payloads"] == {}
         assert app.session_state["analysis_map"] is None
+        assert app.session_state["analysis_map_center"] is None
+        assert app.session_state["index_value_grid"] is None
+        assert app.session_state["index_preload_error"] is None
+        assert app.session_state["index_tile_urls"] == {}
         assert app.session_state["analysis_status"] == "idle"
         assert app.session_state["analysis_error"] is None
 
