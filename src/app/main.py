@@ -56,6 +56,9 @@ UI_STATE_DEFAULTS = {
     "aoi_centroid": None,
     "show_save_location_dialog": False,
     "saved_location_name": "",
+    "show_saved_locations": False,
+    "pending_saved_location_id": None,
+    "pending_saved_location_name": None,
     "analysis_mode": "single",
     "selected_indices": ["NDVI"],
     "visible_index": "NDVI",
@@ -105,6 +108,49 @@ def clear_area_selection_state() -> None:
     st.session_state.aoi_perimeter_km = None
     st.session_state.aoi_centroid = None
     clear_analysis_state()
+
+
+def render_saved_locations_picker() -> None:
+    """Show persisted locations and capture a selection for the restore flow."""
+    if st.button(
+        "📍 Localizações salvas",
+        key="toggle_saved_locations",
+        use_container_width=True,
+    ):
+        st.session_state.show_saved_locations = not st.session_state.show_saved_locations
+
+    if not st.session_state.show_saved_locations:
+        return
+
+    try:
+        locations = SavedLocationsService().list_saved_locations()
+    except SavedLocationStorageError:
+        logger.exception("Could not load saved locations for the search picker")
+        st.error("Não foi possível carregar as localizações salvas. Tente novamente.")
+        return
+    except Exception:
+        logger.exception("Unexpected error while loading saved locations")
+        st.error("Ocorreu um erro ao carregar as localizações salvas.")
+        return
+
+    if not locations:
+        st.info("Nenhuma localização salva ainda.")
+        return
+
+    st.caption("Selecione uma localização salva para restaurá-la no mapa.")
+    for location in locations:
+        location_id = location.get("id")
+        name = location.get("name")
+        if not location_id or not name:
+            logger.warning("Ignoring malformed saved-location summary")
+            continue
+        if st.button(name, key=f"select_saved_location_{location_id}"):
+            st.session_state.pending_saved_location_id = location_id
+            st.session_state.pending_saved_location_name = name
+
+    selected_name = st.session_state.pending_saved_location_name
+    if selected_name:
+        st.success(f'Localização selecionada: "{selected_name}".')
 
 
 @st.dialog("Salvar localização")
@@ -389,6 +435,7 @@ def _render_controls_content() -> tuple[bool, bool]:
                     key="search_location_button",
                     use_container_width=True,
                 )
+            render_saved_locations_picker()
 
     with col_period_start:
         start_date = st.date_input(

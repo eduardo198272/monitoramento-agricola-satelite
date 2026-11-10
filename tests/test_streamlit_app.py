@@ -94,6 +94,77 @@ class TestWorkspaceControls:
         search_button = next((b for b in buttons if b.label == "🔍"), None)
         assert search_button is not None
 
+    def test_saved_locations_are_loaded_only_when_picker_is_opened(self, app, monkeypatch):
+        service = MagicMock()
+        service.list_saved_locations.return_value = [
+            {"id": "loc-1", "name": "Fazenda Norte", "center": {"lat": -28, "lon": -52}},
+            {"id": "loc-2", "name": "Talhão Sul", "center": {"lat": -29, "lon": -53}},
+        ]
+        monkeypatch.setattr(
+            main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+
+        service.list_saved_locations.assert_not_called()
+        next(button for button in app.button if button.label == "📍 Localizações salvas").click().run()
+
+        service.list_saved_locations.assert_called_once_with()
+        assert any(button.label == "Fazenda Norte" for button in app.button)
+        assert any(button.label == "Talhão Sul" for button in app.button)
+
+    def test_saved_locations_picker_shows_empty_state(self, app, monkeypatch):
+        service = MagicMock()
+        service.list_saved_locations.return_value = []
+        monkeypatch.setattr(
+            main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+
+        next(button for button in app.button if button.label == "📍 Localizações salvas").click().run()
+
+        assert any("Nenhuma localização salva" in info.value for info in app.info)
+        assert not app.exception
+
+    def test_saved_locations_storage_error_is_recoverable(self, app, monkeypatch):
+        from src.app.saved_locations_repository import SavedLocationStorageError
+
+        service = MagicMock()
+        service.list_saved_locations.side_effect = SavedLocationStorageError("private path")
+        monkeypatch.setattr(
+            main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+
+        next(button for button in app.button if button.label == "📍 Localizações salvas").click().run()
+
+        assert any("Não foi possível carregar as localizações salvas" in error.value for error in app.error)
+        assert all("private path" not in error.value for error in app.error)
+        assert not app.exception
+
+    def test_selecting_saved_location_does_not_geocode_or_start_analysis(
+        self, app, monkeypatch
+    ):
+        service = MagicMock()
+        service.list_saved_locations.return_value = [
+            {"id": "loc-123", "name": "Fazenda Leste", "center": {"lat": -28, "lon": -52}},
+        ]
+        monkeypatch.setattr(
+            main_module, "SavedLocationsService", MagicMock(return_value=service)
+        )
+        search = MagicMock(side_effect=AssertionError("Nominatim must not be called"))
+        single_analysis = MagicMock(side_effect=AssertionError("Analysis must not start"))
+        multi_analysis = MagicMock(side_effect=AssertionError("Analysis must not start"))
+        monkeypatch.setattr(main_module, "search_location", search)
+        monkeypatch.setattr(main_module, "run_analysis", single_analysis)
+        monkeypatch.setattr(main_module, "run_multi_analysis", multi_analysis)
+
+        next(button for button in app.button if button.label == "📍 Localizações salvas").click().run()
+        next(button for button in app.button if button.label == "Fazenda Leste").click().run()
+
+        assert app.session_state["pending_saved_location_id"] == "loc-123"
+        assert app.session_state["pending_saved_location_name"] == "Fazenda Leste"
+        assert any("Localização selecionada" in success.value for success in app.success)
+        search.assert_not_called()
+        single_analysis.assert_not_called()
+        multi_analysis.assert_not_called()
+
     def test_save_location_action_is_hidden_without_valid_selection(self, app):
         assert all(button.label != "Salvar localização" for button in app.button)
 
