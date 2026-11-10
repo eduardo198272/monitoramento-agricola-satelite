@@ -139,6 +139,7 @@ def test_corrupt_geojson_is_reported_instead_of_returned(tmp_path):
     repository = SavedLocationsRepository(path)
     repository.initialize()
     repository.insert_location(record())
+    repository.insert_location(record("id-2", "Outra área", "outra área"))
     with open_database(path) as connection:
         connection.execute(
             "UPDATE saved_locations SET geojson_json = ? WHERE id = ?",
@@ -147,6 +148,9 @@ def test_corrupt_geojson_is_reported_instead_of_returned(tmp_path):
 
     with pytest.raises(SavedLocationStorageError, match="corrompido"):
         repository.get_location("id-1")
+
+    assert repository.get_location("id-2")["geojson"] == GEOJSON
+    assert [item["id"] for item in repository.list_locations()] == ["id-2", "id-1"]
 
 
 def test_geojson_round_trip_keeps_utf8_content_and_numeric_precision(tmp_path):

@@ -7,6 +7,8 @@ from streamlit.testing.v1 import AppTest
 import plotly.graph_objects as go
 
 import src.app.main as main_module
+from src.app.saved_locations_repository import SavedLocationsRepository
+from src.app.saved_locations_service import SavedLocationsService
 from src.app.main import (
     DEFAULT_END,
     DEFAULT_START,
@@ -110,6 +112,79 @@ class TestWorkspaceControls:
         service.list_saved_locations.assert_called_once_with()
         assert any(button.label == "Fazenda Norte" for button in app.button)
         assert any(button.label == "Talhão Sul" for button in app.button)
+
+    def test_saved_location_persists_through_real_storage_and_ui_restore(
+        self, app, monkeypatch, tmp_path
+    ):
+        database_path = tmp_path / "saved-locations-integration.sqlite3"
+        create_service = lambda: SavedLocationsService(
+            SavedLocationsRepository(database_path)
+        )
+        geojson = {
+            "type": "Polygon",
+            "coordinates": [[[-52.1, -28.0], [-52.0, -28.0],
+                              [-52.0, -28.1], [-52.1, -28.0]]],
+        }
+        selected_geometry = object()
+        geometry = object()
+        map_render = MagicMock()
+        geocode = MagicMock(side_effect=AssertionError("Restore must not geocode"))
+        single_analysis = MagicMock(side_effect=AssertionError("Restore must not analyze"))
+        multi_analysis = MagicMock(side_effect=AssertionError("Restore must not analyze"))
+        monkeypatch.setattr(main_module, "SavedLocationsService", create_service)
+        monkeypatch.setattr(main_module, "geojson_to_ee_geometry", lambda _: geometry)
+        monkeypatch.setattr(
+            main_module,
+            "calculate_area_context",
+            lambda _: {"area_ha": 2.5, "perimeter_km": 0.8, "centroid": (-28.05, -52.05)},
+        )
+        monkeypatch.setattr(main_module, "create_selection_map", map_render)
+        monkeypatch.setattr(main_module, "search_location", geocode)
+        monkeypatch.setattr(main_module, "run_analysis", single_analysis)
+        monkeypatch.setattr(main_module, "run_multi_analysis", multi_analysis)
+        app.session_state["aoi_geojson"] = geojson
+        app.session_state["aoi_geometry"] = selected_geometry
+        app.run()
+
+        next(button for button in app.button if button.label == "Salvar localização").click().run()
+        next(item for item in app.text_input if item.label == "Nome da localização").set_value(
+            "Integração UI"
+        )
+        next(button for button in app.button if button.label == "Confirmar").click().run()
+
+        saved = create_service().list_saved_locations()[0]
+        assert saved["name"] == "Integração UI"
+
+        next(button for button in app.button if button.label == "📍 Localizações salvas").click().run()
+        assert any(button.label == "Integração UI" for button in app.button)
+        next(button for button in app.button if button.label == "Integração UI").click().run()
+
+        assert app.session_state["aoi_geojson"] == geojson
+        assert app.session_state["aoi_geometry"] is geometry
+        assert app.session_state["aoi_area_ha"] == 2.5
+        assert app.session_state["pending_saved_location_id"] is None
+        assert any(
+            call.kwargs.get("geojson") == geojson
+            for call in map_render.call_args_list
+        )
+        persisted = create_service().get_saved_location(saved["id"])
+        assert persisted["geojson"] == geojson
+        assert create_service().list_saved_locations() == [
+            {
+                "id": saved["id"],
+                "name": "Integração UI",
+                "center": saved["center"],
+                "created_at": saved["created_at"],
+                "updated_at": saved["updated_at"],
+            }
+        ]
+        geocode.assert_not_called()
+        single_analysis.assert_not_called()
+        multi_analysis.assert_not_called()
+        app.run()
+        assert len(create_service().list_saved_locations()) == 1
+        assert app.session_state["aoi_geojson"] == geojson
+        assert not app.exception
 
     def test_saved_locations_picker_shows_empty_state(self, app, monkeypatch):
         service = MagicMock()
