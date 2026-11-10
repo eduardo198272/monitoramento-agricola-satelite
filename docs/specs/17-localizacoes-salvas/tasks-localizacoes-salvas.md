@@ -11,7 +11,7 @@ Referência: `spec-localizacoes-salvas.md`.
 | SPEC-17-05 | Implementar fluxo UI `Salvar localização` em diálogo/modal | Ação só aparece para seleção válida; diálogo confirma/cancela, grava uma vez e fornece feedback acessível | SPEC-17-04 | 2h | Concluída |
 | SPEC-17-06 | Exibir localizações salvas na interação com a busca | Popover/sugestões acionados pelo campo de pesquisa aparecem abaixo dele; lista vem do SQLite, inclui estado vazio/erro e seleção não inicia consulta Nominatim | SPEC-17-04/05 | 1h30 | Concluída |
 | SPEC-17-07 | Restaurar geometria, pontos/desenho e enquadramento no mapa | Seleção restaura GeoJSON e `ee.Geometry`, centraliza/ajusta zoom, atualiza estado sem chamadas ao geocodificador nem análise automática | SPEC-10-07/09/10, SPEC-17-06 | 2h30 | Concluída |
-| SPEC-17-08 | Invalidar resultados antigos e gerenciar erros de estado/storage | Troca da seleção limpa resultados incompatíveis; registro corrompido ou banco indisponível não derruba o app e não altera registros válidos | SPEC-17-05/07 | 1h30 | Não iniciado |
+| SPEC-17-08 | Invalidar resultados antigos e gerenciar erros de estado/storage | Troca da seleção limpa resultados incompatíveis; registro corrompido ou banco indisponível não derruba o app e não altera registros válidos | SPEC-17-05/07 | 1h30 | Concluída |
 | SPEC-17-09 | Cobrir persistência, integração Streamlit e regressões | Suíte cobre CRUD, conexão nova/reinício simulado, UI/rerun, seleção/restauração, duplicatas, geometria inválida e zero geocodificação no restore | SPEC-17-01 a SPEC-17-08 | 3h | Não iniciado |
 
 ## Ordem de execução
