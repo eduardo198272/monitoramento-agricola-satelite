@@ -621,40 +621,45 @@ EXPORT_FORMATS = {
 
 
 def render_export_actions() -> None:
-    """Render on-demand export actions for the current successful multi-index run."""
+    """Render on-demand export actions for the current successful analysis."""
     snapshot = st.session_state.get("analysis_snapshot")
     if st.session_state.get("analysis_status") != "success":
         return
-    if st.session_state.get("analysis_mode") != "multi":
-        st.info("Para exportar os resultados, execute a análise multiíndice (Todos).")
-        return
     if not isinstance(snapshot, dict):
-        st.info("Execute uma nova análise multiíndice antes de exportar os resultados.")
+        st.info("Execute uma análise antes de exportar os resultados.")
         return
 
     analysis = snapshot.get("analysis")
     indices = analysis.get("indices") if isinstance(analysis, dict) else None
+    requested_indices = tuple(st.session_state.get("selected_indices", ()))
+    if (
+        indices is None
+        and isinstance(analysis, dict)
+        and analysis.get("index_name") in SUPPORTED_INDICES
+    ):
+        indices = {analysis["index_name"]: analysis}
     geometry = snapshot.get("geometry_geojson")
     if (
         not isinstance(analysis, dict)
         or analysis.get("success") is not True
         or not isinstance(indices, dict)
-        or any(not isinstance(indices.get(name), dict) for name in SUPPORTED_INDICES)
+        or not requested_indices
+        or any(not isinstance(indices.get(name), dict) for name in requested_indices)
         or not isinstance(geometry, dict)
         or geometry.get("type") != "Polygon"
         or not geometry.get("coordinates")
     ):
-        st.info("A análise está incompleta ou sem geometria válida; execute Todos novamente.")
+        st.info("A análise está incompleta ou sem geometria válida; execute-a novamente.")
         return
 
     matches_current_request = (
         geometry == st.session_state.get("aoi_geojson")
         and snapshot.get("start_date") == st.session_state.get("analysis_start_date")
         and snapshot.get("end_date") == st.session_state.get("analysis_end_date")
-        and st.session_state.get("selected_indices") == SUPPORTED_INDICES
+        and tuple(st.session_state.get("selected_indices", ())) == tuple(indices)
     )
     if not matches_current_request:
-        st.info("Os parâmetros mudaram. Execute uma nova análise multiíndice para exportar.")
+        st.info("Os parâmetros mudaram. Execute uma nova análise para exportar.")
         st.session_state.export_payloads = {}
         return
 
@@ -670,6 +675,7 @@ def render_export_actions() -> None:
                         geometry,
                         snapshot["start_date"],
                         snapshot["end_date"],
+                        tuple(st.session_state.get("selected_indices", ())),
                     )
                     payloads[format_key] = globals()[details["builder"]](context)
                 except Exception:
@@ -786,7 +792,12 @@ def main():
                             "end_date": end_date,
                         }
                     else:
-                        st.session_state.analysis_snapshot = None
+                        st.session_state.analysis_snapshot = {
+                            "analysis": result,
+                            "geometry_geojson": st.session_state.aoi_geojson,
+                            "start_date": start_date,
+                            "end_date": end_date,
+                        }
                         st.session_state.visible_index = selected_indices[0]
                         st.session_state.analysis_results = {st.session_state.visible_index: result}
                     st.session_state.analysis_map_center = (

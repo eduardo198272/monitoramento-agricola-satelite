@@ -163,11 +163,24 @@ def test_pdf_shows_only_detected_anomalies_from_pipeline_records(export_context)
     assert b"z=-1.50" in pdf
 
 
-def test_pdf_rejects_context_without_all_supported_indices(export_context):
-    export_context["indices"].pop("NDMI")
+def test_pdf_rejects_context_without_any_indices(export_context):
+    export_context["indices"] = {}
 
-    with pytest.raises(ValueError, match="NDVI, NDWI e NDMI"):
+    with pytest.raises(ValueError, match="ao menos um índice"):
         render_analysis_pdf(export_context, map_renderer=static_map_renderer)
+
+
+def test_pdf_renders_only_selected_index(export_context):
+    export_context["indices"] = {"NDWI": export_context["indices"]["NDWI"]}
+    rendered = []
+
+    def renderer(index_image, index_name, geometry_geojson, **kwargs):
+        rendered.append(index_name)
+        return StaticMapResult(None, "Mapa indisponível")
+
+    render_analysis_pdf(export_context, map_renderer=renderer)
+
+    assert rendered == ["NDWI"]
 
 
 def test_pdf_uses_injected_renderer_and_never_performs_http_requests(

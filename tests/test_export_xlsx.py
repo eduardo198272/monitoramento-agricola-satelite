@@ -280,11 +280,17 @@ def test_xlsx_dates_are_iso_format_strings(export_context):
                 assert row[0].count("-") == 2
 
 
-def test_render_analysis_xlsx_rejects_missing_indices(export_context):
-    """Renderer rejects context missing any of the three indices."""
-    export_context["indices"].pop("NDMI")
-    with pytest.raises(ValueError, match="NDVI, NDWI e NDMI"):
+def test_render_analysis_xlsx_rejects_empty_indices(export_context):
+    """Renderer rejects context without selected indices."""
+    export_context["indices"] = {}
+    with pytest.raises(ValueError, match="ao menos um índice"):
         render_analysis_xlsx(export_context)
+
+
+def test_render_analysis_xlsx_includes_only_selected_index(export_context):
+    export_context["indices"] = {"NDWI": export_context["indices"]["NDWI"]}
+    workbook = openpyxl.load_workbook(BytesIO(render_analysis_xlsx(export_context)))
+    assert workbook.sheetnames == ["Resumo", "NDWI", "Clima", "Anomalias", "Geografia"]
 
 
 def test_render_analysis_xlsx_rejects_non_dict_context():
@@ -531,14 +537,14 @@ def test_geografia_sheet_handles_geometry_without_crs(export_context):
 def test_render_analysis_xlsx_rejects_empty_indices_dict(export_context):
     """Renderer rejects context with empty indices dict."""
     export_context["indices"] = {}
-    with pytest.raises(ValueError, match="NDVI, NDWI e NDMI"):
+    with pytest.raises(ValueError, match="ao menos um índice"):
         render_analysis_xlsx(export_context)
 
 
 def test_render_analysis_xlsx_rejects_none_indices(export_context):
     """Renderer rejects context with None indices."""
     export_context["indices"] = None
-    with pytest.raises(ValueError, match="NDVI, NDWI e NDMI"):
+    with pytest.raises(ValueError, match="ao menos um índice"):
         render_analysis_xlsx(export_context)
 
 

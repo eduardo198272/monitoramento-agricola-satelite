@@ -50,14 +50,23 @@ def ui(monkeypatch):
     return stub, state
 
 
-def test_export_actions_are_hidden_for_single_index_analysis(ui):
+def test_export_actions_allow_single_index_analysis(ui):
     stub, state = ui
     state.analysis_mode = "single"
+    state.selected_indices = ["NDVI"]
+    state.analysis_snapshot["analysis"] = {
+        "success": True,
+        "index_name": "NDVI",
+        "index_map": object(),
+        "time_series": [],
+        "anomalies": [],
+    }
+    stub.button.side_effect = [False, False, False]
 
     main_module.render_export_actions()
 
-    stub.download_button.assert_not_called()
-    assert any("multiíndice" in str(call.args[0]).lower() for call in stub.info.call_args_list)
+    stub.subheader.assert_called_once_with("Exportar resultados")
+    assert not stub.info.called
 
 
 @pytest.mark.parametrize("state_changes", [
@@ -192,6 +201,7 @@ def test_each_export_format_uses_snapshot_without_pipeline_or_network_calls(
         state.analysis_snapshot["geometry_geojson"],
         state.analysis_snapshot["start_date"],
         state.analysis_snapshot["end_date"],
+        tuple(state.selected_indices),
     )
     builders[builder_name].assert_called_once_with(context)
     for name, builder in builders.items():

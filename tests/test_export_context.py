@@ -52,6 +52,33 @@ def test_build_export_context_normalizes_dates_and_keeps_pipeline_data(valid_inp
     assert context["collection_metadata"] == analysis["collection_metadata"]
 
 
+def test_build_export_context_exports_only_requested_index(valid_inputs):
+    analysis, geometry = valid_inputs
+
+    context = build_export_context(
+        analysis, geometry, "2025-01-01", "2025-03-01", ["NDWI"]
+    )
+
+    assert list(context["indices"]) == ["NDWI"]
+
+
+def test_build_export_context_accepts_single_index_pipeline_result(valid_inputs):
+    analysis, geometry = valid_inputs
+    index_result = {
+        "success": True,
+        "index_name": "NDVI",
+        **analysis["indices"]["NDVI"],
+        "area_ha": analysis["area_ha"],
+        "map_center": analysis["map_center"],
+    }
+
+    context = build_export_context(
+        index_result, geometry, "2025-01-01", "2025-03-01", ["NDVI"]
+    )
+
+    assert list(context["indices"]) == ["NDVI"]
+
+
 def test_build_export_context_does_not_mutate_inputs(valid_inputs):
     analysis, geometry = valid_inputs
     original_analysis = deepcopy({key: value for key, value in analysis.items() if key != "indices"})

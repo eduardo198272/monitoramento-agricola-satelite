@@ -66,6 +66,14 @@ def test_zip_contains_only_the_seven_expected_csvs(export_context):
         "resumo.csv", "ndvi.csv", "ndwi.csv", "ndmi.csv", "clima.csv",
         "anomalias.csv", "geografia.csv",
     ]
+
+
+def test_zip_contains_only_selected_index_csv(export_context):
+    export_context["indices"] = {"NDWI": export_context["indices"]["NDWI"]}
+    archive, _ = read_zip(render_analysis_csv_zip(export_context))
+    assert archive.namelist() == [
+        "resumo.csv", "ndwi.csv", "clima.csv", "anomalias.csv", "geografia.csv"
+    ]
     assert all("/" not in name and "\\" not in name for name in archive.namelist())
 
 
@@ -118,10 +126,10 @@ def test_empty_sets_keep_headers_and_zip_is_valid(export_context):
     ]
 
 
-@pytest.mark.parametrize("indices", [None, {}, {"NDVI": {}, "NDWI": {}}])
+@pytest.mark.parametrize("indices", [None, {}])
 def test_invalid_or_incomplete_context_is_rejected(export_context, indices):
     export_context["indices"] = indices
-    with pytest.raises(ValueError, match="NDVI, NDWI e NDMI"):
+    with pytest.raises(ValueError, match="ao menos um índice"):
         render_analysis_csv_zip(export_context)
 
 

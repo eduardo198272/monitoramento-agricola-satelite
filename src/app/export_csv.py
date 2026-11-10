@@ -135,7 +135,7 @@ def _climate_rows(climate_data: Any) -> list[dict]:
 
 def _anomaly_rows(indices: dict) -> list[dict]:
     rows = []
-    for index_name in SUPPORTED_INDICES:
+    for index_name in indices:
         for item in _records(indices[index_name].get("anomalies")):
             if item.get("anomaly") is not True:
                 continue
@@ -175,22 +175,21 @@ def render_analysis_csv_zip(
     if not isinstance(export_context, dict):
         raise ValueError("O contexto de exportacao deve ser um dicionario")
     indices = export_context.get("indices")
-    if not isinstance(indices, dict) or any(
-        name not in indices or not isinstance(indices[name], dict)
-        for name in SUPPORTED_INDICES
+    if not isinstance(indices, dict) or not indices or any(
+        name not in SUPPORTED_INDICES or not isinstance(result, dict)
+        for name, result in indices.items()
     ):
-        raise ValueError("O contexto deve conter NDVI, NDWI e NDMI")
+        raise ValueError("O contexto deve conter ao menos um índice")
 
     generated_at = generated_at or datetime.now()
-    datasets = {
-        "resumo.csv": _summary_rows(export_context, generated_at),
-        "ndvi.csv": _index_rows(indices["NDVI"]),
-        "ndwi.csv": _index_rows(indices["NDWI"]),
-        "ndmi.csv": _index_rows(indices["NDMI"]),
+    datasets = {"resumo.csv": _summary_rows(export_context, generated_at)}
+    for index_name, result in indices.items():
+        datasets[f"{index_name.lower()}.csv"] = _index_rows(result)
+    datasets.update({
         "clima.csv": _climate_rows(export_context.get("climate_data")),
         "anomalias.csv": _anomaly_rows(indices),
         "geografia.csv": _geography_rows(export_context),
-    }
+    })
     output = BytesIO()
     with zipfile.ZipFile(output, mode="w", compression=zipfile.ZIP_DEFLATED) as archive:
         for filename, rows in datasets.items():

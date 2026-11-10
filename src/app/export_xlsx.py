@@ -238,8 +238,11 @@ def render_analysis_xlsx(
         raise ValueError("O contexto de exportacao deve ser um dicionario")
 
     indices = export_context.get("indices")
-    if not isinstance(indices, dict) or any(name not in indices for name in SUPPORTED_INDICES):
-        raise ValueError("O contexto deve conter NDVI, NDWI e NDMI")
+    if not isinstance(indices, dict) or not indices or any(
+        name not in SUPPORTED_INDICES or not isinstance(result, dict)
+        for name, result in indices.items()
+    ):
+        raise ValueError("O contexto deve conter ao menos um índice")
 
     generated_at = generated_at or datetime.now()
 
@@ -259,7 +262,7 @@ def render_analysis_xlsx(
     ws_resumo.column_dimensions["C"].width = 20
 
     # Sheets 2-4: Index sheets (NDVI, NDWI, NDMI)
-    for index_name in SUPPORTED_INDICES:
+    for index_name in indices:
         ws = wb.create_sheet(index_name)
         _write_index_sheet(ws, index_name, indices[index_name])
         ws.column_dimensions["A"].width = 15

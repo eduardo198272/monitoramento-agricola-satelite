@@ -353,8 +353,11 @@ def render_analysis_pdf(
     if not isinstance(export_context, dict):
         raise ValueError("O contexto de exportacao deve ser um dicionario")
     indices = export_context.get("indices")
-    if not isinstance(indices, dict) or any(name not in indices for name in SUPPORTED_INDICES):
-        raise ValueError("O contexto deve conter NDVI, NDWI e NDMI")
+    if not isinstance(indices, dict) or not indices or any(
+        name not in SUPPORTED_INDICES or not isinstance(result, dict)
+        for name, result in indices.items()
+    ):
+        raise ValueError("O contexto deve conter ao menos um índice")
 
     generated_at = generated_at or datetime.now().date()
     generated_label = generated_at.isoformat()
@@ -363,7 +366,7 @@ def render_analysis_pdf(
     pdf = canvas.Canvas(output, pagesize=PAGE_SIZE, pageCompression=0, invariant=1)
     pdf.setTitle("Relatorio de monitoramento agricola")
     pdf.setAuthor("Monitoramento Agricola por Satelite")
-    for index_name in SUPPORTED_INDICES:
+    for index_name in indices:
         _draw_page(pdf, export_context, index_name, generated_label, renderer)
     pdf.save()
     return output.getvalue()

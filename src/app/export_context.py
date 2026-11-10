@@ -113,6 +113,7 @@ def build_export_context(
     geometry_geojson: dict,
     start_date: str | date,
     end_date: str | date,
+    selected_indices: tuple[str, ...] | list[str] | None = None,
 ) -> dict:
     """Validate and normalize data from a successful three-index analysis.
 
@@ -123,12 +124,17 @@ def build_export_context(
         raise ExportContextError("A exportação exige uma análise concluída com sucesso")
 
     indices = analysis.get("indices")
+    if indices is None and analysis.get("index_name") in SUPPORTED_INDICES:
+        indices = {analysis["index_name"]: analysis}
     if not isinstance(indices, dict):
-        raise ExportContextError("A exportação exige análise multiíndice (Todos)")
-    missing = [name for name in SUPPORTED_INDICES if not isinstance(indices.get(name), dict)]
+        raise ExportContextError("A análise multiíndice não contém resultados para exportar")
+    names = tuple(selected_indices or SUPPORTED_INDICES)
+    if not names or any(name not in SUPPORTED_INDICES for name in names):
+        raise ExportContextError("Selecione ao menos um índice válido para exportar")
+    missing = [name for name in names if not isinstance(indices.get(name), dict)]
     missing.extend(
         name
-        for name in SUPPORTED_INDICES
+        for name in names
         if isinstance(indices.get(name), dict)
         and not {"index_map", "time_series", "anomalies"}.issubset(indices[name])
     )
@@ -153,7 +159,7 @@ def build_export_context(
         "area_ha": _copy_export_value(analysis.get("area_ha")),
         "map_center": _copy_export_value(analysis.get("map_center")),
         "indices": {
-            name: _copy_export_value(indices[name]) for name in SUPPORTED_INDICES
+            name: _copy_export_value(indices[name]) for name in names
         },
         "image_count": _copy_export_value(analysis.get("image_count")),
         "climate_data": _copy_export_value(analysis.get("climate_data")),
