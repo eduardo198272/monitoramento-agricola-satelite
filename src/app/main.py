@@ -811,7 +811,8 @@ def render_export_actions() -> None:
                         f"Não foi possível gerar o arquivo {details['label']}. "
                         "Confira os resultados e tente novamente."
                     )
-        else:
+            payload = payloads.get(format_key)
+        if payload is not None:
             st.download_button(
                 f"Baixar {details['label']}",
                 data=payload,

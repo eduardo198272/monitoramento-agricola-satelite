@@ -210,6 +210,14 @@ def test_each_export_format_uses_snapshot_without_pipeline_or_network_calls(
     for pipeline in pipeline_calls.values():
         pipeline.assert_not_called()
     assert state.export_payloads[format_key] == f"{builder_name}-bytes".encode()
+    details = main_module.EXPORT_FORMATS[format_key]
+    stub.download_button.assert_called_once_with(
+        f"Baixar {details['label']}",
+        data=f"{builder_name}-bytes".encode(),
+        file_name=details["filename"],
+        mime=details["mime"],
+        key=f"download_export_{format_key}",
+    )
 
 
 def test_clear_analysis_state_invalidates_export_snapshot(stub_streamlit=None):
