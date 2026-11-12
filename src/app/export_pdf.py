@@ -213,14 +213,14 @@ def _draw_page(
     pdf.drawString(PAGE_MARGIN, climate_y, "Contexto climatico")
     if isinstance(climate, dict) and climate:
         parts = []
-        for key, suffix in (
-            ("precipitation_mm", "mm"),
-            ("temperature_c", "C"),
-            ("solar_radiation_mj_m2_day", "MJ/m2/dia"),
+        for key, fallback, label, suffix in (
+            ("total_precipitation_mm", "precipitation_mm", "Precipitacao total", "mm"),
+            ("mean_temperature_c", "temperature_c", "Temperatura media", "C"),
+            ("mean_solar_radiation_mj_m2_day", "solar_radiation_mj_m2_day", "Radiacao media", "MJ/m2/dia"),
         ):
-            number = _format_number(climate.get(key))
+            number = _format_number(climate.get(key, climate.get(fallback)))
             if number is not None:
-                parts.append(f"{key.replace('_', ' ')}: {number} {suffix}")
+                parts.append(f"{label}: {number} {suffix}")
         climate_text = " | ".join(parts) if parts else "Indisponivel"
     else:
         climate_text = "Indisponivel"

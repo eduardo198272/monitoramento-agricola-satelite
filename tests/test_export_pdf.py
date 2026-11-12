@@ -93,6 +93,17 @@ def test_pdf_pages_contain_real_metrics_dates_series_anomalies_and_map_attributi
         assert text.encode() in pdf
 
 
+def test_pdf_displays_climate_summary_from_pipeline(export_context):
+    export_context["climate_summary"] = {
+        "total_precipitation_mm": 82.5,
+        "mean_temperature_c": 23.1,
+        "mean_solar_radiation_mj_m2_day": 15.6,
+    }
+    pdf = render_analysis_pdf(export_context, map_renderer=static_map_renderer)
+    for value in (b"82.50 mm", b"23.10 C", b"15.60 MJ/m2/dia"):
+        assert value in pdf
+
+
 @pytest.mark.parametrize("missing", ["mean_value", "trend", "time_series", "anomalies"])
 def test_pdf_identifies_unavailable_data_without_fabricating_values(
     export_context, missing

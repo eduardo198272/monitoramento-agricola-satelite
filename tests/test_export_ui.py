@@ -46,6 +46,7 @@ def ui(monkeypatch):
     )
     stub = MagicMock()
     stub.session_state = state
+    stub.columns.side_effect = lambda count: [MagicMock() for _ in range(count)]
     monkeypatch.setattr(main_module, "st", stub)
     return stub, state
 
@@ -153,7 +154,7 @@ def test_export_generation_is_on_demand_and_downloads_cached_payload(ui, monkeyp
     assert state.export_payloads["pdf"] == b"pdf-data"
 
     stub.download_button.reset_mock()
-    stub.button.side_effect = [False, False]
+    stub.button.side_effect = [False, False, False]
     main_module.render_export_actions()
 
     assert any(call.kwargs.get("data") == b"pdf-data" for call in stub.download_button.call_args_list)
@@ -174,6 +175,56 @@ def test_export_builder_failure_is_reported_and_does_not_remove_analysis(ui, mon
     assert state.analysis_status == "success"
     assert state.analysis_snapshot is not None
     assert "xlsx" not in state.export_payloads
+
+
+def test_generating_each_format_shows_spinner_and_retains_generate_control(ui, monkeypatch):
+    stub, state = ui
+    state.export_payloads["pdf"] = b"existing-pdf"
+    stub.button.side_effect = [True, False, False]
+    builder = MagicMock(return_value=b"new-pdf")
+    monkeypatch.setattr(main_module, "build_export_context", MagicMock(return_value={}))
+    monkeypatch.setattr(main_module, "render_analysis_pdf", builder)
+
+    main_module.render_export_actions()
+
+    stub.spinner.assert_called_once_with("Gerando PDF...")
+    stub.columns.assert_called()
+    assert state.export_payloads["pdf"] == b"new-pdf"
+    stub.download_button.assert_called_once_with(
+        "Baixar PDF", data=b"new-pdf", file_name="relatorio-monitoramento.pdf",
+        mime="application/pdf", key="download_export_pdf",
+    )
+
+
+@pytest.mark.parametrize("position,format_key,builder_name", [
+    (0, "pdf", "render_analysis_pdf"),
+    (1, "xlsx", "render_analysis_xlsx"),
+    (2, "csv", "render_analysis_csv_zip"),
+])
+def test_generation_uses_format_specific_spinner(ui, monkeypatch, position, format_key, builder_name):
+    stub, state = ui
+    stub.button.side_effect = [index == position for index in range(3)]
+    monkeypatch.setattr(main_module, "build_export_context", MagicMock(return_value={}))
+    monkeypatch.setattr(main_module, builder_name, MagicMock(return_value=b"generated"))
+
+    main_module.render_export_actions()
+
+    stub.spinner.assert_called_once_with(f"Gerando {main_module.EXPORT_FORMATS[format_key]['label']}...")
+    assert state.export_payloads[format_key] == b"generated"
+
+
+def test_failed_regeneration_keeps_previously_generated_file(ui, monkeypatch):
+    stub, state = ui
+    state.export_payloads["pdf"] = b"previous-pdf"
+    stub.button.side_effect = [True, False, False]
+    monkeypatch.setattr(main_module, "build_export_context", MagicMock(return_value={}))
+    monkeypatch.setattr(main_module, "render_analysis_pdf", MagicMock(side_effect=ValueError("failed")))
+
+    main_module.render_export_actions()
+
+    assert state.export_payloads["pdf"] == b"previous-pdf"
+    assert stub.download_button.call_args.kwargs["data"] == b"previous-pdf"
+    stub.error.assert_called_once()
 
 
 @pytest.mark.parametrize(
