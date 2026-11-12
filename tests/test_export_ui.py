@@ -97,6 +97,24 @@ def test_export_actions_are_hidden_for_incomplete_snapshot(ui, invalid_snapshot)
     assert any("incompleta" in str(call.args[0]).lower() for call in stub.info.call_args_list)
 
 
+def test_export_actions_accepts_feature_wrapped_polygon(ui):
+    stub, state = ui
+    feature = {
+        "type": "Feature",
+        "properties": {},
+        "geometry": state.aoi_geojson,
+    }
+    state.aoi_geojson = feature
+    state.analysis_snapshot["geometry_geojson"] = feature
+    stub.button.side_effect = [False, False, False]
+
+    main_module.render_export_actions()
+
+    stub.subheader.assert_called_once_with("Exportar resultados")
+    assert not stub.info.called
+    assert stub.button.call_count == 3
+
+
 @pytest.mark.parametrize("changed_field, changed_value", [
     ("analysis_start_date", date(2025, 1, 2)),
     ("analysis_end_date", date(2025, 4, 1)),

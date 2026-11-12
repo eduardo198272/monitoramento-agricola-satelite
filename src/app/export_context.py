@@ -63,7 +63,16 @@ def _copy_export_value(value: Any, field_name: str | None = None) -> Any:
 
 
 def _validate_geometry(geometry_geojson: Any) -> dict:
-    if not isinstance(geometry_geojson, dict) or geometry_geojson.get("type") != "Polygon":
+    if not isinstance(geometry_geojson, dict):
+        raise ExportContextError("A geometria GeoJSON da análise deve ser um Polygon válido")
+
+    if geometry_geojson.get("type") == "Feature":
+        geometry = geometry_geojson.get("geometry")
+        if not isinstance(geometry, dict):
+            raise ExportContextError("A geometria GeoJSON da análise está ausente ou inválida")
+        geometry_geojson = geometry
+
+    if geometry_geojson.get("type") != "Polygon":
         raise ExportContextError("A geometria GeoJSON da análise deve ser um Polygon válido")
 
     rings = geometry_geojson.get("coordinates")

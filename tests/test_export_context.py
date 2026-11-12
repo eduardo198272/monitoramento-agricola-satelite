@@ -62,6 +62,24 @@ def test_build_export_context_exports_only_requested_index(valid_inputs):
     assert list(context["indices"]) == ["NDWI"]
 
 
+def test_build_export_context_normalizes_polygon_feature_without_mutating_input(valid_inputs):
+    analysis, polygon = valid_inputs
+    feature = {
+        "type": "Feature",
+        "properties": {"source": "drawn-area"},
+        "geometry": deepcopy(polygon),
+    }
+
+    context = build_export_context(
+        analysis, feature, "2025-01-01", "2025-03-01", ["NDVI"]
+    )
+
+    assert context["geometry_geojson"] == polygon
+    assert context["geometry_geojson"] is not feature["geometry"]
+    assert feature["type"] == "Feature"
+    assert feature["properties"] == {"source": "drawn-area"}
+
+
 def test_build_export_context_accepts_single_index_pipeline_result(valid_inputs):
     analysis, geometry = valid_inputs
     index_result = {
@@ -236,6 +254,8 @@ def test_build_export_context_rejects_invalid_or_reversed_dates(
         None,
         {},
         {"type": "Point", "coordinates": [-52.0, -28.0]},
+        {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-52.0, -28.0]}},
+        {"type": "Feature", "geometry": None},
         {"type": "Polygon", "coordinates": []},
         {"type": "Polygon", "coordinates": [[[0, 0], [1, 1], [2, 2]]]},
         {"type": "Polygon", "coordinates": [[[0, 0], [1, 1], [2, 2], [0, 0]]]},

@@ -766,15 +766,18 @@ def render_export_actions() -> None:
     ):
         indices = {analysis["index_name"]: analysis}
     geometry = snapshot.get("geometry_geojson")
+    geometry_shape = geometry
+    if isinstance(geometry, dict) and geometry.get("type") == "Feature":
+        geometry_shape = geometry.get("geometry")
     if (
         not isinstance(analysis, dict)
         or analysis.get("success") is not True
         or not isinstance(indices, dict)
         or not requested_indices
         or any(not isinstance(indices.get(name), dict) for name in requested_indices)
-        or not isinstance(geometry, dict)
-        or geometry.get("type") != "Polygon"
-        or not geometry.get("coordinates")
+        or not isinstance(geometry_shape, dict)
+        or geometry_shape.get("type") != "Polygon"
+        or not geometry_shape.get("coordinates")
     ):
         st.info("A análise está incompleta ou sem geometria válida; execute-a novamente.")
         return
