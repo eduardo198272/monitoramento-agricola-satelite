@@ -796,33 +796,35 @@ def render_export_actions() -> None:
     st.subheader("Exportar resultados")
     payloads = st.session_state.setdefault("export_payloads", {})
     for format_key, details in EXPORT_FORMATS.items():
-        payload = payloads.get(format_key)
-        if payload is None:
+        generate_column, download_column = st.columns(2)
+        with generate_column:
             if st.button(f"Gerar {details['label']}", key=f"generate_export_{format_key}"):
                 try:
-                    context = build_export_context(
-                        analysis,
-                        geometry,
-                        snapshot["start_date"],
-                        snapshot["end_date"],
-                        tuple(st.session_state.get("selected_indices", ())),
-                    )
-                    payloads[format_key] = globals()[details["builder"]](context)
+                    with st.spinner(f"Gerando {details['label']}..."):
+                        context = build_export_context(
+                            analysis,
+                            geometry,
+                            snapshot["start_date"],
+                            snapshot["end_date"],
+                            tuple(st.session_state.get("selected_indices", ())),
+                        )
+                        payloads[format_key] = globals()[details["builder"]](context)
                 except Exception:
                     logger.exception("Failed to generate %s analysis export", format_key)
                     st.error(
                         f"Não foi possível gerar o arquivo {details['label']}. "
                         "Confira os resultados e tente novamente."
                     )
-            payload = payloads.get(format_key)
-        if payload is not None:
-            st.download_button(
-                f"Baixar {details['label']}",
-                data=payload,
-                file_name=details["filename"],
-                mime=details["mime"],
-                key=f"download_export_{format_key}",
-            )
+        payload = payloads.get(format_key)
+        with download_column:
+            if payload is not None:
+                st.download_button(
+                    f"Baixar {details['label']}",
+                    data=payload,
+                    file_name=details["filename"],
+                    mime=details["mime"],
+                    key=f"download_export_{format_key}",
+                )
 
 
 def render_results_map_area() -> bool:
