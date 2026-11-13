@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      html, body, #map { height: 100%; width: 100%; margin: 0; }
+      body { font-family: sans-serif; }
+      .index-legend {
+        background: rgba(255, 255, 255, .94); border-radius: 5px;
+        box-shadow: 0 1px 5px #5558; padding: 7px 10px; color: #222;
+        font-size: 12px; min-width: 145px;
+      }
+      .index-gradient { height: 10px; margin: 5px 0 2px; }
+      .index-labels { display: flex; justify-content: space-between; }
+      .pixel-tooltip {
+        position: absolute; z-index: 1000; display: none; pointer-events: none;
+        background: #17212b; color: white; padding: 5px 8px; border-radius: 4px;
+        font-size: 12px; white-space: nowrap; box-shadow: 0 1px 5px #0006;
+      }
+      .map-status {
+        position: absolute; z-index: 900; top: 12px; left: 50%;
+        transform: translateX(-50%); background: #17212b; color: white;
+        padding: 7px 11px; border-radius: 4px; font-size: 13px;
+      }
+      .leaflet-container { cursor: crosshair; }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="pixel-tooltip" class="pixel-tooltip"></div>
+    <div id="map-status" class="map-status">Carregando o mapa…</div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/proj4@2.15.0/dist/proj4.js"></script>
+    <script>
+      const PARENT = window.parent;
+      const tooltip = document.getElementById("pixel-tooltip");
+      const mapStatus = document.getElementById("map-status");
+      let map, raster, outline, legend, cursor;
+      let args = {};
+      let currentTileUrl = null;
+      let currentGeojson = null;
+      let loadedAnalysisKey = null;
+      let loadedGrids = {};
+      let preloadPromise = null;
+
+      function send(type, extra = {}) {
+        PARENT.postMessage({ isStreamlitMessage: true, type, ...extra }, "*");
+      }
+
+      async function decodeGrid(encoded) {
+        const compressed = Uint8Array.from(atob(encoded), (char) => char.charCodeAt(0));
+        const stream = new Blob([compressed]).stream().pipeThrough(new DecompressionStream("deflate"));
+        const buffer = await new Response(stream).arrayBuffer();
+        return new Float32Array(buffer);
+      }
+
+      async function preloadGrids(grid) {
+        if (!grid || !grid.indices) throw new Error("Valores dos índices ausentes.");
+        const nextKey = grid.analysis_key;
+        if (nextKey === loadedAnalysisKey && Object.keys(loadedGrids).length) return;
+        if (preloadPromise) await preloadPromise;
+        loadedGrids = {};
+        mapStatus.textContent = "Pré-carregando valores dos índices…";
+        mapStatus.style.display = "block";
+        preloadPromise = Promise.all(Object.entries(grid.indices).map(async ([name, metadata]) => {
+          const values = await decodeGrid(metadata.values);
+          loadedGrids[name] = { ...metadata, data: values };
+        }));
+        try {
+          await preloadPromise;
+          loadedAnalysisKey = nextKey;
+          mapStatus.style.display = "none";
+        } catch (error) {
+          loadedGrids = {};
+          mapStatus.textContent = "Não foi possível pré-carregar os valores do mapa.";
+          mapStatus.style.display = "block";
+          console.error(error);
+        } finally {
+          preloadPromise = null;
+        }
+      }
+
+      function pointInRing(point, ring) {
+        const x = point.lng, y = point.lat;
+        let inside = false;
+        for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+          const xi = ring[i][0], yi = ring[i][1];
+          const xj = ring[j][0], yj = ring[j][1];
+          const crosses = ((yi > y) !== (yj > y)) &&
+            (x < (xj - xi) * (y - yi) / ((yj - yi) || 1e-15) + xi);
+          if (crosses) inside = !inside;
+        }
+        return inside;
+      }
+
+      function isInsideArea(point, geojson) {
+        if (!geojson) return true;
+        if (geojson.type === "FeatureCollection") {
+          return geojson.features.some((feature) => isInsideArea(point, feature));
+        }
+        const geometry = geojson.type === "Feature" ? geojson.geometry : geojson;
+        if (!geometry || !geometry.coordinates) return true;
+        if (geometry.type === "Polygon") {
+          return geometry.coordinates.length &&
+            pointInRing(point, geometry.coordinates[0]) &&
+            !geometry.coordinates.slice(1).some((hole) => pointInRing(point, hole));
+        }
+        if (geometry.type === "MultiPolygon") {
+          return geometry.coordinates.some((polygon) => polygon.length &&
+            pointInRing(point, polygon[0]) &&
+            !polygon.slice(1).some((hole) => pointInRing(point, hole)));
+        }
+        return true;
+      }
+
+      function updateLegend() {
+        if (!legend) return;
+        const colors = args.palette || [];
+        const gradient = colors.map((color, i) =>
+          `${color} ${colors.length < 2 ? 0 : i * 100 / (colors.length - 1)}%`
+        ).join(", ");
+        legend.getContainer().innerHTML =
+          `<strong>${args.index_name}</strong>` +
+          `<div class="index-gradient" style="background:linear-gradient(90deg,${gradient})"></div>` +
+          `<div class="index-labels"><span>${Number(args.range?.[0] ?? -1).toFixed(3)}</span>` +
+          `<span>${((Number(args.range?.[0] ?? -1) + Number(args.range?.[1] ?? 1)) / 2).toFixed(3)}</span>` +
+          `<span>${Number(args.range?.[1] ?? 1).toFixed(3)}</span></div>`;
+      }
+
+      function initializeMap() {
+        map = L.map("map", { zoomControl: true }).setView(args.center || [-28, -52], args.zoom || 10);
+        L.tileLayer(
+          "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          { attribution: "Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community", maxZoom: 19 }
+        ).addTo(map);
+        legend = L.control({ position: "bottomright" });
+        legend.onAdd = () => {
+          const div = L.DomUtil.create("div", "index-legend");
+          L.DomEvent.disableClickPropagation(div);
+          return div;
+        };
+        legend.addTo(map);
+        updateLegend();
+        map.on("mousemove", onMouseMove);
+        map.on("mouseout", () => { tooltip.style.display = "none"; });
+      }
+
+      function applyArgs(newArgs) {
+        const indexChanged = args.index_name !== newArgs.index_name;
+        args = newArgs;
+        if (!map) initializeMap();
+        if (!raster || currentTileUrl !== args.tile_url) {
+          if (raster) map.removeLayer(raster);
+          raster = L.tileLayer(args.tile_url, { opacity: 0.7, maxZoom: 20 });
+          raster.addTo(map);
+          currentTileUrl = args.tile_url;
+        }
+        const nextGeojson = JSON.stringify(args.geojson || null);
+        if (nextGeojson !== currentGeojson && outline) map.removeLayer(outline);
+        if (nextGeojson !== currentGeojson && args.geojson) {
+          outline = L.geoJSON(args.geojson, {
+            style: { color: "#ff7800", weight: 3, fillOpacity: 0 }
+          }).addTo(map);
+        }
+        currentGeojson = nextGeojson;
+        updateLegend();
+        if (indexChanged) tooltip.style.display = "none";
+        preloadGrids(args.value_grid).then(() => showLocalValue(cursor));
+        requestAnimationFrame(() => map.invalidateSize());
+      }
+
+      function onMouseMove(event) {
+        cursor = event;
+        if (mapStatus.style.display !== "none") return;
+        tooltip.style.display = "block";
+        tooltip.style.left = `${event.containerPoint.x + 14}px`;
+        tooltip.style.top = `${event.containerPoint.y + 14}px`;
+        if (!isInsideArea(event.latlng, args.geojson)) {
+          tooltip.textContent = "Fora da área selecionada";
+          return;
+        }
+        showLocalValue(event);
+      }
+
+      function showLocalValue(event) {
+        if (!event || !event.latlng || !isInsideArea(event.latlng, args.geojson)) return;
+        const grid = args.value_grid;
+        const band = loadedGrids[args.index_name];
+        if (!grid || !band || typeof proj4 !== "function") {
+          tooltip.textContent = "Valores do índice indisponíveis";
+          return;
+        }
+        if (!proj4.defs(grid.crs)) {
+          const code = Number(grid.crs.split(":")[1]);
+          const isSouth = code >= 32701 && code <= 32760;
+          const zone = isSouth ? code - 32700 : code - 32600;
+          proj4.defs(grid.crs,
+            `+proj=utm +zone=${zone} ${isSouth ? "+south " : ""}+datum=WGS84 +units=m +no_defs +type=crs`);
+        }
+        const [x, y] = proj4("EPSG:4326", grid.crs, [event.latlng.lng, event.latlng.lat]);
+        const [xScale, , xOrigin, , yScale, yOrigin] = grid.transform;
+        const globalColumn = Math.floor((x - xOrigin) / xScale);
+        const globalRow = Math.floor((y - yOrigin) / yScale);
+        const column = globalColumn - grid.first_column;
+        const row = globalRow - grid.first_row;
+        if (row < 0 || column < 0 || row >= band.rows || column >= band.columns) {
+          tooltip.textContent = "Sem dado";
+          return;
+        }
+        const value = band.data[row * band.columns + column];
+        tooltip.textContent = !Number.isFinite(value) || value === grid.nodata
+          ? "Sem dado" : `${args.index_name}: ${value.toFixed(4)}`;
+      }
+
+      window.addEventListener("message", (event) => {
+        if (!event.data || event.data.type !== "streamlit:render") return;
+        applyArgs(event.data.args || {});
+      });
+      send("streamlit:componentReady", { apiVersion: 1 });
+      send("streamlit:setFrameHeight", { height: 320 });
+    </script>
+  </body>
+</html>

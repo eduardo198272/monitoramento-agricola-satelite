@@ -1,0 +1,163 @@
+%----------------------------------------------------------------------------------
+% Exemplo do uso da classe upf-ccc.cls. Veja o arquivo .cls
+% para mais detalhes e instruções.
+%----------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------
+% Para usuários Linux/ Mac OS X:
+% - Para utilizar o pacote Português Brasileiro, é necessário
+% instalar o pacote texlive-lang-portuguese
+%----------------------------------------------------------------------------------
+
+% Seleção de idioma da proposta de TCC. Por enquanto as únicas opções
+% suportadas são 'brazilian' e 'english'
+%\documentclass[num-refs,brazilian,oneside]{upf-ppgca}
+\documentclass[alpha-refs,brazilian,oneside]{upf-ccc}
+
+%----------------------------------------------------------------
+% Coloque seus pacotes abaixo.
+%
+% Obs.: muitos pacotes de uso comum do LaTeX, como amsmath,
+% geometry e url já são automaticamente incluídos pela classe
+% (veja o arquivo .cls). Isso torna obrigatória a presença destes
+% no sistema para o uso desta classe, mas ao mesmo tempo o uso se
+% torna mais simples. Antes de incluir qualquer novo pacote, confira
+% se a classe já o faz, observando o comando \RequirePackage
+%
+%----------------------------------------------------------------
+% Para inserção de figuras.
+\usepackage{graphicx}
+% Utilize a opção 'pdftex' se você estiver usando o pdflatex (que
+% permite figuras em formatos como .jpg ou .png)
+%\usepackage[pdftex]{graphicx}
+% Para tabelas com elementos ocupando mais de uma linha
+\usepackage{multirow}
+% Para frações na mesma linha (ex. ⅓).
+\usepackage{nicefrac}
+% Para inserir figuras lado a lado.
+\usepackage{subfigure}
+% Para converter imagens EPS para PDF
+\usepackage{epstopdf}
+% Para numerar sequencialmente figuras, tabelas e equações,
+% do início ao fim do documento (não reinicia a numeração a cada
+% novo capítulo incluído neste documento).
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{equation}{chapter}
+\counterwithout{footnote}{chapter}
+% Mantém a numeração sequencial de citação somente para o corpo do
+% texto, ignorando contagem a partir de sumários e listas
+\usepackage{notoccite}
+% Para ajustar um elemento dentro das margens da página
+\usepackage{adjustbox}
+% Para customizar itemize, enumerate
+\usepackage{enumitem}
+% Para sublegendas em tabelas, figuras e quadros
+\usepackage{threeparttable}
+% Para aceitar frases sublinhadas com quebras de linha
+\usepackage{soul}
+\usepackage{todonotes}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+
+%----------------------------------------------------------------
+% Autor (OBRIGATÓRIO)
+%----------------------------------------------------------------
+\author{Marcelo Trindade Rebonatto}
+
+%----------------------------------------------------------------
+% Título (OBRIGATÓRIO). Devem ser passados DOIS parâmetros,
+% o título em português E o inglês, não importando o idioma
+% escolhido. Os títulos são utilizados para a montagem da capa,
+% resumo e abstract mais tarde.
+%----------------------------------------------------------------
+\title{Minha proposta da TCC}
+      {TITLE IN ENGLISH}
+
+%----------------------------------------------------------------
+% Opções para o tipo de trabalho (OBRIGATÓRIO)
+%----------------------------------------------------------------
+\tipotrabalho{\monografia}  % Monografias em geral.
+
+%----------------------------------------------------------------
+% Orientador (OBRIGATÓRIO). Aqui vc deve indicar o nome do orientador
+% do seu trabalho final.
+%----------------------------------------------------------------
+\orientador{Meu orientador}
+
+%----------------------------------------------------------------
+% A capa é inserida automaticamente. Por isso não é necessário
+% chamar \maketitle
+%----------------------------------------------------------------
+
+%----------------------------------------------------------------
+% O espaçamento entre linhas é colocado de maneira automática!
+% As únicas seções que não têm espaçamento 1,5 são o resumo e
+% o abtract. Veja nestes locais como é feita a definição.
+%----------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------
+% O sumário é opcional, pode-se incluir ele para verificar a estrutura geral.
+% Para não incluí-lo, basta comentar.
+%----------------------------------------------------------------
+\tableofcontents      % Sumário               (Opcional)
+%\listoftodos          % Relação dos Todos inseridos ao longo do texto  
+
+%----------------------------------------------------------------
+% Aqui começa o desenvolvimento da proposta de TCC.
+% Os itens da proposta colocados abaixo são obrigatórios.
+%----------------------------------------------------------------
+\include{1_Resumo}
+\include{2_Motivacao_e_objetivos}
+\include{3_Revisão_Literatura}
+\include{4_Materiais_Métodos}
+
+%----------------------------------------------------------------
+% Aqui vai a bibliografia. Utiliza-se o estilo 'dcu'
+% para citações alfanuméricas aparecendo
+% na ordem alfabética do último sobrenome do autor principal.
+%----------------------------------------------------------------
+\renewcommand*{\bibname}{\capbib}
+\clearpage\phantomsection\addcontentsline{toc}{chapter}{\MakeUppercase{\capbib}}
+\bibliography{referencias}
+
+%----------------------------------------------------------------
+% Após \appendix, se iniciam os capítulos de Apêndice, com
+% numeração alfabética.
+% Pode-se utilizar o comando \include para os apêndices
+%----------------------------------------------------------------
+%\appendix
+%\chapter{Exemplo de Apêndice}
+%
+%Apêndices e anexos são materiais complementares ao texto que só devem ser incluídos quando forem imprescindíveis à compreensão deste. Cada apêndice deverá ser tratado como um novo capítulo da monografia.
+%
+%\textbf{Apêndices são textos elaborados pelo autor} a fim de complementar sua argumentação. Eles são elementos pós-textuais opcionais.
+%
+% Você pode incluir um arquivo separado para descrever/ redigir o apêndice ou o anexo, no mesmo modo que o modelo apresenta os capítulos. Por exemplo:
+% \include{ex-apendice1}
+% \include{ex-anexo1}
+%
+% Ou ainda, você pode adicionar como apêndice/ anexo um documento elaborado externamente a esse modelo, como um arquivo PDF. Exemplo:
+% \chapter{Termo de consentimento, questionário de caracterização da amostra, e expectativa pré-jogo}\label{chap:apendiceA}
+% \includepdf[pages=-]{forms/1TCLE.pdf}
+
+%----------------------------------------------------------------
+% Aqui vão os "capítulos" de anexos. Cada anexo deve
+% ser considerado um capítulo.
+% Pode-se utilizar o comando \include para os anexos
+%----------------------------------------------------------------
+%\anexos
+%\chapter{Exemplo de Anexo}
+%
+%Apêndices e anexos são materiais complementares ao texto que só devem ser incluídos quando forem imprescindíveis à compreensão deste. Cada %anexo deverá ser tratado como um novo capítulo da monografia.
+%
+%\textbf{Anexos são os documentos não elaborados pelo autor}, que servem de fundamentação, comprovação ou ilustração, como mapas, leis, estatutos etc. Eles são elementos pós-textuais opcionais.
+%
+% E aqui (para a felicidade de todos) termina o documento.
+
+%\contracapa
+
+\end{document}

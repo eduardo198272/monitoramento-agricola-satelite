@@ -1,0 +1,38 @@
+\documentclass[alpha-refs,brazilian,oneside]{upf-ccc}
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{nicefrac}
+\usepackage{subfigure}
+\usepackage{epstopdf}
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{equation}{chapter}
+\counterwithout{footnote}{chapter}
+\usepackage{notoccite}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{threeparttable}
+\usepackage{soul}
+
+\author{Eduardo Steffens Hoppen}
+\title{Sistema de Monitoramento Agrícola por Imagens de Satélite}
+      {Agricultural Monitoring System Using Satellite Imagery}
+\tipotrabalho{\monografia}
+\orientador{Rafael Rieder}
+
+\begin{document}
+
+\tableofcontents
+
+\include{1_Resumo}
+\include{2_Motivacao_e_objetivos}
+\include{3_Revisao_Literatura}
+\include{4_Materiais_Metodos}
+
+\renewcommand*{\bibname}{\capbib}
+\clearpage\phantomsection\addcontentsline{toc}{chapter}{\MakeUppercase{\capbib}}
+\bibliography{referencias}
+
+\end{document}
