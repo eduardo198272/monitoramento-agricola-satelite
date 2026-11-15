@@ -10,11 +10,19 @@ Os cenários são executados pelo script `src/app/validate_scenarios.py` usando 
 2025/2026. Cada execução cria uma geometria quadrada em torno da coordenada central,
 consulta o Sentinel-2, aplica máscara de nuvens, calcula o NDVI e avalia a série temporal.
 
-| Cultura | Período executado | Centro | Tamanho da geometria |
+| Cultura | Período configurado | Centro (longitude, latitude) | Parâmetro `size_km` |
 |---|---|---|---:|
 | Soja | 2025-10-01 a 2026-03-31 | -50.5, -15.5 | 1,0 km |
 | Milho | 2025-09-01 a 2026-03-31 | -52.0, -25.0 | 0,7 km |
 | Pastagem | 2025-01-01 a 2025-12-31 | -50.0, -16.5 | 0,5 km |
+
+No código, `size_km` é convertido em `size_km / 111` graus e aplicado
+para cada lado do centro em ambas as coordenadas: é um semilado aproximado,
+não o comprimento total do lado. A largura real em quilômetros varia com a
+latitude. As áreas sugeridas nas seções abaixo são propostas conceituais,
+não dimensões usadas pelo script. Os cenários configurados não demonstram,
+por si só, que as coordenadas correspondam às culturas indicadas nem que a
+validação experimental tenha sido concluída.
 
 Para executar e salvar os resultados estruturados em JSON:
 

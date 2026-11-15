@@ -1,5 +1,12 @@
 # Spec: Localizações Salvas
 
+> Escopo original da SPEC-17: armazenamento SQLite local. O ponto de entrada
+> `streamlit_app.py` posterior usa armazenamento isolado por sessão, sem SQLite
+> e sem persistência após o encerramento da sessão. Para transferência por
+> GeoJSON e configuração dos dois modos, consulte
+> [Publicação no Streamlit Community Cloud](../../deploy-streamlit.md).
+> As referências a persistência e reinício abaixo aplicam-se ao modo SQLite.
+
 ## Propósito
 
 Permitir que o usuário nomeie e salve uma área desenhada no mapa e a restaure
