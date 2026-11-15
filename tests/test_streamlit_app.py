@@ -682,7 +682,8 @@ class TestWorkspaceControls:
 
         assert app.session_state["aoi_geojson"] == selected_geojson
         assert app.session_state["aoi_geometry"] is geometry
-        assert create_map.call_args.kwargs["geojson"] == selected_geojson
+        # Live drawings remain in Leaflet instead of being injected again.
+        assert create_map.call_args.kwargs["geojson"] is None
 
     def test_workspace_has_analyze_button(self, app):
         buttons = app.button
@@ -879,9 +880,9 @@ class TestApplicationFlow:
         search.assert_called_once_with("Passo Fundo")
         assert function_app.session_state["location_center"] == [-28.26, -52.41]
         assert function_app.session_state["location_zoom"] == 11
-        assert function_app.session_state["aoi_geojson"] == selected_geojson
-        assert function_app.session_state["aoi_geometry"] == selected_geometry
-        assert function_app.session_state["aoi_area_ha"] == 12.5
+        assert function_app.session_state["aoi_geojson"] is None
+        assert function_app.session_state["aoi_geometry"] is None
+        assert function_app.session_state["aoi_area_ha"] is None
         assert any(
             "Localidade encontrada: Passo Fundo, RS" in success.value
             for success in function_app.success
@@ -932,7 +933,7 @@ class TestApplicationFlow:
         assert function_app.session_state["aoi_area_ha"] == 12.5
         assert create_map.call_args.kwargs["center"] == [-27.0, -51.0]
         assert create_map.call_args.kwargs["zoom"] == 8
-        assert create_map.call_args.kwargs["geojson"] == selected_geojson
+        assert create_map.call_args.kwargs["geojson"] is None
 
     def test_empty_location_search_does_not_call_service(
         self, function_app, monkeypatch

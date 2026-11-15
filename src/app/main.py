@@ -1,5 +1,6 @@
 import math
 import logging
+from copy import deepcopy
 
 import streamlit as st
 from datetime import date, timedelta
@@ -63,6 +64,8 @@ UI_STATE_DEFAULTS = {
     "pending_saved_location_name": None,
     "restored_saved_location_name": None,
     "selection_map_revision": 0,
+    "selection_map_seed": None,
+    "selection_map_last_event": None,
     "ignore_next_empty_drawings": False,
     "analysis_mode": "single",
     "selected_indices": ["NDVI"],
@@ -112,6 +115,16 @@ def clear_area_selection_state() -> None:
     st.session_state.aoi_area_ha = None
     st.session_state.aoi_perimeter_km = None
     st.session_state.aoi_centroid = None
+    st.session_state.selection_map_seed = None
+    st.session_state.selection_map_last_event = None
+    st.session_state.selection_map_revision = (
+        getattr(st.session_state, "selection_map_revision", 0) + 1
+    )
+    st.session_state.ignore_next_empty_drawings = False
+    st.session_state.show_save_location_dialog = False
+    st.session_state.pending_saved_location_id = None
+    st.session_state.pending_saved_location_name = None
+    st.session_state.restored_saved_location_name = None
     clear_analysis_state()
 
 
@@ -166,6 +179,8 @@ def restore_pending_saved_location() -> bool:
 
     # Update the selected area only after the record and all derived values are valid.
     st.session_state.aoi_geojson = geojson
+    st.session_state.selection_map_seed = deepcopy(geojson)
+    st.session_state.selection_map_last_event = None
     st.session_state.aoi_geometry = geometry
     st.session_state.aoi_area_ha = area_context["area_ha"]
     st.session_state.aoi_perimeter_km = area_context["perimeter_km"]
@@ -556,6 +571,7 @@ def _render_controls_content() -> tuple[bool, bool]:
             type="primary",
             use_container_width=True,
             disabled=analysis_disabled,
+            key="analyze_area",
         )
 
     if search:
@@ -580,9 +596,12 @@ def _render_controls_content() -> tuple[bool, bool]:
                         "indisponível. Confira o nome e tente novamente."
                     )
                 else:
+                    clear_area_selection_state()
                     st.session_state.location_center = center
                     st.session_state.location_zoom = zoom
                     st.session_state.location_result = location
+                    # Rebuild controls and the map against the now-empty area.
+                    st.rerun()
 
     if st.session_state.location_result:
         st.success(
@@ -603,7 +622,10 @@ def render_selection_map_area() -> None:
     selection_map = create_selection_map(
         center=st.session_state.location_center,
         zoom=st.session_state.location_zoom,
-        geojson=st.session_state.aoi_geojson,
+        # Live drawings already belong to the browser's editable feature group.
+        # Injecting them again changes streamlit-folium's script hash, remounting
+        # the component and losing its drawing state. Only seed restored areas.
+        geojson=getattr(st.session_state, "selection_map_seed", None),
     )
     map_data = st_folium(
         selection_map,
@@ -615,23 +637,41 @@ def render_selection_map_area() -> None:
 
     map_data = map_data or {}
     drawn_geojson = map_data.get("last_active_drawing")
+    drawings = map_data.get("all_drawings")
+    event = {"last_active_drawing": drawn_geojson, "all_drawings": drawings}
+    has_update = drawn_geojson is not None or isinstance(drawings, list)
+    replay = has_update and event == getattr(
+        st.session_state, "selection_map_last_event", None
+    )
+    if replay:
+        drawn_geojson = None
     ignore_empty_drawings = getattr(
         st.session_state, "ignore_next_empty_drawings", False
     )
-    if ignore_empty_drawings and "all_drawings" in map_data:
+    # A default payload with all_drawings=None is not the initial empty event.
+    if ignore_empty_drawings and isinstance(drawings, list) and not replay:
         st.session_state.ignore_next_empty_drawings = False
+        if not drawings:
+            st.session_state.selection_map_last_event = deepcopy(event)
+            drawn_geojson = None
     drawings_removed = (
-        "all_drawings" in map_data
-        and isinstance(map_data["all_drawings"], list)
-        and not map_data["all_drawings"]
-        and st.session_state.aoi_geojson is not None
+        isinstance(drawings, list)
+        and not drawings
         and not ignore_empty_drawings
+        and not replay
     )
     if drawings_removed:
-        clear_area_selection_state()
+        if st.session_state.aoi_geojson is not None or st.session_state.aoi_geometry is not None:
+            clear_area_selection_state()
+            # Reflect removal in the Analyze button, which is rendered first.
+            st.rerun()
+        else:
+            # Ignore last_active_drawing left behind by a deleted polygon.
+            st.session_state.selection_map_last_event = deepcopy(event)
     elif drawn_geojson:
         try:
-            if drawn_geojson != st.session_state.aoi_geojson:
+            changed = drawn_geojson != st.session_state.aoi_geojson
+            if changed:
                 geometry = geojson_to_ee_geometry(drawn_geojson)
                 context = calculate_area_context(geometry)
                 st.session_state.aoi_geometry = geometry
@@ -640,6 +680,8 @@ def render_selection_map_area() -> None:
                 st.session_state.aoi_perimeter_km = context["perimeter_km"]
                 st.session_state.aoi_centroid = context["centroid"]
                 clear_analysis_state()
+            st.session_state.selection_map_last_event = deepcopy(event)
+            if changed:
                 # Re-evaluate the Analyze button against the freshly stored AOI.
                 st.rerun()
             lat, lon = st.session_state.aoi_centroid
@@ -835,7 +877,8 @@ def render_results_map_area() -> bool:
     if not available_indices:
         return False
     if st.button("Alterar área", key="edit_analysis_area"):
-        clear_analysis_state()
+        clear_area_selection_state()
+        st.rerun()
         return False
     selected = st.session_state.get("visible_index_control")
     visible_index = selected if selected in available_indices else available_indices[0]
