@@ -1,0 +1,144 @@
+\clearpage
+\section{Apresentação da plataforma desenvolvida}\label{chap:plataforma-final}
+
+As capturas desta seção foram fornecidas pelo autor para apresentar o fluxo da aplicação. São exemplos de interface, distintos da demonstração instrumentada descrita nos resultados. Não se presume equivalência entre a versão capturada e os contratos corrigidos em desenvolvimento. Os valores exibidos pertencem a cada exemplo; as telas desktop e móveis não representam necessariamente a mesma área ou execução.
+
+\subsection{Organização e entrada espacial}
+
+A exploração de uma região começa pela definição da área e do período. A interface reúne busca, datas, índices e acionamento da análise em torno do mapa, que recebe a demarcação antes do processamento e apresenta a composição temática depois dele. Esse fluxo permite consultar os produtos sem que o usuário tenha de manipular diretamente os arquivos raster (\cref{fig:autor-inicial,fig:autor-configuracao}).
+
+\capturaautor[p]{inicial.png}{Interface inicial, com controles analíticos e mapa de seleção}{inicial}
+\capturaautor{configuracao.png}{Detalhe dos controles de busca, localizações salvas, período e índice}{configuracao}
+
+A busca resolve um nome de lugar e aproxima a navegação da região desejada, sem identificar automaticamente limites cadastrais. A \cref{fig:autor-busca} apresenta a consulta por Passo Fundo e a confirmação da localização. O mapa-base é distinto da imagem Sentinel-2 utilizada nos cálculos; sua atribuição acompanha a visualização.
+
+\begin{figure*}[htbp]
+\centering
+\includegraphics[width=0.60\textwidth]{fig/capturas_autor/busca.png}
+\par\smallskip
+{\small (a) Preenchimento do campo de busca.}
+\par\medskip
+\includegraphics[width=0.98\textwidth]{fig/capturas_autor/busca_resultado.png}
+\par\smallskip
+{\small (b) Confirmação da localidade e enquadramento do mapa.}
+\caption{Busca geográfica por Passo Fundo. Fonte: capturas da aplicação fornecidas pelo autor.}
+\label{fig:autor-busca}
+\end{figure*}
+
+A demarcação fornece a geometria das consultas (\cref{fig:autor-desenho}). Área em hectares, perímetro e centroide permitem conferir o recorte espacial; não são estimativa de área cultivada. O salvamento associa nome e polígono, e a restauração permite repetir análises com outra configuração temporal sem redesenhar a região (\cref{fig:autor-salvar,fig:autor-restaurar}).
+
+\capturaautor{desenho.png}{Polígono desenhado no mapa, medidas da geometria e comando de salvamento}{desenho}
+
+\begin{figure*}[htbp]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{fig/capturas_autor/salvar.png}
+\par\smallskip
+{\small (a) Atribuição de nome à localização.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{fig/capturas_autor/salva.png}
+\par\smallskip
+{\small (b) Localizações disponíveis para seleção.}
+\end{minipage}
+\caption{Salvamento e listagem de geometrias. Fonte: capturas da aplicação fornecidas pelo autor.}
+\label{fig:autor-salvar}
+\end{figure*}
+
+\capturaautor{restaurar.png}{Restauração de uma localização salva e reapresentação de seu polígono no mapa}{restaurar}
+
+O armazenamento web está vinculado à sessão. A transferência GeoJSON oferece continuidade por arquivo: exporta localizações e permite importar conjuntos validados, preservando as restrições de tamanho e quantidade. A \cref{fig:autor-geojson} mostra o envio de arquivo e a confirmação de uma localização importada. Essa estratégia não representa sincronização autenticada entre dispositivos.
+
+\begin{figure*}[htbp]
+\centering
+\begin{minipage}[t]{0.30\textwidth}
+\vspace{0pt}
+\centering
+\includegraphics[width=\linewidth]{fig/capturas_autor/geojson_upload_barra.png}
+\par\smallskip
+{\small (a) Controle de upload.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\textwidth}
+\vspace{0pt}
+\centering
+\includegraphics[width=\linewidth]{fig/capturas_autor/geojson_arquivo_barra.png}
+\par\smallskip
+{\small (b) Arquivo selecionado.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\textwidth}
+\vspace{0pt}
+\centering
+\includegraphics[width=\linewidth]{fig/capturas_autor/geojson_importado_barra.png}
+\par\smallskip
+{\small (c) Confirmação da importação.}
+\end{minipage}
+\caption{Importação de localizações em GeoJSON. Os três painéis são recortes da barra lateral; o conteúdo dos controles foi preservado. Fonte: capturas da aplicação fornecidas pelo autor.}
+\label{fig:autor-geojson}
+\end{figure*}
+
+\subsection{Configuração e produtos analíticos}
+
+Na implementação corrigida, as datas inicial e final são inclusivas em UTC. A opção ``Todos'' compartilha coleção e clima entre os três índices; a alternância posterior de visualização não solicita novo processamento. A mudança de geometria, período ou conjunto analítico invalida produtos incompatíveis, mantendo a coerência da apresentação. Essas regras foram verificadas separadamente e não são comprovadas apenas pelas capturas.
+
+O painel reúne média espacial da composição, área, tendência e visão geral por indicador. A contagem corresponde às imagens filtradas, não a dias sem nuvens ou observações válidas em todos os pixels. NDWI e NDMI do sistema são variantes NIR--SWIR próximas, diferenciadas pela banda NIR empregada.
+
+Os mapas representam a mediana temporal por posição. O gradiente permite explorar contrastes internos, sem atribuir automaticamente classes agronômicas. A \cref{fig:autor-mapa} ilustra a camada NDVI e a consulta de um valor por posição. Na implementação corrigida, os limites enviados à legenda são os mesmos da camada, conforme a verificação relatada nos resultados; não se usa a captura fornecida como comprovação dessa correção.
+
+\capturaautor{mapa_indice.png}{Mapa NDVI com gradiente, contorno da área, legenda e leitura pontual; a seleção ``Todos'' disponibiliza a alternância entre os índices}{mapa}
+
+\subsection{Exploração espacial, temporal e meteorológica}
+
+A consulta por posição permite examinar diferenças dentro da área ao apresentar o valor de uma célula da composição já transferida. Movimento e toque utilizam a mesma consulta local no navegador, com mensagens para posições fora da geometria, sem dado ou além da matriz. As quatro casas decimais são uma escolha de apresentação, não uma medida de precisão agronômica.
+
+Enquanto o mapa resume o período, a série temporal apresenta a média espacial de cada aquisição. O gráfico une os pontos por segmentos de reta, mas a aplicação não calcula valores diários intermediários nem elimina datas repetidas. A \cref{fig:autor-series} mostra o painel e parte do gráfico, cujo eixo de datas não está enquadrado no arquivo fornecido. Essa imagem ilustra a organização da tela, não substitui a série exportada para análise numérica.
+
+\capturaautor{painel_series.png}{Resumo do índice, visão geral multiíndice e trecho da série NDVI; o eixo temporal fica fora do enquadramento original}{series}
+
+A lista de anomalias informa as quedas sinalizadas em relação à janela anterior, ou a ausência de sinalizações. Esses recursos permitem examinar mudanças na série, sem classificar doenças ou identificar suas causas. No exemplo da \cref{fig:autor-clima}, a listagem aparece acima do contexto meteorológico.
+
+O gráfico climático combina precipitação em barras e temperatura média em linha, com eixos próprios. Na implementação corrigida, a radiação utiliza a unidade normalizada e permanece indisponível quando não há valor válido. O modo multiíndice recupera o contexto compartilhado, sem repetir a consulta para cada indicador. A captura ilustra precipitação e temperatura, não a validação da radiação.
+
+\capturaautor{anomalias_clima.png}{Listagem de sinalizações NDVI e gráfico de precipitação e temperatura da NASA POWER}{clima}
+
+\subsection{Relatórios e interoperabilidade}
+
+A interface distingue preparação e download dos arquivos. O PDF sintetiza resultados visuais, o XLSX organiza abas e o ZIP distribui tabelas CSV. A geração utiliza o snapshot concluído; não recalcula os índices para cada formato. O mapa estático do PDF usa escala fixa $[-1,1]$, comunicada em sua legenda, podendo diferir do contraste ajustado do mapa interativo.
+
+A nova captura do relatório PDF aguarda substituição após atualização da versão pública e conferência da radiação. Por isso, não é incluída como evidência visual validada nesta versão do artigo. As saídas permitem conferir e reutilizar informações fora da interface, mas não incluem raster GeoTIFF nem toda a proveniência necessária para reconstruir exatamente o processamento remoto. Os arquivos PDF, XLSX e ZIP da demonstração anterior permanecem preservados; XLSX e ZIP foram verificados programaticamente, mas suas capturas em visualizadores próprios continuam pendentes.
+
+\subsection{Adaptabilidade e acesso público}
+
+O CSS possui regras para larguras até 1.100, 768 e 480 pixels, reorganizando os controles. Mapas e gráficos integram o layout web, não um aplicativo móvel nativo. O tratamento de toque amplia a exploração sem cursor, mas desenho, importação e downloads também dependem do navegador e do sistema operacional.
+
+As capturas móveis fornecidas pelo autor mostram a apresentação do mapa e do painel de indicadores (\cref{fig:mobile}). Elas complementam a emulação documentada anteriormente, mas não constituem uma avaliação sistemática de compatibilidade, acessibilidade ou operação por toque. Modelo do aparelho, versão do navegador e protocolo de teste não foram registrados para essas imagens. O exemplo móvel apresenta outra área e não deve ser comparado numericamente ao desktop como se fosse a mesma execução.
+
+A aplicação pode ser acessada sem instalação local pelo visitante no \href{https://eduardo198272-monitoramento-agricola-satel-streamlit-app-q0mow9.streamlit.app/}{endereço público Streamlit}. O QR Code da \cref{fig:qr-acesso} aponta para o URL completo e foi conferido por decodificação. A verificação de acesso não implica disponibilidade contínua nem publicação das correções locais.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.48\columnwidth]{fig/qr_plataforma.png}
+\caption{QR Code de acesso ao endereço público. Fonte: elaborado pelo autor.}
+\label{fig:qr-acesso}
+\end{figure}
+
+\begin{figure*}[htbp]
+\centering
+\begin{minipage}[t]{0.43\textwidth}
+\centering
+\includegraphics[width=\linewidth,height=0.66\textheight,keepaspectratio]{fig/capturas_autor/mobile_mapa.jpeg}
+\par\smallskip
+{\small (a) Mapa e controles de análise.}
+\end{minipage}\hspace{0.04\textwidth}
+\begin{minipage}[t]{0.43\textwidth}
+\centering
+\includegraphics[width=\linewidth,height=0.66\textheight,keepaspectratio]{fig/capturas_autor/mobile_painel.jpeg}
+\par\smallskip
+{\small (b) Resumo e indicadores.}
+\end{minipage}
+\caption{Apresentação da aplicação em navegador móvel, com exemplo distinto das telas desktop. Fonte: capturas fornecidas pelo autor.}
+\label{fig:mobile}
+\end{figure*}
+
+\clearpage

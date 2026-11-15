@@ -1,21 +1,23 @@
-% Relatório em elaboração. A proposta original permanece em Proposta.tex.
+% Relatório do artefato computacional. Proposta.tex permanece como histórico.
 \documentclass[alpha-refs,english,brazilian]{CC-EC_TF-TC}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric}
 
 \AtBeginDocument{\renewcommand{\harvardand}{e}}
+\input{figuras_relatorio}
+\input{avaliacao_usuarios/resultados/indicadores}
+\hypersetup{pdftitle={Sistema de Monitoramento Agrícola por Imagens de Satélite},pdfauthor={Eduardo Steffens Hoppen},pdfsubject={Trabalho de Conclusão de Curso - Ciência da Computação - UPF}}
 
 \title{Sistema de Monitoramento Agrícola por Imagens de Satélite}
 \titleother{Agricultural Monitoring System Using Satellite Imagery}
 \author[1]{Eduardo Steffens Hoppen}
-% PENDENTE: confirmar orientador e sua forma de identificação no artigo.
-\affil[1]{Universidade de Passo Fundo, Instituto de Tecnologia, Curso de Ciência da Computação}
+\affil[1]{Universidade de Passo Fundo, Instituto de Tecnologia, Curso de Ciência da Computação\\Orientador: Prof. Carlos Amaral Holbig}
 \runningauthor{Hoppen}
 \titulores{Monitoramento agrícola por imagens de satélite}
 \papercat{Trabalho de Conclusão de Curso}
 % PENDENTE: confirmar mês e ano da defesa.
 \jyear{2026}
-\jmonth{A confirmar}
+\jmonth{} % Pendente administrativo: mês da defesa, confirmar antes da entrega.
 \jcourse{Ciência da Computação}
 \setcounter{page}{1}
 \firstpage{1}
@@ -31,6 +33,8 @@
 \input{final_1_introducao}
 \input{final_2_fundamentacao}
 \input{final_3_metodos}
+\input{final_3a_implementacao}
+\input{final_3b_plataforma}
 \input{final_4_resultados}
 \input{final_5_discussao}
 \input{final_6_conclusao}

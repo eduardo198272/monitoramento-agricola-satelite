@@ -1,0 +1,47 @@
+{
+  "pdf": "Relatorio_Final.pdf",
+  "pages": 28,
+  "sha256": "d083e02bf5bb0cb0fbc1db013ea87fc8fd03af8945fb1430f822d26ef359b5d7",
+  "cited_keys": [
+    "AMANI2020",
+    "EOSDA_PLATFORM",
+    "ESA_SENTINEL2",
+    "GAO1996",
+    "GOOGLE_EE_DATE",
+    "GOOGLE_EE_MEDIAN",
+    "GOOGLE_EE_ND",
+    "GOOGLE_EE_NONCOMMERCIAL",
+    "GOOGLE_EE_REDUCE",
+    "GOOGLE_EE_SAMPLE",
+    "GOOGLE_EE_SERVICE_ACCOUNT",
+    "GOOGLE_S2_SR",
+    "GORELICK2017",
+    "MCFEETERS1996",
+    "NASA_POWER_DAILY",
+    "NOMINATIM_POLICY",
+    "ONESOIL_PLATFORM",
+    "PATRICIO2018",
+    "ROUSE1974_NTRS",
+    "SLAIFFER2023",
+    "STREAMLIT_CLOUD_SECRETS",
+    "USGS_NDMI",
+    "WEISS2020"
+  ],
+  "unresolved_citations": [],
+  "unresolved_references": [],
+  "class_changed_in_second_round": false,
+  "visual_review": "Todas as páginas em folhas de contato; detalhes de esquemas e produto PDF real",
+  "warnings": [
+    "overfull de cabeçalho herdado 54.64 pt",
+    "headheight herdado",
+    "substituição de tamanho de fonte",
+    "underfulls de parágrafo/coluna"
+  ],
+  "pending": [
+    "mês da defesa",
+    "identificador de publicação institucional",
+    "respostas reais da pesquisa",
+    "CAP-18/19 em visualizador",
+    "revisão de contraste/compatibilidade"
+  ]
+}

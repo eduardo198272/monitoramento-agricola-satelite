@@ -11,18 +11,20 @@ import zipfile
 import pandas as pd
 
 from src.app.export_context import SUPPORTED_INDICES
+from src.app.export_context import observation_is_anomaly
+from src.app.climate import climate_records
 from src.app.export_xlsx import _to_iso_date
 
 CSV_SCHEMAS = {
     "resumo.csv": ("campo", "valor", "unidade"),
-    "ndvi.csv": ("date", "value", "trend", "anomaly"),
-    "ndwi.csv": ("date", "value", "trend", "anomaly"),
-    "ndmi.csv": ("date", "value", "trend", "anomaly"),
+    "ndvi.csv": ("date", "value", "trend", "anomaly", "observation_id"),
+    "ndwi.csv": ("date", "value", "trend", "anomaly", "observation_id"),
+    "ndmi.csv": ("date", "value", "trend", "anomaly", "observation_id"),
     "clima.csv": (
         "date", "precipitation_mm", "temperature_c",
         "solar_radiation_mj_m2_day",
     ),
-    "anomalias.csv": ("index", "date", "value", "anomaly", "classification"),
+    "anomalias.csv": ("index", "date", "value", "anomaly", "classification", "observation_id"),
     "geografia.csv": ("field", "value", "unit"),
 }
 
@@ -96,18 +98,14 @@ def _summary_rows(context: dict, generated_at: date | datetime) -> list[dict]:
 
 
 def _index_rows(index_data: dict) -> list[dict]:
-    anomaly_dates = {
-        _to_iso_date(item.get("date"))
-        for item in _records(index_data.get("anomalies"))
-        if item.get("anomaly") is True and item.get("date") is not None
-    }
     trend = index_data.get("trend")
     return [
         {
             "date": _to_iso_date(record.get("date")),
             "value": _number(record.get("value")),
             "trend": trend,
-            "anomaly": _to_iso_date(record.get("date")) in anomaly_dates,
+            "anomaly": observation_is_anomaly(record, _records(index_data.get("anomalies"))),
+            "observation_id": record.get("observation_id"),
         }
         for record in _records(index_data.get("time_series"))
     ]
@@ -116,14 +114,8 @@ def _index_rows(index_data: dict) -> list[dict]:
 def _climate_rows(climate_data: Any) -> list[dict]:
     """Map pipeline NASA POWER names to the stable export schema."""
     result = []
-    for record in _records(climate_data):
+    for record in climate_records(climate_data):
         radiation = record.get("solar_radiation_mj_m2_day")
-        if radiation is None:
-            raw_radiation = record.get("solar_radiation")
-            radiation = _number(raw_radiation)
-            # NASA POWER source values are kWh/m²/day; export contract is MJ/m²/day.
-            if radiation is not None:
-                radiation *= 3.6
         result.append({
             "date": _to_iso_date(record.get("date")),
             "precipitation_mm": _number(record.get("precipitation_mm", record.get("precipitation"))),
@@ -145,6 +137,7 @@ def _anomaly_rows(indices: dict) -> list[dict]:
                 "value": _number(item.get("value")),
                 "anomaly": True,
                 "classification": item.get("classification"),
+                "observation_id": item.get("observation_id"),
             })
     return rows
 

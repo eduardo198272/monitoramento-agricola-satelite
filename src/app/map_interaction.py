@@ -25,6 +25,7 @@ def render_index_hover_map(
     height: int = 320,
 ) -> dict | None:
     """Render the map; all cursor reads happen from the preloaded browser grid."""
+    index_grid = value_grid.get("indices", {}).get(index_name, {})
     return _index_hover_component(
         tile_url=tile_url,
         center=center,
@@ -33,6 +34,7 @@ def render_index_hover_map(
         index_name=index_name,
         palette=palette,
         value_grid=value_grid,
+        range=[index_grid.get("minimum", -1), index_grid.get("maximum", 1)],
         key=key,
         default=None,
         width="stretch",

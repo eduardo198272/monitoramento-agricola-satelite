@@ -3,12 +3,67 @@ import requests
 import pandas as pd
 import plotly.graph_objects as go
 from datetime import date
+import logging
+import math
 
 from src.app.utils import normalize_date
 
 NASA_POWER_API = "https://power.larc.nasa.gov/api/temporal/daily/point"
 
 COMMUNITY = "ag"
+logger = logging.getLogger(__name__)
+
+
+def finite_number(value):
+    """Accept finite numbers only; no sentinel, boolean or invalid strings."""
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    return number if math.isfinite(number) and number != -999 else None
+
+
+def radiation_to_mj(value, unit):
+    """Normalize a declared daily energy unit; never infer it from magnitude."""
+    number = finite_number(value)
+    if number is None:
+        return None
+    normalized = str(unit or "").casefold().replace("²", "2").replace("^", "")
+    normalized = normalized.replace(" ", "").replace("-hr", "h").replace("/dia", "/day")
+    factor = {"mj/m2/day": 1.0, "kwh/m2/day": 3.6}.get(normalized)
+    if factor is None:
+        logger.warning("Radiação indisponível: unidade de origem ausente ou desconhecida.")
+        return None
+    return number * factor
+
+
+def climate_records(data):
+    """Produce export-safe records with explicitly normalized radiation."""
+    units = {}
+    if isinstance(data, pd.DataFrame):
+        units = data.attrs.get("units", {})
+        records = data.to_dict(orient="records")
+    elif isinstance(data, dict):
+        records = [data]
+    elif isinstance(data, (list, tuple)):
+        records = [record for record in data if isinstance(record, dict)]
+    else:
+        records = []
+    result = []
+    for record in records:
+        row = dict(record)
+        if "solar_radiation_mj_m2_day" in row:
+            radiation = finite_number(row["solar_radiation_mj_m2_day"])
+        else:
+            radiation = radiation_to_mj(
+                row.get("solar_radiation"),
+                row.get("solar_radiation_unit", units.get("solar_radiation")),
+            )
+        row["solar_radiation_mj_m2_day"] = radiation
+        result.append(row)
+    return result
 
 DEFAULT_PARAMETERS = ["PRECTOTCORR", "T2M", "ALLSKY_SFC_SW_DWN"]
 
@@ -30,6 +85,8 @@ def fetch_climate_data(
 ) -> pd.DataFrame:
     start_date = normalize_date(start_date)
     end_date = normalize_date(end_date)
+    if start_date > end_date:
+        raise ValueError("A data inicial deve ser anterior ou igual à final")
     if parameters is None:
         parameters = DEFAULT_PARAMETERS.copy()
 
@@ -49,6 +106,7 @@ def fetch_climate_data(
         "latitude": latitude,
         "longitude": longitude,
         "format": "JSON",
+        "time-standard": "UTC",
     }
 
     response = requests.get(NASA_POWER_API, params=params, timeout=30)
@@ -57,6 +115,7 @@ def fetch_climate_data(
     data = response.json()
     properties = data.get("properties", {})
     parameter_data = properties.get("parameter", {})
+    radiation_unit = data.get("parameters", {}).get("ALLSKY_SFC_SW_DWN", {}).get("units")
 
     records = {}
     for param_code in parameters:
@@ -65,11 +124,19 @@ def fetch_climate_data(
             if date_str not in records:
                 records[date_str] = {"date": date_str}
             mapped_name = PARAMETER_NAMES.get(param_code, param_code.lower())
-            records[date_str][mapped_name] = None if value == -999 else value
+            records[date_str][mapped_name] = finite_number(value)
+            if param_code == "ALLSKY_SFC_SW_DWN":
+                records[date_str]["solar_radiation_mj_m2_day"] = radiation_to_mj(value, radiation_unit)
 
     df = pd.DataFrame(list(records.values()))
     if "date" in df.columns:
         df = df.sort_values("date").reset_index(drop=True)
+    df.attrs["units"] = {"solar_radiation": radiation_unit}
+    df.attrs["warnings"] = []
+    if "ALLSKY_SFC_SW_DWN" in parameters and radiation_to_mj(1, radiation_unit) is None:
+        df.attrs["warnings"].append(
+            "Radiação solar indisponível: unidade NASA POWER ausente ou não reconhecida."
+        )
 
     return df
 
@@ -139,14 +206,13 @@ def summarize_climate_data(climate_df: pd.DataFrame) -> dict:
 
     Args:
         climate_df: DataFrame com colunas opcionais 'precipitation', 'temperature',
-                    'solar_radiation' (em kWh/m²/dia).
+                    radiação normalizada ou unidade de origem explícita.
 
     Returns:
         Dicionário com chaves:
         - total_precipitation_mm: soma de precipitação válida (mm)
         - mean_temperature_c: média de temperatura válida (°C)
-        - mean_solar_radiation_mj_m2_day: média de radiação válida convertida para MJ/m²/dia
-          (NASA POWER entrega em kWh/m²/dia, fator 3.6).
+        - mean_solar_radiation_mj_m2_day: média válida em MJ/m²/dia.
         Valores ausentes ou sem dados válidos resultam em None.
     """
     if climate_df is None or climate_df.empty:
@@ -163,18 +229,20 @@ def summarize_climate_data(climate_df: pd.DataFrame) -> dict:
     }
 
     if "precipitation" in climate_df.columns:
-        valid_precip = climate_df["precipitation"].dropna()
+        valid_precip = climate_df["precipitation"].map(finite_number).dropna()
         if not valid_precip.empty:
             result["total_precipitation_mm"] = float(valid_precip.sum())
 
     if "temperature" in climate_df.columns:
-        valid_temp = climate_df["temperature"].dropna()
+        valid_temp = climate_df["temperature"].map(finite_number).dropna()
         if not valid_temp.empty:
             result["mean_temperature_c"] = float(valid_temp.mean())
 
-    if "solar_radiation" in climate_df.columns:
-        valid_rad = climate_df["solar_radiation"].dropna()
-        if not valid_rad.empty:
-            result["mean_solar_radiation_mj_m2_day"] = float(valid_rad.mean() * 3.6)
+    radiation = pd.Series(
+        [record["solar_radiation_mj_m2_day"] for record in climate_records(climate_df)],
+        dtype=float,
+    ).dropna()
+    if not radiation.empty:
+        result["mean_solar_radiation_mj_m2_day"] = float(radiation.mean())
 
     return result

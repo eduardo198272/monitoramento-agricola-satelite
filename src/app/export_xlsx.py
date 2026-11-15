@@ -10,6 +10,8 @@ from openpyxl.styles import Font
 import pandas as pd
 
 from src.app.export_context import SUPPORTED_INDICES
+from src.app.export_context import observation_is_anomaly
+from src.app.climate import climate_records
 
 
 def _format_number_for_cell(value: Any) -> float | int | None:
@@ -89,24 +91,16 @@ def _write_resumo_sheet(ws, context: dict, generated_at: date | datetime | None 
 
 def _write_index_sheet(ws, index_name: str, index_data: dict) -> None:
     """Write an index sheet (NDVI, NDWI, NDMI) with date, value, trend, anomaly."""
-    _write_header(ws, ["date", "value", "trend", "anomaly"])
+    _write_header(ws, ["date", "value", "trend", "anomaly", "observation_id"])
 
     time_series = index_data.get("time_series", []) or []
     trend = index_data.get("trend")
     anomalies = index_data.get("anomalies", []) or []
 
-    # Build anomaly lookup by date
-    anomaly_by_date = {}
-    for anomaly in anomalies:
-        if anomaly.get("anomaly") is True:
-            anomaly_date = _to_iso_date(anomaly.get("date"))
-            if anomaly_date:
-                anomaly_by_date[anomaly_date] = True
-
     for row_idx, record in enumerate(time_series, 2):
         date_value = _to_iso_date(record.get("date"))
         value = _format_number_for_cell(record.get("value"))
-        anomaly_flag = anomaly_by_date.get(date_value, False)
+        anomaly_flag = observation_is_anomaly(record, anomalies)
 
         ws.cell(row=row_idx, column=1, value=date_value)
         cell_valor = ws.cell(row=row_idx, column=2, value=value)
@@ -114,24 +108,18 @@ def _write_index_sheet(ws, index_name: str, index_data: dict) -> None:
             cell_valor.number_format = "0.00000000"
         ws.cell(row=row_idx, column=3, value=trend)
         ws.cell(row=row_idx, column=4, value=anomaly_flag)
+        ws.cell(row=row_idx, column=5, value=record.get("observation_id"))
 
 
 def _write_clima_sheet(ws, climate_data: list[dict]) -> None:
     """Write the Clima sheet with date, precipitation_mm, temperature_c, solar_radiation_mj_m2_day."""
     _write_header(ws, ["date", "precipitation_mm", "temperature_c", "solar_radiation_mj_m2_day"])
 
-    if isinstance(climate_data, pd.DataFrame):
-        climate_data = climate_data.to_dict(orient="records")
-
-    for row_idx, record in enumerate(climate_data or [], 2):
+    for row_idx, record in enumerate(climate_records(climate_data), 2):
         date_value = _to_iso_date(record.get("date"))
         precip = _format_number_for_cell(record.get("precipitation_mm", record.get("precipitation")))
         temp = _format_number_for_cell(record.get("temperature_c", record.get("temperature")))
         radiation = record.get("solar_radiation_mj_m2_day")
-        if radiation is None and record.get("solar_radiation") is not None:
-            radiation = _format_number_for_cell(record["solar_radiation"])
-            if radiation is not None:
-                radiation *= 3.6  # NASA POWER provides kWh/m²/day; export uses MJ/m²/day.
         rad = _format_number_for_cell(radiation)
 
         ws.cell(row=row_idx, column=1, value=date_value)
@@ -148,7 +136,7 @@ def _write_clima_sheet(ws, climate_data: list[dict]) -> None:
 
 def _write_anomalias_sheet(ws, indices: dict) -> None:
     """Write the Anomalias sheet with index, date, value, anomaly, classification."""
-    _write_header(ws, ["index", "date", "value", "anomaly", "classification"])
+    _write_header(ws, ["index", "date", "value", "anomaly", "classification", "observation_id"])
 
     row_idx = 2
     for index_name in SUPPORTED_INDICES:
@@ -168,6 +156,7 @@ def _write_anomalias_sheet(ws, indices: dict) -> None:
                 cell_valor.number_format = "0.00000000"
             ws.cell(row=row_idx, column=4, value=True)
             ws.cell(row=row_idx, column=5, value=classification)
+            ws.cell(row=row_idx, column=6, value=anomaly.get("observation_id"))
             row_idx += 1
 
 

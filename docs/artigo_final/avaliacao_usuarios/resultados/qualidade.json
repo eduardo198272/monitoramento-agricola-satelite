@@ -1,0 +1,315 @@
+{
+  "recebidos": 31,
+  "elegiveis": 31,
+  "duplicatas_exatas_excluidas": 0,
+  "linhas_em_duplicatas_sem_carimbo_requerem_revisao": 0,
+  "sem_consentimento": 0,
+  "sem_exploracao_declarada": 0,
+  "unidade": "Submissão elegível; independência pessoal não comprovada",
+  "procedencia": "Todos os registros declarados reais pelo autor; não há autenticação externa",
+  "sinteticos_identificados": 0,
+  "nao_confirmados_na_classificacao_operacional": 0,
+  "registros_pendentes_codificacao": 0,
+  "celulas_discursivas_codificadas": 142,
+  "abas": {
+    "Respostas ao formulário 1": [
+      31,
+      50
+    ],
+    "Página1": [
+      0,
+      0
+    ]
+  },
+  "colunas": 50,
+  "original_sha256": "d61b9f11514f8d42f276abdb3e4e173782955c468fb50d774680032d342ce48a",
+  "analisado_sha256": "9adb66b330103ca858c37d7dc6cdb5e4e954f09f749a0c122fa6e6b2f4f5de59",
+  "retificacao_autorizada": {
+    "authorization": "Autor informou erro de digitação nos dias 16 e 17; solicitou retificação para dia 15, mantendo horários.",
+    "changed_cells": 7,
+    "answers_unchanged": true
+  },
+  "periodo_carimbos_corrigidos": [
+    "2026-11-06",
+    "2026-11-15"
+  ],
+  "datas_invalidas": 0,
+  "ausentes_por_coluna": [
+    {
+      "coluna": 1,
+      "pergunta": "Carimbo de data/hora",
+      "ausentes": 0
+    },
+    {
+      "coluna": 2,
+      "pergunta": "Você tem 18 anos ou mais, leu as informações acima e concorda voluntariamente em participar da pesquisa?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 3,
+      "pergunta": "Qual é sua área de atuação?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 4,
+      "pergunta": "Qual é seu nível de conhecimento em agricultura de precisão?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 5,
+      "pergunta": "Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 6,
+      "pergunta": "Qual foi o resultado de cada atividade? [Buscar uma localização geográfica]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 7,
+      "pergunta": "Qual foi o resultado de cada atividade? [Demarcar uma área no mapa]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 8,
+      "pergunta": "Qual foi o resultado de cada atividade? [Salvar uma área]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 9,
+      "pergunta": "Qual foi o resultado de cada atividade? [Realizar uma análise de índices espectrais]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 10,
+      "pergunta": "Qual foi o resultado de cada atividade? [Explorar o mapa de distribuição dos índices]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 11,
+      "pergunta": "Qual foi o resultado de cada atividade? [Consultar valores utilizando o cursor]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 12,
+      "pergunta": "Qual foi o resultado de cada atividade? [Visualizar séries temporais e possíveis anomalias]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 13,
+      "pergunta": "Qual foi o resultado de cada atividade? [Consultar informações meteorológicas]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 14,
+      "pergunta": "Qual foi o resultado de cada atividade? [Exportar um relatório ou conjunto de dados]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 15,
+      "pergunta": "Você conseguiu explorar pelo menos uma funcionalidade da plataforma?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 16,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [A interface é fácil de compreender.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 17,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [A navegação pela plataforma é intuitiva.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 18,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [A organização das informações é adequada.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 19,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [Consegui utilizar a plataforma sem auxílio externo.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 20,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [A demarcação de áreas no mapa é fácil.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 21,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [A configuração das análises é simples.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 22,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [O tempo de resposta é satisfatório.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 23,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [As funcionalidades são fáceis de localizar.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 24,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [A apresentação visual é adequada.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 25,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Busca por localização geográfica]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 26,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Demarcação de áreas agrícolas]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 27,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Salvamento e gerenciamento de áreas]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 28,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Análise de índices espectrais]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 29,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Mapas temáticos com gradientes de cores]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 30,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Consulta interativa de valores por pixel]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 31,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Gráficos de evolução temporal]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 32,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Detecção de anomalias]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 33,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Informações de temperatura e precipitação]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 34,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Geração de relatórios PDF]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 35,
+      "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Exportação em Excel e CSV]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 36,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [As informações apresentadas são compreensíveis.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 37,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [Os mapas facilitam a interpretação dos índices espectrais.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 38,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [Os gráficos facilitam o acompanhamento temporal da vegetação.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 39,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [As informações meteorológicas complementam a análise.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 40,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [A plataforma apresenta potencial para auxiliar no monitoramento agrícola.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 41,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [Os relatórios apresentam informações relevantes.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 42,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [Consideraria utilizar a plataforma em atividades profissionais ou acadêmicas.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 43,
+      "pergunta": "Indique seu nível de concordância com as afirmações. [Recomendaria a plataforma a pessoas interessadas no monitoramento agrícola.]",
+      "ausentes": 0
+    },
+    {
+      "coluna": 44,
+      "pergunta": "Quais aspectos positivos você identificou na plataforma?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 45,
+      "pergunta": "Quais dificuldades você encontrou durante a utilização?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 46,
+      "pergunta": "Quais funcionalidades ou melhorias considera importantes para versões futuras?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 47,
+      "pergunta": "Em quais situações você considera que a plataforma poderia ser utilizada?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 48,
+      "pergunta": "Deseja acrescentar algum comentário ou sugestão?",
+      "ausentes": 13
+    },
+    {
+      "coluna": 49,
+      "pergunta": "De 0 a 10, qual nota geral você atribui à plataforma?",
+      "ausentes": 0
+    },
+    {
+      "coluna": 50,
+      "pergunta": "Descreva o que impediu o acesso ou a exploração da plataforma.",
+      "ausentes": 31
+    }
+  ],
+  "sinteticos_comparados": {
+    "arquivo": "tests/test_user_survey_analysis.py",
+    "correspondencias_texto_distintivo": 0,
+    "limite": "Comparação com fixtures locais conhecidas; não certifica autenticidade externa"
+  },
+  "ambiente": {
+    "python": "3.14.4",
+    "pandas": "2.3.3",
+    "numpy": "2.4.3",
+    "openpyxl": "3.1.5"
+  },
+  "versao_publica": "Avaliou-se versão anterior às correções; commit e intervalo de publicação não fornecidos",
+  "nota": {
+    "n_valido": 31,
+    "ausentes": 0,
+    "invalidas": 0,
+    "media": 7.741935483870968,
+    "mediana": 8.0,
+    "dp_amostral": 1.806797201966025,
+    "q1": 7.0,
+    "q3": 9.0,
+    "iiq": 2.0,
+    "minimo": 3.0,
+    "maximo": 10.0,
+    "modas": "9"
+  }
+}

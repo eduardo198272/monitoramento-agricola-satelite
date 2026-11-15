@@ -1,0 +1,26 @@
+{
+  "constante": {
+    "natureza": "matriz controlada, n\u00e3o dados agr\u00edcolas",
+    "cells": 16384,
+    "raw_bytes": 65536,
+    "zlib_bytes": 89,
+    "base64_bytes": 120,
+    "compressed_to_raw": 0.0013580322265625
+  },
+  "gradiente": {
+    "natureza": "matriz controlada, n\u00e3o dados agr\u00edcolas",
+    "cells": 16384,
+    "raw_bytes": 65536,
+    "zlib_bytes": 845,
+    "base64_bytes": 1128,
+    "compressed_to_raw": 0.0128936767578125
+  },
+  "aleatoria": {
+    "natureza": "matriz controlada, n\u00e3o dados agr\u00edcolas",
+    "cells": 16384,
+    "raw_bytes": 65536,
+    "zlib_bytes": 60562,
+    "base64_bytes": 80752,
+    "compressed_to_raw": 0.924102783203125
+  }
+}

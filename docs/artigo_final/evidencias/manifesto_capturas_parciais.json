@@ -1,0 +1,43 @@
+{
+  "scenario": "Demonstra\u00e7\u00e3o computacional, sem identifica\u00e7\u00e3o de cultura",
+  "url": "http://localhost:8502",
+  "period": [
+    "2026-09-01",
+    "2026-10-31"
+  ],
+  "indices": [
+    "NDVI",
+    "NDWI",
+    "NDMI"
+  ],
+  "polygon": [
+    [
+      -52.332,
+      -28.229
+    ],
+    [
+      -52.33,
+      -28.229
+    ],
+    [
+      -52.33,
+      -28.227
+    ],
+    [
+      -52.332,
+      -28.227
+    ]
+  ],
+  "captures": [
+    "cap01_interface",
+    "cap02_busca",
+    "cap03_poligono",
+    "cap04_salvar",
+    "cap05_restaurar",
+    "cap07_parametros",
+    "estado_interrupcao"
+  ],
+  "downloads": [],
+  "completed": false,
+  "failure_type": "TimeoutError"
+}

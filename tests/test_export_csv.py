@@ -81,12 +81,12 @@ def test_csv_headers_are_stable_and_data_matches_contract(export_context):
     _, data = read_zip(render_analysis_csv_zip(export_context, generated_at=date(2025, 4, 1)))
     assert list(data["resumo.csv"][0]) == ["campo", "valor", "unidade"]
     for name in ("ndvi.csv", "ndwi.csv", "ndmi.csv"):
-        assert list(data[name][0]) == ["date", "value", "trend", "anomaly"]
+        assert list(data[name][0]) == ["date", "value", "trend", "anomaly", "observation_id"]
     assert list(data["clima.csv"][0]) == [
         "date", "precipitation_mm", "temperature_c", "solar_radiation_mj_m2_day"
     ]
     assert list(data["anomalias.csv"][0]) == [
-        "index", "date", "value", "anomaly", "classification"
+        "index", "date", "value", "anomaly", "classification", "observation_id"
     ]
     assert list(data["geografia.csv"][0]) == ["field", "value", "unit"]
     summary = {r["campo"]: (r["valor"], r["unidade"]) for r in data["resumo.csv"]}
@@ -98,7 +98,8 @@ def test_csv_headers_are_stable_and_data_matches_contract(export_context):
 def test_index_climate_anomalies_and_geography_are_serialized(export_context):
     _, data = read_zip(render_analysis_csv_zip(export_context))
     assert data["ndvi.csv"][0] == {
-        "date": "2025-01-10", "value": "0.42", "trend": "stable", "anomaly": "true"
+        "date": "2025-01-10", "value": "0.42", "trend": "stable", "anomaly": "true",
+        "observation_id": "",
     }
     assert data["ndvi.csv"][1]["value"] == ""
     assert data["ndvi.csv"][1]["anomaly"] == "false"

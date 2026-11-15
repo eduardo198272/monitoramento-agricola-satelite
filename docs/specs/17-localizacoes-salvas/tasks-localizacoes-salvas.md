@@ -2,6 +2,10 @@
 
 Referência: `spec-localizacoes-salvas.md`.
 
+As tarefas abaixo registram a entrega original em SQLite local. O ponto de
+entrada web usa armazenamento isolado por sessão; veja o
+[guia de deploy](../../deploy-streamlit.md) para o comportamento atual.
+
 | ID | Descrição | Critério de aceite | Dependências | Esforço | Status |
 |---|---|---|---|---:|---|
 | SPEC-17-01 | Definir contrato persistente e configuração SQLite | Caminho configurável/default documentado, tabela/migração inicial e contrato CRUD definidos; nenhum dado salvo em `session_state` como armazenamento primário | Critérios desta spec | 1h30 | Concluída |

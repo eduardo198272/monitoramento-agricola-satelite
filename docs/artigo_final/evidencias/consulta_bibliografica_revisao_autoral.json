@@ -1,0 +1,417 @@
+[
+  {
+    "key": "GAO1996",
+    "url": "https://api.crossref.org/works/10.1016/S0034-4257(96)00067-3",
+    "status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016/S0034-4257(96)00067-3",
+    "metadata": {
+      "title": [
+        "NDWI—A normalized difference water index for remote sensing of vegetation liquid water from space"
+      ],
+      "author": [
+        {
+          "given": "Bo-cai",
+          "family": "Gao",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            1996,
+            12
+          ]
+        ]
+      },
+      "container-title": [
+        "Remote Sensing of Environment"
+      ],
+      "volume": "58",
+      "issue": "3",
+      "page": "257-266",
+      "article-number": null,
+      "DOI": "10.1016/s0034-4257(96)00067-3",
+      "abstract": null
+    }
+  },
+  {
+    "key": "MCFEETERS1996",
+    "url": "https://api.crossref.org/works/10.1080/01431169608948714",
+    "status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1080/01431169608948714",
+    "metadata": {
+      "title": [
+        "The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features"
+      ],
+      "author": [
+        {
+          "given": "S. K.",
+          "family": "McFEETERS",
+          "sequence": "first",
+          "affiliation": [
+            {
+              "name": "a  Center for Advanced Land Management Information Technologies (CALMIT), Conservation and Survey Division, University of Nebraska-Lincoln , 113 Nebraska Hall, Lincoln, NE, 68588-0517,  U.S.A"
+            }
+          ],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            1996,
+            5
+          ]
+        ]
+      },
+      "container-title": [
+        "International Journal of Remote Sensing"
+      ],
+      "volume": "17",
+      "issue": "7",
+      "page": "1425-1432",
+      "article-number": null,
+      "DOI": "10.1080/01431169608948714",
+      "abstract": null
+    }
+  },
+  {
+    "key": "PATRICIO2018",
+    "url": "https://api.crossref.org/works/10.1016/j.compag.2018.08.001",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "GORELICK2017",
+    "url": "https://api.crossref.org/works/10.1016/j.rse.2017.06.031",
+    "status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016/j.rse.2017.06.031",
+    "metadata": {
+      "title": [
+        "Google Earth Engine: Planetary-scale geospatial analysis for everyone"
+      ],
+      "author": [
+        {
+          "ORCID": "https://orcid.org/0000-0002-5548-2436",
+          "authenticated-orcid": false,
+          "given": "Noel",
+          "family": "Gorelick",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Matt",
+          "family": "Hancher",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Mike",
+          "family": "Dixon",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Simon",
+          "family": "Ilyushchenko",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "David",
+          "family": "Thau",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Rebecca",
+          "family": "Moore",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2017,
+            12
+          ]
+        ]
+      },
+      "container-title": [
+        "Remote Sensing of Environment"
+      ],
+      "volume": "202",
+      "issue": null,
+      "page": "18-27",
+      "article-number": null,
+      "DOI": "10.1016/j.rse.2017.06.031",
+      "abstract": null
+    }
+  },
+  {
+    "key": "AMANI2020",
+    "url": "https://api.crossref.org/works/10.1109/JSTARS.2020.3021052",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "key": "WEISS2020",
+    "url": "https://api.crossref.org/works/10.1016/j.rse.2019.111402",
+    "status": 200,
+    "resolved_url": "https://api.crossref.org/works/10.1016/j.rse.2019.111402",
+    "metadata": {
+      "title": [
+        "Remote sensing for agricultural applications: A meta-review"
+      ],
+      "author": [
+        {
+          "given": "M.",
+          "family": "Weiss",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "F.",
+          "family": "Jacob",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "G.",
+          "family": "Duveiller",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "published": {
+        "date-parts": [
+          [
+            2020,
+            1
+          ]
+        ]
+      },
+      "container-title": [
+        "Remote Sensing of Environment"
+      ],
+      "volume": "236",
+      "issue": null,
+      "page": "111402",
+      "article-number": "111402",
+      "DOI": "10.1016/j.rse.2019.111402",
+      "abstract": null
+    }
+  },
+  {
+    "key": "GOOGLE_EE_ND",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
+    "status": 200,
+    "resolved_url": "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
+    "excerpts": [
+      "mage. The output image band is named &#39;nd&#39;, and input image properties are not carried over. Negative pixel values in either input band will result in the corresponding output pixel being masked; to avoid this, use ee.Image.expression() . Computes the normalized difference between two bands. If the bands to use are not specified, uses the first two bands. The normalized difference is computed as (first − second) / (first + second). Note that the returned image band name is &#39;nd&#39;, the input image properties are not retained in the output i",
+      "e band name is &#39;nd&#39;, the input image properties are not retained in the output image, and a negative pixel value in either input band will cause the output pixel to be masked. To avoid masking negative input values, use ee.Image.expression() to compute normalized difference. Usage Returns Image. normalizedDifference ( bandNames ) Image Argument Type Details this: input Image The input image. bandNames List, default: null A list of names specifying the bands to use. If not specified, the first and second bands are used. Examples Code Editor (Jav",
+      " based on your preferences. Page Summary outlined_flag The normalizedDifference method computes the normalized difference between two bands using the formula (first - second) / (first + second). If no specific bands are provided, the method defaults to using the first two bands of the image. The output image band is named &#39;nd&#39;, and input image properties are not carried over. Negative pixel values in either input band will result in the corresponding output pixel being masked; to avoid this, use ee.Image.expression() . Computes the normalized difference bet",
+      "he corresponding output pixel being masked; to avoid this, use ee.Image.expression() . Computes the normalized difference between two bands. If the bands to use are not specified, uses the first two bands. The normalized difference is computed as (first − second) / (first + second). Note that the returned image band name is &#39;nd&#39;, the input image properties are not retained in the output image, and a negative pixel value in either input band will cause the output pixel to be masked. To avoid masking negative input values, use ee.Image.expression() to compute"
+    ]
+  },
+  {
+    "key": "GOOGLE_EE_DATE",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
+    "status": 200,
+    "resolved_url": "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
+    "excerpts": [
+      "start Date|Number|String The start date (inclusive). end Date|Number|String, optional The end date (exclusive). Optional. If not specified, a 1-millisecond range starting at 'start' is created. Examples Code Editor (JavaScript) // collection.filterDate is preferred. // Constructed FeatureCollection representing a field site sampled at // four different dates. var geom = ee . Geometry . Point ([ - 119.56 , 37.67 ]); var fc = ee . FeatureCollection ([ ee . Feature ( geom , { 'prop' : 10 , 'system:time_start' : ee . Date ( '2021-06-10' )}), ee . Feature ( ",
+      "s ee.Filter.date(start, end ) Filter Argument Type Details start Date|Number|String The start date (inclusive). end Date|Number|String, optional The end date (exclusive). Optional. If not specified, a 1-millisecond range starting at 'start' is created. Examples Code Editor (JavaScript) // collection.filterDate is preferred. // Constructed FeatureCollection representing a field site sampled at // four different dates. var geom = ee . Geometry . Point ([ - 119.56 , 37.67 ]); var fc = ee . FeatureCollection ([ ee . Feature ( geom , { 'prop' : 10 , 'system:"
+    ]
+  },
+  {
+    "key": "GOOGLE_EE_SAMPLE",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
+    "status": 200,
+    "resolved_url": "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
+    "excerpts": [
+      "calibratedRadiance Landsat.pathRowLimit Landsat.simpleCloudScore Landsat.simpleComposite ObjectType ProjectionTransform Sentinel2.CDI String TemporalSegmentation.C2c TemporalSegmentation.Ccdc TemporalSegmentation.Ewmacd TemporalSegmentation.LandTrendr TemporalSegmentation.LandTrendrFit TemporalSegmentation.StructuralChangeBreakpoints TemporalSegmentation.VCT TemporalSegmentation.Verdet Terrain ee.Array ee.Array abs accum acos add and argmax asin atan atan2 bitCount bitsToArray bitwiseAnd bitwiseNot bitwiseOr bitwiseXor byte cat cbrt ceil cos cosh cut dig",
+      "ies BBox.getInfo BBox.intersection BBox.intersects BBox.isUnbounded BBox.length BBox.perimeter BBox.projection BBox.serialize BBox.simplify BBox.symmetricDifference BBox.toGeoJSON BBox.toGeoJSONString BBox.transform BBox.type BBox.union BBox.withinDistance LineString LineString.area LineString.aside LineString.bounds LineString.buffer LineString.centroid LineString.closestPoint LineString.closestPoints LineString.containedIn LineString.contains LineString.convexHull LineString.coordinates LineString.coveringGrid LineString.cutLines LineString.difference ",
+      "array bands where N is the original number of dimensions. If a sampled region of a band is entirely masked and a default array value is provided, that default value will be used instead of sampling the image. Extracts a rectangular region of pixels from an image into a ND array per band. The arrays are returned in a feature retaining the same properties as the image and a geometry the same as that used to sample the image (or the image footprint if unspecified). Each band is sampled in its input projection, and if no geometry is specified, sampled us",
+      "bands, all arrays must have the same number of elements. If a band&#39;s sampled region is entirely masked and a default array value is specified, the default array value is used in-lieu of sampling the image. Usage Returns Image. sampleRectangle ( region , properties , defaultValue , defaultArrayValue ) Feature Argument Type Details this: image Image The image to sample. region Geometry, default: null The region whose projected bounding box is used to sample the image. Defaults to the footprint in each band. properties List, default: null The proper"
+    ]
+  },
+  {
+    "key": "GOOGLE_EE_MEDIAN",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
+    "status": 200,
+    "resolved_url": "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
+    "excerpts": [
+      " ee.ImageCollection.median &nbsp;|&nbsp; Google Earth Engine &nbsp;|&nbsp; Google for Developers Skip to main content Google Earth Engine / English Deutsch Español Español – América Latina Français Indonesia Italiano Polski Português – Brasil Tiếng Việt Türkçe Русский עברית العربيّة فارسی हिंदी বাংলা ภาษาไทย 中文 – 简体 中文 – 繁體 日本語 한국어 Sign in Home Guides Reference Support Community Data Catalog Timelapse Google Earth Engine Home Guides Reference Support Community Data Cata",
+      "valuate exp expression fastDistanceTransform first firstNonZero float floor focalMax focalMean focalMedian focalMin focalMode gamma gammainc geometry get getArray getDownloadURL getInfo getMapId getNumber getString getThumbId getThumbURL glcmTexture gradient gt gte hersDescriptor hersFeature hersImage hsvToRgb hypot id int int16 int32 int64 int8 interpolate lanczos leftShift linkCollection load loadGeoTIFF loadZarrV2Array log log10 long lt lte mask matrixCholeskyDecomposition matrixDeterminant matrixDiagonal matrixFnorm matrixIdentity matrixInverse m"
+    ]
+  },
+  {
+    "key": "GOOGLE_EE_REDUCE",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
+    "status": 200,
+    "resolved_url": "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
+    "excerpts": [
+      "riance sensSlope setOutputs skew spearmansCorrelation splitWeights stdDev sum toCollection toList unweighted variance ee.String ee.String aside cat compareTo decodeJSON encodeJSON equals evaluate getInfo index length match replace rindex serialize slice split toLowerCase toUpperCase trim ee.Terrain aspect fillMinima hillShadow hillshade products slope ee.apply ee.apply ee.call ee.call ee.data authenticateViaOauth authenticateViaPopup authenticateViaPrivateKey cancelOperation computeValue copyAsset createAsset createAssetHome createFolder deleteAsset ge",
+      "calibratedRadiance Landsat.pathRowLimit Landsat.simpleCloudScore Landsat.simpleComposite ObjectType ProjectionTransform Sentinel2.CDI String TemporalSegmentation.C2c TemporalSegmentation.Ccdc TemporalSegmentation.Ewmacd TemporalSegmentation.LandTrendr TemporalSegmentation.LandTrendrFit TemporalSegmentation.StructuralChangeBreakpoints TemporalSegmentation.VCT TemporalSegmentation.Verdet Terrain ee.Array ee.Array abs accum acos add and argmax asin atan atan2 bitCount bitsToArray bitwiseAnd bitwiseNot bitwiseOr bitwiseXor byte cat cbrt ceil cos cosh cut dig",
+      "ies BBox.getInfo BBox.intersection BBox.intersects BBox.isUnbounded BBox.length BBox.perimeter BBox.projection BBox.serialize BBox.simplify BBox.symmetricDifference BBox.toGeoJSON BBox.toGeoJSONString BBox.transform BBox.type BBox.union BBox.withinDistance LineString LineString.area LineString.aside LineString.bounds LineString.buffer LineString.centroid LineString.closestPoint LineString.closestPoints LineString.containedIn LineString.contains LineString.convexHull LineString.coordinates LineString.coveringGrid LineString.cutLines LineString.difference ",
+      "ot bitwiseOr bitwiseXor blend byte cast cat cbrt ceil changeProj clamp classify clip clipToBoundsAndScale clipToCollection cluster connectedComponents connectedPixelCount constant convolve copyProperties cos cosh cumulativeCost date derivative digamma directionalDistanceTransform displace displacement distance divide double entropy eq erf erfInv erfc erfcInv evaluate exp expression fastDistanceTransform first firstNonZero float floor focalMax focalMean focalMedian focalMin focalMode gamma gammainc geometry get getArray getDownloadURL getInfo getMapI",
+      " toInt64 toInt8 toLong toShort toUint16 toUint32 toUint8 translate trigamma uint16 uint32 uint8 unitScale unmask unmix updateMask visualize where zeroCrossing ee.ImageCollection ee.ImageCollection aggregate_array aggregate_count aggregate_count_distinct aggregate_first aggregate_histogram aggregate_max aggregate_mean aggregate_min aggregate_product aggregate_sample_sd aggregate_sample_var aggregate_stats aggregate_sum aggregate_total_sd aggregate_total_var and aside bounds cast combine copyProperties count distance distinct draw errorMatrix evaluate"
+    ]
+  },
+  {
+    "key": "GOOGLE_EE_SERVICE_ACCOUNT",
+    "url": "https://developers.google.com/earth-engine/guides/service_account",
+    "status": 200,
+    "resolved_url": "https://developers.google.com/earth-engine/guides/service_account",
+    "excerpts": [
+      " Service Accounts &nbsp;|&nbsp; Google Earth Engine &nbsp;|&nbsp; Google for Developers Skip to main content Google Earth Engine / English Deutsch Español Español – América Latina Français Indonesia Italiano Polski Português – Brasil Tiếng Việt Türkçe Русский עברית العربيّة فارسی हिंदी বাংলা ภาษาไทย 中文 – 简体 中文 – 繁體 日本語 한국어 Sign in Home Guides Reference Support Community Data Catalog Timelapse Google Earth Engine Home Guides Reference Support Community Data Cat",
+      " tiers Managing assets Usage quota and limits Monitoring usage Cost controls Computation benchmarks Service accounts Audit logs Troubleshoot Coding best practices Debugging Script recovery and migration Archive Custom applications App Engine and Earth Engine overview App Engine example apps NPM installation Samples Overview Introduction to JavaScript for Earth Engine Introduction Earth Engine objects and methods Functional programming concepts The Earth Engine API Introduction Visualizing images and image bands Computations using images Image collections Comp",
+      "les Exporting to BigQuery Extracting image data programmatically Manage Control access to resources Noncommercial tiers Managing assets Usage quota and limits Monitoring usage Cost controls Computation benchmarks Service accounts Audit logs Troubleshoot Coding best practices Debugging Script recovery and migration Archive Custom applications App Engine and Earth Engine overview App Engine example apps NPM installation Samples Overview Introduction to JavaScript for Earth Engine Introduction Earth Engine objects and methods Functional programming concepts Th",
+      "ce (1984-2015) Water occurrence change intensity Water class transition Earth Engine has introduced noncommercial quota tiers to safeguard shared compute resources and ensure reliable performance for everyone. Noncommercial projects use the Community Tier by default, though you can change a project's tier at any time. Home Products Google Earth Engine Guides Send feedback Service Accounts Stay organized with collections Save and categorize content based on your preferences. Page Summary outlined_flag A service account is used for applications or the REST AP"
+    ]
+  },
+  {
+    "key": "GOOGLE_EE_NONCOMMERCIAL",
+    "url": "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
+    "status": 200,
+    "resolved_url": "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
+    "excerpts": [
+      " tiers Managing assets Usage quota and limits Monitoring usage Cost controls Computation benchmarks Service accounts Audit logs Troubleshoot Coding best practices Debugging Script recovery and migration Archive Custom applications App Engine and Earth Engine overview App Engine example apps NPM installation Samples Overview Introduction to JavaScript for Earth Engine Introduction Earth Engine objects and methods Functional programming concepts The Earth Engine API Introduction Visualizing images and image bands Computations using images Image collections Comp",
+      "39;ll need to share them. You can do this from the Asset Manager by granting your new project&#39;s service account Viewer or Writer access to your assets. Staying on the Partner Tier : If your project is registered for the Partner Tier, you can switch it to access Earth Engine commercially, but you can&#39;t switch back to using the Partner Tier without resubmitting an application. We recommend using separate projects when combining Partner Tier and commercial use. Switching from commercial use to the Partner Tier always requires an application, regardless i",
+      " Earth Engine Noncommercial Tiers &nbsp;|&nbsp; Google Earth Engine &nbsp;|&nbsp; Google for Developers Skip to main content Google Earth Engine / English Deutsch Español Español – América Latina Français Indonesia Italiano Polski Português – Brasil Tiếng Việt Türkçe Русский עברית العربيّة فارسی हिंदी বাংলা ภาษาไทย 中文 – 简体 中文 – 繁體 日本語 한국어 Sign in Home Guides Reference Support Community Data Catalog Timelapse Google Earth Engine Home Guides Reference Support Community Dat",
+      "les Exporting to BigQuery Extracting image data programmatically Manage Control access to resources Noncommercial tiers Managing assets Usage quota and limits Monitoring usage Cost controls Computation benchmarks Service accounts Audit logs Troubleshoot Coding best practices Debugging Script recovery and migration Archive Custom applications App Engine and Earth Engine overview App Engine example apps NPM installation Samples Overview Introduction to JavaScript for Earth Engine Introduction Earth Engine objects and methods Functional programming concepts Th"
+    ]
+  },
+  {
+    "key": "STREAMLIT_CLOUD_SECRETS",
+    "url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
+    "status": 200,
+    "resolved_url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
+    "excerpts": [
+      " Secrets management for your Community Cloud app - Streamlit Docs Documentation search Search rocket_launch Get started Why Streamlit Installation add Fundamentals add First steps add code Develop Concepts add API reference add Tutorials add Quick reference add web_asset Deploy Concepts add Streamlit Community Cloud remove Get started add Deploy your app remove File organization App dependencies Secrets management Deploy! Manage your app add Share your a",
+      "it Community Cloud remove Get started add Deploy your app remove File organization App dependencies Secrets management Deploy! Manage your app add Share your app add Manage your account add Status and limitations Snowflake Other platforms add school Knowledge base FAQ Installing dependencies Deployment issues Home / Deploy / Streamlit Community Cloud / Deploy your app / Secrets management Secrets management for your Community Cloud app Introduction If you are connecting to data sources , you will likely need to handle credentials or secrets. Storing u"
+    ]
+  },
+  {
+    "key": "NOMINATIM_POLICY",
+    "url": "https://operations.osmfoundation.org/policies/nominatim/",
+    "status": 200,
+    "resolved_url": "https://operations.osmfoundation.org/policies/nominatim/",
+    "excerpts": [
+      "overned by the OSMF Terms of Use . Requirements No heavy uses (an absolute maximum of 1 request per second ). Provide a valid HTTP Referer or User-Agent identifying the application (stock User-Agents as set by http libraries will not do). Clearly display attribution as suitable for your medium. Data is provided under the ODbL license which requires to share alike (although small extractions are likely to be covered by fair usage / fair dealing). Websites and Apps Use that is directly triggered by the end-user (for example, user searches for something"
+    ]
+  },
+  {
+    "key": "ESA_SENTINEL2",
+    "url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+    "status": 200,
+    "resolved_url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+    "excerpts": [
+      "erations configuration, all regular areas, indicated in green in Figure 4 , will be revisited every five days under the same viewing conditions (i.e. viewing angles). The Sentinel-2A extension campaign brings an improved revisit frequency for some areas. However, due to overlap between swaths from adjacent orbits, the revisit frequency is increased with different viewing conditions, as shown in Figure 6 . Figure 6: Number of acquisitions for Sentinel-2A/B/C MSI in 20 day period During the Sentinel-2A extension campaign , Sentinel-2A is located 36° "
+    ]
+  },
+  {
+    "key": "SLAIFFER2023",
+    "url": "https://repositorio.ufsm.br/handle/1/29995",
+    "status": 200,
+    "resolved_url": "https://repositorio.ufsm.br/handle/1/29995",
+    "excerpts": [
+      "gada e de sequeiro Visualizar/ Abrir TCC de Gradua&ccedil;&atilde;o (2.153Mb) Data 2023-07-17 Autor Slaiffer, Henrique Metadata Mostrar registro completo Resumo A soja constitui uma cultura de destaque na agricultura brasileira com grande representa&ccedil;&atilde;o no&#13; cen&aacute;rio econ&ocirc;mico nacional. No estado do Rio Grande do Sul sua produtividade vem se&#13; destacando, como consequ&ecirc;ncia, principalmente, do emprego da tecnologia no campo e uso da&#13; agricultura de precis&atilde;o. Entre as ferramentas que contribu&iacute;ram par",
+      " &Iacute;ndices de vegeta&ccedil;&atilde;o e sua correla&ccedil;&atilde;o com a produtividade da cultura da soja em &aacute;rea irrigada e de sequeiro | Manancial - Reposit&oacute;rio Digital da UFSM Toggle navigation portugu&ecirc;s (Brasil) English espa&ntilde;ol portugu&ecirc;s (Brasil)&nbsp; portugu&ecirc;s (Brasil) English espa&ntilde;ol Entrar Toggle navigation Ver item&nbsp; &nbsp; P&aacute;gina inicial Bibliotecas Digitais (SiB-UFSM) Biblioteca Digital de Trabalhos de Conclus&atilde;o de Curso Trabalhos de Conclus&atilde;o de Cur",
+      "not work without it. &Iacute;ndices de vegeta&ccedil;&atilde;o e sua correla&ccedil;&atilde;o com a produtividade da cultura da soja em &aacute;rea irrigada e de sequeiro Visualizar/ Abrir TCC de Gradua&ccedil;&atilde;o (2.153Mb) Data 2023-07-17 Autor Slaiffer, Henrique Metadata Mostrar registro completo Resumo A soja constitui uma cultura de destaque na agricultura brasileira com grande representa&ccedil;&atilde;o no&#13; cen&aacute;rio econ&ocirc;mico nacional. No estado do Rio Grande do Sul sua produtividade vem se&#13; destacando, como consequ&ecirc;nci",
+      "nto dos&#13; &iacute;ndices de vegeta&ccedil;&atilde;o foi realizado utilizando a plataforma online Crop Monitoring. Foram&#13; gerados mapas de variabilidade espacial dos &iacute;ndices de vegeta&ccedil;&atilde;o estudados para diferentes&#13; datas, ao longo do ciclo da cultura, cultivada em sistema irrigado e de sequeiro. Os dados de&#13; produtividade e dos &iacute;ndices de vegeta&ccedil;&atilde;o compuseram o banco de dados empregado nas&#13; an&aacute;lises estat&iacute;sticas e geoestat&iacute;sticas. Para an&aacute;lise e tratamento dos dados foram u"
+    ]
+  },
+  {
+    "key": "EOSDA_PLATFORM",
+    "url": "https://eos.com/products/crop-monitoring/",
+    "status": 200,
+    "resolved_url": "https://eos.com/products/crop-monitoring/",
+    "excerpts": [
+      "verse sources and turn it into clear, simple insights just for you. Access farm analytics: history, weather, and vegetation data — all you need for smarter, faster farming decisions. Monitor Crop Health Remotely With Satellite Images Skip the field trips. Stay updated on plants' health and growth stages with fresh satellite images. Keep an eye on crop conditions, spot problem areas, track vegetation changes, and monitor soil moisture — all from your screen. Get Notified About Risks We'll inform you about any potential problems before they become major",
+      "s are doing and fix issues fast. --> --> Analyze Trends Dive into historical data on vegetation and weather. Spot patterns and use them to make smarter decisions next time. --> --> Check Current Risks Use all our tools to detect any risks to your plants during the growing season. Stay ahead of problems before they happen. --> --> Take Action Send scouts to the land plot or plan your field activities based on your monitoring and analysis. Track the outcomes and see the results of your decisions. --> --> Share Data Prepare a custom report for the curren",
+      " Crop Monitoring Software For Remote Farm Analytics EOSDA Products LandViewer Search, visualize, and analyze satellite imagery directly in your browser. Learn more Crop Monitoring Track crop health and field conditions with smart precision agriculture platform. Learn more EOS RayVision Get tailored analytical reports with advanced visualisation for any industry. Learn more Satellite imagery Analytics Industries Agriculture &#038; land use Forestry Critical infrastructure Disaster management Oil, gas, and mining Mariti",
+      "> --> Access Satellite Data Get the latest satellite images right when they capture your field. Use NDVI and other vegetation indices to see how your crops are doing and fix issues fast. --> --> Analyze Trends Dive into historical data on vegetation and weather. Spot patterns and use them to make smarter decisions next time. --> --> Check Current Risks Use all our tools to detect any risks to your plants during the growing season. Stay ahead of problems before they happen. --> --> Take Action Send scouts to the land plot or plan your field activiti"
+    ]
+  },
+  {
+    "key": "ONESOIL_PLATFORM",
+    "url": "https://onesoil.ai/en/platform",
+    "status": 200,
+    "resolved_url": "https://onesoil.ai/en/platform",
+    "excerpts": [
+      "Practical workflows from day one See what&#x27;s happening across your fields. Monitor crop health, weather, and field changes in one place. Satellite field monitoring. Track crop changes across every field. Catch issues sooner. Find stress and anomalies before they spread. Hyperlocal weather. See weather and rainfall field by field. Compare across seasons. Put current conditions in context. Bring your field data together. Match machinery data with satellite imagery. Manage fields your way. Organize large field sets with ease. Make better agronomic de",
+      "s across every field. Catch issues sooner. Find stress and anomalies before they spread. Hyperlocal weather. See weather and rainfall field by field. Compare across seasons. Put current conditions in context. Bring your field data together. Match machinery data with satellite imagery. Manage fields your way. Organize large field sets with ease. Make better agronomic decisions with AI Agronomist. We built an AI that reads every field, every day — cross-referencing satellite signals, weather, and crop calendar — and delivers one ranked list of what need",
+      " Focus on the areas that need checking first. Connect to your machinery. Send maps to John Deere or export in the right format. Built to deliver measurable agronomic impact 3x–28x ROI 300,000 ha Tested trials with OneSoil 140,000+ Farmers annually Built for everyday agronomic work. Every feature designed to keep you working — whatever the season brings. Field monitoring Productivity zones OVER 90% CORRELATION TO YIELD MAP Scouting Disease Pests Weeds Lodging Waterlogging Other Variable-rate application maps Rate, seeds/ha Zone 1 (Low) Zone 2 (Medium)",
+      " Spraying windows Soil sampling Homogeneity &gt;90% 85–90% &lt;85% Weather context Field boundaries export Batch creation of task maps Planet Labs Machinery integration Multiuser Field monitoring Productivity zones OVER 90% CORRELATION TO YIELD MAP Scouting Disease Pests Weeds Lodging Waterlogging Other Variable-rate application maps Rate, seeds/ha Zone 1 (Low) Zone 2 (Medium) Zone 3 (High) Spraying windows Weather context Field trials Machinery integration AI Agronomist AI Report Sep 10 Areas with darker tones indicate less vegetation, potentially d",
+      " OneSoil Mobile and OneSoil Pro? OneSoil Mobile is designed for fieldwork — scouting, observations, NDVI monitoring, weather forecasts, and offline access. OneSoil Pro provides advanced precision agriculture tools, including productivity zones, variable-rate application maps, soil sampling, field trials, machinery integrations, and yield analysis. Most users combine both products in a single workflow. How does OneSoil analyze my field? OneSoil combines satellite imagery, vegetation indices, weather data, and field-level analytics to monitor crop de",
+      "indices, weather data, and field-level analytics to monitor crop development and field variability. NDVI, NDRE, RECI, moisture, and weather layers help identify crop stress, nutrient issues, water imbalance, and productivity patterns throughout the season. Do I need to upload my own data to get started? No. Simply select existing field boundaries or draw your fields on the map to start monitoring immediately. Additional features such as productivity analysis, variable-rate maps, soil sampling, and field trials become available with the appropriate "
+    ]
+  }
+]

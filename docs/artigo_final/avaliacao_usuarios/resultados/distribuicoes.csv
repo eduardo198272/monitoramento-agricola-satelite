@@ -1,0 +1,192 @@
+grupo,coluna,rotulo,categoria,valor,frequencia,n_valido,percentual_valido
+perfil,3,Qual é sua área de atuação?,Engenheiro agrônomo,,18,31,58.064516129032256
+perfil,3,Qual é sua área de atuação?,Estudante de Agronomia ou áreas relacionadas,,1,31,3.225806451612903
+perfil,3,Qual é sua área de atuação?,Outra,,2,31,6.451612903225806
+perfil,3,Qual é sua área de atuação?,Pesquisador,,2,31,6.451612903225806
+perfil,3,Qual é sua área de atuação?,Produtor rural,,3,31,9.67741935483871
+perfil,3,Qual é sua área de atuação?,Profissional ou estudante de tecnologia,,2,31,6.451612903225806
+perfil,3,Qual é sua área de atuação?,Técnico agrícola,,3,31,9.67741935483871
+perfil,4,Qual é seu nível de conhecimento em agricultura de precisão?,Avançado,,14,31,45.16129032258065
+perfil,4,Qual é seu nível de conhecimento em agricultura de precisão?,Básico,,4,31,12.903225806451612
+perfil,4,Qual é seu nível de conhecimento em agricultura de precisão?,Especialista,,5,31,16.129032258064516
+perfil,4,Qual é seu nível de conhecimento em agricultura de precisão?,Intermediário,,8,31,25.806451612903224
+perfil,5,Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?,Frequentemente,,7,31,22.580645161290324
+perfil,5,Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?,Nunca,,2,31,6.451612903225806
+perfil,5,Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?,Ocasionalmente,,11,31,35.483870967741936
+perfil,5,Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?,Poucas vezes,,11,31,35.483870967741936
+tarefas,6,Buscar uma localização geográfica,Consegui sem ajuda,,31,31,100.0
+tarefas,6,Buscar uma localização geográfica,Consegui com ajuda,,0,31,0.0
+tarefas,6,Buscar uma localização geográfica,"Tentei, mas não consegui",,0,31,0.0
+tarefas,6,Buscar uma localização geográfica,Não tentei,,0,31,0.0
+tarefas,7,Demarcar uma área no mapa,Consegui sem ajuda,,18,31,58.064516129032256
+tarefas,7,Demarcar uma área no mapa,Consegui com ajuda,,5,31,16.129032258064516
+tarefas,7,Demarcar uma área no mapa,"Tentei, mas não consegui",,2,31,6.451612903225806
+tarefas,7,Demarcar uma área no mapa,Não tentei,,6,31,19.35483870967742
+tarefas,8,Salvar uma área,Consegui sem ajuda,,21,31,67.74193548387096
+tarefas,8,Salvar uma área,Consegui com ajuda,,3,31,9.67741935483871
+tarefas,8,Salvar uma área,"Tentei, mas não consegui",,4,31,12.903225806451612
+tarefas,8,Salvar uma área,Não tentei,,3,31,9.67741935483871
+tarefas,9,Realizar uma análise de índices espectrais,Consegui sem ajuda,,25,31,80.64516129032258
+tarefas,9,Realizar uma análise de índices espectrais,Consegui com ajuda,,3,31,9.67741935483871
+tarefas,9,Realizar uma análise de índices espectrais,"Tentei, mas não consegui",,1,31,3.225806451612903
+tarefas,9,Realizar uma análise de índices espectrais,Não tentei,,2,31,6.451612903225806
+tarefas,10,Explorar o mapa de distribuição dos índices,Consegui sem ajuda,,22,31,70.96774193548387
+tarefas,10,Explorar o mapa de distribuição dos índices,Consegui com ajuda,,3,31,9.67741935483871
+tarefas,10,Explorar o mapa de distribuição dos índices,"Tentei, mas não consegui",,3,31,9.67741935483871
+tarefas,10,Explorar o mapa de distribuição dos índices,Não tentei,,3,31,9.67741935483871
+tarefas,11,Consultar valores utilizando o cursor,Consegui sem ajuda,,21,31,67.74193548387096
+tarefas,11,Consultar valores utilizando o cursor,Consegui com ajuda,,3,31,9.67741935483871
+tarefas,11,Consultar valores utilizando o cursor,"Tentei, mas não consegui",,2,31,6.451612903225806
+tarefas,11,Consultar valores utilizando o cursor,Não tentei,,5,31,16.129032258064516
+tarefas,12,Visualizar séries temporais e possíveis anomalias,Consegui sem ajuda,,20,31,64.51612903225806
+tarefas,12,Visualizar séries temporais e possíveis anomalias,Consegui com ajuda,,3,31,9.67741935483871
+tarefas,12,Visualizar séries temporais e possíveis anomalias,"Tentei, mas não consegui",,5,31,16.129032258064516
+tarefas,12,Visualizar séries temporais e possíveis anomalias,Não tentei,,3,31,9.67741935483871
+tarefas,13,Consultar informações meteorológicas,Consegui sem ajuda,,21,31,67.74193548387096
+tarefas,13,Consultar informações meteorológicas,Consegui com ajuda,,7,31,22.580645161290324
+tarefas,13,Consultar informações meteorológicas,"Tentei, mas não consegui",,0,31,0.0
+tarefas,13,Consultar informações meteorológicas,Não tentei,,3,31,9.67741935483871
+tarefas,14,Exportar um relatório ou conjunto de dados,Consegui sem ajuda,,23,31,74.19354838709677
+tarefas,14,Exportar um relatório ou conjunto de dados,Consegui com ajuda,,6,31,19.35483870967742
+tarefas,14,Exportar um relatório ou conjunto de dados,"Tentei, mas não consegui",,0,31,0.0
+tarefas,14,Exportar um relatório ou conjunto de dados,Não tentei,,2,31,6.451612903225806
+usabilidade,16,A interface é fácil de compreender.,1 – Discordo totalmente,1.0,1,30,3.3333333333333335
+usabilidade,16,A interface é fácil de compreender.,2 – Discordo parcialmente,2.0,1,30,3.3333333333333335
+usabilidade,16,A interface é fácil de compreender.,3 – Neutro,3.0,4,30,13.333333333333334
+usabilidade,16,A interface é fácil de compreender.,4 – Concordo parcialmente,4.0,15,30,50.0
+usabilidade,16,A interface é fácil de compreender.,5 – Concordo totalmente,5.0,9,30,30.0
+usabilidade,17,A navegação pela plataforma é intuitiva.,1 – Discordo totalmente,1.0,0,29,0.0
+usabilidade,17,A navegação pela plataforma é intuitiva.,2 – Discordo parcialmente,2.0,3,29,10.344827586206897
+usabilidade,17,A navegação pela plataforma é intuitiva.,3 – Neutro,3.0,6,29,20.689655172413794
+usabilidade,17,A navegação pela plataforma é intuitiva.,4 – Concordo parcialmente,4.0,12,29,41.37931034482759
+usabilidade,17,A navegação pela plataforma é intuitiva.,5 – Concordo totalmente,5.0,8,29,27.586206896551722
+usabilidade,18,A organização das informações é adequada.,1 – Discordo totalmente,1.0,0,31,0.0
+usabilidade,18,A organização das informações é adequada.,2 – Discordo parcialmente,2.0,1,31,3.225806451612903
+usabilidade,18,A organização das informações é adequada.,3 – Neutro,3.0,8,31,25.806451612903224
+usabilidade,18,A organização das informações é adequada.,4 – Concordo parcialmente,4.0,13,31,41.935483870967744
+usabilidade,18,A organização das informações é adequada.,5 – Concordo totalmente,5.0,9,31,29.032258064516128
+usabilidade,19,Consegui utilizar a plataforma sem auxílio externo.,1 – Discordo totalmente,1.0,0,29,0.0
+usabilidade,19,Consegui utilizar a plataforma sem auxílio externo.,2 – Discordo parcialmente,2.0,2,29,6.896551724137931
+usabilidade,19,Consegui utilizar a plataforma sem auxílio externo.,3 – Neutro,3.0,6,29,20.689655172413794
+usabilidade,19,Consegui utilizar a plataforma sem auxílio externo.,4 – Concordo parcialmente,4.0,13,29,44.827586206896555
+usabilidade,19,Consegui utilizar a plataforma sem auxílio externo.,5 – Concordo totalmente,5.0,8,29,27.586206896551722
+usabilidade,20,A demarcação de áreas no mapa é fácil.,1 – Discordo totalmente,1.0,0,31,0.0
+usabilidade,20,A demarcação de áreas no mapa é fácil.,2 – Discordo parcialmente,2.0,2,31,6.451612903225806
+usabilidade,20,A demarcação de áreas no mapa é fácil.,3 – Neutro,3.0,5,31,16.129032258064516
+usabilidade,20,A demarcação de áreas no mapa é fácil.,4 – Concordo parcialmente,4.0,12,31,38.70967741935484
+usabilidade,20,A demarcação de áreas no mapa é fácil.,5 – Concordo totalmente,5.0,12,31,38.70967741935484
+usabilidade,21,A configuração das análises é simples.,1 – Discordo totalmente,1.0,0,31,0.0
+usabilidade,21,A configuração das análises é simples.,2 – Discordo parcialmente,2.0,1,31,3.225806451612903
+usabilidade,21,A configuração das análises é simples.,3 – Neutro,3.0,8,31,25.806451612903224
+usabilidade,21,A configuração das análises é simples.,4 – Concordo parcialmente,4.0,11,31,35.483870967741936
+usabilidade,21,A configuração das análises é simples.,5 – Concordo totalmente,5.0,11,31,35.483870967741936
+usabilidade,22,O tempo de resposta é satisfatório.,1 – Discordo totalmente,1.0,1,31,3.225806451612903
+usabilidade,22,O tempo de resposta é satisfatório.,2 – Discordo parcialmente,2.0,1,31,3.225806451612903
+usabilidade,22,O tempo de resposta é satisfatório.,3 – Neutro,3.0,8,31,25.806451612903224
+usabilidade,22,O tempo de resposta é satisfatório.,4 – Concordo parcialmente,4.0,13,31,41.935483870967744
+usabilidade,22,O tempo de resposta é satisfatório.,5 – Concordo totalmente,5.0,8,31,25.806451612903224
+usabilidade,23,As funcionalidades são fáceis de localizar.,1 – Discordo totalmente,1.0,0,31,0.0
+usabilidade,23,As funcionalidades são fáceis de localizar.,2 – Discordo parcialmente,2.0,3,31,9.67741935483871
+usabilidade,23,As funcionalidades são fáceis de localizar.,3 – Neutro,3.0,6,31,19.35483870967742
+usabilidade,23,As funcionalidades são fáceis de localizar.,4 – Concordo parcialmente,4.0,10,31,32.25806451612903
+usabilidade,23,As funcionalidades são fáceis de localizar.,5 – Concordo totalmente,5.0,12,31,38.70967741935484
+usabilidade,24,A apresentação visual é adequada.,1 – Discordo totalmente,1.0,1,31,3.225806451612903
+usabilidade,24,A apresentação visual é adequada.,2 – Discordo parcialmente,2.0,3,31,9.67741935483871
+usabilidade,24,A apresentação visual é adequada.,3 – Neutro,3.0,4,31,12.903225806451612
+usabilidade,24,A apresentação visual é adequada.,4 – Concordo parcialmente,4.0,16,31,51.61290322580645
+usabilidade,24,A apresentação visual é adequada.,5 – Concordo totalmente,5.0,7,31,22.580645161290324
+utilidade,25,Busca por localização geográfica,1 – Nada útil,1.0,0,31,0.0
+utilidade,25,Busca por localização geográfica,2 – Pouco útil,2.0,3,31,9.67741935483871
+utilidade,25,Busca por localização geográfica,3 – Moderadamente útil,3.0,3,31,9.67741935483871
+utilidade,25,Busca por localização geográfica,4 – Útil,4.0,14,31,45.16129032258065
+utilidade,25,Busca por localização geográfica,5 – Muito útil,5.0,11,31,35.483870967741936
+utilidade,26,Demarcação de áreas agrícolas,1 – Nada útil,1.0,0,31,0.0
+utilidade,26,Demarcação de áreas agrícolas,2 – Pouco útil,2.0,2,31,6.451612903225806
+utilidade,26,Demarcação de áreas agrícolas,3 – Moderadamente útil,3.0,7,31,22.580645161290324
+utilidade,26,Demarcação de áreas agrícolas,4 – Útil,4.0,11,31,35.483870967741936
+utilidade,26,Demarcação de áreas agrícolas,5 – Muito útil,5.0,11,31,35.483870967741936
+utilidade,27,Salvamento e gerenciamento de áreas,1 – Nada útil,1.0,0,23,0.0
+utilidade,27,Salvamento e gerenciamento de áreas,2 – Pouco útil,2.0,1,23,4.3478260869565215
+utilidade,27,Salvamento e gerenciamento de áreas,3 – Moderadamente útil,3.0,4,23,17.391304347826086
+utilidade,27,Salvamento e gerenciamento de áreas,4 – Útil,4.0,14,23,60.869565217391305
+utilidade,27,Salvamento e gerenciamento de áreas,5 – Muito útil,5.0,4,23,17.391304347826086
+utilidade,28,Análise de índices espectrais,1 – Nada útil,1.0,1,30,3.3333333333333335
+utilidade,28,Análise de índices espectrais,2 – Pouco útil,2.0,4,30,13.333333333333334
+utilidade,28,Análise de índices espectrais,3 – Moderadamente útil,3.0,4,30,13.333333333333334
+utilidade,28,Análise de índices espectrais,4 – Útil,4.0,10,30,33.333333333333336
+utilidade,28,Análise de índices espectrais,5 – Muito útil,5.0,11,30,36.666666666666664
+utilidade,29,Mapas temáticos com gradientes de cores,1 – Nada útil,1.0,0,30,0.0
+utilidade,29,Mapas temáticos com gradientes de cores,2 – Pouco útil,2.0,1,30,3.3333333333333335
+utilidade,29,Mapas temáticos com gradientes de cores,3 – Moderadamente útil,3.0,5,30,16.666666666666668
+utilidade,29,Mapas temáticos com gradientes de cores,4 – Útil,4.0,6,30,20.0
+utilidade,29,Mapas temáticos com gradientes de cores,5 – Muito útil,5.0,18,30,60.0
+utilidade,30,Consulta interativa de valores por pixel,1 – Nada útil,1.0,0,23,0.0
+utilidade,30,Consulta interativa de valores por pixel,2 – Pouco útil,2.0,0,23,0.0
+utilidade,30,Consulta interativa de valores por pixel,3 – Moderadamente útil,3.0,3,23,13.043478260869565
+utilidade,30,Consulta interativa de valores por pixel,4 – Útil,4.0,8,23,34.78260869565217
+utilidade,30,Consulta interativa de valores por pixel,5 – Muito útil,5.0,12,23,52.17391304347826
+utilidade,31,Gráficos de evolução temporal,1 – Nada útil,1.0,0,29,0.0
+utilidade,31,Gráficos de evolução temporal,2 – Pouco útil,2.0,4,29,13.793103448275861
+utilidade,31,Gráficos de evolução temporal,3 – Moderadamente útil,3.0,5,29,17.24137931034483
+utilidade,31,Gráficos de evolução temporal,4 – Útil,4.0,9,29,31.03448275862069
+utilidade,31,Gráficos de evolução temporal,5 – Muito útil,5.0,11,29,37.93103448275862
+utilidade,32,Detecção de anomalias,1 – Nada útil,1.0,0,29,0.0
+utilidade,32,Detecção de anomalias,2 – Pouco útil,2.0,1,29,3.4482758620689653
+utilidade,32,Detecção de anomalias,3 – Moderadamente útil,3.0,4,29,13.793103448275861
+utilidade,32,Detecção de anomalias,4 – Útil,4.0,16,29,55.172413793103445
+utilidade,32,Detecção de anomalias,5 – Muito útil,5.0,8,29,27.586206896551722
+utilidade,33,Informações de temperatura e precipitação,1 – Nada útil,1.0,0,29,0.0
+utilidade,33,Informações de temperatura e precipitação,2 – Pouco útil,2.0,0,29,0.0
+utilidade,33,Informações de temperatura e precipitação,3 – Moderadamente útil,3.0,6,29,20.689655172413794
+utilidade,33,Informações de temperatura e precipitação,4 – Útil,4.0,8,29,27.586206896551722
+utilidade,33,Informações de temperatura e precipitação,5 – Muito útil,5.0,15,29,51.724137931034484
+utilidade,34,Geração de relatórios PDF,1 – Nada útil,1.0,0,28,0.0
+utilidade,34,Geração de relatórios PDF,2 – Pouco útil,2.0,1,28,3.5714285714285716
+utilidade,34,Geração de relatórios PDF,3 – Moderadamente útil,3.0,4,28,14.285714285714286
+utilidade,34,Geração de relatórios PDF,4 – Útil,4.0,13,28,46.42857142857143
+utilidade,34,Geração de relatórios PDF,5 – Muito útil,5.0,10,28,35.714285714285715
+utilidade,35,Exportação em Excel e CSV,1 – Nada útil,1.0,0,27,0.0
+utilidade,35,Exportação em Excel e CSV,2 – Pouco útil,2.0,1,27,3.7037037037037037
+utilidade,35,Exportação em Excel e CSV,3 – Moderadamente útil,3.0,5,27,18.51851851851852
+utilidade,35,Exportação em Excel e CSV,4 – Útil,4.0,16,27,59.25925925925926
+utilidade,35,Exportação em Excel e CSV,5 – Muito útil,5.0,5,27,18.51851851851852
+aplicabilidade,36,As informações apresentadas são compreensíveis.,1 – Discordo totalmente,1.0,0,30,0.0
+aplicabilidade,36,As informações apresentadas são compreensíveis.,2 – Discordo parcialmente,2.0,3,30,10.0
+aplicabilidade,36,As informações apresentadas são compreensíveis.,3 – Neutro,3.0,4,30,13.333333333333334
+aplicabilidade,36,As informações apresentadas são compreensíveis.,4 – Concordo parcialmente,4.0,12,30,40.0
+aplicabilidade,36,As informações apresentadas são compreensíveis.,5 – Concordo totalmente,5.0,11,30,36.666666666666664
+aplicabilidade,37,Os mapas facilitam a interpretação dos índices espectrais.,1 – Discordo totalmente,1.0,1,31,3.225806451612903
+aplicabilidade,37,Os mapas facilitam a interpretação dos índices espectrais.,2 – Discordo parcialmente,2.0,2,31,6.451612903225806
+aplicabilidade,37,Os mapas facilitam a interpretação dos índices espectrais.,3 – Neutro,3.0,6,31,19.35483870967742
+aplicabilidade,37,Os mapas facilitam a interpretação dos índices espectrais.,4 – Concordo parcialmente,4.0,10,31,32.25806451612903
+aplicabilidade,37,Os mapas facilitam a interpretação dos índices espectrais.,5 – Concordo totalmente,5.0,12,31,38.70967741935484
+aplicabilidade,38,Os gráficos facilitam o acompanhamento temporal da vegetação.,1 – Discordo totalmente,1.0,0,30,0.0
+aplicabilidade,38,Os gráficos facilitam o acompanhamento temporal da vegetação.,2 – Discordo parcialmente,2.0,6,30,20.0
+aplicabilidade,38,Os gráficos facilitam o acompanhamento temporal da vegetação.,3 – Neutro,3.0,2,30,6.666666666666667
+aplicabilidade,38,Os gráficos facilitam o acompanhamento temporal da vegetação.,4 – Concordo parcialmente,4.0,9,30,30.0
+aplicabilidade,38,Os gráficos facilitam o acompanhamento temporal da vegetação.,5 – Concordo totalmente,5.0,13,30,43.333333333333336
+aplicabilidade,39,As informações meteorológicas complementam a análise.,1 – Discordo totalmente,1.0,0,31,0.0
+aplicabilidade,39,As informações meteorológicas complementam a análise.,2 – Discordo parcialmente,2.0,2,31,6.451612903225806
+aplicabilidade,39,As informações meteorológicas complementam a análise.,3 – Neutro,3.0,4,31,12.903225806451612
+aplicabilidade,39,As informações meteorológicas complementam a análise.,4 – Concordo parcialmente,4.0,11,31,35.483870967741936
+aplicabilidade,39,As informações meteorológicas complementam a análise.,5 – Concordo totalmente,5.0,14,31,45.16129032258065
+aplicabilidade,40,A plataforma apresenta potencial para auxiliar no monitoramento agrícola.,1 – Discordo totalmente,1.0,0,31,0.0
+aplicabilidade,40,A plataforma apresenta potencial para auxiliar no monitoramento agrícola.,2 – Discordo parcialmente,2.0,2,31,6.451612903225806
+aplicabilidade,40,A plataforma apresenta potencial para auxiliar no monitoramento agrícola.,3 – Neutro,3.0,6,31,19.35483870967742
+aplicabilidade,40,A plataforma apresenta potencial para auxiliar no monitoramento agrícola.,4 – Concordo parcialmente,4.0,12,31,38.70967741935484
+aplicabilidade,40,A plataforma apresenta potencial para auxiliar no monitoramento agrícola.,5 – Concordo totalmente,5.0,11,31,35.483870967741936
+aplicabilidade,41,Os relatórios apresentam informações relevantes.,1 – Discordo totalmente,1.0,1,29,3.4482758620689653
+aplicabilidade,41,Os relatórios apresentam informações relevantes.,2 – Discordo parcialmente,2.0,2,29,6.896551724137931
+aplicabilidade,41,Os relatórios apresentam informações relevantes.,3 – Neutro,3.0,3,29,10.344827586206897
+aplicabilidade,41,Os relatórios apresentam informações relevantes.,4 – Concordo parcialmente,4.0,18,29,62.06896551724138
+aplicabilidade,41,Os relatórios apresentam informações relevantes.,5 – Concordo totalmente,5.0,5,29,17.24137931034483
+aplicabilidade,42,Consideraria utilizar a plataforma em atividades profissionais ou acadêmicas.,1 – Discordo totalmente,1.0,0,30,0.0
+aplicabilidade,42,Consideraria utilizar a plataforma em atividades profissionais ou acadêmicas.,2 – Discordo parcialmente,2.0,2,30,6.666666666666667
+aplicabilidade,42,Consideraria utilizar a plataforma em atividades profissionais ou acadêmicas.,3 – Neutro,3.0,4,30,13.333333333333334
+aplicabilidade,42,Consideraria utilizar a plataforma em atividades profissionais ou acadêmicas.,4 – Concordo parcialmente,4.0,12,30,40.0
+aplicabilidade,42,Consideraria utilizar a plataforma em atividades profissionais ou acadêmicas.,5 – Concordo totalmente,5.0,12,30,40.0
+aplicabilidade,43,Recomendaria a plataforma a pessoas interessadas no monitoramento agrícola.,1 – Discordo totalmente,1.0,0,31,0.0
+aplicabilidade,43,Recomendaria a plataforma a pessoas interessadas no monitoramento agrícola.,2 – Discordo parcialmente,2.0,4,31,12.903225806451612
+aplicabilidade,43,Recomendaria a plataforma a pessoas interessadas no monitoramento agrícola.,3 – Neutro,3.0,3,31,9.67741935483871
+aplicabilidade,43,Recomendaria a plataforma a pessoas interessadas no monitoramento agrícola.,4 – Concordo parcialmente,4.0,14,31,45.16129032258065
+aplicabilidade,43,Recomendaria a plataforma a pessoas interessadas no monitoramento agrícola.,5 – Concordo totalmente,5.0,10,31,32.25806451612903

@@ -1,0 +1,236 @@
+{
+  "source_context": "Capturas declaradas reais e fornecidas pelo autor nesta revisão",
+  "capture_date": null,
+  "desktop_commit": null,
+  "mobile_device_and_browser_version": null,
+  "limits": [
+    "Não substituem a demonstração instrumentada anterior nem seus resultados.",
+    "Capturas não comprovam equivalência com o código corrigido.",
+    "A série na imagem fornecida tem eixo temporal fora do enquadramento.",
+    "Mobile mostra outra área; não é continuação da análise desktop."
+  ],
+  "originals": [
+    {
+      "source": "Imagens Artigo/Imagem1-Página Inicial.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/inicial.png",
+      "sha256": "5c0c2cf34935e8566a35c823fdd5d194c96d1f4b9be7292877701dd4524d84c6",
+      "size_px": [
+        1838,
+        958
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem1.2-Barra de configuração.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/configuracao.png",
+      "sha256": "5ac194130aa1d60dee5149c8a355bb71bbf7b17567801d55676faff6b54405ab",
+      "size_px": [
+        1294,
+        222
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem1.3-Barra de pesquisa de localizações.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/busca.png",
+      "sha256": "7e8b912b52b881ab1be897a80fab2e30596f0a6a506d4aff00eb2bb8b7b22548",
+      "size_px": [
+        559,
+        225
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem1.4-Ao clicar em pesquisa no mapa fica centralizada a localização pesquisada.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/busca_resultado.png",
+      "sha256": "fe4f132f5479f18e9ec3fe228383e06ab86be2b03ac3c3f8b0f40d1d74ada79b",
+      "size_px": [
+        1740,
+        811
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem2.1-Mapa da área selecioada com gradiente do índice selecionado.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/mapa_indice.png",
+      "sha256": "b3c2e7a5c8941fe9879bbeec14c879726721e9218bbbab9d28e3ee87046b2e7e",
+      "size_px": [
+        1825,
+        902
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem2.2-Relatório dos Indices da série temporal.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/painel_series.png",
+      "sha256": "8df33adec89f270fa66b36f6ab6e62b8b89b7986fca061d42c252c8ba6bd1fbd",
+      "size_px": [
+        1825,
+        902
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem2.3-Relatório de Anomalias do Indicador selecioado e de clima.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/anomalias_clima.png",
+      "sha256": "6393685463eb0fa76f280d37fa0ab0283242a8ba2b4cb4e0f341b8167263c960",
+      "size_px": [
+        1825,
+        902
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem3.1-Relatório gerado em pdf.png",
+      "copy": "docs/artigo_final/evidencias/capturas_autor/relatorio_pdf_pendente.png",
+      "sha256": "6d91cb54b4286f834be4b2402a46342d40094466912b860ba1e97ddbbaf2dcce",
+      "size_px": [
+        1121,
+        900
+      ],
+      "included": false,
+      "status": "Aguardar nova captura após atualização e conferência da radiação"
+    },
+    {
+      "source": "Imagens Artigo/Imagem4.1-Barra de upload no geoJson.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/geojson_upload.png",
+      "sha256": "85aba8a3f3360c778cd43bbb1825e15fb9179db37a81685ae9950bf37e83de23",
+      "size_px": [
+        909,
+        783
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem4.2-arquivo geojson aberto.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/geojson_arquivo.png",
+      "sha256": "d51ed7d6e2e8bb794606d5d29cb8a271a9ea6fd7760864d1bb28a2040e79937d",
+      "size_px": [
+        909,
+        783
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/imagem4.3-arquivo importado e opções aparecendo.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/geojson_importado.png",
+      "sha256": "4b5704bed8db95324bbb94e04c768616ef52c71d2b817cfb7d6133d4dfdd7435",
+      "size_px": [
+        1111,
+        871
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem4.4-Desenhada figura no mapa.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/desenho.png",
+      "sha256": "70a43753788618f61c9e1146d4416a665083194e5251ecf7fcd13de8b2126fa6",
+      "size_px": [
+        1833,
+        948
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem4.5-Salvamento da localização.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/salvar.png",
+      "sha256": "de6e486d0f2551fbcc5bda9a3cdc8b68a78d8cac6678db7730db56682125baf1",
+      "size_px": [
+        647,
+        426
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem4.6-Localização salva.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/salva.png",
+      "sha256": "4d542510436f82d51216f024e9847827c8294ec022925636ce32f8bd4f3d9cff",
+      "size_px": [
+        647,
+        426
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem4.7-Restauração de localização no mapa, após clicar na localização.png",
+      "copy": "docs/artigo_final/fig/capturas_autor/restaurar.png",
+      "sha256": "dca801ce5846bf3ededa04fa393c6be2bad5c53b0bb70b689332e6f345be8660",
+      "size_px": [
+        1796,
+        940
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem5.1-responsividade mapa celular.jpeg",
+      "copy": "docs/artigo_final/fig/capturas_autor/mobile_mapa.jpeg",
+      "sha256": "b7a52400a88fdf8897013a8cff7cdd7a7de2d90a21b0f43026109960b5f7b81b",
+      "size_px": [
+        587,
+        1280
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    },
+    {
+      "source": "Imagens Artigo/Imagem5.2-Responsividade celular relatório.jpeg",
+      "copy": "docs/artigo_final/fig/capturas_autor/mobile_painel.jpeg",
+      "sha256": "cdad4cdc6fcb4f92d56b1b7e7a2ff98147fcd1d4bba8318826d6391eca3ef32b",
+      "size_px": [
+        587,
+        1280
+      ],
+      "included": true,
+      "status": "Ilustração da interface fornecida pelo autor"
+    }
+  ],
+  "editorial_crops": [
+    {
+      "source": "docs/artigo_final/fig/capturas_autor/geojson_upload.png",
+      "output": "docs/artigo_final/fig/capturas_autor/geojson_upload_barra.png",
+      "box_px": [
+        0,
+        0,
+        264,
+        783
+      ],
+      "sha256": "8a9c25abc76f127d286fbc2c0dd5e53992702656803b21f4d662e6cf4a6a3fa3"
+    },
+    {
+      "source": "docs/artigo_final/fig/capturas_autor/geojson_arquivo.png",
+      "output": "docs/artigo_final/fig/capturas_autor/geojson_arquivo_barra.png",
+      "box_px": [
+        0,
+        0,
+        264,
+        783
+      ],
+      "sha256": "c516d589e73405752b79a2fbe5327063b93d541d941394936fdf4508f51b1e95"
+    },
+    {
+      "source": "docs/artigo_final/fig/capturas_autor/geojson_importado.png",
+      "output": "docs/artigo_final/fig/capturas_autor/geojson_importado_barra.png",
+      "box_px": [
+        0,
+        0,
+        264,
+        871
+      ],
+      "sha256": "33fff6c0bc93bdbf88d5d2d528e36e79a011afc88bd21ace9feb2fcfbb92ff37"
+    }
+  ]
+}

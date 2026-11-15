@@ -1,100 +1,122 @@
 \section{Materiais e métodos}\label{chap:metodos-final}
 
-\subsection{Caracterização e materiais}
+\subsection{Caracterização da pesquisa e fontes de evidência}
 
-O trabalho caracteriza-se como desenvolvimento aplicado de um protótipo computacional, acompanhado de verificação de software e avaliação funcional a ser complementada por execuções documentadas. A pesquisa bibliográfica sustenta os conceitos espectrais e a escolha de serviços, sem reivindicar uma revisão sistemática. Não se pressupõe validação agronômica de campo.
+O trabalho caracteriza-se como pesquisa aplicada e tecnológica em Ciência da Computação, tendo como principal resultado um artefato de software. Para construí-lo e examinar seu funcionamento, foram articulados estudo bibliográfico, especificação de funcionalidades, implementação modular e verificação técnica. A avaliação realizada não constitui experimento agronômico, e o estudo bibliográfico não seguiu protocolo de revisão sistemática. Também não se atribui ao desenvolvimento a adoção formal de \textit{Design Science Research}, dado que esse protocolo não foi documentado.
 
-O repositório implementa a aplicação em Python. A interface utiliza Streamlit e componentes de mapas Folium; o acesso a imagens ocorre pela API Python do Earth Engine. Pandas e NumPy apoiam dados e cálculos locais, Plotly os gráficos e Requests o acesso HTTP. As dependências e versões declaradas encontram-se em \texttt{requirements.txt}. Fontes adicionais são NASA POWER, Nominatim para busca geográfica e Esri World Imagery para mapa-base.
+A revisão do artefato priorizou o código-fonte sobre descrições prospectivas. Foram examinados os pontos de entrada, os módulos Python, o componente HTML/JavaScript, os contratos de armazenamento e exportação, a suíte de testes, as especificações e os documentos acadêmicos. A proposta original foi tratada como planejamento histórico. O vínculo entre objetivos, requisitos, funções, testes e seções foi organizado em \path{docs/artigo_final/RASTREABILIDADE_TCC.md}, com distinção entre implementação e avaliação.
 
-A autenticação do Earth Engine requer um projeto habilitado e registrado. A execução local admite autenticação interativa; o ponto de entrada \texttt{streamlit\_app.py}, preparado para o Streamlit Community Cloud, exige conta de serviço e recebe as credenciais por Secrets, sem incluí-las no Git. Essa conta autentica a aplicação perante o Google, não usuários do site \citep{GOOGLE_EE_SERVICE_ACCOUNT,STREAMLIT_CLOUD_SECRETS}. O projeto foi configurado para uso não comercial; essa condição não deve ser confundida com garantia irrestrita de gratuidade de outros serviços do Google Cloud \citep{GOOGLE_EE_NONCOMMERCIAL}.
+O desenvolvimento foi organizado por especificações funcionais, tarefas em branches e integração por revisão de alterações. O histórico registra entregas de interface, persistência e exportações acompanhadas por testes. Nas correções dos contratos de dados, os novos testes foram executados antes da alteração funcional para reproduzir as divergências e, depois, verificar sua correção. Essa prática localizada não permite afirmar que todo o projeto seguiu desenvolvimento orientado a testes (TDD, \textit{Test-Driven Development}). O controle de dependências e a separação de responsabilidades apoiaram a evolução incremental; não foi identificada configuração de integração contínua no repositório.
 
-\subsection{Organização da aplicação e fluxo}
+\subsection{Materiais e ambiente}
 
-A arquitetura observada no código separa responsabilidades sem impor uma arquitetura distribuída própria: \texttt{main.py} gerencia interface e estado; \texttt{maps.py} e \texttt{map\_interaction.py} tratam mapas e interação; \texttt{pipeline.py} coordena a análise; \texttt{earth\_engine.py}, \texttt{time\_series.py}, \texttt{anomalies.py} e \texttt{climate.py} implementam as etapas de dados e cálculos. Módulos de exportação preparam saídas PDF, XLSX e CSV ZIP. O serviço de localizações utiliza SQLite no modo local ou um repositório em memória vinculado à sessão no modo web. Os módulos \texttt{locations\_geojson.py} e \texttt{locations\_transfer\_ui.py} implementam a transferência de localizações. A presença desses componentes não substitui a verificação operacional.
+A solução foi implementada em Python. O Streamlit coordena a interface e o estado da sessão, enquanto Folium/Leaflet apresentam os mapas e o Earth Engine executa as operações raster. Após a transferência dos resultados, NumPy e pandas organizam os dados locais e Plotly produz os gráficos. Para disponibilizar esses resultados fora da interface, ReportLab, Pillow e Matplotlib apoiam os relatórios estáticos, e openpyxl gera planilhas. A biblioteca geemap permanece em operações e mapas auxiliares, mas não é responsável por toda a interface atual.
 
-Na \cref{fig:arquitetura-atual}, a interface e os módulos Python pertencem à aplicação, enquanto Earth Engine, NASA POWER, Nominatim e Esri são serviços externos. A consulta de imagens e o processamento geoespacial no Earth Engine dependem de autenticação e disponibilidade remota; a NASA POWER fornece contexto climático, o Nominatim apoia a busca de lugares e a Esri fornece imagens de mapa-base. O SQLite armazena localizações no modo local, não o histórico completo de análises. No modo web não há banco externo nem armazenamento permanente automático: cada visitante precisa baixar suas localizações em GeoJSON e importá-las quando retornar. A geração dos arquivos de resultados utiliza os dados disponíveis na aplicação.
+O arquivo \texttt{requirements.txt} fixa dependências diretas e transitivas. A execução da suíte registrada nas evidências utilizou Linux x86\_64, Python 3.14.4, pytest 9.0.3, pytest-cov 7.1.0 e coverage 7.14.0. A identificação dessas versões situa o resultado dos testes, mas não demonstra reprodução em todos os sistemas operacionais ou na hospedagem. Os registros de preparação do Streamlit Community Cloud descrevem separadamente a resolução de dependências para Python 3.12.
 
-\begin{figure*}[htb!]
+\subsection{Entradas e requisitos}
+
+As entradas principais são um polígono, duas datas e a escolha de NDVI, NDWI, NDMI ou todos os índices. A busca textual serve para navegação, não para inferir automaticamente limites de uma propriedade. A análise depende de geometria válida e intervalo cuja data final não anteceda a inicial. Salvar uma localização não executa análise nem associa automaticamente uma cultura.
+
+O escopo funcional reúne seleção de área, consulta Sentinel-2, filtros, índices, mapas, séries, anomalias e clima, acrescido de localizações nomeadas e exportações. Os requisitos não funcionais foram examinados com cautela: modularidade é observável no código e cobertura é mensurável, mas simplicidade da interface, latência inferior a 30 s, baixo consumo e redução de custos não foram demonstrados por avaliações próprias. A execução local requer um servidor Streamlit na máquina, embora não exija servidor dedicado separado.
+
+\subsection{Aquisição de imagens e qualidade}
+
+O módulo \texttt{earth\_engine.py} consulta \texttt{COPERNICUS/S2\_SR\_HARMONIZED}. O filtro espacial mantém imagens que intersectam a geometria. As duas datas da interface representam dias inclusivos em Tempo Universal Coordenado (UTC). Como \texttt{ee.Filter.date} usa limite final exclusivo, a aplicação solicita $[d_{\mathrm{inicial}},d_{\mathrm{final}}+1\ \mathrm{dia})$ \citep{GOOGLE_EE_DATE}. Datas iguais representam, assim, um dia completo; intervalos invertidos são rejeitados.
+
+O filtro de nuvens usa, por padrão, comparação estrita \texttt{CLOUD\_COVERAGE\_ASSESSMENT < 20}. Esse metadado descreve o arquivo do produto que contém o grânulo, não a cobertura de nuvens calculada dentro da área selecionada. Não há seleção apenas da imagem mais recente ou menos nublada: todas as imagens que passam pelos filtros alimentam as etapas seguintes.
+
+São selecionadas B2, B3, B4, B8, B8A, B11 e QA60. B2 e B3 não entram nas três equações implementadas. Para cada imagem, a máscara mantém posições nas quais os bits 10 e 11 de QA60 são zero, correspondentes à ausência dos indicadores de nuvens opacas e cirrus. Não há máscara adicional específica de sombra, neve ou probabilidade de nuvens. O catálogo informa que QA60 esteve mascarada entre 25/01/2022 e 28/02/2024, inclusive, e descreve a posterior reconstrução a partir de classificações auxiliares \citep{GOOGLE_S2_SR}. A disponibilidade da coleção, portanto, não garante dados úteis após aplicar essa máscara em qualquer intervalo.
+
+Os índices das \cref{eq:ndvi-final,eq:ndwi-final,eq:ndmi-final} são calculados por \texttt{normalizedDifference}, renomeados e associados a \texttt{system:time\_start} e \texttt{system:index}. A série preserva data, valor e identificador de aquisição quando disponível, permitindo distinguir observações do mesmo dia.
+
+\subsection{Produtos espaciais e temporais}\label{sec:agregacoes-final}
+
+Seja $I_k(p,t)$ o índice $k$ em uma posição $p$ e aquisição $t$, após as máscaras. A composição utilizada no mapa é:
+\begin{equation}\label{eq:composto-final}
+ C_k(p)=\operatorname{mediana}_{t\in T_p} I_k(p,t),
+\end{equation}
+em que $T_p$ contém observações válidas naquela posição. Primeiro é calculado o índice em cada imagem e depois a mediana; não se calcula o índice sobre uma mediana prévia das bandas.
+
+A métrica resumida do período é a redução espacial por média sobre $C_k$. A série utiliza a mesma família de redutor sobre cada imagem. Uma representação geral dessas operações é:
+\begin{align}
+ M_k&=\frac{\sum_{p\in P_C}w_{p,C}C_k(p)}
+                {\sum_{p\in P_C}w_{p,C}},\label{eq:media-composto}\\
+ S_k(t)&=\frac{\sum_{p\in P_t}w_{p,t}I_k(p,t)}
+                  {\sum_{p\in P_t}w_{p,t}}.\label{eq:serie-final}
+\end{align}
+Os conjuntos $P_C$ e $P_t$ representam posições válidas consideradas pela redução. Os pesos $w$ expressam a semântica do redutor remoto e sua interseção/máscara, não uma ponderação adicional programada no cliente. O código chama \texttt{ee.Reducer.mean()} com \texttt{scale=10} e \texttt{maxPixels=1e9}, sem fixar \texttt{crs} nessa etapa \citep{GOOGLE_EE_REDUCE}.
+
+Essas operações respondem a perguntas diferentes. $C_k(p)$ descreve uma posição na composição do período, $M_k$ resume espacialmente essa composição e $S_k(t)$ representa a média da área em uma aquisição. Portanto, não se espera que sejam intercambiáveis. Além da ordem das agregações, é necessário considerar a grade: o sistema de referência de coordenadas (CRS) não é fixado explicitamente nas reduções anteriores. A grade Universal Transversa de Mercator (UTM) a 10 m da consulta interativa é definida somente em etapa posterior.
+
+Em \texttt{time\_series.py}, registros cujo valor remoto é nulo são omitidos; os demais são convertidos em números e ordenados pela data textual ISO. Não há interpolação, preenchimento de lacunas, agregação mensal, composição diária ou eliminação de duplicatas de data. Imagens diferentes na mesma data podem gerar registros distintos. O número de imagens da coleção, quando informado, é contado antes da máscara e não corresponde necessariamente ao número de pontos válidos da série.
+
+\begin{figure*}[htbp]
 \centering
-\resizebox{\textwidth}{!}{\input{fig/arquitetura_atual}}
-\caption{Componentes e integrações da aplicação. Fonte: elaborado pelo autor a partir do código do projeto.}
-\label{fig:arquitetura-atual}
-\end{figure*}
-
-\subsection{Interação e casos de uso}
-
-A \cref{fig:casos-uso} resume as ações disponibilizadas pela interface. O usuário pode selecionar uma geometria no mapa ou restaurar uma localização, definir período e índices e solicitar o processamento. Os resultados podem ser consultados e preparados para download nos formatos implementados. Salvar, importar e exportar localizações são operações independentes da execução de uma análise. A exclusão existe na camada de serviço, mas não é apresentada como ação da interface atual. O diagrama sintetiza funcionalidades implementadas e não comprova, por si só, que todos os fluxos foram executados com serviços reais.
-
-\begin{figure*}[htb!]
-\centering
-\resizebox{0.48\textwidth}{!}{\input{fig/casos_uso}}
-\caption{Visão resumida dos casos de uso da aplicação. Fonte: elaborado pelo autor a partir da interface implementada.}
-\label{fig:casos-uso}
-\end{figure*}
-
-\subsection{Fluxo de processamento e persistência}
-
-No fluxo principal, o usuário seleciona ou restaura um polígono, informa o período e escolhe um ou mais índices. O pipeline solicita imagens, aplica máscara e calcula índices. Para cada índice produz um composto temporal mediano, média espacial desse composto, série de médias por imagem e sinalizações de anomalia. A aplicação agrega contexto climático e apresenta mapas e gráficos. O composto mediano por pixel e a série de médias por aquisição são produtos diferentes e não devem ser confundidos.
-
-A \cref{fig:fluxo-analise} distingue esses dois produtos e mostra a obtenção complementar de clima. O acesso climático pode falhar sem interromper a análise espectral; já a ausência de imagens produz uma resposta de erro. Os mapas e gráficos dependem dos dados disponíveis e dos serviços consultados.
-
-\begin{figure*}[htb!]
-\centering
-\resizebox{\textwidth}{!}{\input{fig/fluxo_analise}}
-\caption{Fluxo simplificado da análise de uma área. Fonte: elaborado pelo autor a partir de \texttt{pipeline.py}.}
+\resizebox{0.96\textwidth}{!}{\input{fig/fluxo_analise}}
+\caption{Derivação dos produtos espaciais e temporais a partir da coleção filtrada. Fonte: elaborado pelo autor a partir de \texttt{pipeline.py} e \texttt{time\_series.py}.}
 \label{fig:fluxo-analise}
 \end{figure*}
 
-O gerenciamento de localizações é um recorte orientado a objetos da implementação, apresentado na \cref{fig:classes-localizacao}. A classe de serviço valida e coordena as operações; o repositório local acessa SQLite e o repositório de sessão mantém registros isolados em \texttt{st.session\_state}. O registro inclui nome, geometria GeoJSON, centro e datas. A geometria é validada antes da gravação e os nomes são comparados sem diferenciar caixa, normalizando espaços. A importação aceita uma Feature ou FeatureCollection com polígonos WGS84 e nome em \texttt{properties.name}, limitada a 100 localizações e 2 MB por arquivo. O lote é validado integralmente e conflitos não sobrescrevem registros nem produzem importação parcial.
+\subsection{Regra de detecção e tendência}\label{sec:anomalias-final}
 
-Na sessão web, novas gravações também respeitam os limites necessários para que o conjunto permaneça exportável. Não há autenticação Google de visitantes ou recuperação automática entre sessões. O arquivo GeoJSON fica sob responsabilidade do usuário e contém nomes e coordenadas; o isolamento de sessão não equivale a um serviço permanente de armazenamento privado. O diagrama não pretende descrever todas as funções e módulos do sistema.
+Seja $x_i$ o valor da série na posição $i$, com indexação iniciada em zero. Para $i\geq3$, a janela contém os três registros anteriores:
+\begin{align}
+ \mu_i&=\frac{1}{3}\sum_{j=i-3}^{i-1}x_j,\\
+ \sigma_i&=\sqrt{\frac{1}{3}\sum_{j=i-3}^{i-1}(x_j-\mu_i)^2},\\
+ z_i&=\frac{x_i-\mu_i}{\sigma_i},\quad \sigma_i>0.\label{eq:escore-final}
+\end{align}
+O algoritmo marca anomalia somente quando $z_i<-1$. Os três primeiros registros e os casos $\sigma_i=0$ não são sinalizados e recebem escore zero na estrutura de saída. Esse zero é um valor inicial do algoritmo, não um desvio padronizado necessariamente calculado.
 
-\begin{figure*}[htb!]
+O cálculo usa a fórmula de desvio padrão populacional (\texttt{ddof=0}) sobre os três valores da janela, sem pressupor que eles representem a população de condições agrícolas. A janela conta observações, não dias, e os valores nulos removidos da série não são repostos. A função \texttt{detect\_anomalies} pressupõe entradas numéricas compatíveis, sem tratamento adicional específico de NaN; quedas já sinalizadas continuam participando das janelas seguintes. Como o limiar não foi calibrado por cultura, a sinalização não produz uma probabilidade de diagnóstico.
+
+Para tendência, \texttt{np.polyfit} ajusta $x_i\simeq a\,i+b$. A classificação é crescente se $a>0{,}01$, decrescente se $a<-0{,}01$ e estável nos demais casos. Séries com menos de dois pontos recebem o rótulo estável pela função. Como a variável explicativa é a ordem, a inclinação não representa variação por dia, e o rótulo não descreve necessariamente fases fenológicas.
+
+\begin{figure*}[htbp]
 \centering
-\resizebox{\textwidth}{!}{\input{fig/classes_localizacao}}
-\caption{Recorte das classes de gerenciamento de localizações nos modos local e web. Fonte: elaborado pelo autor a partir do código.}
-\label{fig:classes-localizacao}
+\resizebox{0.92\textwidth}{!}{\input{fig/fluxo_anomalias}}
+\caption{Heurística unilateral de sinalização de desvios negativos. Fonte: elaborado pelo autor a partir de \texttt{anomalies.py}.}
+\label{fig:fluxo-anomalias}
 \end{figure*}
 
-\subsection{Aquisição, filtros e cálculos}
+\subsection{Consulta e agregação meteorológica}\label{sec:clima-final}
 
-O módulo \texttt{earth\_engine.py} consulta \texttt{COPERNICUS/S2\_SR\_HARMONIZED}, filtra pela geometria e pelo intervalo e usa, por padrão, \texttt{CLOUD\_COVERAGE\_ASSESSMENT < 20}. Esse metadado diz respeito ao produto, não especificamente ao polígono. A data inicial é inclusiva e a final é exclusiva no filtro do Earth Engine; o código encaminha as datas informadas sem acrescentar um dia \citep{GOOGLE_EE_DATE}.
+O serviço \texttt{/api/temporal/daily/point} é consultado com \texttt{community=ag}, longitude e latitude do centroide Earth Engine, datas em \texttt{YYYYMMDD}, formato JSON e tempo limite de 30 s. Os parâmetros padrão são \texttt{PRECTOTCORR}, \texttt{T2M} e \texttt{ALLSKY\_SFC\_SW\_DWN}. Embora existam nomes internos para \texttt{T2M\_MAX} e \texttt{T2M\_MIN}, eles não são solicitados no fluxo padrão; não se descrevem séries de máximas e mínimas como funcionalidades desse fluxo.
 
-A máscara consulta os bits 10 e 11 da banda QA60 para nuvens opacas e cirrus. Não há etapa específica de máscara de sombra nesse módulo. O catálogo informa mudanças na disponibilidade de QA60 entre 2022 e 2024; portanto, a suficiência e o efeito da máscara devem ser verificados em cada período \citep{GOOGLE_S2_SR}. Imagens com nuvens residuais ou pixels mascarados podem comprometer a série.
+As respostas são convertidas em tabela ordenada por data. O valor $-999$ é substituído por ausência, e cada agregação utiliza somente valores não ausentes de sua variável. Para conjuntos válidos $D_P$, $D_T$ e $D_R$, as operações implementadas são:
+\begin{align}
+ P_{\mathrm{total}}&=\sum_{d\in D_P} P_d,\\
+ \overline{T}&=\frac{1}{|D_T|}\sum_{d\in D_T}T_d,\\
+ \overline{R}&=\frac{1}{|D_R|}\sum_{d\in D_R} f(u)R_d.\label{eq:radiacao-codigo}
+\end{align}
+Na \cref{eq:radiacao-codigo}, $f(u)=1$ para MJ/m²/dia e $f(u)=3{,}6$ para kWh/m²/dia, conforme a unidade declarada nos metadados. Unidade ausente ou desconhecida torna a radiação indisponível e gera aviso, sem inferência pela magnitude. Valores não finitos, booleanos, inválidos e a sentinela $-999$ são descartados. A coluna normalizada em MJ/m²/dia é compartilhada pelo resumo e pelas exportações.
 
-Os índices seguem as equações da \cref{sec:indices-final} por chamadas a \texttt{normalizedDifference}, preservando data e identificador da imagem. A redução espacial usa média e escala solicitada de 10 m, com limite de $10^9$ pixels. A escala solicitada não altera a resolução nativa das bandas. A operação de diferença normalizada possui comportamento próprio para entradas negativas e propriedades da imagem, descrito na documentação oficial \citep{GOOGLE_EE_ND}.
+A soma da precipitação disponível não assegura cobertura integral do intervalo caso haja lacunas. A requisição define \texttt{time-standard=UTC}, mantendo as duas datas inclusivas em correspondência ao período espectral \citep{NASA_POWER_DAILY}. A consulta é compartilhada entre os índices da mesma análise. A apresentação conjunta fornece contexto, sem calcular correlação ou atribuir causalidade.
 
-\begin{table*}[htb!]
-\centering
-\caption{Bandas utilizadas nos índices implementados.}
-\label{tab:bandas-final}
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Índice} & \textbf{Bandas} & \textbf{Resoluções nominais} \\ \hline
-NDVI & B8 e B4 & 10 m e 10 m \\ \hline
-NDWI & B8 e B11 & 10 m e 20 m \\ \hline
-NDMI & B8A e B11 & 20 m e 20 m \\ \hline
-\end{tabular}
+\subsection{Procedimentos de avaliação técnica}\label{sec:avaliacao-final}
 
-\small Fonte: implementação em \texttt{earth\_engine.py} e catálogo Sentinel-2 \citep{GOOGLE_S2_SR}.
-\end{table*}
+A avaliação distinguiu implementação, testes isolados, integração com serviços externos e interação em navegador. Testes unitários exercitaram regras locais; testes de integração verificaram contratos entre componentes; regressões preservaram comportamentos corrigidos. A navegação real foi registrada separadamente, pois testes com serviços substituídos não equivalem a ensaios de ponta a ponta.
 
-As expressões matemáticas constam na \cref{sec:indices-final}; a tabela identifica escolhas da aplicação, sem atribuir a Gao uma validação específica das combinações Sentinel-2 adotadas.
+Foi reexecutada a suíte existente com tracer C e cobertura de ramificações. Os testes espectrais verificam seleção de bandas, filtros e chamadas usando substitutos da API, não a aritmética remota sobre imagens reais. Os testes de persistência usam arquivos temporários; os de exportação inspecionam formatos e valores controlados. Alguns testes Streamlit usam widgets reais com serviços substituídos. A cobertura Python não mede execução JavaScript no navegador.
 
-\subsection{Séries temporais e anomalias}
+Uma requisição pública curta à NASA POWER verificou metadados e datas em uma coordenada técnica, sem identificação de cultura. A resposta histórica está em tempo solar local (LST, \textit{Local Solar Time}); foi preservada para reproduzir a divergência de unidade, não como evidência de uma nova consulta UTC. Seus valores foram reutilizados em testes de regressão de resumo e exportação. O componente JavaScript recebeu testes independentes de legenda, consulta e descompressão, e matrizes controladas permitiram medir o empacotamento de dados. Essas medições não foram usadas para inferir desempenho em produção.
 
-Em \texttt{time\_series.py}, cada imagem é reduzida à média da banda sobre a geometria; valores nulos são omitidos e os pontos restantes ordenados por data. O acesso individual aos resultados remotos pode aumentar a latência. A série pode ter observações em intervalos irregulares e mais de uma imagem na mesma data.
+\subsection{Avaliação com potenciais usuários}\label{sec:pesquisa-usuarios}
 
-Em \texttt{anomalies.py}, para cada ponto $x_i$ após os três primeiros, calcula-se a média $\mu_i$ e o desvio padrão populacional $\sigma_i$ dos três valores imediatamente anteriores. Se $\sigma_i>0$, calcula-se $z_i=(x_i-\mu_i)/\sigma_i$; o ponto é sinalizado quando $z_i<-1$. Se o desvio é zero, não há sinalização, mesmo diante de uma queda. A janela é definida por número de observações, não por dias. O alerta apenas lista ocorrências e datas. O código também ajusta uma reta em função da posição das observações e classifica a inclinação por limiares $\pm 0{,}01$; essa tendência não é taxa por unidade de tempo e séries com menos de dois pontos recebem o rótulo estável.
+A avaliação com usuários é exploratória e descritiva, com componentes quantitativo e qualitativo. Seu objetivo é examinar execução autodeclarada de tarefas, experiência de uso, utilidade percebida e possibilidades de aplicação do artefato, não sua eficácia agronômica. O formulário \url{https://forms.gle/VXqtdCgH9us774VE6} foi divulgado por WhatsApp e LinkedIn, conforme informação do autor, para profissionais e estudantes de agronomia, produção rural, tecnologia e áreas afins. A participação voluntária caracteriza amostragem não probabilística por adesão; não há cadastro que permita estimar taxa de resposta ou representatividade populacional.
 
-\subsection{Contexto climático e interface}
+A apresentação solicita exploração prévia da plataforma, estima de 5 a 8 minutos para responder e orienta evitar informações pessoais. A planilha fornecida pelo autor contém uma aba de respostas com 50 colunas, incluindo o carimbo, a triagem e os itens de matrizes expandidos, e outra aba vazia. Foram identificados três itens de perfil, nove atividades, nove afirmações sobre uso, onze recursos avaliados quanto à utilidade, oito afirmações sobre compreensão e aplicabilidade, cinco campos discursivos e uma nota geral de 0 a 10. O conhecimento declarado refere-se à agricultura de precisão, não a uma medida direta de domínio de sensoriamento remoto; a experiência prévia e sua frequência são captadas em um mesmo item.
 
-O módulo \texttt{climate.py} solicita à NASA POWER, para o centroide da geometria e o período fornecido, precipitação, temperatura média e radiação solar. Valores \texttt{-999} são tratados como ausentes. O resumo soma precipitação, calcula médias de temperatura e radiação e converte esta última por fator 3,6 conforme a unidade assumida no código; a unidade retornada e os parâmetros devem ser conferidos nas execuções. O gráfico climático implementado apresenta precipitação e temperatura. Caso a consulta climática falhe, o pipeline mantém a análise espectral e registra a indisponibilidade do contexto.
+A procedência foi examinada antes dos cálculos. O autor declarou reais todos os registros; não foi encontrada correspondência com o texto distintivo das fixtures sintéticas da pesquisa no repositório. Essa declaração não equivale a autenticação independente da coleta. Os 31 registros indicam ``Sim'' na pergunta conjunta sobre maioridade, leitura e consentimento, e na declaração de exploração de ao menos um recurso. Não há duplicatas exatas, nem respostas integralmente iguais ao desconsiderar o carimbo. Como não se coletaram identificadores individuais, a unidade descritiva é a submissão elegível, sem comprovação de que cada linha corresponda a uma pessoa distinta.
 
-A interface permite busca geográfica, desenho e restauração de áreas, seleção de período e índices e apresentação dos resultados. Na barra lateral, a transferência GeoJSON permite levar as localizações para outra sessão. As exportações PDF, XLSX e CSV ZIP são preparadas sob solicitação; a interface indica a geração e disponibiliza o download quando o arquivo está pronto. As funções de exportação e mapas dependem dos dados e serviços disponíveis no momento da execução.
+Os carimbos do recorte corrigido vão de 06 a 15/11/2026. Por solicitação expressa do autor, sete datas originalmente nos dias 16 ou 17 foram retificadas para o dia 15, mantendo horários e todas as respostas. A cópia recebida foi preservada byte a byte, e a retificação possui registro separado. O fuso dos carimbos, a data formal de encerramento e o vínculo com um identificador da versão publicada não foram documentados; não são inferidos a partir das datas.
 
-\subsection{Estratégia de verificação e avaliação}\label{sec:avaliacao-final}
+Nas tarefas, as categorias são ``Consegui sem ajuda'', ``Consegui com ajuda'', ``Tentei, mas não consegui'' e ``Não tentei''. A conclusão entre tentativas é a razão entre as duas primeiras e o total das três primeiras. O questionário agrega séries temporais e possíveis anomalias em uma atividade e reúne a exportação de relatório ou dados em outra; não se estimam taxas separadas para recursos que o instrumento não separou. Trata-se de autorrelato, sem observação controlada, cronometração ou inspeção dos logs de cada utilização.
 
-Os testes em \texttt{tests/} cobrem componentes, tratamento de erros e fluxos com substituição de dependências externas. Em particular, os testes dos índices verificam as bandas passadas à API simulada, não a aritmética executada pelo Earth Engine. Testes de anomalia incluem séries sintéticas e o caso de desvio zero. Os testes de transferência verificam ida e volta de arquivos, rejeição de arquivos inválidos, conflitos sem gravação parcial e isolamento das sessões; um teste com widgets reais do Streamlit mantém a inicialização remota do Earth Engine simulada. A execução, o ambiente e a revisão do código estão registrados em \path{docs/validation/streamlit-cloud-readiness.md}.
+As afirmações de concordância usam cinco categorias, de discordo totalmente a concordo totalmente; a utilidade vai de nada útil a muito útil, tendo ``Moderadamente útil'' como categoria intermediária, não neutralidade. A análise prioriza frequências absolutas e relativas, mediana e quartis por item, conforme as cautelas sobre dados ordinais discutidas por \citet{SULLIVAN2013}. Percentuais de categorias 4--5, 3 e 1--2 são apresentados sem substituir a distribuição completa. ``Não consegui avaliar'', ausências e valores inválidos ficam fora do denominador ordinal e são contabilizados separadamente; ``Não tentei'' permanece na distribuição de execução, mas não no denominador das tentativas. Não há imputação.
 
-Para complementar a avaliação, são necessárias execuções autenticadas de ponta a ponta, conferência independente de valores de pixels ou imagens controladas, verificação de datas e máscaras e registro de parâmetros, saídas e eventuais falhas. O protocolo em \texttt{docs/validation/scenarios.md} propõe soja, milho e pastagem; suas localizações, culturas, geometrias e critérios necessitam confirmação antes de uso como estudos de caso. A comparação com dados de campo, se disponível, constitui avaliação distinta e não é pressuposta.
+Os quartis usam interpolação linear, e o intervalo interquartil é $Q_3-Q_1$. Médias e desvios padrão amostrais dos códigos ordinais são disponibilizados somente como descrições complementares; a nota geral recebe também moda, extremos e distribuição. Não se construíram escores agregados de usabilidade ou aceitação, nem se denominou o instrumento SUS, TAM, UTAUT ou NPS. Seis cruzamentos descritivos usam agrupamentos amplos, com supressão de grupos com menos de cinco respostas válidas, sem testes de hipótese ou conclusões causais. Isso reduz a exposição de pequenos grupos, mas não certifica anonimato.
+
+A análise discursiva partiu da leitura integral dos textos, identificação de unidades de significado, codificação semântica multirrótulo, agrupamento e revisão de categorias, em diálogo com a referência de análise temática de \citet{BRAUN2006}. Foram codificadas 142 células preenchidas; treze comentários opcionais estavam ausentes. O campo de impedimento de acesso estava vazio nos 31 registros, sendo tratado como ausência estrutural compatível com a triagem, não dificuldade igual a zero. Cada registro conta uma vez por tema, mesmo quando o menciona em mais de uma pergunta. A codificação assistida por IA, seus critérios e trechos literais sem identificação estão disponíveis para validação do autor; não houve dupla codificação independente nem aferição de concordância entre avaliadores.
+
+A coleta utiliza a versão pública anterior às correções de radiação, legenda, clima multiíndice, intervalos, invalidação e IDs de aquisição. Por decisão do autor, essa versão foi mantida durante a coleta, sem implantação das alterações locais. As percepções dos respondentes não são atribuídas à versão aprimorada, consolidada no commit \texttt{28759bf}. A documentação da análise distingue essas versões; o commit exato da versão pública permanece pendente. A confirmação dos procedimentos éticos institucionais cabe ao autor e ao orientador; não se atribui aprovação ou dispensa formal sem documento.

@@ -1,0 +1,139 @@
+\section{Desenvolvimento e implementação}\label{chap:implementacao-final}
+
+\subsection{Arquitetura e divisão de responsabilidades}
+
+A construção da plataforma exige coordenar ações do usuário, operações remotas e resultados que permanecem disponíveis entre interações. Para isso, a aplicação organiza apresentação, orquestração e acesso a dados em módulos de um mesmo processo Python. O Streamlit gerencia a renderização e o estado da sessão, enquanto um componente JavaScript realiza a consulta da grade no navegador. Essa divisão é lógica: não há microsserviços próprios nem um servidor independente com API REST.
+
+O ponto de entrada local é \texttt{src/app/main.py}; o ponto de entrada web é \texttt{streamlit\_app.py}. Este último ajusta o caminho de importação, força armazenamento por sessão e autenticação por conta de serviço, carrega as configurações disponíveis nos Secrets e encaminha a execução à mesma função principal. A conta de serviço autentica a aplicação perante o Earth Engine, não o visitante \citep{GOOGLE_EE_SERVICE_ACCOUNT,STREAMLIT_CLOUD_SECRETS}.
+
+\begin{figure*}[htbp]
+\centering
+\resizebox{0.96\textwidth}{!}{\input{fig/arquitetura_atual}}
+\caption{Arquitetura implementada, com processamento no servidor Python, interação no navegador e serviços externos. Fonte: elaborado pelo autor a partir dos módulos do sistema.}
+\label{fig:arquitetura-atual}
+\end{figure*}
+
+\begin{table*}[htbp]
+\centering\small
+\caption{Responsabilidades dos principais componentes implementados.}
+\label{tab:componentes-final}
+\begin{tabular}{p{0.25\textwidth}p{0.66\textwidth}}
+\hline
+\textbf{Componente} & \textbf{Responsabilidade e fronteira} \\ \hline
+\texttt{main.py}, estilos & Controles, estado, validação de requisições, apresentação e ações de exportação. \\
+\texttt{maps.py} & Geocodificação, mapas de seleção, conversão de geometrias, métricas, tiles e pré-carregamento de grades. \\
+\texttt{map\_interaction.py}, HTML & Ponte Streamlit e mapa Leaflet com consulta local de valores raster. \\
+\texttt{pipeline.py} & Coordenação da coleção, produtos por índice e contexto meteorológico. \\
+\texttt{earth\_engine.py}, \texttt{time\_series.py} & Filtros, máscara, índices e redução espacial por aquisição. \\
+\texttt{anomalies.py}, \texttt{climate.py} & Heurística temporal, tendência, requisições climáticas, tabela, gráfico e resumo. \\
+Serviço e repositórios de localizações & Validação e operações de armazenamento SQLite ou em memória de sessão. \\
+\texttt{export\_context.py}, exportadores & Snapshot normalizado e serialização em PDF, XLSX e CSV ZIP. \\ \hline
+\end{tabular}
+\end{table*}
+
+O desenvolvimento incremental ampliou o núcleo de mapas e séries com análise multiíndice, exportações e alternativas de armazenamento. A implementação avaliada foi registrada no commit \texttt{28759bf}, que reúne a base \texttt{b7c325c} e as correções de contratos e testes descritas na avaliação técnica. Os manifestos da demonstração preservam também os hashes dos arquivos executados, permitindo conferir sua correspondência com o código.
+
+\subsection{Busca geográfica e mapa de seleção}
+
+A busca usa o endpoint público Nominatim \texttt{/search}, com texto normalizado, formato \texttt{jsonv2}, limite de um resultado e tempo limite de 10 s. O retorno contém descrição, latitude, longitude e caixa delimitadora. O zoom é estimado pela extensão dessa caixa e limitado de 1 a 20. A primeira resposta não comprova a identificação de uma propriedade rural; sua função é aproximar a navegação da região desejada.
+
+O mapa de seleção é construído com Folium, tiles Esri World Imagery e ferramenta de polígono do Leaflet Draw. São habilitadas edição e remoção de desenhos. A análise utiliza uma área ativa obtida do evento de desenho; a existência de múltiplos desenhos no componente não implementa comparação automática entre talhões.
+
+A conversão para \texttt{ee.Geometry.Polygon} verifica tipo, fechamento, coordenadas finitas, limites geográficos, quantidade de vértices e área planar não nula. Nesse caminho também são rejeitadas interseções próprias estritas entre segmentos não adjacentes. Isso não equivale a um validador topológico completo de polígonos, relações entre anéis e todos os casos degenerados. Área, perímetro e centroide analíticos são obtidos pelo Earth Engine e convertidos para hectares, quilômetros e coordenadas.
+
+\subsection{Estado da interface e coerência entre entradas e saídas}
+
+Como o Streamlit reexecuta o código após interações, os resultados precisam permanecer associados às entradas que os produziram. O estado da sessão separa área ativa, parâmetros, resultados por índice, grade de valores, endereços de tiles e arquivos preparados. Também mantém um snapshot, isto é, um registro dos resultados e parâmetros de uma análise concluída. A inicialização preserva esses valores entre reexecuções, e os estados de espera, execução, sucesso, ausência de imagens e erro orientam a apresentação. Falhas de autenticação impedem a continuidade da interface principal; falhas de clima são tratadas pela orquestração como indisponibilidade complementar.
+
+A aceitação de desenho, troca de área e busca bem-sucedida invalidam resultados associados à seleção anterior. A busca sem resultado preserva a seleção existente. A restauração de uma área é concluída somente após validação e obtenção das métricas; não chama o geocodificador nem inicia análise automática. Chaves de revisão do mapa e controle de eventos repetidos evitam reaplicar um polígono excluído ou perder desenhos durante reexecuções.
+
+A alteração de geometria, período ou conjunto solicitado de índices invalida os produtos derivados, inclusive o snapshot e os arquivos preparados. Essa invalidação evita apresentar uma análise anterior sob novos parâmetros. Porém, alternar a visualização entre índices já calculados não altera as entradas da análise; por isso, preserva os produtos e não inicia nova consulta remota. Antes de gerar um arquivo, a exportação volta a conferir essa correspondência.
+
+\subsection{Gerenciamento de localizações}
+
+Para reutilizar uma área sem repetir sua demarcação, o serviço \texttt{SavedLocationsService} associa um nome à geometria GeoJSON, aplica validações e coordena as alternativas de armazenamento. O registro contém identificador UUID, nome exibido, chave normalizada de comparação, geometria, coordenadas de enquadramento e datas UTC de criação e atualização. O nome é limitado a 100 caracteres; espaços são normalizados e a comparação utiliza \texttt{casefold}, sem distinguir maiúsculas de minúsculas. Dessa forma, diferenças de caixa ou espaçamento não criam nomes considerados distintos pelo serviço.
+
+As coordenadas \texttt{center\_lat} e \texttt{center\_lon} persistidas correspondem ao ponto médio da caixa delimitadora, não ao centroide geométrico calculado no Earth Engine. A recuperação utiliza esse tipo de enquadramento para navegação, mas recalcula as métricas analíticas da área. Essa distinção evita confundir um centro de visualização com a coordenada da consulta climática.
+
+No modo SQLite, uma tabela \texttt{saved\_locations} mantém GeoJSON serializado em texto, nomes e metadados. O caminho é configurável por \texttt{SAVED\_LOCATIONS\_DB\_PATH}; o padrão utiliza o diretório de dados do usuário. A inicialização é idempotente, usa \texttt{PRAGMA user\_version=1} e rejeita esquema futuro incompatível. Consultas parametrizadas, unicidade do nome normalizado e transações protegem o contrato de gravação. O armazenamento é da instância local e não oferece isolamento autenticado por pessoa.
+
+No modo web, o repositório recebe um dicionário da sessão Streamlit e retorna cópias independentes. Não utiliza banco externo nem promete recuperação após encerramento ou perda da sessão. O limite do conjunto é verificado para que as localizações possam ser transferidas em um arquivo aceito pelo importador.
+
+\begin{figure*}[htbp]
+\centering
+\resizebox{0.95\textwidth}{!}{\input{fig/classes_localizacao}}
+\caption{Serviço e alternativas de armazenamento de localizações. Fonte: elaborado pelo autor a partir das classes implementadas.}
+\label{fig:classes-localizacao}
+\end{figure*}
+
+A transferência aceita uma \texttt{Feature} ou \texttt{FeatureCollection}, contendo geometrias Polygon e nome em \texttt{properties.name}, limitada a 100 áreas e $2\times1024^2$ bytes. A importação valida o lote e rejeita duplicatas sem sobrescrever registros. No SQLite, a inserção é transacional; na sessão, a atualização ocorre após as verificações. IDs e datas são gerados novamente, não copiados do arquivo.
+
+Há operações de exclusão no serviço e nos repositórios, porém não há ação correspondente na interface atual nem fluxo de renomeação. Também não são persistidos histórico de análises, credenciais ou objetos Earth Engine. A validação local de geometrias salvas verifica estrutura e área assinada de cada anel, mas não repete todos os testes de interseção do caminho de análise; as camadas não devem ser descritas como validadores topológicos equivalentes.
+
+\begin{figure*}[htbp]
+\centering
+\resizebox{0.95\textwidth}{!}{\input{fig/fluxo_areas}}
+\caption{Demarcação, gravação e restauração da área ativa, com alternativas de armazenamento. Fonte: elaborado pelo autor a partir da interface e do serviço de localizações.}
+\label{fig:fluxo-areas}
+\end{figure*}
+
+\subsection{Orquestração e análise multiíndice}
+
+Quando o usuário solicita mais de um índice, a área e o período continuam sendo os mesmos. Por isso, a orquestração multiíndice consulta uma coleção, aplica a máscara e obtém um contexto meteorológico compartilhado antes de produzir os resultados de cada indicador. Os caminhos individual e multiíndice utilizam os mesmos métodos de cálculo, e nomes repetidos são removidos preservando a ordem. Esse compartilhamento organiza a análise; não acrescenta treinamento, classificação de culturas ou diagnóstico causal.
+
+Os objetos de imagem permanecem como referências a operações Earth Engine, enquanto estatísticas e séries são transferidas ao Python. Na série temporal, o resultado da redução de cada aquisição é recuperado por uma chamada individual dentro de uma iteração. Essa organização produz um registro por imagem, mas o número de requisições cresce com a coleção e pode aumentar a latência. Não há fila de tarefas, processamento distribuído próprio ou retomada persistente de uma análise interrompida.
+
+\subsection{Pré-carregamento e consulta interativa}\label{sec:hover-final}
+
+Exibir a cor de um mapa não basta para recuperar o valor numérico correspondente a uma posição. A exploração espacial utiliza, portanto, dois produtos: tiles, que são blocos de imagem usados na renderização, e uma grade numérica para consulta. Após o processamento, \texttt{preload\_index\_values} escolhe a zona UTM pelo centro informado e cria a projeção norte ou sul em escala nominal de 10 m. Cada composição é selecionada, reprojetada, recortada pelo polígono e convertida em ponto flutuante. As bandas \texttt{grid\_x} e \texttt{grid\_y} identificam a origem dos índices da grade.
+
+A extração usa \texttt{sampleRectangle}, que retorna uma matriz por banda na projeção de entrada \citep{GOOGLE_EE_SAMPLE}. A região é a caixa delimitadora projetada da área; valores mascarados recebem $-9999$. O código estima a quantidade de células considerando também duas bandas de coordenadas e recusa estimativas superiores a dois milhões de valores. Uma verificação posterior confere a dimensão efetivamente recebida dos índices. Esse limite é do cliente da aplicação, não garantia de que o serviço remoto aceitará qualquer requisição abaixo dele.
+
+As matrizes são convertidas para \texttt{float32} little-endian, comprimidas com zlib e codificadas em Base64. O componente recebe CRS, transformação afim, primeira linha/coluna, dimensões, sentinela e valores. No navegador, \texttt{DecompressionStream("deflate")} recupera os bytes e \texttt{Float32Array} permite acesso por posição. A compatibilidade desses recursos e das bibliotecas carregadas por CDN é requisito de execução, ainda não avaliado em uma matriz de navegadores.
+
+Os eventos de movimento e toque verificam pertencimento ao polígono por teste de cruzamentos, incluindo exclusão de anéis internos. O componente projeta longitude/latitude em UTM com Proj4 e usa os termos de escala e origem da transformação. Para uma grade sem rotação, a localização é:
+\begin{align}
+ c&=\left\lfloor\frac{x-x_0}{s_x}\right\rfloor-c_0,\\
+ r&=\left\lfloor\frac{y-y_0}{s_y}\right\rfloor-r_0,\qquad q=r\,n_c+c.
+\end{align}
+O índice linear $q$ acessa a matriz do indicador ativo. Termos de rotação/cisalhamento não são utilizados pelo JavaScript; o procedimento pressupõe a grade alinhada construída na etapa anterior. Fora do polígono, fora da matriz, com valor não finito ou com a sentinela, são exibidas mensagens específicas. Valores válidos aparecem com quatro casas decimais.
+
+Com a grade transferida, o navegador acessa diretamente a célula correspondente à posição indicada, operação aqui denominada consulta local ou lookup. Assim, mover o cursor não gera uma chamada ao Earth Engine para obter o valor, embora os tiles do mapa-base e da camada temática ainda dependam da rede. A leitura representa uma célula reamostrada da composição mediana do período; não é uma observação de campo, uma aquisição individual ou a média espacial da área.
+
+Uma medição reproduzível de empacotamento utilizou três matrizes controladas de $128\times128$ células, cada uma com 65.536 bytes em float32. Os tamanhos zlib foram 89 bytes para a matriz constante, 845 para o gradiente repetido e 60.562 para valores pseudoaleatórios com semente 42; em Base64, resultaram 120, 1.128 e 80.752 bytes. O contraste mostra que compressibilidade depende dos dados e que Base64 acrescenta volume. Não foram medidos tráfego total, latência de produção ou número observado de chamadas evitadas; arquiteturalmente, o lookup não solicita valores remotos por evento.
+
+\begin{figure*}[htbp]
+\centering
+\resizebox{0.96\textwidth}{!}{\input{fig/fluxo_consulta_pixel}}
+\caption{Transferência da grade e consulta local por posição no navegador. Fonte: elaborado pelo autor a partir de \texttt{maps.py} e \texttt{index\_hover/index.html}.}
+\label{fig:fluxo-consulta-pixel}
+\end{figure*}
+
+\subsection{Cores, legendas e mapas estáticos}
+
+As paletas são sequenciais: branco--verde no NDVI, branco--azul no NDWI e tons claros--alaranjados--marrons no NDMI. No caminho interativo principal, os extremos são obtidos dos valores válidos da grade. Intervalos constantes recebem pequena expansão e conjuntos sem valores válidos usam $[-1,1]$. Os tiles são recortados pela geometria e obtidos com \texttt{getMapId}; a opacidade no Leaflet é 0,7.
+
+Para que a legenda descreva a camada apresentada, a ponte Python transmite em \texttt{range} os mesmos extremos utilizados nos tiles. O navegador calcula mínimo, ponto médio e máximo a partir desse intervalo, inclusive quando os valores são negativos. A expansão de intervalos constantes e o intervalo de referência para ausência de dados são definidos antes da renderização, evitando que camada e legenda adotem escalas independentes.
+
+No PDF, o renderizador estático usa intervalo fixo $[-1,1]$, thumbnail Earth Engine em EPSG:3857 e mosaico de tiles Esri. O contorno, gradiente e atribuição são desenhados com Pillow. Portanto, o PDF não é uma captura do componente interativo e pode ter contraste visual diferente. Falhas de rede ou renderização produzem estado explícito de mapa indisponível.
+
+\subsection{Exportação e interoperabilidade}\label{sec:exportacao-final}
+
+Os formatos de exportação precisam representar a mesma análise que o usuário está consultando. Para manter essa relação, a interface verifica o snapshot antes da geração, e o construtor do contexto normaliza datas e copia as estruturas mutáveis. As referências a imagens e objetos gráficos são mantidas, sem reconstruí-las nessa etapa. Cada exportador utiliza esse contexto comum, de forma que não é necessário repetir a análise espectral para cada formato.
+
+O PDF é gerado em memória com ReportLab em A4 paisagem, com uma página por índice presente no contexto, na ordem fornecida. Com os três índices, resulta em três páginas; com apenas um, em uma. Cada página reúne período, área, data de geração, média espacial da composição, tendência quando disponível, contagem de imagens quando fornecida, resumo meteorológico, série, anomalias e mapa estático. O nome da localização salva e coordenadas explícitas não são impressos automaticamente como identificação de propriedade. A lista de anomalias é resumida, exibindo até três ocorrências e indicação de excedentes. O PDF não substitui a saída tabular completa.
+
+O XLSX contém \texttt{Resumo}, uma aba por índice selecionado, \texttt{Clima}, \texttt{Anomalias} e \texttt{Geografia}; são sete abas quando os três índices estão presentes. Nas abas espectrais, as colunas são \texttt{date}, \texttt{value}, \texttt{trend}, \texttt{anomaly} e \texttt{observation\_id}. A tendência é global à série. A marcação de anomalias utiliza o identificador de aquisição; registros legados sem identificador usam conjuntamente data e valor, não apenas data. A aba climática contém radiação normalizada, e a geográfica inclui área, centro, CRS e GeoJSON.
+
+A coluna \texttt{classification} existe na aba e no CSV de anomalias, mas permanece sem categoria agronômica no fluxo padrão, pois o detector não produz essa classificação. Os caminhos individual e multiíndice fornecem contagem, tendência e contexto meteorológico sob contratos harmonizados, mantendo a ausência explícita quando um serviço não está disponível.
+
+O ZIP é construído com \texttt{zipfile} e compressão DEFLATE. Contém \texttt{resumo.csv}, um CSV por índice, \texttt{clima.csv}, \texttt{anomalias.csv} e \texttt{geografia.csv}. Os arquivos usam UTF-8, separação por vírgula, cabeçalhos estáveis, datas ISO, booleanos textuais e campos vazios para ausência. Não são exportados rasters analíticos GeoTIFF nem todas as amostras por pixel. A transferência de localizações em GeoJSON é uma função separada da exportação de resultados.
+
+\begin{figure*}[htbp]
+\centering
+\resizebox{0.96\textwidth}{!}{\input{fig/fluxo_exportacao}}
+\caption{Geração sob demanda de arquivos a partir do snapshot de análise. Fonte: elaborado pelo autor a partir dos módulos de exportação.}
+\label{fig:fluxo-exportacao}
+\end{figure*}
+
+Os formatos estruturados favorecem reutilização em ferramentas externas, inspeção dos resultados e transparência. Sua contribuição à reprodutibilidade é parcial: o contexto não inclui obrigatoriamente todos os IDs de imagens, versões de catálogo, parâmetros de reprojeção, máscaras efetivas e respostas remotas. A exportação de tabelas não constitui um pacote autossuficiente para repetir integralmente a análise.

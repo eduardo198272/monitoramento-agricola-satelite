@@ -1,26 +1,35 @@
 \section{Resultados}\label{chap:resultados-final}
 
-\subsection{Implementação e evidências disponíveis}
+\subsection{Artefato desenvolvido}
 
-A inspeção do repositório identifica os componentes descritos na \cref{chap:metodos-final}. Em 15 de novembro de 2026, a revisão de software \texttt{a9a9677} foi verificada com Python 3.14.4, pytest 9.0.3, pytest-cov 7.1.0 e coverage 7.14.0, em Linux x86\_64. O comando utilizado foi \texttt{COVERAGE\_CORE=ctrace .venv/bin/python -m pytest -q}. Foram aprovados 677 testes, sem falhas, com 100\% de cobertura de linhas e ramificações em \texttt{src/app}. O uso do tracer C evita uma divergência de medição observada no SysMonitor do Python 3.14; a meta de cobertura não foi reduzida. O ponto de entrada web também é exercitado por testes, mas está fora desse escopo de cobertura por ficar na raiz.
+O resultado principal é uma plataforma na qual a geometria selecionada orienta a consulta Sentinel-2, a exploração dos índices e a exportação. O processamento remoto dispensa manter o acervo orbital no servidor da aplicação, enquanto a grade pré-carregada disponibiliza valores para consulta no navegador. Para reutilizar áreas, a solução oferece armazenamento SQLite local ou em memória de sessão, além da transferência GeoJSON. Esses recursos materializam o fluxo proposto; sua avaliação é apresentada a seguir.
 
-O registro de preparação para a nuvem citado na \cref{sec:avaliacao-final} identifica comandos, versões e limites. Os registros históricos com 307 ou 309 testes foram preservados como históricos, não como contagem atual. Os testes usam dependências simuladas para evitar serviços reais: cobertura integral do código medido não comprova correção numérica remota, ausência de defeitos ou validade agronômica.
+\subsection{Avaliação computacional}
 
-A verificação de localizações inclui transferência GeoJSON entre repositórios, preservação de nomes e geometrias, rejeição de arquivos fora do contrato, importação sem gravação parcial e isolamento entre visitantes. O teste de interface executa widgets reais do Streamlit e verifica a disponibilidade do download em uma sessão sem torná-lo visível em outra; a integração remota é substituída nesse teste.
+A execução registrada nas evidências corresponde ao código consolidado no commit \texttt{28759bf}. Em Linux x86\_64, Python 3.14.4, pytest 9.0.3 e tracer C, o comando \texttt{python -m pytest -q -p no:cacheprovider}, com \texttt{COVERAGE\_CORE=ctrace}, resultou em \textbf{710 testes aprovados em 11,73 s}, sem falhas ou testes ignorados. A cobertura em \texttt{src/app} foi de \textbf{100\% das linhas e ramificações}, com 2.735 instruções e 856 ramificações, sem caminhos parcialmente cobertos. A linha de base de 686 testes foi preservada e ampliada com casos para os contratos corrigidos. O tempo informado pertence a essa execução, não a uma estimativa de desempenho da plataforma.
 
-\subsection{Verificação mínima com serviço real}
+Os testes abrangem regras locais, integração entre módulos, persistência temporária, widgets Streamlit e serialização. Serviços remotos são substituídos em parte da suíte. A medição não inclui o ponto de entrada da raiz nem HTML/JavaScript. Separadamente, três testes Node verificaram legenda negativa, lookup de células e NoData, e descompressão zlib/Base64 em \texttt{Float32Array}; os três foram aprovados. Esses testes não constituem uma matriz de compatibilidade de navegadores.
 
-Separadamente da suíte automatizada, uma execução autenticada por conta de serviço confirmou inicialização do Earth Engine, avaliação de \texttt{ee.Number(1).add(1).getInfo()} com resultado 2 e consulta de \texttt{COPERNICUS/S2\_SR\_HARMONIZED} limitada a uma imagem, com resultado de tamanho 1. A verificação foi executada com earthengine-api 1.7.17 e credenciais locais excluídas do Git. Esses resultados demonstram acesso básico ao serviço e ao catálogo, não a execução completa do pipeline nem a correção dos índices.
+Embora todos os caminhos medidos tenham sido executados, isso não demonstra ausência de defeitos. A conferência dos contratos identificou suposições sobre unidades, datas e associação de registros que a suíte anterior não distinguia. Os novos testes passaram a representar essas diferenças, mantendo a meta de cobertura.
 
-\subsection{Demonstração dos fluxos}
-A preparação para o Streamlit Community Cloud inclui ponto de entrada na raiz, configuração de servidor, autenticação sem interação e armazenamento por sessão. O teste de resolução das dependências para Python 3.12 foi bem-sucedido, mas não equivale a executar o ambiente hospedado. A criação do site, a instalação no Cloud e a validação ponta a ponta da versão publicada permanecem pendentes; promoção entre branches não comprova deploy.
-% PENDENTE: executar os fluxos com serviços reais e registrar parâmetros, capturas e eventuais falhas.
+\subsection{Verificação das integrações}\label{sec:resultado-unidades}
 
-\subsection{Verificação dos cálculos}
-A avaliação remota de uma soma confirma acesso ao mecanismo de cálculo, mas não verifica os índices espectrais. A comparação independente de NDVI, NDWI e NDMI, incluindo bandas, pixels mascarados e resoluções distintas, ainda não foi registrada nesta revisão.
-% PENDENTE: comparar resultados numéricos com cálculo independente, incluindo máscaras e bandas.
+A resposta histórica NASA POWER para longitude $-52$ e latitude $-28$, entre 01/01/2025 e 02/01/2025, está em LST e declara radiação em MJ/m²/dia, com valores 21,64 e 20,99. Sua média é 21,315. A conversão anterior multiplicava essa média por 3,6, produzindo 76,734 sob o mesmo rótulo; o erro decorria de assumir kWh sem conferir a unidade retornada. A normalização passou a preservar MJ e converter somente kWh declarados. Testes verificaram a média corrigida, as duas linhas XLSX/CSV e a representação resumida do PDF. Essa evidência sustenta a correção da unidade, sem reclassificar a resposta histórica como UTC.
 
-\subsection{Mapas, séries e estudos de caso}
-Os cenários agrícolas continuam como protocolo a executar, não resultados observados. Ainda é necessário confirmar as culturas e geometrias e documentar imagens, períodos, séries e contexto climático para cada caso, sem tratar valores esperados como medições.
-% PENDENTE: confirmar culturas e polígonos; registrar fonte, datas, dados climáticos, mapas e séries obtidos.
-% PENDENTE: construir tabela de resultados observados, sem reutilizar valores esperados como medições.
+A avaliação também harmonizou limites temporais, resumo meteorológico compartilhado e metadados dos pipelines. Um teste multiíndice confirmou uma única obtenção do contexto climático. Outro distinguiu aquisições do mesmo dia na marcação de anomalias. Alterações analíticas passaram a invalidar todos os produtos derivados, enquanto a troca visual entre índices calculados preserva a análise.
+
+No mapa, o mesmo intervalo usado nos tiles é enviado à legenda. A escala fixa do PDF permanece uma escolha separada, comunicada no próprio produto. A correção do contrato não implica igualdade pixel a pixel entre reduções remotas, grade reamostrada e mapa estático.
+
+\subsection{Demonstração funcional}
+
+Uma sessão real em Chrome confirmou o fluxo entre busca por Passo Fundo, demarcação, salvamento, restauração, análise e download. O recorte demonstrativo de aproximadamente 4,36 ha foi consultado entre 01/09/2026 e 31/10/2026, sem atribuição de cultura ou propriedade. Duas imagens passaram pelos filtros, em 08/09 e 20/10. As médias espaciais das composições foram 0,7070 (NDVI), 0,2140 (NDWI) e 0,2380 (NDMI). Esses valores caracterizam o exemplo computacional, não uma amostra representativa de áreas agrícolas.
+
+As séries contiveram dois pontos por índice. Como o detector exige três observações anteriores ao ponto avaliado, nenhum ponto reuniu as condições para aplicação da regra. A ausência de sinalizações nessa demonstração, portanto, não informa sua eficácia. O contexto meteorológico apresentou 61 registros, precipitação acumulada de 635,56 mm e temperatura média de 16,24 °C. A radiação permaneceu indisponível também nos arquivos, sem preenchimento por suposição.
+
+O PDF baixado contém três páginas com mapas estáticos, o XLSX possui sete abas e o ZIP sete arquivos CSV com integridade estrutural conferida. O identificador de aquisição está presente nas séries tabulares. A consulta NDMI na posição $(-52{,}331,-28{,}228)$ exibiu 0,3228, tanto por movimento quanto por toque em viewport de 390 pixels. O resultado pertence à célula reamostrada da composição e não substitui a média espacial de 0,2380.
+
+O endereço público respondeu HTTP 200 e apresentou a interface Streamlit em navegador. Essa verificação não estabelece equivalência entre versão publicada e alterações locais nem disponibilidade contínua. As evidências da demonstração instrumentada correspondem à execução local corrigida; manifestos e arquivos preservam o vínculo com os parâmetros. As capturas fornecidas posteriormente pelo autor, usadas na apresentação da plataforma, ilustram outros exemplos de interface e não substituem os valores e arquivos dessa demonstração.
+
+\subsection{Avaliação com usuários}
+
+\input{final_4a_usuarios}

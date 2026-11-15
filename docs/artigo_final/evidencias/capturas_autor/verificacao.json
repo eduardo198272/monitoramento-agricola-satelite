@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "originals_preserved": 17,
+  "originals_used": 16,
+  "excluded_pdf": 1,
+  "editorial_crops_pixel_identical": 3,
+  "functional_files_unchanged": 28,
+  "used_assets": [
+    "anomalias_clima.png",
+    "busca.png",
+    "busca_resultado.png",
+    "configuracao.png",
+    "desenho.png",
+    "geojson_arquivo_barra.png",
+    "geojson_importado_barra.png",
+    "geojson_upload_barra.png",
+    "inicial.png",
+    "mapa_indice.png",
+    "mobile_mapa.jpeg",
+    "mobile_painel.jpeg",
+    "painel_series.png",
+    "restaurar.png",
+    "salva.png",
+    "salvar.png"
+  ],
+  "pdf_sha256": "1c2bc294904a5438204358c3a68cc32b3e53ec54d4f60af78eee8456d8f33447"
+}

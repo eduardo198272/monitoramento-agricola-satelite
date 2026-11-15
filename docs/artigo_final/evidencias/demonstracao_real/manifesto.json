@@ -1,0 +1,101 @@
+{
+  "scenario": "Demonstração computacional, sem identificação de cultura",
+  "url": "http://localhost:8502",
+  "period": [
+    "2026-09-01",
+    "2026-10-31"
+  ],
+  "indices": [
+    "NDVI",
+    "NDWI",
+    "NDMI"
+  ],
+  "polygon": [
+    [
+      -52.332,
+      -28.229
+    ],
+    [
+      -52.33,
+      -28.229
+    ],
+    [
+      -52.33,
+      -28.227
+    ],
+    [
+      -52.332,
+      -28.227
+    ]
+  ],
+  "captures": [
+    "cap01_interface",
+    "cap02_busca",
+    "cap03_poligono",
+    "cap04_salvar",
+    "cap05_restaurar",
+    "cap07_parametros",
+    "cap08_painel",
+    "cap09_ndvi",
+    "cap10_ndwi",
+    "cap11_ndmi",
+    "cap12_cursor",
+    "cap13_series",
+    "cap14_anomalias",
+    "cap15_clima",
+    "cap16_exportacao",
+    "cap06_geojson",
+    "mobile_resultados"
+  ],
+  "downloads": [
+    "demonstracao.pdf",
+    "demonstracao.xlsx",
+    "demonstracao.zip",
+    "localizacoes.geojson"
+  ],
+  "completed": true,
+  "cursor_read": "NDMI: 0.3228",
+  "geojson_imported_in_new_session": true,
+  "touch_read": "NDMI: 0.3228",
+  "base_commit": "b7c325c79c0b6473cc08c4cc04aa163cc3887640",
+  "browser": "Google Chrome / Playwright",
+  "desktop_viewport": [
+    1680,
+    1100
+  ],
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "date": "2026-11-15",
+  "code_sha256": {
+    "src/app/export_csv.py": "be0b1b502536cdd6cf4cf38145df0e2b86787d9b5b2f7ad41a48bac1f9e80067",
+    "src/app/pipeline.py": "3b2680a6764afc5e762e5cc6e0596d5afb8c90507efb3c7678a9536f14ebe664",
+    "src/app/saved_locations_session.py": "409316d38ef50b458cb0d0fbe996f811df038bc9d5048713b8f880988edf11ca",
+    "src/app/locations_transfer_ui.py": "756a0c0a0802fca6418d5280102ec3418289e1ed9e1e7042c49754057eef30bb",
+    "src/app/anomalies.py": "2b220e3ded9d8ac5945169ae2323a143f18ec27b30ce1808ed3f64a1083f3741",
+    "src/app/climate.py": "f1a911636a84c10c3fffb17d0a851df40805280b78423beadc62bdf6e248c702",
+    "src/app/utils.py": "dbcf26867154aee6bb3d3837b6dce2ab745f85844e93bbdfec37820784579847",
+    "src/app/main.py": "ddcb2a2b201bef3de1a4630c4f6b0065b292669d8139c78def982bce2c7ee188",
+    "src/app/saved_locations_service.py": "3db7cf8fcf7bb1be98ec83b45c668c9b7d574242444022e84bad104b67eec556",
+    "src/app/validate_apis.py": "62ab6ef5c50cb1b1adf62daa9ee46974a564c83ce8f8db8ddd3196caa9105567",
+    "src/app/validate_scenarios.py": "01be78a6019055707d143c04d286be333dd92289b4a28b0ba699cd44bbf503a9",
+    "src/app/export_context.py": "7e34a21df23cb75c2b62b8fbc1ba8367333d7f776293a16f92811aa7f19d4867",
+    "src/app/ee_auth.py": "babb957ad7c336ae5baf3c4737bc64b0bc5da9581e8a8e3999e23ab1e49c83ec",
+    "src/app/__init__.py": "e27bc5ec56c380e4d53f56860a867a2ca184db83cfb8dfe2af7295ab9a1c4d9c",
+    "src/app/maps.py": "dd0c67c522d38d0ac8b2b2668578f86a8a32b17ca8e99c49d2ce9169eb4e8b83",
+    "src/app/saved_locations_repository.py": "ce3180af704d7f4e8a31a7d0271c7f51585c521c0fe95219d8ee6e41628793c2",
+    "src/app/styles.py": "9cba229a613d3aa543ba667f3b97a88e20969efcee118d2f475387c1c839024f",
+    "src/app/earth_engine.py": "b6f6fe669cd0ce0714b2129556009435d5cd00d645de73fbc0bd7099fc6b06ab",
+    "src/app/config.py": "7ef35073062fcea6fec9ca5d1200ca7971362360560e56f397c1b00c96ed4c37",
+    "src/app/saved_locations_validation.py": "c1418892fe4155d33b9906a023cdeca981969c8c3c97d5fb9672f5f61a9c3e72",
+    "src/app/export_pdf.py": "826b3aa3570a88ececdeacd5df0e45bccbe9592b8425c71572ebb844b0d4b191",
+    "src/app/locations_geojson.py": "4a2a2aff20a6ca59c872b15fe9c4653e56177157a5c5988f2dcdeddb6f72e0c3",
+    "src/app/map_interaction.py": "b861d75ff20c5a79ad4301b29a80bed9db1fb8c7604ac8cf9ff69616fd22cf26",
+    "src/app/export_xlsx.py": "e87569794b9dfd79fd2dc6d31fe68f7d3f3e84ba3045016dca9321e13181ed8d",
+    "src/app/time_series.py": "bb59bf2a7ac64742af5697ccd809ea104078a7ce30d7ce34c23ddabd962f9772",
+    "src/app/export_maps.py": "9aa9c69a973146c4280596a9a3f6d8fbeaa7b16fa57616b83eb6fb690c784425",
+    "src/app/assets/style.css": "0840e9bfbf0cbaa5fe6cf178f0afae7c6c857dd0929e6446471adfb94c2843c4",
+    "src/app/assets/index_hover/index.html": "f9333341a5e993c548dfd325d7fb624f3cd31deae76688b7c3aa890fee5fcf3d"
+  }
+}

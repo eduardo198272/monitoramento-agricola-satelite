@@ -12,6 +12,23 @@ from src.app.utils import normalize_date
 SUPPORTED_INDICES = ("NDVI", "NDWI", "NDMI")
 
 
+def observation_is_anomaly(record: dict, anomalies: list[dict]) -> bool:
+    """Prefer acquisition IDs; legacy records match date AND value, not date alone."""
+    for anomaly in anomalies:
+        if anomaly.get("anomaly") is not True:
+            continue
+        if record.get("observation_id"):
+            if record["observation_id"] == anomaly.get("observation_id"):
+                return True
+        elif (
+            record.get("date") is not None
+            and record.get("date") == anomaly.get("date")
+            and record.get("value") == anomaly.get("value")
+        ):
+            return True
+    return False
+
+
 class ExportContextError(ValueError):
     """Raised when the current analysis cannot be exported as a full snapshot."""
 
