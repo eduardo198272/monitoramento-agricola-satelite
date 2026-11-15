@@ -73,10 +73,6 @@ Cada spec possui um arquivo `tasks-*.md` com a quebra em sub-tasks implementáve
 | RF08 | Detectar anomalias | `07-anomalias/spec-deteccao-anomalias.md` |
 | RF09 | Integrar dados climáticos | `08-clima/spec-nasa-power.md` |
 | RF10 | Exibir resumo (índice médio, tendência, alerta) | `05-streamlit/spec-mapa-ui.md` |
-| RF11 | Pesquisar e centralizar localidades no mapa | `10-mapas-interacao/spec-mapa-interacao.md` |
-| RF12 | Bloquear e liberar navegação após seleção do polígono | `10-mapas-interacao/spec-mapa-interacao.md` |
-| RF13 | Exibir área em hectares ou acres | `11-unidades-area/spec-unidades-area.md` |
-| RF14 | Organizar resultados e alertas na interface | `12-interface-resultados/spec-interface-resultados.md` |
 | RF15 | Exportar análise completa multiíndice em PDF de três páginas | `16-exportacao-resultados/spec-exportacao-resultados.md` |
 | RF16 | Exportar dados analíticos e geográficos para XLSX e CSV | `16-exportacao-resultados/spec-exportacao-resultados.md` |
 | RF17 | Salvar, listar e restaurar localizações geográficas nomeadas | `17-localizacoes-salvas/spec-localizacoes-salvas.md` |
