@@ -1,0 +1,26 @@
+\section{Resultados}\label{chap:resultados-final}
+
+\subsection{Implementação e evidências disponíveis}
+
+A inspeção do repositório identifica os componentes descritos na \cref{chap:metodos-final}. Em 15 de novembro de 2026, a revisão de software \texttt{a9a9677} foi verificada com Python 3.14.4, pytest 9.0.3, pytest-cov 7.1.0 e coverage 7.14.0, em Linux x86\_64. O comando utilizado foi \texttt{COVERAGE\_CORE=ctrace .venv/bin/python -m pytest -q}. Foram aprovados 677 testes, sem falhas, com 100\% de cobertura de linhas e ramificações em \texttt{src/app}. O uso do tracer C evita uma divergência de medição observada no SysMonitor do Python 3.14; a meta de cobertura não foi reduzida. O ponto de entrada web também é exercitado por testes, mas está fora desse escopo de cobertura por ficar na raiz.
+
+O registro de preparação para a nuvem citado na \cref{sec:avaliacao-final} identifica comandos, versões e limites. Os registros históricos com 307 ou 309 testes foram preservados como históricos, não como contagem atual. Os testes usam dependências simuladas para evitar serviços reais: cobertura integral do código medido não comprova correção numérica remota, ausência de defeitos ou validade agronômica.
+
+A verificação de localizações inclui transferência GeoJSON entre repositórios, preservação de nomes e geometrias, rejeição de arquivos fora do contrato, importação sem gravação parcial e isolamento entre visitantes. O teste de interface executa widgets reais do Streamlit e verifica a disponibilidade do download em uma sessão sem torná-lo visível em outra; a integração remota é substituída nesse teste.
+
+\subsection{Verificação mínima com serviço real}
+
+Separadamente da suíte automatizada, uma execução autenticada por conta de serviço confirmou inicialização do Earth Engine, avaliação de \texttt{ee.Number(1).add(1).getInfo()} com resultado 2 e consulta de \texttt{COPERNICUS/S2\_SR\_HARMONIZED} limitada a uma imagem, com resultado de tamanho 1. A verificação foi executada com earthengine-api 1.7.17 e credenciais locais excluídas do Git. Esses resultados demonstram acesso básico ao serviço e ao catálogo, não a execução completa do pipeline nem a correção dos índices.
+
+\subsection{Demonstração dos fluxos}
+A preparação para o Streamlit Community Cloud inclui ponto de entrada na raiz, configuração de servidor, autenticação sem interação e armazenamento por sessão. O teste de resolução das dependências para Python 3.12 foi bem-sucedido, mas não equivale a executar o ambiente hospedado. A criação do site, a instalação no Cloud e a validação ponta a ponta da versão publicada permanecem pendentes; promoção entre branches não comprova deploy.
+% PENDENTE: executar os fluxos com serviços reais e registrar parâmetros, capturas e eventuais falhas.
+
+\subsection{Verificação dos cálculos}
+A avaliação remota de uma soma confirma acesso ao mecanismo de cálculo, mas não verifica os índices espectrais. A comparação independente de NDVI, NDWI e NDMI, incluindo bandas, pixels mascarados e resoluções distintas, ainda não foi registrada nesta revisão.
+% PENDENTE: comparar resultados numéricos com cálculo independente, incluindo máscaras e bandas.
+
+\subsection{Mapas, séries e estudos de caso}
+Os cenários agrícolas continuam como protocolo a executar, não resultados observados. Ainda é necessário confirmar as culturas e geometrias e documentar imagens, períodos, séries e contexto climático para cada caso, sem tratar valores esperados como medições.
+% PENDENTE: confirmar culturas e polígonos; registrar fonte, datas, dados climáticos, mapas e séries obtidos.
+% PENDENTE: construir tabela de resultados observados, sem reutilizar valores esperados como medições.

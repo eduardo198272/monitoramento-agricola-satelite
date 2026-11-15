@@ -1,0 +1,51 @@
+\section{Fundamentação teórica}\label{chap:fundamentacao-final}
+
+\subsection{Sensoriamento remoto e Sentinel-2}
+
+Sensores multiespectrais registram respostas da superfície em diferentes faixas do espectro. Na agricultura, essas observações permitem investigar padrões espaciais e temporais da vegetação, mas sua interpretação depende da cultura, do ambiente e da qualidade dos dados \citep{WEISS2020}. O catálogo Sentinel-2 Level-2A harmonizado no Earth Engine fornece reflectância de superfície e bandas de qualidade \citep{GOOGLE_S2_SR}.
+
+As bandas B4 e B8 têm resolução espacial nominal de 10 m; B8A e B11, de 20 m. B4 corresponde ao vermelho, B8 ao infravermelho próximo, B8A a uma faixa mais estreita próxima ao infravermelho e B11 ao infravermelho de ondas curtas. Combinar bandas com resoluções diferentes exige observar a escala e a projeção usadas no processamento; solicitar uma saída a 10 m não cria informação espacial nativa de 10 m para B11 ou B8A \citep{GOOGLE_S2_SR}.
+
+\subsection{Índices espectrais}\label{sec:indices-final}
+
+A diferença normalizada entre bandas $A$ e $B$ é $(A-B)/(A+B)$, quando definida. O NDVI relaciona infravermelho próximo e vermelho. No sistema, empregam-se as bandas B8 e B4:
+\begin{equation}\label{eq:ndvi-final}
+ NDVI=\frac{B8-B4}{B8+B4}.
+\end{equation}
+O indicador é empregado como aproximação da condição da vegetação, não como medida direta de produtividade ou diagnóstico. % PENDENTE: conferir metadados da referência original Rouse antes de incluí-la.
+
+\citet{GAO1996} apresentou um índice de diferença normalizada relacionado à água líquida da vegetação. É importante distinguir o conceito original das bandas disponíveis em cada sensor. Nesta aplicação, o índice denominado NDWI usa B8 e B11, como adaptação NIR--SWIR:
+\begin{equation}\label{eq:ndwi-final}
+ NDWI_{\mathrm{sistema}}=\frac{B8-B11}{B8+B11}.
+\end{equation}
+O índice denominado NDMI emprega a mesma forma matemática, mas utiliza B8A no lugar de B8:
+\begin{equation}\label{eq:ndmi-final}
+ NDMI_{\mathrm{sistema}}=\frac{B8A-B11}{B8A+B11}.
+\end{equation}
+Esses nomes não identificam métodos inteiramente independentes: a distinção operacional aqui é a escolha da banda NIR. As formulações NIR--SWIR são relacionadas à umidade da vegetação, mas não medem diretamente a umidade do solo nem estabelecem a causa de uma variação. A nomenclatura de índices de água varia na literatura; a aplicação não usa, para seu NDWI, a formulação verde--NIR voltada à água superficial. % PENDENTE: acrescentar fonte específica verificada para a nomenclatura NDMI e sua variante B8A/B11.
+
+\subsection{Processamento geoespacial e clima}
+
+O Earth Engine oferece infraestrutura para análise geoespacial em nuvem e acesso programático a coleções de imagens \citep{GORELICK2017}. Sua operação de diferença normalizada é utilizada para produzir as bandas derivadas; os detalhes de máscara e tratamento de pixels devem ser considerados ao reproduzir os cálculos \citep{GOOGLE_EE_ND}.
+
+A API diária da NASA POWER fornece séries de variáveis meteorológicas e de radiação para uma coordenada \citep{NASA_POWER_DAILY}. A consulta pontual representa dados na resolução de origem do produto, não uma medição de campo nem uma média espacial calculada para o polígono. A comparação temporal com índices pode fornecer contexto, mas coincidência temporal não demonstra causalidade.
+
+\subsection{Séries temporais e anomalias}
+
+Uma série temporal de médias espaciais resume a evolução de um índice em uma área. Uma regra baseada em média e desvio padrão de observações anteriores pode destacar quedas relativas, mas depende da janela, da distribuição e da frequência das observações. No protótipo, trata-se de uma heurística de sinalização, e não de um classificador agronômico validado; seus parâmetros são descritos na \cref{chap:metodos-final}.
+
+\subsection{Trabalhos relacionados}\label{sec:relacionados-final}
+
+\citet{SLAIFFER2023} estudou a variabilidade espacial de NDVI, NDMI e NDRE e sua relação com a produtividade de soja em Cachoeira do Sul, em cultivos irrigado e de sequeiro. Segundo o resumo do trabalho, as maiores correlações positivas entre NDVI e produtividade foram 0,60 e 0,57, respectivamente, em datas diferentes do ciclo. A pesquisa utilizou, entre outras ferramentas, uma plataforma de monitoramento e dados de produtividade da colhedora. Esses resultados dizem respeito às condições estudadas; o cálculo de índices na plataforma deste TCC não constitui estimativa validada de produtividade.
+
+\citet{LOVATO2021} examinou 18 talhões em Dumont, São Paulo, usando cinco datas de imagens CBERS-04A e NDVI para investigar áreas em renovação de canaviais. O trabalho ilustra a importância da seleção de polígonos e da comparação temporal. Diferentemente dessa pesquisa, o presente protótipo não implementa uma classificação automática de renovação de canaviais.
+
+\citet{ARAUJO2025} estudaram a fenologia da soja em São Desidério, Bahia, na safra 2021/2022, com seis datas Sentinel-2, NDVI, NDMI e precipitação do INMET. Os autores relatam correlação de Pearson de 0,6349 entre NDMI e precipitação acumulada nas condições analisadas. Esse exemplo fundamenta a apresentação conjunta de índices e clima, mas não demonstra causalidade nem permite transferir a correlação para outras áreas ou para o sistema deste trabalho.
+
+\citet{CHAVES2019} analisou séries de produtos MODIS e técnicas geoestatísticas para o monitoramento de áreas agrícolas em Mato Grosso entre 2000 e 2012. O resumo informa acurácia global de 92,1\% em uma tarefa de identificação de áreas de soja em escala estadual e o desenvolvimento da plataforma web SojaSAT para divulgação de mapas. Esse antecedente mostra que sistemas de disponibilização já existiam; a contribuição aqui não é reivindicada como a primeira plataforma do gênero. A aplicação deste TCC não reproduz a classificação ou a estimativa de produtividade desse estudo.
+
+Os trabalhos apresentam objetivos e dados distintos: produtividade, renovação de canaviais, fenologia e monitoramento territorial. Em conjunto, justificam investigar a integração de seleção geográfica, índices, visualização temporal e contexto climático. O presente trabalho tem recorte de engenharia de software e depende de avaliação própria para demonstrar seu comportamento; não se presume superioridade, redução de custos ou maior facilidade de uso.
+
+\subsection{Avaliação do artefato computacional}
+
+Neste trabalho, o artefato é avaliado pela verificação de componentes e pela execução documentada dos fluxos. Testes automatizados, resultados de serviços reais e comparação independente dos cálculos fornecem evidências complementares. Cobertura de código não prova correção científica nem validade agronômica. Não se declara adoção formal de \textit{Design Science Research}: sua adequação, protocolo e extensão da avaliação ainda precisam ser estabelecidos.

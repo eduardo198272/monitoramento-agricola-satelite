@@ -1,0 +1,23 @@
+% Fluxo conceitual: processamento por índice e clima compartilhado.
+\begin{tikzpicture}[
+  node distance=8mm and 7mm,
+  box/.style={draw, rounded corners, align=center, text width=30mm,
+    minimum height=12mm, font=\small, fill=green!6},
+  link/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (input) {Área, período\\e índices};
+\node[box, right=of input] (query) {Consulta Sentinel-2\\e filtro de imagens};
+\node[box, right=of query] (mask) {Máscara QA60\\e índices};
+\node[box, right=of mask] (spatial) {Composto mediano\\e média espacial};
+\node[box, below=of mask] (series) {Série por aquisição\\e anomalias};
+\node[box, below=of query] (climate) {NASA POWER\\no centroide};
+\node[box, below=of spatial] (output) {Mapas e gráficos;\\exportação};
+\draw[link] (input) -- (query);
+\draw[link] (query) -- (mask);
+\draw[link] (mask) -- (spatial);
+\draw[link] (mask) -- (series);
+\draw[link] (input.south) |- (climate.west);
+\draw[link] (climate.south) -- ++(0,-0.5) -| (output.south);
+\draw[link] (series) -- (output);
+\draw[link] (spatial) -- (output);
+\end{tikzpicture}
