@@ -108,6 +108,26 @@ def clear_analysis_state() -> None:
     st.session_state.analysis_error = None
 
 
+def invalidate_changed_analysis() -> bool:
+    """Invalidate analytical products, but not a visual switch of computed indices."""
+    snapshot = st.session_state.get("analysis_snapshot")
+    if not isinstance(snapshot, dict):
+        return False
+    analysis = snapshot.get("analysis", {})
+    indices = analysis.get("indices")
+    names = tuple(indices) if indices is not None else (analysis.get("index_name"),)
+    matches = (
+        snapshot.get("geometry_geojson") == st.session_state.get("aoi_geojson")
+        and snapshot.get("start_date") == st.session_state.get("analysis_start_date")
+        and snapshot.get("end_date") == st.session_state.get("analysis_end_date")
+        and names == tuple(st.session_state.get("selected_indices", ()))
+    )
+    if matches:
+        return False
+    clear_analysis_state()
+    return True
+
+
 def clear_area_selection_state() -> None:
     """Clear the selected area and every value derived from it."""
     st.session_state.aoi_geojson = None
@@ -440,6 +460,8 @@ def display_analysis_details(
         st.info(f"Nenhuma anomalia detectada no {index_name} para este período.")
 
     st.subheader("Dados Climáticos (NASA POWER)")
+    for warning in result.get("climate_warnings", []):
+        st.warning(warning)
     if climate_plot is not None:
         st.plotly_chart(climate_plot, use_container_width=True)
     else:
@@ -534,6 +556,7 @@ def _render_controls_content() -> tuple[bool, bool]:
             value=DEFAULT_START,
             key="analysis_start_date",
             format="DD/MM/YYYY",
+            help="Primeiro dia incluído na análise (UTC).",
             label_visibility="collapsed",
         )
 
@@ -543,6 +566,7 @@ def _render_controls_content() -> tuple[bool, bool]:
             value=DEFAULT_END,
             key="analysis_end_date",
             format="DD/MM/YYYY",
+            help="Último dia incluído na análise (UTC), inclusive para um único dia.",
             label_visibility="collapsed",
         )
 
@@ -766,7 +790,11 @@ def render_results_panels() -> None:
     climate_plot = res.get("climate_plot")
     if climate_plot is None:
         climate_plot = st.session_state.analysis_metadata.get("climate_plot")
-    display_analysis_details(visible_index, res, climate_plot)
+    display_analysis_details(
+        visible_index,
+        {**st.session_state.analysis_metadata, **res},
+        climate_plot,
+    )
 
 
 EXPORT_FORMATS = {
@@ -909,6 +937,7 @@ def main():
     with st.sidebar:
         render_locations_transfer(st)
     analyze, analysis_disabled = render_controls_bar()
+    invalidate_changed_analysis()
 
     if restore_pending_saved_location():
         st.rerun()
@@ -967,6 +996,8 @@ def main():
                             "image_count",
                             "climate_data",
                             "climate_plot",
+                            "climate_summary",
+                            "climate_warnings",
                         )
                         if key in result
                     }

@@ -147,6 +147,8 @@
         legend.addTo(map);
         updateLegend();
         map.on("mousemove", onMouseMove);
+        // A tap uses the same preloaded lookup on devices without a cursor.
+        map.on("click", onMouseMove);
         map.on("mouseout", () => { tooltip.style.display = "none"; });
       }
 

@@ -160,6 +160,7 @@ class TestFetchClimateData:
                 "latitude": -20.0,
                 "longitude": -45.0,
                 "format": "JSON",
+                "time-standard": "UTC",
             },
             timeout=30,
         )
@@ -263,6 +264,7 @@ class TestSummarizeClimateData:
             "solar_radiation": [6.0, 5.5, 7.0],  # kWh/m²/dia
         })
 
+        climate_df.attrs["units"] = {"solar_radiation": "kWh/m²/day"}
         result = summarize_climate_data(climate_df)
 
         assert result["total_precipitation_mm"] == pytest.approx(10.5)
@@ -277,6 +279,7 @@ class TestSummarizeClimateData:
             "solar_radiation": [6.0, None, 7.0],
         })
 
+        climate_df.attrs["units"] = {"solar_radiation": "kWh/m²/day"}
         result = summarize_climate_data(climate_df)
 
         assert result["total_precipitation_mm"] == pytest.approx(8.5)
@@ -291,6 +294,7 @@ class TestSummarizeClimateData:
             "solar_radiation": [6.0, float("nan"), 7.0],
         })
 
+        climate_df.attrs["units"] = {"solar_radiation": "kWh/m²/day"}
         result = summarize_climate_data(climate_df)
 
         assert result["total_precipitation_mm"] == pytest.approx(8.5)
@@ -315,6 +319,7 @@ class TestSummarizeClimateData:
             "solar_radiation": [6.0, 5.5],
         })
 
+        climate_df.attrs["units"] = {"solar_radiation": "kWh/m²/day"}
         result = summarize_climate_data(climate_df)
 
         assert result["total_precipitation_mm"] is None
@@ -328,6 +333,7 @@ class TestSummarizeClimateData:
             "solar_radiation": [6.0, 5.5],
         })
 
+        climate_df.attrs["units"] = {"solar_radiation": "kWh/m²/day"}
         result = summarize_climate_data(climate_df)
 
         assert result["total_precipitation_mm"] == pytest.approx(8.5)
@@ -384,6 +390,7 @@ class TestSummarizeClimateData:
             "solar_radiation": [8.0],
         })
 
+        climate_df.attrs["units"] = {"solar_radiation": "kWh/m²/day"}
         result = summarize_climate_data(climate_df)
 
         assert result["total_precipitation_mm"] == pytest.approx(10.0)
@@ -398,6 +405,7 @@ class TestSummarizeClimateData:
             "solar_radiation": [0.0, 0.0],
         })
 
+        climate_df.attrs["units"] = {"solar_radiation": "kWh/m²/day"}
         result = summarize_climate_data(climate_df)
 
         assert result["total_precipitation_mm"] == pytest.approx(0.0)

@@ -1,0 +1,11 @@
+% Inclui apenas capturas reais existentes. IDs/contextos ficam no inventário.
+\newcommand{\capturatcc}[4]{%
+  \IfFileExists{fig/capturas/#1.png}{%
+    \begin{figure*}[htbp]
+      \centering
+      \includegraphics[width=0.94\textwidth,height=0.40\textheight,keepaspectratio]{fig/capturas/#1.png}
+      \caption{#3. Fonte: execução local e arquivos gerados.}
+      \label{fig:#1}
+    \end{figure*}%
+  }{}%
+}

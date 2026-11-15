@@ -1,5 +1,13 @@
 # Auditoria e atualização do relatório final
 
+> **Registro histórico.** A revisão acadêmica posterior está documentada em
+> [REVISAO_TCC.md](REVISAO_TCC.md) e
+> [ANALISE_TECNICA_TCC.md](ANALISE_TECNICA_TCC.md). Estado vigente: base `b7c325c`
+> com correções locais, 710 testes e demonstração real com downloads.
+> O autor confirmou Carlos Amaral Holbig como orientador e informou que os estudos
+> por cultura não foram realizados. As descrições abaixo preservam as condições
+> e pendências da auditoria anterior, sem substituir o estado da nova redação.
+
 > Revisão de 15/11/2026: texto e diagramas alinhados ao software `a9a9677`.
 > A classe atual é `CC-EC_TF-TC.cls`; `upf-ccc.cls` e `Proposta.tex` são históricos.
 > As alterações atuais não encerram a redação acadêmica ou a avaliação agronômica.

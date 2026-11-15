@@ -135,6 +135,9 @@ def run_analysis(
             "climate_plot": climate_plot,
             "climate_summary": climate_summary,
             "mean_value": mean_value,
+            "image_count": image_count,
+            "trend": compute_trend(time_series),
+            "climate_warnings": climate_df.attrs.get("warnings", []) if climate_df is not None else [],
             "area_ha": area_ha,
             "map_center": map_center,
         }
@@ -247,6 +250,7 @@ def run_multi_analysis(
             "climate_data": climate_data,
             "climate_plot": climate_plot,
             "climate_summary": climate_summary,
+            "climate_warnings": climate_data.attrs.get("warnings", []) if climate_data is not None else [],
             "map_center": map_center,
         }
     except Exception as e:

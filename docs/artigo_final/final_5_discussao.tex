@@ -1,20 +1,65 @@
 \section{Discussão}\label{chap:discussao-final}
 
-\subsection{Atendimento aos objetivos e integração}
-As evidências disponíveis sustentam a implementação das integrações e a verificação de contratos de software, incluindo o gerenciamento de localizações nos modos local e por sessão. A autenticação com serviço real reduz a incerteza sobre a configuração de acesso, mas não encerra a avaliação dos fluxos agrícolas. Assim, o objetivo de desenvolver a plataforma foi materializado em código e testes; a avaliação funcional com dados e cenários reais permanece parcial.
-% PENDENTE: confrontar cada objetivo com evidências de execução e testes, distinguindo implementação de avaliação concluída.
+\subsection{Atendimento aos objetivos e evolução do escopo}
 
-\subsection{Correção e reprodutibilidade}
-O registro de revisão, ambiente e comando permite repetir a suíte, distinguindo testes isolados de verificações com serviços reais. A cobertura de 100\% refere-se aos módulos medidos e não demonstra exatidão dos índices ou representatividade dos casos. A persistência via arquivos GeoJSON torna explícita a transferência entre sessões sem depender do disco efêmero da hospedagem; em contrapartida, exige ação do usuário e não oferece sincronização, login ou armazenamento permanente automático.
-% PENDENTE: discutir os resultados da conferência independente e registrar versões, parâmetros, disponibilidade de dados e serviços.
+Os objetivos de integração, seleção de áreas, índices, mapas, séries e exportação foram materializados em módulos verificáveis. A \cref{tab:objetivos-final} distingue implementação e extensão da avaliação, sem equiparar testes de software a estudos agronômicos.
 
-\subsection{Limitações técnicas e interpretação agronômica}
+\begin{table*}[htbp]
+\centering\small
+\caption{Síntese do atendimento aos objetivos da redação final.}
+\label{tab:objetivos-final}
+\begin{tabular}{p{0.10\textwidth}p{0.20\textwidth}p{0.61\textwidth}}
+\hline
+\textbf{Objetivo} & \textbf{Situação} & \textbf{Fundamento e ressalva} \\ \hline
+OE1 & Implementado & Estrutura modular e métodos documentados; bibliografia com pendências explícitas. \\
+OE2 & Implementado & Busca, desenho, gravação e recuperação; sessão web não é persistência permanente. \\
+OE3 & Implementado & Filtros e fórmulas exercitados, demonstração remota executada; adequação histórica da máscara requer avaliação específica. \\
+OE4 & Implementado & Composição, média e consulta local; contrato de escala corrigido e testado. \\
+OE5 & Implementado & Série, tendência e regra unilateral exercitadas com dados controlados; sem acurácia agronômica atribuída. \\
+OE6 & Implementado & Clima compartilhado, unidade normalizada e resumo propagado; ausência tratada explicitamente. \\
+OE7 & Implementado & PDF, XLSX, CSV ZIP e GeoJSON exercitados com entradas controladas; não equivalem a pacote completo de reprodução. \\
+OE8 & Parcialmente concluído & Suíte e fluxo real com downloads executados; pesquisa com usuários sem resultados e estudos por cultura não realizados. \\ \hline
+\end{tabular}
+\end{table*}
 
-A análise depende da disponibilidade dos serviços externos e da qualidade das imagens. A máscara QA60 não constitui tratamento completo de nuvens e sombras; diferentes resoluções nativas das bandas e a escala solicitada devem ser consideradas. O detector identifica desvios relativos segundo uma regra fixa e pode confundir alterações reais com ruído ou mudanças normais do ciclo. O contexto NASA POWER corresponde a uma consulta pontual em resolução própria. Esses limites não permitem atribuir causas agronômicas às anomalias sem dados complementares.
+Na proposta, NDVI e NDWI eram o foco e NDMI aparecia como evolução futura. A implementação incorporou NDMI, exploração numérica no navegador, modos de armazenamento e exportações estruturadas. A ausência original de banco foi substituída por SQLite local e, posteriormente, por alternativa de sessão para o ponto de entrada web. Essas adições são resultados de engenharia e não substituem o objetivo original de validar o protótipo em áreas de soja, milho e pastagem.
 
-Na versão web, os visitantes compartilham a conta de serviço e as cotas do projeto Earth Engine, embora suas localizações estejam isoladas por sessão. Arquivos exportados contêm coordenadas e precisam ser protegidos pelo usuário. A publicação e testes de carga ainda são necessários para avaliar disponibilidade, latência e consumo de recursos; não se afirma adequação a operação comercial ou garantia de ausência de custos.
+Os estudos de soja, milho e pastagem, experimentos controlados e coleta em campo previstos não foram realizados. A avaliação concentrou-se no artefato computacional. Essa delimitação mantém a contribuição de engenharia, mas não substitui o objetivo experimental original e requer apreciação do orientador.
 
-\subsection{Comparação com trabalhos relacionados}
-Os estudos apresentados na \cref{sec:relacionados-final} motivam a análise espacial e temporal e a integração de contexto climático, mas abordam culturas, sensores, escalas e objetivos distintos. A existência da plataforma SojaSAT em \citet{CHAVES2019} também impede tratar a disponibilização de mapas em uma aplicação web como contribuição inédita por si só.
+Outros requisitos das especificações também exigem distinção. O fluxo atual mostra área em hectares, sem seletor de acres, e não implementa bloqueio/liberação explícitos de navegação como descrito em especificações anteriores. A exclusão de localizações está no serviço, mas não na interface. Descrever esses itens como integralmente disponíveis apenas porque constam no planejamento produziria uma representação inadequada do sistema.
 
-% PENDENTE: confrontar resultados próprios com os trabalhos relacionados e documentar diferenças de dados, métodos e escopo; não transferir suas métricas para este sistema.
+\subsection{Contribuições de Engenharia de Software}
+
+A plataforma articula representações heterogêneas: texto de busca, coordenadas, polígonos, operações remotas de imagem, matrizes comprimidas, séries e arquivos. O encapsulamento em serviço e repositórios permite manter as regras de nome e transferência independentemente do armazenamento local ou de sessão. O snapshot de exportação reduz a possibilidade de gerar arquivos associados a parâmetros diferentes dos que produziram os dados.
+
+O componente de consulta local é uma decisão de interação relevante: transfere uma grade após a análise para evitar requisições por movimento do cursor. Em contrapartida, impõe custo de memória e transferência, depende de suporte do navegador e limita o tamanho da região. Trata-se de um compromisso explícito de engenharia, não de comprovação de baixa latência em qualquer área.
+
+As exportações disponibilizam informações fora da interface e permitem conferir dados com outras ferramentas. O PDF sintetiza, enquanto tabelas e GeoJSON preservam estruturas reutilizáveis. Contudo, não há exportação de toda a proveniência necessária à reconstrução exata do processamento. Interoperabilidade e transparência são ampliadas, mas reprodutibilidade integral ainda requer versões, IDs, parâmetros e dados auxiliares adicionais.
+
+\subsection{Consistência das integrações e limites dos testes}
+
+A divergência corrigida na radiação evidencia a diferença entre cobertura e correção semântica: a execução dos caminhos não verifica, por si só, a unidade de origem. A interpretação explícita dos metadados e sua reutilização em resumo e exportações reduziram a duplicação dessa regra.
+
+A legenda passou a compartilhar o intervalo dos tiles. O mapa interativo favorece contraste interno ao recorte, enquanto o PDF mantém escala fixa, útil para referência comum entre relatórios. Aparências distintas podem ser corretas quando cada escala é comunicada.
+
+A harmonização dos pipelines e a associação por aquisição preservam a interpretação dos registros entre modos e formatos. O identificador melhora a proveniência tabular, embora ainda não constitua inventário completo de processamento. A invalidação de estado complementa esse cuidado ao impedir apresentação de resultados sob parâmetros analíticos diferentes.
+
+\subsection{Limitações espaciais, temporais e estatísticas}
+
+A máscara QA60 não resolve todos os problemas de nuvens e sombras e possui restrições históricas de disponibilidade. O filtro de nuvens é do produto, não da área. A grade a 10 m não confere resolução nativa de 10 m às bandas B8A e B11. A média espacial do pipeline não fixa explicitamente o CRS, enquanto a consulta interativa utiliza UTM; correspondência numérica estrita requer verificação adicional.
+
+A composição mediana pode reduzir a influência de observações extremas, mas também oculta quando uma mudança ocorreu e quantas observações sustentam cada posição. A série pode apresentar lacunas, datas repetidas e variação do suporte espacial válido. O resumo de imagens não informa essa cobertura por pixel.
+
+A heurística de anomalias considera apenas três observações e desvios negativos. Não sinaliza quedas após janela de desvio zero, não modela sazonalidade ou fenologia e não separa ruído de mudanças reais. A tendência usa ordem de observações, não tempo decorrido. Sem referências agronômicas e avaliação apropriada, esses produtos servem à exploração de comportamentos atípicos e não ao diagnóstico automático.
+
+\subsection{Operação, serviços e avaliação não realizada}
+
+O uso de bibliotecas abertas deve ser distinguido do acesso a serviços externos. Earth Engine e Esri não são componentes locais de código aberto da aplicação. Dados Sentinel possuem condições próprias de uso, o serviço de geocodificação público possui política de utilização e o Earth Engine requer projeto e elegibilidade, com cotas e condições específicas \citep{GOOGLE_EE_NONCOMMERCIAL,NOMINATIM_POLICY}. Não se demonstrou operação comercial gratuita ou custo total inferior ao de outras soluções.
+
+O serviço público Nominatim limita o tráfego agregado da aplicação a uma requisição por segundo e proíbe autocomplete. O código utiliza busca explícita e identifica a aplicação, mas não implementa limitador global ou cache de buscas. A atribuição e as condições de acesso devem ser revistas antes de ampliar o número de visitantes; disponibilidade pública não implica capacidade ilimitada.
+
+Na web, visitantes compartilham a conta de serviço e o consumo de cotas, embora os registros estejam separados por sessão. GeoJSON e arquivos de resultados podem conter coordenadas sensíveis, e a privacidade dos arquivos transferidos fica sob responsabilidade de quem os armazena e compartilha. O isolamento de sessão não constitui sistema de autorização de propriedades.
+
+Não foram conduzidos testes de carga, ensaios representativos de latência, comparação quantitativa com plataformas ou avaliação de campo. A pesquisa de experiência de uso permanece sem resultados analisados; sua amostragem por adesão limitará generalizações. A resolução das bandas e dos dados meteorológicos, a dependência de serviços e cotas, a memória da grade no navegador e a natureza heurística das anomalias delimitam o uso. A máscara QA60 foi preservada: uma substituição por SCL ou probabilidade de nuvens exige verificação de classes, sombras, disponibilidade histórica e efeitos sobre os resultados, não apenas troca de API.
+
+A inspeção visual identificou contraste insuficiente em alguns textos quando os estilos escuros se combinam ao tema de widgets do ambiente. A emulação móvel confirmou reorganização e lookup por toque, mas não substitui ensaios de acessibilidade ou uma matriz de dispositivos e navegadores.

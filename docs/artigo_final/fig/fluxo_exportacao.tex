@@ -1,0 +1,20 @@
+\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=39mm,
+ minimum height=14mm,font=\small,fill=green!5},
+ link/.style={-{Stealth[length=2mm]},thick}]
+\node[box] (snapshot) at (0,0) {Snapshot de análise\\concluída com sucesso};
+\node[box] (match) at (5.2,0) {Confere área, período\\e índices atuais\\se diferentes: reanalisar};
+\node[box] (context) at (10.4,0) {Contexto normalizado\\datas, geometria\\e cópias dos dados};
+\node[box] (pdf) at (15.6,2) {PDF por índice\\série e resumo locais\\mapa estático remoto};
+\node[box] (xlsx) at (15.6,0) {XLSX\\abas compartilhadas\\e por índice};
+\node[box] (zip) at (15.6,-2) {CSV UTF-8\\conjuntos tabulares\\ZIP DEFLATE};
+\node[box] (download) at (20.8,0) {Bytes em memória\\download por formato\\sem persistir análise};
+\draw[link] (snapshot)--(match);
+\draw[link] (match)--(context);
+\draw[link] (context)--(pdf);
+\draw[link] (context)--(xlsx);
+\draw[link] (context)--(zip);
+\draw[link] (pdf)--(download);
+\draw[link] (xlsx)--(download);
+\draw[link] (zip)--(download);
+\end{tikzpicture}

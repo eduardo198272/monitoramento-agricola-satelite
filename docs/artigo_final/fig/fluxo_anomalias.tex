@@ -1,0 +1,22 @@
+\begin{tikzpicture}[
+ node distance=9mm and 12mm,
+ box/.style={draw,rounded corners,align=center,text width=40mm,
+ minimum height=12mm,font=\small,fill=green!5},
+ decision/.style={draw,diamond,aspect=2,align=center,font=\small,inner sep=1mm},
+ link/.style={-{Stealth[length=2mm]},thick}]
+\node[box] (input) {Série ordenada\\valores $x_i$};
+\node[decision,right=of input] (initial) {$i<3$?};
+\node[box,right=of initial] (window) {Três valores anteriores\\$\mu_i$ e $\sigma_i$ populacional};
+\node[decision,right=of window] (zero) {$\sigma_i=0$?};
+\node[box,below=of window] (score) {$z_i=(x_i-\mu_i)/\sigma_i$\\sinaliza se $z_i<-1$};
+\node[box,below=of initial] (false) {Sem sinalização\\escore inicial zero};
+\node[box,below=of score] (output) {Registro com data, valor,\\\texttt{anomaly} e \texttt{z\_score}\\avança para próximo ponto};
+\draw[link] (input)--(initial);
+\draw[link] (initial)--node[above,font=\scriptsize]{não}(window);
+\draw[link] (initial)--node[left,font=\scriptsize]{sim}(false);
+\draw[link] (window)--(zero);
+\draw[link] (zero.south)|-node[above,font=\scriptsize,pos=.6]{não}(score.east);
+\draw[link] (zero.north)--++(0,0.8)-|node[above,font=\scriptsize,pos=.5]{sim}(false.west);
+\draw[link] (false.south)|-(output.west);
+\draw[link] (score)--(output);
+\end{tikzpicture}
