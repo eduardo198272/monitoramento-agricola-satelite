@@ -33,8 +33,13 @@ seção, conferência de fontes e pendências.
 - [Pesquisa com usuários e incorporação de respostas reais](PESQUISA_USUARIOS.md)
 - [Checklist de entrega](CHECKLIST_ENTREGA.md)
 - [Avaliação com usuários: planilha, análise e gráficos](avaliacao_usuarios/README.md)
+- [Capturas fornecidas pelo autor: substituição e validação atual do PDF](evidencias/capturas_autor/README.md)
 
-As capturas existentes são reais; imagens ausentes não geram placeholders.
+Na apresentação atual foram usadas 16 capturas fornecidas pelo autor,
+agrupadas em onze figuras; o PDF permanece com 33 páginas. A imagem nova do
+relatório PDF aguarda substituição após atualização e conferência da radiação,
+e não foi incluída como evidência validada. As capturas da demonstração anterior
+continuam preservadas, mas não são mais as ilustrações dessa seção.
 CAP-18/19 continuam planejadas para visualizador de planilha/ZIP.
 A consulta pública registrada em `evidencias/nasa_power_unidades.json` identificou
 uma conversão de radiação incompatível com a unidade AG retornada. A aplicação
@@ -74,7 +79,9 @@ backup histórico, não a versão atual nem parte desta atualização versionada
 - Conferir integralmente trabalhos relacionados e a referência específica de NDMI.
 - Revisar com o orientador a mudança de escopo: estudos de soja, milho e pastagem
   e experimentos de campo não foram realizados; não são resultados do artigo.
-- Concluir capturas de Excel/ZIP em visualizador e avaliação em aparelhos físicos.
+- Obter nova captura do relatório PDF com radiação conferida, concluir capturas
+  de Excel/ZIP e avaliação sistemática em aparelhos físicos. Os screenshots
+  móveis recebidos documentam a apresentação, não uma matriz de compatibilidade.
 - Aprovar codificação e interpretação das 31 submissões recebidas, confirmar
   versão pública/encerramento/fuso da coleta e conferir ética com o orientador.
 - Revisar a adequação histórica da QA60 e compatibilidade de navegadores.

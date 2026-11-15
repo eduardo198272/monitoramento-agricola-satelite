@@ -1,5 +1,10 @@
 # Validação final da integração da avaliação de usuários
 
+> Registro histórico da integração da pesquisa, anterior à substituição das
+> capturas da plataforma. Para o PDF e as figuras atuais, consultar
+> [`../evidencias/capturas_autor/README.md`](../evidencias/capturas_autor/README.md).
+> Os cálculos e dados da pesquisa não foram alterados nessa troca visual.
+
 **Data:** 15/11/2026. **Base Git:** `af120d5`, preservadas as alterações locais
 da revisão autoral anterior. **Situação:** arquivos e PDF atualizados para
 aprovação substantiva do autor; sem commit, push, merge ou deploy.

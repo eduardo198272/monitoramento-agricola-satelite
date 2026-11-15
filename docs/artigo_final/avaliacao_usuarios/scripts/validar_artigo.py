@@ -17,6 +17,8 @@ ROOT = BASE.parents[2]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-dir", type=Path, required=True)
+    parser.add_argument("--output", type=Path, default=BASE/"resultados/compilacao.json",
+                        help="Permite validar nova revisão sem sobrescrever o registro histórico.")
     args = parser.parse_args()
     files = {}
 
@@ -42,7 +44,9 @@ def main():
                         log,re.M)
     assert not citations-set(keys), "Citação sem entrada."
     assert not citations-compiled, "Citação não compilada."
-    assert not refs-set(labels), "Referência sem rótulo."
+    # Macros de figuras geram rótulos por argumentos; conferir a expansão compilada.
+    compiled_labels = set(re.findall(r"\\newlabel\{([^}]+)\}", aux))
+    assert not refs-compiled_labels, "Referência sem rótulo compilado."
     assert not errors, errors
     assert all(n == 1 for n in Counter(labels).values())
     assert all(n == 1 for n in Counter(keys).values())
@@ -69,7 +73,7 @@ def main():
               "pdfinfo":subprocess.check_output(["pdfinfo",str(pdf)],text=True).splitlines(),
               "source_hashes":{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
                                for p in files}}
-    (BASE/"resultados/compilacao.json").write_text(
+    args.output.write_text(
         json.dumps(result,ensure_ascii=False,indent=2)+"\n")
     print(json.dumps(result,ensure_ascii=False,indent=2))
 

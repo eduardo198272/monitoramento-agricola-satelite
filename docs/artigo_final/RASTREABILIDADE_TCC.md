@@ -53,3 +53,13 @@ não substituem retroativamente o estudo agronômico originalmente planejado.
 As contagens de testes da aplicação são históricas e não foram substituídas
 pelos testes dos scripts estatísticos. Os dados de percepção não verificam
 as correções ainda não publicadas nem validam diagnóstico agronômico.
+
+## Atualização visual posterior à integração da pesquisa
+
+As ilustrações da apresentação foram substituídas por 16 imagens fornecidas
+pelo autor, agrupadas em onze figuras. Originais, cópias, recortes e exclusão
+da captura do relatório com radiação pendente estão documentados em
+`evidencias/capturas_autor/README.md` e `manifesto.json`. Não foram alterados
+os números da demonstração instrumentada, os questionários ou os ensaios
+históricos. Capturas antigas permanecem disponíveis. O PDF atual tem
+33 páginas; seu registro de compilação está nessa nova pasta de evidências.
