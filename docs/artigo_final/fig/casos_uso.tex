@@ -1,0 +1,18 @@
+% Visão funcional; as elipses não implicam validação operacional.
+\begin{tikzpicture}[
+  usecase/.style={draw, ellipse, align=center, minimum height=10mm,
+    minimum width=55mm, font=\small, fill=green!6}
+]
+\node[draw, rounded corners, minimum width=70mm, minimum height=115mm,
+  label={[font=\small]above:Aplicação de monitoramento}] at (4.7,0) {};
+\node[align=center, font=\small] (user) at (-1,0) {Usuário};
+\node[usecase] (area) at (4.7,4.5) {Selecionar ou restaurar área};
+\node[usecase] (save) at (4.7,3) {Salvar localização};
+\node[usecase] (transfer) at (4.7,1.5) {Importar/exportar GeoJSON};
+\node[usecase] (config) at (4.7,0) {Configurar período e índices};
+\node[usecase] (run) at (4.7,-1.5) {Executar análise};
+\node[usecase] (view) at (4.7,-3) {Consultar mapas, séries e clima};
+\node[usecase] (download) at (4.7,-4.5) {Gerar e baixar resultados};
+\foreach \action in {area,save,transfer,config,run,view,download}
+  \draw[thick] (user.east) -- (\action.west);
+\end{tikzpicture}

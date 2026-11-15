@@ -1,0 +1,20 @@
+\section{Discussão}\label{chap:discussao-final}
+
+\subsection{Atendimento aos objetivos e integração}
+As evidências disponíveis sustentam a implementação das integrações e a verificação de contratos de software, incluindo o gerenciamento de localizações nos modos local e por sessão. A autenticação com serviço real reduz a incerteza sobre a configuração de acesso, mas não encerra a avaliação dos fluxos agrícolas. Assim, o objetivo de desenvolver a plataforma foi materializado em código e testes; a avaliação funcional com dados e cenários reais permanece parcial.
+% PENDENTE: confrontar cada objetivo com evidências de execução e testes, distinguindo implementação de avaliação concluída.
+
+\subsection{Correção e reprodutibilidade}
+O registro de revisão, ambiente e comando permite repetir a suíte, distinguindo testes isolados de verificações com serviços reais. A cobertura de 100\% refere-se aos módulos medidos e não demonstra exatidão dos índices ou representatividade dos casos. A persistência via arquivos GeoJSON torna explícita a transferência entre sessões sem depender do disco efêmero da hospedagem; em contrapartida, exige ação do usuário e não oferece sincronização, login ou armazenamento permanente automático.
+% PENDENTE: discutir os resultados da conferência independente e registrar versões, parâmetros, disponibilidade de dados e serviços.
+
+\subsection{Limitações técnicas e interpretação agronômica}
+
+A análise depende da disponibilidade dos serviços externos e da qualidade das imagens. A máscara QA60 não constitui tratamento completo de nuvens e sombras; diferentes resoluções nativas das bandas e a escala solicitada devem ser consideradas. O detector identifica desvios relativos segundo uma regra fixa e pode confundir alterações reais com ruído ou mudanças normais do ciclo. O contexto NASA POWER corresponde a uma consulta pontual em resolução própria. Esses limites não permitem atribuir causas agronômicas às anomalias sem dados complementares.
+
+Na versão web, os visitantes compartilham a conta de serviço e as cotas do projeto Earth Engine, embora suas localizações estejam isoladas por sessão. Arquivos exportados contêm coordenadas e precisam ser protegidos pelo usuário. A publicação e testes de carga ainda são necessários para avaliar disponibilidade, latência e consumo de recursos; não se afirma adequação a operação comercial ou garantia de ausência de custos.
+
+\subsection{Comparação com trabalhos relacionados}
+Os estudos apresentados na \cref{sec:relacionados-final} motivam a análise espacial e temporal e a integração de contexto climático, mas abordam culturas, sensores, escalas e objetivos distintos. A existência da plataforma SojaSAT em \citet{CHAVES2019} também impede tratar a disponibilização de mapas em uma aplicação web como contribuição inédita por si só.
+
+% PENDENTE: confrontar resultados próprios com os trabalhos relacionados e documentar diferenças de dados, métodos e escopo; não transferir suas métricas para este sistema.

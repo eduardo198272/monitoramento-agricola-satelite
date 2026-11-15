@@ -1,0 +1,30 @@
+% Diagrama baseado em src/app e nas integrações observadas no código.
+\begin{tikzpicture}[
+  node distance=7mm and 9mm,
+  box/.style={draw, rounded corners, align=center, minimum height=11mm,
+    text width=37mm, font=\small, fill=green!6},
+  external/.style={box, fill=blue!5},
+  link/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[box] (user) {Usuário};
+\node[box, right=of user] (ui) {Interface Streamlit\\mapas e controles};
+\node[box, right=of ui] (pipeline) {Orquestração Python\\\texttt{pipeline.py}};
+\node[external, right=of pipeline] (gee) {Google Earth Engine\\Sentinel-2};
+\node[external, above=of pipeline] (climate) {NASA POWER\\dados climáticos};
+\node[external, above=of ui] (map) {Nominatim e Esri\\busca e mapa-base};
+\node[box, below=of ui] (location) {Serviço e repositório\\de localizações};
+\node[box, below=of pipeline] (export) {Exportação\\PDF, XLSX, CSV ZIP};
+\node[box, below=of location] (sqlite) {Modo local:\\SQLite};
+\node[box, left=of sqlite] (session) {Modo web:\\memória da sessão};
+\node[box, left=of location] (geojson) {Transferência GeoJSON\\arquivo do usuário};
+\draw[link,<->] (user) -- (ui);
+\draw[link,<->] (ui) -- (pipeline);
+\draw[link,<->] (pipeline) -- (gee);
+\draw[link,<->] (pipeline.north) -- (climate.south);
+\draw[link,<->] (ui.south) -- (location.north);
+\draw[link,<->] (location.south) -- (sqlite.north);
+\draw[link,<->] (location.south west) -- (session.north east);
+\draw[link,<->] (geojson.east) -- (location.west);
+\draw[link] (pipeline.south) -- (export.north);
+\draw[link,<->] (ui.north) -- (map.south);
+\end{tikzpicture}

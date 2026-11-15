@@ -1,0 +1,100 @@
+\section{Materiais e métodos}\label{chap:metodos-final}
+
+\subsection{Caracterização e materiais}
+
+O trabalho caracteriza-se como desenvolvimento aplicado de um protótipo computacional, acompanhado de verificação de software e avaliação funcional a ser complementada por execuções documentadas. A pesquisa bibliográfica sustenta os conceitos espectrais e a escolha de serviços, sem reivindicar uma revisão sistemática. Não se pressupõe validação agronômica de campo.
+
+O repositório implementa a aplicação em Python. A interface utiliza Streamlit e componentes de mapas Folium; o acesso a imagens ocorre pela API Python do Earth Engine. Pandas e NumPy apoiam dados e cálculos locais, Plotly os gráficos e Requests o acesso HTTP. As dependências e versões declaradas encontram-se em \texttt{requirements.txt}. Fontes adicionais são NASA POWER, Nominatim para busca geográfica e Esri World Imagery para mapa-base.
+
+A autenticação do Earth Engine requer um projeto habilitado e registrado. A execução local admite autenticação interativa; o ponto de entrada \texttt{streamlit\_app.py}, preparado para o Streamlit Community Cloud, exige conta de serviço e recebe as credenciais por Secrets, sem incluí-las no Git. Essa conta autentica a aplicação perante o Google, não usuários do site \citep{GOOGLE_EE_SERVICE_ACCOUNT,STREAMLIT_CLOUD_SECRETS}. O projeto foi configurado para uso não comercial; essa condição não deve ser confundida com garantia irrestrita de gratuidade de outros serviços do Google Cloud \citep{GOOGLE_EE_NONCOMMERCIAL}.
+
+\subsection{Organização da aplicação e fluxo}
+
+A arquitetura observada no código separa responsabilidades sem impor uma arquitetura distribuída própria: \texttt{main.py} gerencia interface e estado; \texttt{maps.py} e \texttt{map\_interaction.py} tratam mapas e interação; \texttt{pipeline.py} coordena a análise; \texttt{earth\_engine.py}, \texttt{time\_series.py}, \texttt{anomalies.py} e \texttt{climate.py} implementam as etapas de dados e cálculos. Módulos de exportação preparam saídas PDF, XLSX e CSV ZIP. O serviço de localizações utiliza SQLite no modo local ou um repositório em memória vinculado à sessão no modo web. Os módulos \texttt{locations\_geojson.py} e \texttt{locations\_transfer\_ui.py} implementam a transferência de localizações. A presença desses componentes não substitui a verificação operacional.
+
+Na \cref{fig:arquitetura-atual}, a interface e os módulos Python pertencem à aplicação, enquanto Earth Engine, NASA POWER, Nominatim e Esri são serviços externos. A consulta de imagens e o processamento geoespacial no Earth Engine dependem de autenticação e disponibilidade remota; a NASA POWER fornece contexto climático, o Nominatim apoia a busca de lugares e a Esri fornece imagens de mapa-base. O SQLite armazena localizações no modo local, não o histórico completo de análises. No modo web não há banco externo nem armazenamento permanente automático: cada visitante precisa baixar suas localizações em GeoJSON e importá-las quando retornar. A geração dos arquivos de resultados utiliza os dados disponíveis na aplicação.
+
+\begin{figure*}[htb!]
+\centering
+\resizebox{\textwidth}{!}{\input{fig/arquitetura_atual}}
+\caption{Componentes e integrações da aplicação. Fonte: elaborado pelo autor a partir do código do projeto.}
+\label{fig:arquitetura-atual}
+\end{figure*}
+
+\subsection{Interação e casos de uso}
+
+A \cref{fig:casos-uso} resume as ações disponibilizadas pela interface. O usuário pode selecionar uma geometria no mapa ou restaurar uma localização, definir período e índices e solicitar o processamento. Os resultados podem ser consultados e preparados para download nos formatos implementados. Salvar, importar e exportar localizações são operações independentes da execução de uma análise. A exclusão existe na camada de serviço, mas não é apresentada como ação da interface atual. O diagrama sintetiza funcionalidades implementadas e não comprova, por si só, que todos os fluxos foram executados com serviços reais.
+
+\begin{figure*}[htb!]
+\centering
+\resizebox{0.48\textwidth}{!}{\input{fig/casos_uso}}
+\caption{Visão resumida dos casos de uso da aplicação. Fonte: elaborado pelo autor a partir da interface implementada.}
+\label{fig:casos-uso}
+\end{figure*}
+
+\subsection{Fluxo de processamento e persistência}
+
+No fluxo principal, o usuário seleciona ou restaura um polígono, informa o período e escolhe um ou mais índices. O pipeline solicita imagens, aplica máscara e calcula índices. Para cada índice produz um composto temporal mediano, média espacial desse composto, série de médias por imagem e sinalizações de anomalia. A aplicação agrega contexto climático e apresenta mapas e gráficos. O composto mediano por pixel e a série de médias por aquisição são produtos diferentes e não devem ser confundidos.
+
+A \cref{fig:fluxo-analise} distingue esses dois produtos e mostra a obtenção complementar de clima. O acesso climático pode falhar sem interromper a análise espectral; já a ausência de imagens produz uma resposta de erro. Os mapas e gráficos dependem dos dados disponíveis e dos serviços consultados.
+
+\begin{figure*}[htb!]
+\centering
+\resizebox{\textwidth}{!}{\input{fig/fluxo_analise}}
+\caption{Fluxo simplificado da análise de uma área. Fonte: elaborado pelo autor a partir de \texttt{pipeline.py}.}
+\label{fig:fluxo-analise}
+\end{figure*}
+
+O gerenciamento de localizações é um recorte orientado a objetos da implementação, apresentado na \cref{fig:classes-localizacao}. A classe de serviço valida e coordena as operações; o repositório local acessa SQLite e o repositório de sessão mantém registros isolados em \texttt{st.session\_state}. O registro inclui nome, geometria GeoJSON, centro e datas. A geometria é validada antes da gravação e os nomes são comparados sem diferenciar caixa, normalizando espaços. A importação aceita uma Feature ou FeatureCollection com polígonos WGS84 e nome em \texttt{properties.name}, limitada a 100 localizações e 2 MB por arquivo. O lote é validado integralmente e conflitos não sobrescrevem registros nem produzem importação parcial.
+
+Na sessão web, novas gravações também respeitam os limites necessários para que o conjunto permaneça exportável. Não há autenticação Google de visitantes ou recuperação automática entre sessões. O arquivo GeoJSON fica sob responsabilidade do usuário e contém nomes e coordenadas; o isolamento de sessão não equivale a um serviço permanente de armazenamento privado. O diagrama não pretende descrever todas as funções e módulos do sistema.
+
+\begin{figure*}[htb!]
+\centering
+\resizebox{\textwidth}{!}{\input{fig/classes_localizacao}}
+\caption{Recorte das classes de gerenciamento de localizações nos modos local e web. Fonte: elaborado pelo autor a partir do código.}
+\label{fig:classes-localizacao}
+\end{figure*}
+
+\subsection{Aquisição, filtros e cálculos}
+
+O módulo \texttt{earth\_engine.py} consulta \texttt{COPERNICUS/S2\_SR\_HARMONIZED}, filtra pela geometria e pelo intervalo e usa, por padrão, \texttt{CLOUD\_COVERAGE\_ASSESSMENT < 20}. Esse metadado diz respeito ao produto, não especificamente ao polígono. A data inicial é inclusiva e a final é exclusiva no filtro do Earth Engine; o código encaminha as datas informadas sem acrescentar um dia \citep{GOOGLE_EE_DATE}.
+
+A máscara consulta os bits 10 e 11 da banda QA60 para nuvens opacas e cirrus. Não há etapa específica de máscara de sombra nesse módulo. O catálogo informa mudanças na disponibilidade de QA60 entre 2022 e 2024; portanto, a suficiência e o efeito da máscara devem ser verificados em cada período \citep{GOOGLE_S2_SR}. Imagens com nuvens residuais ou pixels mascarados podem comprometer a série.
+
+Os índices seguem as equações da \cref{sec:indices-final} por chamadas a \texttt{normalizedDifference}, preservando data e identificador da imagem. A redução espacial usa média e escala solicitada de 10 m, com limite de $10^9$ pixels. A escala solicitada não altera a resolução nativa das bandas. A operação de diferença normalizada possui comportamento próprio para entradas negativas e propriedades da imagem, descrito na documentação oficial \citep{GOOGLE_EE_ND}.
+
+\begin{table*}[htb!]
+\centering
+\caption{Bandas utilizadas nos índices implementados.}
+\label{tab:bandas-final}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Índice} & \textbf{Bandas} & \textbf{Resoluções nominais} \\ \hline
+NDVI & B8 e B4 & 10 m e 10 m \\ \hline
+NDWI & B8 e B11 & 10 m e 20 m \\ \hline
+NDMI & B8A e B11 & 20 m e 20 m \\ \hline
+\end{tabular}
+
+\small Fonte: implementação em \texttt{earth\_engine.py} e catálogo Sentinel-2 \citep{GOOGLE_S2_SR}.
+\end{table*}
+
+As expressões matemáticas constam na \cref{sec:indices-final}; a tabela identifica escolhas da aplicação, sem atribuir a Gao uma validação específica das combinações Sentinel-2 adotadas.
+
+\subsection{Séries temporais e anomalias}
+
+Em \texttt{time\_series.py}, cada imagem é reduzida à média da banda sobre a geometria; valores nulos são omitidos e os pontos restantes ordenados por data. O acesso individual aos resultados remotos pode aumentar a latência. A série pode ter observações em intervalos irregulares e mais de uma imagem na mesma data.
+
+Em \texttt{anomalies.py}, para cada ponto $x_i$ após os três primeiros, calcula-se a média $\mu_i$ e o desvio padrão populacional $\sigma_i$ dos três valores imediatamente anteriores. Se $\sigma_i>0$, calcula-se $z_i=(x_i-\mu_i)/\sigma_i$; o ponto é sinalizado quando $z_i<-1$. Se o desvio é zero, não há sinalização, mesmo diante de uma queda. A janela é definida por número de observações, não por dias. O alerta apenas lista ocorrências e datas. O código também ajusta uma reta em função da posição das observações e classifica a inclinação por limiares $\pm 0{,}01$; essa tendência não é taxa por unidade de tempo e séries com menos de dois pontos recebem o rótulo estável.
+
+\subsection{Contexto climático e interface}
+
+O módulo \texttt{climate.py} solicita à NASA POWER, para o centroide da geometria e o período fornecido, precipitação, temperatura média e radiação solar. Valores \texttt{-999} são tratados como ausentes. O resumo soma precipitação, calcula médias de temperatura e radiação e converte esta última por fator 3,6 conforme a unidade assumida no código; a unidade retornada e os parâmetros devem ser conferidos nas execuções. O gráfico climático implementado apresenta precipitação e temperatura. Caso a consulta climática falhe, o pipeline mantém a análise espectral e registra a indisponibilidade do contexto.
+
+A interface permite busca geográfica, desenho e restauração de áreas, seleção de período e índices e apresentação dos resultados. Na barra lateral, a transferência GeoJSON permite levar as localizações para outra sessão. As exportações PDF, XLSX e CSV ZIP são preparadas sob solicitação; a interface indica a geração e disponibiliza o download quando o arquivo está pronto. As funções de exportação e mapas dependem dos dados e serviços disponíveis no momento da execução.
+
+\subsection{Estratégia de verificação e avaliação}\label{sec:avaliacao-final}
+
+Os testes em \texttt{tests/} cobrem componentes, tratamento de erros e fluxos com substituição de dependências externas. Em particular, os testes dos índices verificam as bandas passadas à API simulada, não a aritmética executada pelo Earth Engine. Testes de anomalia incluem séries sintéticas e o caso de desvio zero. Os testes de transferência verificam ida e volta de arquivos, rejeição de arquivos inválidos, conflitos sem gravação parcial e isolamento das sessões; um teste com widgets reais do Streamlit mantém a inicialização remota do Earth Engine simulada. A execução, o ambiente e a revisão do código estão registrados em \path{docs/validation/streamlit-cloud-readiness.md}.
+
+Para complementar a avaliação, são necessárias execuções autenticadas de ponta a ponta, conferência independente de valores de pixels ou imagens controladas, verificação de datas e máscaras e registro de parâmetros, saídas e eventuais falhas. O protocolo em \texttt{docs/validation/scenarios.md} propõe soja, milho e pastagem; suas localizações, culturas, geometrias e critérios necessitam confirmação antes de uso como estudos de caso. A comparação com dados de campo, se disponível, constitui avaliação distinta e não é pressuposta.

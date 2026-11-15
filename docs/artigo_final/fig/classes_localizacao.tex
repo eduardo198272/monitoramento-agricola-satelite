@@ -1,0 +1,35 @@
+% Recorte das classes reais de gerenciamento de localizações.
+\begin{tikzpicture}[
+  class/.style={draw, align=left, inner sep=3mm, font=\small, fill=green!6},
+  link/.style={-{Stealth[length=2mm]}, thick}
+]
+\node[class] (service) at (0,0) {\textbf{SavedLocationsService}\\
+  + save\_location(name, geojson)\\
+  + list\_saved\_locations()\\
+  + get\_saved\_location(id)\\
+  + delete\_saved\_location(id)\\
+  + import\_locations(payload)\\
+  + export\_locations()};
+\node[class, right=16mm of service] (repo) {\textbf{SavedLocationsRepository}\\
+  + initialize()\\
+  + insert\_location(record)\\
+  + insert\_locations(records)\\
+  + list\_locations()\\
+  + get\_location(id)\\
+  + delete\_location(id)};
+\node[draw, rounded corners, align=center, right=12mm of repo,
+  font=\small, fill=blue!5] (db) {SQLite\\saved\_locations};
+\node[class, below=12mm of repo] (session) {\textbf{SessionLocationsRepository}\\
+  + initialize()\\
+  + insert\_location(record)\\
+  + insert\_locations(records)\\
+  + list\_locations()\\
+  + get\_location(id)\\
+  + delete\_location(id)};
+\node[draw, rounded corners, align=center, right=12mm of session,
+  font=\small, fill=blue!5] (memory) {Memória\\da sessão};
+\draw[link] (service) -- node[above, font=\scriptsize] {local} (repo);
+\draw[link] (service.south) |- node[below, font=\scriptsize, pos=0.75] {web} (session.west);
+\draw[link] (repo) -- (db);
+\draw[link] (session) -- (memory);
+\end{tikzpicture}

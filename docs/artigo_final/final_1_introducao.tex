@@ -1,0 +1,33 @@
+\section{Introdução}\label{chap:introducao-final}
+
+O acompanhamento de áreas agrícolas envolve observações em diferentes momentos do ciclo produtivo e em locais que podem apresentar comportamentos distintos. Entre as tecnologias empregadas nesse contexto, o sensoriamento remoto permite observar a superfície terrestre repetidamente e investigar características da vegetação por meio de medidas espectrais. A literatura reúne aplicações agrícolas que vão do acompanhamento de culturas à estimativa de variáveis biofísicas \citep{WEISS2020}.
+
+Em aplicações específicas, \citet{SLAIFFER2023} investigou relações entre índices espectrais e produtividade da soja em áreas irrigadas e de sequeiro, enquanto \citet{LOVATO2021} analisou a variação temporal do NDVI em talhões associados à renovação de canaviais. Em outra escala, \citet{CHAVES2019} utilizou séries temporais para monitoramento agrícola em Mato Grosso. Esses estudos ilustram que a utilidade dos índices depende da área, da cultura, do período e dos procedimentos de análise, e não apenas de sua fórmula.
+
+O acesso a imagens, entretanto, não elimina a necessidade de selecionar uma área, filtrar observações, aplicar cálculos adequados e apresentar os resultados de forma interpretável. O problema de pesquisa é: como desenvolver e avaliar uma plataforma que integre consulta a imagens de satélite, cálculo de índices espectrais, análise temporal e visualização de informações agrícolas? A questão envolve tanto o processamento geoespacial quanto a organização de componentes de interface, serviços externos e mecanismos de verificação.
+
+\subsection{Justificativa e contribuição}
+
+A combinação de imagens Sentinel-2, processamento no Google Earth Engine e dados da NASA POWER oferece uma base para construir um protótipo acadêmico de monitoramento. A contribuição pretendida não é um novo índice espectral nem um diagnóstico agronômico: consiste no desenvolvimento e na avaliação de um artefato que reúne procedimentos existentes em um fluxo computacional documentado. Sua relevância para a Ciência da Computação está na integração de serviços, na arquitetura, na implementação verificável das operações e na análise de suas limitações.
+
+O uso de serviços acessíveis em contexto acadêmico não demonstra, por si só, economia financeira, facilidade de uso ou superioridade em relação a outras soluções. Essas propriedades exigiriam avaliações próprias, não realizadas neste texto.
+
+\subsection{Objetivos}
+
+O objetivo geral é desenvolver e avaliar uma plataforma computacional de apoio ao monitoramento agrícola, integrando imagens de satélite, índices espectrais, visualização temporal e dados climáticos.
+
+Como objetivos específicos, pretende-se:
+\begin{itemize}[leftmargin=3em]
+    \item investigar os fundamentos de sensoriamento remoto e índices pertinentes ao sistema;
+    \item organizar componentes de interface, processamento e acesso a serviços externos;
+    \item implementar a consulta a imagens Sentinel-2 e o cálculo de NDVI, NDWI e NDMI;
+    \item disponibilizar mapas, séries temporais, indicadores de variação e contexto climático;
+    \item verificar contratos e cálculos por testes e avaliar o fluxo funcional com evidências reproduzíveis;
+    \item documentar decisões técnicas, limitações e possibilidades de evolução.
+\end{itemize}
+
+\subsection{Delimitação e organização}
+
+O sistema opera sobre áreas e períodos selecionados pelo usuário. Seus indicadores são medidas indiretas: oscilações podem resultar de ciclo da cultura, manejo, clima ou qualidade das imagens, entre outros fatores. O trabalho não substitui observações de campo nem pretende identificar automaticamente causas de estresse. A avaliação funcional do software e a validação agronômica são problemas distintos; a segunda depende de referências externas apropriadas.
+
+A \cref{chap:fundamentacao-final} apresenta os fundamentos; a \cref{chap:metodos-final} descreve implementação e avaliação; as seções seguintes apresentam as evidências de software disponíveis, sua discussão e uma conclusão parcial. A avaliação agrícola e a publicação em nuvem ainda exigem evidências adicionais.
