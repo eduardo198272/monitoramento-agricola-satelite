@@ -22,7 +22,7 @@ class TestFilterByDate:
 
         result = filter_by_date(mock_collection, "2026-01-01", "2026-01-31")
 
-        mock_ee.Filter.date.assert_called_once_with("2026-01-01", "2026-01-31")
+        mock_ee.Filter.date.assert_called_once_with("2026-01-01", "2026-02-01")
         mock_collection.filter.assert_called_once_with("date_filter")
         assert result == mock_filtered
 
@@ -55,7 +55,7 @@ class TestFilterByDate:
         collection = MagicMock()
         filter_by_date(collection, date(2026, 1, 1), date(2026, 1, 31))
 
-        mock_ee.Filter.date.assert_called_once_with("2026-01-01", "2026-01-31")
+        mock_ee.Filter.date.assert_called_once_with("2026-01-01", "2026-02-01")
 
 
 class TestFilterByArea:

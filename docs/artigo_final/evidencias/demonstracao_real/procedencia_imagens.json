@@ -1,0 +1,6 @@
+{
+  "default": "Sessão demo9, manifesto.json",
+  "cap08_painel.png": "Captura de contexto da sessão demo8 (cap12_cursor.png), mesma versão, área e período; substitui captura prematura antes do mapa carregar",
+  "cap17_pdf.png": "pdftoppm, primeira página do PDF efetivamente baixado",
+  "mobile_resultados.png": "Chrome com has_touch=True, viewport 390x844; não dispositivo físico"
+}

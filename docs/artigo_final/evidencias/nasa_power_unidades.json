@@ -1,0 +1,30 @@
+{
+  "type": "Feature",
+  "geometry": {"type": "Point", "coordinates": [-52.0, -28.0, 668.29]},
+  "properties": {
+    "parameter": {
+      "PRECTOTCORR": {"20250101": 2.94, "20250102": 10.37},
+      "T2M": {"20250101": 23.58, "20250102": 23.29},
+      "ALLSKY_SFC_SW_DWN": {"20250101": 21.64, "20250102": 20.99}
+    }
+  },
+  "header": {
+    "title": "NASA/POWER Source Native Resolution Daily Data",
+    "api": {"version": "v2.10.3", "name": "POWER Daily API"},
+    "sources": ["MERRA2", "SYN1DEG"],
+    "fill_value": -999.0,
+    "time_standard": "LST",
+    "start": "20250101",
+    "end": "20250102"
+  },
+  "messages": [],
+  "parameters": {
+    "PRECTOTCORR": {"units": "mm/day", "longname": "Precipitation Corrected"},
+    "T2M": {"units": "C", "longname": "Temperature at 2 Meters"},
+    "ALLSKY_SFC_SW_DWN": {
+      "units": "MJ/m^2/day",
+      "longname": "All Sky Surface Shortwave Downward Irradiance"
+    }
+  },
+  "times": {"data": 0.126, "process": 0.01}
+}

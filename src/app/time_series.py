@@ -24,7 +24,10 @@ def compute_time_series(
         )
         value = stats.get(index_name)
         date_str = img.date().format("YYYY-MM-dd")
-        return ee.Feature(None, {"date": date_str, "value": value})
+        return ee.Feature(None, {
+            "date": date_str, "value": value,
+            "observation_id": img.get("system:index"),
+        })
 
     features = collection.map(reduce_image)
     features_list = features.toList(image_count)
@@ -39,6 +42,8 @@ def compute_time_series(
                 "date": props["date"],
                 "value": float(val)
             })
+            if props.get("observation_id"):
+                result[-1]["observation_id"] = props["observation_id"]
 
     result.sort(key=lambda x: x["date"])
     return result

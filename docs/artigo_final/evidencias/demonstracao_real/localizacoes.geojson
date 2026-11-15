@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Recorte demonstrativo"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -52.332,
+              -28.229
+            ],
+            [
+              -52.33,
+              -28.229
+            ],
+            [
+              -52.33,
+              -28.227
+            ],
+            [
+              -52.332,
+              -28.227
+            ],
+            [
+              -52.332,
+              -28.229
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

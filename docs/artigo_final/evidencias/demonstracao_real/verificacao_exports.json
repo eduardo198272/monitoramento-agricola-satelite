@@ -1,0 +1,153 @@
+{
+  "sheets": [
+    "Resumo",
+    "NDVI",
+    "NDWI",
+    "NDMI",
+    "Clima",
+    "Anomalias",
+    "Geografia"
+  ],
+  "rows": {
+    "Resumo": 9,
+    "NDVI": 3,
+    "NDWI": 3,
+    "NDMI": 3,
+    "Clima": 62,
+    "Anomalias": 1,
+    "Geografia": 6
+  },
+  "summary": [
+    [
+      "campo",
+      "valor",
+      "unidade"
+    ],
+    [
+      "periodo_inicial",
+      "2026-09-01",
+      null
+    ],
+    [
+      "periodo_final",
+      "2026-10-31",
+      null
+    ],
+    [
+      "area_ha",
+      4.357551414552949,
+      "ha"
+    ],
+    [
+      "imagens_analisadas",
+      2,
+      "imagens"
+    ],
+    [
+      "data_geracao",
+      "2026-11-15",
+      null
+    ],
+    [
+      "precipitacao_total_mm",
+      635.5600000000001,
+      "mm"
+    ],
+    [
+      "temperatura_media_c",
+      16.23918032786885,
+      "C"
+    ],
+    [
+      "radiacao_solar_media_mj_m2_dia",
+      null,
+      "MJ/m2/dia"
+    ]
+  ],
+  "series": {
+    "NDVI": [
+      [
+        "date",
+        "value",
+        "trend",
+        "anomaly",
+        "observation_id"
+      ],
+      [
+        "2026-09-08",
+        0.7569122287179881,
+        "decrescente",
+        false,
+        "20260908T133141_20260908T133559_T22JCP"
+      ],
+      [
+        "2026-10-20",
+        0.6554477796830454,
+        "decrescente",
+        false,
+        "20261020T133231_20261020T133233_T22JCP"
+      ]
+    ],
+    "NDWI": [
+      [
+        "date",
+        "value",
+        "trend",
+        "anomaly",
+        "observation_id"
+      ],
+      [
+        "2026-09-08",
+        0.2416267617048181,
+        "decrescente",
+        false,
+        "20260908T133141_20260908T133559_T22JCP"
+      ],
+      [
+        "2026-10-20",
+        0.1835199913973663,
+        "decrescente",
+        false,
+        "20261020T133231_20261020T133233_T22JCP"
+      ]
+    ],
+    "NDMI": [
+      [
+        "date",
+        "value",
+        "trend",
+        "anomaly",
+        "observation_id"
+      ],
+      [
+        "2026-09-08",
+        0.2679522343688764,
+        "decrescente",
+        false,
+        "20260908T133141_20260908T133559_T22JCP"
+      ],
+      [
+        "2026-10-20",
+        0.2064984517226206,
+        "decrescente",
+        false,
+        "20261020T133231_20261020T133233_T22JCP"
+      ]
+    ]
+  },
+  "sha256": {
+    "demonstracao.pdf": "0621697032aa9e12c361169ecc3837c89436098faf1af214ab00819952a977e1",
+    "demonstracao.xlsx": "e624ada5b03952d073041951a6d7adb23cbffeb27f1bd6fa826f379f0c3f4110",
+    "demonstracao.zip": "bdb7d5c53e8c9fad46d07332f1fb73d89cfe53b1135b541363af0e3c8f3f9ce1"
+  },
+  "zip": [
+    "resumo.csv",
+    "ndvi.csv",
+    "ndwi.csv",
+    "ndmi.csv",
+    "clima.csv",
+    "anomalias.csv",
+    "geografia.csv"
+  ],
+  "zip_errors": null
+}

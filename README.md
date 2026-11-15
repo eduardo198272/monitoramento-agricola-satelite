@@ -1,58 +1,67 @@
 # Sistema de Monitoramento Agrícola por Imagens de Satélite
 
-Projeto de TCC do curso de Ciência da Computação.
+Projeto de TCC em Ciência da Computação para apoiar o monitoramento agrícola
+com imagens Sentinel-2, índices de vegetação e umidade, dados climáticos e
+detecção de possíveis anomalias. Os resultados não substituem avaliação
+agronômica em campo.
 
-O relatório final utiliza o modelo institucional `CC-EC_TF-TC`. O arquivo
-principal e as instruções de compilação estão em [docs/artigo_final](docs/artigo_final/README.md).
+## Funcionalidades e tecnologias
 
-## Aplicação
+- Interface Python/Streamlit com seleção de área e mapas interativos.
+- Google Earth Engine para imagens Sentinel-2 e índices NDVI, NDWI e NDMI.
+- Séries temporais, tendências, alertas e dados climáticos da NASA POWER.
+- Exportação de resultados em PDF, XLSX e CSV; localizações em GeoJSON.
+- Localizações salvas em SQLite no modo local ou isoladas por sessão no ponto
+  de entrada web.
 
-A aplicação integra imagens Sentinel-2 no Google Earth Engine, índices NDVI,
-NDWI e NDMI, séries temporais, sinalizações de anomalias e contexto climático
-da NASA POWER. Os resultados podem ser exportados em PDF, XLSX e CSV ZIP.
-Os indicadores apoiam análise exploratória, não diagnóstico agronômico.
+## Instalação e execução
 
-Tecnologias utilizadas:
-
-- Python
-- Streamlit
-- Google Earth Engine
-- NASA POWER, Folium, Plotly, Pandas e NumPy
-- SQLite no uso local; memória por sessão e transferência GeoJSON na versão web
-
-## Execução
-
-Após instalar `requirements.txt` em um ambiente virtual:
+Na raiz do repositório, crie um ambiente virtual e instale as dependências:
 
 ```sh
-# Aplicação local, com SQLite e autenticação local do Earth Engine:
-.venv/bin/python -m streamlit run src/app/main.py
+python -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+```
 
-# Comportamento da versão web: sessões isoladas e conta de serviço:
+Os exemplos usam Linux/macOS; no Windows, use `.venv\Scripts\python`.
+Para acessar dados do Earth Engine é necessário um projeto habilitado e
+credenciais válidas. Para o ponto de entrada web, configure os Secrets conforme
+o [guia de deploy](docs/deploy-streamlit.md) e execute:
+
+```sh
 .venv/bin/python -m streamlit run streamlit_app.py
 ```
 
-A autenticação exige projeto habilitado e registrado no Earth Engine.
-Consulte [o guia de deploy](docs/deploy-streamlit.md) para configurar Secrets.
-Nunca versione `.env`, `secrets.toml` ou chaves JSON reais.
+Esse comando usa localizações temporárias por sessão e autenticação não
+interativa. Para executar o modo local com SQLite e autenticação interativa,
+configure `EE_PROJECT_ID` no ambiente ou em `.env` e execute:
 
-Na versão web, exporte as localizações em GeoJSON antes de sair ou recarregar
-a página e importe o arquivo quando voltar. Não há banco externo, recuperação
-automática entre sessões ou login de usuários.
+```sh
+.venv/bin/python -m streamlit run src/app/main.py
+```
 
-## Verificação e estado
+Não versione credenciais, `.env`, Secrets ou bancos locais. Veja o
+[guia de deploy](docs/deploy-streamlit.md) para detalhes, limitações e
+transferência de localizações entre sessões.
+
+## Testes
 
 ```sh
 COVERAGE_CORE=ctrace .venv/bin/python -m pytest -q
 ```
 
-Após a correção de seleção de área em 15/11/2026, a suíte passou com 686 testes e 100% de cobertura
-de linhas e ramificações em `src/app`. O tracer C evita uma divergência observada
-no SysMonitor do Python 3.14, sem reduzir a meta de cobertura.
-Veja [a verificação de seleção e busca](docs/validation/area-selection-regressions.md).
-O [registro inicial de preparação da nuvem](docs/validation/streamlit-cloud-readiness.md)
-preserva a execução anterior de 677 testes na revisão `a9a9677`.
+`pytest.ini` exige 100% de cobertura de linhas e ramificações para `src/app`.
+Os testes automatizados não substituem validação com serviços reais ou
+validação agronômica.
 
-O site foi publicado pelo responsável no Streamlit Community Cloud; a validação
-dos fluxos na aplicação hospedada continua em andamento. A avaliação agronômica,
-os estudos de caso e partes acadêmicas do relatório continuam pendentes.
+## Documentação
+
+- [Índice de especificações](docs/specs/index.md)
+- [Preparação e deploy no Streamlit Cloud](docs/deploy-streamlit.md)
+- [Registro de verificação de software](docs/validation/streamlit-cloud-readiness.md)
+- [Cenários de validação](docs/validation/scenarios.md)
+- [Relatório final do TCC e compilação](docs/artigo_final/README.md)
+- [Fluxo de desenvolvimento](docs/development-workflow.md)
+
+O projeto e o relatório acadêmico permanecem em desenvolvimento. Registros de
+validação datados descrevem a revisão e as condições informadas em cada documento.

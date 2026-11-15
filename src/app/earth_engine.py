@@ -1,5 +1,5 @@
 import ee
-from datetime import date
+from datetime import date, timedelta
 
 from src.app.utils import normalize_date
 
@@ -13,7 +13,9 @@ def filter_by_date(
     end_date = normalize_date(end_date)
     if start_date > end_date:
         raise ValueError("start_date deve ser menor ou igual a end_date")
-    return collection.filter(ee.Filter.date(start_date, end_date))
+    # UI dates are inclusive; Earth Engine's upper boundary is exclusive.
+    exclusive_end = (date.fromisoformat(end_date) + timedelta(days=1)).isoformat()
+    return collection.filter(ee.Filter.date(start_date, exclusive_end))
 
 
 def filter_by_area(collection: ee.ImageCollection, geometry: ee.Geometry) -> ee.ImageCollection:

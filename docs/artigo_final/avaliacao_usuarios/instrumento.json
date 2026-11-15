@@ -1,0 +1,751 @@
+[
+  {
+    "coluna": 1,
+    "pergunta": "Carimbo de data/hora",
+    "grupo": "carimbo",
+    "categorias_observadas": [],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 2,
+    "pergunta": "Você tem 18 anos ou mais, leu as informações acima e concorda voluntariamente em participar da pesquisa?",
+    "grupo": "triagem",
+    "categorias_observadas": [
+      "Sim"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 3,
+    "pergunta": "Qual é sua área de atuação?",
+    "grupo": "perfil",
+    "categorias_observadas": [
+      "Engenheiro agrônomo",
+      "Estudante de Agronomia ou áreas relacionadas",
+      "Outra",
+      "Pesquisador",
+      "Produtor rural",
+      "Profissional ou estudante de tecnologia",
+      "Técnico agrícola"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 4,
+    "pergunta": "Qual é seu nível de conhecimento em agricultura de precisão?",
+    "grupo": "perfil",
+    "categorias_observadas": [
+      "Avançado",
+      "Básico",
+      "Especialista",
+      "Intermediário"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 5,
+    "pergunta": "Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?",
+    "grupo": "perfil",
+    "categorias_observadas": [
+      "Frequentemente",
+      "Nunca",
+      "Ocasionalmente",
+      "Poucas vezes"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 6,
+    "pergunta": "Qual foi o resultado de cada atividade? [Buscar uma localização geográfica]",
+    "grupo": "tarefas",
+    "categorias_observadas": [
+      "Consegui sem ajuda"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 7,
+    "pergunta": "Qual foi o resultado de cada atividade? [Demarcar uma área no mapa]",
+    "grupo": "tarefas",
+    "categorias_observadas": [
+      "Consegui com ajuda",
+      "Consegui sem ajuda",
+      "Não tentei",
+      "Tentei, mas não consegui"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 8,
+    "pergunta": "Qual foi o resultado de cada atividade? [Salvar uma área]",
+    "grupo": "tarefas",
+    "categorias_observadas": [
+      "Consegui com ajuda",
+      "Consegui sem ajuda",
+      "Não tentei",
+      "Tentei, mas não consegui"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 9,
+    "pergunta": "Qual foi o resultado de cada atividade? [Realizar uma análise de índices espectrais]",
+    "grupo": "tarefas",
+    "categorias_observadas": [
+      "Consegui com ajuda",
+      "Consegui sem ajuda",
+      "Não tentei",
+      "Tentei, mas não consegui"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 10,
+    "pergunta": "Qual foi o resultado de cada atividade? [Explorar o mapa de distribuição dos índices]",
+    "grupo": "tarefas",
+    "categorias_observadas": [
+      "Consegui com ajuda",
+      "Consegui sem ajuda",
+      "Não tentei",
+      "Tentei, mas não consegui"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 11,
+    "pergunta": "Qual foi o resultado de cada atividade? [Consultar valores utilizando o cursor]",
+    "grupo": "tarefas",
+    "categorias_observadas": [
+      "Consegui com ajuda",
+      "Consegui sem ajuda",
+      "Não tentei",
+      "Tentei, mas não consegui"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 12,
+    "pergunta": "Qual foi o resultado de cada atividade? [Visualizar séries temporais e possíveis anomalias]",
+    "grupo": "tarefas",
+    "categorias_observadas": [
+      "Consegui com ajuda",
+      "Consegui sem ajuda",
+      "Não tentei",
+      "Tentei, mas não consegui"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 13,
+    "pergunta": "Qual foi o resultado de cada atividade? [Consultar informações meteorológicas]",
+    "grupo": "tarefas",
+    "categorias_observadas": [
+      "Consegui com ajuda",
+      "Consegui sem ajuda",
+      "Não tentei"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 14,
+    "pergunta": "Qual foi o resultado de cada atividade? [Exportar um relatório ou conjunto de dados]",
+    "grupo": "tarefas",
+    "categorias_observadas": [
+      "Consegui com ajuda",
+      "Consegui sem ajuda",
+      "Não tentei"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 15,
+    "pergunta": "Você conseguiu explorar pelo menos uma funcionalidade da plataforma?",
+    "grupo": "triagem",
+    "categorias_observadas": [
+      "Sim"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 16,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [A interface é fácil de compreender.]",
+    "grupo": "usabilidade",
+    "categorias_observadas": [
+      "1 – Discordo totalmente",
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 17,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [A navegação pela plataforma é intuitiva.]",
+    "grupo": "usabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 18,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [A organização das informações é adequada.]",
+    "grupo": "usabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 19,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [Consegui utilizar a plataforma sem auxílio externo.]",
+    "grupo": "usabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 20,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [A demarcação de áreas no mapa é fácil.]",
+    "grupo": "usabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 21,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [A configuração das análises é simples.]",
+    "grupo": "usabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 22,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [O tempo de resposta é satisfatório.]",
+    "grupo": "usabilidade",
+    "categorias_observadas": [
+      "1 – Discordo totalmente",
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 23,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [As funcionalidades são fáceis de localizar.]",
+    "grupo": "usabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 24,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [A apresentação visual é adequada.]",
+    "grupo": "usabilidade",
+    "categorias_observadas": [
+      "1 – Discordo totalmente",
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 25,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Busca por localização geográfica]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "2 – Pouco útil",
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 26,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Demarcação de áreas agrícolas]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "2 – Pouco útil",
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 27,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Salvamento e gerenciamento de áreas]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "2 – Pouco útil",
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 28,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Análise de índices espectrais]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "1 – Nada útil",
+      "2 – Pouco útil",
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 29,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Mapas temáticos com gradientes de cores]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "2 – Pouco útil",
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 30,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Consulta interativa de valores por pixel]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 31,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Gráficos de evolução temporal]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "2 – Pouco útil",
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 32,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Detecção de anomalias]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "2 – Pouco útil",
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 33,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Informações de temperatura e precipitação]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 34,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Geração de relatórios PDF]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "2 – Pouco útil",
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 35,
+    "pergunta": "Como você avalia a utilidade de cada funcionalidade? [Exportação em Excel e CSV]",
+    "grupo": "utilidade",
+    "categorias_observadas": [
+      "2 – Pouco útil",
+      "3 – Moderadamente útil",
+      "4 – Útil",
+      "5 – Muito útil",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Nada útil": 1,
+      "2 – Pouco útil": 2,
+      "3 – Moderadamente útil": 3,
+      "4 – Útil": 4,
+      "5 – Muito útil": 5
+    }
+  },
+  {
+    "coluna": 36,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [As informações apresentadas são compreensíveis.]",
+    "grupo": "aplicabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 37,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [Os mapas facilitam a interpretação dos índices espectrais.]",
+    "grupo": "aplicabilidade",
+    "categorias_observadas": [
+      "1 – Discordo totalmente",
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 38,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [Os gráficos facilitam o acompanhamento temporal da vegetação.]",
+    "grupo": "aplicabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 39,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [As informações meteorológicas complementam a análise.]",
+    "grupo": "aplicabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 40,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [A plataforma apresenta potencial para auxiliar no monitoramento agrícola.]",
+    "grupo": "aplicabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 41,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [Os relatórios apresentam informações relevantes.]",
+    "grupo": "aplicabilidade",
+    "categorias_observadas": [
+      "1 – Discordo totalmente",
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 42,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [Consideraria utilizar a plataforma em atividades profissionais ou acadêmicas.]",
+    "grupo": "aplicabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente",
+      "Não consegui avaliar"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 43,
+    "pergunta": "Indique seu nível de concordância com as afirmações. [Recomendaria a plataforma a pessoas interessadas no monitoramento agrícola.]",
+    "grupo": "aplicabilidade",
+    "categorias_observadas": [
+      "2 – Discordo parcialmente",
+      "3 – Neutro",
+      "4 – Concordo parcialmente",
+      "5 – Concordo totalmente"
+    ],
+    "escala_mapeada": {
+      "1 – Discordo totalmente": 1,
+      "2 – Discordo parcialmente": 2,
+      "3 – Neutro": 3,
+      "4 – Concordo parcialmente": 4,
+      "5 – Concordo totalmente": 5
+    }
+  },
+  {
+    "coluna": 44,
+    "pergunta": "Quais aspectos positivos você identificou na plataforma?",
+    "grupo": "abertas",
+    "categorias_observadas": [],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 45,
+    "pergunta": "Quais dificuldades você encontrou durante a utilização?",
+    "grupo": "abertas",
+    "categorias_observadas": [],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 46,
+    "pergunta": "Quais funcionalidades ou melhorias considera importantes para versões futuras?",
+    "grupo": "abertas",
+    "categorias_observadas": [],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 47,
+    "pergunta": "Em quais situações você considera que a plataforma poderia ser utilizada?",
+    "grupo": "abertas",
+    "categorias_observadas": [],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 48,
+    "pergunta": "Deseja acrescentar algum comentário ou sugestão?",
+    "grupo": "abertas",
+    "categorias_observadas": [],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 49,
+    "pergunta": "De 0 a 10, qual nota geral você atribui à plataforma?",
+    "grupo": "nota",
+    "categorias_observadas": [
+      "10",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "escala_mapeada": null
+  },
+  {
+    "coluna": 50,
+    "pergunta": "Descreva o que impediu o acesso ou a exploração da plataforma.",
+    "grupo": "triagem",
+    "categorias_observadas": [],
+    "escala_mapeada": null
+  }
+]

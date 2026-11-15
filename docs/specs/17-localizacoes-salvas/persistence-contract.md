@@ -1,8 +1,9 @@
 # Contrato de Persistência: Localizações Salvas
 
-Este documento fecha as decisões da SPEC-17-01 para o repositório SQLite. A
-implementação começa na SPEC-17-02; carregar a configuração não cria diretórios
-nem abre o banco.
+Este documento registra as decisões da SPEC-17-01 para o repositório SQLite,
+implementado a partir da SPEC-17-02. Carregar a configuração não cria diretórios
+nem abre o banco. O ponto de entrada web usa armazenamento por sessão em vez
+de SQLite; consulte o [guia de deploy](../../deploy-streamlit.md).
 
 ## Caminho e ciclo de vida
 

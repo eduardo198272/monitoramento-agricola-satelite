@@ -312,4 +312,4 @@ def test_map_interaction_forwards_all_component_parameters(monkeypatch):
     result = map_interaction.render_index_hover_map(**params)
 
     assert result == {"sample": 0.42}
-    component.assert_called_once_with(**params, default=None, width="stretch")
+    component.assert_called_once_with(**params, range=[-1, 1], default=None, width="stretch")

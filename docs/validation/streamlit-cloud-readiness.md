@@ -1,5 +1,14 @@
 # Verificação de software e preparação do Streamlit Cloud
 
+## Reexecução da suíte em 15/11/2026
+
+Na revisão de software `4b3cd2c`, em Linux com Python 3.14.4, o comando
+`COVERAGE_CORE=ctrace .venv/bin/python -m pytest -q` resultou em **686 testes
+aprovados** e **100% de cobertura de linhas e ramificações em `src/app`**.
+A medição não inclui `streamlit_app.py` na cobertura. Esta reexecução não
+incluiu novas verificações de serviços reais ou do deploy. O registro abaixo
+continua descrevendo a revisão anterior e suas condições.
+
 ## Identificação e escopo
 
 - Data de referência: 15/11/2026 (UTC).
