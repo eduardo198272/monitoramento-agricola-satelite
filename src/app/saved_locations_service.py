@@ -1,12 +1,15 @@
 """Domain operations for saved geographic locations."""
 
 from datetime import datetime, timezone
+import os
 import uuid
 from src.app.saved_locations_repository import (
     SavedLocationConflictError,
     SavedLocationsRepository,
 )
 from src.app.saved_locations_validation import prepare_saved_location
+from src.app.saved_locations_session import SessionLocationsRepository
+from src.app.locations_geojson import parse_locations_geojson, export_locations_geojson
 
 
 class SavedLocationDuplicateError(ValueError):
@@ -20,22 +23,28 @@ class SavedLocationServiceError(RuntimeError):
 class SavedLocationsService:
     """Validate and orchestrate location operations through a repository."""
 
-    def __init__(self, repository: SavedLocationsRepository | None = None):
-        self.repository = repository or SavedLocationsRepository()
+    def __init__(
+        self, repository: SavedLocationsRepository | SessionLocationsRepository | None = None
+    ):
+        if repository is not None:
+            self.repository = repository
+        elif os.getenv("SAVED_LOCATIONS_STORAGE", "sqlite") == "session":
+            import streamlit as st
+
+            if "_saved_location_records" not in st.session_state:
+                st.session_state["_saved_location_records"] = {}
+            self.repository = SessionLocationsRepository(
+                st.session_state["_saved_location_records"]
+            )
+        elif os.getenv("SAVED_LOCATIONS_STORAGE", "sqlite") == "sqlite":
+            self.repository = SavedLocationsRepository()
+        else:
+            raise SavedLocationServiceError("Modo de armazenamento de localizações inválido.")
 
     def save_location(self, name: str, geojson: dict) -> dict:
         """Validate and persist a location, returning its complete record."""
         prepared = prepare_saved_location(name, geojson)
-        center = _bounding_box_center(prepared["geojson"])
-        now = datetime.now(timezone.utc).isoformat()
-        record = {
-            **prepared,
-            "id": str(uuid.uuid4()),
-            "center_lat": center["lat"],
-            "center_lon": center["lon"],
-            "created_at": now,
-            "updated_at": now,
-        }
+        record = _build_record(prepared)
 
         self.repository.initialize()
         try:
@@ -72,6 +81,42 @@ class SavedLocationsService:
         """Delete one location and return whether it existed."""
         self.repository.initialize()
         return self.repository.delete_location(location_id)
+
+    def import_locations(self, payload: bytes) -> int:
+        """Import a fully validated batch atomically; never overwrite a location."""
+        records = [_build_record(prepared) for prepared in parse_locations_geojson(payload)]
+        self.repository.initialize()
+        try:
+            self.repository.insert_locations(records)
+        except SavedLocationConflictError as error:
+            raise SavedLocationDuplicateError(
+                "Um nome do arquivo já existe nas localizações salvas. "
+                "Nenhuma localização foi importada."
+            ) from error
+        return len(records)
+
+    def export_locations(self) -> bytes:
+        summaries = self.list_saved_locations()
+        locations = []
+        for summary in summaries:
+            record = self.get_saved_location(summary["id"])
+            if record is None:
+                raise SavedLocationServiceError("Uma localização não pôde ser exportada.")
+            locations.append(record)
+        return export_locations_geojson(locations)
+
+
+def _build_record(prepared: dict) -> dict:
+    center = _bounding_box_center(prepared["geojson"])
+    now = datetime.now(timezone.utc).isoformat()
+    return {
+        **prepared,
+        "id": str(uuid.uuid4()),
+        "center_lat": center["lat"],
+        "center_lon": center["lon"],
+        "created_at": now,
+        "updated_at": now,
+    }
 
 
 def _bounding_box_center(geojson: dict) -> dict[str, float]:
