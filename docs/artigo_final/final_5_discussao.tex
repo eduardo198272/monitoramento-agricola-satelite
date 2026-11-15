@@ -18,11 +18,11 @@ OE4 & Implementado & Composição, média e consulta local; contrato de escala c
 OE5 & Implementado & Série, tendência e regra unilateral exercitadas com dados controlados; sem acurácia agronômica atribuída. \\
 OE6 & Implementado & Clima compartilhado, unidade normalizada e resumo propagado; ausência tratada explicitamente. \\
 OE7 & Implementado & PDF, XLSX, CSV ZIP e GeoJSON exercitados com entradas controladas; não equivalem a pacote completo de reprodução. \\
-OE8 & Parcialmente concluído & Suíte e fluxo real com downloads executados; pesquisa com usuários sem resultados e estudos por cultura não realizados. \\ \hline
+OE8 & Parcialmente concluído & Suíte, demonstração e análise de 31 submissões declaradas reais; independência pessoal não autenticada e estudos por cultura não realizados. \\ \hline
 \end{tabular}
 \end{table*}
 
-Na proposta, NDVI e NDWI eram o foco e NDMI aparecia como evolução futura. A implementação incorporou NDMI, exploração numérica no navegador, modos de armazenamento e exportações estruturadas. A ausência original de banco foi substituída por SQLite local e, posteriormente, por alternativa de sessão para o ponto de entrada web. Essas adições são resultados de engenharia e não substituem o objetivo original de validar o protótipo em áreas de soja, milho e pastagem.
+Na proposta, NDVI e NDWI eram o foco, e NDMI aparecia como evolução futura. Ao longo do desenvolvimento, foram incorporados NDMI, consulta numérica no navegador, alternativas de armazenamento e exportações estruturadas. O planejamento sem banco de dados deu lugar ao SQLite local e, posteriormente, ao armazenamento por sessão no ponto de entrada web. Essas ampliações produziram recursos de engenharia, mas não evidências adicionais sobre o comportamento de culturas.
 
 Os estudos de soja, milho e pastagem, experimentos controlados e coleta em campo previstos não foram realizados. A avaliação concentrou-se no artefato computacional. Essa delimitação mantém a contribuição de engenharia, mas não substitui o objetivo experimental original e requer apreciação do orientador.
 
@@ -30,19 +30,29 @@ Outros requisitos das especificações também exigem distinção. O fluxo atual
 
 \subsection{Contribuições de Engenharia de Software}
 
-A plataforma articula representações heterogêneas: texto de busca, coordenadas, polígonos, operações remotas de imagem, matrizes comprimidas, séries e arquivos. O encapsulamento em serviço e repositórios permite manter as regras de nome e transferência independentemente do armazenamento local ou de sessão. O snapshot de exportação reduz a possibilidade de gerar arquivos associados a parâmetros diferentes dos que produziram os dados.
+Ao passar da seleção de uma área para um arquivo de resultados, a aplicação precisa preservar o significado dos dados entre representações diferentes. Um nome de lugar não é um limite de propriedade, uma composição não é uma aquisição, e o centro usado para enquadrar o mapa não é necessariamente o centroide analítico. A divisão em módulos torna essas fronteiras identificáveis. No armazenamento, serviço e repositórios mantêm as regras de nome e transferência sob alternativas distintas; na exportação, o snapshot permite conferir se os parâmetros atuais correspondem aos dados processados.
 
-O componente de consulta local é uma decisão de interação relevante: transfere uma grade após a análise para evitar requisições por movimento do cursor. Em contrapartida, impõe custo de memória e transferência, depende de suporte do navegador e limita o tamanho da região. Trata-se de um compromisso explícito de engenharia, não de comprovação de baixa latência em qualquer área.
+A consulta local evidencia um compromisso entre interação e volume de dados. Transferir a grade após a análise evita consultar um valor remoto a cada movimento do cursor, mas antecipa o custo de transferência e ocupa memória no navegador. Por isso, o tamanho da região é limitado e a execução depende de recursos compatíveis no cliente. A medição com matrizes controladas mostra a variação da compressibilidade, não comprova baixa latência para qualquer área.
 
 As exportações disponibilizam informações fora da interface e permitem conferir dados com outras ferramentas. O PDF sintetiza, enquanto tabelas e GeoJSON preservam estruturas reutilizáveis. Contudo, não há exportação de toda a proveniência necessária à reconstrução exata do processamento. Interoperabilidade e transparência são ampliadas, mas reprodutibilidade integral ainda requer versões, IDs, parâmetros e dados auxiliares adicionais.
 
 \subsection{Consistência das integrações e limites dos testes}
 
-A divergência corrigida na radiação evidencia a diferença entre cobertura e correção semântica: a execução dos caminhos não verifica, por si só, a unidade de origem. A interpretação explícita dos metadados e sua reutilização em resumo e exportações reduziram a duplicação dessa regra.
+A divergência da radiação mostra por que a avaliação não pode se limitar à cobertura de código. Uma conversão pode executar todos os seus caminhos e ainda partir de uma unidade incorreta. Nesse caso, foi necessário confrontar o valor com os metadados de origem e representar a diferença entre MJ e kWh nos testes. Compartilhar a normalização entre resumo e exportações também evita manter versões independentes da mesma regra.
 
 A legenda passou a compartilhar o intervalo dos tiles. O mapa interativo favorece contraste interno ao recorte, enquanto o PDF mantém escala fixa, útil para referência comum entre relatórios. Aparências distintas podem ser corretas quando cada escala é comunicada.
 
 A harmonização dos pipelines e a associação por aquisição preservam a interpretação dos registros entre modos e formatos. O identificador melhora a proveniência tabular, embora ainda não constitua inventário completo de processamento. A invalidação de estado complementa esse cuidado ao impedir apresentação de resultados sob parâmetros analíticos diferentes.
+
+\subsection{Percepção de uso e prioridades de engenharia}
+
+A avaliação reúne três dimensões que não devem ser confundidas: os testes exercitam regras computacionais, a demonstração registra um fluxo funcional e o questionário descreve percepções e tarefas autodeclaradas. O contraste entre a cobertura dos testes e dificuldades de demarcação, navegação e séries/anomalias mostra que verificar a implementação não garante compreensão do fluxo. À luz da distinção entre facilidade e utilidade percebidas \citep{DAVIS1989}, o interesse por um recurso pode coexistir com dificuldade para executá-lo ou interpretá-lo.
+
+A consulta por pixel ilustra esse contraste. Entre quem a avaliou, houve 20/23 respostas útil/muito útil, mas oito registros não conseguiram avaliá-la e cinco declararam não tentar a atividade correspondente. Essas categorias não são intercambiáveis e não foram convertidas em avaliação neutra. Elas indicam a necessidade de investigar descoberta do recurso, instruções e condições de acesso, sem presumir que a grade local tenha sido percebida ou utilizada por todos.
+
+Os relatos também delimitam a comunicação científica da interface. Termos como fertilidade, compactação e diagnóstico surgem nas respostas, mas o sistema não produz essas inferências. Explicar bandas, janela estatística, suporte meteorológico e diferenças de escala pode ser mais relevante do que acrescentar classes de cores que reforcem interpretações indevidas. As sugestões sobre fenologia, manejo, formatos e acesso móvel devem ser tratadas como requisitos candidatos, não funcionalidades já implementadas ou evidência de ganhos de produtividade.
+
+As respostas referem-se à versão pública anterior às correções locais. Portanto, não demonstram satisfação com a legenda harmonizada, a normalização de radiação, o resumo climático multiíndice ou os demais contratos corrigidos. A associação entre uma dificuldade relatada e um defeito específico exige reprodução na versão efetivamente acessada. Como seu commit e os logs individuais não estão disponíveis, não se atribui causalidade a uma correção. Os cruzamentos também não sustentam diferenças populacionais: há predomínio de agrônomos, grupos pequenos, autoavaliação e independência pessoal não verificável.
 
 \subsection{Limitações espaciais, temporais e estatísticas}
 
@@ -60,6 +70,8 @@ O serviço público Nominatim limita o tráfego agregado da aplicação a uma re
 
 Na web, visitantes compartilham a conta de serviço e o consumo de cotas, embora os registros estejam separados por sessão. GeoJSON e arquivos de resultados podem conter coordenadas sensíveis, e a privacidade dos arquivos transferidos fica sob responsabilidade de quem os armazena e compartilha. O isolamento de sessão não constitui sistema de autorização de propriedades.
 
-Não foram conduzidos testes de carga, ensaios representativos de latência, comparação quantitativa com plataformas ou avaliação de campo. A pesquisa de experiência de uso permanece sem resultados analisados; sua amostragem por adesão limitará generalizações. A resolução das bandas e dos dados meteorológicos, a dependência de serviços e cotas, a memória da grade no navegador e a natureza heurística das anomalias delimitam o uso. A máscara QA60 foi preservada: uma substituição por SCL ou probabilidade de nuvens exige verificação de classes, sombras, disponibilidade histórica e efeitos sobre os resultados, não apenas troca de API.
+Não foram conduzidos testes de carga, ensaios representativos de latência, comparação quantitativa com plataformas ou avaliação de campo. A pesquisa por adesão descreve o recorte recebido, com procedência declarada pelo autor, e não permite generalização populacional. A retificação autorizada de sete carimbos preservou as respostas, mas o fuso, o encerramento formal da coleta e o identificador da versão publicada permanecem pendentes. A codificação qualitativa assistida por IA requer apreciação substantiva do autor e não oferece concordância independente entre avaliadores. Assim, as evidências sustentam o fluxo demonstrado, as regras testadas e as percepções registradas, não a adequação a qualquer condição operacional.
+
+A substituição da QA60 pela classificação de cena SCL (\textit{Scene Classification Layer}) ou por probabilidade de nuvens também requer avaliação própria: é necessário verificar classes, sombras, disponibilidade histórica e efeitos nos resultados antes de alterar o processamento.
 
 A inspeção visual identificou contraste insuficiente em alguns textos quando os estilos escuros se combinam ao tema de widgets do ambiente. A emulação móvel confirmou reorganização e lookup por toque, mas não substitui ensaios de acessibilidade ou uma matriz de dispositivos e navegadores.

@@ -1,5 +1,19 @@
 # Pesquisa de experiência de uso
 
+## Atualização com a planilha recebida
+
+A avaliação foi executada sobre 31 submissões elegíveis, declaradas reais pelo
+autor, da planilha `docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx`.
+O autor autorizou retificar sete carimbos de 16/17 para 15/11/2026; a cópia
+recebida e as respostas foram preservadas. A unidade é submissão, não pessoa
+independentemente autenticada. A análise refere-se à versão pública anterior
+às correções, sem deploy. Documentação e comandos atuais:
+[avaliação com usuários](avaliacao_usuarios/README.md).
+
+Os procedimentos genéricos abaixo são o protocolo de preparação da rodada
+anterior; os scripts XLSX, escalas mapeadas e resultados atuais estão na pasta
+acima. Não usar o exemplo CSV como instrumento desta coleta.
+
 ## Instrumento e alcance
 
 - Formulário: https://forms.gle/VXqtdCgH9us774VE6
@@ -12,7 +26,8 @@
   dados pessoais, explorar a plataforma antes e reservar 5–8 minutos para responder.
 - Nenhuma resposta foi enviada e nenhuma resposta existente foi modificada.
 - As perguntas posteriores à triagem não foram percorridas por envio do formulário.
-  Solicitar ao autor uma cópia do instrumento completo e dos cabeçalhos exportados.
+  Seus cabeçalhos e categorias foram posteriormente mapeados na planilha recebida;
+  regras de navegação/obrigatoriedade não foram autenticadas no editor Forms.
 
 ## Dados necessários e ética
 
@@ -68,9 +83,9 @@ Revisar toda citação e risco de reidentificação antes de inserir no artigo.
 
 ## Integridade e pendências
 
-Não há dataset real fornecido nem estatísticas oficiais calculadas. Os dois testes
-em `tests/test_user_survey_analysis.py` usam somente dados sintéticos embutidos,
-sem participantes reais. O script exige natureza explícita e impede saída sintética
-sob `artigo_final`. Ainda cabe ao responsável conferir a origem de qualquer CSV.
-Permanecem pendentes: instrumento completo, dados reais, análise temática,
-gráficos, limitações observadas e revisão com orientador.
+Na rodada anterior não havia dataset fornecido. Agora há análise quantitativa,
+codificação discursiva e gráficos da planilha, com procedência declarada pelo
+autor e limites explícitos. Os dois testes antigos continuam sintéticos,
+separados dos oito testes sintéticos da nova rotina XLSX e dos resultados
+das 31 submissões. Permanecem pendentes a aprovação da codificação, o commit
+público, encerramento/fuso da coleta e os procedimentos éticos institucionais.

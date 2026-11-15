@@ -16,15 +16,20 @@
 | Cinco esquemas científicos | Concluída | `fig/conceitos.tex`, explícitos como ilustrações |
 | Comparação de plataformas | Parcialmente concluída | EOSDA/OneSoil/fontes oficiais; EO Browser HTTP 403 |
 | Resumo, discussão e conclusão | Concluída | Dados atuais, sem resultados fictícios |
-| Compilar e inspecionar PDF | Concluída | 28 páginas; folhas de contato de todas as páginas, detalhes de produtos |
+| Compilar e inspecionar PDF | Atualizada na integração da pesquisa | Consultar `avaliacao_usuarios/VALIDACAO_FINAL.md`; a paginação de 28 folhas pertence à rodada anterior |
 | Avisos institucionais de cabeçalho | Pendente de verificação | Classe preservada; overfull/headheight registrados |
 | Contraste de alguns widgets | Pendente de verificação | Identificado em capturas; revisão de acessibilidade recomendada |
 | Capturas CAP-01–17 | Concluída | Sessão real; CAP-17 rasterização do PDF gerado |
 | Capturas Excel e ZIP em visualizador | Pendente de verificação | Conteúdo validado programaticamente; CAP-18/19 mantidas no plano |
 | Link público e QR | Concluída | HTTP 200 em Chrome; QR decodificado |
 | Protocolo e script da pesquisa | Concluída | Documento/config/template/testes sintéticos separados |
-| Instrumento completo e respostas reais | Pendente do autor | Nenhum dataset de participantes fornecido |
-| Análise quantitativa/qualitativa da pesquisa | Pendente do autor | Executar após conferência de instrumento, escalas e dados |
+| Cabeçalhos/escalas e respostas | Concluída no nível da planilha | 50 colunas mapeadas; 31 submissões declaradas reais; lógica completa do Forms não autenticada |
+| Retificação de datas | Concluída com autorização | Sete carimbos 16/17→15; horários e respostas inalterados; backup privado |
+| Procedência e independência | Documentadas com limites | Sem correspondência com fixtures; declaração do autor não autentica identidades |
+| Análise quantitativa | Concluída | 40 itens fechados, nota geral, distribuições completas e seis cruzamentos descritivos |
+| Análise temática | Executada, aprovação pendente | 142 células, treze temas multirrótulo; assistência de IA declarada, sem dupla codificação |
+| Gráficos e tabelas da pesquisa | Concluída | Nove gráficos PDF/SVG/PNG; CSV, tabelas LaTeX e indicadores gerados |
+| Versão pública avaliada | Distinta da versão aprimorada | Não atribuir correções aos participantes; commit público e encerramento pendentes |
 | Procedimentos éticos | Pendente do orientador | Não atribuir CEP/dispensa sem documento |
 | Estudos de soja/milho/pastagem | Fora do escopo executado | Não realizados; apreciação da mudança pelo orientador |
 | Mês da defesa e depósito institucional | Pendente do autor | Campo mês vazio, não inventado; nenhum ID de publicação confirmado |
@@ -35,3 +40,7 @@
 O PDF compilado é uma versão de revisão, não uma declaração de encerramento
 da coleta ou de aprovação institucional. A verificação visual e o registro de
 compilação estão em `REVISAO_TCC.md`.
+
+A integração de usuários está em `avaliacao_usuarios/`, com metodologia,
+qualidade, resultados e validação próprios. Não declarar encerramento da coleta
+ou aprovação acadêmica apenas porque os cálculos/compilação foram conferidos.

@@ -2,7 +2,7 @@
 
 \subsection{Organização e entrada espacial}
 
-A interface concentra busca, datas, índices e acionamento da análise, mantendo o mapa como elemento central. Antes do processamento, esse espaço recebe a seleção; depois, apresenta a composição temática. A proximidade entre parâmetros e representação espacial reduz a necessidade de manipular arquivos raster para explorar uma região.
+A exploração de uma região começa pela definição da área e do período. A interface reúne busca, datas, índices e acionamento da análise em torno do mapa, que recebe a demarcação antes do processamento e apresenta a composição temática depois dele. Esse fluxo permite consultar os produtos sem que o usuário tenha de manipular diretamente os arquivos raster.
 
 \capturatcc{cap01_interface}{CAP-01}{Interface inicial, com controles analíticos e mapa de seleção}{}
 \capturatcc{cap02_busca}{CAP-02}{Busca geográfica por Passo Fundo e enquadramento do mapa-base}{}
@@ -36,11 +36,11 @@ Os mapas representam a mediana temporal por posição. O gradiente permite explo
 
 \subsection{Exploração espacial, temporal e meteorológica}
 
-A consulta por posição apresenta o valor de uma célula da composição já transferida, não a média da área ou uma aquisição individual. Movimento e toque utilizam o mesmo lookup no navegador; estados fora da geometria, sem dado ou além da matriz são tratados explicitamente. As quatro casas decimais são uma escolha de apresentação.
+A consulta por posição permite examinar diferenças dentro da área ao apresentar o valor de uma célula da composição já transferida. Movimento e toque utilizam a mesma consulta local no navegador, com mensagens para posições fora da geometria, sem dado ou além da matriz. As quatro casas decimais são uma escolha de apresentação, não uma medida de precisão agronômica.
 
 \capturatcc{cap12_cursor}{CAP-12}{Leitura local de célula na composição por posição}{}
 
-A série temporal apresenta médias espaciais por aquisição. Lacunas e datas repetidas permanecem no eixo temporal; a aplicação não interpola uma trajetória diária. A lista de anomalias informa as quedas sinalizadas pela janela anterior, ou a ausência de sinalizações. O gráfico padrão não classifica doenças nem identifica sua causa.
+Enquanto o mapa resume o período, a série temporal apresenta a média espacial de cada aquisição. O gráfico une os pontos por segmentos de reta, mas a aplicação não calcula valores diários intermediários nem elimina datas repetidas. A lista de anomalias informa as quedas sinalizadas em relação à janela anterior, ou a ausência de sinalizações. Esses recursos permitem examinar mudanças na série, sem classificar doenças ou identificar suas causas.
 
 \capturatcc{cap13_series}{CAP-13}{Série temporal de médias espaciais e estado de sinalização}{}
 \capturatcc{cap14_anomalias}{CAP-14}{Apresentação das sinalizações de desvio temporal}{}
@@ -58,7 +58,7 @@ A interface distingue preparação e download dos arquivos. O PDF sintetiza resu
 \capturatcc{cap18_xlsx}{CAP-18}{Organização tabular dos resultados exportados}{}
 \capturatcc{cap19_zip}{CAP-19}{Conteúdo CSV distribuído no arquivo ZIP}{}
 
-As saídas permitem conferência e reutilização fora da interface. Não incluem raster GeoTIFF nem toda a proveniência necessária para reconstruir exatamente o processamento remoto. O plano visual complementar conserva as capturas ainda não consolidadas, sem apresentar placeholders como evidência.
+As saídas permitem conferir e reutilizar informações fora da interface, mas não incluem raster GeoTIFF nem toda a proveniência necessária para reconstruir exatamente o processamento remoto. Os arquivos XLSX e ZIP da demonstração foram verificados programaticamente; suas capturas em visualizadores próprios permanecem pendentes e, por isso, não são apresentadas como evidência visual concluída.
 
 \subsection{Adaptabilidade e acesso público}
 
@@ -67,7 +67,7 @@ O CSS possui regras para larguras até 1.100, 768 e 480 pixels, reorganizando os
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.74\columnwidth,height=0.43\textheight,keepaspectratio]{fig/capturas/mobile_resultados.png}
-\caption{Viewport de 390 pixels, com consulta por toque e legenda NDMI. Emulação em Chrome, não telefone físico. Fonte: captura real da aplicação local.}
+\caption{Consulta por toque e legenda NDMI em área de visualização de 390 $\times$ 844 pixels. Emulação em Chrome, não telefone físico. Fonte: captura real da aplicação local.}
 \label{fig:mobile}
 \end{figure}
 

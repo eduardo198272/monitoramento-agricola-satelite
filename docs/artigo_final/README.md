@@ -18,6 +18,12 @@ implementação observada, não uma validação operacional dos fluxos.
 
 ## Documentos da revisão
 
+Antes de redigir ou revisar conteúdo acadêmico, consulte integralmente o
+[perfil autoral e protocolo de revisão](../PERFIL_AUTORAL_E_PROTOCOLO_REVISAO.md).
+As alterações da revisão autoral estão disponíveis para aprovação do autor no
+[relatório específico](RELATORIO_REVISAO_AUTORAL.md), com diagnóstico, plano por
+seção, conferência de fontes e pendências.
+
 - [Análise técnica e observações do software](ANALISE_TECNICA_TCC.md)
 - [Matriz de rastreabilidade](RASTREABILIDADE_TCC.md)
 - [Inventário de capturas, sete diagramas e cinco esquemas científicos](FIGURAS_PENDENTES.md)
@@ -26,6 +32,7 @@ implementação observada, não uma validação operacional dos fluxos.
 - [Correções técnicas e testes de regressão](CORRECOES_TECNICAS.md)
 - [Pesquisa com usuários e incorporação de respostas reais](PESQUISA_USUARIOS.md)
 - [Checklist de entrega](CHECKLIST_ENTREGA.md)
+- [Avaliação com usuários: planilha, análise e gráficos](avaliacao_usuarios/README.md)
 
 As capturas existentes são reais; imagens ausentes não geram placeholders.
 CAP-18/19 continuam planejadas para visualizador de planilha/ZIP.
@@ -68,7 +75,8 @@ backup histórico, não a versão atual nem parte desta atualização versionada
 - Revisar com o orientador a mudança de escopo: estudos de soja, milho e pastagem
   e experimentos de campo não foram realizados; não são resultados do artigo.
 - Concluir capturas de Excel/ZIP em visualizador e avaliação em aparelhos físicos.
-- Receber instrumento completo e respostas reais da pesquisa; conferir ética com orientador.
+- Aprovar codificação e interpretação das 31 submissões recebidas, confirmar
+  versão pública/encerramento/fuso da coleta e conferir ética com o orientador.
 - Revisar a adequação histórica da QA60 e compatibilidade de navegadores.
 - Autorizar/publicar correções somente em atividade posterior, fora desta execução.
 - Não remover essas ressalvas apenas porque os testes de software passaram.

@@ -1,0 +1,16 @@
+grupo,coluna,rotulo,categoria,valor,frequencia,n_valido,percentual_valido
+perfil,3,Qual é sua área de atuação?,Engenheiro agrônomo,,18,31,58.064516129032256
+perfil,3,Qual é sua área de atuação?,Estudante de Agronomia ou áreas relacionadas,,1,31,3.225806451612903
+perfil,3,Qual é sua área de atuação?,Outra,,2,31,6.451612903225806
+perfil,3,Qual é sua área de atuação?,Pesquisador,,2,31,6.451612903225806
+perfil,3,Qual é sua área de atuação?,Produtor rural,,3,31,9.67741935483871
+perfil,3,Qual é sua área de atuação?,Profissional ou estudante de tecnologia,,2,31,6.451612903225806
+perfil,3,Qual é sua área de atuação?,Técnico agrícola,,3,31,9.67741935483871
+perfil,4,Qual é seu nível de conhecimento em agricultura de precisão?,Avançado,,14,31,45.16129032258065
+perfil,4,Qual é seu nível de conhecimento em agricultura de precisão?,Básico,,4,31,12.903225806451612
+perfil,4,Qual é seu nível de conhecimento em agricultura de precisão?,Especialista,,5,31,16.129032258064516
+perfil,4,Qual é seu nível de conhecimento em agricultura de precisão?,Intermediário,,8,31,25.806451612903224
+perfil,5,Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?,Frequentemente,,7,31,22.580645161290324
+perfil,5,Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?,Nunca,,2,31,6.451612903225806
+perfil,5,Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?,Ocasionalmente,,11,31,35.483870967741936
+perfil,5,Você já utilizou ferramentas de monitoramento agrícola por imagens de satélite?,Poucas vezes,,11,31,35.483870967741936

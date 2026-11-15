@@ -4,15 +4,15 @@
 
 A agricultura digital envolve o emprego de dados e sistemas computacionais em atividades agrícolas. No recorte da agricultura de precisão, a variabilidade espacial e temporal é relevante para diferenciar condições dentro de uma área, em vez de assumir comportamento uniforme. Revisões sobre aplicações agrícolas de sensoriamento remoto e computação indicam diversidade de sensores, algoritmos e tarefas \citep{WEISS2020,PATRICIO2018}. O presente trabalho ocupa o nível de disponibilização e exploração de informações; não implementa prescrição de insumos, controle de máquinas ou recomendação de manejo.
 
-A representação georreferenciada permite associar valores a posições e áreas. Polígonos delimitam a região de interesse, enquanto grades raster organizam medidas por células. Um mapa temático transforma valores numéricos em símbolos ou cores; sua legenda informa a correspondência entre o domínio dos dados e a representação visual. Cores semelhantes em mapas com escalas distintas não implicam valores equivalentes. Essa distinção é necessária quando se compara uma visualização ajustada ao intervalo observado com outra que utiliza intervalo fixo.
+A representação georreferenciada associa informações a posições e áreas. Na aplicação, o polígono delimita onde a análise será realizada, enquanto a grade raster organiza os valores em células. Para apresentar esses valores em um mapa temático, é necessário estabelecer uma correspondência entre números e cores, comunicada pela legenda. Assim, cores semelhantes em mapas com escalas distintas não indicam necessariamente valores equivalentes. Esse cuidado é importante ao comparar uma visualização ajustada ao intervalo observado com outra de intervalo fixo.
 
 \subsection{Sensoriamento remoto multiespectral e Sentinel-2}
 
-Sensores ópticos multiespectrais registram a resposta da superfície em faixas do espectro eletromagnético. Diferenças entre essas faixas permitem construir indicadores associados a características da vegetação e da água. Sua interpretação depende do alvo, da atmosfera, da geometria de observação e da qualidade do produto \citep{WEISS2020}. O MSI da missão Sentinel-2 observa treze bandas, distribuídas em resoluções espaciais nominais de 10, 20 e 60 m. A revisita nominal da configuração de dois satélites é de cinco dias; isso não garante uma observação utilizável da área a cada cinco dias, em razão de nuvens, cobertura e filtros \citep{ESA_SENTINEL2}.
+Sensores ópticos multiespectrais registram a resposta da superfície em faixas do espectro eletromagnético. As diferenças entre essas faixas permitem construir indicadores associados à vegetação e à água, cuja interpretação depende do alvo, da atmosfera, da geometria de observação e da qualidade do produto \citep{WEISS2020}. O instrumento multiespectral MSI (\textit{MultiSpectral Instrument}) da missão Sentinel-2 observa treze bandas, com resoluções espaciais nominais de 10, 20 e 60 m. A revisita nominal da configuração de dois satélites é de cinco dias, mas nuvens, cobertura e filtros podem impedir o aproveitamento de uma aquisição \citep{ESA_SENTINEL2}. Portanto, essa frequência nominal não equivale à frequência de pontos válidos em uma série.
 
 O catálogo \texttt{COPERNICUS/S2\_SR\_HARMONIZED} fornece produtos Level-2A de reflectância de superfície, harmonizando diferenças introduzidas por mudanças de linha de processamento. O produto catalogado possui doze bandas espectrais, não incluindo B10, e bandas auxiliares de qualidade. O fator de escala de reflectância informado é $10^{-4}$ \citep{GOOGLE_S2_SR}. O sistema consome esse produto processado; não realiza calibração instrumental ou correção atmosférica própria.
 
-As bandas B4 e B8 correspondem ao vermelho e ao infravermelho próximo amplo, com resolução nominal de 10 m. B8A é uma faixa mais estreita no infravermelho próximo e B11 corresponde ao infravermelho de ondas curtas, ambas de 20 m. A resolução espacial nativa não se torna mais fina pela simples solicitação de uma grade a 10 m. Uma saída nessa escala representa uma escolha computacional de amostragem, não a criação de novas observações físicas \citep{GOOGLE_S2_SR}.
+As bandas B4 e B8 correspondem ao vermelho e ao infravermelho próximo (NIR, \textit{Near Infrared}) amplo, com resolução nominal de 10 m. B8A é uma faixa mais estreita no NIR, e B11 corresponde ao infravermelho de ondas curtas (SWIR, \textit{Shortwave Infrared}), ambas de 20 m. Essa diferença precisa ser considerada quando as bandas são combinadas: solicitar uma grade de saída a 10 m não torna mais fina a resolução nativa das observações de 20 m. Trata-se de uma escolha de amostragem, não da criação de novas observações físicas \citep{GOOGLE_S2_SR}.
 
 \subsection{Índices espectrais e nomenclatura}\label{sec:indices-final}
 
@@ -20,7 +20,7 @@ A diferença normalizada entre respostas $A$ e $B$ é dada por $(A-B)/(A+B)$, qu
 
 \subsubsection{NDVI}
 
-O NDVI relaciona a resposta no infravermelho próximo à resposta no vermelho, explorando o contraste espectral associado à vegetação. O registro NASA do trabalho de \citet{ROUSE1974_NTRS} descreve o uso de razões de bandas ERTS para acompanhamento da vegetação. Na implementação Sentinel-2 deste sistema:
+O índice de vegetação por diferença normalizada (NDVI, \textit{Normalized Difference Vegetation Index}) relaciona a resposta no NIR à resposta no vermelho, explorando o contraste espectral associado à vegetação. O registro NASA do trabalho de \citet{ROUSE1974_NTRS} descreve o uso de razões de bandas do satélite ERTS-1 (\textit{Earth Resources Technology Satellite}) para acompanhar a vegetação. Na implementação Sentinel-2 deste sistema:
 \begin{equation}\label{eq:ndvi-final}
  NDVI(p,t)=\frac{B8(p,t)-B4(p,t)}{B8(p,t)+B4(p,t)}.
 \end{equation}
@@ -28,7 +28,7 @@ O índice resume contraste espectral, mas não constitui medida direta de produt
 
 \subsubsection{NDWI utilizado na aplicação}
 
-\citet{GAO1996} apresentou um índice relacionado à água líquida na vegetação, com combinação espectral própria. O sistema utiliza a seguinte adaptação NIR--SWIR sob o rótulo NDWI:
+O acrônimo NDWI (\textit{Normalized Difference Water Index}) designa formulações que precisam ser distinguidas pelas bandas utilizadas. \citet{GAO1996} apresentou um índice relacionado à água líquida na vegetação, com combinação espectral própria. Nesta aplicação, o rótulo NDWI identifica a seguinte adaptação NIR--SWIR:
 \begin{equation}\label{eq:ndwi-final}
  NDWI_{\mathrm{sistema}}(p,t)=
  \frac{B8(p,t)-B11(p,t)}{B8(p,t)+B11(p,t)}.
@@ -37,7 +37,7 @@ Essa expressão não é a formulação verde--NIR de NDWI destinada à delimita�
 
 \subsubsection{NDMI utilizado na aplicação}
 
-O USGS descreve o NDMI pela diferença normalizada NIR--SWIR, aplicada a produtos Landsat \citep{USGS_NDMI}. Nesta plataforma a expressão utiliza B8A, em vez de B8:
+O Serviço Geológico dos Estados Unidos (USGS) descreve o índice de umidade por diferença normalizada (NDMI, \textit{Normalized Difference Moisture Index}) pela combinação NIR--SWIR em produtos Landsat \citep{USGS_NDMI}. Nesta plataforma, a expressão utiliza B8A, em vez de B8:
 \begin{equation}\label{eq:ndmi-final}
  NDMI_{\mathrm{sistema}}(p,t)=
  \frac{B8A(p,t)-B11(p,t)}{B8A(p,t)+B11(p,t)}.
@@ -46,19 +46,19 @@ A fonte USGS sustenta a família NIR--SWIR e sua denominação, não uma valida�
 
 \subsection{Processamento geoespacial remoto e serviços de referência}
 
-O Earth Engine reúne catálogo e infraestrutura de análise geoespacial, permitindo construir operações programáticas sobre coleções sem manter localmente todos os rasters originais \citep{GORELICK2017,AMANI2020}. No uso pela API Python, os objetos representam operações remotas; chamadas como \texttt{getInfo()} materializam resultados no processo cliente. O custo da interação depende tanto do cálculo quanto do volume transferido e da quantidade de requisições.
+O processamento de uma coleção orbital envolve consultar e combinar imagens que não precisam ser armazenadas integralmente no servidor da aplicação. O Earth Engine reúne catálogo e infraestrutura para realizar essas operações remotamente \citep{GORELICK2017,AMANI2020}. Pela interface de programação de aplicações (API) Python, os objetos representam operações a executar no serviço; chamadas como \texttt{getInfo()} transferem os resultados ao processo cliente. Por isso, o custo da interação depende não apenas do cálculo, mas também do volume transferido e da quantidade de requisições.
 
 Google Earth, Google Earth Engine, serviço de geocodificação e mapa-base cumprem funções distintas. O software deste trabalho não integra o aplicativo Google Earth. O Earth Engine processa as imagens analíticas; o Nominatim resolve nomes de lugares em coordenadas; o Esri World Imagery fornece a base cartográfica. A aparência fotográfica do mapa-base não identifica a data ou o sensor da imagem usada no cálculo espectral.
 
 \subsection{Agregação espacial e temporal}
 
-Uma composição temporal reduz várias imagens a um raster. No caso da mediana, cada posição recebe a mediana das observações válidas daquele local; pixels diferentes podem usar quantidades diferentes de observações e não compartilhar uma data representativa \citep{GOOGLE_EE_MEDIAN}. Uma composição não equivale necessariamente a uma imagem real de uma aquisição específica.
+Para representar um período em um único mapa, é necessário combinar as imagens disponíveis. Na composição por mediana, cada posição recebe a mediana de suas observações válidas \citep{GOOGLE_EE_MEDIAN}. Como as máscaras podem excluir pixels diferentes em cada aquisição, a quantidade de observações também pode variar dentro da área. O mapa resultante, portanto, não equivale necessariamente a uma imagem de uma data específica.
 
 A redução espacial resume valores dentro de uma geometria. Ao aplicá-la individualmente às imagens, obtém-se uma série de médias da área; ao aplicá-la à composição temporal, obtém-se um único resumo espacial do período. A ordem importa: média espacial de medianas temporais não é, em geral, igual à mediana ou à média das médias por aquisição. As máscaras e as ponderações da operação remota também influenciam o conjunto efetivamente considerado \citep{GOOGLE_EE_REDUCE}.
 
 \subsection{Séries temporais, tendência e comportamentos atípicos}
 
-Uma série temporal associa valores a instantes de observação. Imagens orbitais filtradas podem produzir intervalos irregulares e múltiplos registros na mesma data. Uma janela com três observações não possui necessariamente a mesma duração em diferentes partes da série. Da mesma forma, a inclinação de uma reta ajustada contra a posição sequencial das observações não é uma taxa diária.
+Uma série temporal associa valores a instantes de observação. Quando as imagens são filtradas, os intervalos podem ser irregulares e uma mesma data pode conter mais de um registro. Isso afeta a interpretação dos métodos: uma janela de três observações não tem duração fixa, e uma reta ajustada à posição sequencial dos registros não fornece uma taxa de variação diária. Essas distinções orientam a leitura da tendência e dos desvios apresentados no sistema.
 
 Média e desvio padrão de uma janela anterior permitem definir um escore padronizado de desvio. Neste trabalho, a regra é uma heurística unilateral para quedas relativas, não um teste de significância estatística nem um modelo treinado. Sua interpretação depende dos parâmetros e não fornece uma classe de doença, praga ou deficiência. Um ponto não sinalizado não deve ser interpretado como comprovação de condição agronômica normal.
 
@@ -67,6 +67,12 @@ Média e desvio padrão de uma janela anterior permitem definir um escore padron
 A NASA POWER disponibiliza séries diárias de variáveis meteorológicas e de radiação, na resolução espacial dos produtos de origem. A API pode retornar médias, máximos ou mínimos conforme o parâmetro solicitado e usa, por padrão, tempo solar local no serviço diário \citep{NASA_POWER_DAILY}. A consulta ao centroide de um polígono é uma consulta pontual ao produto, não uma média espacial calculada para o talhão ou uma estação instalada no local.
 
 Precipitação diária pode ser acumulada sobre as datas disponíveis; temperatura média diária pode ser resumida por média das observações válidas. Esse resumo não representa temperatura máxima ou mínima. A conversão de unidades deve respeitar os metadados da resposta, e não somente uma convenção assumida no código. A apresentação conjunta de clima e índices fornece contexto para exploração, mas não estabelece associação estatística formal ou causalidade.
+
+\subsection{Avaliação de uso e percepção}
+
+Verificar se o software produz arquivos e mapas não responde, por si só, se as pessoas compreendem o fluxo ou consideram seus recursos úteis. A ISO 9241-11 apresenta a usabilidade como resultado do uso e fornece um quadro conceitual para sua avaliação, sem impor um método único \citep{ISO9241_2018}. Neste trabalho, a investigação por questionário alcança percepções e execução autodeclarada, não uma avaliação observacional completa de usabilidade. Essa distinção impede tratar uma opinião sobre tempo de resposta como medição objetiva de eficiência.
+
+\citet{DAVIS1989} distingue utilidade percebida e facilidade de uso percebida na investigação da aceitação de tecnologia. Esses conceitos ajudam a separar o valor atribuído a um recurso da dificuldade para utilizá-lo, mas citar o trabalho não transforma o questionário deste projeto em aplicação validada do modelo de aceitação. Intenção de usar ou recomendar também não comprova utilização continuada. Ao combinar distribuições dos itens e relatos de dificuldades, busca-se compreender onde o fluxo desenvolvido atende às expectativas e onde exige revisão, sem extrapolar para ganhos agronômicos.
 
 \subsection{Trabalhos e plataformas relacionados}\label{sec:relacionados-final}
 
@@ -95,5 +101,5 @@ Modalidade de acesso & web/P & web/móvel/P & NI & projeto/cotas & web público\
 
 A distinção central é de finalidade: serviços comerciais incluem fluxos de gestão e produtos dependentes da modalidade contratada; o Earth Engine fornece infraestrutura para construir análises. O artefato concentra um fluxo acadêmico integrado de seleção, consulta e exportação. O acesso às páginas oficiais do EO Browser não permitiu consolidar seus critérios funcionais; por isso, essa coluna não sustenta comparação negativa.
 
-As \cref{fig:espectro,fig:bandas,fig:raster-vetor,fig:composicao,fig:janela} sintetizam os conceitos usados no processamento. A absorção no vermelho, o contraste estrutural no NIR e a sensibilidade do SWIR à água motivam combinações espectrais, sem tornar os índices diagnósticos únicos. A representação raster organiza amostras espaciais; composição e redução respondem a perguntas distintas. A janela temporal fornece referência local para a heurística, não uma distribuição populacional conhecida.
+As \cref{fig:espectro,fig:bandas,fig:raster-vetor,fig:composicao,fig:janela} relacionam esses conceitos ao processamento. Os esquemas mostram por que combinar bandas, como localizar um valor na grade e por que a ordem das agregações altera a resposta obtida. O exemplo da janela ilustra apenas a regra de sinalização: seus valores são didáticos e não demonstram eficácia de detecção em uma lavoura.
 \input{fig/conceitos}
