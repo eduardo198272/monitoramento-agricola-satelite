@@ -46,11 +46,13 @@ automática entre sessões ou login de usuários.
 COVERAGE_CORE=ctrace .venv/bin/python -m pytest -q
 ```
 
-Na revisão de 15/11/2026, a suíte passou com 677 testes e 100% de cobertura
+Após a correção de seleção de área em 15/11/2026, a suíte passou com 686 testes e 100% de cobertura
 de linhas e ramificações em `src/app`. O tracer C evita uma divergência observada
 no SysMonitor do Python 3.14, sem reduzir a meta de cobertura.
-Veja [o registro e os limites da verificação](docs/validation/streamlit-cloud-readiness.md).
+Veja [a verificação de seleção e busca](docs/validation/area-selection-regressions.md).
+O [registro inicial de preparação da nuvem](docs/validation/streamlit-cloud-readiness.md)
+preserva a execução anterior de 677 testes na revisão `a9a9677`.
 
-O código está preparado para publicação no Streamlit Community Cloud, mas a
-publicação do site ainda não foi verificada. A avaliação agronômica, os estudos
-de caso e partes acadêmicas do relatório continuam pendentes.
+O site foi publicado pelo responsável no Streamlit Community Cloud; a validação
+dos fluxos na aplicação hospedada continua em andamento. A avaliação agronômica,
+os estudos de caso e partes acadêmicas do relatório continuam pendentes.
