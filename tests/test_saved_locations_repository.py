@@ -244,3 +244,10 @@ def test_path_without_application_directory_reaches_filesystem_root(tmp_path, mo
     repository = SavedLocationsRepository(Path(tmp_path.anchor) / "saved.sqlite3")
 
     repository._ensure_parent_directory()
+
+
+def test_windows_directory_creation_skips_posix_permissions(tmp_path, monkeypatch):
+    monkeypatch.setattr(repository_module, "IS_WINDOWS", True)
+    repository = SavedLocationsRepository(tmp_path / "locations.sqlite3")
+    repository.initialize()
+    assert repository.list_locations() == []

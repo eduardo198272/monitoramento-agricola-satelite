@@ -24,10 +24,59 @@ class SessionState(dict):
 @pytest.fixture
 def stub_streamlit(monkeypatch):
     stub = MagicMock()
+    stub.button.return_value = False
+    stub.file_uploader.return_value = None
     state = SessionState()
     stub.session_state = state
     monkeypatch.setattr(main_module, "st", stub)
     return stub, state
+
+
+def test_saved_locations_picker_handles_unexpected_storage_errors(
+    monkeypatch, stub_streamlit
+):
+    stub, state = stub_streamlit
+    state.show_saved_locations = True
+    service = MagicMock()
+    service.list_saved_locations.side_effect = RuntimeError("unexpected")
+    monkeypatch.setattr(main_module, "SavedLocationsService", lambda: service)
+    main_module.render_saved_locations_picker()
+    stub.error.assert_called_once_with("Ocorreu um erro ao carregar as localizações salvas.")
+
+
+def test_saved_locations_picker_ignores_incomplete_summaries(monkeypatch, stub_streamlit):
+    stub, state = stub_streamlit
+    state.show_saved_locations = True
+    state.pending_saved_location_name = None
+    service = MagicMock()
+    service.list_saved_locations.return_value = [{"name": "Missing ID"}]
+    monkeypatch.setattr(main_module, "SavedLocationsService", lambda: service)
+    main_module.render_saved_locations_picker()
+    # Only the toggle button exists: invalid summaries are not selectable.
+    assert stub.button.call_count == 1
+
+
+def test_selection_map_consumes_restored_empty_drawing_event(monkeypatch, stub_streamlit):
+    _, state = stub_streamlit
+    main_module.initialize_ui_state()
+    state.ignore_next_empty_drawings = True
+    state.aoi_geojson = {"type": "Polygon"}
+    monkeypatch.setattr(main_module, "create_selection_map", MagicMock())
+    monkeypatch.setattr(main_module, "enable_area_draw", MagicMock())
+    monkeypatch.setattr(main_module, "st_folium", lambda *args, **kwargs: {"all_drawings": []})
+    main_module.render_selection_map_area()
+    assert state.ignore_next_empty_drawings is False
+    assert state.aoi_geojson == {"type": "Polygon"}
+
+
+def test_export_rejects_unsupported_selected_index():
+    from src.app.export_context import build_export_context, ExportContextError
+
+    with pytest.raises(ExportContextError, match="índice válido"):
+        build_export_context(
+            {"success": True, "indices": {}}, {}, "2026-01-01", "2026-01-31",
+            selected_indices=["INVALID"],
+        )
 
 
 def test_earth_engine_initialization_returns_success_and_caches(monkeypatch):

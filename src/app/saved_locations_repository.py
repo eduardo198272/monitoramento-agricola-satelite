@@ -131,6 +131,28 @@ class SavedLocationsRepository:
                 "O registro da localização não possui os campos necessários."
             ) from error
 
+    def insert_locations(self, records: list[dict]) -> None:
+        """Insert a validated import in one transaction, rolling back on conflict."""
+        values = [
+            (
+                record["id"], record["name"], record["normalized_name"],
+                json.dumps(record["geojson"], ensure_ascii=False, allow_nan=False),
+                record["center_lat"], record["center_lon"],
+                record["created_at"], record["updated_at"],
+            )
+            for record in records
+        ]
+        with self._connection() as connection:
+            connection.executemany(
+                """
+                INSERT INTO saved_locations (
+                    id, name, normalized_name, geojson_json,
+                    center_lat, center_lon, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                values,
+            )
+
     def list_locations(self) -> list[dict]:
         """Return summary records in normalized-name then ID order."""
         with self._connection() as connection:

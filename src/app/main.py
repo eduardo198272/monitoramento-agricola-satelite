@@ -35,6 +35,7 @@ from src.app.saved_locations_service import (
 )
 from src.app.saved_locations_validation import SavedLocationValidationError
 from src.app.saved_locations_validation import validate_saved_location_geojson
+from src.app.locations_transfer_ui import render_locations_transfer
 
 logger = logging.getLogger(__name__)
 
@@ -472,6 +473,7 @@ def _render_header_content() -> None:
         st.error("Earth Engine indisponível", icon="❌")
         st.info(
             "Verifique as credenciais e a configuração da variável EE_PROJECT_ID. "
+            "No Streamlit Cloud, configure também EE_SERVICE_ACCOUNT_JSON nos Secrets. "
             "Tente novamente quando o serviço estiver disponível."
         )
         st.stop()
@@ -861,6 +863,8 @@ def main():
     initialize_ui_state()
 
     render_header_bar()
+    with st.sidebar:
+        render_locations_transfer(st)
     analyze, analysis_disabled = render_controls_bar()
 
     if restore_pending_saved_location():
