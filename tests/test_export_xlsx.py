@@ -128,7 +128,7 @@ def test_index_sheets_structure_and_content(export_context):
     for index_name in ("NDVI", "NDWI", "NDMI"):
         ws = wb[index_name]
         # Header
-        assert [cell.value for cell in ws[1]] == ["date", "value", "trend", "anomaly"]
+        assert [cell.value for cell in ws[1]] == ["date", "value", "trend", "anomaly", "observation_id"]
 
         # Data rows (3 per index)
         data_rows = [row for row in ws.iter_rows(min_row=2, values_only=True) if row[0] is not None]
@@ -204,7 +204,7 @@ def test_anomalias_sheet_structure_and_content(export_context):
     ws = wb["Anomalias"]
 
     # Header
-    assert [cell.value for cell in ws[1]] == ["index", "date", "value", "anomaly", "classification"]
+    assert [cell.value for cell in ws[1]] == ["index", "date", "value", "anomaly", "classification", "observation_id"]
 
     # Data rows: NDVI has 1, NDMI has 2 = 3 total
     data_rows = [row for row in ws.iter_rows(min_row=2, values_only=True) if row[0] is not None]

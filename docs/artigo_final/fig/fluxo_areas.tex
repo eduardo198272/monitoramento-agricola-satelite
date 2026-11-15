@@ -1,0 +1,20 @@
+\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=39mm,
+ minimum height=13mm,font=\small,fill=green!5},
+ link/.style={-{Stealth[length=2mm]},thick}]
+\node[box] (draw) at (0,0) {Desenho Polygon\\validação e métricas};
+\node[box] (active) at (5.1,0) {Área ativa em sessão\\GeoJSON e ee.Geometry\\resultados antigos limpos};
+\node[box] (save) at (10.2,0) {Diálogo de nome\\serviço valida registro\\ID e datas gerados};
+\node[box] (storage) at (15.3,0) {Repositório\\SQLite local\\ou memória da sessão};
+\node[box] (restore) at (5.1,-2.6) {Restaurar: validar registro\\recriar geometria\\recalcular métricas e vista};
+\node[box] (list) at (10.2,-2.6) {Listar e selecionar\\localização existente};
+\node[box,fill=blue!5] (file) at (15.3,-2.6) {GeoJSON do usuário\\importação em lote\\ou exportação};
+\draw[link] (draw)--(active);
+\draw[link] (active)--(save);
+\draw[link] (save)--(storage);
+\draw[link] (storage.south west)--(list.north east);
+\draw[link] (list)--(restore);
+\draw[link] (restore)--(active);
+\draw[link,<->] (storage)--(file);
+\node[font=\small,align=center] at (0,-2.6) {Restauração não executa\\geocodificação nem análise};
+\end{tikzpicture}

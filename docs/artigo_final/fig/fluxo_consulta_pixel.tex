@@ -1,0 +1,21 @@
+\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=41mm,
+ minimum height=15mm,font=\small,fill=green!5},
+ link/.style={-{Stealth[length=2mm]},thick}]
+\node[box] (median) at (0,0) {Composições medianas\\por índice};
+\node[box] (project) at (5.4,0) {Projeção UTM a 10 m\\recorte e bandas\\de coordenadas};
+\node[box] (sample) at (10.8,0) {\texttt{sampleRectangle}\\matrizes, sentinela\\e limites de tamanho};
+\node[box] (pack) at (16.2,0) {float32 + zlib + Base64\\CRS, transformação\\e origem da grade};
+\node[box,fill=blue!5] (decode) at (16.2,-2.8) {Navegador: descomprimir\\Float32Array\\reuso pela chave da análise};
+\node[box,fill=blue!5] (mouse) at (10.8,-2.8) {Evento mousemove\\ponto dentro do polígono\\projeção por Proj4};
+\node[box,fill=blue!5] (lookup) at (5.4,-2.8) {Linha e coluna\\índice linear da célula\\teste de limites e NoData};
+\node[box,fill=blue!5] (tooltip) at (0,-2.8) {Tooltip: valor\\da composição mediana\\ou mensagem de ausência};
+\draw[link] (median)--(project);
+\draw[link] (project)--(sample);
+\draw[link] (sample)--(pack);
+\draw[link] (pack)--node[right,font=\scriptsize]{transferência inicial}(decode);
+\draw[link] (decode)--(mouse);
+\draw[link] (mouse)--(lookup);
+\draw[link] (lookup)--(tooltip);
+\node[font=\small,align=center] at (8.1,-4.5) {A movimentação do cursor consulta memória local; não faz nova requisição ao Earth Engine.\\Tiles cartográficos e analíticos são carregados por um caminho de rede separado.};
+\end{tikzpicture}

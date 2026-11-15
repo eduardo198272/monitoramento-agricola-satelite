@@ -1,33 +1,39 @@
 \section{Introdução}\label{chap:introducao-final}
 
-O acompanhamento de áreas agrícolas envolve observações em diferentes momentos do ciclo produtivo e em locais que podem apresentar comportamentos distintos. Entre as tecnologias empregadas nesse contexto, o sensoriamento remoto permite observar a superfície terrestre repetidamente e investigar características da vegetação por meio de medidas espectrais. A literatura reúne aplicações agrícolas que vão do acompanhamento de culturas à estimativa de variáveis biofísicas \citep{WEISS2020}.
+O acompanhamento de áreas agrícolas requer informações sobre a distribuição espacial da vegetação e suas alterações ao longo do tempo. Observações multiespectrais de satélites oferecem medidas repetidas da superfície, a partir das quais podem ser calculados indicadores de vegetação e umidade. A literatura descreve aplicações agrícolas com diferentes sensores, escalas e métodos de interpretação \citep{WEISS2020}. A disponibilidade desses dados, entretanto, não elimina o trabalho computacional necessário para delimitar uma região, consultar imagens, selecionar bandas, tratar observações inválidas e organizar os resultados.
 
-Em aplicações específicas, \citet{SLAIFFER2023} investigou relações entre índices espectrais e produtividade da soja em áreas irrigadas e de sequeiro, enquanto \citet{LOVATO2021} analisou a variação temporal do NDVI em talhões associados à renovação de canaviais. Em outra escala, \citet{CHAVES2019} utilizou séries temporais para monitoramento agrícola em Mato Grosso. Esses estudos ilustram que a utilidade dos índices depende da área, da cultura, do período e dos procedimentos de análise, e não apenas de sua fórmula.
+Para que os dados sejam explorados em uma aplicação, é necessário integrar operações geográficas, processamento remoto, estruturas tabulares, visualizações e mecanismos de saída. Cada etapa possui contratos próprios: geometrias são representadas em coordenadas geográficas; imagens contêm pixels e máscaras; séries espectrais possuem datas de aquisição irregulares; dados meteorológicos seguem resolução e convenções temporais distintas. A integração semântica desses produtos é um problema de Engenharia de Software, além de uma aplicação de sensoriamento remoto.
 
-O acesso a imagens, entretanto, não elimina a necessidade de selecionar uma área, filtrar observações, aplicar cálculos adequados e apresentar os resultados de forma interpretável. O problema de pesquisa é: como desenvolver e avaliar uma plataforma que integre consulta a imagens de satélite, cálculo de índices espectrais, análise temporal e visualização de informações agrícolas? A questão envolve tanto o processamento geoespacial quanto a organização de componentes de interface, serviços externos e mecanismos de verificação.
+O problema de pesquisa foi delimitado pela seguinte questão: como construir e verificar tecnicamente uma plataforma computacional que integre gerenciamento de áreas geográficas, índices espectrais, exploração espacial e temporal, contexto meteorológico e exportação de resultados para apoio ao monitoramento agrícola?
 
-\subsection{Justificativa e contribuição}
+\subsection{Motivação, justificativa e contribuição}
 
-A combinação de imagens Sentinel-2, processamento no Google Earth Engine e dados da NASA POWER oferece uma base para construir um protótipo acadêmico de monitoramento. A contribuição pretendida não é um novo índice espectral nem um diagnóstico agronômico: consiste no desenvolvimento e na avaliação de um artefato que reúne procedimentos existentes em um fluxo computacional documentado. Sua relevância para a Ciência da Computação está na integração de serviços, na arquitetura, na implementação verificável das operações e na análise de suas limitações.
+O Google Earth Engine disponibiliza catálogos e processamento geoespacial remoto, enquanto a NASA POWER oferece acesso programático a variáveis meteorológicas e de radiação \citep{GORELICK2017,NASA_POWER_DAILY}. Esses serviços permitem desenvolver uma solução sem implementar infraestrutura própria de distribuição de imagens. Ainda assim, a aplicação precisa coordenar requisições, preservar a associação entre entradas e resultados, lidar com indisponibilidade e apresentar produtos de natureza distinta de maneira compreensível.
 
-O uso de serviços acessíveis em contexto acadêmico não demonstra, por si só, economia financeira, facilidade de uso ou superioridade em relação a outras soluções. Essas propriedades exigiriam avaliações próprias, não realizadas neste texto.
+A contribuição deste trabalho consiste no desenvolvimento de uma plataforma que reúne técnicas consolidadas em um fluxo computacional documentado. O artefato abrange seleção e reutilização de polígonos, cálculo de índices, mapas de composição temporal, consulta interativa de valores da grade, séries temporais, identificação de desvios negativos, contexto meteorológico e arquivos de resultados. A relevância em Ciência da Computação está na organização dos componentes, na integração de serviços e formatos e na explicitação dos métodos e limites do processamento.
 
-\subsection{Objetivos}
+Não se propõem novos índices espectrais, uma nova metodologia de diagnóstico agronômico ou a revalidação dos sensores orbitais e produtos meteorológicos. A disponibilidade pública dos dados e o uso de bibliotecas abertas também não demonstram, isoladamente, menor custo total, acessibilidade universal, facilidade de uso ou superioridade frente a sistemas comerciais. Essas afirmações exigiriam avaliações específicas.
 
-O objetivo geral é desenvolver e avaliar uma plataforma computacional de apoio ao monitoramento agrícola, integrando imagens de satélite, índices espectrais, visualização temporal e dados climáticos.
+\subsection{Objetivo geral e objetivos específicos}
 
-Como objetivos específicos, pretende-se:
-\begin{itemize}[leftmargin=3em]
-    \item investigar os fundamentos de sensoriamento remoto e índices pertinentes ao sistema;
-    \item organizar componentes de interface, processamento e acesso a serviços externos;
-    \item implementar a consulta a imagens Sentinel-2 e o cálculo de NDVI, NDWI e NDMI;
-    \item disponibilizar mapas, séries temporais, indicadores de variação e contexto climático;
-    \item verificar contratos e cálculos por testes e avaliar o fluxo funcional com evidências reproduzíveis;
-    \item documentar decisões técnicas, limitações e possibilidades de evolução.
-\end{itemize}
+O objetivo geral foi desenvolver e verificar tecnicamente uma plataforma computacional integrada de apoio ao monitoramento agrícola por imagens de satélite, disponibilizando processamento geoespacial, análise espacial e temporal, contexto meteorológico e exportação de informações.
 
-\subsection{Delimitação e organização}
+Os objetivos específicos da redação final foram organizados para permitir rastreabilidade:
+\begin{enumerate}[leftmargin=3em]
+    \item[\textbf{OE1}] fundamentar os métodos espectrais e definir uma organização modular para integrar interface, processamento e fontes externas;
+    \item[\textbf{OE2}] disponibilizar busca geográfica, demarcação, armazenamento e recuperação de polígonos, distinguindo persistência local e armazenamento por sessão;
+    \item[\textbf{OE3}] integrar imagens Sentinel-2 e implementar as formulações espectrais e os filtros espaciais, temporais e de nuvens presentes na aplicação;
+    \item[\textbf{OE4}] produzir composições temporais, estatísticas espaciais e mapas temáticos com exploração interativa dos valores da grade;
+    \item[\textbf{OE5}] organizar séries temporais e aplicar procedimentos explícitos de classificação de tendência e sinalização de desvios negativos;
+    \item[\textbf{OE6}] integrar informações meteorológicas e explicitar suas agregações, unidades e limites de interpretação;
+    \item[\textbf{OE7}] gerar relatórios PDF e dados estruturados em XLSX e CSV ZIP, além de transferir localizações em GeoJSON;
+    \item[\textbf{OE8}] verificar o artefato por inspeção, testes existentes e rastreabilidade, documentando evidências, inconsistências e limitações da viabilidade técnica.
+\end{enumerate}
 
-O sistema opera sobre áreas e períodos selecionados pelo usuário. Seus indicadores são medidas indiretas: oscilações podem resultar de ciclo da cultura, manejo, clima ou qualidade das imagens, entre outros fatores. O trabalho não substitui observações de campo nem pretende identificar automaticamente causas de estresse. A avaliação funcional do software e a validação agronômica são problemas distintos; a segunda depende de referências externas apropriadas.
+Essa organização preserva a intenção central da proposta e reconhece funcionalidades incorporadas durante o desenvolvimento. A avaliação concentra-se na integração computacional e na experiência de uso, com resultados da pesquisa com usuários ainda pendentes. A diferença entre o escopo executado e os estudos por cultura previstos é discutida na \cref{chap:discussao-final}.
 
-A \cref{chap:fundamentacao-final} apresenta os fundamentos; a \cref{chap:metodos-final} descreve implementação e avaliação; as seções seguintes apresentam as evidências de software disponíveis, sua discussão e uma conclusão parcial. A avaliação agrícola e a publicação em nuvem ainda exigem evidências adicionais.
+\subsection{Delimitação e organização do texto}
+
+A avaliação concentra-se no software: componentes, contratos, operações, formatos e evidências de funcionamento disponíveis. Os índices são indicadores indiretos; suas variações não identificam automaticamente pragas, doenças, deficiência nutricional ou estresse hídrico. Uma eventual área usada em demonstração caracteriza um cenário de utilização, não um experimento agronômico.
+
+A \cref{chap:fundamentacao-final} apresenta os conceitos necessários; a \cref{chap:metodos-final}, os procedimentos de desenvolvimento, processamento e avaliação. A \cref{chap:implementacao-final} explica a construção da solução e a \cref{chap:plataforma-final} apresenta seus recursos e os espaços reservados para evidências visuais reais. As \cref{chap:resultados-final,chap:discussao-final} distinguem resultados de software, atendimento dos objetivos e limitações. A \cref{chap:conclusao-final} sintetiza as contribuições e os trabalhos futuros.
