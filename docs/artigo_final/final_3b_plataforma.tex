@@ -1,16 +1,16 @@
 \clearpage
 \section{Apresentação da plataforma desenvolvida}\label{chap:plataforma-final}
 
-As capturas desta seção foram fornecidas pelo autor para apresentar o fluxo da aplicação. São exemplos de interface, distintos da demonstração instrumentada descrita nos resultados. Não se presume equivalência entre a versão capturada e os contratos corrigidos em desenvolvimento. Os valores exibidos pertencem a cada exemplo; as telas desktop e móveis não representam necessariamente a mesma área ou execução.
+Esta seção acompanha o percurso de uso da plataforma, desde a escolha da área até a consulta e a exportação dos resultados. As capturas foram fornecidas pelo autor e ilustram a interface; elas não substituem a demonstração com registros de execução apresentada nos resultados. A versão das telas não é presumida como equivalente à implementação corrigida, e os exemplos desktop e móveis podem mostrar áreas ou execuções diferentes.
 
 \subsection{Organização e entrada espacial}
 
-A exploração de uma região começa pela definição da área e do período. A interface reúne busca, datas, índices e acionamento da análise em torno do mapa, que recebe a demarcação antes do processamento e apresenta a composição temática depois dele. Esse fluxo permite consultar os produtos sem que o usuário tenha de manipular diretamente os arquivos raster (\cref{fig:autor-inicial,fig:autor-configuracao}).
+A exploração começa pela definição da área e do período. Ao redor do mapa, a interface reúne a busca por lugar, as datas, a escolha dos índices e o comando para iniciar a análise. Antes do processamento, o mapa recebe a demarcação; depois, apresenta o resultado em cores. Assim, o usuário pode consultar os produtos sem manipular diretamente os arquivos raster (\cref{fig:autor-inicial,fig:autor-configuracao}).
 
 \capturaautor[p]{inicial.png}{Interface inicial, com controles analíticos e mapa de seleção}{inicial}
 \capturaautor{configuracao.png}{Detalhe dos controles de busca, localizações salvas, período e índice}{configuracao}
 
-A busca resolve um nome de lugar e aproxima a navegação da região desejada, sem identificar automaticamente limites cadastrais. A \cref{fig:autor-busca} apresenta a consulta por Passo Fundo e a confirmação da localização. O mapa-base é distinto da imagem Sentinel-2 utilizada nos cálculos; sua atribuição acompanha a visualização.
+Ao pesquisar um nome de lugar, o usuário aproxima o mapa da região desejada e pode então desenhar a área. A busca não identifica automaticamente os limites cadastrais de uma propriedade. A \cref{fig:autor-busca} mostra a consulta por Passo Fundo e o enquadramento encontrado. A imagem de fundo do mapa é distinta da imagem Sentinel-2 usada nos cálculos, e sua atribuição acompanha a visualização.
 
 \begin{figure*}[htbp]
 \centering
@@ -25,7 +25,7 @@ A busca resolve um nome de lugar e aproxima a navegação da região desejada, s
 \label{fig:autor-busca}
 \end{figure*}
 
-A demarcação fornece a geometria das consultas (\cref{fig:autor-desenho}). Área em hectares, perímetro e centroide permitem conferir o recorte espacial; não são estimativa de área cultivada. O salvamento associa nome e polígono, e a restauração permite repetir análises com outra configuração temporal sem redesenhar a região (\cref{fig:autor-salvar,fig:autor-restaurar}).
+O polígono desenhado define os limites das consultas (\cref{fig:autor-desenho}). A área em hectares, o perímetro e o centroide ajudam a conferir esse desenho; não indicam automaticamente quanto dele é cultivado. O usuário pode atribuir um nome ao polígono e salvá-lo. Depois, pode restaurar a mesma área e escolher outro período de análise sem desenhá-la novamente (\cref{fig:autor-salvar,fig:autor-restaurar}).
 
 \capturaautor{desenho.png}{Polígono desenhado no mapa, medidas da geometria e comando de salvamento}{desenho}
 
@@ -49,7 +49,7 @@ A demarcação fornece a geometria das consultas (\cref{fig:autor-desenho}). Ár
 
 \capturaautor{restaurar.png}{Restauração de uma localização salva e reapresentação de seu polígono no mapa}{restaurar}
 
-O armazenamento web está vinculado à sessão. A transferência GeoJSON oferece continuidade por arquivo: exporta localizações e permite importar conjuntos validados, preservando as restrições de tamanho e quantidade. A \cref{fig:autor-geojson} mostra o envio de arquivo e a confirmação de uma localização importada. Essa estratégia não representa sincronização autenticada entre dispositivos.
+Na versão web, as áreas salvas ficam vinculadas à sessão. Para reutilizá-las em outro momento, o usuário pode exportá-las em GeoJSON e importar o arquivo depois. A importação verifica os dados e os limites de tamanho e quantidade. A \cref{fig:autor-geojson} mostra o envio de um arquivo e a confirmação de uma localização importada. Essa transferência é feita por arquivo, não por uma conta com sincronização autenticada entre dispositivos.
 
 \begin{figure*}[htbp]
 \centering
@@ -80,9 +80,9 @@ O armazenamento web está vinculado à sessão. A transferência GeoJSON oferece
 
 \subsection{Configuração e produtos analíticos}
 
-Na implementação corrigida, as datas inicial e final são inclusivas em UTC. A opção ``Todos'' compartilha coleção e clima entre os três índices; a alternância posterior de visualização não solicita novo processamento. A mudança de geometria, período ou conjunto analítico invalida produtos incompatíveis, mantendo a coerência da apresentação. Essas regras foram verificadas separadamente e não são comprovadas apenas pelas capturas.
+Na implementação corrigida, os dois dias escolhidos nos campos de data fazem parte do período, em UTC. A opção ``Todos'' calcula os três índices usando a mesma coleção de imagens e as mesmas informações meteorológicas. Depois, o usuário pode alternar entre os índices calculados sem iniciar novo processamento. Se mudar a área, o período ou o conjunto solicitado de índices, os resultados anteriores deixam de ser válidos para a nova configuração. Essas regras foram verificadas separadamente, não apenas pelas capturas.
 
-O painel reúne média espacial da composição, área, tendência e visão geral por indicador. A contagem corresponde às imagens filtradas, não a dias sem nuvens ou observações válidas em todos os pixels. NDWI e NDMI do sistema são variantes NIR--SWIR próximas, diferenciadas pela banda NIR empregada.
+O painel apresenta a área, a média espacial do mapa composto, a tendência e uma visão geral por índice. A quantidade de imagens informa quantas passaram pelos filtros, não quantos dias estavam sem nuvens ou quantas observações foram válidas em cada pixel. Os indicadores chamados NDWI e NDMI continuam sendo variantes NIR--SWIR próximas, diferenciadas pela banda NIR, conforme explicado na fundamentação.
 
 Os mapas representam a mediana temporal por posição. O gradiente permite explorar contrastes internos, sem atribuir automaticamente classes agronômicas. A \cref{fig:autor-mapa} ilustra a camada NDVI e a consulta de um valor por posição. Na implementação corrigida, os limites enviados à legenda são os mesmos da camada, conforme a verificação relatada nos resultados; não se usa a captura fornecida como comprovação dessa correção.
 
@@ -90,7 +90,7 @@ Os mapas representam a mediana temporal por posição. O gradiente permite explo
 
 \subsection{Exploração espacial, temporal e meteorológica}
 
-A consulta por posição permite examinar diferenças dentro da área ao apresentar o valor de uma célula da composição já transferida. Movimento e toque utilizam a mesma consulta local no navegador, com mensagens para posições fora da geometria, sem dado ou além da matriz. As quatro casas decimais são uma escolha de apresentação, não uma medida de precisão agronômica.
+Ao mover o cursor ou tocar no mapa, o usuário pode consultar o valor de uma célula e examinar diferenças dentro da área. A leitura é feita no navegador, a partir da grade da composição já transferida. Quando a posição está fora do polígono, não possui dado ou ultrapassa a matriz, uma mensagem informa a situação. Os valores aparecem com quatro casas decimais por escolha de apresentação; isso não indica precisão agronômica.
 
 Enquanto o mapa resume o período, a série temporal apresenta a média espacial de cada aquisição. O gráfico une os pontos por segmentos de reta, mas a aplicação não calcula valores diários intermediários nem elimina datas repetidas. A \cref{fig:autor-series} mostra o painel e parte do gráfico, cujo eixo de datas não está enquadrado no arquivo fornecido. Essa imagem ilustra a organização da tela, não substitui a série exportada para análise numérica.
 
@@ -104,13 +104,13 @@ O gráfico climático combina precipitação em barras e temperatura média em l
 
 \subsection{Relatórios e interoperabilidade}
 
-A interface distingue preparação e download dos arquivos. O PDF sintetiza resultados visuais, o XLSX organiza abas e o ZIP distribui tabelas CSV. A geração utiliza o snapshot concluído; não recalcula os índices para cada formato. O mapa estático do PDF usa escala fixa $[-1,1]$, comunicada em sua legenda, podendo diferir do contraste ajustado do mapa interativo.
+Para obter os arquivos, o usuário primeiro solicita sua preparação e depois realiza o download. O PDF reúne uma síntese visual, o XLSX organiza os dados em abas e o ZIP contém tabelas CSV. Todos são gerados a partir do registro da análise concluída, sem recalcular os índices para cada formato. No PDF, o mapa usa escala fixa $[-1,1]$, indicada na legenda; por isso, seu contraste pode ser diferente do mapa interativo, cuja escala é ajustada aos valores encontrados.
 
 A nova captura do relatório PDF aguarda substituição após atualização da versão pública e conferência da radiação. Por isso, não é incluída como evidência visual validada nesta versão do artigo. As saídas permitem conferir e reutilizar informações fora da interface, mas não incluem raster GeoTIFF nem toda a proveniência necessária para reconstruir exatamente o processamento remoto. Os arquivos PDF, XLSX e ZIP da demonstração anterior permanecem preservados; XLSX e ZIP foram verificados programaticamente, mas suas capturas em visualizadores próprios continuam pendentes.
 
 \subsection{Adaptabilidade e acesso público}
 
-O CSS possui regras para larguras até 1.100, 768 e 480 pixels, reorganizando os controles. Mapas e gráficos integram o layout web, não um aplicativo móvel nativo. O tratamento de toque amplia a exploração sem cursor, mas desenho, importação e downloads também dependem do navegador e do sistema operacional.
+Para acomodar telas menores, as regras de estilo CSS reorganizam os controles em larguras até 1.100, 768 e 480 pixels. Trata-se da mesma aplicação web, com mapas e gráficos no navegador, não de um aplicativo móvel nativo. A consulta por toque permite explorar valores sem cursor. Já o desenho de áreas, a importação e os downloads também dependem dos recursos do navegador e do sistema operacional.
 
 As capturas móveis fornecidas pelo autor mostram a apresentação do mapa e do painel de indicadores (\cref{fig:mobile}). Elas complementam a emulação documentada anteriormente, mas não constituem uma avaliação sistemática de compatibilidade, acessibilidade ou operação por toque. Modelo do aparelho, versão do navegador e protocolo de teste não foram registrados para essas imagens. O exemplo móvel apresenta outra área e não deve ser comparado numericamente ao desktop como se fosse a mesma execução.
 

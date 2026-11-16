@@ -1,0 +1,348 @@
+{
+  "passed": true,
+  "baseline_commit": "1862dd7ef04ff131c5c817112103d71b2207295a",
+  "scope": "Revisão didática; sem nova validação científica ou medição de legibilidade",
+  "source_files": {
+    "docs/artigo_final/final_0_resumo.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 0
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 0
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 0
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 0
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 6
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 0
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 0
+      },
+      "numeric_additions_explained": {},
+      "sha256": "45a9697266cff36bd9db7ca5387703ceac9feb185e97e4a3f653e7f382182af8"
+    },
+    "docs/artigo_final/final_1_introducao.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 0
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 2
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 1
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 7
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 0
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 0
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 0
+      },
+      "numeric_additions_explained": {},
+      "sha256": "44f6d61d1668a3aff2078d0d2a28a9a5a6605b4941d46c10fd5d7fad93683f0a"
+    },
+    "docs/artigo_final/final_2_fundamentacao.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 3
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 34
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 7
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 2
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 0
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 1
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 0
+      },
+      "numeric_additions_explained": {},
+      "sha256": "a8bb465f6111bf09e9a9cbfdc1c40f00b2612b596abb73109f17cfa21c1ae582"
+    },
+    "docs/artigo_final/final_3_metodos.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 4
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 13
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 13
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 2
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 0
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 0
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 2
+      },
+      "numeric_additions_explained": {
+        "20": 1
+      },
+      "sha256": "1513ac6e7134a9a70dbc5271233fc22e20756cb555ce320dd13c0f780f70d845"
+    },
+    "docs/artigo_final/final_3a_implementacao.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 1
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 3
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 9
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 0
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 0
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 1
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 5
+      },
+      "numeric_additions_explained": {
+        "32": 1
+      },
+      "sha256": "b05459042bd72d67b1b454dcfbedb8823c0319fa5325e8f12c9f8e8dced81f27"
+    },
+    "docs/artigo_final/final_3b_plataforma.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 0
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 0
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 6
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 10
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 0
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 0
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 5
+      },
+      "numeric_additions_explained": {},
+      "sha256": "0d604dcd9bf3647e3c7133c6068d611501199c81231472f8d849fb3fe4ca2acc"
+    },
+    "docs/artigo_final/final_4_resultados.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 0
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 0
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 2
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 0
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 0
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 0
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 0
+      },
+      "numeric_additions_explained": {
+        "11,73": 1
+      },
+      "sha256": "bafe3ff9cb677a998d2aa09d2d0421a541a7bbb2997dac5915e6c0cd68befb04"
+    },
+    "docs/artigo_final/final_4a_usuarios.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 0
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 0
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 3
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 4
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 20
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 0
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 3
+      },
+      "numeric_additions_explained": {},
+      "sha256": "b9910b37e8643aaccd3d366c038fbe3d42bc7a6141517d348ce51a4b8cab357b"
+    },
+    "docs/artigo_final/final_5_discussao.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 0
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 2
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 2
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 1
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 0
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 1
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 0
+      },
+      "numeric_additions_explained": {},
+      "sha256": "6b4f26c4f5c65dde536bf9c20afef9b376dde89a588536e628e4b824f5d72d7c"
+    },
+    "docs/artigo_final/final_6_conclusao.tex": {
+      "numbered_math": {
+        "unchanged": true,
+        "count": 0
+      },
+      "citations": {
+        "unchanged": true,
+        "count": 0
+      },
+      "labels": {
+        "unchanged": true,
+        "count": 1
+      },
+      "cross_references": {
+        "unchanged": true,
+        "count": 0
+      },
+      "survey_macros": {
+        "unchanged": true,
+        "count": 3
+      },
+      "tables": {
+        "unchanged": true,
+        "count": 0
+      },
+      "figures": {
+        "unchanged": true,
+        "count": 0
+      },
+      "numeric_additions_explained": {},
+      "sha256": "a804c436df6ad98ff6adda41c237fae689a6bbfab035be5b50e0ecee70a71683"
+    }
+  },
+  "other_tracked_content_unchanged": true,
+  "unchanged_includes": [
+    "aplicação e testes",
+    "bibliografia e classe institucional",
+    "resultados gerados e gráficos de usuários",
+    "figuras e capturas",
+    "evidências históricas e auditoria científica"
+  ],
+  "analyzed_workbook_sha256": "9adb66b330103ca858c37d7dc6cdb5e4e954f09f749a0c122fa6e6b2f4f5de59",
+  "pdf_sha256": "0f94a512abde41f78066f3b7f8ed79ae6fb90b9e84425732eb133e40ed9f6ca8",
+  "automated_validation_does_not_replace": [
+    "aprovação final de cada seção pelo autor",
+    "avaliação de leitura por leitores independentes",
+    "resolução das pendências científicas e institucionais"
+  ]
+}

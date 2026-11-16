@@ -34,10 +34,15 @@ seção, conferência de fontes e pendências.
 - [Checklist de entrega](CHECKLIST_ENTREGA.md)
 - [Avaliação com usuários: planilha, análise e gráficos](avaliacao_usuarios/README.md)
 - [Capturas fornecidas pelo autor: substituição e validação atual do PDF](evidencias/capturas_autor/README.md)
-- [Revisão da redação da avaliação e compilação mais recente](evidencias/revisao_redacao_usuarios/README.md)
+- [Revisão anterior da redação da avaliação](evidencias/revisao_redacao_usuarios/README.md)
+- [Auditoria científica parcial e pendências](auditoria_cientifica/README.md)
+- [Diagnóstico e aplicação da revisão didática](REVISAO_DIDATICA_ESCRITA.md)
+- [Validação da revisão didática e compilação atual](evidencias/revisao_didatica/README.md)
 
 Na apresentação atual foram usadas 16 capturas fornecidas pelo autor,
-agrupadas em onze figuras; o PDF permanece com 33 páginas. A imagem nova do
+agrupadas em onze figuras. A versão anterior à revisão didática tinha 33 páginas;
+a paginação e o hash da versão atual estão no manifesto de compilação dessa revisão.
+A imagem nova do
 relatório PDF aguarda substituição após atualização e conferência da radiação,
 e não foi incluída como evidência validada. As capturas da demonstração anterior
 continuam preservadas, mas não são mais as ilustrações dessa seção.

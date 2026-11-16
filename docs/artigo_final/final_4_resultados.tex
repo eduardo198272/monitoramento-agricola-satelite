@@ -2,13 +2,17 @@
 
 \subsection{Artefato desenvolvido}
 
-O resultado principal é uma plataforma na qual a geometria selecionada orienta a consulta Sentinel-2, a exploração dos índices e a exportação. O processamento remoto dispensa manter o acervo orbital no servidor da aplicação, enquanto a grade pré-carregada disponibiliza valores para consulta no navegador. Para reutilizar áreas, a solução oferece armazenamento SQLite local ou em memória de sessão, além da transferência GeoJSON. Esses recursos materializam o fluxo proposto; sua avaliação é apresentada a seguir.
+O principal resultado é a plataforma que conecta a seleção da área à consulta de imagens Sentinel-2, à exploração dos índices e à exportação. O Earth Engine processa as imagens remotamente, sem exigir que seu acervo seja mantido no servidor da aplicação. Após a análise, a grade numérica transferida permite consultar valores no navegador. As áreas podem ser reutilizadas por armazenamento SQLite local, memória de sessão ou transferência GeoJSON. A avaliação a seguir examina o funcionamento desses recursos.
 
 \subsection{Avaliação computacional}
 
-A execução registrada nas evidências corresponde ao código consolidado no commit \texttt{28759bf}. Em Linux x86\_64, Python 3.14.4, pytest 9.0.3 e tracer C, o comando \texttt{python -m pytest -q -p no:cacheprovider}, com \texttt{COVERAGE\_CORE=ctrace}, resultou em \textbf{710 testes aprovados em 11,73 s}, sem falhas ou testes ignorados. A cobertura em \texttt{src/app} foi de \textbf{100\% das linhas e ramificações}, com 2.735 instruções e 856 ramificações, sem caminhos parcialmente cobertos. A linha de base de 686 testes foi preservada e ampliada com casos para os contratos corrigidos. O tempo informado pertence a essa execução, não a uma estimativa de desempenho da plataforma.
+A execução documentada teve \textbf{710 testes aprovados em 11,73 s}, sem falhas ou testes ignorados, para o código consolidado no commit \texttt{28759bf}. A cobertura em \texttt{src/app} alcançou \textbf{100\% das linhas e ramificações}: 2.735 instruções e 856 ramificações, sem caminhos parcialmente cobertos. O conjunto anterior de 686 testes foi preservado e ampliado com casos para as regras de integração corrigidas.
 
-Os testes abrangem regras locais, integração entre módulos, persistência temporária, widgets Streamlit e serialização. Serviços remotos são substituídos em parte da suíte. A medição não inclui o ponto de entrada da raiz nem HTML/JavaScript. Separadamente, três testes Node verificaram legenda negativa, lookup de células e NoData, e descompressão zlib/Base64 em \texttt{Float32Array}; os três foram aprovados. Esses testes não constituem uma matriz de compatibilidade de navegadores.
+O ambiente dessa execução foi Linux x86\_64, Python 3.14.4, pytest 9.0.3 e tracer C. O comando utilizado foi \texttt{python -m pytest -q -p no:cacheprovider}, com \texttt{COVERAGE\_CORE=ctrace}. Esses dados identificam o resultado reproduzido nas evidências. Os 11,73 s correspondem à execução dos testes, não ao tempo de uma análise na plataforma.
+
+Os testes examinam regras locais, comunicação entre módulos, armazenamento temporário, controles Streamlit e conversão dos dados para os formatos de saída. Parte deles substitui os serviços remotos por respostas controladas. A cobertura medida não inclui o arquivo de entrada na raiz nem HTML/JavaScript.
+
+Separadamente, três testes Node verificaram a legenda com valores negativos, a consulta de células e o tratamento de ausência de dados (NoData), além da descompressão zlib/Base64 em \texttt{Float32Array}. Os três foram aprovados. Isso verifica os casos descritos, não a compatibilidade com todos os navegadores.
 
 Embora todos os caminhos medidos tenham sido executados, isso não demonstra ausência de defeitos. A conferência dos contratos identificou suposições sobre unidades, datas e associação de registros que a suíte anterior não distinguia. Os novos testes passaram a representar essas diferenças, mantendo a meta de cobertura.
 
@@ -16,7 +20,7 @@ Embora todos os caminhos medidos tenham sido executados, isso não demonstra aus
 
 A resposta histórica NASA POWER para longitude $-52$ e latitude $-28$, entre 01/01/2025 e 02/01/2025, está em LST e declara radiação em MJ/m²/dia, com valores 21,64 e 20,99. Sua média é 21,315. A conversão anterior multiplicava essa média por 3,6, produzindo 76,734 sob o mesmo rótulo; o erro decorria de assumir kWh sem conferir a unidade retornada. A normalização passou a preservar MJ e converter somente kWh declarados. Testes verificaram a média corrigida, as duas linhas XLSX/CSV e a representação resumida do PDF. Essa evidência sustenta a correção da unidade, sem reclassificar a resposta histórica como UTC.
 
-A avaliação também harmonizou limites temporais, resumo meteorológico compartilhado e metadados dos pipelines. Um teste multiíndice confirmou uma única obtenção do contexto climático. Outro distinguiu aquisições do mesmo dia na marcação de anomalias. Alterações analíticas passaram a invalidar todos os produtos derivados, enquanto a troca visual entre índices calculados preserva a análise.
+A avaliação também verificou se os diferentes caminhos de análise usavam as mesmas regras de datas, resumo meteorológico e identificação dos resultados. Um teste com vários índices confirmou que as informações meteorológicas eram obtidas uma única vez. Outro distinguiu aquisições do mesmo dia na marcação de anomalias. Quando as entradas da análise mudam, os resultados e arquivos anteriores deixam de ser válidos; quando apenas se alterna entre índices já calculados, a análise é preservada.
 
 No mapa, o mesmo intervalo usado nos tiles é enviado à legenda. A escala fixa do PDF permanece uma escolha separada, comunicada no próprio produto. A correção do contrato não implica igualdade pixel a pixel entre reduções remotas, grade reamostrada e mapa estático.
 
