@@ -121,7 +121,7 @@ def generate(results, output):
     for y, row in enumerate(themes.itertuples()):
         ax.text(row.registros_com_tema+.2,y,str(row.registros_com_tema),va="center")
     ax.set_xlim(0,max(1,themes.n_codificado.max()*1.15))
-    ax.set_xlabel(f"Registros com menção em ao menos uma resposta (n codificado = {themes.n_codificado.max()})")
+    ax.set_xlabel(f"Registros com menção em ao menos uma resposta (n analisado = {themes.n_codificado.max()})")
     ax.set_title("Temas multirrótulo — percepções e propostas, não eficácia",loc="left")
     save(fig, output, "temas")
 

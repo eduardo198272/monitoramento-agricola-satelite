@@ -1,0 +1,44 @@
+\section{Resultados}\label{chap:resultados-final}
+
+\subsection{Artefato desenvolvido}
+
+O principal resultado é a plataforma que conecta a seleção da área à consulta de imagens Sentinel-2, à exploração dos índices e à exportação. O Earth Engine processa as imagens remotamente, sem exigir que seu acervo seja mantido no servidor da aplicação. Após a análise, a grade numérica transferida permite consultar valores no navegador. As áreas podem ser reutilizadas por armazenamento SQLite local, memória de sessão ou transferência GeoJSON. A avaliação a seguir examina o funcionamento desses recursos.
+
+\subsection{Avaliação computacional}
+
+A execução documentada teve \textbf{710 testes aprovados em 11,73 s}, sem falhas ou testes ignorados, para o código consolidado no commit \texttt{28759bf}. A cobertura em \texttt{src/app} alcançou \textbf{100\% das linhas e ramificações}: 2.735 instruções e 856 ramificações, sem caminhos parcialmente cobertos.
+
+O ambiente dessa execução foi Linux x86\_64, Python 3.14.4, pytest 9.0.3 e tracer C. O comando utilizado foi \texttt{python -m pytest -q -p no:cacheprovider}, com \texttt{COVERAGE\_CORE=ctrace}. Esses dados identificam o resultado reproduzido nas evidências. Os 11,73 s correspondem à execução dos testes, não ao tempo de uma análise na plataforma.
+
+Os testes examinam regras locais, comunicação entre módulos, armazenamento temporário, controles Streamlit e conversão dos dados para os formatos de saída. Parte deles substitui os serviços remotos por respostas controladas. A cobertura medida não inclui o arquivo de entrada na raiz nem HTML/JavaScript.
+
+Separadamente, três testes Node verificaram a legenda com valores negativos, a consulta de células e o tratamento de ausência de dados (NoData), além da descompressão zlib/Base64 em \texttt{Float32Array}. Os três foram aprovados. Isso verifica os casos descritos, não a compatibilidade com todos os navegadores.
+
+As verificações dos contratos acrescentaram expectativas específicas sobre unidades, datas e associação de registros. Assim, a cobertura informa a extensão de código exercitada, enquanto os casos de teste explicitam os comportamentos avaliados.
+
+\subsection{Verificação das integrações}\label{sec:resultado-unidades}
+
+A resposta NASA POWER preservada para longitude $-52$ e latitude $-28$, de 01/01/2025 a 02/01/2025, declara LST e radiação em \radiacaoTCC{}, com valores 21,64 e 20,99. Os testes confirmaram a média de 21,315, as duas observações nas saídas XLSX/CSV e o resumo arredondado no PDF. A normalização preservou os valores em MJ e aplicou o fator 3,6 somente a entradas declaradas em kWh. Entradas sem unidade reconhecida produziram indisponibilidade explícita.
+
+A avaliação também verificou se os diferentes caminhos de análise usavam as mesmas regras de datas, resumo meteorológico e identificação dos resultados. Um teste com vários índices confirmou que as informações meteorológicas eram obtidas uma única vez. Outro distinguiu aquisições do mesmo dia na marcação de anomalias. Quando as entradas da análise mudam, os resultados e arquivos anteriores deixam de ser válidos; quando apenas se alterna entre índices já calculados, a análise é preservada.
+
+No mapa, os testes verificaram a propagação do intervalo dos tiles à legenda, incluindo valores negativos. O PDF manteve a escala fixa comunicada no produto. As verificações tratam consistência de escala, não igualdade pixel a pixel entre representações.
+
+\subsection{Transferência da grade ao navegador}\label{sec:transferencia-resultados}
+
+Cada matriz controlada de $128\times128$ células ocupou 65.536 bytes em float32. Após compressão zlib, os tamanhos foram 89 bytes para a matriz constante, 845 para o gradiente repetido e 60.562 para os valores pseudoaleatórios. Em Base64, passaram a 120, 1.128 e 80.752 bytes, respectivamente. Esses resultados caracterizam o empacotamento de dados controlados, não medições de tráfego ou latência da aplicação em produção.
+
+\subsection{Demonstração funcional}
+
+Uma sessão real em Chrome confirmou o fluxo entre busca por Passo Fundo, demarcação, salvamento, restauração, análise e download. O recorte demonstrativo de aproximadamente 4,36 ha foi consultado entre 01/09/2026 e 31/10/2026, sem atribuição de cultura ou propriedade. Duas imagens passaram pelos filtros, em 08/09 e 20/10. As médias espaciais das composições foram 0,7070 (NDVI), 0,2140 (NDWI) e 0,2380 (NDMI). Esses valores caracterizam o exemplo computacional, não uma amostra representativa de áreas agrícolas.
+
+As séries contiveram dois pontos por índice. Como o detector exige três observações anteriores ao ponto avaliado, nenhum ponto reuniu as condições para aplicação da regra. A ausência de sinalizações nessa demonstração, portanto, não informa sua eficácia. O contexto meteorológico apresentou 61 registros, precipitação acumulada de 635,56~mm e temperatura média de 16,24~°C. A radiação permaneceu indisponível também nos arquivos, sem preenchimento por suposição.
+
+O PDF baixado contém três páginas com mapas estáticos, o XLSX possui sete abas e o ZIP sete arquivos CSV com integridade estrutural conferida. O identificador de aquisição está presente nas séries tabulares. A consulta NDMI na posição $(-52{,}331,-28{,}228)$ exibiu 0,3228, tanto por movimento quanto por toque em viewport de 390 pixels. O resultado pertence à célula reamostrada da composição e não substitui a média espacial de 0,2380.
+
+O endereço público respondeu HTTP 200 e apresentou a interface Streamlit. A demonstração instrumentada corresponde à execução local identificada pelos manifestos, que preservam parâmetros, arquivos e hashes do código. As capturas da apresentação da plataforma ilustram outras execuções.
+
+\newpage
+\subsection{Avaliação exploratória com usuários}
+
+\input{final_4a_usuarios}

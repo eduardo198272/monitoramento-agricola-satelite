@@ -1,0 +1,2 @@
+# Dependência editorial isolada; não pertence à aplicação.
+pybtex==0.26.1

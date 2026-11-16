@@ -1,0 +1,76 @@
+ docs/artigo_final/DECLARACAO_USO_IA.pdf            | Bin 29919 -> 30143 bytes
+ docs/artigo_final/DECLARACAO_USO_IA.tex            |   2 +
+ docs/artigo_final/README.md                        |   8 +-
+ docs/artigo_final/REGISTRO_USO_IA.md               |  10 +
+ docs/artigo_final/Relatorio_Final.pdf              | Bin 5337292 -> 5341294 bytes
+ .../auditoria_cientifica/AUDITORIA_CIENTIFICA.md   |  75 ++++
+ .../auditoria_cientifica/AUDITORIA_EQUACOES.md     |   4 +
+ .../AUDITORIA_ORIGINALIDADE.md                     |   6 +
+ .../auditoria_cientifica/AUDITORIA_REFERENCIAS.md  |  12 +
+ .../auditoria_cientifica/CHANGELOG_ARTIGO.md       |  15 +
+ .../MATRIZ_RASTREABILIDADE_CIENTIFICA.md           |  13 +
+ .../auditoria_cientifica/PENDENCIAS_AUTOR.md       |  13 +
+ docs/artigo_final/auditoria_cientifica/README.md   |   4 +-
+ .../artigo_final/avaliacao_usuarios/METODOLOGIA.md |  14 +
+ docs/artigo_final/avaliacao_usuarios/README.md     |  14 +-
+ .../RELATORIO_QUALIDADE_DADOS.md                   |  12 +
+ docs/artigo_final/avaliacao_usuarios/RESULTADOS.md |  62 +--
+ .../avaliacao_usuarios/VALIDACAO_FINAL.md          |   6 +
+ .../avaliacao_usuarios/codificacao.json            |   1 +
+ .../avaliacao_usuarios/figuras/aplicabilidade.pdf  | Bin 23754 -> 23694 bytes
+ .../avaliacao_usuarios/figuras/aplicabilidade.png  | Bin 544803 -> 544227 bytes
+ .../avaliacao_usuarios/figuras/aplicabilidade.svg  | 392 +++++++++---------
+ .../avaliacao_usuarios/figuras/experiencia.pdf     | Bin 18894 -> 19236 bytes
+ .../avaliacao_usuarios/figuras/experiencia.png     | Bin 113723 -> 113884 bytes
+ .../avaliacao_usuarios/figuras/experiencia.svg     |  80 ++--
+ .../avaliacao_usuarios/figuras/familiaridade.pdf   | Bin 18926 -> 18924 bytes
+ .../avaliacao_usuarios/figuras/familiaridade.png   | Bin 106092 -> 106809 bytes
+ .../avaliacao_usuarios/figuras/familiaridade.svg   |  80 ++--
+ .../avaliacao_usuarios/figuras/nota_geral.pdf      | Bin 17316 -> 17402 bytes
+ .../avaliacao_usuarios/figuras/nota_geral.png      | Bin 75245 -> 76263 bytes
+ .../avaliacao_usuarios/figuras/nota_geral.svg      |  74 ++--
+ .../figuras/perfil_profissional.pdf                | Bin 19766 -> 19795 bytes
+ .../figuras/perfil_profissional.png                | Bin 182348 -> 182856 bytes
+ .../figuras/perfil_profissional.svg                | 114 +++---
+ .../avaliacao_usuarios/figuras/tarefas.pdf         | Bin 23968 -> 23869 bytes
+ .../avaliacao_usuarios/figuras/tarefas.png         | Bin 407920 -> 412273 bytes
+ .../avaliacao_usuarios/figuras/tarefas.svg         | 370 ++++++++---------
+ .../avaliacao_usuarios/figuras/temas.pdf           | Bin 23205 -> 23208 bytes
+ .../avaliacao_usuarios/figuras/temas.png           | Bin 365515 -> 365063 bytes
+ .../avaliacao_usuarios/figuras/temas.svg           | 170 ++++----
+ .../avaliacao_usuarios/figuras/usabilidade.pdf     | Bin 22988 -> 22960 bytes
+ .../avaliacao_usuarios/figuras/usabilidade.png     | Bin 487590 -> 488487 bytes
+ .../avaliacao_usuarios/figuras/usabilidade.svg     | 446 ++++++++++-----------
+ .../avaliacao_usuarios/figuras/utilidade.pdf       | Bin 24125 -> 24006 bytes
+ .../avaliacao_usuarios/figuras/utilidade.png       | Bin 537234 -> 534905 bytes
+ .../avaliacao_usuarios/figuras/utilidade.svg       | 442 ++++++++++----------
+ .../resultados/aplicabilidade.csv                  |  16 +-
+ .../resultados/avaliacao_geral.csv                 |   2 +-
+ .../resultados/avaliacao_usabilidade.csv           |  18 +-
+ .../resultados/categorias_qualitativas.csv         |  26 +-
+ .../avaliacao_usuarios/resultados/cruzamentos.csv  |  12 +-
+ .../resultados/distribuicao_notas.csv              |  16 +-
+ .../resultados/distribuicoes.csv                   | 362 ++++++++---------
+ .../resultados/estatisticas_descritivas.csv        |  80 ++--
+ .../resultados/execucao_funcionalidades.csv        |  18 +-
+ .../avaliacao_usuarios/resultados/indicadores.tex  |  58 +--
+ .../resultados/perfil_participantes.csv            |  30 +-
+ .../avaliacao_usuarios/resultados/qualidade.json   |  31 +-
+ .../resultados/tabela_tarefas.tex                  |  18 +-
+ .../avaliacao_usuarios/resultados/tabela_temas.tex |   2 +-
+ .../resultados/tabela_utilidade.tex                |  22 +-
+ .../resultados/utilidade_funcionalidades.csv       |  22 +-
+ .../avaliacao_usuarios/resultados/validacao.json   |  13 +-
+ .../scripts/analisar_respostas.py                  |   7 +-
+ .../avaliacao_usuarios/scripts/gerar_graficos.py   |   2 +-
+ .../avaliacao_usuarios/scripts/gerar_tabelas.py    |   4 +-
+ .../avaliacao_usuarios/scripts/test_analise.py     |  10 +
+ .../scripts/validar_resultados.py                  |  91 ++++-
+ docs/artigo_final/final_0_resumo.tex               |   4 +-
+ docs/artigo_final/final_2_fundamentacao.tex        |   4 +
+ docs/artigo_final/final_3_metodos.tex              |  10 +-
+ docs/artigo_final/final_4a_usuarios.tex            |  24 +-
+ docs/artigo_final/final_5_discussao.tex            |   8 +-
+ docs/artigo_final/final_6_conclusao.tex            |   4 +-
+ docs/artigo_final/referencias.bib                  |  34 ++
+ 75 files changed, 1851 insertions(+), 1536 deletions(-)

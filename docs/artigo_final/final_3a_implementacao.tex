@@ -9,8 +9,9 @@ A execução pode ser iniciada localmente por \texttt{src/app/main.py} ou, na ve
 \begin{figure*}[htbp]
 \centering
 \resizebox{0.96\textwidth}{!}{\input{fig/arquitetura_atual}}
-\caption{Arquitetura implementada, com processamento no servidor Python, interação no navegador e serviços externos. Fonte: elaborado pelo autor a partir dos módulos do sistema.}
+\caption{Arquitetura implementada, com processamento no servidor Python, interação no navegador e serviços externos.}
 \label{fig:arquitetura-atual}
+\fonteTCC{elaborado pelo autor a partir dos módulos do sistema.}
 \end{figure*}
 
 \begin{table*}[htbp]
@@ -29,6 +30,7 @@ A execução pode ser iniciada localmente por \texttt{src/app/main.py} ou, na ve
 Serviço e repositórios de localizações & Validação e operações de armazenamento SQLite ou em memória de sessão. \\
 \texttt{export\_context.py}, exportadores & Snapshot normalizado e serialização em PDF, XLSX e CSV ZIP. \\ \hline
 \end{tabular}
+\fonteTCC{elaborado pelo autor a partir dos módulos implementados.}
 \end{table*}
 
 O desenvolvimento incremental ampliou o núcleo de mapas e séries com análise multiíndice, exportações e alternativas de armazenamento. A implementação tecnicamente avaliada foi consolidada em \texttt{28759bf}; os manifestos preservam os hashes dos arquivos executados. As especificações de interação, exportação e localizações delimitam os respectivos critérios de aceitação.
@@ -66,8 +68,9 @@ No modo web, o repositório recebe um dicionário da sessão Streamlit e retorna
 \begin{figure*}[htbp]
 \centering
 \resizebox{0.95\textwidth}{!}{\input{fig/classes_localizacao}}
-\caption{Serviço e alternativas de armazenamento de localizações. Fonte: elaborado pelo autor a partir das classes implementadas.}
+\caption{Serviço e alternativas de armazenamento de localizações.}
 \label{fig:classes-localizacao}
+\fonteTCC{elaborado pelo autor a partir das classes implementadas.}
 \end{figure*}
 
 A transferência aceita uma \texttt{Feature} ou \texttt{FeatureCollection}, contendo geometrias Polygon e nome em \texttt{properties.name}, limitada a 100 áreas e $2\times1024^2$ bytes. A importação valida o lote e rejeita duplicatas sem sobrescrever registros. No SQLite, a inserção é transacional; na sessão, a atualização ocorre após as verificações. IDs e datas são gerados novamente, não copiados do arquivo.
@@ -77,8 +80,9 @@ Há operações de exclusão no serviço e nos repositórios, porém não há a�
 \begin{figure*}[htbp]
 \centering
 \resizebox{0.95\textwidth}{!}{\input{fig/fluxo_areas}}
-\caption{Demarcação, gravação e restauração da área ativa, com alternativas de armazenamento. Fonte: elaborado pelo autor a partir da interface e do serviço de localizações.}
+\caption{Demarcação, gravação e restauração da área ativa, com alternativas de armazenamento.}
 \label{fig:fluxo-areas}
+\fonteTCC{elaborado pelo autor a partir da interface e do serviço de localizações.}
 \end{figure*}
 
 \subsection{Orquestração e análise multiíndice}
@@ -113,8 +117,9 @@ O tamanho dessa transferência foi avaliado com três matrizes controladas de $1
 \begin{figure*}[htbp]
 \centering
 \resizebox{0.96\textwidth}{!}{\input{fig/fluxo_consulta_pixel}}
-\caption{Transferência da grade e consulta local por posição no navegador. Fonte: elaborado pelo autor a partir de \texttt{maps.py} e \texttt{index\_hover/index.html}.}
+\caption{Transferência da grade e consulta local por posição no navegador.}
 \label{fig:fluxo-consulta-pixel}
+\fonteTCC{elaborado pelo autor a partir de \texttt{maps.py} e \texttt{index\_hover/index.html}.}
 \end{figure*}
 
 \subsection{Cores, legendas e mapas estáticos}
@@ -132,8 +137,9 @@ Ao exportar, o usuário precisa receber os resultados da análise que está cons
 \begin{figure*}[htbp]
 \centering
 \resizebox{0.96\textwidth}{!}{\input{fig/fluxo_exportacao}}
-\caption{Geração sob demanda de arquivos a partir do snapshot de análise. Fonte: elaborado pelo autor a partir dos módulos de exportação.}
+\caption{Geração sob demanda de arquivos a partir do \textit{snapshot} de análise.}
 \label{fig:fluxo-exportacao}
+\fonteTCC{elaborado pelo autor a partir dos módulos de exportação.}
 \end{figure*}
 
 O PDF é gerado em memória com ReportLab, em A4 paisagem, com uma página por índice. Reúne período, área, data de geração, média espacial da composição, tendência, contagem de imagens, contexto meteorológico, série e mapa estático, conforme os dados disponíveis. A lista de anomalias apresenta até três ocorrências e indica excedentes; as saídas tabulares preservam os registros completos.

@@ -18,7 +18,7 @@ As verificações dos contratos acrescentaram expectativas específicas sobre un
 
 \subsection{Verificação das integrações}\label{sec:resultado-unidades}
 
-A resposta NASA POWER preservada para longitude $-52$ e latitude $-28$, de 01/01/2025 a 02/01/2025, declara LST e radiação em MJ/m²/dia, com valores 21,64 e 20,99. Os testes confirmaram a média de 21,315, as duas observações nas saídas XLSX/CSV e o resumo arredondado no PDF. A normalização preservou os valores em MJ e aplicou o fator 3,6 somente a entradas declaradas em kWh. Entradas sem unidade reconhecida produziram indisponibilidade explícita.
+A resposta NASA POWER preservada para longitude $-52$ e latitude $-28$, de 01/01/2025 a 02/01/2025, declara LST e radiação em \radiacaoTCC{}, com valores 21,64 e 20,99. Os testes confirmaram a média de 21,315, as duas observações nas saídas XLSX/CSV e o resumo arredondado no PDF. A normalização preservou os valores em MJ e aplicou o fator 3,6 somente a entradas declaradas em kWh. Entradas sem unidade reconhecida produziram indisponibilidade explícita.
 
 A avaliação também verificou se os diferentes caminhos de análise usavam as mesmas regras de datas, resumo meteorológico e identificação dos resultados. Um teste com vários índices confirmou que as informações meteorológicas eram obtidas uma única vez. Outro distinguiu aquisições do mesmo dia na marcação de anomalias. Quando as entradas da análise mudam, os resultados e arquivos anteriores deixam de ser válidos; quando apenas se alterna entre índices já calculados, a análise é preservada.
 
@@ -32,7 +32,7 @@ Cada matriz controlada de $128\times128$ células ocupou 65.536 bytes em float32
 
 Uma sessão real em Chrome confirmou o fluxo entre busca por Passo Fundo, demarcação, salvamento, restauração, análise e download. O recorte demonstrativo de aproximadamente 4,36 ha foi consultado entre 01/09/2026 e 31/10/2026, sem atribuição de cultura ou propriedade. Duas imagens passaram pelos filtros, em 08/09 e 20/10. As médias espaciais das composições foram 0,7070 (NDVI), 0,2140 (NDWI) e 0,2380 (NDMI). Esses valores caracterizam o exemplo computacional, não uma amostra representativa de áreas agrícolas.
 
-As séries contiveram dois pontos por índice. Como o detector exige três observações anteriores ao ponto avaliado, nenhum ponto reuniu as condições para aplicação da regra. A ausência de sinalizações nessa demonstração, portanto, não informa sua eficácia. O contexto meteorológico apresentou 61 registros, precipitação acumulada de 635,56 mm e temperatura média de 16,24 °C. A radiação permaneceu indisponível também nos arquivos, sem preenchimento por suposição.
+As séries contiveram dois pontos por índice. Como o detector exige três observações anteriores ao ponto avaliado, nenhum ponto reuniu as condições para aplicação da regra. A ausência de sinalizações nessa demonstração, portanto, não informa sua eficácia. O contexto meteorológico apresentou 61 registros, precipitação acumulada de 635,56~mm e temperatura média de 16,24~°C. A radiação permaneceu indisponível também nos arquivos, sem preenchimento por suposição.
 
 O PDF baixado contém três páginas com mapas estáticos, o XLSX possui sete abas e o ZIP sete arquivos CSV com integridade estrutural conferida. O identificador de aquisição está presente nas séries tabulares. A consulta NDMI na posição $(-52{,}331,-28{,}228)$ exibiu 0,3228, tanto por movimento quanto por toque em viewport de 390 pixels. O resultado pertence à célula reamostrada da composição e não substitui a média espacial de 0,2380.
 

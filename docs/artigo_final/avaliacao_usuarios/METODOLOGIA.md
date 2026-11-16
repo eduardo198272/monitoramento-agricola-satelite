@@ -1,5 +1,19 @@
 # Metodologia da avaliação de usuários
 
+## Procedimento vigente — quarta rodada, 16/11/2026
+
+A coleta está concluída; o conjunto definitivo é o snapshot público de **32 respostas**, escolhido expressamente pelo pesquisador. A exportação anterior foi recuperada com hash `c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34`; a fonte dinâmica consultada nesta rodada contém33, e o pesquisador optou por manter o snapshot32. Seus32 registros coincidem integralmente com a exportação atual; o posterior não foi incorporado.
+
+Todos os32 atendem à triagem conjunta de consentimento/maioridade e exploração, sem duplicatas exatas ou equivalências integrais sem o carimbo. As31 respostas do original privado foram encontradas sem mudanças de conteúdo; as sete diferenças históricas de carimbo foram conferidas, não reaplicadas. A nova análise não modifica nenhuma célula da fonte.
+
+Foram recalculados os40 itens fechados,191 categorias, nota e seis cruzamentos, com os mesmos critérios de exclusão por item e quartis por interpolação linear. Médias/DP dos códigos ordinais permanecem complementares. O denominador de conclusão de tarefas exclui não tentativa; avaliações impossíveis não equivalem a neutralidade.
+
+Os textos foram relidos e as atribuições das31 submissões anteriores preservadas. A submissão incluída tem cinco campos abertos vazios, recebendo mapa de códigos vazio, sem nova categoria ou texto imputado. São142 células preenchidas em31 submissões,18 ausências entre160 campos possíveis e14 ausências no comentário opcional. Os13 temas mantêm suas contagens; percentuais por submissão usam32. Não houve segundo codificador ou nova aprovação humana presumida.
+
+O artigo descreve participação voluntária, consentimento, maioridade autodeclarada e apresentação agregada, com excertos desvinculados de perfis. A informação de que não houve submissão ao CEP foi mantida uma única vez na metodologia; não se declara aprovação/dispensa. Limites de autorrelato e amostragem permanecem científicos, sem questionamentos especulativos.
+
+Snapshot de reprodução: `privado/snapshot_publico_32.xlsx`, ignorado pelo Git. Resultados atuais em `resultados/` e validação desta rodada em `../evidencias/quarta_rodada/`. **As seções abaixo são históricas**, inclusive contagens e pendências31/32 já superadas.
+
 ## Estado vigente — terceira rodada
 
 O procedimento abaixo continua aplicado ao recorte preservado de31 respostas, sem mudanças de triagem, escalas, quartis, atribuições qualitativas ou valores. O pesquisador confirmou participantes reais, coleta06–15/11/2026 emBrasíliaUTC−3, encerramento e estabilidade da versão pública. As categorias e interpretações qualitativas já foram aprovadas.

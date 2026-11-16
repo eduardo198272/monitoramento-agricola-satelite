@@ -1,0 +1,745 @@
+[
+  {
+    "key": "ESA_SENTINEL2",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_S2_SR",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_EE_ND",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_EE_DATE",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_EE_SERVICE_ACCOUNT",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_EE_NONCOMMERCIAL",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "STREAMLIT_CLOUD_SECRETS",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "SLAIFFER2023",
+    "fields_preserved": [
+      "title",
+      "school",
+      "type",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "LOVATO2021",
+    "fields_preserved": [
+      "title",
+      "school",
+      "type",
+      "year",
+      "address",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "ARAUJO2025",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "number",
+      "pages",
+      "year",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "CHAVES2019",
+    "fields_preserved": [
+      "title",
+      "school",
+      "year",
+      "address",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "NASA_POWER_DAILY",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "ROUSE1973",
+    "fields_preserved": [
+      "title",
+      "booktitle",
+      "year",
+      "pages",
+      "publisher",
+      "address"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GAO1996",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "number",
+      "pages",
+      "year",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "PATRICIO2018",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "pages",
+      "year",
+      "publisher",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GORELICK2017",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "pages",
+      "year",
+      "publisher",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "AMANI2020",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "pages",
+      "year",
+      "publisher",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "WEISS2020",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "year",
+      "publisher",
+      "doi",
+      "url",
+      "urldate",
+      "eid"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "PHIRI2020",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "number",
+      "year",
+      "publisher",
+      "doi",
+      "url",
+      "eid"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "WAZLAWICK2014",
+    "fields_preserved": [
+      "title",
+      "publisher",
+      "year",
+      "edition",
+      "address"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "WAZLAWICK2020",
+    "fields_preserved": [
+      "title",
+      "year",
+      "publisher",
+      "edition",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "MCFEETERS1996",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "year",
+      "volume",
+      "number",
+      "pages",
+      "doi",
+      "url"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "USGS_NDMI",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_EE_SAMPLE",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_EE_MEDIAN",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_EE_REDUCE",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "NOMINATIM_POLICY",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "ROUSE1974_NTRS",
+    "fields_preserved": [
+      "title",
+      "booktitle",
+      "publisher",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "EOSDA_PLATFORM",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "ONESOIL_PLATFORM",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "ISO9241_2018",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate",
+      "publisher"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "DAVIS1989",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "number",
+      "pages",
+      "year",
+      "doi",
+      "url"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "SULLIVAN2013",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "number",
+      "pages",
+      "year",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "BRAUN2006",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "number",
+      "pages",
+      "year",
+      "doi",
+      "url"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "QGIS_VECTOR",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year",
+      "version"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "QGIS_RASTER",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year",
+      "version"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "QGIS_MAP",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year",
+      "version"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_EE_RESAMPLE",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOOGLE_EE_REGION",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "SENTINELHUB_NDMI",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "HYNDMAN2021",
+    "fields_preserved": [
+      "title",
+      "edition",
+      "publisher",
+      "address",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "NIST_OUTLIERS",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "NUMPY_STD",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "NUMPY_POLYFIT",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "BIPM_SI",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year",
+      "address",
+      "publisher",
+      "edition",
+      "version",
+      "doi"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "BENDER2020",
+    "fields_preserved": [
+      "title",
+      "booktitle",
+      "publisher",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "AAPOR2013",
+    "fields_preserved": [
+      "title",
+      "institution",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "SLAIFFER2025",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "number",
+      "pages",
+      "year",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "IZQUIERDO2026",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "volume",
+      "number",
+      "year",
+      "doi",
+      "url",
+      "eid"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "NASA_POWER_METHOD",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "NASA_POWER_PARAMETERS",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "STREAMLIT_STATE",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "MERONI2019",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "year",
+      "volume",
+      "pages",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "PARNAS1972",
+    "fields_preserved": [
+      "title",
+      "journal",
+      "year",
+      "volume",
+      "number",
+      "pages",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "NIST_LOCATION",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GITHUB_SDD",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "BOECKELER2025",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "UPF_IA2026",
+    "fields_preserved": [
+      "title",
+      "year",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "EOSDA_GUIDE",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "ONESOIL_PLATFORM_DETAIL",
+    "fields_preserved": [
+      "title",
+      "url",
+      "urldate",
+      "year"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "GOTEL1994",
+    "fields_preserved": [
+      "title",
+      "booktitle",
+      "year",
+      "pages",
+      "publisher",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "BJARNASON2015",
+    "fields_preserved": [
+      "title",
+      "booktitle",
+      "year",
+      "series",
+      "volume",
+      "pages",
+      "publisher",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  },
+  {
+    "key": "VAITHILINGAM2022",
+    "fields_preserved": [
+      "title",
+      "booktitle",
+      "year",
+      "pages",
+      "publisher",
+      "doi",
+      "url",
+      "urldate"
+    ],
+    "title_characters_preserved": true
+  }
+]

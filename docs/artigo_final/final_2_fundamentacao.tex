@@ -83,7 +83,11 @@ Para examinar um desvio, também é possível comparar sua distância em relaç�
 
 \citet{PARNAS1972} relaciona a modularização à atribuição de responsabilidades e à ocultação de decisões suscetíveis a mudanças. Essa perspectiva fundamenta a separação entre interface, processamento, persistência e exportação: cada fronteira reúne regras próprias e delimita a informação compartilhada com os demais componentes.
 
-No desenvolvimento assistido por IA, especificações explicitam o comportamento esperado e os critérios de aceitação. A documentação técnica do Spec Kit descreve o desenvolvimento orientado a especificações (\textit{Specification-Driven Development}, SDD) \citep{GITHUB_SDD}. Em análise técnica, \citet{BOECKELER2025} distingue o uso inicial de especificações de sua manutenção durante a evolução do software. Neste trabalho, SDD designa o fluxo de requisitos, especificações, tarefas e verificações, sem adoção do toolkit Spec Kit.
+No desenvolvimento assistido por inteligência artificial (IA), especificações explicitam o comportamento esperado e os critérios de aceitação. A documentação técnica do Spec Kit descreve o desenvolvimento orientado a especificações (\textit{Specification-Driven Development}, SDD) \citep{GITHUB_SDD}. Em análise técnica, \citet{BOECKELER2025} distingue o uso inicial de especificações de sua manutenção durante a evolução do software. Neste trabalho, SDD designa o fluxo de requisitos, especificações, tarefas e verificações, sem adoção do \textit{toolkit} Spec Kit.
+
+A rastreabilidade permite acompanhar um requisito desde sua origem até os artefatos derivados e suas modificações \citep{GOTEL1994}. Em estudo industrial, \citet{BJARNASON2015} examinam a relação entre requisitos, critérios de aceitação e testes: explicitar resultados esperados aproxima especificação e verificação, mas não elimina a necessidade de manter contexto e vínculos entre artefatos. Essa perspectiva fundamenta a associação entre especificações, implementação e testes adotada no projeto, sem atribuir-lhe desenvolvimento formal ou orientado a comportamento.
+
+Na geração assistida por modelos de linguagem, \citet{VAITHILINGAM2022} observaram dificuldades de compreensão, edição e depuração do código produzido. Esses resultados reforçam a necessidade de combinar supervisão humana, critérios explícitos e verificações automatizadas; não demonstram ganhos de produtividade deste projeto nem equivalência entre ferramentas ou modelos.
 
 A verificação técnica combina testes unitários de regras delimitadas, testes de integração entre componentes e testes de regressão \citep{BENDER2020}. A cobertura de linhas e ramificações indica os caminhos executados, mas não garante que as expectativas dos testes sejam corretas ou completas. A demonstração com serviços reais complementa esse exame ao exercitar o fluxo integrado.
 
@@ -120,7 +124,7 @@ A \cref{tab:plataformas} apresenta uma comparação documental de funcionalidade
 
 \begin{table*}[htbp]
 \centering\small
-\caption{Comparação documental por finalidade e funcionalidades. As fontes oficiais dos produtos são \citet{EOSDA_GUIDE} e \citet{ONESOIL_PLATFORM_DETAIL}; Earth Engine é infraestrutura programável, não produto final equivalente. Recursos comerciais dependem de plano e modalidade.}
+\caption{Comparação documental por finalidade e funcionalidades.}
 \label{tab:plataformas}
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}}
@@ -132,6 +136,8 @@ Clima & Histórico e previsão & Clima e chuva & Integração por programação 
 Saídas & Downloads documentados & Limites e mapas para máquinas & Exportação por programação & PDF, XLSX, CSV e GeoJSON\\
 Acesso & Planos e complementos & Mobile/Pro e assinaturas & Projeto, elegibilidade e cotas & Web; cotas de serviços externos\\ \hline
 \end{tabular}
+\fonteTCC{elaborado pelo autor com base em \citet{EOSDA_GUIDE,ONESOIL_PLATFORM_DETAIL,GORELICK2017} e na implementação do sistema.}
+\notaTCC{Earth Engine é infraestrutura programável, não produto final equivalente. Recursos comerciais dependem de plano e modalidade.}
 \end{table*}
 
 A distinção central é de finalidade: os produtos comerciais incluem gestão e recursos contratados; o Earth Engine oferece infraestrutura programável; e o artefato concentra um fluxo de seleção, processamento e exportação cuja implementação e verificação podem ser examinadas. Esse posicionamento permite discutir decisões de engenharia sem estabelecer superioridade funcional ou agronômica.

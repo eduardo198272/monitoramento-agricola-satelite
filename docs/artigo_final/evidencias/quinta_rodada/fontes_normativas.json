@@ -1,0 +1,52 @@
+{
+  "obtidos": [
+    {
+      "documento": "6023",
+      "url": "https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/149/2025/05/Referencias-NBR-6023-2025.pdf",
+      "sha256": "616a10de37531d08fc58e7780206f0f190dc509a31cec58c9f807c5802283cf4",
+      "access": "16 nov. 2026",
+      "tls_certificate_verification_disabled": false,
+      "corrected_editions_fully_verified": false
+    },
+    {
+      "documento": "10520",
+      "url": "https://coc.fiocruz.br/wp-content/uploads/2024/03/Abnt_nbr_10520_2023.pdf",
+      "sha256": "e7e5372accf526ffc6ab232173aa545a5bb0c29d47f41b55b55362a9a62fe70a",
+      "access": "16 nov. 2026",
+      "tls_certificate_verification_disabled": true,
+      "corrected_editions_fully_verified": false
+    },
+    {
+      "documento": "14724",
+      "url": "https://tpp-uff.com.br/wp-content/uploads/2025/02/ABNT_NBR_14724_2024-1.pdf",
+      "sha256": "b26b55f576f6be75ee36288aab3f0bd831720ec526fa0681af2ccb5b24db89d4",
+      "access": "16 nov. 2026",
+      "tls_certificate_verification_disabled": false,
+      "corrected_editions_fully_verified": false
+    },
+    {
+      "documento": "IBGE",
+      "url": "https://biblioteca.ibge.gov.br/visualizacao/livros/liv23907.pdf",
+      "sha256": "b56bf78c260fcf732bb650d306efe8e0bf65e9f71fc74da376ceb5c31594d0a0",
+      "access": "16 nov. 2026",
+      "tls_certificate_verification_disabled": false,
+      "corrected_editions_fully_verified": false
+    },
+    {
+      "documento": "SI",
+      "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+      "sha256": "1122cf38e25b23d780a30607c68f7350b2b6d1f9970a89947aaa87a45ecbb20a",
+      "access": "16 nov. 2026",
+      "tls_certificate_verification_disabled": false,
+      "corrected_editions_fully_verified": false
+    }
+  ],
+  "nao_obtidos_integralmente": [
+    "NBR 6022:2018",
+    "NBR 6024:2012",
+    "NBR 6028:2021"
+  ],
+  "official_template_independent_copy_obtained": false,
+  "official_course_page": "https://www.upf.br/itec/curso/ciencia-da-computacao",
+  "abnt_catalog_attempt": "Página principal acessível; ficha normativa não obtida de forma conclusiva"
+}

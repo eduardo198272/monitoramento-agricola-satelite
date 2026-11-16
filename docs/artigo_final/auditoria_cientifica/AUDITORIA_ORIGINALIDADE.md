@@ -1,5 +1,11 @@
 # Auditoria preliminar de originalidade e atribuição
 
+## Quarta rodada — atualização dirigida
+
+As novas sínteses foram confrontadas com Gotel/Finkelstein §§1/5, Bjarnason et al. §§2/5.2/6 e Vaithilingam et al. §§3–5. São paráfrases conceituais acompanhadas de citação, sem tradução literal de parágrafos ou atribuição dos resultados desses estudos ao artefato. A classificação do processo continua operacional, não se reivindicam como inéditos SDD, rastreabilidade ou testes.
+
+As respostas originais e os excertos foram preservados. O registro adicional do snapshot32 não tem textos abertos: não foram geradas respostas nem categorias para suprir ausências. A assistência de IA na análise e na redação está declarada; não se apresenta o texto como integralmente produzido sem assistência. Não houve detector, percentual de similaridade ou envio do manuscrito a serviço antiplágio. Trata-se de confronto dirigido, não certificação universal de originalidade.
+
 ## Terceira rodada — revisão dirigida da versão consolidada
 
 Foi relida a árvore completa de inclusões do artigo, com atenção a definições, traduções, equações, diagramas, legendas e sínteses de trabalhos relacionados. O confronto textual direto foi limitado aos documentos efetivamente consultados nesta e nas rodadas anteriores; não equivale a busca universal de similaridade.

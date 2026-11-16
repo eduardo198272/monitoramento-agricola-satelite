@@ -1,0 +1,2029 @@
+--- quarta-rodada/README.md
++++ quinta-rodada/README.md
+@@ -1,4 +1,14 @@
+ # Relatório final do TCC
++
++## Quinta rodada — normalização aplicada, aceite integral pendente
++
++- [PDF atualizado](Relatorio_Final.pdf), 32 páginas.
++- [Auditoria ABNT-01–22](AUDITORIA_ABNT.md), com correções e limitações explícitas.
++- Bibliografia gerada em `referencias_normalizadas.bib` e
++  `referencias_normalizadas.tex`; origem preservada em `referencias.bib`.
++- [Compilação, preservação e inspeção visual](evidencias/quinta_rodada/README.md).
++- Resultados das 32 respostas, classe, imagens e declaração de IA preservados.
++  Não se declara conformidade integral ou aprovação institucional; sem commit/push.
+ 
+ ## Versão consolidada para o orientador — quarta rodada
+ 
+--- quarta-rodada/Relatorio_Final.tex
++++ quinta-rodada/Relatorio_Final.tex
+@@ -18,7 +18,7 @@
+     {}{\PackageError{TCC}{Bloco institucional de cabecalho nao localizado}{Conferir a classe antes de ajustar o conteiner.}}}
+ \makeatother
+ 
+-\AtBeginDocument{\renewcommand{\harvardand}{e}}
++\input{normalizacao}
+ \input{figuras_relatorio}
+ \input{avaliacao_usuarios/resultados/indicadores}
+ \hypersetup{pdftitle={Sistema de Monitoramento Agrícola por Imagens de Satélite},pdfauthor={Eduardo Steffens Hoppen},pdfsubject={Trabalho de Conclusão de Curso - Ciência da Computação - UPF}}
+@@ -53,5 +53,5 @@
+ \input{final_5_discussao}
+ \input{final_6_conclusao}
+ \input{final_7_uso_ia}
+-\bibliography{referencias}
++\input{referencias_normalizadas}
+ \end{document}
+--- quarta-rodada/avaliacao_usuarios/resultados/tabela_tarefas.tex
++++ quinta-rodada/avaliacao_usuarios/resultados/tabela_tarefas.tex
+@@ -1,6 +1,6 @@
+ \begin{table*}[htbp]
+ \centering\small
+-\caption{Execução autodeclarada. SA: sem ajuda; CA: com ajuda; F: tentou sem sucesso; NT: não tentou. Conclusão: (SA+CA)/(SA+CA+F).}
++\caption{Execução autodeclarada.}
+ \label{tab:usuarios-tarefas}
+ \begin{tabular}{p{0.44\textwidth}ccccp{0.22\textwidth}}
+ \hline
+@@ -16,4 +16,6 @@
+ Exportar um relatório ou conjunto de dados & 24 & 6 & 0 & 2 & 30/30 (100,0\%)\\
+ \hline
+ \end{tabular}
++\fonteTCC{dados da pesquisa (2026).}
++\notaTCC{SA: sem ajuda; CA: com ajuda; F: tentou sem sucesso; NT: não tentou. Conclusão: (SA+CA)/(SA+CA+F).}
+ \end{table*}
+--- quarta-rodada/avaliacao_usuarios/resultados/tabela_temas.tex
++++ quinta-rodada/avaliacao_usuarios/resultados/tabela_temas.tex
+@@ -1,6 +1,6 @@
+ \begin{table*}[htbp]
+ \centering\small
+-\caption{Categorias temáticas selecionadas. n conta registros que mencionam o tema em qualquer uma das cinco perguntas; categorias não exclusivas. Frequências completas, definições e exemplos estão no material complementar.}
++\caption{Categorias temáticas selecionadas.}
+ \label{tab:usuarios-temas}
+ \begin{tabular}{p{0.20\textwidth}cp{0.30\textwidth}p{0.34\textwidth}}
+ \hline
+@@ -13,4 +13,6 @@
+ Uso móvel e acesso offline & 3 & ``Desenvolver versão otimizada para celular'' & Testar dispositivos físicos; estudar offline sem confundir com função atual.\\
+ \hline
+ \end{tabular}
++\fonteTCC{dados da pesquisa (2026).}
++\notaTCC{n conta registros que mencionam o tema em qualquer uma das cinco perguntas; categorias não exclusivas. Frequências completas, definições e exemplos estão no material complementar.}
+ \end{table*}
+--- quarta-rodada/avaliacao_usuarios/resultados/tabela_utilidade.tex
++++ quinta-rodada/avaliacao_usuarios/resultados/tabela_utilidade.tex
+@@ -1,6 +1,6 @@
+ \begin{table*}[htbp]
+ \centering\small
+-\caption{Utilidade percebida. Med.: mediana; Q1--Q3: quartis; 4--5: útil/muito útil; 1--2: nada/pouco útil; NC: não conseguiu avaliar. Percentuais usam o n válido do item.}
++\caption{Utilidade percebida.}
+ \label{tab:usuarios-utilidade}
+ \begin{tabular}{p{0.37\textwidth}cccp{0.18\textwidth}cc}
+ \hline
+@@ -18,4 +18,6 @@
+ Exportação em Excel e CSV & 27 & 4 & 4,0--4,0 & 21/27 (77,8\%) & 1 & 5\\
+ \hline
+ \end{tabular}
++\fonteTCC{dados da pesquisa (2026).}
++\notaTCC{Med.: mediana; Q1--Q3: quartis; 4--5: útil/muito útil; 1--2: nada/pouco útil; NC: não conseguiu avaliar. Percentuais usam o n válido do item.}
+ \end{table*}
+--- quarta-rodada/avaliacao_usuarios/scripts/gerar_tabelas.py
++++ quinta-rodada/avaliacao_usuarios/scripts/gerar_tabelas.py
+@@ -19,12 +19,15 @@
+ 
+ 
+ def table(caption, label, layout, header, rows):
++    title, _, note = caption.partition(". ")
+     return "\n".join([
+         r"\begin{table*}[htbp]", r"\centering\small",
+-        r"\caption{"+caption+"}", r"\label{"+label+"}",
++        r"\caption{"+title+".}", r"\label{"+label+"}",
+         r"\begin{tabular}{"+layout+"}", r"\hline",
+         header+r"\\ \hline", *[row+r"\\" for row in rows],
+-        r"\hline", r"\end{tabular}", r"\end{table*}", ""])
++        r"\hline", r"\end{tabular}",
++        r"\fonteTCC{dados da pesquisa (2026).}",
++        r"\notaTCC{"+note+"}", r"\end{table*}", ""])
+ 
+ 
+ def generate():
+--- quarta-rodada/fig/conceitos.tex
++++ quinta-rodada/fig/conceitos.tex
+@@ -1,5 +1,7 @@
+ \begin{figure*}[htbp]
+ \centering\small
++\caption{Bandas dos índices.}
++\label{fig:bandas}
+ \begin{tabular}{lllll}
+ \hline Banda & Região & Centro S2A / S2B (nm) & Resolução & Índice no sistema\\ \hline
+ B4 & Vermelho & 664,5 / 665 & 10 m & NDVI\\
+@@ -14,11 +16,13 @@
+ \node at (665,1.5){B4}; \node at (805,1.5){B8};
+ \node at (895,2){B8A}; \node at (1614,1.5){B11};
+ \end{tikzpicture}
+-\caption{Bandas dos índices. Centros espectrais por instrumento e resoluções nativas conforme o catálogo harmonizado \citep{GOOGLE_S2_SR}. Fonte: elaborado pelo autor.}
+-\label{fig:bandas}
++\fonteTCC{elaborado pelo autor com base no catálogo harmonizado \citep{GOOGLE_S2_SR}.}
++\notaTCC{centros espectrais por instrumento e resoluções nativas.}
+ \end{figure*}
+ \begin{figure*}[htbp]
+ \centering
++\caption{Polígono vetorial, células \textit{raster} e gradiente em esquema sem dados reais.}
++\label{fig:raster-vetor}
+ \begin{tikzpicture}[x=1cm,y=0.85cm,font=\small]
+ \foreach \x in {0,...,4}{\foreach \y in {0,...,2}{
+ \pgfmathtruncatemacro{\shade}{15+12*\x+5*\y}
+@@ -31,11 +35,13 @@
+ \node at (6.8,0.5){mínimo}; \node at (10,0.5){máximo};
+ \node at (8.4,2.4){legenda da camada};
+ \end{tikzpicture}
+-\caption{Polígono vetorial, células raster e gradiente em esquema sem dados reais. A geometria e as máscaras determinam o suporte válido. Fonte: elaborado pelo autor.}
+-\label{fig:raster-vetor}
++\fonteTCC{elaborado pelo autor.}
++\notaTCC{a geometria e as máscaras determinam o suporte válido.}
+ \end{figure*}
+ \begin{figure*}[htbp]
+ \centering\small
++\caption{Ilustração matemática: a média das médias por aquisição é 0,6, enquanto a média da composição mediana é 0,5.}
++\label{fig:composicao}
+ \begin{tabular}{lcccl}
+ \hline & Pixel A & Pixel B & Média espacial & Operação\\ \hline
+ Aquisição 1 & 0,1 & 0,9 & 0,5 & média dos pixels\\
+@@ -43,11 +49,13 @@
+ Aquisição 3 & 0,9 & 0,7 & 0,8 & média dos pixels\\ \hline
+ Mediana por pixel & 0,2 & 0,8 & 0,5 & média da composição\\ \hline
+ \end{tabular}
+-\caption{Ilustração matemática: a média das médias por aquisição é 0,6, enquanto a média da composição mediana é 0,5. Pesos iguais, sem máscaras; não é resultado experimental. Fonte: elaborado pelo autor.}
+-\label{fig:composicao}
++\fonteTCC{elaborado pelo autor.}
++\notaTCC{pesos iguais, sem máscaras; não é resultado experimental.}
+ \end{figure*}
+ \begin{figure*}[htbp]
+ \centering
++\caption{Janela e sinalização em sequência didática.}
++\label{fig:janela}
+ \begin{tikzpicture}[x=1.5cm,y=3cm,font=\small]
+ \fill[blue!8] (0.7,0.05) rectangle (3.3,0.95);
+ \draw[->] (0,0)--(5,0) node[right]{ordem};
+@@ -60,6 +68,6 @@
+ \node[anchor=west] at (4.1,0.45){$\sigma\simeq0{,}0816$};
+ \node[anchor=west] at (4.1,0.25){$z\simeq-4{,}90<-1$};
+ \end{tikzpicture}
+-\caption{Janela e sinalização em sequência didática. Valores criados para ilustrar a regra, não observações agrícolas ou medida de eficácia. Fonte: elaborado pelo autor.}
+-\label{fig:janela}
++\fonteTCC{elaborado pelo autor.}
++\notaTCC{valores criados para ilustrar a regra, não observações agrícolas ou medida de eficácia.}
+ \end{figure*}
+--- quarta-rodada/figuras_relatorio.tex
++++ quinta-rodada/figuras_relatorio.tex
+@@ -3,9 +3,10 @@
+   \IfFileExists{fig/capturas/#1.png}{%
+     \begin{figure*}[htbp]
+       \centering
++      \caption{#3.}
++      \label{fig:#1}
+       \includegraphics[width=0.94\textwidth,height=0.40\textheight,keepaspectratio]{fig/capturas/#1.png}
+-      \caption{#3. Fonte: execução local e arquivos gerados.}
+-      \label{fig:#1}
++      \fonteTCC{execução local e arquivos gerados.}
+     \end{figure*}%
+   }{}%
+ }
+@@ -14,8 +15,9 @@
+ \newcommand{\capturaautor}[4][htbp]{%
+   \begin{figure*}[#1]
+     \centering
++    \caption{#3.}
++    \label{fig:autor-#4}
+     \includegraphics[width=0.98\textwidth,height=0.49\textheight,keepaspectratio]{fig/capturas_autor/#2}
+-    \caption{#3. Fonte: captura da aplicação.}
+-    \label{fig:autor-#4}
++    \fonteTCC{captura da aplicação.}
+   \end{figure*}%
+ }
+--- quarta-rodada/final_0_resumo.tex
++++ quinta-rodada/final_0_resumo.tex
+@@ -1,3 +1,11 @@
++\selectlanguage{brazilian}
++\begin{resumo}
++Integrar imagens de satélite a um software agrícola exige consistência entre geometrias, datas, unidades e saídas. Este estudo desenvolveu e avaliou tecnicamente uma plataforma web modular com Python, Streamlit, Google Earth Engine, Sentinel-2 e NASA POWER. O desenvolvimento seguiu um fluxo orientado a especificações. A plataforma calcula o índice de vegetação por diferença normalizada (NDVI) e variantes infravermelho próximo--infravermelho de ondas curtas denominadas índice de água por diferença normalizada (NDWI) e índice de umidade por diferença normalizada (NDMI). Integra mapas, séries temporais, dados meteorológicos, consulta a grades no navegador e exportações. A avaliação documentada registrou 710 testes Python aprovados, com 100\% de cobertura de linhas e ramificações nos módulos medidos, três verificações JavaScript e demonstração com serviços reais. O questionário exploratório concluído, com \UsuariosN{} respostas, apresentou nota média de \UsuariosMedia{}/10, mediana \UsuariosMediana{} e barreiras de demarcação e interpretação de alertas. A contribuição está na integração de dados, na coerência do estado e na rastreabilidade das saídas. As evidências sustentam o fluxo computacional demonstrado; o questionário descreve o uso autodeclarado, sem generalização populacional. Validação agronômica em campo e calibração das heurísticas temporais permanecem como trabalhos futuros.
++\end{resumo}
++\begin{palavras_chave}
++engenharia de software; monitoramento agrícola; sensoriamento remoto; processamento geoespacial; visualização de dados.
++\end{palavras_chave}
++
+ \begin{Abstract}
+ \selectlanguage{english}
+ Integrating satellite imagery into agricultural software requires consistency across geometries, dates, units and outputs. This study developed and technically assessed a modular web platform using Python, Streamlit, Google Earth Engine, Sentinel-2 and NASA POWER. Development followed a specification-driven workflow. The platform computes the Normalized Difference Vegetation Index (NDVI) and near-infrared--shortwave-infrared variants labelled Normalized Difference Water Index (NDWI) and Normalized Difference Moisture Index (NDMI). It integrates maps, time series, weather data, browser-side grid queries and exports. The documented assessment recorded 710 passing Python tests, 100\% line and branch coverage in the measured modules, three JavaScript checks and a demonstration with real services. A completed exploratory questionnaire with \UsuariosN{} responses yielded a mean rating of \UsuariosMediaEN{}/10, a median of \UsuariosMediana{} and barriers involving area selection and alert interpretation. The contribution lies in data integration, state consistency and traceable outputs. The evidence supports the demonstrated computational workflow; the questionnaire describes self-reported use, without population-level generalization. Agronomic field validation and calibration of the temporal heuristics remain future work.
+@@ -5,10 +13,4 @@
+ \begin{keywords}
+ software engineering; agricultural monitoring; remote sensing; geospatial processing; data visualization.
+ \end{keywords}
+-
+-\begin{resumo}
+-Integrar imagens de satélite a um software agrícola exige consistência entre geometrias, datas, unidades e saídas. Este estudo desenvolveu e avaliou tecnicamente uma plataforma web modular com Python, Streamlit, Google Earth Engine, Sentinel-2 e NASA POWER. O desenvolvimento seguiu um fluxo orientado a especificações. A plataforma calcula o índice de vegetação por diferença normalizada (NDVI) e variantes infravermelho próximo--infravermelho de ondas curtas denominadas índice de água por diferença normalizada (NDWI) e índice de umidade por diferença normalizada (NDMI). Integra mapas, séries temporais, dados meteorológicos, consulta a grades no navegador e exportações. A avaliação documentada registrou 710 testes Python aprovados, com 100\% de cobertura de linhas e ramificações nos módulos medidos, três verificações JavaScript e demonstração com serviços reais. O questionário exploratório concluído, com \UsuariosN{} respostas, apresentou nota média de \UsuariosMedia{}/10, mediana \UsuariosMediana{} e barreiras de demarcação e interpretação de alertas. A contribuição está na integração de dados, na coerência do estado e na rastreabilidade das saídas. As evidências sustentam o fluxo computacional demonstrado; o questionário descreve o uso autodeclarado, sem generalização populacional. Validação agronômica em campo e calibração das heurísticas temporais permanecem como trabalhos futuros.
+-\end{resumo}
+-\begin{palavras_chave}
+-engenharia de software; monitoramento agrícola; sensoriamento remoto; processamento geoespacial; visualização de dados.
+-\end{palavras_chave}
++\selectlanguage{brazilian}
+--- quarta-rodada/final_1_introducao.tex
++++ quinta-rodada/final_1_introducao.tex
+@@ -26,7 +26,7 @@
+     \item[\textbf{OE4}] produzir composições temporais, estatísticas espaciais e mapas temáticos com exploração interativa dos valores da grade;
+     \item[\textbf{OE5}] organizar séries temporais e aplicar procedimentos explícitos de classificação de tendência e sinalização de desvios negativos;
+     \item[\textbf{OE6}] integrar informações meteorológicas e explicitar suas agregações, unidades e limites de interpretação;
+-    \item[\textbf{OE7}] gerar relatórios PDF e dados estruturados em XLSX e CSV ZIP, além de transferir localizações em GeoJSON;
++    \item[\textbf{OE7}] gerar relatórios em formato de documento portátil (PDF), planilhas XLSX e dados em valores separados por vírgulas (CSV), compactados em ZIP, além de transferir localizações em GeoJSON;
+     \item[\textbf{OE8}] verificar o artefato por inspeção, testes automatizados e demonstração funcional, com rastreabilidade entre requisitos, implementação e evidências.
+ \end{enumerate}
+ 
+--- quarta-rodada/final_2_fundamentacao.tex
++++ quinta-rodada/final_2_fundamentacao.tex
+@@ -83,7 +83,7 @@
+ 
+ \citet{PARNAS1972} relaciona a modularização à atribuição de responsabilidades e à ocultação de decisões suscetíveis a mudanças. Essa perspectiva fundamenta a separação entre interface, processamento, persistência e exportação: cada fronteira reúne regras próprias e delimita a informação compartilhada com os demais componentes.
+ 
+-No desenvolvimento assistido por IA, especificações explicitam o comportamento esperado e os critérios de aceitação. A documentação técnica do Spec Kit descreve o desenvolvimento orientado a especificações (\textit{Specification-Driven Development}, SDD) \citep{GITHUB_SDD}. Em análise técnica, \citet{BOECKELER2025} distingue o uso inicial de especificações de sua manutenção durante a evolução do software. Neste trabalho, SDD designa o fluxo de requisitos, especificações, tarefas e verificações, sem adoção do toolkit Spec Kit.
++No desenvolvimento assistido por inteligência artificial (IA), especificações explicitam o comportamento esperado e os critérios de aceitação. A documentação técnica do Spec Kit descreve o desenvolvimento orientado a especificações (\textit{Specification-Driven Development}, SDD) \citep{GITHUB_SDD}. Em análise técnica, \citet{BOECKELER2025} distingue o uso inicial de especificações de sua manutenção durante a evolução do software. Neste trabalho, SDD designa o fluxo de requisitos, especificações, tarefas e verificações, sem adoção do \textit{toolkit} Spec Kit.
+ 
+ A rastreabilidade permite acompanhar um requisito desde sua origem até os artefatos derivados e suas modificações \citep{GOTEL1994}. Em estudo industrial, \citet{BJARNASON2015} examinam a relação entre requisitos, critérios de aceitação e testes: explicitar resultados esperados aproxima especificação e verificação, mas não elimina a necessidade de manter contexto e vínculos entre artefatos. Essa perspectiva fundamenta a associação entre especificações, implementação e testes adotada no projeto, sem atribuir-lhe desenvolvimento formal ou orientado a comportamento.
+ 
+@@ -124,7 +124,7 @@
+ 
+ \begin{table*}[htbp]
+ \centering\small
+-\caption{Comparação documental por finalidade e funcionalidades. As fontes oficiais dos produtos são \citet{EOSDA_GUIDE} e \citet{ONESOIL_PLATFORM_DETAIL}; Earth Engine é infraestrutura programável, não produto final equivalente. Recursos comerciais dependem de plano e modalidade.}
++\caption{Comparação documental por finalidade e funcionalidades.}
+ \label{tab:plataformas}
+ \setlength{\tabcolsep}{3pt}
+ \begin{tabular}{p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}}
+@@ -136,6 +136,8 @@
+ Saídas & Downloads documentados & Limites e mapas para máquinas & Exportação por programação & PDF, XLSX, CSV e GeoJSON\\
+ Acesso & Planos e complementos & Mobile/Pro e assinaturas & Projeto, elegibilidade e cotas & Web; cotas de serviços externos\\ \hline
+ \end{tabular}
++\fonteTCC{elaborado pelo autor com base em \citet{EOSDA_GUIDE,ONESOIL_PLATFORM_DETAIL,GORELICK2017} e na implementação do sistema.}
++\notaTCC{Earth Engine é infraestrutura programável, não produto final equivalente. Recursos comerciais dependem de plano e modalidade.}
+ \end{table*}
+ 
+ A distinção central é de finalidade: os produtos comerciais incluem gestão e recursos contratados; o Earth Engine oferece infraestrutura programável; e o artefato concentra um fluxo de seleção, processamento e exportação cuja implementação e verificação podem ser examinadas. Esse posicionamento permite discutir decisões de engenharia sem estabelecer superioridade funcional ou agronômica.
+--- quarta-rodada/final_3_metodos.tex
++++ quinta-rodada/final_3_metodos.tex
+@@ -60,9 +60,10 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Derivação dos produtos espaciais e temporais a partir da coleção filtrada.}
++\label{fig:fluxo-analise}
+ \resizebox{0.96\textwidth}{!}{\input{fig/fluxo_analise}}
+-\caption{Derivação dos produtos espaciais e temporais a partir da coleção filtrada. Fonte: elaborado pelo autor a partir de \texttt{pipeline.py} e \texttt{time\_series.py}.}
+-\label{fig:fluxo-analise}
++\fonteTCC{elaborado pelo autor a partir de \texttt{pipeline.py} e \texttt{time\_series.py}.}
+ \end{figure*}
+ 
+ \subsection{Regra de detecção e tendência}\label{sec:anomalias-final}
+@@ -85,16 +86,17 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Heurística unilateral de sinalização de desvios negativos.}
++\label{fig:fluxo-anomalias}
+ \resizebox{0.92\textwidth}{!}{\input{fig/fluxo_anomalias}}
+-\caption{Heurística unilateral de sinalização de desvios negativos. Fonte: elaborado pelo autor a partir de \texttt{anomalies.py}.}
+-\label{fig:fluxo-anomalias}
++\fonteTCC{elaborado pelo autor a partir de \texttt{anomalies.py}.}
+ \end{figure*}
+ 
+ \subsection{Consulta e agregação meteorológica}\label{sec:clima-final}
+ 
+ O contexto meteorológico é obtido por uma consulta diária da NASA POWER nas coordenadas do centroide calculado pelo Earth Engine. A requisição usa o serviço \texttt{/api/temporal/daily/point}, a comunidade agrícola \texttt{community=ag}, datas no formato \texttt{YYYYMMDD}, resposta JSON e tempo limite de 30 s. São solicitados os parâmetros \texttt{PRECTOTCORR}, \texttt{T2M} e \texttt{ALLSKY\_SFC\_SW\_DWN}. Embora o código contenha nomes internos para \texttt{T2M\_MAX} e \texttt{T2M\_MIN}, o fluxo padrão não consulta temperaturas máximas e mínimas.
+ 
+-No catálogo diário da comunidade agrícola, \texttt{PRECTOTCORR} corresponde à precipitação corrigida, em mm/dia; \texttt{T2M}, à temperatura média do ar a 2 m, em °C; e \texttt{ALLSKY\_SFC\_SW\_DWN}, à energia solar de ondas curtas incidente em superfície horizontal sob todas as condições de céu, em MJ/m²/dia \citep{NASA_POWER_PARAMETERS}. Para a integração efetiva, prevalece a unidade declarada em cada resposta, especialmente na radiação.
++No catálogo diário da comunidade agrícola, \texttt{PRECTOTCORR} corresponde à precipitação corrigida, em mm/dia; \texttt{T2M}, à temperatura média do ar a 2~m, em °C; e \texttt{ALLSKY\_SFC\_SW\_DWN}, à energia solar de ondas curtas incidente em superfície horizontal sob todas as condições de céu, em \radiacaoTCC{} \citep{NASA_POWER_PARAMETERS}. Para a integração efetiva, prevalece a unidade declarada em cada resposta, especialmente na radiação.
+ 
+ A resposta é organizada em uma tabela ordenada por data. O código $-999$, usado para indicar ausência de dado, não é tratado como uma medição. Para resumir o período, o sistema soma a precipitação e calcula as médias de temperatura e radiação, usando separadamente as observações válidas de cada variável. Esses conjuntos de dias são representados por $D_P$, $D_T$ e $D_R$:
+ \begin{align}
+@@ -102,7 +104,7 @@
+  \overline{T}&=\frac{1}{|D_T|}\sum_{d\in D_T}T_d,\\
+  \overline{R}&=\frac{1}{|D_R|}\sum_{d\in D_R} f(u)R_d.\label{eq:radiacao-codigo}
+ \end{align}
+-Na \cref{eq:radiacao-codigo}, $f(u)=1$ para MJ/m²/dia e $f(u)=3{,}6$ para kWh/m²/dia, conforme a unidade declarada nos metadados. A conversão decorre de $1\ \mathrm{kWh}=1000\ \mathrm{J/s}\times3600\ \mathrm{s}=3{,}6\ \mathrm{MJ}$, pelas definições de watt e prefixos do SI \citep{BIPM_SI}. Unidade ausente ou desconhecida torna a radiação indisponível e gera aviso, sem inferência pela magnitude. Valores não finitos, booleanos, inválidos e a sentinela $-999$ são descartados. A coluna normalizada em MJ/m²/dia é compartilhada pelo resumo e pelas exportações.
++Na \cref{eq:radiacao-codigo}, $f(u)=1$ para \radiacaoTCC{} e $f(u)=3{,}6$ para \radiacaoKWhTCC{}, conforme a unidade declarada nos metadados. A conversão decorre de $1\ \mathrm{kWh}=1000\ \mathrm{J/s}\times3600\ \mathrm{s}=3{,}6\ \mathrm{MJ}$, pelas definições de watt e prefixos do SI \citep{BIPM_SI}. Unidade ausente ou desconhecida torna a radiação indisponível e gera aviso, sem inferência pela magnitude. Valores não finitos, booleanos, inválidos e a sentinela $-999$ são descartados. A coluna normalizada em \radiacaoTCC{} é compartilhada pelo resumo e pelas exportações.
+ 
+ A soma da precipitação disponível não assegura cobertura integral do intervalo caso haja lacunas. A requisição define \texttt{time-standard=UTC}, mantendo as duas datas inclusivas em correspondência ao período espectral \citep{NASA_POWER_DAILY}. A consulta é compartilhada entre os índices da mesma análise. A apresentação conjunta fornece contexto, sem calcular correlação ou atribuir causalidade.
+ 
+--- quarta-rodada/final_3a_implementacao.tex
++++ quinta-rodada/final_3a_implementacao.tex
+@@ -8,9 +8,10 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Arquitetura implementada, com processamento no servidor Python, interação no navegador e serviços externos.}
++\label{fig:arquitetura-atual}
+ \resizebox{0.96\textwidth}{!}{\input{fig/arquitetura_atual}}
+-\caption{Arquitetura implementada, com processamento no servidor Python, interação no navegador e serviços externos. Fonte: elaborado pelo autor a partir dos módulos do sistema.}
+-\label{fig:arquitetura-atual}
++\fonteTCC{elaborado pelo autor a partir dos módulos do sistema.}
+ \end{figure*}
+ 
+ \begin{table*}[htbp]
+@@ -29,6 +30,7 @@
+ Serviço e repositórios de localizações & Validação e operações de armazenamento SQLite ou em memória de sessão. \\
+ \texttt{export\_context.py}, exportadores & Snapshot normalizado e serialização em PDF, XLSX e CSV ZIP. \\ \hline
+ \end{tabular}
++\fonteTCC{elaborado pelo autor a partir dos módulos implementados.}
+ \end{table*}
+ 
+ O desenvolvimento incremental ampliou o núcleo de mapas e séries com análise multiíndice, exportações e alternativas de armazenamento. A implementação tecnicamente avaliada foi consolidada em \texttt{28759bf}; os manifestos preservam os hashes dos arquivos executados. As especificações de interação, exportação e localizações delimitam os respectivos critérios de aceitação.
+@@ -65,9 +67,10 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Serviço e alternativas de armazenamento de localizações.}
++\label{fig:classes-localizacao}
+ \resizebox{0.95\textwidth}{!}{\input{fig/classes_localizacao}}
+-\caption{Serviço e alternativas de armazenamento de localizações. Fonte: elaborado pelo autor a partir das classes implementadas.}
+-\label{fig:classes-localizacao}
++\fonteTCC{elaborado pelo autor a partir das classes implementadas.}
+ \end{figure*}
+ 
+ A transferência aceita uma \texttt{Feature} ou \texttt{FeatureCollection}, contendo geometrias Polygon e nome em \texttt{properties.name}, limitada a 100 áreas e $2\times1024^2$ bytes. A importação valida o lote e rejeita duplicatas sem sobrescrever registros. No SQLite, a inserção é transacional; na sessão, a atualização ocorre após as verificações. IDs e datas são gerados novamente, não copiados do arquivo.
+@@ -76,9 +79,10 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Demarcação, gravação e restauração da área ativa, com alternativas de armazenamento.}
++\label{fig:fluxo-areas}
+ \resizebox{0.95\textwidth}{!}{\input{fig/fluxo_areas}}
+-\caption{Demarcação, gravação e restauração da área ativa, com alternativas de armazenamento. Fonte: elaborado pelo autor a partir da interface e do serviço de localizações.}
+-\label{fig:fluxo-areas}
++\fonteTCC{elaborado pelo autor a partir da interface e do serviço de localizações.}
+ \end{figure*}
+ 
+ \subsection{Orquestração e análise multiíndice}
+@@ -112,9 +116,10 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Transferência da grade e consulta local por posição no navegador.}
++\label{fig:fluxo-consulta-pixel}
+ \resizebox{0.96\textwidth}{!}{\input{fig/fluxo_consulta_pixel}}
+-\caption{Transferência da grade e consulta local por posição no navegador. Fonte: elaborado pelo autor a partir de \texttt{maps.py} e \texttt{index\_hover/index.html}.}
+-\label{fig:fluxo-consulta-pixel}
++\fonteTCC{elaborado pelo autor a partir de \texttt{maps.py} e \texttt{index\_hover/index.html}.}
+ \end{figure*}
+ 
+ \subsection{Cores, legendas e mapas estáticos}
+@@ -131,9 +136,10 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Geração sob demanda de arquivos a partir do \textit{snapshot} de análise.}
++\label{fig:fluxo-exportacao}
+ \resizebox{0.96\textwidth}{!}{\input{fig/fluxo_exportacao}}
+-\caption{Geração sob demanda de arquivos a partir do snapshot de análise. Fonte: elaborado pelo autor a partir dos módulos de exportação.}
+-\label{fig:fluxo-exportacao}
++\fonteTCC{elaborado pelo autor a partir dos módulos de exportação.}
+ \end{figure*}
+ 
+ O PDF é gerado em memória com ReportLab, em A4 paisagem, com uma página por índice. Reúne período, área, data de geração, média espacial da composição, tendência, contagem de imagens, contexto meteorológico, série e mapa estático, conforme os dados disponíveis. A lista de anomalias apresenta até três ocorrências e indica excedentes; as saídas tabulares preservam os registros completos.
+--- quarta-rodada/final_3b_plataforma.tex
++++ quinta-rodada/final_3b_plataforma.tex
+@@ -16,6 +16,8 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Importação de localizações em GeoJSON: controle, arquivo selecionado e confirmação.}
++\label{fig:autor-geojson}
+ \begin{minipage}[t]{0.30\textwidth}
+ \vspace{0pt}
+ \centering
+@@ -37,8 +39,8 @@
+ \par\smallskip
+ {\small (c) Confirmação da importação.}
+ \end{minipage}
+-\caption{Importação de localizações em GeoJSON: controle, arquivo selecionado e confirmação. Recortes da barra lateral com conteúdo preservado. Fonte: capturas da aplicação.}
+-\label{fig:autor-geojson}
++\fonteTCC{capturas da aplicação.}
++\notaTCC{recortes da barra lateral com conteúdo preservado.}
+ \end{figure*}
+ 
+ \subsection{Configuração e produtos analíticos}
+@@ -83,6 +85,8 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Interface em navegador móvel e acesso público.}
++\label{fig:mobile}
+ \begin{minipage}[t]{0.36\textwidth}
+ \centering
+ \vspace{0pt}
+@@ -104,8 +108,8 @@
+ \par\smallskip
+ {\small (c) Acesso público.}
+ \end{minipage}
+-\caption{Interface em navegador móvel e acesso público. As telas mostram um exemplo distinto do desktop. Fonte: capturas da aplicação e QR Code elaborado pelo autor.}
+-\label{fig:mobile}
++\fonteTCC{capturas da aplicação e QR Code elaborado pelo autor.}
++\notaTCC{as telas mostram um exemplo distinto do desktop.}
+ \end{figure*}
+ 
+ \clearpage
+--- quarta-rodada/final_4_resultados.tex
++++ quinta-rodada/final_4_resultados.tex
+@@ -18,7 +18,7 @@
+ 
+ \subsection{Verificação das integrações}\label{sec:resultado-unidades}
+ 
+-A resposta NASA POWER preservada para longitude $-52$ e latitude $-28$, de 01/01/2025 a 02/01/2025, declara LST e radiação em MJ/m²/dia, com valores 21,64 e 20,99. Os testes confirmaram a média de 21,315, as duas observações nas saídas XLSX/CSV e o resumo arredondado no PDF. A normalização preservou os valores em MJ e aplicou o fator 3,6 somente a entradas declaradas em kWh. Entradas sem unidade reconhecida produziram indisponibilidade explícita.
++A resposta NASA POWER preservada para longitude $-52$ e latitude $-28$, de 01/01/2025 a 02/01/2025, declara LST e radiação em \radiacaoTCC{}, com valores 21,64 e 20,99. Os testes confirmaram a média de 21,315, as duas observações nas saídas XLSX/CSV e o resumo arredondado no PDF. A normalização preservou os valores em MJ e aplicou o fator 3,6 somente a entradas declaradas em kWh. Entradas sem unidade reconhecida produziram indisponibilidade explícita.
+ 
+ A avaliação também verificou se os diferentes caminhos de análise usavam as mesmas regras de datas, resumo meteorológico e identificação dos resultados. Um teste com vários índices confirmou que as informações meteorológicas eram obtidas uma única vez. Outro distinguiu aquisições do mesmo dia na marcação de anomalias. Quando as entradas da análise mudam, os resultados e arquivos anteriores deixam de ser válidos; quando apenas se alterna entre índices já calculados, a análise é preservada.
+ 
+@@ -32,7 +32,7 @@
+ 
+ Uma sessão real em Chrome confirmou o fluxo entre busca por Passo Fundo, demarcação, salvamento, restauração, análise e download. O recorte demonstrativo de aproximadamente 4,36 ha foi consultado entre 01/09/2026 e 31/10/2026, sem atribuição de cultura ou propriedade. Duas imagens passaram pelos filtros, em 08/09 e 20/10. As médias espaciais das composições foram 0,7070 (NDVI), 0,2140 (NDWI) e 0,2380 (NDMI). Esses valores caracterizam o exemplo computacional, não uma amostra representativa de áreas agrícolas.
+ 
+-As séries contiveram dois pontos por índice. Como o detector exige três observações anteriores ao ponto avaliado, nenhum ponto reuniu as condições para aplicação da regra. A ausência de sinalizações nessa demonstração, portanto, não informa sua eficácia. O contexto meteorológico apresentou 61 registros, precipitação acumulada de 635,56 mm e temperatura média de 16,24 °C. A radiação permaneceu indisponível também nos arquivos, sem preenchimento por suposição.
++As séries contiveram dois pontos por índice. Como o detector exige três observações anteriores ao ponto avaliado, nenhum ponto reuniu as condições para aplicação da regra. A ausência de sinalizações nessa demonstração, portanto, não informa sua eficácia. O contexto meteorológico apresentou 61 registros, precipitação acumulada de 635,56~mm e temperatura média de 16,24~°C. A radiação permaneceu indisponível também nos arquivos, sem preenchimento por suposição.
+ 
+ O PDF baixado contém três páginas com mapas estáticos, o XLSX possui sete abas e o ZIP sete arquivos CSV com integridade estrutural conferida. O identificador de aquisição está presente nas séries tabulares. A consulta NDMI na posição $(-52{,}331,-28{,}228)$ exibiu 0,3228, tanto por movimento quanto por toque em viewport de 390 pixels. O resultado pertence à célula reamostrada da composição e não substitui a média espacial de 0,2380.
+ 
+--- quarta-rodada/final_4a_usuarios.tex
++++ quinta-rodada/final_4a_usuarios.tex
+@@ -6,9 +6,10 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Área de atuação declarada nas \UsuariosN{} submissões, conforme as categorias do instrumento.}
++\label{fig:usuarios-perfil}
+ \includegraphics[width=0.82\textwidth]{avaliacao_usuarios/figuras/perfil_profissional.pdf}
+-\caption{Área de atuação declarada nas \UsuariosN{} submissões, conforme as categorias do instrumento. Fonte: dados da pesquisa.}
+-\label{fig:usuarios-perfil}
++\fonteTCC{dados da pesquisa (2026).}
+ \end{figure*}
+ 
+ \subsubsection{Execução e experiência de uso}
+@@ -21,9 +22,11 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Execução autodeclarada das atividades, incluindo não tentativa, com base em \UsuariosN{} respostas por item.}
++\label{fig:usuarios-tarefas}
+ \includegraphics[width=0.98\textwidth,height=0.63\textheight,keepaspectratio]{avaliacao_usuarios/figuras/tarefas.pdf}
+-\caption{Execução autodeclarada das atividades, incluindo não tentativa, com base em \UsuariosN{} respostas por item. Séries/anomalias e exportações mantêm o agrupamento do questionário. Fonte: dados da pesquisa.}
+-\label{fig:usuarios-tarefas}
++\fonteTCC{dados da pesquisa (2026).}
++\notaTCC{séries/anomalias e exportações mantêm o agrupamento do questionário.}
+ \end{figure*}
+ 
+ Os nove itens de experiência tiveram mediana 4, mas essa medida central não mostra todas as diferenças entre as respostas (\cref{fig:usuarios-usabilidade}). A facilidade de compreensão reuniu \UsCompreensaoPos{}/\UsCompreensaoN{} concordâncias nas categorias 4--5 (\UsCompreensaoPct\%), com uma impossibilidade de avaliação. A intuitividade teve \UsIntuitividadePos{}/\UsIntuitividadeN{} (\UsIntuitividadePct\%) e duas impossibilidades.
+@@ -32,9 +35,11 @@
+ 
+ \begin{figure*}[htbp]
+ \centering
++\caption{Concordância sobre a experiência de uso.}
++\label{fig:usuarios-usabilidade}
+ \includegraphics[width=0.98\textwidth,height=0.66\textheight,keepaspectratio]{avaliacao_usuarios/figuras/usabilidade.pdf}
+-\caption{Concordância sobre a experiência de uso. Cada barra apresenta as cinco categorias ordinais; o n válido exclui a impossibilidade de avaliação, informada separadamente. Fonte: dados da pesquisa.}
+-\label{fig:usuarios-usabilidade}
++\fonteTCC{dados da pesquisa (2026).}
++\notaTCC{cada barra apresenta as cinco categorias ordinais; o n válido exclui a impossibilidade de avaliação, informada separadamente.}
+ \end{figure*}
+ 
+ \subsubsection{Utilidade, aplicabilidade e avaliação geral}
+--- quarta-rodada/final_5_discussao.tex
++++ quinta-rodada/final_5_discussao.tex
+@@ -21,6 +21,7 @@
+ OE7 & Implementado & PDF, XLSX, CSV ZIP e GeoJSON exercitados com entradas controladas; não equivalem a pacote completo de reprodução. \\
+ OE8 & Verificação técnica realizada & 710 testes Python, três verificações JavaScript e demonstração com serviços reais; questionário exploratório complementar. \\ \hline
+ \end{tabular}
++\fonteTCC{elaborado pelo autor a partir das evidências da pesquisa.}
+ \end{table*}
+ 
+ O desenvolvimento orientado a especificações tornou explícitos requisitos e critérios verificáveis. A rastreabilidade entre esses documentos, módulos e testes permite distinguir disponibilidade funcional e avaliação realizada, em consonância com a relação entre requisitos e verificação examinada por \citet{GOTEL1994,BJARNASON2015}. Essa é uma contribuição de processo documentada, não uma medida de ganho de produtividade de desenvolvimento ou comparação entre metodologias.
+--- /dev/null
++++ quinta-rodada/AUDITORIA_ABNT.md
+@@ -0,0 +1,131 @@
++# Auditoria de normalização acadêmica — quinta rodada
++
++**Autor:** Eduardo Steffens Hoppen. **Orientador:** Prof. Rafael Rieder.
++**Data:** 16 nov. 2026. **Defesa prevista:** dezembro de 2026.
++**Comparação:** versão local da quarta rodada, preservada antes dos ajustes.
++**PDF desta entrega:** 32 páginas, papel Letter, duas colunas, 22 figuras,
++cinco tabelas e **14 expressões numeradas**.
++
++## Resultado e limites
++
++Foram aplicadas correções de apresentação, citações, geração bibliográfica,
++fontes/legendas e unidades. Foram inventariadas individualmente as **63 entradas
++bibliográficas**; as **54 citadas** são publicadas, e as nove não citadas
++permanecem na base. Não houve exclusão de fontes, nova revisão científica,
++nova análise das respostas ou alteração de resultados.
++
++**Esta entrega não satisfaz ainda todos os critérios de aceite integral.**
++Inventariar e normalizar uma entrada não equivale a confirmar todos os seus
++metadados. A proveniência oficial do modelo final, o levantamento completo
++de versões corrigidas/emendas e algumas datas/metadados bibliográficos não
++foram encerrados. As lacunas são indicadas abaixo e em
++`evidencias/quinta_rodada/referencias.json`; não há certificação de conformidade
++integral com a ABNT nem aprovação institucional presumida.
++
++O conteúdo dos dois resumos foi preservado; mudou sua ordem. A declaração
++de IA, a classe, os resultados e as imagens foram preservados. A contagem
++“12 equações” da solicitação não correspondia à base: ela já numerava **14**,
++em oito ambientes `equation`/`align`. Nenhuma foi removida ou renumerada
++para forçar aquela contagem.
++
++## 1. Base normativa e institucional consultada
++
++| Documento | Evidência obtida | Alcance e limitação |
++|---|---|---|
++| NBR 6023:2025 | PDF da terceira edição, 21 maio 2025, disponibilizado em domínio de armazenamento do Centro Paula Souza; substitui a edição anterior e sua emenda | Consultados, entre outros, §§6.3, 6.6, 6.7, 7 e 8.4–8.6. A extração tem glifos corrompidos; usou-se também decodificação auxiliar. Não foi confirmada a inexistência de correções posteriores no catálogo oficial. |
++| NBR 10520:2023 | PDF disponibilizado pela Casa de Oswaldo Cruz/Fiocruz | §§6.1.1.1, 6.1.2, 6.1.3, 6.1.4 e 6.1.8: caixa mista, autores, narrativa e citações simultâneas. O servidor apresentou cadeia TLS não validável; download realizado sem validação de certificado e conteúdo identificado pelo documento. Essa limitação de transporte não é omitida. |
++| NBR 14724:2024 | PDF da quarta edição, 16 dez. 2024, disponibilizado em site do TPP/UFF | Subsídio geral; não foi usada para converter o artigo em monografia. Situação de versão corrigida posterior não confirmada. |
++| IBGE, Normas de apresentação tabular | PDF obtido na Biblioteca do IBGE | Conferência de fonte, título e estrutura aberta; tabelas descritivas foram distinguidas da estatística, sem reclassificação indiscriminada. |
++| SI, 9ª edição de 2019 | PDF oficial do BIPM, versão 4.01 de junho de 2026 | §§5.4.3, 5.4.4 e 5.4.7; produto/quociente de unidades e espaço entre valor e símbolo. |
++| NBR 6022:2018, 6024:2012 e 6028:2021 | Requisitos indicados na solicitação; buscas de texto primário sem resultado utilizável nesta execução | Não se afirma leitura integral dessas três normas, nem se inventam números de cláusulas. As correções compatíveis e expressamente solicitadas foram realizadas; conferência normativa direta permanece necessária. |
++| Modelo final UPF | Leitura integral de `CC-EC_TF-TC.cls`, entrada, macros e histórico Git | A classe local declara desenvolvimento por Marcelo Trindade Rebonatto e atualização por Rafael Rieder. Comentário: v1.1, 26/06/2026; `ProvidesClass`: 24/07/2025. Introduzida em `f4c46a7`; sem alteração posterior identificada na classe. Não se obteve cópia oficial independente para comparação de origem. |
++| Curso/UPF | Página pública do curso no Instituto de Tecnologia | Confirma unidade, curso e campus Passo Fundo; não foi encontrado ali o pacote final nem regra expressa impondo ordem dos resumos, `dcu` ou legendas inferiores. O antigo modelo de proposta em `docs/modelo_latex/` não foi tratado como modelo original do artigo final. |
++| Catálogo ABNT | Página principal acessível; tentativa de busca sem ficha normativa conclusiva | Não permite declarar que inexistem emendas ou versões corrigidas. |
++
++URLs, hashes e limitações constam de `evidencias/quinta_rodada/fontes_normativas.json`.
++Os PDFs normativos ficaram em cache privado, sem republicação no repositório.
++
++## 2. Achados ABNT-01–22
++
++Os números de página abaixo correspondem ao PDF desta rodada. “Corrigida”
++identifica a ocorrência específica, não constitui certificado de conformidade
++integral do item ou do documento. Evidências comuns: `antes_depois.diff`,
++`compilacao.json`, `renderizacao.json` e relatório visual na pasta desta rodada.
++
++| ID | Norma / localização verificada | Página | Problema e estado anterior | Correção / decisão | Arquivos | Evidência / validação | Status |
++|---|---|---|---|---|---|---|---|
++| ABNT-01 | NBR 6022:2018, cláusula não conferida diretamente | 1 | Abstract/Keywords antes de Resumo/Palavras-chave | Resumo em português primeiro; identificação e nota 1 preservadas, sem inventar contato ou datas editoriais | `final_0_resumo.tex` | Comparação dos dois textos, renderização p.1 | Não conformidade corrigida |
++| ABNT-02 | NBR 6028:2021, cláusula não conferida diretamente | 1 | Rótulo “Palavras-Chave” da classe | Ajuste local para “Palavras-chave”; parágrafos únicos, descritores e resultados das 32 respostas preservados | `normalizacao.tex`, `final_0_resumo.tex` | Leitura dos resumos e p.1; sem reformulação científica | Não conformidade corrigida |
++| ABNT-03 | NBR 10520:2023, 6.1.1.1 | 2–5, 7–12, 15, 27–32 | Risco de introduzir regra antiga de caixa alta nas citações | Caixa mista mantida nas citações; caixa alta apenas nos sobrenomes/autorias da lista bibliográfica | `normalizacao.tex`, gerador e produtos bibliográficos | Fontes e PDF: Gao, Davis, Patrício/Rieder e autores institucionais | Conforme |
++| ABNT-04 | NBR 10520:2023, 6.1.3 e 6.1.4 | 2–5, 7–12, 27–29 | `harvardand=e` compartilhado entre narrativa e parênteses | Separadores dependentes do contexto: “Patrício; Rieder” versus “Patrício e Rieder”; três autores explicitados, abreviação para quatro ou mais | `normalizacao.tex`, `scripts/gerar_referencias_normalizadas.py` | Leitura visual de exemplos parentéticos e narrativos | Não conformidade corrigida |
++| ABNT-05 | NBR 10520:2023, 6.1.2 e 6.1.8 | 2–5, 7–12, 27–32 | Espaços relatados nas auditorias e risco de sufixos incoerentes | Geração de pontuação por natbib; ordenação das citações simultâneas pela lista alfabética; sufixos autor/ano coerentes; `et al.` tipograficamente uniforme | Configuração e gerador | PDF não apresenta citações indefinidas; os exemplos de extração não foram presumidos erros visuais | Não conformidade corrigida |
++| ABNT-06 | NBR 6023:2025, seções 7 e 8 | 30–32 | `dcu`: ano após autor, formato internacional e estruturas heterogêneas | Estruturas distintas para artigo, livro, capítulo, evento, trabalho acadêmico, relatório e documentação; sobrenomes em caixa alta, autores separados por ponto e vírgula, periódico/obra em negrito; identificadores de artigo separados de páginas | Gerador, `referencias_normalizadas.bib/.tex` | 63 entradas inventariadas, 54 publicadas; lacunas individuais explícitas, sem atestar metadados completos | Pendente de confirmação institucional |
++| ABNT-07 | NBR 6023:2025, 6.6 | 30–32 | Notas com “Acessado em”, falta de dois-pontos e comentários internos | Campos URL, DOI e acesso separados; “Disponível em:” / “Acesso em:”; meses abreviados; datas antigas preservadas e novas somente quando houve consulta documentada | Gerador e produtos bibliográficos | `links.json`; falhas HTTP não são declaradas consultas bem-sucedidas; ainda há entradas sem acesso registrado | Pendente de confirmação institucional |
++| ABNT-08 | NBR 6023:2025, 8.6.1.1 e 8.6.1.3 | 4–5, 7–8, 10, 29–32 | Documentação sem ano, gerando `n.d.` e sufixos | Datas verificadas do Google/QGIS; copyright identificado como tal em NumPy/Streamlit; edição e revisão do SI separadas; dez fontes com século provável, não com ano inventado | Gerador e `datas.json` | Cada alteração e incerteza discriminada; século provável é indicação de incerteza, não data exata certificada | Pendente de confirmação institucional |
++| ABNT-09 | NBR 6023:2025, 6.3 e 6.7 | 30–32 | Recuo francês, alinhamento e destaque heterogêneos | Recuo zero, alinhamento à esquerda, espaço simples, linha simples entre entradas e destaque uniforme por tipo | `normalizacao.tex` | PDF renderizado; nove entradas não citadas preservadas na base, não incluídas artificialmente na lista | Não conformidade corrigida |
++| ABNT-10 | Configuração editorial; NBR 6023/10520 | 2–32 | Estilo `dcu` não implementa a apresentação pretendida | Geração determinística de `bibitem` natbib a partir de dados estruturados; sem biblatex, sem edição de `.bbl`, sem alterar a classe; arquivo de origem preservado | `Relatorio_Final.tex`, gerador, requisitos editoriais e produtos | Compilação efetiva; instruções de reprodução na pasta de evidências | Recomendação editorial implementada |
++| ABNT-11 | NBR 6022:2018, cláusula não conferida diretamente | 6, 9–10, 12, 14, 16, 18–22, 24–26 | Títulos abaixo das 22 figuras | Identificação/título acima de todas as figuras; fonte e notas abaixo; nenhum conteúdo visual refeito | `figuras_relatorio.tex`, `fig/conceitos.tex`, seções com figuras | Todas as páginas contendo figuras inspecionadas | Não conformidade corrigida |
++| ABNT-12 | NBR 6022 / apresentação tabular, cláusula não atribuída | Mesmas páginas e 8, 13, 25, 27–28 | Separador global “:” da classe | Separador automático “–” nos títulos de figuras e tabelas, sem editar números | `normalizacao.tex` | 22 figuras e cinco tabelas; numeração automática preservada | Não conformidade corrigida |
++| ABNT-13 | NBR 6022 / atribuição científica | Páginas com figuras | Fonte e explicações integradas à legenda | Fonte em bloco inferior; notas separadas quando cabíveis; origem própria, aplicação e catálogo diferenciados | Macros e seções com figuras | Conferência de 22 fontes sem atribuição fictícia | Não conformidade corrigida |
++| ABNT-14 | IBGE; NBR 6023 quando há citação da fonte | 8, 13, 25, 27–28 | Três tabelas sem fonte explícita e notas excessivas em títulos | Fontes em todas; notas das tabelas geradas separadas do título. Laterais já eram abertas, sem grades fechadas: não se registrou correção de borda inexistente | `final_2_fundamentacao.tex`, `final_3a_implementacao.tex`, `final_5_discussao.tex`, gerador de tabelas | Conteúdo e valores comparados; tabela 3 estatística; 1, 2 e 5 textuais; 4 mista com frequências | Não conformidade corrigida |
++| ABNT-15 | Legibilidade editorial | 6, 9–10, 12–16, 18–22, 24–26 | Risco de textos pequenos nas capturas escuras | Mantidos os vetores nos diagramas e gráficos; inspeção das capturas sem alteração artificial de contraste, valores ou enquadramento | PDF; imagens intactas | Não houve corte de títulos/fontes. Textos pequenos nas capturas 18–21 e eixo ausente na captura da série continuam limitações dos originais; não se certifica legibilidade de impressão sem prova física | Pendente de confirmação institucional |
++| ABNT-16 | NBR 6024:2012, texto primário não obtido | 2–29 | Conferência de hierarquia e numeração | Hierarquia e estrutura científicas preservadas; nenhum ponto ou hífen introduzido entre indicativo e título; declaração e referências sem número | Seções preservadas | Inspeção de títulos e referências cruzadas; conferência normativa direta pendente | Pendente de confirmação institucional |
++| ABNT-17 | NBR 14724:2024, aplicação subsidiária ao artigo | 3–4, 8–10, 15 | Solicitação menciona 12; base possui 14 números | Todas as 14 expressões e oito ambientes preservados literalmente; identificação à direita e referências automáticas mantidas | Fórmulas sem alteração | `preservacao.json`; números (1)–(14), não “12 equações preservadas” | Conforme |
++| ABNT-18 | NBR 14724 / revisão terminológica | 2–5, 9–13 | IA sem expansão na primeira ocorrência do corpo; formatos apresentados somente pelas siglas | Expansão de IA; identificação de PDF/CSV e caracterização de XLSX/ZIP sem inventar expansões; NIR/SWIR/MSI/API/CRS/UTM/UTC/LST já definidos | `final_1_introducao.tex`, `final_2_fundamentacao.tex` | Leitura das primeiras ocorrências; QA60 mantido como identificador de banda, sem lista artificial de siglas | Recomendação editorial implementada |
++| ABNT-19 | Critério editorial, não regra universal de ABNT | 5–16, 17, 23, 27–29 | Estrangeirismos e identificadores com usos distintos | Itálico em `toolkit` e em ocorrências ilustrativas de raster/snapshot; identificadores literais e nomes próprios preservados; não foi feita substituição indiscriminada em excertos e diagramas | Seções e legenda pontualmente ajustadas | Uniformização não esgotada: permanecem usos não destacados de raster, tiles, snapshot, viewport e tracer; não se declara revisão terminológica integral | Pendente de confirmação institucional |
++| ABNT-20 | SI, §§5.4.3, 5.4.4 e 5.4.7 | 1, 10, 23–29 | Unidade de radiação com duas barras; símbolo de porcentagem junto ao número | Radiação em MJ m⁻² d⁻¹ e kWh m⁻² d⁻¹; espaço entre número e % no texto/tabelas; espaços inseparáveis em medidas selecionadas; vírgula PT e ponto EN mantidos | `normalizacao.tex`, métodos e resultados | Nenhuma conversão de valor ou precisão; textos internos das imagens preservados, não uniformizados artificialmente | Recomendação editorial implementada |
++| ABNT-21 | Revisão editorial e preservação do modelo | 1–32 | Flutuantes, títulos, fontes e possíveis excessos de caixa | Legendas/fontes mantidas com o elemento; nenhuma redução de margens ou fontes. PDF sem `Overfull`/referências indefinidas | Fontes e PDF | 32 páginas inspecionadas por IA; permanecem espaçamento vertical elástico na p.10 e páginas de figuras com branco, sem impor limite artificial de páginas | Pendente de confirmação institucional |
++| ABNT-22 | Identificação confirmada pelo autor; modelo local | 1–32 | Conferência de identidade, orientador, data e endereço | Eduardo Steffens Hoppen, Prof. Rafael Rieder, Itec/UPF, Ciência da Computação, dezembro de 2026 e URL do repositório preservados; cabeçalho indica 1–32 | Entrada e classe preservada | PDF e hashes; nenhuma afiliação, assinatura ou identificador criado | Conforme |
++
++## 3. Particularidades preservadas — sem alegar confirmação indevida
++
++- Duas colunas, papel Letter, Merriweather, fontes, margens, identidade verde,
++  logotipo, cabeçalhos, paginação e estrutura de identificação da classe local.
++- Endereço `https://repositorio.upf.br/handle/123456789/8754` mantido.
++- Nenhuma capa, folha de rosto, ficha catalográfica, sumário ou lista de siglas.
++- Não foi usado o status **“Particularidade institucional confirmada”** para
++  `dcu`, ordem do Abstract, legendas inferiores ou qualquer regra cuja
++  obrigatoriedade não foi demonstrada em documento oficial independente.
++- Elementos textuais 1, 2 e 5 foram reconhecidos como potenciais quadros,
++  mas mantidos como tabelas: a reclassificação não é automática nem necessária
++  para corrigir fonte e apresentação, e não há regra específica do curso
++  confirmada para impor outro nome.
++
++## 4. Datas bibliográficas e lacunas
++
++A investigação foi individual, não uma substituição de `n.d.` por 2026.
++As páginas do Google exibiram atualizações em 2023, 2024 e 2026; QGIS 3.40
++exibiu atualização em março de 2026. O SI confirma a edição de 2019 e a
++revisão 4.01 de junho de 2026. Copyright aparece com prefixo `c`, não como
++ano editorial certificado.
++
++Para `USGS_NDMI`, `NOMINATIM_POLICY`, `SENTINELHUB_NDMI`,
++`NIST_OUTLIERS`, `NASA_POWER_METHOD`, `NASA_POWER_PARAMETERS`,
++`NIST_LOCATION`, `GITHUB_SDD`, `EOSDA_GUIDE` e `ONESOIL_PLATFORM_DETAIL`,
++não se obteve data editorial exata. A indicação **[20--?]** é de **século
++provável**, possibilidade prevista no §8.6.1.3, e permanece uma aproximação
++editorial a validar, não uma confirmação de data. Os anos 2026 anteriormente
++atribuídos a outras páginas dinâmicas também não são certificados apenas
++porque o acesso ocorreu nesse ano.
++
++Há ainda localidades não identificadas, entradas sem data efetiva de acesso
++registrada, detalhes dos eventos e do trabalho acadêmico a conferir na fonte.
++Não foram inventados páginas, graus, números de evento, cidades ou editoras.
++As abreviações de ausência não equivalem a preenchimento de metadados reais.
++Comentários internos removidos dos verbetes permanecem no inventário.
++
++## 5. Aceite e próximos encaminhamentos
++
++1. Confirmar com o orientador/curso o pacote oficial e suas exceções obrigatórias.
++2. Encerrar a consulta das versões corrigidas/emendas e das três normas cujo
++   texto primário não foi obtido, preferencialmente pelo acesso da biblioteca.
++3. Conferir os metadados ainda ausentes, as dez datas aproximadas e os anos
++   anteriores não demonstrados; registrar acessos efetivos, sem reconstruí-los.
++4. Encerrar a uniformização terminológica e avaliar os espaços verticais e
++   uma prova de impressão das capturas antes de declarar acabamento integral.
++5. Submeter a apresentação ao autor e ao orientador. A inspeção de IA não é
++   aprovação humana, aprovação institucional ou validação de conteúdo científico.
++
++Esses encaminhamentos não reabrem as decisões já fornecidas sobre as
++32 respostas, orientador, defesa, imagem ilustrativa e declaração de IA.
++Sem commit ou push.
+--- /dev/null
++++ quinta-rodada/normalizacao.tex
+@@ -0,0 +1,29 @@
++% Ajustes locais de normalização; a classe institucional permanece intacta.
++\makeatletter
++% Executado somente ao compor os nomes, não ao gravar/analisar os rótulos.
++\DeclareRobustCommand{\TCCand}{\ifNAT@swa;\space\else\space e\space\fi}
++\DeclareRobustCommand{\TCCsep}{\ifNAT@swa;\space\else,\space\fi}
++\AtBeginDocument{%
++  \bibpunct{(}{)}{;}{a}{,}{,}%
++  \def\NAT@sort{\@ne}%
++  \expandafter\patchcmd\csname palavras_chave\endcsname
++    {Palavras-Chave}{Palavras-chave}{}{%
++    \PackageError{TCC}{Rotulo de palavras-chave nao encontrado}{Conferir a classe.}}}
++\makeatother
++\DeclareCaptionLabelSeparator{tccdash}{\space\textendash\space}
++\captionsetup{labelsep=tccdash}
++\captionsetup[figure]{position=top,skip=6pt}
++\captionsetup[table]{position=top,skip=6pt}
++\newcommand{\fonteTCC}[1]{\par\smallskip{\fontsize{9pt}{10.5pt}\selectfont
++  \raggedright Fonte: #1\par}}
++\newcommand{\notaTCC}[1]{\par{\fontsize{9pt}{10.5pt}\selectfont
++  \raggedright Nota: #1\par}}
++% NBR 6023:2025, 6.3: sem recuo francês, espaço simples e uma linha entre itens.
++\setlength{\bibhang}{0pt}
++\setlength{\bibsep}{10.5pt}
++\renewcommand{\bibfont}{\fontsize{9pt}{10.5pt}\selectfont\raggedright}
++\newcommand{\radiacaoTCC}{\ensuremath{\mathrm{MJ}\,\mathrm{m}^{-2}\,\mathrm{d}^{-1}}}
++\newcommand{\radiacaoKWhTCC}{\ensuremath{\mathrm{kWh}\,\mathrm{m}^{-2}\,\mathrm{d}^{-1}}}
++% SI, 5.4.3 e 5.4.7: separar valor e símbolo; preserva os números.
++\let\TCCPercent\%
++\renewcommand{\%}{\nobreak\,\TCCPercent}
+--- /dev/null
++++ quinta-rodada/referencias_normalizadas.bib
+@@ -0,0 +1,617 @@
++@misc{ESA_SENTINEL2,
++    author = "{European Space Agency} and {Copernicus}",
++    title = "{Sentinel-2 Mission}",
++    year = "2026",
++    url = "https://sentiwiki.copernicus.eu/web/s2-mission",
++    urldate = "24 jun. 2026"
++}
++
++@misc{GOOGLE_S2_SR,
++    author = "{Google}",
++    title = "{Harmonized Sentinel-2 MSI: MultiSpectral Instrument, Level-2A (SR)}",
++    year = "2026",
++    url = "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
++    urldate = "15 nov. 2026"
++}
++
++@misc{GOOGLE_EE_ND,
++    author = "{Google}",
++    title = "{ee.Image.normalizedDifference}",
++    year = "2026",
++    url = "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
++    urldate = "24 jun. 2026"
++}
++
++@misc{GOOGLE_EE_DATE,
++    author = "{Google}",
++    title = "{ee.Filter.date}",
++    year = "2023",
++    url = "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
++    urldate = "11 nov. 2026"
++}
++
++@misc{GOOGLE_EE_SERVICE_ACCOUNT,
++    author = "{Google}",
++    title = "Service Accounts: {Google Earth Engine}",
++    year = "2026",
++    url = "https://developers.google.com/earth-engine/guides/service_account",
++    urldate = "15 nov. 2026"
++}
++
++@misc{GOOGLE_EE_NONCOMMERCIAL,
++    author = "{Google}",
++    title = "Noncommercial tiers: {Google Earth Engine}",
++    year = "2026",
++    url = "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
++    urldate = "15 nov. 2026"
++}
++
++@misc{STREAMLIT_CLOUD_SECRETS,
++    author = "{Streamlit}",
++    title = "Secrets management for your Community Cloud app",
++    year = "c2026",
++    url = "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
++    urldate = "15 nov. 2026"
++}
++
++@mastersthesis{SLAIFFER2023,
++    author = "Slaiffer, Henrique",
++    title = "Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro",
++    school = "Universidade Federal de Santa Maria",
++    type = "Trabalho de Conclusão de Curso em Engenharia Agrícola",
++    year = "2023",
++    url = "https://repositorio.ufsm.br/handle/1/29995",
++    urldate = "11 nov. 2026"
++}
++
++@mastersthesis{LOVATO2021,
++    author = "Lovato, João Guilherme Lopes",
++    title = "Identificação de áreas de renovação da cultura da cana-de-açúcar por meio de índice de vegetação e técnicas de sensoriamento remoto",
++    school = "Universidade Estadual Paulista",
++    type = "Trabalho de Conclusão de Curso em Engenharia Agronômica",
++    year = "2021",
++    address = "Jaboticabal",
++    url = "https://repositorio.unesp.br/entities/publication/b9caa0ff-8be4-44b6-ba3d-e40bbfa7e275",
++    urldate = "11 nov. 2026"
++}
++
++@article{ARAUJO2025,
++    author = "Araujo, Ralph Wendel Oliveira de and Cruz, Samir Herick Menezes da and Sousa, Deivson Nacim Teixeira and Cardoso, Ariston de Lima and Ribeiro, Ossival Lolato",
++    title = "Utilização de imageamento multiespectral por satélite para monitoramento de ciclo fenológico da cultura da soja",
++    journal = "Boletim de Conjuntura (BOCA)",
++    volume = "23",
++    number = "67",
++    pages = "197--224",
++    year = "2025",
++    doi = "10.5281/zenodo.15871939",
++    url = "https://doi.org/10.5281/zenodo.15871939",
++    urldate = "16 nov. 2026"
++}
++
++@phdthesis{CHAVES2019,
++    author = "Chaves, Michel Eustáquio Dantas",
++    title = "Uso das séries temporais de índices de vegetação para o monitoramento agrícola no Estado de Mato Grosso",
++    school = "Universidade Federal de Lavras",
++    year = "2019",
++    address = "Lavras",
++    url = "https://repositorio.ufla.br/items/62ad79ab-a7b3-400b-ad28-5779e424f3d3",
++    urldate = "11 nov. 2026"
++}
++
++@misc{NASA_POWER_DAILY,
++    author = "{NASA}",
++    title = "{{NASA POWER}: Daily API}",
++    year = "2026",
++    url = "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
++    urldate = "15 nov. 2026"
++}
++
++@inproceedings{ROUSE1973,
++    author = "Rouse, J. W. and Haas, R. H. and Schell, J. A. and Deering, D. W.",
++    title = "Monitoring Vegetation Systems in the Great Plains with {ERTS}",
++    booktitle = "Third Earth Resources Technology Satellite Symposium",
++    year = "1973",
++    pages = "309--317",
++    publisher = "NASA",
++    address = "Washington, DC"
++}
++
++@article{GAO1996,
++    author = "Gao, Bo-Cai",
++    title = "{NDWI}: A Normalized Difference Water Index for Remote Sensing of Vegetation Liquid Water from Space",
++    journal = "Remote Sensing of Environment",
++    volume = "58",
++    number = "3",
++    pages = "257--266",
++    year = "1996",
++    doi = "10.1016/S0034-4257(96)00067-3",
++    url = "https://doi.org/10.1016/S0034-4257(96)00067-3",
++    urldate = "16 nov. 2026"
++}
++
++@article{PATRICIO2018,
++    author = "Patrício, Diego Inácio and Rieder, Rafael",
++    title = "Computer Vision and Artificial Intelligence in Precision Agriculture for Grain Crops: A Systematic Review",
++    journal = "Computers and Electronics in Agriculture",
++    volume = "153",
++    pages = "69--81",
++    year = "2018",
++    publisher = "Elsevier",
++    doi = "10.1016/j.compag.2018.08.001",
++    url = "https://doi.org/10.1016/j.compag.2018.08.001",
++    urldate = "16 nov. 2026"
++}
++
++@article{GORELICK2017,
++    author = "Gorelick, Noel and Hancher, Matt and Dixon, Mike and Ilyushchenko, Simon and Thau, David and Moore, Rebecca",
++    title = "{Google Earth Engine}: Planetary-scale geospatial analysis for everyone",
++    journal = "Remote Sensing of Environment",
++    volume = "202",
++    pages = "18--27",
++    year = "2017",
++    publisher = "Elsevier",
++    doi = "10.1016/j.rse.2017.06.031",
++    url = "https://doi.org/10.1016/j.rse.2017.06.031",
++    urldate = "16 nov. 2026"
++}
++
++@article{AMANI2020,
++    author = "Amani, Meisam and Ghorbanian, Arsalan and Ahmadi, Seyed Ali and Kakooei, Mohammad and Moghimi, Armin and Mirmazloumi, S. Mohammad and Moghaddam, Sayyed Hamed Alizadeh and Mahdavi, Sahel and Ghahremanloo, Masoud and Parsian, Saeid and Wu, Qiusheng and Brisco, Brian",
++    title = "{Google Earth Engine} Cloud Computing Platform for Remote Sensing Big Data Applications: A Comprehensive Review",
++    journal = "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
++    volume = "13",
++    pages = "5326--5350",
++    year = "2020",
++    publisher = "IEEE",
++    doi = "10.1109/JSTARS.2020.3021052",
++    url = "https://doi.org/10.1109/JSTARS.2020.3021052",
++    urldate = "16 nov. 2026"
++}
++
++@article{WEISS2020,
++    author = "Weiss, Marie and Jacob, Frédéric and Duveiller, Gregory",
++    title = "Remote sensing for agricultural applications: A meta-review",
++    journal = "Remote Sensing of Environment",
++    volume = "236",
++    year = "2020",
++    publisher = "Elsevier",
++    doi = "10.1016/j.rse.2019.111402",
++    url = "https://doi.org/10.1016/j.rse.2019.111402",
++    urldate = "16 nov. 2026",
++    eid = "111402"
++}
++
++@article{PHIRI2020,
++    author = "Phiri, Darius and Simwanda, Matamyo and Salekin, Sharif and Nyirenda, Vincent R. and Murayama, Yuji and Ranagalage, Manjula",
++    title = "Sentinel-2 Data for Land Cover/Use Mapping: A Review",
++    journal = "Remote Sensing",
++    volume = "12",
++    number = "14",
++    year = "2020",
++    publisher = "MDPI",
++    doi = "10.3390/rs12142291",
++    url = "https://doi.org/10.3390/rs12142291",
++    eid = "2291"
++}
++
++@book{WAZLAWICK2014,
++    author = "Wazlawick, Raul Sidnei",
++    title = "Metodologia de Pesquisa para Ciência da Computação",
++    publisher = "Elsevier",
++    year = "2014",
++    edition = "2",
++    address = "Rio de Janeiro"
++}
++
++@misc{WAZLAWICK2020,
++    author = "Wazlawick, Raul Sidnei",
++    title = "Metodologia de Pesquisa para Ciência da Computação",
++    year = "2020",
++    publisher = "Grupo GEN",
++    edition = "3",
++    url = "https://integrada.minhabiblioteca.com.br/books/9788595157712",
++    urldate = "31 mar. 2025"
++}
++
++@article{MCFEETERS1996,
++    author = "McFeeters, S. K.",
++    title = "The use of the Normalized Difference Water Index ({NDWI}) in the delineation of open water features",
++    journal = "International Journal of Remote Sensing",
++    year = "1996",
++    volume = "17",
++    number = "7",
++    pages = "1425--1432",
++    doi = "10.1080/01431169608948714",
++    url = "https://doi.org/10.1080/01431169608948714"
++}
++
++@misc{USGS_NDMI,
++    author = "{U.S. Geological Survey}",
++    title = "Normalized Difference Moisture Index",
++    url = "https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@misc{GOOGLE_EE_SAMPLE,
++    author = "{Google}",
++    title = "{ee.Image.sampleRectangle}",
++    url = "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
++    urldate = "15 nov. 2026",
++    year = "2023"
++}
++
++@misc{GOOGLE_EE_MEDIAN,
++    author = "{Google}",
++    title = "{ee.ImageCollection.median}",
++    url = "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
++    urldate = "15 nov. 2026",
++    year = "2023"
++}
++
++@misc{GOOGLE_EE_REDUCE,
++    author = "{Google}",
++    title = "{ee.Image.reduceRegion}",
++    url = "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
++    urldate = "15 nov. 2026",
++    year = "2026"
++}
++
++@misc{NOMINATIM_POLICY,
++    author = "{OpenStreetMap Foundation}",
++    title = "Nominatim Usage Policy",
++    url = "https://operations.osmfoundation.org/policies/nominatim/",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@inproceedings{ROUSE1974_NTRS,
++    author = "Rouse, Jr., J. W. and Haas, R. H. and Schell, J. A. and Deering, D. W.",
++    title = "Monitoring vegetation systems in the Great Plains with {ERTS}",
++    booktitle = "Third Earth Resources Technology Satellite-1 Symposium, Volume 1, Section A",
++    publisher = "NASA",
++    year = "1974",
++    url = "https://ntrs.nasa.gov/citations/19740022614",
++    urldate = "15 nov. 2026"
++}
++
++@misc{EOSDA_PLATFORM,
++    author = "{EOS Data Analytics}",
++    title = "{EOSDA Crop Monitoring}",
++    year = "2026",
++    url = "https://eos.com/products/crop-monitoring/",
++    urldate = "15 nov. 2026"
++}
++
++@misc{ONESOIL_PLATFORM,
++    author = "{OneSoil}",
++    title = "{OneSoil} Platform",
++    year = "2026",
++    url = "https://onesoil.ai/en/platform",
++    urldate = "15 nov. 2026"
++}
++
++@misc{ISO9241_2018,
++    author = "{International Organization for Standardization}",
++    title = "{ISO 9241-11:2018}: Ergonomics of human-system interaction --- Part 11: Usability: Definitions and concepts",
++    year = "2018",
++    url = "https://www.iso.org/standard/63500.html",
++    urldate = "15 nov. 2026",
++    publisher = "ISO"
++}
++
++@article{DAVIS1989,
++    author = "Davis, Fred D.",
++    title = "Perceived Usefulness, Perceived Ease of Use, and User Acceptance of Information Technology",
++    journal = "MIS Quarterly",
++    volume = "13",
++    number = "3",
++    pages = "319--340",
++    year = "1989",
++    doi = "10.2307/249008",
++    url = "https://doi.org/10.2307/249008"
++}
++
++@article{SULLIVAN2013,
++    author = "Sullivan, Gail M. and Artino, Jr., Anthony R.",
++    title = "Analyzing and Interpreting Data From {Likert}-Type Scales",
++    journal = "Journal of Graduate Medical Education",
++    volume = "5",
++    number = "4",
++    pages = "541--542",
++    year = "2013",
++    doi = "10.4300/JGME-5-4-18",
++    url = "https://doi.org/10.4300/JGME-5-4-18",
++    urldate = "16 nov. 2026"
++}
++
++@article{BRAUN2006,
++    author = "Braun, Virginia and Clarke, Victoria",
++    title = "Using thematic analysis in psychology",
++    journal = "Qualitative Research in Psychology",
++    volume = "3",
++    number = "2",
++    pages = "77--101",
++    year = "2006",
++    doi = "10.1191/1478088706qp063oa",
++    url = "https://doi.org/10.1191/1478088706qp063oa"
++}
++
++@misc{QGIS_VECTOR,
++    author = "{QGIS Project}",
++    title = "A Gentle Introduction to GIS: Vector Data",
++    url = "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html",
++    urldate = "15 nov. 2026",
++    year = "2026",
++    version = "3.40"
++}
++
++@misc{QGIS_RASTER,
++    author = "{QGIS Project}",
++    title = "A Gentle Introduction to GIS: Raster Data",
++    url = "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html",
++    urldate = "15 nov. 2026",
++    year = "2026",
++    version = "3.40"
++}
++
++@misc{QGIS_MAP,
++    author = "{QGIS Project}",
++    title = "A Gentle Introduction to GIS: Map Production",
++    url = "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html",
++    urldate = "15 nov. 2026",
++    year = "2026",
++    version = "3.40"
++}
++
++@misc{GOOGLE_EE_RESAMPLE,
++    author = "{Google}",
++    title = "Resampling and Reducing Resolution",
++    url = "https://developers.google.com/earth-engine/guides/resample",
++    urldate = "15 nov. 2026",
++    year = "2024"
++}
++
++@misc{GOOGLE_EE_REGION,
++    author = "{Google}",
++    title = "Statistics of an Image Region",
++    url = "https://developers.google.com/earth-engine/guides/reducers_reduce_region",
++    urldate = "15 nov. 2026",
++    year = "2026"
++}
++
++@misc{SENTINELHUB_NDMI,
++    author = "{Sentinel Hub}",
++    title = "Normalized Difference Moisture Index (NDMI)",
++    url = "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@book{HYNDMAN2021,
++    author = "Hyndman, Rob J. and Athanasopoulos, George",
++    title = "Forecasting: Principles and Practice",
++    edition = "3",
++    publisher = "OTexts",
++    address = "Melbourne",
++    year = "2021",
++    url = "https://otexts.com/fpp3/",
++    urldate = "15 nov. 2026"
++}
++
++@misc{NIST_OUTLIERS,
++    author = "{NIST/SEMATECH}",
++    title = "e-Handbook of Statistical Methods: Detection of Outliers",
++    url = "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@misc{NUMPY_STD,
++    author = "{NumPy Developers}",
++    title = "numpy.std",
++    url = "https://numpy.org/doc/stable/reference/generated/numpy.std.html",
++    urldate = "15 nov. 2026",
++    year = "c2026"
++}
++
++@misc{NUMPY_POLYFIT,
++    author = "{NumPy Developers}",
++    title = "numpy.polyfit",
++    url = "https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html",
++    urldate = "15 nov. 2026",
++    year = "c2026"
++}
++
++@misc{BIPM_SI,
++    author = "{Bureau International des Poids et Mesures}",
++    title = "The International System of Units (SI)",
++    url = "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
++    urldate = "15 nov. 2026",
++    year = "2019",
++    address = "Sèvres",
++    publisher = "BIPM",
++    edition = "9",
++    version = "4.01, jun. 2026",
++    doi = "10.59161/AUEZ1291"
++}
++
++@incollection{BENDER2020,
++    author = "Bender, Adam",
++    editor = "Winters, Titus and Manshreck, Tom and Wright, Hyrum",
++    title = "Testing Overview",
++    booktitle = "Software Engineering at Google: Lessons Learned from Programming Over Time",
++    publisher = "O'Reilly Media",
++    year = "2020",
++    url = "https://abseil.io/resources/swe-book/html/ch11.html",
++    urldate = "15 nov. 2026"
++}
++
++@techreport{AAPOR2013,
++    author = "{American Association for Public Opinion Research}",
++    title = "Report of the AAPOR Task Force on Non-Probability Sampling",
++    institution = "AAPOR",
++    year = "2013",
++    url = "https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf",
++    urldate = "15 nov. 2026"
++}
++
++@article{SLAIFFER2025,
++    author = "Slaiffer, Henrique and Bottega, Eduardo Leonel and Oliveira, Zanandra Boff de and Saretta, Ezequiel",
++    title = "Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro",
++    journal = "Nativa",
++    volume = "13",
++    number = "3",
++    pages = "495--502",
++    year = "2025",
++    doi = "10.31413/nat.v13i3.18592",
++    url = "https://doi.org/10.31413/nat.v13i3.18592",
++    urldate = "16 nov. 2026"
++}
++
++@article{IZQUIERDO2026,
++    author = "Izquierdo-Sanz, Héctor and Moltó, Enrique",
++    title = "Hybrid Physical--Machine Learning Soil Moisture Modeling at Orchard Scale in Irrigated Citrus Orchards Using Sentinel 1 and 2 and Agroclimatic Data",
++    journal = "Agronomy",
++    volume = "16",
++    number = "5",
++    year = "2026",
++    doi = "10.3390/agronomy16050541",
++    url = "https://doi.org/10.3390/agronomy16050541",
++    eid = "541"
++}
++
++@misc{NASA_POWER_METHOD,
++    author = "{NASA}",
++    title = "POWER Data Methodology",
++    url = "https://power.larc.nasa.gov/docs/methodology/",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@misc{NASA_POWER_PARAMETERS,
++    author = "{NASA}",
++    title = "POWER Parameter Dictionary: Agricultural Community, Daily",
++    url = "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@misc{STREAMLIT_STATE,
++    author = "{Streamlit}",
++    title = "Add Statefulness to Apps: Session State",
++    url = "https://docs.streamlit.io/develop/concepts/architecture/session-state",
++    urldate = "15 nov. 2026",
++    year = "c2026"
++}
++
++@article{MERONI2019,
++    author = "Meroni, Michele and Fasbender, Dominique and Rembold, Felix and Atzberger, Clement and Klisch, Anja",
++    title = "Near real-time vegetation anomaly detection with {MODIS NDVI}: Timeliness vs. accuracy and effect of anomaly computation options",
++    journal = "Remote Sensing of Environment",
++    year = "2019",
++    volume = "221",
++    pages = "508--521",
++    doi = "10.1016/j.rse.2018.11.041",
++    url = "https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/",
++    urldate = "15 nov. 2026"
++}
++
++@article{PARNAS1972,
++    author = "Parnas, D. L.",
++    title = "On the Criteria To Be Used in Decomposing Systems into Modules",
++    journal = "Communications of the ACM",
++    year = "1972",
++    volume = "15",
++    number = "12",
++    pages = "1053--1058",
++    doi = "10.1145/361598.361623",
++    url = "https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf",
++    urldate = "15 nov. 2026"
++}
++
++@misc{NIST_LOCATION,
++    author = "{National Institute of Standards and Technology}",
++    title = "Measures of Location: {NIST/SEMATECH e-Handbook of Statistical Methods}",
++    url = "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@misc{GITHUB_SDD,
++    author = "{GitHub}",
++    title = "Specification-Driven Development ({SDD}): {Spec Kit}",
++    url = "https://github.com/github/spec-kit/blob/main/spec-driven.md",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@misc{BOECKELER2025,
++    author = "Böckeler, Birgitta",
++    title = "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl",
++    year = "2025",
++    url = "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
++    urldate = "15 nov. 2026"
++}
++
++@misc{UPF_IA2026,
++    author = "{Universidade de Passo Fundo}",
++    title = "Instrução Normativa nº 03/2026/PROACAD: Uso de Inteligência Artificial nas atividades acadêmicas",
++    year = "2026",
++    url = "https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in",
++    urldate = "15 nov. 2026"
++}
++
++@misc{EOSDA_GUIDE,
++    author = "{EOS Data Analytics}",
++    title = "{EOSDA Crop Monitoring User Guide}",
++    url = "https://eos.com/user-guide/",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@misc{ONESOIL_PLATFORM_DETAIL,
++    author = "{OneSoil}",
++    title = "{OneSoil Platform}",
++    url = "https://onesoil.ai/en/platform",
++    urldate = "15 nov. 2026",
++    year = "[20--?]"
++}
++
++@inproceedings{GOTEL1994,
++    author = "Gotel, Orlena C. Z. and Finkelstein, Anthony C. W.",
++    title = "An Analysis of the Requirements Traceability Problem",
++    booktitle = "Proceedings of the First International Conference on Requirements Engineering",
++    year = "1994",
++    pages = "94--101",
++    publisher = "IEEE",
++    doi = "10.1109/ICRE.1994.292398",
++    url = "https://discovery.ucl.ac.uk/749/",
++    urldate = "16 nov. 2026"
++}
++
++@inproceedings{BJARNASON2015,
++    author = {Bjarnason, Elizabeth and Unterkalmsteiner, Michael and Engstr{\"o}m, Emelie and Borg, Markus},
++    title = "An Industrial Case Study on Test Cases as Requirements",
++    booktitle = "Agile Processes in Software Engineering and Extreme Programming",
++    year = "2015",
++    series = "Lecture Notes in Business Information Processing",
++    volume = "212",
++    pages = "27--39",
++    publisher = "Springer",
++    doi = "10.1007/978-3-319-18612-2_3",
++    url = "https://arxiv.org/abs/2308.06509",
++    urldate = "16 nov. 2026"
++}
++
++@inproceedings{VAITHILINGAM2022,
++    author = "Vaithilingam, Priyan and Zhang, Tianyi and Glassman, Elena L.",
++    title = "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models",
++    booktitle = "CHI Conference on Human Factors in Computing Systems Extended Abstracts",
++    year = "2022",
++    pages = "1--7",
++    publisher = "ACM",
++    doi = "10.1145/3491101.3519665",
++    url = "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
++    urldate = "16 nov. 2026"
++}
+--- /dev/null
++++ quinta-rodada/referencias_normalizadas.tex
+@@ -0,0 +1,466 @@
++% Gerado por scripts/gerar_referencias_normalizadas.py; não editar.
++
++\begin{thebibliography}{99}
++
++\bibitem[Amani \textit{et al.}({2020})]{AMANI2020}
++\MakeUppercase{Amani}, M.; \MakeUppercase{Ghorbanian}, A.; \MakeUppercase{Ahmadi}, S. A.; \MakeUppercase{Kakooei}, M.; \MakeUppercase{Moghimi}, A.; \MakeUppercase{Mirmazloumi}, S. M.; \MakeUppercase{Moghaddam}, S. H. A.; \MakeUppercase{Mahdavi}, S.; \MakeUppercase{Ghahremanloo}, M.; \MakeUppercase{Parsian}, S.; \MakeUppercase{Wu}, Q.; \MakeUppercase{Brisco}, B.
++{Google Earth Engine} Cloud Computing Platform for Remote Sensing Big Data Applications: A Comprehensive Review.
++\textbf{IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing}, [S. l.],
++v. 13,
++p. 5326--5350,
++2020.
++DOI: \url{https://doi.org/10.1109/JSTARS.2020.3021052}.
++Disponível em: \url{https://doi.org/10.1109/JSTARS.2020.3021052}.
++Acesso em: 16 nov. 2026.
++
++\bibitem[{American Association for Public Opinion Research}({2013})]{AAPOR2013}
++\MakeUppercase{{American Association for Public Opinion Research}}.
++\textbf{Report of the AAPOR Task Force on Non-Probability Sampling}.
++[S. l.]: AAPOR, 2013.
++Disponível em: \url{https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Bender({2020})]{BENDER2020}
++\MakeUppercase{Bender}, A.
++Testing Overview.
++In:
++\MakeUppercase{Winters}, T.; \MakeUppercase{Manshreck}, T.; \MakeUppercase{Wright}, H. (ed.).
++\textbf{Software Engineering at Google}: Lessons Learned from Programming Over Time.
++[S. l.]: O'Reilly Media, 2020.
++cap. 11.
++Disponível em: \url{https://abseil.io/resources/swe-book/html/ch11.html}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Bjarnason \textit{et al.}({2015})]{BJARNASON2015}
++\MakeUppercase{Bjarnason}, E.; \MakeUppercase{Unterkalmsteiner}, M.; \MakeUppercase{Engstr{\"o}m}, E.; \MakeUppercase{Borg}, M.
++An Industrial Case Study on Test Cases as Requirements.
++In:
++\textbf{Agile Processes in Software Engineering and Extreme Programming}.
++[S. l.]: Springer, 2015.
++(Lecture Notes in Business Information Processing, v. 212).
++p. 27--39.
++DOI: \url{https://doi.org/10.1007/978-3-319-18612-2_3}.
++Disponível em: \url{https://arxiv.org/abs/2308.06509}.
++Acesso em: 16 nov. 2026.
++
++\bibitem[Böckeler({2025})]{BOECKELER2025}
++\MakeUppercase{Böckeler}, B.
++\textbf{Understanding Spec-Driven-Development}: Kiro, spec-kit, and Tessl.
++[S. l.], 2025.
++Disponível em: \url{https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Braun\TCCand{}Clarke({2006})]{BRAUN2006}
++\MakeUppercase{Braun}, V.; \MakeUppercase{Clarke}, V.
++Using thematic analysis in psychology.
++\textbf{Qualitative Research in Psychology}, [S. l.],
++v. 3,
++n. 2,
++p. 77--101,
++2006.
++DOI: \url{https://doi.org/10.1191/1478088706qp063oa}.
++Disponível em: \url{https://doi.org/10.1191/1478088706qp063oa}.
++
++\bibitem[{Bureau International des Poids et Mesures}({2019})]{BIPM_SI}
++\MakeUppercase{{Bureau International des Poids et Mesures}}.
++\textbf{The International System of Units (SI)}.
++9. ed.
++Versão 4.01, jun. 2026.
++Sèvres: BIPM, 2019.
++DOI: \url{https://doi.org/10.59161/AUEZ1291}.
++Disponível em: \url{https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Davis({1989})]{DAVIS1989}
++\MakeUppercase{Davis}, F. D.
++Perceived Usefulness, Perceived Ease of Use, and User Acceptance of Information Technology.
++\textbf{MIS Quarterly}, [S. l.],
++v. 13,
++n. 3,
++p. 319--340,
++1989.
++DOI: \url{https://doi.org/10.2307/249008}.
++Disponível em: \url{https://doi.org/10.2307/249008}.
++
++\bibitem[{EOS Data Analytics}({[20--?]})]{EOSDA_GUIDE}
++\MakeUppercase{{EOS Data Analytics}}.
++\textbf{{EOSDA Crop Monitoring User Guide}}.
++[S. l.], [20--?].
++Disponível em: \url{https://eos.com/user-guide/}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{European Space Agency}\TCCand{}{Copernicus}({2026})]{ESA_SENTINEL2}
++\MakeUppercase{{European Space Agency}}; \MakeUppercase{{Copernicus}}.
++\textbf{{Sentinel-2 Mission}}.
++[S. l.], 2026.
++Disponível em: \url{https://sentiwiki.copernicus.eu/web/s2-mission}.
++Acesso em: 24 jun. 2026.
++
++\bibitem[Gao({1996})]{GAO1996}
++\MakeUppercase{Gao}, B.-C.
++{NDWI}: A Normalized Difference Water Index for Remote Sensing of Vegetation Liquid Water from Space.
++\textbf{Remote Sensing of Environment}, [S. l.],
++v. 58,
++n. 3,
++p. 257--266,
++1996.
++DOI: \url{https://doi.org/10.1016/S0034-4257(96)00067-3}.
++Disponível em: \url{https://doi.org/10.1016/S0034-4257(96)00067-3}.
++Acesso em: 16 nov. 2026.
++
++\bibitem[{GitHub}({[20--?]})]{GITHUB_SDD}
++\MakeUppercase{{GitHub}}.
++\textbf{Specification-Driven Development ({SDD})}: {Spec Kit}.
++[S. l.], [20--?].
++Disponível em: \url{https://github.com/github/spec-kit/blob/main/spec-driven.md}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Google}({2023a})]{GOOGLE_EE_DATE}
++\MakeUppercase{{Google}}.
++\textbf{{ee.Filter.date}}.
++[S. l.], 2023a.
++Disponível em: \url{https://developers.google.com/earth-engine/apidocs/ee-filter-date}.
++Acesso em: 11 nov. 2026.
++
++\bibitem[{Google}({2023b})]{GOOGLE_EE_SAMPLE}
++\MakeUppercase{{Google}}.
++\textbf{{ee.Image.sampleRectangle}}.
++[S. l.], 2023b.
++Disponível em: \url{https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Google}({2023c})]{GOOGLE_EE_MEDIAN}
++\MakeUppercase{{Google}}.
++\textbf{{ee.ImageCollection.median}}.
++[S. l.], 2023c.
++Disponível em: \url{https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Google}({2024})]{GOOGLE_EE_RESAMPLE}
++\MakeUppercase{{Google}}.
++\textbf{Resampling and Reducing Resolution}.
++[S. l.], 2024.
++Disponível em: \url{https://developers.google.com/earth-engine/guides/resample}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Google}({2026a})]{GOOGLE_EE_ND}
++\MakeUppercase{{Google}}.
++\textbf{{ee.Image.normalizedDifference}}.
++[S. l.], 2026a.
++Disponível em: \url{https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference}.
++Acesso em: 24 jun. 2026.
++
++\bibitem[{Google}({2026b})]{GOOGLE_EE_REDUCE}
++\MakeUppercase{{Google}}.
++\textbf{{ee.Image.reduceRegion}}.
++[S. l.], 2026b.
++Disponível em: \url{https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Google}({2026c})]{GOOGLE_S2_SR}
++\MakeUppercase{{Google}}.
++\textbf{{Harmonized Sentinel-2 MSI}: MultiSpectral Instrument, Level-2A (SR)}.
++[S. l.], 2026c.
++Disponível em: \url{https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Google}({2026d})]{GOOGLE_EE_NONCOMMERCIAL}
++\MakeUppercase{{Google}}.
++\textbf{Noncommercial tiers}: {Google Earth Engine}.
++[S. l.], 2026d.
++Disponível em: \url{https://developers.google.com/earth-engine/guides/noncommercial_tiers}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Google}({2026e})]{GOOGLE_EE_SERVICE_ACCOUNT}
++\MakeUppercase{{Google}}.
++\textbf{Service Accounts}: {Google Earth Engine}.
++[S. l.], 2026e.
++Disponível em: \url{https://developers.google.com/earth-engine/guides/service_account}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Google}({2026f})]{GOOGLE_EE_REGION}
++\MakeUppercase{{Google}}.
++\textbf{Statistics of an Image Region}.
++[S. l.], 2026f.
++Disponível em: \url{https://developers.google.com/earth-engine/guides/reducers_reduce_region}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Gorelick \textit{et al.}({2017})]{GORELICK2017}
++\MakeUppercase{Gorelick}, N.; \MakeUppercase{Hancher}, M.; \MakeUppercase{Dixon}, M.; \MakeUppercase{Ilyushchenko}, S.; \MakeUppercase{Thau}, D.; \MakeUppercase{Moore}, R.
++{Google Earth Engine}: Planetary-scale geospatial analysis for everyone.
++\textbf{Remote Sensing of Environment}, [S. l.],
++v. 202,
++p. 18--27,
++2017.
++DOI: \url{https://doi.org/10.1016/j.rse.2017.06.031}.
++Disponível em: \url{https://doi.org/10.1016/j.rse.2017.06.031}.
++Acesso em: 16 nov. 2026.
++
++\bibitem[Gotel\TCCand{}Finkelstein({1994})]{GOTEL1994}
++\MakeUppercase{Gotel}, O. C. Z.; \MakeUppercase{Finkelstein}, A. C. W.
++An Analysis of the Requirements Traceability Problem.
++In:
++\textbf{Proceedings of the First International Conference on Requirements Engineering}.
++[S. l.]: IEEE, 1994.
++p. 94--101.
++DOI: \url{https://doi.org/10.1109/ICRE.1994.292398}.
++Disponível em: \url{https://discovery.ucl.ac.uk/749/}.
++Acesso em: 16 nov. 2026.
++
++\bibitem[Hyndman\TCCand{}Athanasopoulos({2021})]{HYNDMAN2021}
++\MakeUppercase{Hyndman}, R. J.; \MakeUppercase{Athanasopoulos}, G.
++\textbf{Forecasting}: Principles and Practice.
++3. ed.
++Melbourne: OTexts, 2021.
++Disponível em: \url{https://otexts.com/fpp3/}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{International Organization for Standardization}({2018})]{ISO9241_2018}
++\MakeUppercase{{International Organization for Standardization}}.
++\textbf{{ISO 9241-11:2018}}: Ergonomics of human-system interaction --- Part 11: Usability: Definitions and concepts.
++[S. l.]: ISO, 2018.
++Disponível em: \url{https://www.iso.org/standard/63500.html}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Izquierdo-Sanz\TCCand{}Moltó({2026})]{IZQUIERDO2026}
++\MakeUppercase{Izquierdo-Sanz}, H.; \MakeUppercase{Moltó}, E.
++Hybrid Physical--Machine Learning Soil Moisture Modeling at Orchard Scale in Irrigated Citrus Orchards Using Sentinel 1 and 2 and Agroclimatic Data.
++\textbf{Agronomy}, [S. l.],
++v. 16,
++n. 5,
++art. 541,
++2026.
++DOI: \url{https://doi.org/10.3390/agronomy16050541}.
++Disponível em: \url{https://doi.org/10.3390/agronomy16050541}.
++
++\bibitem[McFeeters({1996})]{MCFEETERS1996}
++\MakeUppercase{McFeeters}, S. K.
++The use of the Normalized Difference Water Index ({NDWI}) in the delineation of open water features.
++\textbf{International Journal of Remote Sensing}, [S. l.],
++v. 17,
++n. 7,
++p. 1425--1432,
++1996.
++DOI: \url{https://doi.org/10.1080/01431169608948714}.
++Disponível em: \url{https://doi.org/10.1080/01431169608948714}.
++
++\bibitem[Meroni \textit{et al.}({2019})]{MERONI2019}
++\MakeUppercase{Meroni}, M.; \MakeUppercase{Fasbender}, D.; \MakeUppercase{Rembold}, F.; \MakeUppercase{Atzberger}, C.; \MakeUppercase{Klisch}, A.
++Near real-time vegetation anomaly detection with {MODIS NDVI}: Timeliness vs. accuracy and effect of anomaly computation options.
++\textbf{Remote Sensing of Environment}, [S. l.],
++v. 221,
++p. 508--521,
++2019.
++DOI: \url{https://doi.org/10.1016/j.rse.2018.11.041}.
++Disponível em: \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{NASA}({2026})]{NASA_POWER_DAILY}
++\MakeUppercase{{NASA}}.
++\textbf{{{NASA POWER}}: Daily API}.
++[S. l.], 2026.
++Disponível em: \url{https://power.larc.nasa.gov/docs/services/api/temporal/daily/}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{NASA}({[20--?]a})]{NASA_POWER_METHOD}
++\MakeUppercase{{NASA}}.
++\textbf{POWER Data Methodology}.
++[S. l.], [20--?]a.
++Disponível em: \url{https://power.larc.nasa.gov/docs/methodology/}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{NASA}({[20--?]b})]{NASA_POWER_PARAMETERS}
++\MakeUppercase{{NASA}}.
++\textbf{POWER Parameter Dictionary}: Agricultural Community, Daily.
++[S. l.], [20--?]b.
++Disponível em: \url{https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{National Institute of Standards and Technology}({[20--?]})]{NIST_LOCATION}
++\MakeUppercase{{National Institute of Standards and Technology}}.
++\textbf{Measures of Location}: {NIST/SEMATECH e-Handbook of Statistical Methods}.
++[S. l.], [20--?].
++Disponível em: \url{https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{NIST/SEMATECH}({[20--?]})]{NIST_OUTLIERS}
++\MakeUppercase{{NIST/SEMATECH}}.
++\textbf{e-Handbook of Statistical Methods}: Detection of Outliers.
++[S. l.], [20--?].
++Disponível em: \url{https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{NumPy Developers}({2026a})]{NUMPY_POLYFIT}
++\MakeUppercase{{NumPy Developers}}.
++\textbf{numpy.polyfit}.
++[S. l.], c2026a.
++Disponível em: \url{https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{NumPy Developers}({2026b})]{NUMPY_STD}
++\MakeUppercase{{NumPy Developers}}.
++\textbf{numpy.std}.
++[S. l.], c2026b.
++Disponível em: \url{https://numpy.org/doc/stable/reference/generated/numpy.std.html}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{OneSoil}({[20--?]})]{ONESOIL_PLATFORM_DETAIL}
++\MakeUppercase{{OneSoil}}.
++\textbf{{OneSoil Platform}}.
++[S. l.], [20--?].
++Disponível em: \url{https://onesoil.ai/en/platform}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{OpenStreetMap Foundation}({[20--?]})]{NOMINATIM_POLICY}
++\MakeUppercase{{OpenStreetMap Foundation}}.
++\textbf{Nominatim Usage Policy}.
++[S. l.], [20--?].
++Disponível em: \url{https://operations.osmfoundation.org/policies/nominatim/}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Parnas({1972})]{PARNAS1972}
++\MakeUppercase{Parnas}, D. L.
++On the Criteria To Be Used in Decomposing Systems into Modules.
++\textbf{Communications of the ACM}, [S. l.],
++v. 15,
++n. 12,
++p. 1053--1058,
++1972.
++DOI: \url{https://doi.org/10.1145/361598.361623}.
++Disponível em: \url{https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Patrício\TCCand{}Rieder({2018})]{PATRICIO2018}
++\MakeUppercase{Patrício}, D. I.; \MakeUppercase{Rieder}, R.
++Computer Vision and Artificial Intelligence in Precision Agriculture for Grain Crops: A Systematic Review.
++\textbf{Computers and Electronics in Agriculture}, [S. l.],
++v. 153,
++p. 69--81,
++2018.
++DOI: \url{https://doi.org/10.1016/j.compag.2018.08.001}.
++Disponível em: \url{https://doi.org/10.1016/j.compag.2018.08.001}.
++Acesso em: 16 nov. 2026.
++
++\bibitem[{QGIS Project}({2026a})]{QGIS_MAP}
++\MakeUppercase{{QGIS Project}}.
++\textbf{A Gentle Introduction to GIS}: Map Production.
++Versão 3.40.
++[S. l.], 2026a.
++Disponível em: \url{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{QGIS Project}({2026b})]{QGIS_RASTER}
++\MakeUppercase{{QGIS Project}}.
++\textbf{A Gentle Introduction to GIS}: Raster Data.
++Versão 3.40.
++[S. l.], 2026b.
++Disponível em: \url{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{QGIS Project}({2026c})]{QGIS_VECTOR}
++\MakeUppercase{{QGIS Project}}.
++\textbf{A Gentle Introduction to GIS}: Vector Data.
++Versão 3.40.
++[S. l.], 2026c.
++Disponível em: \url{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Rouse \textit{et al.}({1974})]{ROUSE1974_NTRS}
++\MakeUppercase{Rouse Jr.}, J. W.; \MakeUppercase{Haas}, R. H.; \MakeUppercase{Schell}, J. A.; \MakeUppercase{Deering}, D. W.
++Monitoring vegetation systems in the Great Plains with {ERTS}.
++In:
++\textbf{Third Earth Resources Technology Satellite-1 Symposium, Volume 1, Section A}.
++[S. l.]: NASA, 1974.
++Disponível em: \url{https://ntrs.nasa.gov/citations/19740022614}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Sentinel Hub}({[20--?]})]{SENTINELHUB_NDMI}
++\MakeUppercase{{Sentinel Hub}}.
++\textbf{Normalized Difference Moisture Index (NDMI)}.
++[S. l.], [20--?].
++Disponível em: \url{https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Slaiffer({2023})]{SLAIFFER2023}
++\MakeUppercase{Slaiffer}, H.
++\textbf{Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro}.
++2023.
++Trabalho de Conclusão de Curso em Engenharia Agrícola -- Universidade Federal de Santa Maria, [S. l.], 2023.
++Disponível em: \url{https://repositorio.ufsm.br/handle/1/29995}.
++Acesso em: 11 nov. 2026.
++
++\bibitem[Slaiffer \textit{et al.}({2025})]{SLAIFFER2025}
++\MakeUppercase{Slaiffer}, H.; \MakeUppercase{Bottega}, E. L.; \MakeUppercase{Oliveira}, Z. B. d.; \MakeUppercase{Saretta}, E.
++Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro.
++\textbf{Nativa}, [S. l.],
++v. 13,
++n. 3,
++p. 495--502,
++2025.
++DOI: \url{https://doi.org/10.31413/nat.v13i3.18592}.
++Disponível em: \url{https://doi.org/10.31413/nat.v13i3.18592}.
++Acesso em: 16 nov. 2026.
++
++\bibitem[{Streamlit}({2026a})]{STREAMLIT_STATE}
++\MakeUppercase{{Streamlit}}.
++\textbf{Add Statefulness to Apps}: Session State.
++[S. l.], c2026a.
++Disponível em: \url{https://docs.streamlit.io/develop/concepts/architecture/session-state}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Streamlit}({2026b})]{STREAMLIT_CLOUD_SECRETS}
++\MakeUppercase{{Streamlit}}.
++\textbf{Secrets management for your Community Cloud app}.
++[S. l.], c2026b.
++Disponível em: \url{https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Sullivan\TCCand{}Artino({2013})]{SULLIVAN2013}
++\MakeUppercase{Sullivan}, G. M.; \MakeUppercase{Artino Jr.}, A. R.
++Analyzing and Interpreting Data From {Likert}-Type Scales.
++\textbf{Journal of Graduate Medical Education}, [S. l.],
++v. 5,
++n. 4,
++p. 541--542,
++2013.
++DOI: \url{https://doi.org/10.4300/JGME-5-4-18}.
++Disponível em: \url{https://doi.org/10.4300/JGME-5-4-18}.
++Acesso em: 16 nov. 2026.
++
++\bibitem[{U.S. Geological Survey}({[20--?]})]{USGS_NDMI}
++\MakeUppercase{{U.S. Geological Survey}}.
++\textbf{Normalized Difference Moisture Index}.
++[S. l.], [20--?].
++Disponível em: \url{https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[{Universidade de Passo Fundo}({2026})]{UPF_IA2026}
++\MakeUppercase{{Universidade de Passo Fundo}}.
++\textbf{Instrução Normativa nº 03/2026/PROACAD}: Uso de Inteligência Artificial nas atividades acadêmicas.
++[S. l.], 2026.
++Disponível em: \url{https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in}.
++Acesso em: 15 nov. 2026.
++
++\bibitem[Vaithilingam\TCCsep{}Zhang\TCCand{}Glassman({2022})]{VAITHILINGAM2022}
++\MakeUppercase{Vaithilingam}, P.; \MakeUppercase{Zhang}, T.; \MakeUppercase{Glassman}, E. L.
++Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models.
++In:
++\textbf{CHI Conference on Human Factors in Computing Systems Extended Abstracts}.
++[S. l.]: ACM, 2022.
++p. 1--7.
++DOI: \url{https://doi.org/10.1145/3491101.3519665}.
++Disponível em: \url{https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf}.
++Acesso em: 16 nov. 2026.
++
++\bibitem[Weiss\TCCsep{}Jacob\TCCand{}Duveiller({2020})]{WEISS2020}
++\MakeUppercase{Weiss}, M.; \MakeUppercase{Jacob}, F.; \MakeUppercase{Duveiller}, G.
++Remote sensing for agricultural applications: A meta-review.
++\textbf{Remote Sensing of Environment}, [S. l.],
++v. 236,
++art. 111402,
++2020.
++DOI: \url{https://doi.org/10.1016/j.rse.2019.111402}.
++Disponível em: \url{https://doi.org/10.1016/j.rse.2019.111402}.
++Acesso em: 16 nov. 2026.
++
++\end{thebibliography}
+--- /dev/null
++++ quinta-rodada/scripts/.gitignore
+@@ -0,0 +1 @@
++__pycache__/
+--- /dev/null
++++ quinta-rodada/scripts/gerar_referencias_normalizadas.py
+@@ -0,0 +1,261 @@
++"""Geração editorial explícita para este artigo, não um estilo ABNT universal.
++
++Requer pybtex==0.26.1. Mantém o .bib de origem e gera .bib estruturado,
++thebibliography compatível com natbib e inventário de TODAS as entradas.
++Não consulta rede nem infere datas exatas de anos de acesso.
++"""
++
++from collections import Counter, defaultdict
++import json
++from pathlib import Path
++import re
++import unicodedata
++
++from pybtex.database import parse_file
++from pybtex.database.output.bibtex import Writer
++
++
++BASE = Path(__file__).resolve().parents[1]
++# Evidências: fontes/datas_paginas.json do cache da quinta rodada.
++DATES = {
++    "ESA_SENTINEL2": "2026",  # page-last-modified 2026-08-11
++    "GOOGLE_EE_ND": "2026",  # Last updated 2026-04-20
++    "GOOGLE_EE_DATE": "2023",  # Last updated 2023-10-06
++    "GOOGLE_EE_SAMPLE": "2023",
++    "GOOGLE_EE_MEDIAN": "2023",
++    "GOOGLE_EE_REDUCE": "2026",  # Last updated 2026-04-20
++    "GOOGLE_EE_SERVICE_ACCOUNT": "2026",  # 2026-06-09
++    "GOOGLE_EE_NONCOMMERCIAL": "2026",  # 2026-09-25
++    "GOOGLE_EE_RESAMPLE": "2024",  # 2024-05-30
++    "GOOGLE_EE_REGION": "2026",  # 2026-05-29
++    "QGIS_VECTOR": "2026",  # Last updated 2026 Mar 16
++    "QGIS_RASTER": "2026",
++    "QGIS_MAP": "2026",
++    "NUMPY_STD": "c2026",  # copyright, não data de publicação
++    "NUMPY_POLYFIT": "c2026",
++    "STREAMLIT_STATE": "c2026",
++    "STREAMLIT_CLOUD_SECRETS": "c2026",
++    "BIPM_SI": "2019",  # 9ª edição; não confundir com revisão on-line
++}
++
++
++def plain(value):
++    """Somente para ordenar; preservar LaTeX e acentos no texto publicado."""
++    value = re.sub(r"\\[\"'`^~]\{?([A-Za-z])\}?", r"\1", value)
++    value = re.sub(r"[{}\\]", "", value)
++    return "".join(c for c in unicodedata.normalize("NFKD", value)
++                   if not unicodedata.combining(c)).casefold()
++
++
++def surname(person):
++    return " ".join(person.last_names)
++
++
++def full_name(person):
++    last = surname(person)
++    if person.lineage_names:
++        last += " " + " ".join(person.lineage_names)
++    if not person.first_names and not person.middle_names:
++        return r"\MakeUppercase{" + last + "}"
++    # Abreviar uniformemente os prenomes; não expandir iniciais desconhecidas.
++    given = person.first_names + person.middle_names
++    initials = []
++    for word in given:
++        initials.append("-".join(part[0] + "." for part in word.split("-") if part))
++    result = r"\MakeUppercase{" + last + "}, " + " ".join(initials)
++    if person.prelast_names:
++        result += " " + " ".join(person.prelast_names)
++    return result
++
++
++def citation_name(entry):
++    authors = entry.persons["author"]
++    names = [surname(p) for p in authors]
++    if len(names) >= 4:
++        return names[0] + r" \textit{et al.}"
++    if len(names) == 3:
++        return names[0] + r"\TCCsep{}" + names[1] + r"\TCCand{}" + names[2]
++    # A macro é robusta: somente a composição distingue narrativa/parentética.
++    return r"\TCCand{}".join(names)
++
++
++def highlight(title):
++    # Somente título principal, não subtítulo. Chaves internas preservadas.
++    main, sep, subtitle = title.partition(": ")
++    return r"\textbf{" + main + "}" + (sep + subtitle if sep else "")
++
++
++def main():
++    data = parse_file(BASE / "referencias.bib")
++    evidence = BASE / "evidencias/quinta_rodada"
++    links_file = evidence / "links.json"
++    links = {r["key"]: r for r in json.loads(links_file.read_text())} if links_file.exists() else {}
++    texts = "\n".join(p.read_text() for p in BASE.glob("final_*.tex"))
++    # As tabelas geradas também podem conter citações.
++    texts += (BASE / "figuras_relatorio.tex").read_text()
++    cited = {key.strip()
++             for group in re.findall(r"\\cite\w*\*?(?:\[[^]]*\])*\{([^}]+)\}", texts)
++             for key in group.split(",")}
++    assert not cited - set(data.entries), cited - set(data.entries)
++    audits = {}
++    for key, entry in data.entries.items():
++        f = entry.fields
++        before = dict(f)
++        note = f.pop("note", "")
++        urls = re.findall(r"\\url\{([^}]+)\}", note)
++        for url in urls:
++            if "doi.org/" in url:
++                f["doi"] = url.split("doi.org/", 1)[1]
++            else:
++                f.setdefault("url", url)
++        access = re.search(r"(?:Acesso|Acessado) em:?\s*(\d{1,2})\s+([a-zç]+)\.?\s+(\d{4})",
++                           note, re.I)
++        if access:
++            f["urldate"] = f"{access[1]} {access[2]}. {access[3]}"
++        if f.get("url") and not f.get("urldate"):
++            # Os três textos primários foram efetivamente consultados em 16/11.
++            if key in {"GOTEL1994", "BJARNASON2015", "VAITHILINGAM2022"}:
++                f["urldate"] = "16 nov. 2026"
++        if f.get("doi") and not f.get("url"):
++            f["url"] = "https://doi.org/" + f["doi"]
++            # Conferência da rodada anterior documentada na auditoria científica.
++            # Sem inventar data quando não constava do registro da entrada.
++        if not f.get("urldate") and links.get(key, {}).get("consulta"):
++            f["urldate"] = links[key]["access_date"]
++        if key in DATES:
++            f["year"] = DATES[key]
++        elif not f.get("year"):
++            # Século provável, NÃO um ano de publicação inventado.
++            # Requer confirmação bibliográfica para reduzir a incerteza.
++            f["year"] = "[20--?]"
++        if key in {"WEISS2020", "PHIRI2020", "IZQUIERDO2026"}:
++            f["eid"] = f.pop("pages")
++        if key == "WAZLAWICK2020":
++            entry.type = "book"
++        if key == "ISO9241_2018":
++            f["publisher"] = "ISO"
++        if key == "BIPM_SI":
++            f.update(address="Sèvres", publisher="BIPM", edition="9",
++                     version="4.01, jun. 2026", doi="10.59161/AUEZ1291")
++        if key.startswith("QGIS_"):
++            f["version"] = "3.40"
++        # Notas de acesso/auditoria ficam no inventário, não no verbete.
++        audits[key] = {
++            "tipo": entry.type, "citada": key in cited,
++            "antes": before, "depois": dict(f),
++            "nota_original": note,
++            "data": ("Atualização/copyright/edição verificados"
++                     if key in DATES else
++                     "Século provável; confirmar data do documento"
++                     if f["year"] == "[20--?]" else
++                     "Ano anterior preservado; ver auditoria científica"),
++            "lacunas": [],
++        }
++        if not f.get("address"):
++            audits[key]["lacunas"].append("Local não identificado na entrada")
++        if f.get("url") and not f.get("urldate"):
++            audits[key]["lacunas"].append("Data efetiva de acesso não registrada na entrada")
++        if entry.type in {"mastersthesis", "phdthesis"}:
++            audits[key]["lacunas"].append("Conferir grau, instituição/unidade e extensão no original")
++        if f["year"] == "[20--?]":
++            audits[key]["lacunas"].append("Data apenas aproximada; século provável")
++
++    def sort_key(key):
++        entry = data.entries[key]
++        authors = "; ".join(plain(str(p)) for p in entry.persons["author"])
++        return authors, plain(entry.fields["year"]), plain(entry.fields["title"])
++
++    ordered = sorted(cited, key=sort_key)
++    groups = defaultdict(list)
++    for key in ordered:
++        entry = data.entries[key]
++        groups[(citation_name(entry), entry.fields["year"].removeprefix("c"))].append(key)
++    suffixes = {}
++    for keys in groups.values():
++        for i, key in enumerate(keys):
++            suffixes[key] = chr(97+i) if len(keys) > 1 else ""
++    lines = [
++        "% Gerado por scripts/gerar_referencias_normalizadas.py; não editar.",
++        r"\begin{thebibliography}{99}",
++    ]
++    for key in ordered:
++        e = data.entries[key]
++        f = e.fields
++        suffix = suffixes[key]
++        year = f["year"] + suffix
++        labelyear = f["year"].removeprefix("c") + suffix
++        author = "; ".join(full_name(p) for p in e.persons["author"])
++        # Colchetes nas datas dentro de um argumento opcional precisam de grupo.
++        label = citation_name(e) + "({" + labelyear + "})"
++        parts = [r"\bibitem[" + label + "]{" + key + "}", author.rstrip(".") + "."]
++        title = f["title"]
++        if e.type == "article":
++            parts += [title + ".", highlight(f["journal"]) + ", "
++                      + f.get("address", "[S. l.]") + ","]
++            for field, prefix in [("volume", "v."), ("number", "n."),
++                                  ("pages", "p."), ("eid", "art.")]:
++                if f.get(field):
++                    parts.append(prefix + " " + f[field] + ",")
++            parts.append(year + ".")
++        elif e.type in {"inproceedings", "incollection"}:
++            parts += [title + ".", "In:"]
++            if e.persons.get("editor"):
++                parts.append("; ".join(full_name(p) for p in e.persons["editor"])
++                             + " (ed.).")
++            parts += [highlight(f["booktitle"]) + ".",
++                      f.get("address", "[S. l.]") + ": "
++                      + f.get("publisher", "[s. n.]") + ", " + year + "."]
++            if f.get("series"):
++                parts.append("(" + f["series"] + ", v. " + f["volume"] + ").")
++            if f.get("pages"):
++                parts.append("p. " + f["pages"] + ".")
++            if key == "BENDER2020":
++                parts.append("cap. 11.")
++        elif e.type in {"mastersthesis", "phdthesis"}:
++            parts += [highlight(title) + ".", year + ".",
++                      f.get("type", "Tese") + " -- " + f["school"] + ", "
++                      + f.get("address", "[S. l.]") + ", " + year + "."]
++        else:
++            parts.append(highlight(title) + ".")
++            if f.get("edition"):
++                parts.append(f["edition"] + ". ed.")
++            if f.get("version"):
++                parts.append("Versão " + f["version"] + ".")
++            publisher = f.get("publisher", f.get("institution"))
++            if publisher:
++                parts.append(f.get("address", "[S. l.]") + ": " + publisher
++                             + ", " + year + ".")
++            else:
++                parts.append(f.get("address", "[S. l.]") + ", " + year + ".")
++        if f.get("doi"):
++            parts.append(r"DOI: \url{https://doi.org/" + f["doi"] + "}.")
++        if f.get("url"):
++            parts.append(r"Disponível em: \url{" + f["url"] + "}.")
++        if f.get("urldate"):
++            parts.append("Acesso em: " + f["urldate"] + ".")
++        lines.append("\n".join(parts))
++    lines.append(r"\end{thebibliography}")
++    (BASE / "referencias_normalizadas.tex").write_text("\n\n".join(lines) + "\n")
++    class SourceWriter(Writer):
++        # As entradas já contêm LaTeX; não escapar _ ou & dentro de URLs.
++        def _encode(self, text):
++            return text
++
++    SourceWriter(encoding="UTF-8").write_file(data, BASE / "referencias_normalizadas.bib")
++    report = {
++        "entradas": len(data.entries), "citadas": len(cited),
++        "nao_citadas": sorted(set(data.entries)-cited),
++        "duplicacoes_de_url": {url: n for url, n in
++                               Counter(e.fields.get("url") for e in data.entries.values()).items()
++                               if url and n > 1},
++        "ordem": ordered, "entradas_auditadas": audits,
++        "limite": "Geração editorial local; não certifica cumprimento integral da NBR 6023.",
++    }
++    evidence.mkdir(parents=True, exist_ok=True)
++    (evidence / "referencias.json").write_text(
++        json.dumps(report, ensure_ascii=False, indent=2) + "\n")
++    print(f"{len(data.entries)} entradas examinadas; {len(cited)} citadas.")
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ quinta-rodada/scripts/requirements-normalizacao.txt
+@@ -0,0 +1,2 @@
++# Dependência editorial isolada; não pertence à aplicação.
++pybtex==0.26.1

@@ -256,7 +256,7 @@ def qualitative(eligible):
 
 def run(source, output, new_source_confirmed=False):
     before = digest(source)
-    confirmed_snapshot = "9adb66b330103ca858c37d7dc6cdb5e4e954f09f749a0c122fa6e6b2f4f5de59"
+    confirmed_snapshot = "c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34"
     if before != confirmed_snapshot and not new_source_confirmed:
         raise ValueError("Fonte diferente do recorte confirmado. Conferir procedência e usar "
                          "--confirmar-procedencia somente com nova confirmação do responsável.")
@@ -290,8 +290,9 @@ def run(source, output, new_source_confirmed=False):
         "colunas": frame.shape[1],
         "original_sha256": digest(original) if original.exists() else audit.get("original_sha256"),
         "analisado_sha256": before,
-        "retificacao_autorizada": {k: audit.get(k) for k in
-                                 ["authorization", "changed_cells", "answers_unchanged"]},
+        "retificacao_autorizada": {
+            "aplicada_nesta_analise": False,
+            "nota": "Snapshot público preservado sem alterações; retificações do original são históricas."},
         "periodo_carimbos_corrigidos": [str(dates.min().date()), str(dates.max().date())],
         "datas_invalidas": int(dates.isna().sum()),
         "ausentes_por_coluna": [{"coluna": i+1, "pergunta": normalized(c),

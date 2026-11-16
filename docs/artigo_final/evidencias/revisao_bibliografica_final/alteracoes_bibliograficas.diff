@@ -1,0 +1,101 @@
+--- antes/referencias_normalizadas.bib
++++ depois/referencias_normalizadas.bib
+@@ -273,8 +273,9 @@
+     booktitle = "Third Earth Resources Technology Satellite-1 Symposium, Volume 1, Section A",
+     publisher = "NASA",
+     year = "1974",
++    pages = "309--317",
+     url = "https://ntrs.nasa.gov/citations/19740022614",
+-    urldate = "15 nov. 2026"
++    urldate = "16 nov. 2026"
+ }
+ 
+ @misc{EOSDA_PLATFORM,
+@@ -342,28 +343,28 @@
+ @misc{QGIS_VECTOR,
+     author = "{QGIS Project}",
+     title = "A Gentle Introduction to GIS: Vector Data",
+-    url = "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html",
+-    urldate = "15 nov. 2026",
+-    year = "2026",
+-    version = "3.40"
++    url = "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/vector_data.html",
++    urldate = "16 nov. 2026",
++    year = "2026",
++    version = "3.44"
+ }
+ 
+ @misc{QGIS_RASTER,
+     author = "{QGIS Project}",
+     title = "A Gentle Introduction to GIS: Raster Data",
+-    url = "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html",
+-    urldate = "15 nov. 2026",
+-    year = "2026",
+-    version = "3.40"
++    url = "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/raster_data.html",
++    urldate = "16 nov. 2026",
++    year = "2026",
++    version = "3.44"
+ }
+ 
+ @misc{QGIS_MAP,
+     author = "{QGIS Project}",
+     title = "A Gentle Introduction to GIS: Map Production",
+-    url = "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html",
+-    urldate = "15 nov. 2026",
+-    year = "2026",
+-    version = "3.40"
++    url = "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/map_production.html",
++    urldate = "16 nov. 2026",
++    year = "2026",
++    version = "3.44"
+ }
+ 
+ @misc{GOOGLE_EE_RESAMPLE,
+@@ -431,8 +432,8 @@
+     author = "{Bureau International des Poids et Mesures}",
+     title = "The International System of Units (SI)",
+     url = "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+-    urldate = "15 nov. 2026",
+-    year = "2019",
++    urldate = "16 nov. 2026",
++    year = "2026",
+     address = "Sèvres",
+     publisher = "BIPM",
+     edition = "9",
+@@ -497,7 +498,8 @@
+     author = "{NASA}",
+     title = "POWER Parameter Dictionary: Agricultural Community, Daily",
+     url = "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
+-    urldate = "15 nov. 2026",
++    urldate = "16 nov. 2026",
++    note = "Documentação do serviço Manager API: \url{https://power.larc.nasa.gov/docs/services/api/system/manager/}.",
+     year = "[20--?]"
+ }
+ 
+@@ -562,17 +564,19 @@
+ 
+ @misc{UPF_IA2026,
+     author = "{Universidade de Passo Fundo}",
+-    title = "Instrução Normativa nº 03/2026/PROACAD: Uso de Inteligência Artificial nas atividades acadêmicas",
+-    year = "2026",
+-    url = "https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in",
+-    urldate = "15 nov. 2026"
++    title = "Instrução Normativa nº 03/2026/{PROACAD}: dispõe sobre o uso de Inteligência Artificial ({IA}) nas atividades acadêmicas na {Universidade de Passo Fundo} ({UPF}) e dá outras providências",
++    year = "2026",
++    url = "https://www.upf.br//_uploads/Conteudo/IN%20n%C2%BA%2003_2026%20Uso%20de%20Intelig%C3%AAncia%20Artificial%20%28IA%29%20nas%20atividades%20acad%C3%AAmicas%20da%20UPF_docx%281%29.pdf",
++    urldate = "16 nov. 2026",
++    date = "2026-10-28",
++    note = "Pró-Reitoria Acadêmica."
+ }
+ 
+ @misc{EOSDA_GUIDE,
+     author = "{EOS Data Analytics}",
+     title = "{EOSDA Crop Monitoring User Guide}",
+-    url = "https://eos.com/user-guide/",
+-    urldate = "15 nov. 2026",
++    url = "https://eos.com/user-guide/crop-monitoring/",
++    urldate = "16 nov. 2026",
+     year = "[20--?]"
+ }
+ 

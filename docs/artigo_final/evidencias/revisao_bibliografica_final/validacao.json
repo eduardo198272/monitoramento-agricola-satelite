@@ -1,0 +1,83 @@
+{
+  "aprovado_checagens_automaticas": true,
+  "compilador": "Tectonic 0.17.0 (XeTeX), BibTeX/dcu",
+  "compilacao_limpa": true,
+  "paginas": 32,
+  "entradas_base": 63,
+  "citadas": 54,
+  "entradas_alteradas": [
+    "ROUSE1974_NTRS",
+    "QGIS_VECTOR",
+    "QGIS_RASTER",
+    "QGIS_MAP",
+    "BIPM_SI",
+    "NASA_POWER_PARAMETERS",
+    "UPF_IA2026",
+    "EOSDA_GUIDE"
+  ],
+  "figuras": 22,
+  "tabelas": 5,
+  "equacoes_com_rotulo_explicito": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "9",
+    "12"
+  ],
+  "citações_indefinidas": false,
+  "overfull": false,
+  "avisos_bibtex": false,
+  "dois_duplicados_na_lista": false,
+  "paginas_texto_modificado": [
+    10,
+    30,
+    31,
+    32
+  ],
+  "paginas_render_modificado": [
+    10,
+    30,
+    31,
+    32
+  ],
+  "pagina_10_unica_mudanca_textual": "2019 → 2026, citação BIPM",
+  "hyperlinks_corrigidos_conferidos": true,
+  "pdf_antes_sha256": "d3b817cac5fdaa08fb8671f4ceb62e53df6d715c47ab9548c2bbe9bf7ab37896",
+  "pdf_depois_sha256": "2b6d82535a3078011ae86a9b5945db57a7ef6f9542fca205c63253e847e6718d",
+  "arquivos_baseline": 678,
+  "arquivos_baseline_modificados": [
+    "docs/artigo_final/AUDITORIA_ABNT.md",
+    "docs/artigo_final/referencias_institucionais.bib",
+    "docs/artigo_final/referencias_normalizadas.bib",
+    "docs/artigo_final/scripts/preparar_bib_dcu.py",
+    "docs/artigo_final/Relatorio_Final.pdf",
+    "docs/artigo_final/auditoria_cientifica/AUDITORIA_REFERENCIAS.md"
+  ],
+  "arquivos_baseline_preservados": 672,
+  "tex_cientificos_preservados": 35,
+  "classe_preservada": true,
+  "snapshot_envio_professor_preservado": true,
+  "aprovacao_humana": false,
+  "commit_push": false,
+  "limitacoes": "Ver AUDITORIA_REFERENCIAS.md; acesso integral/metadados não são certificados por HTTP 200.",
+  "expressoes_numeradas_preservadas": 14,
+  "numeros_equacoes_no_pdf": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ]
+}

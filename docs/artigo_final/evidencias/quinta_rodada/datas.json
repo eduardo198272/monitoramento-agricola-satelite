@@ -1,0 +1,290 @@
+[
+  {
+    "key": "ESA_SENTINEL2",
+    "url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+    "before": "2026",
+    "after": "2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "<meta name=\"page-last-modified\" content=\"2026-08-11T11:09:17.700Z\">"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "GOOGLE_EE_ND",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
+    "before": "2026",
+    "after": "2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "  <p>Last updated 2026-04-20 UTC.</p>"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "GOOGLE_EE_DATE",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
+    "before": "2026",
+    "after": "2023",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "  <p>Last updated 2023-10-06 UTC.</p>"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "GOOGLE_EE_SERVICE_ACCOUNT",
+    "url": "https://developers.google.com/earth-engine/guides/service_account",
+    "before": "2026",
+    "after": "2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "  <p>Last updated 2026-06-09 UTC.</p>"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "GOOGLE_EE_NONCOMMERCIAL",
+    "url": "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
+    "before": "2026",
+    "after": "2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "  <p>Last updated 2026-09-25 UTC.</p>"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "STREAMLIT_CLOUD_SECRETS",
+    "url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
+    "before": "2026",
+    "after": "c2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "\"round\" fill=\"none\"></path></svg></i></a></section><div class=\"footer_Copyright__pxXlR\"><span>© <!-- -->2026<!-- --> Snowflake Inc.</span></div></section></footer></section></div><div class=\"chatSticky_Container__G7L0R\"><button id=\"kapa-ai\" type=\"button\" clas"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "USGS_NDMI",
+    "url": "https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  },
+  {
+    "key": "GOOGLE_EE_SAMPLE",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
+    "before": null,
+    "after": "2023",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "  <p>Last updated 2023-10-06 UTC.</p>"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "GOOGLE_EE_MEDIAN",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
+    "before": null,
+    "after": "2023",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "  <p>Last updated 2023-10-06 UTC.</p>"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "GOOGLE_EE_REDUCE",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
+    "before": null,
+    "after": "2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "  <p>Last updated 2026-04-20 UTC.</p>"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "NOMINATIM_POLICY",
+    "url": "https://operations.osmfoundation.org/policies/nominatim/",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  },
+  {
+    "key": "QGIS_VECTOR",
+    "url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html",
+    "before": null,
+    "after": "2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "      <span class=\"lastupdated\">Last updated on 2026 Mar 16, 15:45 +0000."
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "QGIS_RASTER",
+    "url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html",
+    "before": null,
+    "after": "2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "      <span class=\"lastupdated\">Last updated on 2026 Mar 16, 15:45 +0000."
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "QGIS_MAP",
+    "url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html",
+    "before": null,
+    "after": "2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "      <span class=\"lastupdated\">Last updated on 2026 Mar 16, 15:45 +0000."
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "GOOGLE_EE_RESAMPLE",
+    "url": "https://developers.google.com/earth-engine/guides/resample",
+    "before": null,
+    "after": "2024",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "  <p>Last updated 2024-05-30 UTC.</p>"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "GOOGLE_EE_REGION",
+    "url": "https://developers.google.com/earth-engine/guides/reducers_reduce_region",
+    "before": null,
+    "after": "2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "  <p>Last updated 2026-05-29 UTC.</p>"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "SENTINELHUB_NDMI",
+    "url": "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  },
+  {
+    "key": "NIST_OUTLIERS",
+    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  },
+  {
+    "key": "NUMPY_STD",
+    "url": "https://numpy.org/doc/stable/reference/generated/numpy.std.html",
+    "before": null,
+    "after": "c2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "      © Copyright 2008-2026, NumPy Developers."
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "NUMPY_POLYFIT",
+    "url": "https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html",
+    "before": null,
+    "after": "c2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "      © Copyright 2008-2026, NumPy Developers."
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "BIPM_SI",
+    "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+    "before": null,
+    "after": "2019",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "PDF oficial: 9e édition 2019; V4.01 juin 2026; edição e revisão distinguidas."
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "NASA_POWER_METHOD",
+    "url": "https://power.larc.nasa.gov/docs/methodology/",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  },
+  {
+    "key": "NASA_POWER_PARAMETERS",
+    "url": "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  },
+  {
+    "key": "STREAMLIT_STATE",
+    "url": "https://docs.streamlit.io/develop/concepts/architecture/session-state",
+    "before": null,
+    "after": "c2026",
+    "criterion": "Atualização/copyright/edição verificados",
+    "evidence": [
+      "\"round\" fill=\"none\"></path></svg></i></a></section><div class=\"footer_Copyright__pxXlR\"><span>© <!-- -->2026<!-- --> Snowflake Inc.</span></div></section></footer></section></div><div class=\"chatSticky_Container__G7L0R\"><button id=\"kapa-ai\" type=\"button\" clas"
+    ],
+    "uncertainty": false
+  },
+  {
+    "key": "NIST_LOCATION",
+    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  },
+  {
+    "key": "GITHUB_SDD",
+    "url": "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  },
+  {
+    "key": "EOSDA_GUIDE",
+    "url": "https://eos.com/user-guide/",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  },
+  {
+    "key": "ONESOIL_PLATFORM_DETAIL",
+    "url": "https://onesoil.ai/en/platform",
+    "before": null,
+    "after": "[20--?]",
+    "criterion": "Século provável; confirmar data do documento",
+    "evidence": [],
+    "uncertainty": true
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "basis": "Snapshot no início da revisão de fidelidade; resumos também comparados à quinta rodada",
+  "science_body_literal_except_caption_relocation": [
+    "final_4_resultados.tex",
+    "final_4a_usuarios.tex",
+    "final_1_introducao.tex",
+    "final_7_uso_ia.tex",
+    "final_2_fundamentacao.tex",
+    "final_6_conclusao.tex",
+    "final_0_resumo.tex",
+    "final_3_metodos.tex",
+    "final_3a_implementacao.tex",
+    "final_5_discussao.tex",
+    "final_3b_plataforma.tex"
+  ],
+  "abstracts_and_descriptors_literal_against_fifth_round": true,
+  "captions_and_labels_preserved": true,
+  "equation_environments_literal": 8,
+  "numbered_expressions": 14,
+  "original_image_files_unchanged": 71,
+  "data_files_unchanged": 19,
+  "prior_evidence_files_unchanged": 97,
+  "tracked_files_outside_article_unchanged": 221,
+  "tables_literal": true,
+  "ai_declarations_unchanged": true,
+  "metadata_source_unchanged": true,
+  "metadata_projection_all_63_entries_preserved": true,
+  "class_literal_against_git_f4c46a7": true,
+  "custom_bibitem_generator_inactive": true,
+  "new_experiments_or_reanalysis": false,
+  "commit_push": false
+}

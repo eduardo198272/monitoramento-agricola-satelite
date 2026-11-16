@@ -1,0 +1,55 @@
+% Relatório do artefato computacional. Proposta.tex permanece como histórico.
+\documentclass[alpha-refs,english,brazilian]{CC-EC_TF-TC}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric}
+\usepackage{etoolbox}
+\setlength{\headheight}{18.2pt}
+\addtolength{\topmargin}{-0.7pt}
+\let\TCCOriginalHref\href
+\renewcommand{\href}[3][]{%
+  \ifstrequal{#3}{https://repositorio.upf.br/handle/123456789/8754}
+    {\TCCOriginalHref[#1]{#2}{\nolinkurl{#3}}}
+    {\TCCOriginalHref[#1]{#2}{#3}}}
+\makeatletter
+\AtBeginDocument{%
+  \patchcmd{\@maketitle}
+    {\begin{textblock*}{\textwidth-21pc}(21pc,0pt)}
+    {\begin{textblock*}{\textwidth-21pc+4pc+6.64pt}(21pc,0pt)}
+    {}{\PackageError{TCC}{Bloco institucional de cabecalho nao localizado}{Conferir a classe antes de ajustar o conteiner.}}}
+\makeatother
+
+\input{normalizacao}
+\input{figuras_relatorio}
+\input{avaliacao_usuarios/resultados/indicadores}
+\hypersetup{pdftitle={Sistema de Monitoramento Agrícola por Imagens de Satélite},pdfsubject={Trabalho de Conclusão de Curso - Ciência da Computação - UPF}}
+
+\title{Sistema de Monitoramento Agrícola por Imagens de Satélite}
+\titleother{Agricultural Monitoring System Using Satellite Imagery}
+\input{autoria}
+\titulores{Monitoramento agrícola por imagens de satélite}
+\papercat{Trabalho de Conclusão de Curso}
+\jyear{2026}
+\jmonth{dezembro}
+\jcourse{Ciência da Computação}
+\setcounter{page}{1}
+\firstpage{1}
+
+\begin{document}
+\begin{frontmatter}
+\maketitle
+\thispagestyle{empty}
+\input{final_0_resumo}
+\end{frontmatter}
+\clearpage
+
+\input{final_1_introducao}
+\input{final_2_fundamentacao}
+\input{final_3_metodos}
+\input{final_3a_implementacao}
+\input{final_3b_plataforma}
+\input{final_4_resultados}
+\input{final_5_discussao}
+\input{final_6_conclusao}
+\input{final_7_uso_ia}
+\bibliography{referencias_institucionais}
+\end{document}

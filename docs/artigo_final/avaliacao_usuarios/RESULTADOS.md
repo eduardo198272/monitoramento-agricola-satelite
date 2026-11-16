@@ -3,11 +3,11 @@
 Análise descritiva das respostas coletadas no questionário de avaliação com usuários.
 Gerado pelos CSV; a amostragem por adesão e o autorrelato delimitam a interpretação.
 
-Recebidas/elegíveis: **31/31**. Período das respostas analisadas: 2026-11-06 a 2026-11-15.
+Recebidas/elegíveis: **32/32**. Período das respostas analisadas: 2026-11-06 a 2026-11-15.
 
 ## Avaliação geral
 
-n=31; média=7,74; DP amostral=1,81; mediana=8; moda=9; Q1=7; Q3=9; mínimo=3; máximo=10.
+n=32; média=7,72; DP amostral=1,78; mediana=8; moda=9; Q1=7; Q3=9; mínimo=3; máximo=10.
 
 ## Distribuições e estatísticas por item
 
@@ -17,34 +17,34 @@ Médias/DP dos códigos ordinais são complementares; não representam intervalo
 
 | Item | n | Mediana | Q1–Q3 | Positivas 4–5 | Negativas 1–2 | Não avaliou |
 |---|---:|---:|---|---|---:|---:|
-| A interface é fácil de compreender. | 30 | 4 | 4,0–5,0 | 24 (80,0%) | 2 | 1 |
-| A navegação pela plataforma é intuitiva. | 29 | 4 | 3,0–5,0 | 20 (69,0%) | 3 | 2 |
-| A organização das informações é adequada. | 31 | 4 | 3,0–5,0 | 22 (71,0%) | 1 | 0 |
-| Consegui utilizar a plataforma sem auxílio externo. | 29 | 4 | 3,0–5,0 | 21 (72,4%) | 2 | 2 |
-| A demarcação de áreas no mapa é fácil. | 31 | 4 | 4,0–5,0 | 24 (77,4%) | 2 | 0 |
-| A configuração das análises é simples. | 31 | 4 | 3,0–5,0 | 22 (71,0%) | 1 | 0 |
-| O tempo de resposta é satisfatório. | 31 | 4 | 3,0–4,5 | 21 (67,7%) | 2 | 0 |
-| As funcionalidades são fáceis de localizar. | 31 | 4 | 3,0–5,0 | 22 (71,0%) | 3 | 0 |
-| A apresentação visual é adequada. | 31 | 4 | 3,5–4,0 | 23 (74,2%) | 4 | 0 |
-| Busca por localização geográfica | 31 | 4 | 4,0–5,0 | 25 (80,6%) | 3 | 0 |
-| Demarcação de áreas agrícolas | 31 | 4 | 3,0–5,0 | 22 (71,0%) | 2 | 0 |
-| Salvamento e gerenciamento de áreas | 23 | 4 | 4,0–4,0 | 18 (78,3%) | 1 | 8 |
-| Análise de índices espectrais | 30 | 4 | 3,0–5,0 | 21 (70,0%) | 5 | 1 |
-| Mapas temáticos com gradientes de cores | 30 | 5 | 4,0–5,0 | 24 (80,0%) | 1 | 1 |
-| Consulta interativa de valores por pixel | 23 | 5 | 4,0–5,0 | 20 (87,0%) | 0 | 8 |
-| Gráficos de evolução temporal | 29 | 4 | 3,0–5,0 | 20 (69,0%) | 4 | 2 |
-| Detecção de anomalias | 29 | 4 | 4,0–5,0 | 24 (82,8%) | 1 | 2 |
-| Informações de temperatura e precipitação | 29 | 5 | 4,0–5,0 | 23 (79,3%) | 0 | 2 |
-| Geração de relatórios PDF | 28 | 4 | 4,0–5,0 | 23 (82,1%) | 1 | 3 |
-| Exportação em Excel e CSV | 27 | 4 | 4,0–4,0 | 21 (77,8%) | 1 | 4 |
-| As informações apresentadas são compreensíveis. | 30 | 4 | 4,0–5,0 | 23 (76,7%) | 3 | 1 |
-| Os mapas facilitam a interpretação dos índices espectrais. | 31 | 4 | 3,0–5,0 | 22 (71,0%) | 3 | 0 |
-| Os gráficos facilitam o acompanhamento temporal da vegetação. | 30 | 4 | 3,2–5,0 | 22 (73,3%) | 6 | 1 |
-| As informações meteorológicas complementam a análise. | 31 | 4 | 4,0–5,0 | 25 (80,6%) | 2 | 0 |
-| A plataforma apresenta potencial para auxiliar no monitoramento agrícola. | 31 | 4 | 3,5–5,0 | 23 (74,2%) | 2 | 0 |
-| Os relatórios apresentam informações relevantes. | 29 | 4 | 4,0–4,0 | 23 (79,3%) | 3 | 2 |
-| Consideraria utilizar a plataforma em atividades profissionais ou acadêmicas. | 30 | 4 | 4,0–5,0 | 24 (80,0%) | 2 | 1 |
-| Recomendaria a plataforma a pessoas interessadas no monitoramento agrícola. | 31 | 4 | 4,0–5,0 | 24 (77,4%) | 4 | 0 |
+| A interface é fácil de compreender. | 31 | 4 | 4,0–5,0 | 25 (80,6%) | 2 | 1 |
+| A navegação pela plataforma é intuitiva. | 30 | 4 | 3,0–4,8 | 20 (66,7%) | 3 | 2 |
+| A organização das informações é adequada. | 32 | 4 | 3,0–5,0 | 23 (71,9%) | 1 | 0 |
+| Consegui utilizar a plataforma sem auxílio externo. | 30 | 4 | 3,2–5,0 | 22 (73,3%) | 2 | 2 |
+| A demarcação de áreas no mapa é fácil. | 32 | 4 | 4,0–5,0 | 25 (78,1%) | 2 | 0 |
+| A configuração das análises é simples. | 32 | 4 | 3,0–5,0 | 22 (68,8%) | 1 | 0 |
+| O tempo de resposta é satisfatório. | 32 | 4 | 3,0–4,2 | 22 (68,8%) | 2 | 0 |
+| As funcionalidades são fáceis de localizar. | 32 | 4 | 3,0–5,0 | 23 (71,9%) | 3 | 0 |
+| A apresentação visual é adequada. | 32 | 4 | 3,0–4,0 | 23 (71,9%) | 4 | 0 |
+| Busca por localização geográfica | 32 | 4 | 4,0–5,0 | 26 (81,2%) | 3 | 0 |
+| Demarcação de áreas agrícolas | 32 | 4 | 3,0–5,0 | 22 (68,8%) | 2 | 0 |
+| Salvamento e gerenciamento de áreas | 24 | 4 | 4,0–4,0 | 19 (79,2%) | 1 | 8 |
+| Análise de índices espectrais | 31 | 4 | 3,0–5,0 | 21 (67,7%) | 5 | 1 |
+| Mapas temáticos com gradientes de cores | 31 | 5 | 4,0–5,0 | 25 (80,6%) | 1 | 1 |
+| Consulta interativa de valores por pixel | 24 | 5 | 4,0–5,0 | 21 (87,5%) | 0 | 8 |
+| Gráficos de evolução temporal | 30 | 4 | 3,0–5,0 | 21 (70,0%) | 4 | 2 |
+| Detecção de anomalias | 30 | 4 | 4,0–4,8 | 25 (83,3%) | 1 | 2 |
+| Informações de temperatura e precipitação | 30 | 5 | 4,0–5,0 | 24 (80,0%) | 0 | 2 |
+| Geração de relatórios PDF | 28 | 4 | 4,0–5,0 | 23 (82,1%) | 1 | 4 |
+| Exportação em Excel e CSV | 27 | 4 | 4,0–4,0 | 21 (77,8%) | 1 | 5 |
+| As informações apresentadas são compreensíveis. | 31 | 4 | 4,0–5,0 | 24 (77,4%) | 3 | 1 |
+| Os mapas facilitam a interpretação dos índices espectrais. | 32 | 4 | 3,0–5,0 | 23 (71,9%) | 3 | 0 |
+| Os gráficos facilitam o acompanhamento temporal da vegetação. | 31 | 4 | 3,5–5,0 | 23 (74,2%) | 6 | 1 |
+| As informações meteorológicas complementam a análise. | 32 | 4 | 4,0–5,0 | 26 (81,2%) | 2 | 0 |
+| A plataforma apresenta potencial para auxiliar no monitoramento agrícola. | 32 | 4 | 3,0–5,0 | 23 (71,9%) | 2 | 0 |
+| Os relatórios apresentam informações relevantes. | 30 | 4 | 4,0–4,0 | 23 (76,7%) | 3 | 2 |
+| Consideraria utilizar a plataforma em atividades profissionais ou acadêmicas. | 31 | 4 | 4,0–5,0 | 24 (77,4%) | 2 | 1 |
+| Recomendaria a plataforma a pessoas interessadas no monitoramento agrícola. | 32 | 4 | 3,8–5,0 | 24 (75,0%) | 4 | 0 |
 
 ## Codificação temática
 
@@ -68,7 +68,7 @@ Médias/DP dos códigos ordinais são complementares; não representam intervalo
 
 ## Interpretação e limites
 
-- Maior proporção de avaliações 4–5 não significa maior alcance: pixel tem oito impossibilidades de avaliação.
+- Maior proporção de avaliações 4–5 não significa maior alcance: pixel tem 8 impossibilidades de avaliação.
 - Demarcação e séries/anomalias combinam interesse com dificuldade; percepção de facilidade não substitui conclusão de tarefa.
 - Relatos de comparação lado a lado, alertas coloridos e estação meteorológica são percepções/expectativas, não confirmação dessas funcionalidades.
 - As categorias de desempenho são relatos, não cronometração; as aplicações agronômicas propostas não foram demonstradas.

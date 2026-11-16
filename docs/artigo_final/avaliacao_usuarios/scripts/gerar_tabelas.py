@@ -19,12 +19,15 @@ def number(value, digits=1):
 
 
 def table(caption, label, layout, header, rows):
+    title, _, note = caption.partition(". ")
     return "\n".join([
         r"\begin{table*}[htbp]", r"\centering\small",
-        r"\caption{"+caption+"}", r"\label{"+label+"}",
+        r"\caption{"+title+".}", r"\label{"+label+"}",
         r"\begin{tabular}{"+layout+"}", r"\hline",
         header+r"\\ \hline", *[row+r"\\" for row in rows],
-        r"\hline", r"\end{tabular}", r"\end{table*}", ""])
+        r"\hline", r"\end{tabular}",
+        r"\fonteTCC{dados da pesquisa (2026).}",
+        r"\notaTCC{"+note+"}", r"\end{table*}", ""])
 
 
 def generate():
@@ -80,7 +83,7 @@ def generate():
         rows.append(f"{tex(r.categoria)} & {int(r.registros_com_tema)} & "
                     f"``{tex(r.trecho_anonimizado)}'' & {tex(r.implicacao)}")
     (RESULTS/"tabela_temas.tex").write_text(table(
-        "Categorias temáticas selecionadas da codificação assistida por IA e conferida pelo pesquisador. "
+        "Categorias temáticas selecionadas. "
         "n conta registros que mencionam o tema em qualquer uma das cinco perguntas; "
         "categorias não exclusivas. Frequências completas, definições e exemplos estão no material complementar.",
         "tab:usuarios-temas", r"p{0.20\textwidth}cp{0.30\textwidth}p{0.34\textwidth}",
@@ -117,7 +120,7 @@ def generate():
         text.append(f"| {r.categoria}: {r.descricao} | {r.registros_com_tema} | "
                     f"“{r.trecho_anonimizado}” | {r.implicacao} |")
     text += ["", "## Interpretação e limites", "",
-             "- Maior proporção de avaliações 4–5 não significa maior alcance: pixel tem oito impossibilidades de avaliação.",
+              f"- Maior proporção de avaliações 4–5 não significa maior alcance: pixel tem {int(items.loc[30].nao_avaliou)} impossibilidades de avaliação.",
              "- Demarcação e séries/anomalias combinam interesse com dificuldade; percepção de facilidade não substitui conclusão de tarefa.",
              "- Relatos de comparação lado a lado, alertas coloridos e estação meteorológica são percepções/expectativas, não confirmação dessas funcionalidades.",
              "- As categorias de desempenho são relatos, não cronometração; as aplicações agronômicas propostas não foram demonstradas.",

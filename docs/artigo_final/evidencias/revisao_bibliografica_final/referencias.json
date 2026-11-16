@@ -1,0 +1,4042 @@
+[
+  {
+    "chave": "ESA_SENTINEL2",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{European Space Agency}",
+      "{Copernicus}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{Sentinel-2 Mission}",
+      "year": "2026",
+      "url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+      "urldate": "24 jun. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 16
+      }
+    ],
+    "consulta_url": {
+      "id": "ESA_SENTINEL2",
+      "url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+      "consulta": "2026-11-16T14:04:52.099107+00:00",
+      "http": 200,
+      "final_url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+      "redirects": [],
+      "content_type": "text/html",
+      "sha256": "5674052397a2f4610edb29ad8cbfdf0ce5d555ca5415ada63b920e06216cfce7",
+      "bytes": 123805,
+      "title": "S2 Mission | SentiWiki",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOOGLE_S2_SR",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{Harmonized Sentinel-2 MSI: MultiSpectral Instrument, Level-2A (SR)}",
+      "year": "2026",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "fig/conceitos.tex",
+        "linha": 19
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 18
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 20
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 42
+      },
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 34
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_S2_SR",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+      "consulta": "2026-11-16T14:04:52.100265+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "390ec21061d4d4c80820d7fc3c066b1e02eeb60bc94874e08d5ff3f20cf38241",
+      "bytes": 138048,
+      "title": "Harmonized Sentinel-2 MSI: MultiSpectral Instrument, Level-2A (SR)  |  Earth Engine Data Catalog  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOOGLE_EE_ND",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{ee.Image.normalizedDifference}",
+      "year": "2026",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
+      "urldate": "24 jun. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 30
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_EE_ND",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
+      "consulta": "2026-11-16T14:04:52.100930+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "c586166b1cf043a467bba488744ecb34c999f0d402e53320c8eb407f4111f533",
+      "bytes": 540444,
+      "title": "ee.Image.normalizedDifference  |  Google Earth Engine  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOOGLE_EE_DATE",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{ee.Filter.date}",
+      "year": "2023",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
+      "urldate": "11 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 28
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_EE_DATE",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
+      "consulta": "2026-11-16T14:04:52.101307+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "a78a94f9483da1cc9f983301df6ee88166bc199feda9d9780f6b09e9f0101e81",
+      "bytes": 552048,
+      "title": "ee.Filter.date  |  Google Earth Engine  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOOGLE_EE_SERVICE_ACCOUNT",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Service Accounts: {Google Earth Engine}",
+      "year": "2026",
+      "url": "https://developers.google.com/earth-engine/guides/service_account",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3a_implementacao.tex",
+        "linha": 7
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_EE_SERVICE_ACCOUNT",
+      "url": "https://developers.google.com/earth-engine/guides/service_account",
+      "consulta": "2026-11-16T14:04:52.101981+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/guides/service_account",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "8e379f3bb2478c0f9ad5646666a932ee55ee060717f72ada0efb0a7408e945cc",
+      "bytes": 129665,
+      "title": "Service Accounts  |  Google Earth Engine  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOOGLE_EE_NONCOMMERCIAL",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Noncommercial tiers: {Google Earth Engine}",
+      "year": "2026",
+      "url": "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_5_discussao.tex",
+        "linha": 69
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_EE_NONCOMMERCIAL",
+      "url": "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
+      "consulta": "2026-11-16T14:04:52.102384+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "28a590a6980b81dd1865fe0bf10e92d81dee86998cce1030c21143883697d1ab",
+      "bytes": 139477,
+      "title": "Earth Engine Noncommercial Tiers  |  Google Earth Engine  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "STREAMLIT_CLOUD_SECRETS",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Streamlit}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Secrets management for your Community Cloud app",
+      "year": "c2026",
+      "url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3a_implementacao.tex",
+        "linha": 7
+      }
+    ],
+    "consulta_url": {
+      "id": "STREAMLIT_CLOUD_SECRETS",
+      "url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
+      "consulta": "2026-11-16T14:04:52.102825+00:00",
+      "http": 200,
+      "final_url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
+      "redirects": [],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "93e1bd766f9bdf23482615ada284b6802696d9a765c2eed9b58af9131e3244d9",
+      "bytes": 155946,
+      "title": "Secrets management for your Community Cloud app - Streamlit Docs",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "SLAIFFER2023",
+    "citada": true,
+    "tipo": "mastersthesis",
+    "autores_ordenados": [
+      "Slaiffer, Henrique"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro",
+      "school": "Universidade Federal de Santa Maria",
+      "type": "Trabalho de Conclusão de Curso em Engenharia Agrícola",
+      "year": "2023",
+      "url": "https://repositorio.ufsm.br/handle/1/29995",
+      "urldate": "11 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 113
+      }
+    ],
+    "consulta_url": {
+      "id": "SLAIFFER2023",
+      "url": "https://repositorio.ufsm.br/handle/1/29995",
+      "consulta": "2026-11-16T14:04:52.103299+00:00",
+      "http": 200,
+      "final_url": "https://repositorio.ufsm.br/handle/1/29995",
+      "redirects": [],
+      "content_type": "text/html;charset=utf-8",
+      "sha256": "ae25df8178f42d8ac6f1024daafbbf49bade986d48cf0a258ebe1f9213368d47",
+      "bytes": 31259,
+      "title": "Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro | Manancial - Repositório Digital da UFSM",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "LOVATO2021",
+    "citada": false,
+    "tipo": "mastersthesis",
+    "autores_ordenados": [
+      "Lovato, João Guilherme Lopes"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Identificação de áreas de renovação da cultura da cana-de-açúcar por meio de índice de vegetação e técnicas de sensoriamento remoto",
+      "school": "Universidade Estadual Paulista",
+      "type": "Trabalho de Conclusão de Curso em Engenharia Agronômica",
+      "year": "2021",
+      "address": "Jaboticabal",
+      "url": "https://repositorio.unesp.br/entities/publication/b9caa0ff-8be4-44b6-ba3d-e40bbfa7e275",
+      "urldate": "11 nov. 2026"
+    },
+    "citacoes": [],
+    "consulta_url": {
+      "id": "LOVATO2021",
+      "url": "https://repositorio.unesp.br/entities/publication/b9caa0ff-8be4-44b6-ba3d-e40bbfa7e275",
+      "consulta": "2026-11-16T14:04:52.716915+00:00",
+      "http": 200,
+      "final_url": "https://repositorio.unesp.br/entities/publication/b9caa0ff-8be4-44b6-ba3d-e40bbfa7e275",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "6f7ce90f79e74efa4b42139c26ff6e52d01a0053697cc3638e155150e999c7d4",
+      "bytes": 715220,
+      "title": "Identificação de áreas de renovação da cultura da cana-de-açúcar por meio de índice de vegetação e técnicas de sensoriamento remoto",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "ARAUJO2025",
+    "citada": false,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Araujo, Ralph Wendel Oliveira de",
+      "Cruz, Samir Herick Menezes da",
+      "Sousa, Deivson Nacim Teixeira",
+      "Cardoso, Ariston de Lima",
+      "Ribeiro, Ossival Lolato"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Utilização de imageamento multiespectral por satélite para monitoramento de ciclo fenológico da cultura da soja",
+      "journal": "Boletim de Conjuntura (BOCA)",
+      "volume": "23",
+      "number": "67",
+      "pages": "197--224",
+      "year": "2025",
+      "doi": "10.5281/zenodo.15871939",
+      "url": "https://doi.org/10.5281/zenodo.15871939",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [],
+    "consulta_url": {
+      "id": "ARAUJO2025",
+      "url": "https://doi.org/10.5281/zenodo.15871939",
+      "consulta": "2026-11-16T14:04:52.718222+00:00",
+      "http": 200,
+      "final_url": "https://zenodo.org/records/15871939",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.5281/zenodo.15871939"
+        },
+        {
+          "http": 302,
+          "url": "https://zenodo.org/doi/10.5281/zenodo.15871939"
+        }
+      ],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "59095168306592ecbf3e28efc7e857b0b0804be24d58d09c0ed461959464ac5f",
+      "bytes": 102838,
+      "title": "USE OF MULTISPECTRAL SATELLITE IMAGING FOR MONITORING THE PHENOLOGICAL CYCLE OF SOYBEAN CROP | Zenodo",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_ARAUJO2025",
+      "url": "https://api.crossref.org/works/10.5281/zenodo.15871939",
+      "consulta": "2026-11-16T14:04:52.780430+00:00",
+      "http": 404,
+      "final_url": "https://api.crossref.org/works/10.5281/zenodo.15871939",
+      "redirects": [],
+      "content_type": "text/plain",
+      "sha256": "ae8462e3af85ca7577aaa97ff22a194f9dfd7fada58cf4944b53d2fdfa7b1f92",
+      "bytes": 19,
+      "title": "",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "CHAVES2019",
+    "citada": false,
+    "tipo": "phdthesis",
+    "autores_ordenados": [
+      "Chaves, Michel Eustáquio Dantas"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Uso das séries temporais de índices de vegetação para o monitoramento agrícola no Estado de Mato Grosso",
+      "school": "Universidade Federal de Lavras",
+      "year": "2019",
+      "address": "Lavras",
+      "url": "https://repositorio.ufla.br/items/62ad79ab-a7b3-400b-ad28-5779e424f3d3",
+      "urldate": "11 nov. 2026"
+    },
+    "citacoes": [],
+    "consulta_url": {
+      "id": "CHAVES2019",
+      "url": "https://repositorio.ufla.br/items/62ad79ab-a7b3-400b-ad28-5779e424f3d3",
+      "consulta": "2026-11-16T14:04:52.788295+00:00",
+      "error": "HTTPSConnectionPool(host='repositorio.ufla.br', port=443): Max retries exceeded with url: /items/62ad79ab-a7b3-400b-ad28-5779e424f3d3 (Caused by ConnectTimeoutError(<HTTPSConnection(host='repositorio.ufla.br', port=443) at 0x7783481d9810>, 'Connection to repositorio.ufla.br timed out. (connect timeout=15)'))"
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "NASA_POWER_DAILY",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{NASA}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{{NASA POWER}: Daily API}",
+      "year": "2026",
+      "url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_1_introducao.tex",
+        "linha": 11
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 98
+      },
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 109
+      }
+    ],
+    "consulta_url": {
+      "id": "NASA_POWER_DAILY",
+      "url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "consulta": "2026-11-16T14:04:52.825690+00:00",
+      "http": 200,
+      "final_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "redirects": [],
+      "content_type": "text/html",
+      "sha256": "d624945397c5fa517d5d8d63c3c802550869271d545c93f31c0e7e419cf4a9f6",
+      "bytes": 36966,
+      "title": "NASA POWER | Docs | Data Services | Daily API - NASA POWER | Docs",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "ROUSE1973",
+    "citada": false,
+    "tipo": "inproceedings",
+    "autores_ordenados": [
+      "Rouse, J. W.",
+      "Haas, R. H.",
+      "Schell, J. A.",
+      "Deering, D. W."
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Monitoring Vegetation Systems in the Great Plains with {ERTS}",
+      "booktitle": "Third Earth Resources Technology Satellite Symposium",
+      "year": "1973",
+      "pages": "309--317",
+      "publisher": "NASA",
+      "address": "Washington, DC"
+    },
+    "citacoes": [],
+    "consulta_url": null,
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GAO1996",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Gao, Bo-Cai"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{NDWI}: A Normalized Difference Water Index for Remote Sensing of Vegetation Liquid Water from Space",
+      "journal": "Remote Sensing of Environment",
+      "volume": "58",
+      "number": "3",
+      "pages": "257--266",
+      "year": "1996",
+      "doi": "10.1016/S0034-4257(96)00067-3",
+      "url": "https://doi.org/10.1016/S0034-4257(96)00067-3",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 38
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 42
+      }
+    ],
+    "consulta_url": {
+      "id": "GAO1996",
+      "url": "https://doi.org/10.1016/S0034-4257(96)00067-3",
+      "consulta": "2026-11-16T14:04:52.972985+00:00",
+      "http": 200,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0034425796000673",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1016/S0034-4257(96)00067-3"
+        }
+      ],
+      "content_type": "text/html;charset=UTF-8",
+      "sha256": "01924ffe4c5b341b1779a34ff76c394a8e54a27c6850a5453a74874801cabdde",
+      "bytes": 2718,
+      "title": "Redirecting",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_GAO1996",
+      "url": "https://api.crossref.org/works/10.1016/S0034-4257(96)00067-3",
+      "consulta": "2026-11-16T14:04:52.988811+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1016/S0034-4257(96)00067-3",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "9b4ddac2e8b00c4a34d69a3aad41332c8a8eb80a574239bfd35e6eea923aab74",
+      "bytes": 9436,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "NDWI—A normalized difference water index for remote sensing of vegetation liquid water from space"
+        ],
+        "author": [
+          {
+            "given": "Bo-cai",
+            "family": "Gao",
+            "sequence": "first"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              1996,
+              12
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              1996,
+              12
+            ]
+          ]
+        },
+        "container-title": [
+          "Remote Sensing of Environment"
+        ],
+        "volume": "58",
+        "issue": "3",
+        "page": "257-266",
+        "publisher": "Elsevier BV",
+        "type": "journal-article",
+        "DOI": "10.1016/s0034-4257(96)00067-3"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "PATRICIO2018",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Patrício, Diego Inácio",
+      "Rieder, Rafael"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Computer Vision and Artificial Intelligence in Precision Agriculture for Grain Crops: A Systematic Review",
+      "journal": "Computers and Electronics in Agriculture",
+      "volume": "153",
+      "pages": "69--81",
+      "year": "2018",
+      "publisher": "Elsevier",
+      "doi": "10.1016/j.compag.2018.08.001",
+      "url": "https://doi.org/10.1016/j.compag.2018.08.001",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 6
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 117
+      }
+    ],
+    "consulta_url": {
+      "id": "PATRICIO2018",
+      "url": "https://doi.org/10.1016/j.compag.2018.08.001",
+      "consulta": "2026-11-16T14:04:53.098117+00:00",
+      "http": 200,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0168169918305829",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1016/j.compag.2018.08.001"
+        }
+      ],
+      "content_type": "text/html;charset=UTF-8",
+      "sha256": "bd9159f497a6b34b3513f3e30d25e52b98fc384908a7268e2be6ccd73d0056e6",
+      "bytes": 2720,
+      "title": "Redirecting",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_PATRICIO2018",
+      "url": "https://api.crossref.org/works/10.1016/j.compag.2018.08.001",
+      "consulta": "2026-11-16T14:04:53.351093+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1016/j.compag.2018.08.001",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "691adf937746484d9e15b7237555bb893af0b0f7ccd34ae641ccdfa13468522c",
+      "bytes": 25163,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Computer vision and artificial intelligence in precision agriculture for grain crops: A systematic review"
+        ],
+        "author": [
+          {
+            "given": "Diego Inácio",
+            "family": "Patrício",
+            "sequence": "first"
+          },
+          {
+            "given": "Rafael",
+            "family": "Rieder",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2018,
+              10
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2018,
+              10
+            ]
+          ]
+        },
+        "container-title": [
+          "Computers and Electronics in Agriculture"
+        ],
+        "volume": "153",
+        "page": "69-81",
+        "publisher": "Elsevier BV",
+        "type": "journal-article",
+        "DOI": "10.1016/j.compag.2018.08.001"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GORELICK2017",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Gorelick, Noel",
+      "Hancher, Matt",
+      "Dixon, Mike",
+      "Ilyushchenko, Simon",
+      "Thau, David",
+      "Moore, Rebecca"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{Google Earth Engine}: Planetary-scale geospatial analysis for everyone",
+      "journal": "Remote Sensing of Environment",
+      "volume": "202",
+      "pages": "18--27",
+      "year": "2017",
+      "publisher": "Elsevier",
+      "doi": "10.1016/j.rse.2017.06.031",
+      "url": "https://doi.org/10.1016/j.rse.2017.06.031",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_1_introducao.tex",
+        "linha": 11
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 62
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 121
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 139
+      }
+    ],
+    "consulta_url": {
+      "id": "GORELICK2017",
+      "url": "https://doi.org/10.1016/j.rse.2017.06.031",
+      "consulta": "2026-11-16T14:04:53.356671+00:00",
+      "http": 200,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0034425717302900",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1016/j.rse.2017.06.031"
+        }
+      ],
+      "content_type": "text/html;charset=UTF-8",
+      "sha256": "8025a67c12d5197c9b1cde26970c2f6dd7036c5589a304df50d77106e8aaa3f1",
+      "bytes": 2684,
+      "title": "Redirecting",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_GORELICK2017",
+      "url": "https://api.crossref.org/works/10.1016/j.rse.2017.06.031",
+      "consulta": "2026-11-16T14:04:53.466191+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1016/j.rse.2017.06.031",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "df1775542611ff565301fc2470406a5e121dd3b155e1cc8aef1f7def8991c6d6",
+      "bytes": 12400,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Google Earth Engine: Planetary-scale geospatial analysis for everyone"
+        ],
+        "author": [
+          {
+            "given": "Noel",
+            "family": "Gorelick",
+            "sequence": "first"
+          },
+          {
+            "given": "Matt",
+            "family": "Hancher",
+            "sequence": "additional"
+          },
+          {
+            "given": "Mike",
+            "family": "Dixon",
+            "sequence": "additional"
+          },
+          {
+            "given": "Simon",
+            "family": "Ilyushchenko",
+            "sequence": "additional"
+          },
+          {
+            "given": "David",
+            "family": "Thau",
+            "sequence": "additional"
+          },
+          {
+            "given": "Rebecca",
+            "family": "Moore",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2017,
+              12
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2017,
+              12
+            ]
+          ]
+        },
+        "container-title": [
+          "Remote Sensing of Environment"
+        ],
+        "volume": "202",
+        "page": "18-27",
+        "publisher": "Elsevier BV",
+        "type": "journal-article",
+        "DOI": "10.1016/j.rse.2017.06.031"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "AMANI2020",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Amani, Meisam",
+      "Ghorbanian, Arsalan",
+      "Ahmadi, Seyed Ali",
+      "Kakooei, Mohammad",
+      "Moghimi, Armin",
+      "Mirmazloumi, S. Mohammad",
+      "Moghaddam, Sayyed Hamed Alizadeh",
+      "Mahdavi, Sahel",
+      "Ghahremanloo, Masoud",
+      "Parsian, Saeid",
+      "Wu, Qiusheng",
+      "Brisco, Brian"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{Google Earth Engine} Cloud Computing Platform for Remote Sensing Big Data Applications: A Comprehensive Review",
+      "journal": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
+      "volume": "13",
+      "pages": "5326--5350",
+      "year": "2020",
+      "publisher": "IEEE",
+      "doi": "10.1109/JSTARS.2020.3021052",
+      "url": "https://doi.org/10.1109/JSTARS.2020.3021052",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 62
+      }
+    ],
+    "consulta_url": {
+      "id": "AMANI2020",
+      "url": "https://doi.org/10.1109/JSTARS.2020.3021052",
+      "consulta": "2026-11-16T14:04:53.844652+00:00",
+      "http": 202,
+      "final_url": "https://ieeexplore.ieee.org/document/9184118/",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1109/JSTARS.2020.3021052"
+        }
+      ],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "title": "",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_AMANI2020",
+      "url": "https://api.crossref.org/works/10.1109/JSTARS.2020.3021052",
+      "consulta": "2026-11-16T14:04:53.879382+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1109/JSTARS.2020.3021052",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "54c20198c0d1e9774c263c00c064fd5e3637e3f9b7947c9f2f6903bed81a8ecd",
+      "bytes": 20672,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Google Earth Engine Cloud Computing Platform for Remote Sensing Big Data Applications: A Comprehensive Review"
+        ],
+        "author": [
+          {
+            "given": "Meisam",
+            "family": "Amani",
+            "sequence": "first"
+          },
+          {
+            "given": "Arsalan",
+            "family": "Ghorbanian",
+            "sequence": "additional"
+          },
+          {
+            "given": "Seyed Ali",
+            "family": "Ahmadi",
+            "sequence": "additional"
+          },
+          {
+            "given": "Mohammad",
+            "family": "Kakooei",
+            "sequence": "additional"
+          },
+          {
+            "given": "Armin",
+            "family": "Moghimi",
+            "sequence": "additional"
+          },
+          {
+            "given": "S. Mohammad",
+            "family": "Mirmazloumi",
+            "sequence": "additional"
+          },
+          {
+            "given": "Sayyed Hamed Alizadeh",
+            "family": "Moghaddam",
+            "sequence": "additional"
+          },
+          {
+            "given": "Sahel",
+            "family": "Mahdavi",
+            "sequence": "additional"
+          },
+          {
+            "given": "Masoud",
+            "family": "Ghahremanloo",
+            "sequence": "additional"
+          },
+          {
+            "given": "Saeid",
+            "family": "Parsian",
+            "sequence": "additional"
+          },
+          {
+            "given": "Qiusheng",
+            "family": "Wu",
+            "sequence": "additional"
+          },
+          {
+            "given": "Brian",
+            "family": "Brisco",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2020
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2020
+            ]
+          ]
+        },
+        "container-title": [
+          "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing"
+        ],
+        "volume": "13",
+        "page": "5326-5350",
+        "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+        "type": "journal-article",
+        "DOI": "10.1109/jstars.2020.3021052"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "WEISS2020",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Weiss, Marie",
+      "Jacob, Frédéric",
+      "Duveiller, Gregory"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Remote sensing for agricultural applications: A meta-review",
+      "journal": "Remote Sensing of Environment",
+      "volume": "236",
+      "year": "2020",
+      "publisher": "Elsevier",
+      "doi": "10.1016/j.rse.2019.111402",
+      "url": "https://doi.org/10.1016/j.rse.2019.111402",
+      "urldate": "16 nov. 2026",
+      "eid": "111402"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_1_introducao.tex",
+        "linha": 3
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 6
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 14
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 38
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 117
+      }
+    ],
+    "consulta_url": {
+      "id": "WEISS2020",
+      "url": "https://doi.org/10.1016/j.rse.2019.111402",
+      "consulta": "2026-11-16T14:04:53.885533+00:00",
+      "http": 200,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0034425719304213",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1016/j.rse.2019.111402"
+        }
+      ],
+      "content_type": "text/html;charset=UTF-8",
+      "sha256": "ebc821d05814485a80b2a06805cb2eede330510649c0a846e86ebac6959923eb",
+      "bytes": 2674,
+      "title": "Redirecting",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_WEISS2020",
+      "url": "https://api.crossref.org/works/10.1016/j.rse.2019.111402",
+      "consulta": "2026-11-16T14:04:53.968335+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1016/j.rse.2019.111402",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "a5313f8936406fdc642f32ae3867db1fd9ae32158abd9ec87af5269ab34fb1e3",
+      "bytes": 108784,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Remote sensing for agricultural applications: A meta-review"
+        ],
+        "author": [
+          {
+            "given": "M.",
+            "family": "Weiss",
+            "sequence": "first"
+          },
+          {
+            "given": "F.",
+            "family": "Jacob",
+            "sequence": "additional"
+          },
+          {
+            "given": "G.",
+            "family": "Duveiller",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2020,
+              1
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2020,
+              1
+            ]
+          ]
+        },
+        "container-title": [
+          "Remote Sensing of Environment"
+        ],
+        "volume": "236",
+        "page": "111402",
+        "article-number": "111402",
+        "publisher": "Elsevier BV",
+        "type": "journal-article",
+        "DOI": "10.1016/j.rse.2019.111402"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "PHIRI2020",
+    "citada": false,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Phiri, Darius",
+      "Simwanda, Matamyo",
+      "Salekin, Sharif",
+      "Nyirenda, Vincent R.",
+      "Murayama, Yuji",
+      "Ranagalage, Manjula"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Sentinel-2 Data for Land Cover/Use Mapping: A Review",
+      "journal": "Remote Sensing",
+      "volume": "12",
+      "number": "14",
+      "year": "2020",
+      "publisher": "MDPI",
+      "doi": "10.3390/rs12142291",
+      "url": "https://doi.org/10.3390/rs12142291",
+      "eid": "2291"
+    },
+    "citacoes": [],
+    "consulta_url": {
+      "id": "PHIRI2020",
+      "url": "https://doi.org/10.3390/rs12142291",
+      "consulta": "2026-11-16T14:04:54.123880+00:00",
+      "http": 200,
+      "final_url": "https://www.mdpi.com/2072-4292/12/14/2291",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.3390/rs12142291"
+        }
+      ],
+      "content_type": "text/html",
+      "sha256": "3ea0903d82e4e69f84ba7afc34b22f7e9b273f0af175fc817ba7e1bafc1c6feb",
+      "bytes": 2227,
+      "title": "",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_PHIRI2020",
+      "url": "https://api.crossref.org/works/10.3390/rs12142291",
+      "consulta": "2026-11-16T14:04:54.130785+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.3390/rs12142291",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "37122b4f97c0c82da2d7c3fc52c62c68edf8de22c125296e2cab06536e267310",
+      "bytes": 77184,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Sentinel-2 Data for Land Cover/Use Mapping: A Review"
+        ],
+        "author": [
+          {
+            "given": "Darius",
+            "family": "Phiri",
+            "sequence": "first"
+          },
+          {
+            "given": "Matamyo",
+            "family": "Simwanda",
+            "sequence": "additional"
+          },
+          {
+            "given": "Serajis",
+            "family": "Salekin",
+            "sequence": "additional"
+          },
+          {
+            "given": "Vincent",
+            "family": "Nyirenda",
+            "sequence": "additional"
+          },
+          {
+            "given": "Yuji",
+            "family": "Murayama",
+            "sequence": "additional"
+          },
+          {
+            "given": "Manjula",
+            "family": "Ranagalage",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2020,
+              7,
+              16
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2020,
+              7,
+              16
+            ]
+          ]
+        },
+        "container-title": [
+          "Remote Sensing"
+        ],
+        "volume": "12",
+        "issue": "14",
+        "page": "2291",
+        "publisher": "MDPI AG",
+        "type": "journal-article",
+        "DOI": "10.3390/rs12142291"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "WAZLAWICK2014",
+    "citada": false,
+    "tipo": "book",
+    "autores_ordenados": [
+      "Wazlawick, Raul Sidnei"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Metodologia de Pesquisa para Ciência da Computação",
+      "publisher": "Elsevier",
+      "year": "2014",
+      "edition": "2",
+      "address": "Rio de Janeiro"
+    },
+    "citacoes": [],
+    "consulta_url": null,
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "WAZLAWICK2020",
+    "citada": false,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "Wazlawick, Raul Sidnei"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Metodologia de Pesquisa para Ciência da Computação",
+      "year": "2020",
+      "publisher": "Grupo GEN",
+      "edition": "3",
+      "url": "https://integrada.minhabiblioteca.com.br/books/9788595157712",
+      "urldate": "31 mar. 2025"
+    },
+    "citacoes": [],
+    "consulta_url": {
+      "id": "WAZLAWICK2020",
+      "url": "https://integrada.minhabiblioteca.com.br/books/9788595157712",
+      "consulta": "2026-11-16T14:04:54.360808+00:00",
+      "http": 200,
+      "final_url": "https://integrada.minhabiblioteca.com.br/#/books/9788595157712",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://integrada.minhabiblioteca.com.br/books/9788595157712"
+        }
+      ],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "f3eb7a7e73ad19ea3bd0476cd32b44cb9884b4a71cc64b954e991593bbd65e86",
+      "bytes": 36253,
+      "title": "VitalSource Bookshelf Online",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "MCFEETERS1996",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "McFeeters, S. K."
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "The use of the Normalized Difference Water Index ({NDWI}) in the delineation of open water features",
+      "journal": "International Journal of Remote Sensing",
+      "year": "1996",
+      "volume": "17",
+      "number": "7",
+      "pages": "1425--1432",
+      "doi": "10.1080/01431169608948714",
+      "url": "https://doi.org/10.1080/01431169608948714"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 47
+      }
+    ],
+    "consulta_url": {
+      "id": "MCFEETERS1996",
+      "url": "https://doi.org/10.1080/01431169608948714",
+      "consulta": "2026-11-16T14:04:54.603924+00:00",
+      "http": 403,
+      "final_url": "https://www.tandfonline.com/doi/full/10.1080/01431169608948714",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1080/01431169608948714"
+        }
+      ],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "f372c939c247d51213ff4e7c3087ccf266ab69e8fb426099bc1bfa5ce7cd05ee",
+      "bytes": 5722,
+      "title": "Just a moment...",
+      "challenge": true,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_MCFEETERS1996",
+      "url": "https://api.crossref.org/works/10.1080/01431169608948714",
+      "consulta": "2026-11-16T14:04:54.611503+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1080/01431169608948714",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "dc2aeccca0cf4fbaca37babcc0d4d368ab956331cc637eec5875e1d34e2ded50",
+      "bytes": 3929,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features"
+        ],
+        "author": [
+          {
+            "given": "S. K.",
+            "family": "McFEETERS",
+            "sequence": "first"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              1996,
+              5
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              1996,
+              5
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2007,
+              4,
+              27
+            ]
+          ]
+        },
+        "container-title": [
+          "International Journal of Remote Sensing"
+        ],
+        "volume": "17",
+        "issue": "7",
+        "page": "1425-1432",
+        "publisher": "Informa UK Limited",
+        "type": "journal-article",
+        "DOI": "10.1080/01431169608948714"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "USGS_NDMI",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{U.S. Geological Survey}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Normalized Difference Moisture Index",
+      "url": "https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index",
+      "urldate": "15 nov. 2026",
+      "year": "[20--?]"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 51
+      }
+    ],
+    "consulta_url": {
+      "id": "USGS_NDMI",
+      "url": "https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index",
+      "consulta": "2026-11-16T14:04:54.668159+00:00",
+      "http": 200,
+      "final_url": "https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "5a5587095f172db3c943dd71166cb94797b2bf8e5301eea93b4de6b924dff604",
+      "bytes": 92017,
+      "title": "Normalized Difference Moisture Index | U.S. Geological Survey",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOOGLE_EE_SAMPLE",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{ee.Image.sampleRectangle}",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
+      "urldate": "15 nov. 2026",
+      "year": "2023"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3a_implementacao.tex",
+        "linha": 100
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_EE_SAMPLE",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
+      "consulta": "2026-11-16T14:04:54.793035+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "aaf5d7ef52fd4c858421f266a85c9dbeef712fe1be6476f0f4b42491ca250b8a",
+      "bytes": 533187,
+      "title": "ee.Image.sampleRectangle  |  Google Earth Engine  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOOGLE_EE_MEDIAN",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{ee.ImageCollection.median}",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
+      "urldate": "15 nov. 2026",
+      "year": "2023"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 68
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_EE_MEDIAN",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
+      "consulta": "2026-11-16T14:04:54.927101+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "c01ed8614c37dbbf50147d5f1852d8f6c2c583010a28a41b31cae684c55e52d4",
+      "bytes": 565749,
+      "title": "ee.ImageCollection.median  |  Google Earth Engine  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOOGLE_EE_REDUCE",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{ee.Image.reduceRegion}",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
+      "urldate": "15 nov. 2026",
+      "year": "2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 70
+      },
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 55
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_EE_REDUCE",
+      "url": "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
+      "consulta": "2026-11-16T14:04:54.969139+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "f83d4198c350066a7f105d95e3f042d615af8756b77d56355e81bab75a563135",
+      "bytes": 554432,
+      "title": "ee.Image.reduceRegion  |  Google Earth Engine  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "NOMINATIM_POLICY",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{OpenStreetMap Foundation}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Nominatim Usage Policy",
+      "url": "https://operations.osmfoundation.org/policies/nominatim/",
+      "urldate": "15 nov. 2026",
+      "year": "2026",
+      "updatedate": "2026-05-11",
+      "note": "Arquivo-fonte atualizado em 11 maio 2026."
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_5_discussao.tex",
+        "linha": 69
+      }
+    ],
+    "consulta_url": {
+      "id": "NOMINATIM_POLICY",
+      "url": "https://operations.osmfoundation.org/policies/nominatim/",
+      "consulta": "2026-11-16T14:04:55.104218+00:00",
+      "http": 200,
+      "final_url": "https://operations.osmfoundation.org/policies/nominatim/",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "96f1c62c2b6d886d2c525cb60b5d2fbc24532d25ef477bc0aaf31ce786f9ad74",
+      "bytes": 8409,
+      "title": "Nominatim Usage Policy (aka Geocoding Policy)",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "ROUSE1974_NTRS",
+    "citada": true,
+    "tipo": "inproceedings",
+    "autores_ordenados": [
+      "Rouse, Jr., J. W.",
+      "Haas, R. H.",
+      "Schell, J. A.",
+      "Deering, D. W."
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Monitoring vegetation systems in the Great Plains with {ERTS}",
+      "booktitle": "Third Earth Resources Technology Satellite-1 Symposium, Volume 1, Section A",
+      "publisher": "NASA",
+      "year": "1974",
+      "pages": "309--317",
+      "url": "https://ntrs.nasa.gov/citations/19740022614",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 34
+      }
+    ],
+    "consulta_url": {
+      "id": "ROUSE1974_NTRS",
+      "url": "https://ntrs.nasa.gov/citations/19740022614",
+      "consulta": "2026-11-16T14:04:55.179813+00:00",
+      "http": 200,
+      "final_url": "https://ntrs.nasa.gov/citations/19740022614",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "c56249f658051ea67e981a2cd73b7a9f9b0e4e484a5a8c102a1dd8836ee608d7",
+      "bytes": 93949,
+      "title": "Monitoring vegetation systems in the Great Plains with ERTS - NASA Technical Reports Server (NTRS)",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {
+      "urldate": {
+        "antes": "15 nov. 2026",
+        "depois": "16 nov. 2026"
+      },
+      "pages": {
+        "antes": null,
+        "depois": "309--317"
+      }
+    }
+  },
+  {
+    "chave": "EOSDA_PLATFORM",
+    "citada": false,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{EOS Data Analytics}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{EOSDA Crop Monitoring}",
+      "year": "2026",
+      "url": "https://eos.com/products/crop-monitoring/",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [],
+    "consulta_url": {
+      "id": "EOSDA_PLATFORM",
+      "url": "https://eos.com/products/crop-monitoring/",
+      "consulta": "2026-11-16T14:04:55.602223+00:00",
+      "http": 200,
+      "final_url": "https://eos.com/products/crop-monitoring/",
+      "redirects": [],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "706da391aa0d9b7f091d7271932d728104e2902b95b5d9e8ac7c353c1d981634",
+      "bytes": 378174,
+      "title": "Crop Monitoring Software For Remote Farm Analytics",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "ONESOIL_PLATFORM",
+    "citada": false,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{OneSoil}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{OneSoil} Platform",
+      "year": "2026",
+      "url": "https://onesoil.ai/en/platform",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [],
+    "consulta_url": {
+      "id": "ONESOIL_PLATFORM",
+      "url": "https://onesoil.ai/en/platform",
+      "consulta": "2026-11-16T14:04:55.813048+00:00",
+      "http": 200,
+      "final_url": "https://onesoil.ai/en/platform",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "b8f3f9e0c66e4f1a798fd5f3de67f418e4172d755efb36130f8a37d0fc98eea7",
+      "bytes": 635708,
+      "title": "OneSoil Platform - Field Monitoring, VRA Maps & Precision Agriculture | OneSoil",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "ISO9241_2018",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{International Organization for Standardization}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{ISO 9241-11:2018}: Ergonomics of human-system interaction --- Part 11: Usability: Definitions and concepts",
+      "year": "2018",
+      "url": "https://www.iso.org/standard/63500.html",
+      "urldate": "15 nov. 2026",
+      "publisher": "ISO"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 104
+      }
+    ],
+    "consulta_url": {
+      "id": "ISO9241_2018",
+      "url": "https://www.iso.org/standard/63500.html",
+      "consulta": "2026-11-16T14:04:56.182204+00:00",
+      "http": 403,
+      "final_url": "https://www.iso.org/standard/63500.html",
+      "redirects": [],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "62cfcacb4b1f479a1100cf65e223bd2b4338b966e0aa5195384a10e512f9700d",
+      "bytes": 5533,
+      "title": "Just a moment...",
+      "challenge": true,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "DAVIS1989",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Davis, Fred D."
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Perceived Usefulness, Perceived Ease of Use, and User Acceptance of Information Technology",
+      "journal": "MIS Quarterly",
+      "volume": "13",
+      "number": "3",
+      "pages": "319--340",
+      "year": "1989",
+      "doi": "10.2307/249008",
+      "url": "https://doi.org/10.2307/249008"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 106
+      },
+      {
+        "arquivo": "final_5_discussao.tex",
+        "linha": 51
+      }
+    ],
+    "consulta_url": {
+      "id": "DAVIS1989",
+      "url": "https://doi.org/10.2307/249008",
+      "consulta": "2026-11-16T14:04:56.345765+00:00",
+      "http": 403,
+      "final_url": "https://misq.umn.edu/misq/article/13/3/319/191/Perceived-Usefulness-Perceived-Ease-of-Use-and",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.2307/249008"
+        }
+      ],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "84c2f9432771b523912339794776e029e093a0902ef3ea23e919103f8aa5a240",
+      "bytes": 5693,
+      "title": "Just a moment...",
+      "challenge": true,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_DAVIS1989",
+      "url": "https://api.crossref.org/works/10.2307/249008",
+      "consulta": "2026-11-16T14:04:56.444842+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.2307/249008",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "adb5d0f6e16c5cdf2c22121eb2ccaf726810faaf3ef827e11cf2ba915675f24f",
+      "bytes": 28999,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Perceived Usefulness, Perceived Ease of Use, and User Acceptance of Information Technology"
+        ],
+        "author": [
+          {
+            "given": "Fred D.",
+            "family": "Davis",
+            "sequence": "first"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              1989,
+              9,
+              1
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              1989,
+              9,
+              1
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              1989,
+              9,
+              1
+            ]
+          ]
+        },
+        "container-title": [
+          "MIS Quarterly"
+        ],
+        "volume": "13",
+        "issue": "3",
+        "page": "319-340",
+        "publisher": "MIS Quarterly",
+        "type": "journal-article",
+        "DOI": "10.2307/249008"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "SULLIVAN2013",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Sullivan, Gail M.",
+      "Artino, Jr., Anthony R."
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Analyzing and Interpreting Data From {Likert}-Type Scales",
+      "journal": "Journal of Graduate Medical Education",
+      "volume": "5",
+      "number": "4",
+      "pages": "541--542",
+      "year": "2013",
+      "doi": "10.4300/JGME-5-4-18",
+      "url": "https://doi.org/10.4300/JGME-5-4-18",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 135
+      }
+    ],
+    "consulta_url": {
+      "id": "SULLIVAN2013",
+      "url": "https://doi.org/10.4300/JGME-5-4-18",
+      "consulta": "2026-11-16T14:04:56.607306+00:00",
+      "http": 200,
+      "final_url": "https://jgme.kglmeridian.com/view/journals/jgme/5/4/article-p541.xml",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.4300/JGME-5-4-18"
+        }
+      ],
+      "content_type": "text/html",
+      "sha256": "eaa881174a74e8f73d399ff8fe0140b1a61b819a56fdd4f478245d1cee3c4e55",
+      "bytes": 1444,
+      "title": "jgme",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_SULLIVAN2013",
+      "url": "https://api.crossref.org/works/10.4300/JGME-5-4-18",
+      "consulta": "2026-11-16T14:04:56.744261+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.4300/JGME-5-4-18",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "c8d15340f46cbaa8ca5a8247f98ab0cdebedc67cced1423f06d519d65f8ee2ff",
+      "bytes": 4801,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Analyzing and Interpreting Data From Likert-Type Scales"
+        ],
+        "author": [
+          {
+            "given": "Gail M.",
+            "family": "Sullivan",
+            "sequence": "first"
+          },
+          {
+            "given": "Anthony R.",
+            "family": "Artino",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2013,
+              12
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2013,
+              12
+            ]
+          ]
+        },
+        "container-title": [
+          "Journal of Graduate Medical Education"
+        ],
+        "volume": "5",
+        "issue": "4",
+        "page": "541-542",
+        "publisher": "Journal of Graduate Medical Education",
+        "type": "journal-article",
+        "DOI": "10.4300/jgme-5-4-18"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "BRAUN2006",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Braun, Virginia",
+      "Clarke, Victoria"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Using thematic analysis in psychology",
+      "journal": "Qualitative Research in Psychology",
+      "volume": "3",
+      "number": "2",
+      "pages": "77--101",
+      "year": "2006",
+      "doi": "10.1191/1478088706qp063oa",
+      "url": "https://doi.org/10.1191/1478088706qp063oa"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 141
+      }
+    ],
+    "consulta_url": {
+      "id": "BRAUN2006",
+      "url": "https://doi.org/10.1191/1478088706qp063oa",
+      "consulta": "2026-11-16T14:04:56.895389+00:00",
+      "http": 403,
+      "final_url": "https://www.tandfonline.com/doi/full/10.1191/1478088706qp063oa",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1191/1478088706qp063oa"
+        }
+      ],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "b945fece4977ade4d6a9aa17dfa69ec43d380daf9fb7182e836cbff9905485bd",
+      "bytes": 5722,
+      "title": "Just a moment...",
+      "challenge": true,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_BRAUN2006",
+      "url": "https://api.crossref.org/works/10.1191/1478088706qp063oa",
+      "consulta": "2026-11-16T14:04:56.926694+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1191/1478088706qp063oa",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "b4f37f98909f72339ce4063a194b8306825a56415d21f252fe8d23f7ca7f6456",
+      "bytes": 18025,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Using thematic analysis in psychology"
+        ],
+        "author": [
+          {
+            "given": "Virginia",
+            "family": "Braun",
+            "sequence": "first"
+          },
+          {
+            "given": "Victoria",
+            "family": "Clarke",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2006,
+              1
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2006,
+              1
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2008,
+              7,
+              21
+            ]
+          ]
+        },
+        "container-title": [
+          "Qualitative Research in Psychology"
+        ],
+        "volume": "3",
+        "issue": "2",
+        "page": "77-101",
+        "publisher": "Informa UK Limited",
+        "type": "journal-article",
+        "DOI": "10.1191/1478088706qp063oa"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "QGIS_VECTOR",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{QGIS Project}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "A Gentle Introduction to GIS: Vector Data",
+      "url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/vector_data.html",
+      "urldate": "16 nov. 2026",
+      "year": "2026",
+      "version": "3.44"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 8
+      }
+    ],
+    "consulta_url": {
+      "id": "QGIS_3.44_vector_data",
+      "url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/vector_data.html",
+      "consulta": "2026-11-16T14:05:12.526017+00:00",
+      "http": 200,
+      "final_url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/vector_data.html",
+      "redirects": [],
+      "content_type": "text/html",
+      "sha256": "6be5149bc1f5f6b18898e944f5237a0e5540af44bf13f235383899416c287fd9",
+      "bytes": 49637,
+      "title": "3. Vector Data — QGIS Documentation  documentation",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {
+      "urldate": {
+        "antes": "15 nov. 2026",
+        "depois": "16 nov. 2026"
+      },
+      "url": {
+        "antes": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html",
+        "depois": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/vector_data.html"
+      },
+      "version": {
+        "antes": "3.40",
+        "depois": "3.44"
+      }
+    }
+  },
+  {
+    "chave": "QGIS_RASTER",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{QGIS Project}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "A Gentle Introduction to GIS: Raster Data",
+      "url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/raster_data.html",
+      "urldate": "16 nov. 2026",
+      "year": "2026",
+      "version": "3.44"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 8
+      }
+    ],
+    "consulta_url": {
+      "id": "QGIS_3.44_raster_data",
+      "url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/raster_data.html",
+      "consulta": "2026-11-16T14:05:12.526477+00:00",
+      "http": 200,
+      "final_url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/raster_data.html",
+      "redirects": [],
+      "content_type": "text/html",
+      "sha256": "c5297d672c5fa1531c146e64b52f2261ebe13b3abe532ce0543eb12e215f025c",
+      "bytes": 42889,
+      "title": "6. Raster Data — QGIS Documentation  documentation",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {
+      "urldate": {
+        "antes": "15 nov. 2026",
+        "depois": "16 nov. 2026"
+      },
+      "url": {
+        "antes": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html",
+        "depois": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/raster_data.html"
+      },
+      "version": {
+        "antes": "3.40",
+        "depois": "3.44"
+      }
+    }
+  },
+  {
+    "chave": "QGIS_MAP",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{QGIS Project}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "A Gentle Introduction to GIS: Map Production",
+      "url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/map_production.html",
+      "urldate": "16 nov. 2026",
+      "year": "2026",
+      "version": "3.44"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 10
+      }
+    ],
+    "consulta_url": {
+      "id": "QGIS_3.44_map_production",
+      "url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/map_production.html",
+      "consulta": "2026-11-16T14:05:12.526993+00:00",
+      "http": 200,
+      "final_url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/map_production.html",
+      "redirects": [],
+      "content_type": "text/html",
+      "sha256": "cc10dd271ae04189d77c02af8439e33475576717d9b0adb3bc055d6dd700c677",
+      "bytes": 40131,
+      "title": "9. Map Production — QGIS Documentation  documentation",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {
+      "urldate": {
+        "antes": "15 nov. 2026",
+        "depois": "16 nov. 2026"
+      },
+      "url": {
+        "antes": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html",
+        "depois": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/map_production.html"
+      },
+      "version": {
+        "antes": "3.40",
+        "depois": "3.44"
+      }
+    }
+  },
+  {
+    "chave": "GOOGLE_EE_RESAMPLE",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Resampling and Reducing Resolution",
+      "url": "https://developers.google.com/earth-engine/guides/resample",
+      "urldate": "15 nov. 2026",
+      "year": "2024"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 22
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_EE_RESAMPLE",
+      "url": "https://developers.google.com/earth-engine/guides/resample",
+      "consulta": "2026-11-16T14:04:57.520020+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/guides/resample",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "2e539cff1dd2eae7bb453034e926b3c95a24459df2ea0c6d56267dbc9d19b41f",
+      "bytes": 159423,
+      "title": "Resampling and Reducing Resolution  |  Google Earth Engine  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOOGLE_EE_REGION",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Google}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Statistics of an Image Region",
+      "url": "https://developers.google.com/earth-engine/guides/reducers_reduce_region",
+      "urldate": "15 nov. 2026",
+      "year": "2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 53
+      }
+    ],
+    "consulta_url": {
+      "id": "GOOGLE_EE_REGION",
+      "url": "https://developers.google.com/earth-engine/guides/reducers_reduce_region",
+      "consulta": "2026-11-16T14:04:57.848939+00:00",
+      "http": 200,
+      "final_url": "https://developers.google.com/earth-engine/guides/reducers_reduce_region",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "5b184f8851bd9f314b5edc451c2e93e57433c1e35b19cfcb42f62023f1e0378a",
+      "bytes": 138928,
+      "title": "Statistics of an Image Region  |  Google Earth Engine  |  Google for Developers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "SENTINELHUB_NDMI",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Sentinel Hub}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Normalized Difference Moisture Index (NDMI)",
+      "url": "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+      "urldate": "15 nov. 2026",
+      "year": "2026",
+      "updatedate": "2026-06-04",
+      "note": "Arquivo-fonte atualizado em 4 jun. 2026."
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 58
+      }
+    ],
+    "consulta_url": {
+      "id": "SENTINELHUB_NDMI",
+      "url": "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+      "consulta": "2026-11-16T14:04:57.982477+00:00",
+      "http": 200,
+      "final_url": "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "5f80a2fb68ae700c68433620eb5354fae7407c1e12d0c2e3b667ef6c626b0da9",
+      "bytes": 40377,
+      "title": "Normalized Difference Moisture Index (NDMI) | Sentinel Hub custom scripts",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "HYNDMAN2021",
+    "citada": true,
+    "tipo": "book",
+    "autores_ordenados": [
+      "Hyndman, Rob J.",
+      "Athanasopoulos, George"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Forecasting: Principles and Practice",
+      "edition": "3",
+      "publisher": "OTexts",
+      "address": "Melbourne",
+      "year": "2021",
+      "url": "https://otexts.com/fpp3/",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 76
+      },
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 83
+      }
+    ],
+    "consulta_url": {
+      "id": "HYNDMAN2021",
+      "url": "https://otexts.com/fpp3/",
+      "consulta": "2026-11-16T14:04:58.050464+00:00",
+      "http": 200,
+      "final_url": "https://otexts.com/fpp3/",
+      "redirects": [],
+      "content_type": "text/html",
+      "sha256": "69e2f38784f3bd97ca71a72ee98a612a60accbdb6d57705ac1f25a6fe0b21944",
+      "bytes": 39139,
+      "title": "Forecasting: Principles and Practice",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "NIST_OUTLIERS",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{NIST/SEMATECH}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "e-Handbook of Statistical Methods: Detection of Outliers",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
+      "urldate": "15 nov. 2026",
+      "year": "[20--?]"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 78
+      }
+    ],
+    "consulta_url": {
+      "id": "NIST_OUTLIERS",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
+      "consulta": "2026-11-16T14:04:58.473180+00:00",
+      "http": 200,
+      "final_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "47d45a4ffbb32f00267829da7fb572b7a2696502b1d3f7b7e79d08e2ad318b12",
+      "bytes": 15838,
+      "title": "1.3.5.17. Detection of Outliers",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "NUMPY_STD",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{NumPy Developers}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "numpy.std",
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.std.html",
+      "urldate": "15 nov. 2026",
+      "year": "c2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 79
+      }
+    ],
+    "consulta_url": {
+      "id": "NUMPY_STD",
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.std.html",
+      "consulta": "2026-11-16T14:04:58.647062+00:00",
+      "http": 200,
+      "final_url": "https://numpy.org/doc/stable/reference/generated/numpy.std.html",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "cdb1505c54eaed1fd8af8a53f2c005dabb716c7ef5efa0c8043f5d609b910c23",
+      "bytes": 49805,
+      "title": "numpy.std — NumPy v2.5 Manual",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "NUMPY_POLYFIT",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{NumPy Developers}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "numpy.polyfit",
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html",
+      "urldate": "15 nov. 2026",
+      "year": "c2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 83
+      }
+    ],
+    "consulta_url": {
+      "id": "NUMPY_POLYFIT",
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html",
+      "consulta": "2026-11-16T14:04:58.658561+00:00",
+      "http": 200,
+      "final_url": "https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "5f24a818b18f68cc6bd25cc62c60d2cb7ebc04675163c9f0191b566c731df0c4",
+      "bytes": 52636,
+      "title": "numpy.polyfit — NumPy v2.5 Manual",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "BIPM_SI",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Bureau International des Poids et Mesures}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "The International System of Units (SI)",
+      "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+      "urldate": "16 nov. 2026",
+      "year": "2026",
+      "address": "Sèvres",
+      "publisher": "BIPM",
+      "edition": "9",
+      "version": "4.01, jun. 2026",
+      "doi": "10.59161/AUEZ1291"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 107
+      }
+    ],
+    "consulta_url": {
+      "id": "BIPM_SI",
+      "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+      "consulta": "2026-11-16T14:04:58.878204+00:00",
+      "http": 200,
+      "final_url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+      "redirects": [],
+      "content_type": "application/pdf",
+      "sha256": "1122cf38e25b23d780a30607c68f7350b2b6d1f9970a89947aaa87a45ecbb20a",
+      "bytes": 3503078,
+      "pdf": true,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_BIPM_SI",
+      "url": "https://api.crossref.org/works/10.59161/AUEZ1291",
+      "consulta": "2026-11-16T14:04:58.980686+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.59161/AUEZ1291",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "1e3eb930e7f6316b8908e1d22d34a0d60ca820ab5c9a2c789bd07c062978adf1",
+      "bytes": 1317,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "The International System of Units (SI)"
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2019
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2019
+            ]
+          ]
+        },
+        "container-title": [],
+        "publisher": "Bureau International des Poids et Mesures",
+        "type": "report",
+        "DOI": "10.59161/auez1291"
+      }
+    },
+    "consulta_doi_adicional": {
+      "id": "doi_BIPM_SI",
+      "url": "https://doi.org/10.59161/AUEZ1291",
+      "consulta": "2026-11-16T14:09:07.250407+00:00",
+      "http": 200,
+      "final_url": "https://www.bipm.org/en/si-brochure-9",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.59161/AUEZ1291"
+        },
+        {
+          "http": 302,
+          "url": "https://www.bipm.org/si-brochure-9"
+        }
+      ],
+      "content_type": "text/html;charset=UTF-8",
+      "sha256": "0951aa1e78883a6d68771c485337dab283d33687b24a7c96a32bfab43bb43dd2",
+      "bytes": 217571,
+      "title": "SI-Brochure-9 - BIPM",
+      "challenge": false,
+      "valid_json": false
+    },
+    "alteracoes": {
+      "year": {
+        "antes": "2019",
+        "depois": "2026"
+      },
+      "urldate": {
+        "antes": "15 nov. 2026",
+        "depois": "16 nov. 2026"
+      }
+    }
+  },
+  {
+    "chave": "BENDER2020",
+    "citada": true,
+    "tipo": "incollection",
+    "autores_ordenados": [
+      "Bender, Adam"
+    ],
+    "editores_ordenados": [
+      "Winters, Titus",
+      "Manshreck, Tom",
+      "Wright, Hyrum"
+    ],
+    "campos": {
+      "title": "Testing Overview",
+      "booktitle": "Software Engineering at Google: Lessons Learned from Programming Over Time",
+      "publisher": "O'Reilly Media",
+      "year": "2020",
+      "url": "https://abseil.io/resources/swe-book/html/ch11.html",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 92
+      },
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 113
+      },
+      {
+        "arquivo": "final_5_discussao.tex",
+        "linha": 41
+      }
+    ],
+    "consulta_url": {
+      "id": "BENDER2020",
+      "url": "https://abseil.io/resources/swe-book/html/ch11.html",
+      "consulta": "2026-11-16T14:04:59.160899+00:00",
+      "http": 200,
+      "final_url": "https://abseil.io/resources/swe-book/html/ch11.html",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "d2cd97dde24435eec69ff864633bb4f1c6bde45e10d4d76b3661736242124fcf",
+      "bytes": 76730,
+      "title": "Software Engineering at Google",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "AAPOR2013",
+    "citada": true,
+    "tipo": "techreport",
+    "autores_ordenados": [
+      "{American Association for Public Opinion Research}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Report of the AAPOR Task Force on Non-Probability Sampling",
+      "institution": "AAPOR",
+      "year": "2013",
+      "url": "https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 125
+      }
+    ],
+    "consulta_url": {
+      "id": "AAPOR2013",
+      "url": "https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf",
+      "consulta": "2026-11-16T14:04:59.182832+00:00",
+      "http": 200,
+      "final_url": "https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf",
+      "redirects": [],
+      "content_type": "application/pdf",
+      "sha256": "9de97b70c6dce33e5d1cfa45668bfc22c1277634357c583706fc41aa4b8e727f",
+      "bytes": 973662,
+      "pdf": true,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "SLAIFFER2025",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Slaiffer, Henrique",
+      "Bottega, Eduardo Leonel",
+      "Oliveira, Zanandra Boff de",
+      "Saretta, Ezequiel"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro",
+      "journal": "Nativa",
+      "volume": "13",
+      "number": "3",
+      "pages": "495--502",
+      "year": "2025",
+      "doi": "10.31413/nat.v13i3.18592",
+      "url": "https://doi.org/10.31413/nat.v13i3.18592",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 113
+      }
+    ],
+    "consulta_url": {
+      "id": "SLAIFFER2025",
+      "url": "https://doi.org/10.31413/nat.v13i3.18592",
+      "consulta": "2026-11-16T14:04:59.196363+00:00",
+      "http": 200,
+      "final_url": "https://periodicoscientificos.ufmt.br/ojs/index.php/nativa/article/view/18592",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.31413/nat.v13i3.18592"
+        }
+      ],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "9118716bc8f576d2baab769019b0af14dab2df310850679e7f67a3d4bc7bea68",
+      "bytes": 66907,
+      "title": "ÍNDICES DE VEGETAÇÃO E SUA CORRELAÇÃO COM A PRODUTIVIDADE DA CULTURA DA SOJA EM ÁREA IRRIGADA E DE SEQUEIRO\n\t\t\t\t\t\t\t| Nativa",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_SLAIFFER2025",
+      "url": "https://api.crossref.org/works/10.31413/nat.v13i3.18592",
+      "consulta": "2026-11-16T14:04:59.244243+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.31413/nat.v13i3.18592",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "8d7850c068b1d4ef02d357ffafde393e917dec270605c13833df276a91889091",
+      "bytes": 13816,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "ÍNDICES DE VEGETAÇÃO E SUA CORRELAÇÃO COM A PRODUTIVIDADE DA CULTURA DA SOJA EM ÁREA IRRIGADA E DE SEQUEIRO"
+        ],
+        "author": [
+          {
+            "given": "Henrique",
+            "family": "Slaiffer",
+            "sequence": "first"
+          },
+          {
+            "given": "Eduardo Leonel",
+            "family": "Bottega",
+            "sequence": "additional"
+          },
+          {
+            "given": "Zanandra Boff de",
+            "family": "Oliveira",
+            "sequence": "additional"
+          },
+          {
+            "given": "Ezequiel",
+            "family": "Saretta",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2025,
+              9,
+              1
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2025,
+              9,
+              1
+            ]
+          ]
+        },
+        "container-title": [
+          "Nativa"
+        ],
+        "volume": "13",
+        "issue": "3",
+        "page": "495-502",
+        "publisher": "Nativa",
+        "type": "journal-article",
+        "DOI": "10.31413/nat.v13i3.18592"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "IZQUIERDO2026",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Izquierdo-Sanz, Héctor",
+      "Moltó, Enrique"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Hybrid Physical--Machine Learning Soil Moisture Modeling at Orchard Scale in Irrigated Citrus Orchards Using Sentinel 1 and 2 and Agroclimatic Data",
+      "journal": "Agronomy",
+      "volume": "16",
+      "number": "5",
+      "year": "2026",
+      "doi": "10.3390/agronomy16050541",
+      "url": "https://doi.org/10.3390/agronomy16050541",
+      "eid": "541"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 47
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 115
+      }
+    ],
+    "consulta_url": {
+      "id": "IZQUIERDO2026",
+      "url": "https://doi.org/10.3390/agronomy16050541",
+      "consulta": "2026-11-16T14:04:59.466089+00:00",
+      "http": 200,
+      "final_url": "https://www.mdpi.com/2073-4395/16/5/541",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.3390/agronomy16050541"
+        }
+      ],
+      "content_type": "text/html",
+      "sha256": "9875283f41d89e117c8fb59a52949c0cc5fc9aa99903a5d66a73f1d8852962d1",
+      "bytes": 2222,
+      "title": "",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_IZQUIERDO2026",
+      "url": "https://api.crossref.org/works/10.3390/agronomy16050541",
+      "consulta": "2026-11-16T14:04:59.701205+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.3390/agronomy16050541",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "317f5215102d9b09379241bcc9731c274742693c44f9305a2b3c4b14ee969f2a",
+      "bytes": 16499,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Hybrid Physical–Machine Learning Soil Moisture Modeling at Orchard Scale in Irrigated Citrus Orchards Using Sentinel 1 and 2 and Agroclimatic Data"
+        ],
+        "author": [
+          {
+            "given": "Héctor",
+            "family": "Izquierdo-Sanz",
+            "sequence": "first"
+          },
+          {
+            "given": "Enrique",
+            "family": "Moltó",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2026,
+              2,
+              28
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2026,
+              2,
+              28
+            ]
+          ]
+        },
+        "container-title": [
+          "Agronomy"
+        ],
+        "volume": "16",
+        "issue": "5",
+        "page": "541",
+        "publisher": "MDPI AG",
+        "type": "journal-article",
+        "DOI": "10.3390/agronomy16050541"
+      }
+    },
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "NASA_POWER_METHOD",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{NASA}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "POWER Data Methodology",
+      "url": "https://power.larc.nasa.gov/docs/methodology/",
+      "urldate": "15 nov. 2026",
+      "year": "[20--?]"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 96
+      }
+    ],
+    "consulta_url": {
+      "id": "NASA_POWER_METHOD",
+      "url": "https://power.larc.nasa.gov/docs/methodology/",
+      "consulta": "2026-11-16T14:04:59.706469+00:00",
+      "http": 200,
+      "final_url": "https://power.larc.nasa.gov/docs/methodology/",
+      "redirects": [],
+      "content_type": "text/html",
+      "sha256": "362dfb5cc59fb23b6a4f55e4a77326937132c67a33f00b972e6fe3a1567113e3",
+      "bytes": 32862,
+      "title": "NASA POWER | Docs | Methodology - NASA POWER | Docs",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "NASA_POWER_PARAMETERS",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{NASA}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "POWER Parameter Dictionary: Agricultural Community, Daily",
+      "url": "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
+      "urldate": "16 nov. 2026",
+      "note": "Documentação do serviço Manager API: \\url{https://power.larc.nasa.gov/docs/services/api/system/manager/}.",
+      "year": "[20--?]"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3_metodos.tex",
+        "linha": 99
+      }
+    ],
+    "consulta_url": {
+      "id": "NASA_POWER_PARAMETERS",
+      "url": "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
+      "consulta": "2026-11-16T14:04:59.934517+00:00",
+      "http": 200,
+      "final_url": "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "f4928676bfd19982eea63dcbc93c5652dac333dc450ea51c0372310606c28bab",
+      "bytes": 46344,
+      "title": "",
+      "challenge": false,
+      "valid_json": true
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {
+      "urldate": {
+        "antes": "15 nov. 2026",
+        "depois": "16 nov. 2026"
+      },
+      "note": {
+        "antes": null,
+        "depois": "Documentação do serviço Manager API: \\url{https://power.larc.nasa.gov/docs/services/api/system/manager/}."
+      }
+    }
+  },
+  {
+    "chave": "STREAMLIT_STATE",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Streamlit}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Add Statefulness to Apps: Session State",
+      "url": "https://docs.streamlit.io/develop/concepts/architecture/session-state",
+      "urldate": "15 nov. 2026",
+      "year": "c2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_3a_implementacao.tex",
+        "linha": 48
+      }
+    ],
+    "consulta_url": {
+      "id": "STREAMLIT_STATE",
+      "url": "https://docs.streamlit.io/develop/concepts/architecture/session-state",
+      "consulta": "2026-11-16T14:05:00.013004+00:00",
+      "http": 200,
+      "final_url": "https://docs.streamlit.io/develop/concepts/architecture/session-state",
+      "redirects": [],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "5072c21e800066a75ec8e0a420f582315cb1ef4c4c6dd3c617fbec136014b516",
+      "bytes": 218455,
+      "title": "Add statefulness to apps - Streamlit Docs",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "MERONI2019",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Meroni, Michele",
+      "Fasbender, Dominique",
+      "Rembold, Felix",
+      "Atzberger, Clement",
+      "Klisch, Anja"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Near real-time vegetation anomaly detection with {MODIS NDVI}: Timeliness vs. accuracy and effect of anomaly computation options",
+      "journal": "Remote Sensing of Environment",
+      "year": "2019",
+      "volume": "221",
+      "pages": "508--521",
+      "doi": "10.1016/j.rse.2018.11.041",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 80
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 119
+      },
+      {
+        "arquivo": "final_5_discussao.tex",
+        "linha": 65
+      }
+    ],
+    "consulta_url": {
+      "id": "MERONI2019",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/",
+      "consulta": "2026-11-16T14:05:00.201233+00:00",
+      "http": 200,
+      "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "874777055543f1a674c34e80093e6dc6aa4b1a8927b78430ba7cca2da9deef5d",
+      "bytes": 206727,
+      "title": "Near real-time vegetation anomaly detection with MODIS NDVI: Timeliness vs. accuracy and effect of anomaly computation options - PMC",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_MERONI2019",
+      "url": "https://api.crossref.org/works/10.1016/j.rse.2018.11.041",
+      "consulta": "2026-11-16T14:05:00.667673+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1016/j.rse.2018.11.041",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "de13777a3c9ee579ba5c1b0aae5fcfe5b32318f051f23be765fc8f1c0f160206",
+      "bytes": 17378,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Near real-time vegetation anomaly detection with MODIS NDVI: Timeliness vs. accuracy and effect of anomaly computation options"
+        ],
+        "author": [
+          {
+            "given": "Michele",
+            "family": "Meroni",
+            "sequence": "first"
+          },
+          {
+            "given": "Dominique",
+            "family": "Fasbender",
+            "sequence": "additional"
+          },
+          {
+            "given": "Felix",
+            "family": "Rembold",
+            "sequence": "additional"
+          },
+          {
+            "given": "Clement",
+            "family": "Atzberger",
+            "sequence": "additional"
+          },
+          {
+            "given": "Anja",
+            "family": "Klisch",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              2
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2019,
+              2
+            ]
+          ]
+        },
+        "container-title": [
+          "Remote Sensing of Environment"
+        ],
+        "volume": "221",
+        "page": "508-521",
+        "publisher": "Elsevier BV",
+        "type": "journal-article",
+        "DOI": "10.1016/j.rse.2018.11.041"
+      }
+    },
+    "consulta_doi_adicional": {
+      "id": "doi_MERONI2019",
+      "url": "https://doi.org/10.1016/j.rse.2018.11.041",
+      "consulta": "2026-11-16T14:09:07.251481+00:00",
+      "http": 200,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0034425718305509",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1016/j.rse.2018.11.041"
+        }
+      ],
+      "content_type": "text/html;charset=UTF-8",
+      "sha256": "6bae9f2e0ab3bc140f730ebd01078e5b1463658661705ba0fc8b19de80a94130",
+      "bytes": 2741,
+      "title": "Redirecting",
+      "challenge": false,
+      "valid_json": false
+    },
+    "alteracoes": {}
+  },
+  {
+    "chave": "PARNAS1972",
+    "citada": true,
+    "tipo": "article",
+    "autores_ordenados": [
+      "Parnas, D. L."
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "On the Criteria To Be Used in Decomposing Systems into Modules",
+      "journal": "Communications of the ACM",
+      "year": "1972",
+      "volume": "15",
+      "number": "12",
+      "pages": "1053--1058",
+      "doi": "10.1145/361598.361623",
+      "url": "https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 84
+      },
+      {
+        "arquivo": "final_5_discussao.tex",
+        "linha": 31
+      }
+    ],
+    "consulta_url": {
+      "id": "PARNAS1972",
+      "url": "https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf",
+      "consulta": "2026-11-16T14:05:00.915141+00:00",
+      "http": 200,
+      "final_url": "https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf",
+      "redirects": [],
+      "content_type": "application/pdf",
+      "sha256": "7008fd6abc833ded750e52dbac4968e8eda339f66b462ca4427f1953f98df9c4",
+      "bytes": 589565,
+      "pdf": true,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_PARNAS1972",
+      "url": "https://api.crossref.org/works/10.1145/361598.361623",
+      "consulta": "2026-11-16T14:05:01.044081+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1145/361598.361623",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "e917b27a6638c8f0d5250495e06a28f3af3c1c903019a4d9ca148d6e666e74bf",
+      "bytes": 6281,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "On the criteria to be used in decomposing systems into modules"
+        ],
+        "author": [
+          {
+            "given": "D. L.",
+            "family": "Parnas",
+            "sequence": "first"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              1972,
+              12
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              1972,
+              12
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              1972,
+              12
+            ]
+          ]
+        },
+        "container-title": [
+          "Communications of the ACM"
+        ],
+        "volume": "15",
+        "issue": "12",
+        "page": "1053-1058",
+        "publisher": "Association for Computing Machinery (ACM)",
+        "type": "journal-article",
+        "DOI": "10.1145/361598.361623"
+      }
+    },
+    "consulta_doi_adicional": {
+      "id": "doi_PARNAS1972",
+      "url": "https://doi.org/10.1145/361598.361623",
+      "consulta": "2026-11-16T14:09:07.252124+00:00",
+      "http": 403,
+      "final_url": "https://dl.acm.org/doi/10.1145/361598.361623",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1145/361598.361623"
+        }
+      ],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "359f7cdf34eb05e03c31fe1e37155836649e7d566fae8058dc03647b51ec9182",
+      "bytes": 5580,
+      "title": "Just a moment...",
+      "challenge": true,
+      "valid_json": false
+    },
+    "alteracoes": {}
+  },
+  {
+    "chave": "NIST_LOCATION",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{National Institute of Standards and Technology}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Measures of Location: {NIST/SEMATECH e-Handbook of Statistical Methods}",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+      "urldate": "15 nov. 2026",
+      "year": "[20--?]"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 68
+      }
+    ],
+    "consulta_url": {
+      "id": "NIST_LOCATION",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+      "consulta": "2026-11-16T14:05:01.104472+00:00",
+      "http": 200,
+      "final_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "f593327cb732c5eaf64d0deaedd4ed2eb373728962bb058465f990d905282d6e",
+      "bytes": 16812,
+      "title": "1.3.5.1. Measures of Location",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GITHUB_SDD",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{GitHub}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Specification-Driven Development ({SDD}): {Spec Kit}",
+      "url": "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+      "urldate": "15 nov. 2026",
+      "year": "2026",
+      "updatedate": "2026-06-23",
+      "note": "Arquivo-fonte atualizado em 23 jun. 2026."
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 86
+      }
+    ],
+    "consulta_url": {
+      "id": "GITHUB_SDD",
+      "url": "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+      "consulta": "2026-11-16T14:05:01.148338+00:00",
+      "http": 200,
+      "final_url": "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "a39d75e1082014d9e597b3c8874fa77aac91f8c9027d761f18835cc83779a962",
+      "bytes": 374262,
+      "title": "spec-kit/spec-driven.md at main · github/spec-kit · GitHub",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "BOECKELER2025",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "Böckeler, Birgitta"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl",
+      "year": "2025",
+      "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+      "urldate": "15 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 86
+      }
+    ],
+    "consulta_url": {
+      "id": "BOECKELER2025",
+      "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+      "consulta": "2026-11-16T14:05:01.234802+00:00",
+      "http": 200,
+      "final_url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+      "redirects": [],
+      "content_type": "text/html",
+      "sha256": "1b1fb76c908e9b1a0ed0b136eff8583a9cd39efcb91da21008236dbe4ab5f4bc",
+      "bytes": 39774,
+      "title": "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "UPF_IA2026",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{Universidade de Passo Fundo}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Instrução Normativa nº 03/2026/{PROACAD}: dispõe sobre o uso de Inteligência Artificial ({IA}) nas atividades acadêmicas na {Universidade de Passo Fundo} ({UPF}) e dá outras providências",
+      "year": "2026",
+      "url": "https://www.upf.br//_uploads/Conteudo/IN%20n%C2%BA%2003_2026%20Uso%20de%20Intelig%C3%AAncia%20Artificial%20%28IA%29%20nas%20atividades%20acad%C3%AAmicas%20da%20UPF_docx%281%29.pdf",
+      "urldate": "16 nov. 2026",
+      "date": "2026-10-28",
+      "note": "Pró-Reitoria Acadêmica."
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_7_uso_ia.tex",
+        "linha": 7
+      }
+    ],
+    "consulta_url": {
+      "id": "UPF_direto",
+      "url": "https://www.upf.br//_uploads/Conteudo/IN%20n%C2%BA%2003_2026%20Uso%20de%20Intelig%C3%AAncia%20Artificial%20%28IA%29%20nas%20atividades%20acad%C3%AAmicas%20da%20UPF_docx%281%29.pdf",
+      "consulta": "2026-11-16T14:05:03.993663+00:00",
+      "http": 200,
+      "final_url": "https://www.upf.br//_uploads/Conteudo/IN%20n%C2%BA%2003_2026%20Uso%20de%20Intelig%C3%AAncia%20Artificial%20%28IA%29%20nas%20atividades%20acad%C3%AAmicas%20da%20UPF_docx%281%29.pdf",
+      "redirects": [],
+      "content_type": "application/pdf",
+      "sha256": "d44a49e0e77f47339b812b3851a6f5f15877e89004ec646c8bbfe13b3143b28b",
+      "bytes": 3836359,
+      "pdf": true,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {
+      "date": {
+        "antes": null,
+        "depois": "2026-10-28"
+      },
+      "urldate": {
+        "antes": "15 nov. 2026",
+        "depois": "16 nov. 2026"
+      },
+      "url": {
+        "antes": "https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in",
+        "depois": "https://www.upf.br//_uploads/Conteudo/IN%20n%C2%BA%2003_2026%20Uso%20de%20Intelig%C3%AAncia%20Artificial%20%28IA%29%20nas%20atividades%20acad%C3%AAmicas%20da%20UPF_docx%281%29.pdf"
+      },
+      "note": {
+        "antes": null,
+        "depois": "Pró-Reitoria Acadêmica."
+      },
+      "title": {
+        "antes": "Instrução Normativa nº 03/2026/PROACAD: Uso de Inteligência Artificial nas atividades acadêmicas",
+        "depois": "Instrução Normativa nº 03/2026/{PROACAD}: dispõe sobre o uso de Inteligência Artificial ({IA}) nas atividades acadêmicas na {Universidade de Passo Fundo} ({UPF}) e dá outras providências"
+      }
+    }
+  },
+  {
+    "chave": "EOSDA_GUIDE",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{EOS Data Analytics}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{EOSDA Crop Monitoring User Guide}",
+      "url": "https://eos.com/user-guide/crop-monitoring/",
+      "urldate": "16 nov. 2026",
+      "year": "[20--?]"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 121
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 139
+      }
+    ],
+    "consulta_url": {
+      "id": "EOSDA_especifico",
+      "url": "https://eos.com/user-guide/crop-monitoring/",
+      "consulta": "2026-11-16T14:05:03.982683+00:00",
+      "http": 200,
+      "final_url": "https://eos.com/user-guide/crop-monitoring/",
+      "redirects": [],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "0882fc0c4fa505ad713201a207fe4be6fc8a1b593f9569609b14ce390b636d0b",
+      "bytes": 405948,
+      "title": "EOSDA Crop Monitoring Guide: Learn How To Use Our Software",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {
+      "urldate": {
+        "antes": "15 nov. 2026",
+        "depois": "16 nov. 2026"
+      },
+      "url": {
+        "antes": "https://eos.com/user-guide/",
+        "depois": "https://eos.com/user-guide/crop-monitoring/"
+      }
+    }
+  },
+  {
+    "chave": "ONESOIL_PLATFORM_DETAIL",
+    "citada": true,
+    "tipo": "misc",
+    "autores_ordenados": [
+      "{OneSoil}"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "{OneSoil Platform}",
+      "url": "https://onesoil.ai/en/platform",
+      "urldate": "15 nov. 2026",
+      "year": "[20--?]"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 121
+      },
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 139
+      }
+    ],
+    "consulta_url": {
+      "id": "ONESOIL_PLATFORM_DETAIL",
+      "url": "https://onesoil.ai/en/platform",
+      "consulta": "2026-11-16T14:05:01.963857+00:00",
+      "http": 200,
+      "final_url": "https://onesoil.ai/en/platform",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "b8f3f9e0c66e4f1a798fd5f3de67f418e4172d755efb36130f8a37d0fc98eea7",
+      "bytes": 635708,
+      "title": "OneSoil Platform - Field Monitoring, VRA Maps & Precision Agriculture | OneSoil",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": null,
+    "consulta_doi_adicional": null,
+    "alteracoes": {}
+  },
+  {
+    "chave": "GOTEL1994",
+    "citada": true,
+    "tipo": "inproceedings",
+    "autores_ordenados": [
+      "Gotel, Orlena C. Z.",
+      "Finkelstein, Anthony C. W."
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "An Analysis of the Requirements Traceability Problem",
+      "booktitle": "Proceedings of the First International Conference on Requirements Engineering",
+      "year": "1994",
+      "pages": "94--101",
+      "publisher": "IEEE",
+      "doi": "10.1109/ICRE.1994.292398",
+      "url": "https://discovery.ucl.ac.uk/749/",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 88
+      },
+      {
+        "arquivo": "final_5_discussao.tex",
+        "linha": 27
+      }
+    ],
+    "consulta_url": {
+      "id": "GOTEL1994",
+      "url": "https://discovery.ucl.ac.uk/749/",
+      "consulta": "2026-11-16T14:05:02.042529+00:00",
+      "http": 200,
+      "final_url": "https://discovery.ucl.ac.uk/id/eprint/749/",
+      "redirects": [
+        {
+          "http": 303,
+          "url": "https://discovery.ucl.ac.uk/749/"
+        },
+        {
+          "http": 302,
+          "url": "https://discovery.ucl.ac.uk/id/eprint/749"
+        }
+      ],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "dacb1cbf9549047b28c9fbff3f14b3e3bb2f3a8aac57804b97f219e45a1114c2",
+      "bytes": 37677,
+      "title": "An analysis of the requirements traceability problem \n      -\n      UCL Discovery",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_GOTEL1994",
+      "url": "https://api.crossref.org/works/10.1109/ICRE.1994.292398",
+      "consulta": "2026-11-16T14:05:03.081900+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1109/ICRE.1994.292398",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "3b3f9091c7d15a49d07769a830dc1c346bb53b985c8d6fc88208df27acffdb50",
+      "bytes": 7165,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "An analysis of the requirements traceability problem"
+        ],
+        "author": [
+          {
+            "given": "O.C.Z.",
+            "family": "Gotel",
+            "sequence": "first"
+          },
+          {
+            "given": "C.W.",
+            "family": "Finkelstein",
+            "sequence": "additional"
+          }
+        ],
+        "container-title": [
+          "Proceedings of IEEE International Conference on Requirements Engineering"
+        ],
+        "page": "94-101",
+        "publisher": "IEEE Comput. Soc. Press",
+        "type": "proceedings-article",
+        "DOI": "10.1109/icre.1994.292398"
+      }
+    },
+    "consulta_doi_adicional": {
+      "id": "doi_GOTEL1994",
+      "url": "https://doi.org/10.1109/ICRE.1994.292398",
+      "consulta": "2026-11-16T14:09:07.252637+00:00",
+      "http": 202,
+      "final_url": "https://ieeexplore.ieee.org/document/292398/",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1109/ICRE.1994.292398"
+        },
+        {
+          "http": 301,
+          "url": "http://ieeexplore.ieee.org/document/292398/"
+        }
+      ],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "title": "",
+      "challenge": false,
+      "valid_json": false
+    },
+    "alteracoes": {}
+  },
+  {
+    "chave": "BJARNASON2015",
+    "citada": true,
+    "tipo": "inproceedings",
+    "autores_ordenados": [
+      "Bjarnason, Elizabeth",
+      "Unterkalmsteiner, Michael",
+      "Engstr{\\\"o}m, Emelie",
+      "Borg, Markus"
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "An Industrial Case Study on Test Cases as Requirements",
+      "booktitle": "Agile Processes in Software Engineering and Extreme Programming",
+      "year": "2015",
+      "series": "Lecture Notes in Business Information Processing",
+      "volume": "212",
+      "pages": "27--39",
+      "publisher": "Springer",
+      "address": "Cham",
+      "isbn": "9783319186122",
+      "doi": "10.1007/978-3-319-18612-2_3",
+      "url": "https://arxiv.org/abs/2308.06509",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 88
+      },
+      {
+        "arquivo": "final_5_discussao.tex",
+        "linha": 27
+      }
+    ],
+    "consulta_url": {
+      "id": "BJARNASON2015",
+      "url": "https://arxiv.org/abs/2308.06509",
+      "consulta": "2026-11-16T14:05:03.284836+00:00",
+      "http": 200,
+      "final_url": "https://arxiv.org/abs/2308.06509",
+      "redirects": [],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "8bad2255592532e68f37b814467a4ae4fb4643c2d8b104e1246f357a676edd83",
+      "bytes": 41209,
+      "title": "[2308.06509] An Industrial Case Study on Test Cases as Requirements",
+      "challenge": false,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_BJARNASON2015",
+      "url": "https://api.crossref.org/works/10.1007/978-3-319-18612-2_3",
+      "consulta": "2026-11-16T14:05:03.445807+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1007/978-3-319-18612-2_3",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "c4abe7c437a9236b9253b45484aac760b8bd7e5d27d56527603228f4e456fed9",
+      "bytes": 2660,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "An Industrial Case Study on Test Cases as Requirements"
+        ],
+        "author": [
+          {
+            "given": "Elizabeth",
+            "family": "Bjarnason",
+            "sequence": "first"
+          },
+          {
+            "given": "Michael",
+            "family": "Unterkalmsteiner",
+            "sequence": "additional"
+          },
+          {
+            "given": "Emelie",
+            "family": "Engström",
+            "sequence": "additional"
+          },
+          {
+            "given": "Markus",
+            "family": "Borg",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2015
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2015
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2015,
+              5,
+              16
+            ]
+          ]
+        },
+        "container-title": [
+          "Lecture Notes in Business Information Processing",
+          "Agile Processes in Software Engineering and Extreme Programming"
+        ],
+        "page": "27-39",
+        "publisher": "Springer International Publishing",
+        "type": "book-chapter",
+        "DOI": "10.1007/978-3-319-18612-2_3",
+        "ISBN": [
+          "9783319186115",
+          "9783319186122"
+        ]
+      }
+    },
+    "consulta_doi_adicional": {
+      "id": "doi_BJARNASON2015",
+      "url": "https://doi.org/10.1007/978-3-319-18612-2_3",
+      "consulta": "2026-11-16T14:09:07.253251+00:00",
+      "http": 200,
+      "final_url": "https://link.springer.com/10.1007/978-3-319-18612-2_3",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1007/978-3-319-18612-2_3"
+        },
+        {
+          "http": 301,
+          "url": "http://link.springer.com/10.1007/978-3-319-18612-2_3"
+        }
+      ],
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea",
+      "bytes": 3038,
+      "title": "Client Challenge",
+      "challenge": false,
+      "valid_json": false
+    },
+    "alteracoes": {}
+  },
+  {
+    "chave": "VAITHILINGAM2022",
+    "citada": true,
+    "tipo": "inproceedings",
+    "autores_ordenados": [
+      "Vaithilingam, Priyan",
+      "Zhang, Tianyi",
+      "Glassman, Elena L."
+    ],
+    "editores_ordenados": [],
+    "campos": {
+      "title": "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models",
+      "booktitle": "CHI Conference on Human Factors in Computing Systems Extended Abstracts",
+      "year": "2022",
+      "pages": "1--7",
+      "publisher": "ACM",
+      "address": "New York, NY, USA",
+      "doi": "10.1145/3491101.3519665",
+      "url": "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
+      "urldate": "16 nov. 2026"
+    },
+    "citacoes": [
+      {
+        "arquivo": "final_2_fundamentacao.tex",
+        "linha": 90
+      }
+    ],
+    "consulta_url": {
+      "id": "VAITHILINGAM2022",
+      "url": "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
+      "consulta": "2026-11-16T14:05:03.581407+00:00",
+      "http": 200,
+      "final_url": "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
+      "redirects": [],
+      "content_type": "application/pdf",
+      "sha256": "9eb74f23b8d0f3aa05b69076099c2897eeffd42f69111f7740ea48b6f21a47ca",
+      "bytes": 472013,
+      "pdf": true,
+      "valid_json": false
+    },
+    "consulta_crossref": {
+      "id": "crossref_VAITHILINGAM2022",
+      "url": "https://api.crossref.org/works/10.1145/3491101.3519665",
+      "consulta": "2026-11-16T14:05:03.939846+00:00",
+      "http": 200,
+      "final_url": "https://api.crossref.org/works/10.1145/3491101.3519665",
+      "redirects": [],
+      "content_type": "application/json",
+      "sha256": "775e17c98147bd96fe13e6720f2dd7f320487d27c57f95c220f99245b3034ace",
+      "bytes": 17600,
+      "title": "",
+      "challenge": false,
+      "valid_json": true,
+      "metadata": {
+        "title": [
+          "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models"
+        ],
+        "author": [
+          {
+            "given": "Priyan",
+            "family": "Vaithilingam",
+            "sequence": "first"
+          },
+          {
+            "given": "Tianyi",
+            "family": "Zhang",
+            "sequence": "additional"
+          },
+          {
+            "given": "Elena L.",
+            "family": "Glassman",
+            "sequence": "additional"
+          }
+        ],
+        "published": {
+          "date-parts": [
+            [
+              2022,
+              4,
+              27
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2022,
+              4,
+              27
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2022,
+              4,
+              28
+            ]
+          ]
+        },
+        "container-title": [
+          "CHI Conference on Human Factors in Computing Systems Extended Abstracts"
+        ],
+        "page": "1-7",
+        "publisher": "ACM",
+        "type": "proceedings-article",
+        "DOI": "10.1145/3491101.3519665"
+      }
+    },
+    "consulta_doi_adicional": {
+      "id": "doi_VAITHILINGAM2022",
+      "url": "https://doi.org/10.1145/3491101.3519665",
+      "consulta": "2026-11-16T14:09:07.687067+00:00",
+      "http": 403,
+      "final_url": "https://dl.acm.org/doi/10.1145/3491101.3519665",
+      "redirects": [
+        {
+          "http": 302,
+          "url": "https://doi.org/10.1145/3491101.3519665"
+        }
+      ],
+      "content_type": "text/html; charset=UTF-8",
+      "sha256": "8e6738d32e201025754864c2c3a85c5a10a20789dcd2288c59ebc14687664285",
+      "bytes": 5586,
+      "title": "Just a moment...",
+      "challenge": true,
+      "valid_json": false
+    },
+    "alteracoes": {}
+  }
+]

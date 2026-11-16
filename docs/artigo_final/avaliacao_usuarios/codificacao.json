@@ -16,6 +16,7 @@
     "SEM_BARREIRA": {"nome": "Ausência de barreira declarada", "descricao": "Respostas que explicitamente negam dificuldade relevante, não inferidas de silêncio.", "trecho": "Nenhuma barreira relevante no fluxo testado", "implicacao": "Manter casos divergentes; não apagar as dificuldades dos demais registros."}
   },
   "registros": [
+    {"text_sha256":"545c38b0922de19734fbffde62792c37c2aef6a3216cfa472449173165220f7d","codigos":{},"nota":"32º registro do snapshot definitivo: cinco campos abertos vazios; sem atribuição de tema, sem imputação. Conferência assistida na quarta rodada."},
     {"text_sha256":"1b74e7919dbd0169becff28017b1712ca572fb033eb16482fc7a1b743e4a4daa","codigos":{"43":["TEMP"],"44":["SEM_BARREIRA"],"45":["INTERACAO","FENO"],"46":["ACADEMICO"]}},
     {"text_sha256":"0758fec16bac814b29b7783acd9100078d243b75f2bb60dd39b4456d3c237432","codigos":{"43":["VISUAL"],"44":["INTERACAO","REUSO"],"45":["QUALIDADE"],"46":["CAMPO"],"47":["QUALIDADE"]}},
     {"text_sha256":"613990324941fff1aac5848abe17c803ffa44943700ebcba5ce0258817dde0b6","codigos":{"43":["PIXEL","CAMPO"],"44":["ALERTA","PIXEL"],"45":["ALERTA","PIXEL","FENO"],"46":["ACADEMICO","TEMP"]}},

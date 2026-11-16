@@ -1,0 +1,30 @@
+{
+  "institutional_class_sha256": "999d34203d7082ff5be5c48c665f4ff726a0dc359679c0cb3a4c67f0bb485a10",
+  "git_origin": "f4c46a7",
+  "class_unchanged_since_origin": true,
+  "dcu_bst_sha256": "ea850296c6d4f4f44e5a7adae1a1a6e83e85238fd4720814c501a906c841e286",
+  "before_fifth_round": "/tmp/opencode/quinta-rodada/antes",
+  "fifth_round": "/tmp/opencode/ajuste-pretextual-upf/antes",
+  "sixth_and_fidelity_input": "/tmp/opencode/fidelidade-upf/antes",
+  "previous_pdf_sha256": "a548bc214e5740584b70aeaba34d0ebf3bbb51bafdd3fc4bf5517a000079738f",
+  "final_pdf_sha256": "9dba3afa3e806a4f3d84742f16c73a4800bdad6de9dcc92c13aec02734b25041",
+  "external_references": "Todos os três links e os dois endpoints canônicos consultados retornaram HTML Anubis; comparação visual externa não realizada",
+  "decisions": "Tabela comparativa detalhada no início de AUDITORIA_ABNT.md",
+  "restored": [
+    "natbib/dcu",
+    "bibliografia nativa com metadados preservados",
+    "legendas inferiores das figuras",
+    "dois-pontos, centralização, fontes e skips nativos",
+    "recuos e espaçamento da bibliografia nativos",
+    "percentual sem redefinição global"
+  ],
+  "retained": [
+    "Abstract antes de Resumo",
+    "autoria condicional desativada",
+    "ortografia Palavras-chave",
+    "fontes e notas científicas",
+    "notação SI sem alterar valores",
+    "ajustes técnicos de cabeçalho anteriores à quinta rodada",
+    "conteúdo científico integral"
+  ]
+}

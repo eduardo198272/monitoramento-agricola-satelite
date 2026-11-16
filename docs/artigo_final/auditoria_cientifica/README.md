@@ -1,8 +1,8 @@
 # Auditoria científica — 15/11/2026
 
-**Estado vigente: terceira rodada consolidada para apreciação do orientador, sem aprovação institucional definitiva.** O [relatório consolidado](AUDITORIA_CIENTIFICA.md) contém alterações, comparação, alternativa sem questionário, simulação das três perspectivas de banca e perguntas/respostas de defesa. Fontes/PDF foram atualizados sem mudança no software ou nos dados.
+**Estado vigente: quarta rodada, conjunto definitivo de 32 respostas reprocessado.** O [relatório consolidado](AUDITORIA_CIENTIFICA.md) e as [pendências](PENDENCIAS_AUTOR.md) apresentam os resultados atuais. Software e respostas originais preservados. Não se presume aprovação institucional.
 
-**Validação atual:** `../evidencias/terceira_rodada/`. As decisõesPA01–PA18 e sua classificação vigente estão em [PENDENCIAS_AUTOR.md](PENDENCIAS_AUTOR.md). Os relatórios receberam complementos no início; osJSONs, logs e contagens anteriores foram preservados como históricos, sem identificar automaticamente o novoPDF.
+**Validação atual:** `../evidencias/quarta_rodada/`. Os relatórios receberam complementos no início; JSONs, logs, contagens e perguntas de defesa anteriores são históricos e devem ser lidos com as atualizações vigentes.
 
 - [Originalidade preliminar](AUDITORIA_ORIGINALIDADE.md)
 - [Registro de IA](../REGISTRO_USO_IA.md)

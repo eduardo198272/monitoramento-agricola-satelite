@@ -1,0 +1,47 @@
+[
+  {
+    "key": "item",
+    "url": "https://repositorio.upf.br/items/3540a7da-a6df-4004-990e-f0211ce98f87",
+    "http": 200,
+    "pdf": false,
+    "type": "text/html; charset=utf-8",
+    "sha256": "a69f3806ed2610ae18b95a13aff80c24046d3f810689decde18a4edde9d3e287",
+    "preview": "<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</title><link rel=\"stylesheet\" href=\"/.within.website/x/xess/xess.min.css?cachebuster=v1.28.2\"><meta name=\"viewport\" conten"
+  },
+  {
+    "key": "artigo1",
+    "url": "https://repositorio.upf.br/bitstreams/2c41199c-5c1c-42f2-8b9c-2f4eb97b4651/download",
+    "http": 200,
+    "pdf": false,
+    "type": "text/html; charset=utf-8",
+    "sha256": "8fb883471c76f0fe67c38ecea0f0b0b6debbf86f3287ae862418b294f069a99f",
+    "preview": "<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</title><link rel=\"stylesheet\" href=\"/.within.website/x/xess/xess.min.css?cachebuster=v1.28.2\"><meta name=\"viewport\" conten"
+  },
+  {
+    "key": "artigo2",
+    "url": "https://repositorio.upf.br/server/api/core/bitstreams/9d81667e-fc72-4b60-ab67-e9c3deee32e6/content",
+    "http": 200,
+    "pdf": false,
+    "type": "text/html; charset=utf-8",
+    "sha256": "5d67402381ace1c2f9ef9e35d4d4e165bdd542ef548313125f6962ac1aa9a6af",
+    "preview": "<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</title><link rel=\"stylesheet\" href=\"/.within.website/x/xess/xess.min.css?cachebuster=v1.28.2\"><meta name=\"viewport\" conten"
+  },
+  {
+    "key": "item-api",
+    "url": "https://repositorio.upf.br/server/api/core/items/3540a7da-a6df-4004-990e-f0211ce98f87",
+    "http": 200,
+    "pdf": false,
+    "type": "text/html; charset=utf-8",
+    "sha256": "5e1b31f23d6342121c8dfba0bae0eed12d3c014e9a780e511a9f0396cbc0280b",
+    "preview": "<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</title><link rel=\"stylesheet\" href=\"/.within.website/x/xess/xess.min.css?cachebuster=v1.28.2\"><meta name=\"viewport\" conten"
+  },
+  {
+    "key": "artigo1-api",
+    "url": "https://repositorio.upf.br/server/api/core/bitstreams/2c41199c-5c1c-42f2-8b9c-2f4eb97b4651/content",
+    "http": 200,
+    "pdf": false,
+    "type": "text/html; charset=utf-8",
+    "sha256": "731db1718da643208c033efb55812f35daa15021febcddd72397703b6cbba2f5",
+    "preview": "<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</title><link rel=\"stylesheet\" href=\"/.within.website/x/xess/xess.min.css?cachebuster=v1.28.2\"><meta name=\"viewport\" conten"
+  }
+]

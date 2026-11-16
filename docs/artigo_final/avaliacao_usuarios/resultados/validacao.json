@@ -1,11 +1,18 @@
 {
   "passed": true,
-  "registros_conferidos": 31,
+  "registros_conferidos": 32,
   "itens_conferidos": 40,
   "distribuicoes": 191,
   "comparacao_calculos": "Counter/statistics contra pandas/NumPy",
+  "respostas_originais_correspondentes": 31,
+  "registro_adicional": 1,
+  "celulas_discursivas": 142,
+  "temas_conferidos": 13,
+  "cruzamentos_conferidos": 6,
+  "grupos_cruzados_conferidos": 12,
   "respostas_preservadas": true,
-  "carimbos_retificados": 7,
+  "carimbos_retificados_nesta_rodada": 0,
+  "diferencas_historicas_carimbos": 7,
   "arquivos_funcionais_inalterados": 28,
   "figuras": [
     "aplicabilidade.pdf",
@@ -36,5 +43,5 @@
     "utilidade.png",
     "utilidade.svg"
   ],
-  "fonte_sha256": "9adb66b330103ca858c37d7dc6cdb5e4e954f09f749a0c122fa6e6b2f4f5de59"
+  "fonte_sha256": "c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34"
 }

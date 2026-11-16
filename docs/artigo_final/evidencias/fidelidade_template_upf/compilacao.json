@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "pages": 32,
+  "paper": "Letter",
+  "columns": 2,
+  "pdf_sha256": "9dba3afa3e806a4f3d84742f16c73a4800bdad6de9dcc92c13aec02734b25041",
+  "bibliography_style": "dcu.bst (original, unchanged)",
+  "bibtex_database": "referencias_institucionais.bib",
+  "cited_entries": 54,
+  "total_entries": 63,
+  "errors": false,
+  "undefined": false,
+  "overfull": false,
+  "twocolumn_too_tall": false,
+  "remaining_warnings": [
+    "Underfull hbox/vbox",
+    "Fontes matemáticas em tamanhos substituídos, herdadas da classe",
+    "epstopdf/driver XeTeX"
+  ],
+  "coauthorship_active_in_delivered_pdf": false,
+  "coauthor_preview_compiled_and_first_two_pages_inspected": true,
+  "external_example_pdfs_obtained": false
+}

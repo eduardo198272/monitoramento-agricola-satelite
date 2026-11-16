@@ -1,0 +1,30 @@
+% Topologia lógica observada; não representa microsserviços próprios.
+\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=38mm,
+ minimum height=13mm,font=\small,fill=green!5},
+ ext/.style={box,fill=blue!6},
+ link/.style={-{Stealth[length=2mm]},thick}]
+\node[box] (browser) at (0,0) {Navegador\\Streamlit, Folium/Leaflet\\consulta local da grade};
+\node[box] (ui) at (5.1,0) {Servidor Python\\interface e estado\\\texttt{main.py}};
+\node[box] (pipeline) at (10.2,0) {Orquestração\\\texttt{pipeline.py}\\índices, séries, clima};
+\node[ext] (ee) at (15.3,0) {Earth Engine\\Sentinel-2\\operações raster};
+\node[ext] (nominatim) at (5.1,2.3) {Nominatim\\busca por texto};
+\node[ext] (esri) at (0,2.3) {Esri World Imagery\\tiles do mapa-base};
+\node[ext] (nasa) at (10.2,2.3) {NASA POWER\\consulta no centroide};
+\node[box] (locations) at (5.1,-2.5) {Serviço de localizações\\validação e repositório\\SQLite local ou sessão};
+\node[box] (export) at (10.2,-2.5) {Snapshot e exportadores\\PDF, XLSX e CSV ZIP};
+\node[box] (files) at (0,-2.5) {Arquivos do usuário\\GeoJSON de áreas\\resultados para download};
+\draw[link,<->] (browser) -- (ui);
+\draw[link,<->] (ui) -- (pipeline);
+\draw[link,<->] (pipeline) -- (ee);
+\draw[link,<->] (ui) -- (nominatim);
+\draw[link] (esri) -- (browser);
+\draw[link,<->] (pipeline) -- (nasa);
+\draw[link,<->] (ui) -- (locations);
+\draw[link] (pipeline) -- (export);
+\draw[link,<->] (locations) -- (files);
+\draw[link] (export.south) -- ++(0,-0.8) -| (files.south);
+\draw[link] (ee.south) -- ++(0,-4.1) -- (2.4,-4.1)
+ -- (2.4,-1.0) -| (browser.south);
+\node[font=\scriptsize,fill=white] at (9,-4.1) {tiles analíticos; grade entregue via servidor Python};
+\end{tikzpicture}

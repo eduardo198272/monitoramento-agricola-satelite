@@ -1,0 +1,23 @@
+% Inclui apenas capturas reais existentes. IDs/contextos ficam no inventário.
+\newcommand{\capturatcc}[4]{%
+  \IfFileExists{fig/capturas/#1.png}{%
+    \begin{figure*}[htbp]
+      \centering
+      \includegraphics[width=0.94\textwidth,height=0.40\textheight,keepaspectratio]{fig/capturas/#1.png}
+      \caption{#3.}
+      \label{fig:#1}
+      \fonteTCC{execução local e arquivos gerados.}
+    \end{figure*}%
+  }{}%
+}
+
+% Capturas fornecidas pelo autor: não confundir com a demonstração instrumentada.
+\newcommand{\capturaautor}[4][htbp]{%
+  \begin{figure*}[#1]
+    \centering
+    \includegraphics[width=0.98\textwidth,height=0.49\textheight,keepaspectratio]{fig/capturas_autor/#2}
+    \caption{#3.}
+    \label{fig:autor-#4}
+    \fonteTCC{captura da aplicação.}
+  \end{figure*}%
+}

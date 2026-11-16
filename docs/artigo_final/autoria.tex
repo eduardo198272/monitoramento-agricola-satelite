@@ -1,0 +1,17 @@
+% Coautoria não presumida pela condição de orientador.
+% Manter 0 até confirmação explícita da coautoria de Rafael Rieder.
+% Somente após essa confirmação, alterar o valor para 1.
+% \providecommand permite testar a alternativa em compilação isolada.
+\providecommand{\TCCIncluirRafaelComoCoautor}{0}
+
+\author[1]{Eduardo Steffens Hoppen}
+\ifnum\TCCIncluirRafaelComoCoautor=1\relax
+  \author[1]{Rafael Rieder}
+  \affil[1]{Universidade de Passo Fundo, Instituto de Tecnologia, Ciência da Computação}
+  \runningauthor{Hoppen e Rieder}
+  \hypersetup{pdfauthor={Eduardo Steffens Hoppen e Rafael Rieder}}
+\else
+  \affil[1]{Universidade de Passo Fundo, Instituto de Tecnologia, Curso de Ciência da Computação\\Orientador: Prof. Rafael Rieder}
+  \runningauthor{Hoppen}
+  \hypersetup{pdfauthor={Eduardo Steffens Hoppen}}
+\fi

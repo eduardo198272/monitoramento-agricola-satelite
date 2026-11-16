@@ -1,5 +1,18 @@
 # Pendências do autor e orientador
 
+## Estado vigente — quarta rodada, 16/11/2026
+
+- **Pesquisa definitiva resolvida:** o autor confirmou 32 respostas e, após ser informado de que a fonte dinâmica passou a conter 33, escolheu explicitamente o **snapshot de 32 respostas**. A exportação pública anterior foi recuperada (SHA-256 `c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34`) e seus 32 registros coincidem integralmente com um subconjunto da fonte atual. Não há mais pendência de justificar a composição 31/32.
+- **Correspondência com original:** as 31 respostas do original privado estão no snapshot, sem mudança das respostas; permanecem as sete diferenças históricas de carimbo documentadas. Nenhum carimbo foi modificado nesta rodada.
+- **Quantitativo e qualitativo reprocessados:** n=32; média 7,71875; mediana 8; moda 9; DP amostral 1,78224894; Q1=7/Q3=9. Os 40 itens, 191 categorias de distribuição e seis cruzamentos foram recalculados. Permanecem 142 células discursivas e 13 categorias: a submissão incluída tem cinco campos abertos vazios, sem temas imputados. As atribuições anteriores foram preservadas. A nova apresentação exige leitura autoral final, não nova confirmação da coleta.
+- **Fundamentação de SDD complementada:** Gotel/Finkelstein (1994), Bjarnason et al. (2015) e Vaithilingam et al. (2022), com textos primários acessíveis e metadados conferidos. Não se atribuem BDD, ATDD, método formal ou ganhos de produtividade ao projeto.
+- **Demonstração complementar de anomalias:** autorizada a incorporação de evidências reais a serem fornecidas pelo pesquisador; nenhum novo conjunto foi disponibilizado nesta execução. Não foi executado experimento nem fabricada série. A demonstração anterior de dois pontos permanece delimitada.
+- **Institucional:** consentimento, maioridade autodeclarada e tratamento agregado descritos diretamente. A ausência de submissão ao CEP continua informada uma vez na metodologia, sem repetição no resumo/discussão/conclusão. Os encaminhamentos sobre ética e formalização de IA não foram convertidos em aprovação, dispensa ou assinatura.
+- **Outras pendências preservadas:** identificação histórica de “Luna”, commit da versão pública, acesso primário integral às referências previamente delimitadas e precedente científico específico B8A/B11. Não são motivo para questionar especulativamente a realidade da coleta.
+- **Validação:** ver `../evidencias/quarta_rodada/` e o relatório vigente. Sem alteração de software, commit, push ou deploy.
+
+Os quadros abaixo são **históricos**; suas contagens e pendências superadas não descrevem esta versão.
+
 ## Encaminhamento vigente — terceira rodada, 15–16/11/2026
 
 As confirmações autorais de coleta encerrada, participantes reais, estratégia qualitativa, supervisão, escopo e manutenção da captura foram acolhidas. Não se solicita repetição dessas decisões. A conferência pública demonstra correspondência dos31 registros; falta de autenticação externa não foi tratada como indício de falsidade. As tabelas seguintes às desta seção são históricas e não descrevem o estado atual.

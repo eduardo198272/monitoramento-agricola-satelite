@@ -1,0 +1,145 @@
+{
+  "date": "2026-11-16T01:06:47.965812-03:00",
+  "pdf_sha256": "fb80346d1ef3e71464aee9724b9a7babb8319f6e31aa1b9c0fb633b0623e70e1",
+  "renderer": "pdftoppm / Poppler, scale-to1500",
+  "pages_rendered": 32,
+  "all_pages_individually_inspected_by_ai": true,
+  "last_changed_pages_reinspected": [
+    24,
+    27
+  ],
+  "remaining_30_pages_identical_to_initial_inspection": true,
+  "declaration_pages_inspected": 2,
+  "all_nine_graphs_visually_inspected": true,
+  "human_visual_approval": false,
+  "page_hashes": [
+    {
+      "page": 1,
+      "sha256": "3d7229c06adb24f2074117b04c8df3d222bfa8b3af36587224f024a8b53fef18"
+    },
+    {
+      "page": 2,
+      "sha256": "a81ff6f386ad829f77209747091e596612dadfc55a9a59f25a24698b60da7bee"
+    },
+    {
+      "page": 3,
+      "sha256": "799b735057b877429159031492dee2a77c052936ceadc9ae4201b7840374c8f3"
+    },
+    {
+      "page": 4,
+      "sha256": "a00eaf4f4030aa4986a76424c24b95a280c9a21296b3ab702dc73a56ce4967b6"
+    },
+    {
+      "page": 5,
+      "sha256": "90839e0e2dc816ed2e8f35cd970bbd515b2e04fd8cf05621daea7df248df9164"
+    },
+    {
+      "page": 6,
+      "sha256": "8cd8fc80f40133bde577fa3f67b41737d7dd89dc9c4e686898a1dbb3592b3568"
+    },
+    {
+      "page": 7,
+      "sha256": "3ddda187a019b46177d59d4644eb83a94a06d14ce360c659a1ddd5c8cb897c1b"
+    },
+    {
+      "page": 8,
+      "sha256": "c293336028274f0fcd6b8f38231e26e9ca27dd8404a3bf7ad0ccf1fd6b71055c"
+    },
+    {
+      "page": 9,
+      "sha256": "a3a3225d6480dfa7d8826d39c038aefb03206f3184ff1742695f462e777ca8d5"
+    },
+    {
+      "page": 10,
+      "sha256": "b3fbdc939e94ff200fdb1f38ab582c3847653119c1b0097cb4cc9dc3bc3526cb"
+    },
+    {
+      "page": 11,
+      "sha256": "1433defca9485b810018b4fd90a9c7c28d0c5930ec4b6efa68fdbd6a8904a1b2"
+    },
+    {
+      "page": 12,
+      "sha256": "77ba48209f6743497581ba00ef524a7f838fe68aa1b10c0a15bbbb40a52c4a20"
+    },
+    {
+      "page": 13,
+      "sha256": "7eb551b9824f09e68ad0e79b099b9ce69557a7851940aca105e80d48aca9e1e0"
+    },
+    {
+      "page": 14,
+      "sha256": "645ca382b87b2cbba2c29cb66ad4ee7ea5982e1d6e8eb7bb0c8a6c6910c15634"
+    },
+    {
+      "page": 15,
+      "sha256": "ba1057bda1312dc59e12bb34dcd8ac97234acf0fe3b8b11fe0bddfb92c8190bc"
+    },
+    {
+      "page": 16,
+      "sha256": "9ce2e62c6fefbb5ee95d9e485fcdf9ba8f30a9e5ccce1b8f165ede50b224ecc8"
+    },
+    {
+      "page": 17,
+      "sha256": "03e4aa4e29521db98cc0d415e49eec15be9553052ed3c830a9d6c761dcd54f18"
+    },
+    {
+      "page": 18,
+      "sha256": "891a8c446809d749ada3b14293d0fc926d4b52356a9086430cd868ada6da9068"
+    },
+    {
+      "page": 19,
+      "sha256": "a31538f4029e12949003c14897f639121ca5f54ccef445de97ba73d68c86a0a6"
+    },
+    {
+      "page": 20,
+      "sha256": "f3e6dc23252ba7d597e256183fbbf5421edb78987186823b640a9354434a1f56"
+    },
+    {
+      "page": 21,
+      "sha256": "d576aaf4ddd448823ac440795c943f67fd67d348ed70062812d28cb1801cbbb3"
+    },
+    {
+      "page": 22,
+      "sha256": "eaff4d06133fe8dce9dd9cdaaf5e53d1592574466f116da7c5325e5ec413c87d"
+    },
+    {
+      "page": 23,
+      "sha256": "0eecc3d65714b666f19f3b1066a34a53210cb51e7ac5eeb261cf2bb7ae6fa23c"
+    },
+    {
+      "page": 24,
+      "sha256": "d53944d3a0608292fd54e43eecd7d59b3145ccf5d561d57d12799aba04436c42"
+    },
+    {
+      "page": 25,
+      "sha256": "756747d45fafc8d3be6758fbc2a051c42a4dad09c74198daf032a0c906d504af"
+    },
+    {
+      "page": 26,
+      "sha256": "40d413acaf953482c98b1d422b41f32bb7b82bc01f4ea4f4b193f0d6dff2c25d"
+    },
+    {
+      "page": 27,
+      "sha256": "d6ceb6a1a09a865ce35b5d12615406a4e94abdfca1486aac3fea5d8cfbb3c478"
+    },
+    {
+      "page": 28,
+      "sha256": "4e8efd9fcc097a7e987fe4ded2468aeed69bad2d6301e36a4277c8e6963620be"
+    },
+    {
+      "page": 29,
+      "sha256": "2148fe27c42c892d466bf31c2fcf6dca49ba8f3c988a5492b65de93f2a6cb433"
+    },
+    {
+      "page": 30,
+      "sha256": "6e25c36b59551bda5d207ffa9b53f441175165f84d7e32f61f34a025218266fb"
+    },
+    {
+      "page": 31,
+      "sha256": "086edba72b370ed95a4bd74eddcbb429611e83ec60c2133120606e060eb7cebc"
+    },
+    {
+      "page": 32,
+      "sha256": "2f6d6986c3842af35962565cc5332b19ed57839e56a51c0ec2e6a02adadd784e"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+\newpage
+\section{Materiais e métodos}\label{chap:metodos-final}
+
+\subsection{Caracterização da pesquisa e fontes de evidência}
+
+O estudo consiste no desenvolvimento e na avaliação de um artefato computacional para monitoramento agrícola. Os procedimentos compreenderam consulta bibliográfica dirigida, especificação de funcionalidades, implementação modular, testes automatizados, demonstração funcional e questionário exploratório. A consulta à literatura apoiou a definição dos métodos e a interpretação dos resultados, sem protocolo de revisão sistemática.
+
+A análise da implementação utilizou o código-fonte, as especificações funcionais, os registros de decisões e os testes. Foram examinadas as fronteiras entre interface, processamento, armazenamento, componente HTML/JavaScript e exportações. A matriz de rastreabilidade relaciona objetivos, requisitos, funções e evidências de avaliação em \path{docs/artigo_final/RASTREABILIDADE_TCC.md}.
+
+O desenvolvimento adotou SDD, com especificações funcionais, critérios de aceitação e tarefas mantidos em \path{docs/specs}. As alterações foram organizadas em ramificações do controle de versão e integradas por revisão. As decisões técnicas e arquiteturais e a supervisão da assistência de IA permaneceram sob responsabilidade do pesquisador. As especificações orientaram a implementação e as verificações; o código e os testes registram o comportamento efetivamente disponibilizado.
+
+Os testes automatizados foram combinados com verificações manuais. Para as divergências dos contratos de dados, casos de regressão reproduziram o comportamento e verificaram os ajustes.
+
+\subsection{Materiais e ambiente}
+
+A solução foi implementada em Python. O Streamlit coordena a interface e o estado da sessão, enquanto Folium/Leaflet apresentam os mapas e o Earth Engine executa as operações raster. Após a transferência dos resultados, NumPy e pandas organizam os dados locais e Plotly produz os gráficos. Para disponibilizar esses resultados fora da interface, ReportLab, Pillow e Matplotlib apoiam os relatórios estáticos, e openpyxl gera planilhas. A biblioteca geemap permanece em operações e mapas auxiliares, mas não é responsável por toda a interface atual.
+
+O arquivo \texttt{requirements.txt} fixa as dependências. A execução da suíte utilizou Linux x86\_64, Python 3.14.4, pytest 9.0.3, pytest-cov 7.1.0 e coverage 7.14.0. A preparação para hospedagem no Streamlit Community Cloud possui registro separado de resolução de dependências para Python 3.12.
+
+\subsection{Entradas e requisitos}
+
+As entradas principais são um polígono, duas datas e a escolha de NDVI, NDWI, NDMI ou todos os índices. A busca textual serve para navegação, não para inferir automaticamente limites de uma propriedade. A análise depende de geometria válida e intervalo cuja data final não anteceda a inicial. Salvar uma localização não executa análise nem associa automaticamente uma cultura.
+
+Os requisitos implementados abrangem seleção e reutilização de áreas, processamento espectral, exploração de mapas e séries, contexto meteorológico e exportação. A avaliação técnica examinou regras de entrada, integração e consistência das saídas. Na execução local, a própria máquina hospeda o servidor Streamlit.
+
+\subsection{Aquisição de imagens e qualidade}
+
+O módulo \texttt{earth\_engine.py} consulta a coleção \texttt{COPERNICUS/S2\_SR\_HARMONIZED} e mantém as imagens que possuem interseção com a área selecionada. Na interface, as datas inicial e final fazem parte do período solicitado, em Tempo Universal Coordenado (UTC). O Earth Engine, porém, não inclui o instante final de \texttt{ee.Filter.date}. Por isso, a aplicação envia o início do dia seguinte como limite: $[d_{\mathrm{inicial}},d_{\mathrm{final}}+1\ \mathrm{dia})$ \citep{GOOGLE_EE_DATE}. Assim, selecionar a mesma data nos dois campos corresponde a um dia completo. Uma data final anterior à inicial é rejeitada.
+
+Antes de calcular os índices, o sistema filtra as imagens pela informação de cobertura de nuvens do produto. A condição padrão é estrita: \texttt{CLOUD\_COVERAGE\_ASSESSMENT < 20}, portanto o valor deve ser inferior a 20. Essa informação descreve o arquivo do produto que contém o grânulo, não uma medição de nuvens feita dentro da área selecionada. Todas as imagens aprovadas nos filtros seguem para o processamento; não é escolhida apenas a mais recente ou a menos nublada.
+
+Depois desse filtro, a banda de qualidade QA60 é usada para excluir posições marcadas como nuvens opacas ou cirrus. A máscara mantém somente as posições em que os bits 10 e 11 dessa banda são zero. O conjunto selecionado contém B2, B3, B4, B8, B8A, B11 e QA60, embora B2 e B3 não entrem nas três equações dos índices.
+
+Esse procedimento não inclui uma máscara adicional específica para sombras, neve ou probabilidade de nuvens. Há também uma restrição histórica: o catálogo informa que QA60 esteve mascarada entre 25/01/2022 e 28/02/2024, inclusive, e descreve sua posterior reconstrução a partir de classificações auxiliares \citep{GOOGLE_S2_SR}. Assim, encontrar imagens na coleção não garante que restarão dados úteis após aplicar a máscara em qualquer período.
+
+Os índices das \cref{eq:ndvi-final,eq:ndwi-final,eq:ndmi-final} são calculados por \texttt{normalizedDifference}, renomeados e associados a \texttt{system:time\_start} e \texttt{system:index}. A série preserva data, valor e identificador de aquisição quando disponível, permitindo distinguir observações do mesmo dia.
+
+\subsection{Produtos espaciais e temporais}\label{sec:agregacoes-final}
+
+O processamento produz um mapa que combina o período e uma série que mantém os resultados de cada aquisição. Para formar o mapa, o sistema calcula primeiro o índice em cada imagem e depois combina seus valores por mediana em cada posição. Representando por $I_k(p,t)$ o índice $k$ na posição $p$ e aquisição $t$, após as máscaras, a composição é:
+\begin{equation}\label{eq:composto-final}
+ C_k(p)=\operatorname{mediana}_{t\in T_p} I_k(p,t),
+\end{equation}
+em que $T_p$ reúne as observações válidas naquela posição. A ordem é importante: calcula-se a mediana dos índices já obtidos, não o índice a partir de uma mediana prévia das bandas.
+
+Para apresentar um único valor junto ao mapa, o sistema calcula a média espacial da composição $C_k$. Para construir a série temporal, calcula a média espacial separadamente em cada imagem. As duas operações usam o redutor de média do Earth Engine, mas recebem imagens diferentes. Elas podem ser representadas por:
+\begin{align}
+ M_k&=\frac{\sum_{p\in P_C}w_{p,C}C_k(p)}
+                {\sum_{p\in P_C}w_{p,C}},\label{eq:media-composto}\\
+ S_k(t)&=\frac{\sum_{p\in P_t}w_{p,t}I_k(p,t)}
+                  {\sum_{p\in P_t}w_{p,t}}.\label{eq:serie-final}
+\end{align}
+Nessas expressões, $P_C$ e $P_t$ são os conjuntos de posições válidas, e $w$ indica quanto cada posição contribui para a média. A soma dos pesos, no denominador, deve ser positiva. No redutor ponderado padrão, o peso é o menor valor entre a máscara e a fração aproximada do pixel coberta pela área, não o produto dos dois. Essa fração é representada internamente em oito bits; interseções inferiores a aproximadamente $1/256$ podem receber peso zero \citep{GOOGLE_EE_REGION}.
+
+A aplicação não acrescenta outra ponderação ao resultado. A chamada é \texttt{ee.Reducer.mean()}, com escala de processamento \texttt{scale=10} e limite \texttt{maxPixels=1e9}, sem definição explícita de \texttt{crs} nessa etapa \citep{GOOGLE_EE_REDUCE}.
+
+Cada resultado responde a uma pergunta diferente. $C_k(p)$ informa o valor de uma posição no mapa composto; $M_k$ resume esse mapa em uma média da área; e $S_k(t)$ informa a média da área em uma aquisição. Esses valores não devem ser usados como se fossem equivalentes. Também é necessário considerar a grade espacial: o sistema de referência de coordenadas (CRS) não é fixado explicitamente nas reduções anteriores. A grade em projeção Universal Transversa de Mercator (UTM), com escala de 10 m, é definida depois, para a consulta interativa.
+
+Ao organizar a série em \texttt{time\_series.py}, o sistema omite os registros sem valor retornado pelo serviço, converte os demais em números e os ordena pela data no formato ISO. Não estima valores entre as observações, não preenche lacunas e não faz agrupamento mensal ou composição diária. Imagens diferentes de uma mesma data podem gerar registros distintos, pois datas repetidas não são eliminadas. A contagem de imagens da coleção é feita antes da máscara; por isso, pode ser maior que a quantidade de pontos válidos na série.
+
+\begin{figure*}[htbp]
+\centering
+\resizebox{0.96\textwidth}{!}{\input{fig/fluxo_analise}}
+\caption{Derivação dos produtos espaciais e temporais a partir da coleção filtrada.}
+\label{fig:fluxo-analise}
+\fonteTCC{elaborado pelo autor a partir de \texttt{pipeline.py} e \texttt{time\_series.py}.}
+\end{figure*}
+
+\subsection{Regra de detecção e tendência}\label{sec:anomalias-final}
+
+Para sinalizar quedas na série, o sistema compara cada valor com os três registros imediatamente anteriores. Primeiro, calcula a média e o desvio padrão desses registros; depois, verifica quanto o valor atual se afasta dessa referência. Esse afastamento é expresso pelo escore $z_i$. A janela considera três observações, não três dias, pois o intervalo entre imagens pode variar. Nas equações seguintes, $x_i$ representa o valor na posição $i$ da série, com contagem iniciada em zero. O cálculo pode ser aplicado a partir da quarta observação, quando $i\geq3$:
+\begin{align}
+ \mu_i&=\frac{1}{3}\sum_{j=i-3}^{i-1}x_j,\\
+ \sigma_i&=\sqrt{\frac{1}{3}\sum_{j=i-3}^{i-1}(x_j-\mu_i)^2},\\
+ z_i&=\frac{x_i-\mu_i}{\sigma_i},\quad \sigma_i>0.\label{eq:escore-final}
+\end{align}
+O algoritmo marca anomalia somente quando $z_i<-1$: o valor atual deve estar mais de um desvio padrão abaixo da média dos três anteriores. Os três primeiros registros não têm uma janela completa e não são sinalizados. O mesmo ocorre quando $\sigma_i=0$, pois não é possível dividir o desvio por zero. Nesses casos, a saída armazena escore zero por convenção do algoritmo, não como resultado de um escore calculado.
+
+O desvio padrão usa o divisor $N$, correspondente à opção \texttt{ddof=0} do NumPy, em vez de $N-1$ da fórmula amostral \citep{NUMPY_STD}. A denominação populacional dessa fórmula não significa que os três valores representem todas as condições agrícolas possíveis. A média usa apenas os registros anteriores e exclui o valor atual.
+
+A função \texttt{detect\_anomalies} pressupõe entradas numéricas compatíveis, sem tratamento adicional específico de NaN, marcador de valor não numérico. Valores já sinalizados continuam participando das janelas seguintes. A janela de três registros e o limiar $-1$ são escolhas heurísticas, isto é, regras particulares da aplicação sem calibração experimental documentada. Elas não modelam sazonalidade nem são ajustadas por cultura.
+
+Para resumir a tendência, o sistema ajusta uma reta à sequência de valores. A função \texttt{np.polyfit} calcula $x_i\simeq a\,i+b$ pelo método dos mínimos quadrados, minimizando $\sum_i[x_i-(a\,i+b)]^2$ \citep{HYNDMAN2021,NUMPY_POLYFIT}. O coeficiente $a$ é a inclinação, que indica a variação do índice por posição na sequência; $b$ é o intercepto, o valor da reta na posição zero.
+
+A tendência é classificada como crescente se $a>0{,}01$, decrescente se $a<-0{,}01$ e estável nos demais casos. Esses limites também são heurísticos, sem calibração documentada. Como o ajuste usa a ordem das observações e não os dias transcorridos, a inclinação não é uma taxa diária. Quando há menos de dois pontos, a função retorna o rótulo estável por convenção, embora os dados sejam insuficientes para estimar uma inclinação.
+
+\begin{figure*}[htbp]
+\centering
+\resizebox{0.92\textwidth}{!}{\input{fig/fluxo_anomalias}}
+\caption{Heurística unilateral de sinalização de desvios negativos.}
+\label{fig:fluxo-anomalias}
+\fonteTCC{elaborado pelo autor a partir de \texttt{anomalies.py}.}
+\end{figure*}
+
+\subsection{Consulta e agregação meteorológica}\label{sec:clima-final}
+
+O contexto meteorológico é obtido por uma consulta diária da NASA POWER nas coordenadas do centroide calculado pelo Earth Engine. A requisição usa o serviço \texttt{/api/temporal/daily/point}, a comunidade agrícola \texttt{community=ag}, datas no formato \texttt{YYYYMMDD}, resposta JSON e tempo limite de 30 s. São solicitados os parâmetros \texttt{PRECTOTCORR}, \texttt{T2M} e \texttt{ALLSKY\_SFC\_SW\_DWN}. Embora o código contenha nomes internos para \texttt{T2M\_MAX} e \texttt{T2M\_MIN}, o fluxo padrão não consulta temperaturas máximas e mínimas.
+
+No catálogo diário da comunidade agrícola, \texttt{PRECTOTCORR} corresponde à precipitação corrigida, em mm/dia; \texttt{T2M}, à temperatura média do ar a 2~m, em °C; e \texttt{ALLSKY\_SFC\_SW\_DWN}, à energia solar de ondas curtas incidente em superfície horizontal sob todas as condições de céu, em \radiacaoTCC{} \citep{NASA_POWER_PARAMETERS}. Para a integração efetiva, prevalece a unidade declarada em cada resposta, especialmente na radiação.
+
+A resposta é organizada em uma tabela ordenada por data. O código $-999$, usado para indicar ausência de dado, não é tratado como uma medição. Para resumir o período, o sistema soma a precipitação e calcula as médias de temperatura e radiação, usando separadamente as observações válidas de cada variável. Esses conjuntos de dias são representados por $D_P$, $D_T$ e $D_R$:
+\begin{align}
+ P_{\mathrm{total}}&=\sum_{d\in D_P} P_d,\\
+ \overline{T}&=\frac{1}{|D_T|}\sum_{d\in D_T}T_d,\\
+ \overline{R}&=\frac{1}{|D_R|}\sum_{d\in D_R} f(u)R_d.\label{eq:radiacao-codigo}
+\end{align}
+Na \cref{eq:radiacao-codigo}, $f(u)=1$ para \radiacaoTCC{} e $f(u)=3{,}6$ para \radiacaoKWhTCC{}, conforme a unidade declarada nos metadados. A conversão decorre de $1\ \mathrm{kWh}=1000\ \mathrm{J/s}\times3600\ \mathrm{s}=3{,}6\ \mathrm{MJ}$, pelas definições de watt e prefixos do SI \citep{BIPM_SI}. Unidade ausente ou desconhecida torna a radiação indisponível e gera aviso, sem inferência pela magnitude. Valores não finitos, booleanos, inválidos e a sentinela $-999$ são descartados. A coluna normalizada em \radiacaoTCC{} é compartilhada pelo resumo e pelas exportações.
+
+A soma da precipitação disponível não assegura cobertura integral do intervalo caso haja lacunas. A requisição define \texttt{time-standard=UTC}, mantendo as duas datas inclusivas em correspondência ao período espectral \citep{NASA_POWER_DAILY}. A consulta é compartilhada entre os índices da mesma análise. A apresentação conjunta fornece contexto, sem calcular correlação ou atribuir causalidade.
+
+\subsection{Procedimentos de avaliação técnica}\label{sec:avaliacao-final}
+
+A avaliação técnica combinou testes unitários de regras específicas, testes de integração entre componentes e regressões dos contratos de dados, distinguindo execução de caminhos e verificação de comportamento \citep{BENDER2020}.
+
+A interação com serviços externos e a navegação em navegador foram registradas separadamente. Essa separação é necessária porque substituir um serviço durante um teste permite controlar sua resposta, mas não demonstra que o fluxo completo funciona com o serviço real.
+
+A suíte foi executada com tracer C e cobertura de ramificações. Os testes espectrais verificaram bandas, filtros e chamadas com substitutos da API. A persistência utilizou arquivos temporários; as exportações foram inspecionadas quanto a estrutura e valores controlados; e os testes Streamlit combinaram widgets reais e serviços substituídos. O JavaScript recebeu verificações independentes.
+
+Uma requisição curta à NASA POWER verificou metadados e datas em uma coordenada técnica. Essa resposta, em tempo solar local (LST, \textit{Local Solar Time}), foi preservada como entrada de regressão para unidades, resumo e exportação; o fluxo da aplicação consulta UTC. Os testes JavaScript examinaram legenda, consulta à grade e descompressão. Matrizes controladas permitiram medir o tamanho da transferência, separadamente da demonstração em navegador com serviços reais.
+
+\subsection{Avaliação com potenciais usuários}\label{sec:pesquisa-usuarios}
+
+A avaliação com usuários investigou execução autodeclarada de tarefas, experiência de uso e utilidade percebida. O questionário exploratório e descritivo reuniu questões quantitativas e abertas. O formulário \url{https://forms.gle/VXqtdCgH9us774VE6} foi divulgado por WhatsApp e LinkedIn para profissionais e estudantes de agronomia, produção rural, tecnologia e áreas afins. A coleta ocorreu de 06 a 15 de novembro de 2026, no horário de Brasília (UTC$-3$), e foi encerrada.
+
+Como cada pessoa decidiu participar voluntariamente, a coleta caracteriza amostragem não probabilística por adesão, sujeita à autoseleção \citep{AAPOR2013}. Não há um cadastro do público convidado que permita calcular a taxa de resposta ou afirmar representatividade populacional.
+
+A apresentação solicitou exploração prévia da plataforma e orientou evitar informações pessoais. O instrumento contém três itens de perfil, nove atividades, nove afirmações sobre uso, onze recursos avaliados quanto à utilidade, oito afirmações sobre compreensão e aplicabilidade, cinco campos discursivos e uma nota geral de 0 a 10. A estrutura exportada possui 50 colunas, incluindo carimbo e triagem. O conhecimento declarado refere-se à agricultura de precisão; a experiência prévia e sua frequência são captadas em um mesmo item.
+
+Antes dos cálculos, as respostas foram conferidas quanto à elegibilidade, ao preenchimento e à duplicidade. Os \UsuariosN{} registros indicam ``Sim'' na pergunta conjunta sobre maioridade, leitura e consentimento, e na declaração de exploração de ao menos um recurso. Não há duplicatas exatas, nem respostas integralmente iguais ao desconsiderar o carimbo. Não foram coletados identificadores individuais, e a unidade da análise descritiva é a submissão elegível ao questionário.
+
+O conjunto definitivo compreende as \UsuariosN{} respostas do snapshot da \href{https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/edit?usp=sharing}{planilha pública da pesquisa} preservado ao término da coleta. A análise utiliza essa exportação fixa, sem incorporar registros acrescentados posteriormente à fonte pública.
+
+Nas tarefas, as categorias são ``Consegui sem ajuda'', ``Consegui com ajuda'', ``Tentei, mas não consegui'' e ``Não tentei''. A conclusão entre tentativas é a razão entre as duas primeiras e o total das três primeiras. O questionário agrega séries temporais e possíveis anomalias em uma atividade e reúne a exportação de relatório ou dados em outra; não se estimam taxas separadas para recursos que o instrumento não separou. Trata-se de autorrelato, sem observação controlada, cronometração ou inspeção dos logs de cada utilização.
+
+As perguntas de concordância usam cinco categorias, de discordo totalmente a concordo totalmente. Nas perguntas de utilidade, as categorias vão de nada útil a muito útil; ``Moderadamente útil'' ocupa a posição intermediária, mas não significa neutralidade. Para respeitar essa ordenação, a análise prioriza a contagem e o percentual das respostas em cada categoria, a mediana e os quartis, conforme as cautelas discutidas por \citet{SULLIVAN2013}. Os agrupamentos 4--5, 3 e 1--2 ajudam a resumir os resultados sem substituir as distribuições completas.
+
+A base de cálculo depende da pergunta. ``Não consegui avaliar'', ausências e valores inválidos são contados separadamente e não entram no total de respostas usado para os percentuais ordinais. Nas tarefas, ``Não tentei'' permanece na distribuição geral, mas fica fora do cálculo de conclusão entre tentativas. Não há preenchimento estimado de respostas ausentes.
+
+Os quartis usam interpolação linear, e o intervalo interquartil é $Q_3-Q_1$. Médias e desvios padrão amostrais dos códigos ordinais são disponibilizados somente como descrições complementares; a nota geral recebe também moda, extremos e distribuição. Não se construíram escores agregados de usabilidade ou aceitação, nem se denominou o instrumento SUS, TAM, UTAUT ou NPS. Seis cruzamentos descritivos usam agrupamentos amplos, com supressão de grupos com menos de cinco respostas válidas, sem testes de hipótese ou conclusões causais. Isso reduz a exposição de pequenos grupos, mas não certifica anonimato.
+
+A estratégia qualitativa foi prevista no planejamento e empregou codificação semântica multirrótulo, com categorias organizadas a partir do corpus. A identificação e organização de padrões foram orientadas conceitualmente por \citet{BRAUN2006}, sem adoção integral de seu protocolo. A IA executou a codificação e o agrupamento sob supervisão do pesquisador, que conferiu as treze categorias, suas atribuições e interpretações. Cada submissão conta uma vez em cada tema, mesmo quando o menciona em perguntas diferentes.
+
+Foram codificadas 142 células preenchidas em 31 submissões; uma submissão deixou os cinco campos abertos vazios. Entre as 160 células possíveis, 18 estavam ausentes, incluindo catorze comentários opcionais. Ausências não receberam categorias nem foram interpretadas como ausência de dificuldade. As frequências temáticas por submissão usam as \UsuariosN{} respostas como denominador. Não houve dupla codificação independente ou medição de concordância.
+
+A versão pública permaneceu estável durante a coleta e antecede os ajustes de contratos consolidados em \texttt{28759bf}. Seu commit exato não está identificado. Por isso, o questionário e a avaliação técnica correspondem a versões distintas, sem associação causal entre dificuldades relatadas e ajustes posteriores.
+
+O formulário informou finalidade acadêmica, participação voluntária e consentimento conjunto com declaração de maioridade, sem solicitar nome ou e-mail. Os resultados foram apresentados de forma agregada, e os excertos foram desvinculados dos atributos de perfil para reduzir a identificação indireta. Não houve submissão ao Comitê de Ética em Pesquisa; o enquadramento institucional permanece a apreciar.

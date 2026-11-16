@@ -1,0 +1,115 @@
+\clearpage
+\section{Apresentação da plataforma desenvolvida}\label{chap:plataforma-final}
+
+As capturas apresentam o fluxo de interação, da escolha da área à exportação. São exemplos de interface obtidos em diferentes execuções, distintos da demonstração instrumentada apresentada nos resultados. A interpretação dos valores e das unidades é avaliada a partir dos dados exportados e dos testes, não apenas da aparência das telas.
+
+\subsection{Organização e entrada espacial}
+
+A interface reúne busca geográfica, período, índices e comando de análise ao redor do mapa (\cref{fig:autor-inicial}). A busca enquadra uma região; o polígono desenhado define os limites efetivos da consulta (\cref{fig:autor-desenho}).
+
+\capturaautor[p]{inicial.png}{Interface inicial, com controles analíticos e mapa de seleção}{inicial}
+Área, perímetro e centroide permitem conferir a geometria. O salvamento associa um nome ao polígono para recuperá-lo em outra consulta. Na web, a permanência é limitada à sessão; a transferência em GeoJSON permite reutilizar as áreas posteriormente.
+
+\capturaautor{desenho.png}{Polígono desenhado no mapa, medidas da geometria e comando de salvamento}{desenho}
+
+A \cref{fig:autor-geojson} reúne seleção do arquivo e confirmação da importação. O lote é validado antes de atualizar o armazenamento, preservando os limites e as regras descritos na implementação.
+
+\begin{figure*}[htbp]
+\centering
+\begin{minipage}[t]{0.30\textwidth}
+\vspace{0pt}
+\centering
+\includegraphics[width=\linewidth]{fig/capturas_autor/geojson_upload_barra.png}
+\par\smallskip
+{\small (a) Controle de upload.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\textwidth}
+\vspace{0pt}
+\centering
+\includegraphics[width=\linewidth]{fig/capturas_autor/geojson_arquivo_barra.png}
+\par\smallskip
+{\small (b) Arquivo selecionado.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\textwidth}
+\vspace{0pt}
+\centering
+\includegraphics[width=\linewidth]{fig/capturas_autor/geojson_importado_barra.png}
+\par\smallskip
+{\small (c) Confirmação da importação.}
+\end{minipage}
+\caption{Importação de localizações em GeoJSON: controle, arquivo selecionado e confirmação.}
+\label{fig:autor-geojson}
+\fonteTCC{capturas da aplicação.}
+\notaTCC{recortes da barra lateral com conteúdo preservado.}
+\end{figure*}
+
+\subsection{Configuração e produtos analíticos}
+
+A opção ``Todos'' disponibiliza os três índices para a mesma área e período. A alternância entre resultados calculados preserva a análise; mudanças nas entradas exigem novo processamento.
+
+O painel apresenta a área, a média espacial do mapa composto, a tendência e uma visão geral por índice. A quantidade de imagens informa quantas passaram pelos filtros, não quantos dias estavam sem nuvens ou quantas observações foram válidas em cada pixel. Os indicadores chamados NDWI e NDMI continuam sendo variantes NIR--SWIR próximas, diferenciadas pela banda NIR, conforme explicado na fundamentação.
+
+O mapa da \cref{fig:autor-mapa} apresenta a composição NDVI e a leitura por posição. O gradiente permite explorar contrastes internos, sem atribuir classes agronômicas. O mapa-base orienta a navegação e é distinto da imagem analítica Sentinel-2.
+
+\capturaautor{mapa_indice.png}{Mapa NDVI com gradiente, contorno da área, legenda e leitura pontual; a seleção ``Todos'' disponibiliza a alternância entre os índices}{mapa}
+
+\subsection{Exploração espacial, temporal e meteorológica}
+
+Ao mover o cursor ou tocar no mapa, o usuário pode consultar o valor de uma célula e examinar diferenças dentro da área. A leitura é feita no navegador, a partir da grade da composição já transferida. Quando a posição está fora do polígono, não possui dado ou ultrapassa a matriz, uma mensagem informa a situação. Os valores aparecem com quatro casas decimais por escolha de apresentação; isso não indica precisão agronômica.
+
+Enquanto o mapa resume o período, a série apresenta a média espacial por aquisição. Os segmentos unem observações, sem estimar valores diários intermediários. A \cref{fig:autor-series} mostra o painel e parte do gráfico; seu enquadramento original não inclui o eixo de datas. As séries completas permanecem disponíveis nas saídas tabulares.
+
+\capturaautor{painel_series.png}{Resumo do índice, visão geral multiíndice e trecho da série NDVI; o eixo temporal fica fora do enquadramento original}{series}
+
+A lista de anomalias informa as quedas sinalizadas em relação à janela anterior, ou a ausência de sinalizações. Esses recursos permitem examinar mudanças na série, sem classificar doenças ou identificar suas causas. No exemplo da \cref{fig:autor-clima}, a listagem aparece acima do contexto meteorológico.
+
+O gráfico climático combina precipitação em barras e temperatura média em linha, com eixos próprios. O contexto é compartilhado entre os índices da análise (\cref{fig:autor-clima}).
+
+\capturaautor{anomalias_clima.png}{Listagem de sinalizações NDVI e gráfico de precipitação e temperatura da NASA POWER}{clima}
+
+\subsection{Relatórios e interoperabilidade}
+
+Para obter os arquivos, o usuário primeiro solicita sua preparação e depois realiza o download. O PDF reúne uma síntese visual, o XLSX organiza os dados em abas e o ZIP contém tabelas CSV. Todos são gerados a partir do registro da análise concluída, sem recalcular os índices para cada formato. No PDF, o mapa usa escala fixa $[-1,1]$, indicada na legenda; por isso, seu contraste pode ser diferente do mapa interativo, cuja escala é ajustada aos valores encontrados.
+
+A \cref{fig:autor-relatorio-pdf} ilustra a organização do PDF, com área, indicadores e contexto meteorológico. A captura é mantida como exemplo visual do documento exportado, não como evidência da verificação de radiação da \cref{sec:resultado-unidades}.
+
+\capturaautor{relatorio_pdf.png}{Exemplo de relatório PDF exportado pela plataforma}{relatorio-pdf}
+
+\subsection{Adaptabilidade e acesso público}
+
+Para acomodar telas menores, as regras de estilo CSS reorganizam os controles em larguras até 1.100, 768 e 480 pixels. Trata-se da mesma aplicação web, com mapas e gráficos no navegador, não de um aplicativo móvel nativo. A consulta por toque permite explorar valores sem cursor. Já o desenho de áreas, a importação e os downloads também dependem dos recursos do navegador e do sistema operacional.
+
+As capturas móveis mostram mapa e indicadores em um exemplo distinto do desktop (\cref{fig:mobile}). Elas ilustram a adaptação da interface; a verificação por toque em viewport de 390 pixels integra a demonstração funcional.
+
+A aplicação está disponível no \href{https://eduardo198272-monitoramento-agricola-satel-streamlit-app-q0mow9.streamlit.app/}{endereço público Streamlit}, também indicado pelo QR Code da \cref{fig:mobile}. A versão acessível durante a coleta é distinguida da versão dos testes na metodologia.
+
+\begin{figure*}[htbp]
+\centering
+\begin{minipage}[t]{0.36\textwidth}
+\centering
+\vspace{0pt}
+\includegraphics[width=\linewidth,height=0.58\textheight,keepaspectratio]{fig/capturas_autor/mobile_mapa.jpeg}
+\par\smallskip
+{\small (a) Mapa e controles de análise.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.36\textwidth}
+\centering
+\vspace{0pt}
+\includegraphics[width=\linewidth,height=0.58\textheight,keepaspectratio]{fig/capturas_autor/mobile_painel.jpeg}
+\par\smallskip
+{\small (b) Resumo e indicadores.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.20\textwidth}
+\centering
+\vspace{0pt}
+\includegraphics[width=\linewidth]{fig/qr_plataforma.png}
+\par\smallskip
+{\small (c) Acesso público.}
+\end{minipage}
+\caption{Interface em navegador móvel e acesso público.}
+\label{fig:mobile}
+\fonteTCC{capturas da aplicação e QR Code elaborado pelo autor.}
+\notaTCC{as telas mostram um exemplo distinto do desktop.}
+\end{figure*}
+
+\clearpage

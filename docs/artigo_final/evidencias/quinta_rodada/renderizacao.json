@@ -1,0 +1,169 @@
+{
+  "pdf_sha256": "a548bc214e5740584b70aeaba34d0ebf3bbb51bafdd3fc4bf5517a000079738f",
+  "renderer": "pdftoppm, -scale-to 1500",
+  "all_pages_individually_inspected_by_ai": true,
+  "human_visual_approval": false,
+  "physical_print_proof": false,
+  "pages": [
+    {
+      "page": 1,
+      "sha256": "763e131f2d4bb09ff59f35d53d35fa6830fb5fe8f4f5cb685aeeb8e169cbe9f7",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 2,
+      "sha256": "0ebb269b579480acbfcb95466b7f93d464b99baefed8fe6d40165a5fa9e2cfc1",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 3,
+      "sha256": "e0c3a032745cb70865d24acbf7e1ae3bcbd73400fb9030d02feb69c2a17d9d3b",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 4,
+      "sha256": "315a1a0fc8b829703ddfb60918d8612a19571b356ad2b7ea3d91f6f690f8e5e1",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 5,
+      "sha256": "d1ecbf43b851517a42c3cbc3fb1010a0cbcf57ffdf4712eab7120d2284d57999",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 6,
+      "sha256": "cc2bfeeba37012a92890a6df8bc68da7dad8846203314bd3ebe55b842aed4bba",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 7,
+      "sha256": "c0ec0ef1ffe3bc453e4466e65275a0be312bbd7e8bfb4733523e2be53338611d",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 8,
+      "sha256": "941c9a3ca4fb77d6d516ffd4bc3fd34130da5a3f5aa7044a2879fe22eb320229",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 9,
+      "sha256": "43e8e65f27419063adf563c341464657e91cb0c11dbad324b6396f424c96197b",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 10,
+      "sha256": "a48358ba8e9886b1c719c844bcfed29ca709907f8d3c0b30e1960769ec2d04a3",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 11,
+      "sha256": "1433defca9485b810018b4fd90a9c7c28d0c5930ec4b6efa68fdbd6a8904a1b2",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 12,
+      "sha256": "c0cde85283e36882198ad16c449954a64161ffd45533fe253305780198e20ec4",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 13,
+      "sha256": "36e9c4ee1a95aaeded8c14159080584ae97d8a16dcc996301d78f5d56f028874",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 14,
+      "sha256": "11ec8c14a42c55d02a6317832744fcddb7ce8e5e7ae2afd64ae5d8f2f0c3bc65",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 15,
+      "sha256": "274df0d8cb141b1dbd68e545ef7ce1938ee8013efd413d6551e5d8f1ff2e6b8b",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 16,
+      "sha256": "642ce245fcfa49e576c1ab6578b8585a2ee44f12a95692277f6c721c8e17293b",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 17,
+      "sha256": "03e4aa4e29521db98cc0d415e49eec15be9553052ed3c830a9d6c761dcd54f18",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 18,
+      "sha256": "573586b3198b5888ffc9be06e9bf341eb6595aa87b6b048e1a7e8eb7f370f1ba",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 19,
+      "sha256": "fac961398c6c7aac4e32139ad03b1cb6b8370c7448ec83a77d781e5c3e1b7e50",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 20,
+      "sha256": "35b368ff71454523598936c6997d2892eb10a2f06fb877f88abf97b86a1e14fa",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 21,
+      "sha256": "ec83f1b84f8f5b446c474650354cda0e820714419fe4ced8f8d4949f99b43db3",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 22,
+      "sha256": "84ddc05a33cbbcfc2fc85ea382b5f4bd20bcdeb3b40498b26a229302eba1d3a2",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 23,
+      "sha256": "812af6a315bfab993dee5b68189c1735ace429bc6c4d77662f8f3b166463b947",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 24,
+      "sha256": "8a0fdb30e27f229d30e406151f0446594eba41d7855cf1a56e24ac5be78449dd",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 25,
+      "sha256": "04c8eb22621a040db8ba4604e5ec6ad2973ee934fefe54bb882050d706cd260c",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 26,
+      "sha256": "b4e0e3fe8b92ecc4450ce942c1b9bb52662ba7dfc41e8785c399811ff88ab851",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 27,
+      "sha256": "ee430e75014d8906526fc3bf53cd266256d2a0dc477d92a6f4c15a77e39a1283",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 28,
+      "sha256": "538255f225da894173a9151954955f24294905d0ad3c20bb00dee4d2ce605f5e",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 29,
+      "sha256": "b7289aece70d60f588212a77130febd98fcde04fc13560c2cb1502b4d47ba2d3",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 30,
+      "sha256": "b877aef775a6b7fde386d98412c001fc055a1e6dcdf0726126ad5e4afe6dd558",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 31,
+      "sha256": "919d7b027a4282a44f33fbaf546788a06fa7484163180a9df2cb0507fd04e27c",
+      "inspected_by_ai": true
+    },
+    {
+      "page": 32,
+      "sha256": "259104a50973f062ac5cfd396a7c6ec6b89c492b4498002e3fce1c85eae8ddb1",
+      "inspected_by_ai": true
+    }
+  ]
+}

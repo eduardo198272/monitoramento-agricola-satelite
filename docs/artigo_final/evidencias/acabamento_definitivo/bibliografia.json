@@ -1,0 +1,106 @@
+{
+  "all_63_keys_preserved": true,
+  "cited_entries": 54,
+  "authors_titles_and_other_fields_preserved": true,
+  "metadata_changes_only": {
+    "NOMINATIM_POLICY": {
+      "year": {
+        "before": "[20--?]",
+        "after": "2026"
+      },
+      "note": {
+        "before": null,
+        "after": "Arquivo-fonte atualizado em 11 maio 2026."
+      },
+      "updatedate": {
+        "before": null,
+        "after": "2026-05-11"
+      }
+    },
+    "SENTINELHUB_NDMI": {
+      "year": {
+        "before": "[20--?]",
+        "after": "2026"
+      },
+      "note": {
+        "before": null,
+        "after": "Arquivo-fonte atualizado em 4 jun. 2026."
+      },
+      "updatedate": {
+        "before": null,
+        "after": "2026-06-04"
+      }
+    },
+    "GITHUB_SDD": {
+      "year": {
+        "before": "[20--?]",
+        "after": "2026"
+      },
+      "note": {
+        "before": null,
+        "after": "Arquivo-fonte atualizado em 23 jun. 2026."
+      },
+      "updatedate": {
+        "before": null,
+        "after": "2026-06-23"
+      }
+    },
+    "BJARNASON2015": {
+      "isbn": {
+        "before": null,
+        "after": "9783319186122"
+      },
+      "address": {
+        "before": null,
+        "after": "Cham"
+      }
+    },
+    "VAITHILINGAM2022": {
+      "address": {
+        "before": null,
+        "after": "New York, NY, USA"
+      }
+    }
+  },
+  "exact_doi_url_matches": [
+    "ARAUJO2025",
+    "GAO1996",
+    "PATRICIO2018",
+    "GORELICK2017",
+    "AMANI2020",
+    "WEISS2020",
+    "PHIRI2020",
+    "MCFEETERS1996",
+    "DAVIS1989",
+    "SULLIVAN2013",
+    "BRAUN2006",
+    "SLAIFFER2025",
+    "IZQUIERDO2026"
+  ],
+  "exact_matches_cited": [
+    "AMANI2020",
+    "BRAUN2006",
+    "DAVIS1989",
+    "GAO1996",
+    "GORELICK2017",
+    "IZQUIERDO2026",
+    "MCFEETERS1996",
+    "PATRICIO2018",
+    "SLAIFFER2025",
+    "SULLIVAN2013",
+    "WEISS2020"
+  ],
+  "doi_and_url_fields_retained": true,
+  "distinct_doi_and_url_retained_in_bbl": true,
+  "each_cited_doi_address_occurs_once_per_item": true,
+  "generic_dates_remaining": [
+    "USGS_NDMI",
+    "NIST_OUTLIERS",
+    "NASA_POWER_METHOD",
+    "NASA_POWER_PARAMETERS",
+    "NIST_LOCATION",
+    "EOSDA_GUIDE",
+    "ONESOIL_PLATFORM_DETAIL"
+  ],
+  "date_basis": "Atualização do arquivo-fonte, não publicação original ou acesso."
+}

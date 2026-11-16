@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "command": "tectonic -X compile Relatorio_Final.tex --outdir /tmp/opencode/quinta-rodada/build --keep-logs --keep-intermediates",
+  "pdf_sha256": "a548bc214e5740584b70aeaba34d0ebf3bbb51bafdd3fc4bf5517a000079738f",
+  "pages": 32,
+  "paper": "Letter (612 x 792 pt)",
+  "undefined": false,
+  "overfull": false,
+  "twocolumn_too_tall": false,
+  "bibliography_entries": 63,
+  "cited_entries": 54,
+  "uncited_entries": [
+    "ARAUJO2025",
+    "CHAVES2019",
+    "EOSDA_PLATFORM",
+    "LOVATO2021",
+    "ONESOIL_PLATFORM",
+    "PHIRI2020",
+    "ROUSE1973",
+    "WAZLAWICK2014",
+    "WAZLAWICK2020"
+  ],
+  "warnings_remaining": [
+    "Underfull hbox/vbox",
+    "Substituições de tamanhos de fontes matemáticas herdadas",
+    "Compatibilidade epstopdf/driver XeTeX"
+  ],
+  "normative_certification": false
+}

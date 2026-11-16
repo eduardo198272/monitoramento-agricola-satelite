@@ -1,0 +1,20 @@
+% Complementos editoriais sem substituir a apresentação da classe UPF.
+% natbib/dcu, recuos bibliográficos, fontes e legendas são definidos na classe.
+\AtBeginDocument{%
+  \expandafter\patchcmd\csname palavras_chave\endcsname
+    {Palavras-Chave}{Palavras-chave}{}{%
+    \PackageError{TCC}{Rotulo de palavras-chave nao encontrado}{Conferir a classe.}}}
+% Fonte e notas complementam a legenda sem alterar seu contador ou conteúdo.
+% O tamanho/entrelinha de 9/9 pt acompanha a fonte de legenda da classe.
+\newcommand{\fonteTCC}[1]{\par\smallskip{\fontsize{9pt}{9pt}\selectfont
+  \centering Fonte: #1\par}}
+\newcommand{\notaTCC}[1]{\par{\fontsize{9pt}{9pt}\selectfont
+  \centering Nota: #1\par}}
+% Ajustes técnicos de compatibilidade, sem substituir o estilo dcu:
+% URLs clicáveis/quebráveis e proteção de datas entre colchetes no natbib.
+\renewcommand{\harvardurl}[1]{\textbf{URL:} \url{#1}}
+\renewcommand{\harvarditem}[4][]{%
+  \ifstrempty{#1}{\bibitem[#2({#3})]{#4}}{\bibitem[#1({#3})#2]{#4}}}
+% Notação de unidades mantida; nenhuma conversão numérica.
+\newcommand{\radiacaoTCC}{\ensuremath{\mathrm{MJ}\,\mathrm{m}^{-2}\,\mathrm{d}^{-1}}}
+\newcommand{\radiacaoKWhTCC}{\ensuremath{\mathrm{kWh}\,\mathrm{m}^{-2}\,\mathrm{d}^{-1}}}

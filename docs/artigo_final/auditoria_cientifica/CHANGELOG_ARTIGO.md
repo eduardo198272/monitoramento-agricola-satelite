@@ -1,5 +1,20 @@
 # Registro de alterações do artigo
 
+## Quarta rodada — 16/11/2026, base `2ca848a`
+
+Atualização pontual da versão de32 páginas:
+
+- Snapshot público definitivo de32 respostas escolhido expressamente após comunicação de que a fonte dinâmica já continha33; recuperado e conferido sem editar dados.
+- Reprocessados todos os CSV quantitativos, seis cruzamentos, contagens/percentuais qualitativos, nove gráficos em PDF/SVG/PNG, tabelas e macros. Nota média7,74→7,72; DP1,81→1,78; mediana8 e quartis7/9 mantidos por resultado do cálculo, não por suposição.
+- As31 respostas originais preservadas; nenhuma nova retificação de carimbo. O adicional não preencheu os campos abertos: mantidas142 células e13 temas, com denominador32 e ausências explícitas.
+- Corrigidos resultados narrativos, inclusive medianas dos cruzamentos (demais áreas4,5; experiência poucas vezes/nunca7,5), contagens de tarefas, perfis e intenção24/31.
+- Metodologia apresenta coleta concluída, participação voluntária, consentimento/maioridade autodeclarados e tratamento agregado. Pendência31/32 resolvida na apresentação vigente; histórico preservado.
+- Removidas repetições administrativas sobre ética do resumo, discussão e conclusão; informação material mantida uma vez nos métodos. Transparência de IA concentrada na declaração; menções metodológicas ao desenvolvimento e à codificação mantidas.
+- Fundamentação complementada por três estudos primários: Gotel1994, Bjarnason2015 e Vaithilingam2022; três referências adicionadas, nenhuma removida/substituída. Sem atribuição retrospectiva de BDD/ATDD/método formal.
+- Demonstração complementar real de anomalias não recebida: nenhuma incorporação nem novo experimento. Evidência anterior e parâmetros preservados.
+- Scripts de análise/validação atualizados para reprodução do snapshot32, sem alterar código funcional da aplicação. Adicionado teste de campos abertos vazios.
+- PDFs e documentação atualizados; comparação, estatísticas, compilação e inspeção visual em `../evidencias/quarta_rodada/`. Sem commit/push.
+
 ## Terceira rodada — consolidação científica e editorial, 15–16/11/2026
 
 Comparação exclusiva com a versão de38 páginas preservada em `/tmp/opencode/terceira-rodada/antes/`; não se atribuem a esta rodada todas as mudanças acumuladas desde HEAD.

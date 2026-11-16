@@ -1,0 +1,39 @@
+\section{Introdução}\label{chap:introducao-final}
+
+Para acompanhar uma área agrícola, é importante observar tanto as diferenças entre suas partes quanto as mudanças que ocorrem ao longo do tempo. Imagens multiespectrais de satélites registram a superfície em diferentes faixas do espectro, permitindo calcular indicadores associados à vegetação e à umidade. A literatura descreve aplicações agrícolas com diferentes sensores, escalas e métodos de interpretação \citep{WEISS2020}. Porém, ter acesso às imagens não basta para utilizá-las em uma aplicação. Ainda é necessário delimitar a área, consultar as imagens do período, selecionar as bandas, tratar observações inválidas e organizar os resultados.
+
+Para explorar esses dados em uma aplicação, não basta calcular um índice. O mapa, o gráfico e os arquivos exportados precisam corresponder à área e ao período escolhidos pelo usuário. Essa integração exige cuidado porque as imagens de satélite podem estar disponíveis em datas irregulares, enquanto as informações meteorológicas são organizadas por dia. É necessário, portanto, definir como cada parte do sistema trata a área selecionada, as datas, as unidades de medida e os dados ausentes. Essas regras de troca e interpretação das informações, chamadas aqui de contratos de dados, também fazem parte do problema de Engenharia de Software.
+
+O problema de pesquisa foi delimitado pela seguinte questão: como construir e verificar tecnicamente uma plataforma computacional que integre gerenciamento de áreas geográficas, índices espectrais, exploração espacial e temporal, contexto meteorológico e exportação de resultados para apoio ao monitoramento agrícola?
+
+\subsection{Motivação, justificativa e contribuição}
+
+O Google Earth Engine permite consultar catálogos e processar imagens em sua infraestrutura remota. Já o projeto Prediction Of Worldwide Energy Resources (POWER), da NASA, disponibiliza informações meteorológicas e de radiação que podem ser consultadas pelo software \citep{GORELICK2017,NASA_POWER_DAILY}. Com esses serviços, a aplicação não precisa manter uma infraestrutura própria de distribuição de imagens. Ainda assim, precisa organizar as consultas, tratar a indisponibilidade dos serviços e apresentar cada resultado junto da área, do período e dos parâmetros usados para produzi-lo.
+
+A contribuição em Ciência da Computação consiste na construção e verificação de um fluxo integrado entre serviços geoespaciais, processamento Python e interação no navegador. A solução articula dados vetoriais e raster, preserva o vínculo entre parâmetros e resultados, transfere grades para consulta local e gera diferentes formatos de saída a partir de um contexto comum. Os índices e métodos estatísticos são estabelecidos; a contribuição própria está nos mecanismos de integração, gerenciamento de estado e consistência dos produtos do artefato.
+
+A avaliação combina testes automatizados, demonstração com serviços reais e questionário exploratório com potenciais usuários. Esse recorte permite examinar o funcionamento computacional e as percepções de uso, sem atribuir ao sistema validação agronômica ou superioridade sobre outras plataformas.
+
+\subsection{Objetivo geral e objetivos específicos}
+
+O objetivo geral foi desenvolver e verificar tecnicamente uma plataforma computacional integrada de apoio ao monitoramento agrícola por imagens de satélite, disponibilizando processamento geoespacial, análise espacial e temporal, contexto meteorológico e exportação de informações.
+
+Os objetivos específicos foram:
+\begin{enumerate}[leftmargin=3em]
+    \item[\textbf{OE1}] fundamentar os métodos espectrais e definir uma organização modular para integrar interface, processamento e fontes externas;
+    \item[\textbf{OE2}] disponibilizar busca geográfica, demarcação, armazenamento e recuperação de polígonos, distinguindo persistência local e armazenamento por sessão;
+    \item[\textbf{OE3}] integrar imagens Sentinel-2 e implementar as formulações espectrais e os filtros espaciais, temporais e de nuvens presentes na aplicação;
+    \item[\textbf{OE4}] produzir composições temporais, estatísticas espaciais e mapas temáticos com exploração interativa dos valores da grade;
+    \item[\textbf{OE5}] organizar séries temporais e aplicar procedimentos explícitos de classificação de tendência e sinalização de desvios negativos;
+    \item[\textbf{OE6}] integrar informações meteorológicas e explicitar suas agregações, unidades e limites de interpretação;
+    \item[\textbf{OE7}] gerar relatórios em formato de documento portátil (PDF), planilhas XLSX e dados em valores separados por vírgulas (CSV), compactados em ZIP, além de transferir localizações em GeoJSON;
+    \item[\textbf{OE8}] verificar o artefato por inspeção, testes automatizados e demonstração funcional, com rastreabilidade entre requisitos, implementação e evidências.
+\end{enumerate}
+
+O questionário complementa a verificação técnica ao identificar percepções e obstáculos de interação na versão pública utilizada durante a coleta. Sua análise descritiva é apresentada separadamente dos testes de software.
+
+\subsection{Delimitação e organização do texto}
+
+A avaliação concentra-se no funcionamento do software, na troca de dados entre suas partes e nos resultados que ele apresenta e exporta. Os índices são indicadores indiretos: uma alteração em seus valores não identifica, por si só, pragas, doenças, deficiência nutricional ou estresse hídrico. Por isso, as áreas usadas nas demonstrações servem para mostrar o funcionamento da plataforma, não para caracterizar experimentos agronômicos.
+
+A \cref{chap:fundamentacao-final} apresenta os conceitos necessários, e a \cref{chap:metodos-final} descreve os procedimentos de desenvolvimento, processamento e avaliação. A \cref{chap:implementacao-final} explica a construção da solução, enquanto a \cref{chap:plataforma-final} relaciona seus recursos às capturas disponíveis. As \cref{chap:resultados-final,chap:discussao-final} apresentam as evidências de funcionamento, o atendimento aos objetivos e seus limites. Por fim, a \cref{chap:conclusao-final} retoma a contribuição e as possibilidades de continuidade.

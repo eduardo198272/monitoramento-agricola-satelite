@@ -1,5 +1,11 @@
 # Validação final da integração da avaliação de usuários
 
+## Validação vigente — quarta rodada
+
+O snapshot definitivo32 foi reprocessado integralmente, com40 itens,191 categorias, seis cruzamentos,142 células discursivas e13 temas. Nove conjuntos de gráficos PDF/SVG/PNG e tabelas foram regenerados. O validador independente passou; nove testes do código de análise passaram (incluindo campos abertos vazios). Os testes históricos da aplicação não foram reexecutados.
+
+A média é7,72, mediana8, DP amostral1,78; os resultados narrativos e os resumos acompanham os novos denominadores. Evidências de compilação, preservação e inspeção visual do PDF atual em `../evidencias/quarta_rodada/`. Registros abaixo referem-se à integração anterior, não ao conjunto definitivo atual.
+
 > Registro histórico da integração da pesquisa, anterior à substituição das
 > capturas da plataforma. Para o PDF e as figuras atuais, consultar
 > [`../evidencias/revisao_redacao_usuarios/README.md`](../evidencias/revisao_redacao_usuarios/README.md).

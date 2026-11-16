@@ -1,5 +1,18 @@
 # Matriz de rastreabilidade científica
 
+## Complemento vigente — quarta rodada
+
+| Afirmação atual | Evidência | Alcance |
+|---|---|---|
+|32 respostas definitivas | Escolha expressa do snapshot32 nesta conversa; exportação pública hash `c9c26723…`;32 linhas contidas na exportação atual | Não afirmar que a fonte dinâmica continua com32 |
+|Correspondência com original | Comparação por multiconjunto das respostas;31 correspondências; sete carimbos históricos conferidos | Fonte original preservada, não regravada |
+|Média7,72/DP1,78 e distribuições | Reprocessamento dos32; Counter/statistics independente;40 itens/191 categorias/seis cruzamentos | Quantitativo integral, não simples troca deN |
+|142 células/13 temas | Livro de códigos preservado e análise de todos os textos; adicional com cinco campos vazios | Ausências sem imputação; percentuais por32 submissões |
+|SDD como fluxo de requisitos e verificações | Fontes técnicas + Gotel1994, Bjarnason2015 e Vaithilingam2022 | Sem alegação de BDD/ATDD ou ganho medido |
+|Demonstração complementar do detector | Nenhuma nova evidência fornecida | Autorização de incorporar não é resultado empírico |
+
+As matrizes seguintes são históricas; o complemento desta rodada substitui suas contagens e estados superados.
+
 ## Matriz vigente — terceira rodada
 
 Base: PDF de38 páginas, SHA-256 `ebf4e063e32494b57e1b6ce1a363704edb51265181e24d19f631e2f36c46bf4f`, preservado antes das alterações. O diff em `../evidencias/terceira_rodada/antes_depois.diff` compara **essa cópia de trabalho**, não HEAD. Inventários anteriores abaixo permanecem históricos.

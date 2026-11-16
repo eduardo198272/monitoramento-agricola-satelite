@@ -1,14 +1,51 @@
 # Relatório final do TCC
 
-## Versão consolidada para o orientador — terceira rodada
+## Entrega vigente — acabamento final
 
-- [Artigo atualizado, 32 páginas](Relatorio_Final.pdf) e fontes `Relatorio_Final.tex`/`final_*.tex`: consolidação da versão de 38 páginas, sem mudança no código ou nos dados.
+- [Artigo atualizado](Relatorio_Final.pdf), com conteúdo científico preservado.
+- [Template institucional definitivo](TEMPLATE_INSTITUCIONAL.md): padrão
+  oficial/default indicado pelo pesquisador, sem novas personalizações.
+- Removidas repetições visuais de endereços DOI/URL idênticos; três datas
+  genéricas resolvidas por evidência de atualização e metadados complementados.
+- [Auditoria vigente](AUDITORIA_ABNT.md) e
+  [compilação, inspeção e preservação](evidencias/acabamento_definitivo/README.md).
+- As seções seguintes são registros das etapas anteriores. Sem commit/push.
+
+## Versão vigente — fidelidade ao template UPF
+
+- [PDF atualizado](Relatorio_Final.pdf), 32 páginas, Abstract antes do Resumo.
+- Apresentação da classe `CC-EC_TF-TC` restaurada: `natbib/dcu`,
+  legendas inferiores de figuras e separador por dois-pontos.
+- Metadados corrigidos preservados em `referencias_normalizadas.bib`;
+  projeção compatível com o dcu em `referencias_institucionais.bib`.
+  O gerador personalizado da quinta rodada não integra mais a compilação.
+- Coautoria preparada em `autoria.tex`, mas desativada até confirmação.
+- [Auditoria comparativa](AUDITORIA_ABNT.md) e
+  [compilação/preservação/inspeção](evidencias/fidelidade_template_upf/README.md).
+- Os três trabalhos indicados da UPF retornaram verificação antirobô;
+  não se declara comparação visual externa concluída.
+- Conteúdo científico, imagens, dados, equações e declaração de IA preservados.
+  Sem commit/push. As seções seguintes documentam as rodadas anteriores.
+
+## Quinta rodada — normalização aplicada, aceite integral pendente
+
+- [PDF atualizado](Relatorio_Final.pdf), 32 páginas.
+- [Auditoria ABNT-01–22](AUDITORIA_ABNT.md), com correções e limitações explícitas.
+- Bibliografia gerada em `referencias_normalizadas.bib` e
+  `referencias_normalizadas.tex`; origem preservada em `referencias.bib`.
+- [Compilação, preservação e inspeção visual](evidencias/quinta_rodada/README.md).
+- Resultados das 32 respostas, classe, imagens e declaração de IA preservados.
+  Não se declara conformidade integral ou aprovação institucional; sem commit/push.
+
+## Versão consolidada para o orientador — quarta rodada
+
+- [Artigo atualizado](Relatorio_Final.pdf) e fontes `Relatorio_Final.tex`/`final_*.tex`: ajustes pontuais da versão de 32 páginas, com reprocessamento do conjunto definitivo de 32 respostas, sem alterar respostas ou código funcional.
 - [Relatório consolidado, comparação e simulação de banca/defesa](auditoria_cientifica/AUDITORIA_CIENTIFICA.md).
 - [Pendências atuais por responsabilidade](auditoria_cientifica/PENDENCIAS_AUTOR.md), [bibliografia](auditoria_cientifica/AUDITORIA_REFERENCIAS.md) e [originalidade](auditoria_cientifica/AUDITORIA_ORIGINALIDADE.md).
 - [Declaração de IA](DECLARACAO_USO_IA.pdf), sem assinatura, e [registro detalhado](REGISTRO_USO_IA.md).
-- Compilação, preservação, conferência pública e diff antes/depois em `evidencias/terceira_rodada/`.
+- Compilação, preservação, conferência pública e comparação atual em `evidencias/quarta_rodada/`; a terceira rodada permanece como histórico.
 
-As 31 respostas analisadas coincidem integralmente com o subconjunto da fonte pública; o adicional elegível (32º registro) não foi incorporado automaticamente e o recorte precisa ser esclarecido. A pesquisa integra esta versão, com limites exploratórios e admissibilidade ética pendente. A captura do relatório foi mantida por decisão expressa como ilustração, não como evidência de radiação correta.
+O conjunto definitivo é o snapshot público de 32 respostas escolhido pelo pesquisador. A fonte dinâmica passou a conter 33, mas não foi incorporada uma resposta posterior sem autorização. Todos os resultados foram recalculados; a nota média é 7,72, mediana 8 e DP amostral 1,78. As 142 células discursivas permanecem em 13 categorias; o registro incluído não preencheu os campos abertos. A fundamentação de SDD recebeu três estudos científicos. A demonstração complementar real de anomalias aguarda evidências do pesquisador. A captura do relatório permanece ilustrativa, não evidência de radiação correta.
 
 Os registros abaixo descrevem a evolução anterior e não substituem o parecer vigente. Orientador e defesa já confirmados: Prof. Rafael Rieder, dezembro de 2026. A versão é para apreciação, sem alegação de aprovação institucional definitiva e sem commit/push/deploy.
 

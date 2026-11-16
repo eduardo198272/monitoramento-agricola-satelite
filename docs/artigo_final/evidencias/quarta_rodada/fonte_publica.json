@@ -1,0 +1,17 @@
+{
+  "url": "https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/export?format=xlsx",
+  "snapshot32_sha256": "c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34",
+  "current_export_sha256": "3f936fd399390bf352c0d1864a29b33910efa1bcccdd729d1a5464453e146a67",
+  "snapshot_records": 32,
+  "current_records": 33,
+  "snapshot_rows_in_current_including_timestamps": 32,
+  "selection": "Autor escolheu explicitamente Snapshot de 32 respostas após comunicação de33 elegíveis; fonte dinâmica não substitui a exportação fixa.",
+  "dates_snapshot": [
+    "2026-11-06 16:32:18",
+    "2026-11-15 19:46:33.775000"
+  ],
+  "original_preserved_sha256": "d61b9f11514f8d42f276abdb3e4e173782955c468fb50d774680032d342ce48a",
+  "original_rows": 31,
+  "raw_files_publication": false,
+  "raw_snapshot_private": "docs/artigo_final/avaliacao_usuarios/privado/snapshot_publico_32.xlsx"
+}

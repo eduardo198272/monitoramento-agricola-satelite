@@ -1,0 +1,412 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Amani et~al.]{Amani, Ghorbanian, Ahmadi, Kakooei, Moghimi,
+  Mirmazloumi, Moghaddam, Mahdavi, Ghahremanloo, Parsian, Wu \harvardand\
+  Brisco}{2020}{AMANI2020}
+Amani, M., Ghorbanian, A., Ahmadi, S.~A., Kakooei, M., Moghimi, A.,
+  Mirmazloumi, S.~M., Moghaddam, S. H.~A., Mahdavi, S., Ghahremanloo, M.,
+  Parsian, S., Wu, Q. \harvardand\ Brisco, B.  \harvardyearleft
+  2020\harvardyearright .
+\newblock {Google Earth Engine} cloud computing platform for remote sensing big
+  data applications: A comprehensive review, {\em IEEE Journal of Selected
+  Topics in Applied Earth Observations and Remote Sensing} {\bf
+  13}:~5326--5350.
+\newblock DOI: \url{https://doi.org/10.1109/JSTARS.2020.3021052}. Acesso em: 16
+  nov. 2026.
+\newline\harvardurl{https://doi.org/10.1109/JSTARS.2020.3021052}
+
+\harvarditem{{American Association for Public Opinion
+  Research}}{2013}{AAPOR2013}
+{American Association for Public Opinion Research}  \harvardyearleft
+  2013\harvardyearright .
+\newblock Report of the aapor task force on non-probability sampling, {\em
+  Technical report}, AAPOR.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf}
+
+\harvarditem{Bender}{2020}{BENDER2020}
+Bender, A.  \harvardyearleft 2020\harvardyearright .
+\newblock Testing overview, {\em in} T.~Winters, T.~Manshreck \harvardand\
+  H.~Wright (eds), {\em Software Engineering at Google: Lessons Learned from
+  Programming Over Time}, O'Reilly Media.
+\newblock Cap. 11. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://abseil.io/resources/swe-book/html/ch11.html}
+
+\harvarditem[Bjarnason et~al.]{Bjarnason, Unterkalmsteiner, Engstr{\"o}m
+  \harvardand\ Borg}{2015}{BJARNASON2015}
+Bjarnason, E., Unterkalmsteiner, M., Engstr{\"o}m, E. \harvardand\ Borg, M.
+  \harvardyearleft 2015\harvardyearright .
+\newblock An industrial case study on test cases as requirements, {\em Agile
+  Processes in Software Engineering and Extreme Programming}, Vol. 212 of {\em
+  Lecture Notes in Business Information Processing}, Springer, pp.~27--39.
+\newblock DOI: \url{https://doi.org/10.1007/978-3-319-18612-2_3}. Acesso em: 16
+  nov. 2026.
+\newline\harvardurl{https://arxiv.org/abs/2308.06509}
+
+\harvarditem{Braun \harvardand\ Clarke}{2006}{BRAUN2006}
+Braun, V. \harvardand\ Clarke, V.  \harvardyearleft 2006\harvardyearright .
+\newblock Using thematic analysis in psychology, {\em Qualitative Research in
+  Psychology} {\bf 3}(2):~77--101.
+\newblock DOI: \url{https://doi.org/10.1191/1478088706qp063oa}.
+\newline\harvardurl{https://doi.org/10.1191/1478088706qp063oa}
+
+\harvarditem{{Bureau International des Poids et Mesures}}{2019}{BIPM_SI}
+{Bureau International des Poids et Mesures}  \harvardyearleft
+  2019\harvardyearright .
+\newblock The international system of units ({SI}).
+\newblock Versão 4.01, jun. 2026. 9. ed. Sèvres: BIPM. DOI:
+  \url{https://doi.org/10.59161/AUEZ1291}. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf}
+
+\harvarditem{Böckeler}{2025}{BOECKELER2025}
+Böckeler, B.  \harvardyearleft 2025\harvardyearright .
+\newblock Understanding spec-driven-development: {Kiro}, spec-kit, and {Tessl}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html}
+
+\harvarditem{Davis}{1989}{DAVIS1989}
+Davis, F.~D.  \harvardyearleft 1989\harvardyearright .
+\newblock Perceived usefulness, perceived ease of use, and user acceptance of
+  information technology, {\em MIS Quarterly} {\bf 13}(3):~319--340.
+\newblock DOI: \url{https://doi.org/10.2307/249008}.
+\newline\harvardurl{https://doi.org/10.2307/249008}
+
+\harvarditem{{EOS Data Analytics}}{[20--?]}{EOSDA_GUIDE}
+{EOS Data Analytics}  \harvardyearleft [20--?]\harvardyearright .
+\newblock {EOSDA Crop Monitoring User Guide}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://eos.com/user-guide/}
+
+\harvarditem{{European Space Agency} \harvardand\
+  {Copernicus}}{2026}{ESA_SENTINEL2}
+{European Space Agency} \harvardand\ {Copernicus}  \harvardyearleft
+  2026\harvardyearright .
+\newblock {Sentinel-2 Mission}.
+\newblock Acesso em: 24 jun. 2026.
+\newline\harvardurl{https://sentiwiki.copernicus.eu/web/s2-mission}
+
+\harvarditem{Gao}{1996}{GAO1996}
+Gao, B.-C.  \harvardyearleft 1996\harvardyearright .
+\newblock {NDWI}: A normalized difference water index for remote sensing of
+  vegetation liquid water from space, {\em Remote Sensing of Environment} {\bf
+  58}(3):~257--266.
+\newblock DOI: \url{https://doi.org/10.1016/S0034-4257(96)00067-3}. Acesso em:
+  16 nov. 2026.
+\newline\harvardurl{https://doi.org/10.1016/S0034-4257(96)00067-3}
+
+\harvarditem{{GitHub}}{[20--?]}{GITHUB_SDD}
+{GitHub}  \harvardyearleft [20--?]\harvardyearright .
+\newblock Specification-driven development ({SDD}): {Spec Kit}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://github.com/github/spec-kit/blob/main/spec-driven.md}
+
+\harvarditem{{Google}}{2023a}{GOOGLE_EE_DATE}
+{Google}  \harvardyearleft 2023a\harvardyearright .
+\newblock {ee.Filter.date}.
+\newblock Acesso em: 11 nov. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/apidocs/ee-filter-date}
+
+\harvarditem{{Google}}{2023b}{GOOGLE_EE_MEDIAN}
+{Google}  \harvardyearleft 2023b\harvardyearright .
+\newblock {ee.ImageCollection.median}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median}
+
+\harvarditem{{Google}}{2023c}{GOOGLE_EE_SAMPLE}
+{Google}  \harvardyearleft 2023c\harvardyearright .
+\newblock {ee.Image.sampleRectangle}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle}
+
+\harvarditem{{Google}}{2024}{GOOGLE_EE_RESAMPLE}
+{Google}  \harvardyearleft 2024\harvardyearright .
+\newblock Resampling and reducing resolution.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/guides/resample}
+
+\harvarditem{{Google}}{2026a}{GOOGLE_EE_ND}
+{Google}  \harvardyearleft 2026a\harvardyearright .
+\newblock {ee.Image.normalizedDifference}.
+\newblock Acesso em: 24 jun. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference}
+
+\harvarditem{{Google}}{2026b}{GOOGLE_EE_REDUCE}
+{Google}  \harvardyearleft 2026b\harvardyearright .
+\newblock {ee.Image.reduceRegion}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion}
+
+\harvarditem{{Google}}{2026c}{GOOGLE_S2_SR}
+{Google}  \harvardyearleft 2026c\harvardyearright .
+\newblock {Harmonized {Sentinel}-2 MSI: MultiSpectral Instrument, Level-2A
+  (SR)}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED}
+
+\harvarditem{{Google}}{2026d}{GOOGLE_EE_NONCOMMERCIAL}
+{Google}  \harvardyearleft 2026d\harvardyearright .
+\newblock Noncommercial tiers: {Google Earth Engine}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/guides/noncommercial_tiers}
+
+\harvarditem{{Google}}{2026e}{GOOGLE_EE_SERVICE_ACCOUNT}
+{Google}  \harvardyearleft 2026e\harvardyearright .
+\newblock Service accounts: {Google Earth Engine}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/guides/service_account}
+
+\harvarditem{{Google}}{2026f}{GOOGLE_EE_REGION}
+{Google}  \harvardyearleft 2026f\harvardyearright .
+\newblock Statistics of an image region.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://developers.google.com/earth-engine/guides/reducers_reduce_region}
+
+\harvarditem[Gorelick et~al.]{Gorelick, Hancher, Dixon, Ilyushchenko, Thau
+  \harvardand\ Moore}{2017}{GORELICK2017}
+Gorelick, N., Hancher, M., Dixon, M., Ilyushchenko, S., Thau, D. \harvardand\
+  Moore, R.  \harvardyearleft 2017\harvardyearright .
+\newblock {Google Earth Engine}: Planetary-scale geospatial analysis for
+  everyone, {\em Remote Sensing of Environment} {\bf 202}:~18--27.
+\newblock DOI: \url{https://doi.org/10.1016/j.rse.2017.06.031}. Acesso em: 16
+  nov. 2026.
+\newline\harvardurl{https://doi.org/10.1016/j.rse.2017.06.031}
+
+\harvarditem{Gotel \harvardand\ Finkelstein}{1994}{GOTEL1994}
+Gotel, O. C.~Z. \harvardand\ Finkelstein, A. C.~W.  \harvardyearleft
+  1994\harvardyearright .
+\newblock An analysis of the requirements traceability problem, {\em
+  Proceedings of the First International Conference on Requirements
+  Engineering}, IEEE, pp.~94--101.
+\newblock DOI: \url{https://doi.org/10.1109/ICRE.1994.292398}. Acesso em: 16
+  nov. 2026.
+\newline\harvardurl{https://discovery.ucl.ac.uk/749/}
+
+\harvarditem{Hyndman \harvardand\ Athanasopoulos}{2021}{HYNDMAN2021}
+Hyndman, R.~J. \harvardand\ Athanasopoulos, G.  \harvardyearleft
+  2021\harvardyearright .
+\newblock {\em Forecasting: Principles and Practice}, 3 edn, OTexts, Melbourne.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://otexts.com/fpp3/}
+
+\harvarditem{{International Organization for
+  Standardization}}{2018}{ISO9241_2018}
+{International Organization for Standardization}  \harvardyearleft
+  2018\harvardyearright .
+\newblock {ISO 9241-11:2018}: Ergonomics of human-system interaction --- part
+  11: Usability: Definitions and concepts.
+\newblock ISO. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://www.iso.org/standard/63500.html}
+
+\harvarditem{Izquierdo-Sanz \harvardand\ Moltó}{2026}{IZQUIERDO2026}
+Izquierdo-Sanz, H. \harvardand\ Moltó, E.  \harvardyearleft
+  2026\harvardyearright .
+\newblock Hybrid physical--machine learning soil moisture modeling at orchard
+  scale in irrigated citrus orchards using {Sentinel} 1 and 2 and agroclimatic
+  data, {\em Agronomy} {\bf 16}(5).
+\newblock Identificador do artigo: 541. DOI:
+  \url{https://doi.org/10.3390/agronomy16050541}.
+\newline\harvardurl{https://doi.org/10.3390/agronomy16050541}
+
+\harvarditem{McFeeters}{1996}{MCFEETERS1996}
+McFeeters, S.~K.  \harvardyearleft 1996\harvardyearright .
+\newblock The use of the normalized difference water index ({NDWI}) in the
+  delineation of open water features, {\em International Journal of Remote
+  Sensing} {\bf 17}(7):~1425--1432.
+\newblock DOI: \url{https://doi.org/10.1080/01431169608948714}.
+\newline\harvardurl{https://doi.org/10.1080/01431169608948714}
+
+\harvarditem[Meroni et~al.]{Meroni, Fasbender, Rembold, Atzberger \harvardand\
+  Klisch}{2019}{MERONI2019}
+Meroni, M., Fasbender, D., Rembold, F., Atzberger, C. \harvardand\ Klisch, A.
+  \harvardyearleft 2019\harvardyearright .
+\newblock Near real-time vegetation anomaly detection with {MODIS NDVI}:
+  Timeliness vs. accuracy and effect of anomaly computation options, {\em
+  Remote Sensing of Environment} {\bf 221}:~508--521.
+\newblock DOI: \url{https://doi.org/10.1016/j.rse.2018.11.041}. Acesso em: 15
+  nov. 2026.
+\newline\harvardurl{https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/}
+
+\harvarditem{{NASA}}{[20--?]a}{NASA_POWER_METHOD}
+{NASA}  \harvardyearleft [20--?]a\harvardyearright .
+\newblock {POWER} data methodology.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://power.larc.nasa.gov/docs/methodology/}
+
+\harvarditem{{NASA}}{[20--?]b}{NASA_POWER_PARAMETERS}
+{NASA}  \harvardyearleft [20--?]b\harvardyearright .
+\newblock {POWER} parameter dictionary: Agricultural community, daily.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY}
+
+\harvarditem{{NASA}}{2026}{NASA_POWER_DAILY}
+{NASA}  \harvardyearleft 2026\harvardyearright .
+\newblock {{NASA POWER}: Daily API}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://power.larc.nasa.gov/docs/services/api/temporal/daily/}
+
+\harvarditem{{National Institute of Standards and
+  Technology}}{[20--?]}{NIST_LOCATION}
+{National Institute of Standards and Technology}  \harvardyearleft
+  [20--?]\harvardyearright .
+\newblock Measures of location: {NIST/SEMATECH e-Handbook of Statistical
+  Methods}.
+\newblock Seção 1.3.5.1. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm}
+
+\harvarditem{{NIST/SEMATECH}}{[20--?]}{NIST_OUTLIERS}
+{NIST/SEMATECH}  \harvardyearleft [20--?]\harvardyearright .
+\newblock e-handbook of statistical methods: Detection of outliers.
+\newblock Seção 1.3.5.17. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm}
+
+\harvarditem{{NumPy Developers}}{c2026a}{NUMPY_POLYFIT}
+{NumPy Developers}  \harvardyearleft c2026a\harvardyearright .
+\newblock numpy.polyfit.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html}
+
+\harvarditem{{NumPy Developers}}{c2026b}{NUMPY_STD}
+{NumPy Developers}  \harvardyearleft c2026b\harvardyearright .
+\newblock numpy.std.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://numpy.org/doc/stable/reference/generated/numpy.std.html}
+
+\harvarditem{{OneSoil}}{[20--?]}{ONESOIL_PLATFORM_DETAIL}
+{OneSoil}  \harvardyearleft [20--?]\harvardyearright .
+\newblock {OneSoil Platform}.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://onesoil.ai/en/platform}
+
+\harvarditem{{OpenStreetMap Foundation}}{[20--?]}{NOMINATIM_POLICY}
+{OpenStreetMap Foundation}  \harvardyearleft [20--?]\harvardyearright .
+\newblock Nominatim usage policy.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://operations.osmfoundation.org/policies/nominatim/}
+
+\harvarditem{Parnas}{1972}{PARNAS1972}
+Parnas, D.~L.  \harvardyearleft 1972\harvardyearright .
+\newblock On the criteria to be used in decomposing systems into modules, {\em
+  Communications of the ACM} {\bf 15}(12):~1053--1058.
+\newblock DOI: \url{https://doi.org/10.1145/361598.361623}. Acesso em: 15 nov.
+  2026.
+\newline\harvardurl{https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf}
+
+\harvarditem{Patrício \harvardand\ Rieder}{2018}{PATRICIO2018}
+Patrício, D.~I. \harvardand\ Rieder, R.  \harvardyearleft
+  2018\harvardyearright .
+\newblock Computer vision and artificial intelligence in precision agriculture
+  for grain crops: A systematic review, {\em Computers and Electronics in
+  Agriculture} {\bf 153}:~69--81.
+\newblock DOI: \url{https://doi.org/10.1016/j.compag.2018.08.001}. Acesso em:
+  16 nov. 2026.
+\newline\harvardurl{https://doi.org/10.1016/j.compag.2018.08.001}
+
+\harvarditem{{QGIS Project}}{2026a}{QGIS_MAP}
+{QGIS Project}  \harvardyearleft 2026a\harvardyearright .
+\newblock A gentle introduction to {GIS}: Map production.
+\newblock Versão 3.40. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html}
+
+\harvarditem{{QGIS Project}}{2026b}{QGIS_RASTER}
+{QGIS Project}  \harvardyearleft 2026b\harvardyearright .
+\newblock A gentle introduction to {GIS}: Raster data.
+\newblock Versão 3.40. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html}
+
+\harvarditem{{QGIS Project}}{2026c}{QGIS_VECTOR}
+{QGIS Project}  \harvardyearleft 2026c\harvardyearright .
+\newblock A gentle introduction to {GIS}: Vector data.
+\newblock Versão 3.40. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html}
+
+\harvarditem[Rouse et~al.]{Rouse, Haas, Schell \harvardand\
+  Deering}{1974}{ROUSE1974_NTRS}
+Rouse, Jr., J.~W., Haas, R.~H., Schell, J.~A. \harvardand\ Deering, D.~W.
+  \harvardyearleft 1974\harvardyearright .
+\newblock Monitoring vegetation systems in the great plains with {ERTS}, {\em
+  Third Earth Resources Technology Satellite-1 Symposium, Volume 1, Section A},
+  NASA.
+\newblock Registro NASA NTRS 19740022614. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://ntrs.nasa.gov/citations/19740022614}
+
+\harvarditem{{Sentinel Hub}}{[20--?]}{SENTINELHUB_NDMI}
+{Sentinel Hub}  \harvardyearleft [20--?]\harvardyearright .
+\newblock Normalized difference moisture index ({NDMI}).
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/}
+
+\harvarditem{Slaiffer}{2023}{SLAIFFER2023}
+Slaiffer, H.  \harvardyearleft 2023\harvardyearright .
+\newblock {\em Índices de vegetação e sua correlação com a produtividade
+  da cultura da soja em área irrigada e de sequeiro}, Trabalho de conclusão
+  de curso em engenharia agrícola, Universidade Federal de Santa Maria.
+\newblock Acesso em: 11 nov. 2026.
+\newline\harvardurl{https://repositorio.ufsm.br/handle/1/29995}
+
+\harvarditem[Slaiffer et~al.]{Slaiffer, Bottega, Oliveira \harvardand\
+  Saretta}{2025}{SLAIFFER2025}
+Slaiffer, H., Bottega, E.~L., Oliveira, Z. B.~d. \harvardand\ Saretta, E.
+  \harvardyearleft 2025\harvardyearright .
+\newblock Índices de vegetação e sua correlação com a produtividade da
+  cultura da soja em área irrigada e de sequeiro, {\em Nativa} {\bf
+  13}(3):~495--502.
+\newblock DOI: \url{https://doi.org/10.31413/nat.v13i3.18592}. Acesso em: 16
+  nov. 2026.
+\newline\harvardurl{https://doi.org/10.31413/nat.v13i3.18592}
+
+\harvarditem{{Streamlit}}{c2026a}{STREAMLIT_STATE}
+{Streamlit}  \harvardyearleft c2026a\harvardyearright .
+\newblock Add statefulness to apps: Session state.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://docs.streamlit.io/develop/concepts/architecture/session-state}
+
+\harvarditem{{Streamlit}}{c2026b}{STREAMLIT_CLOUD_SECRETS}
+{Streamlit}  \harvardyearleft c2026b\harvardyearright .
+\newblock Secrets management for your community cloud app.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management}
+
+\harvarditem{Sullivan \harvardand\ Artino}{2013}{SULLIVAN2013}
+Sullivan, G.~M. \harvardand\ Artino, Jr., A.~R.  \harvardyearleft
+  2013\harvardyearright .
+\newblock Analyzing and interpreting data from {Likert}-type scales, {\em
+  Journal of Graduate Medical Education} {\bf 5}(4):~541--542.
+\newblock DOI: \url{https://doi.org/10.4300/JGME-5-4-18}. Acesso em: 16 nov.
+  2026.
+\newline\harvardurl{https://doi.org/10.4300/JGME-5-4-18}
+
+\harvarditem{{Universidade de Passo Fundo}}{2026}{UPF_IA2026}
+{Universidade de Passo Fundo}  \harvardyearleft 2026\harvardyearright .
+\newblock Instrução normativa nº 03/2026/proacad: Uso de inteligência
+  artificial nas atividades acadêmicas.
+\newblock 28 out. 2026. Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in}
+
+\harvarditem{{U.S. Geological Survey}}{[20--?]}{USGS_NDMI}
+{U.S. Geological Survey}  \harvardyearleft [20--?]\harvardyearright .
+\newblock Normalized difference moisture index.
+\newblock Acesso em: 15 nov. 2026.
+\newline\harvardurl{https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index}
+
+\harvarditem[Vaithilingam et~al.]{Vaithilingam, Zhang \harvardand\
+  Glassman}{2022}{VAITHILINGAM2022}
+Vaithilingam, P., Zhang, T. \harvardand\ Glassman, E.~L.  \harvardyearleft
+  2022\harvardyearright .
+\newblock Expectation vs. experience: Evaluating the usability of code
+  generation tools powered by large language models, {\em CHI Conference on
+  Human Factors in Computing Systems Extended Abstracts}, ACM, pp.~1--7.
+\newblock DOI: \url{https://doi.org/10.1145/3491101.3519665}. Acesso em: 16
+  nov. 2026.
+\newline\harvardurl{https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf}
+
+\harvarditem[Weiss et~al.]{Weiss, Jacob \harvardand\
+  Duveiller}{2020}{WEISS2020}
+Weiss, M., Jacob, F. \harvardand\ Duveiller, G.  \harvardyearleft
+  2020\harvardyearright .
+\newblock Remote sensing for agricultural applications: A meta-review, {\em
+  Remote Sensing of Environment} {\bf 236}.
+\newblock Identificador do artigo: 111402. DOI:
+  \url{https://doi.org/10.1016/j.rse.2019.111402}. Acesso em: 16 nov. 2026.
+\newline\harvardurl{https://doi.org/10.1016/j.rse.2019.111402}
+
+\end{thebibliography}

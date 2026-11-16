@@ -1,0 +1,40 @@
+{
+  "pdf_sha256": "a548bc214e5740584b70aeaba34d0ebf3bbb51bafdd3fc4bf5517a000079738f",
+  "baseline_pdf_sha256": "fb80346d1ef3e71464aee9724b9a7babb8319f6e31aa1b9c0fb633b0623e70e1",
+  "status": "Correções aplicadas; aceite integral pendente conforme AUDITORIA_ABNT.md",
+  "files": {
+    "Relatorio_Final.pdf": "a548bc214e5740584b70aeaba34d0ebf3bbb51bafdd3fc4bf5517a000079738f",
+    "AUDITORIA_ABNT.md": "77225bd73852df0441fc1bbb7246dbf4fc02061360b85aa739edd02a03d0f342",
+    "normalizacao.tex": "9175c66a5491691950b9f40925ecf258e0550479f090399eb02571e5ad53774e",
+    "referencias_normalizadas.bib": "ca552940ca7e075e332992686cd8180af56d95619f945c395fd67789cc20e53f",
+    "referencias_normalizadas.tex": "17860eeda032c463545f0ad183a0b0260c1e3c078649f908ee34ddea79eed8f8",
+    "scripts/gerar_referencias_normalizadas.py": "3007fbae0d09177bad1df7503982299e4ee5c77cc56728f0ea274a98a321a2c9"
+  },
+  "new_source_files": {
+    "AUDITORIA_ABNT.md": "77225bd73852df0441fc1bbb7246dbf4fc02061360b85aa739edd02a03d0f342",
+    "normalizacao.tex": "9175c66a5491691950b9f40925ecf258e0550479f090399eb02571e5ad53774e",
+    "referencias_normalizadas.bib": "ca552940ca7e075e332992686cd8180af56d95619f945c395fd67789cc20e53f",
+    "referencias_normalizadas.tex": "17860eeda032c463545f0ad183a0b0260c1e3c078649f908ee34ddea79eed8f8",
+    "scripts/.gitignore": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b",
+    "scripts/gerar_referencias_normalizadas.py": "3007fbae0d09177bad1df7503982299e4ee5c77cc56728f0ea274a98a321a2c9",
+    "scripts/requirements-normalizacao.txt": "27a516cb21c569cd6016b2a7059b2d1e4199f6530967926f6415efe52b0d42ce"
+  },
+  "evidence_files": {
+    "README.md": "4c8d1c8488bd0775c9ffa8be426787d90c01d345c4e4bd92895d86e338900c1e",
+    "fontes_normativas.json": "5fcc012b139080eec0343fe68d5db911818d5db17d44cd055bf05ebc23629903",
+    "antes_depois.diff": "e180ec0d91ffd0c8ecedec441d00de19c3810334e42cf550a017a4c1d893e47a",
+    "pdfinfo.txt": "2ca43d0de8fe071804aeb47d7958229dfaf7866329f809d2411a839bb4c4f873",
+    "comparacao.md": "455faf3afb1cd1db555e2c908c8160a51bf3f3f9cf39a1dfea753513f12a2b4f",
+    "renderizacao.json": "6d4c68a4f89a03880ecce29edd982eda5ad4c9f1f9c77a46b5881d6cd94aa6f0",
+    "Relatorio_Final.log": "3d4a9158f7ea70cc4fda67465d058b8f66ba65a43ed45699e8812efac52af66e",
+    "preservacao.json": "6f083ef67551aa843d17b99cb3ae52f301401df13d179603f4af49af943e69d8",
+    "compilacao.json": "807cb6a4514095164a7d523440999c6f3d37dbe7414862727dcb1ea9b89f77cc",
+    "inspecao_visual.md": "d0f85b126fd50d2b19d875af23f6d11e0e26855bee14d679e1affcee847ce606",
+    "console.txt": "e980e958c05ba2ff82e3c7c6acfd3dd85edba27decdf003b3b7df78c54f6889a",
+    "referencias.json": "2c98a5f945d67156ff86c786b886092c72d02f2d2e6aecdca97510cc801b26b4",
+    "links.json": "391c9ae9c3c9e73e717a83626d0c6653aea270fdd3731941761a860b446c7ca5",
+    "referencias_auditadas.md": "480961ae37fdd2aa44f0e8bffd343464e432e4039d50e0c72c064c30d9b223cf",
+    "datas.json": "ac3857cc438e574b8e3d0d2f4235171d7dcb16d252a12ca010449855f270c58b",
+    "compilacao.md": "33804a40cdd90f804b86d95c04a2a66a91345936c204f3a9c0612a8cf523f9b4"
+  }
+}

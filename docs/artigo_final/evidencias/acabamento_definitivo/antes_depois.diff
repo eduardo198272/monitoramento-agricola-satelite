@@ -1,0 +1,391 @@
+--- antes-acabamento/AUDITORIA_ABNT.md
++++ acabamento-definitivo/AUDITORIA_ABNT.md
+@@ -6,9 +6,70 @@
+ **PDF desta entrega:** 32 páginas, papel Letter, duas colunas, 22 figuras,
+ cinco tabelas e **14 expressões numeradas**.
+ 
+-## Estado vigente — revisão de fidelidade ao template UPF
+-
+-**Esta seção prevalece sobre os registros históricos da quinta rodada abaixo.**
++## Estado vigente — acabamento final com template definitivo
++
++O template encaminhado pelo professor foi declarado pelo pesquisador como
++**padrão oficial definitivo de apresentação**. A configuração ativa foi
++preservada integralmente nesta etapa, incluindo autoria/orientador, filiação,
++`dcu`, conjunções das citações, ordem dos resumos, legendas e identidade visual.
++Não foi reaberta a escolha do modelo nem reaplicada normalização geral da ABNT.
++O registro operacional é `TEMPLATE_INSTITUCIONAL.md`, com hashes em
++`evidencias/acabamento_definitivo/template.json`.
++
++Esta etapa alterou apenas dados/projeção bibliográfica, o PDF recompilado e
++documentação interna. O texto dos arquivos científicos e os arquivos de
++apresentação permaneceram intactos. A referência operacional é o conjunto
++ativo de arquivos; não se afirma obtenção de outro pacote independente
++durante este acabamento.
++
++### Ajustes bibliográficos pontuais
++
++| Ocorrência | Decisão e evidência | Resultado |
++|---|---|---|
++| DOI e URL idênticos | Se `url` for exatamente `https://doi.org/` + `doi`, omitir somente a repetição na nota e manter a URL nativa do dcu | 13 ocorrências na base, das quais 11 citadas. Nenhum campo DOI/URL apagado; endereços diferentes continuam distintos. |
++| `GITHUB_SDD` | Última alteração do arquivo `spec-driven.md`: 23/06/2026, commit `3cfc81ff316b3ccdca2aa80500b300787d20212e`; arquivo atual e versão datada com hashes idênticos | Ano bibliográfico 2026, identificado como atualização do arquivo-fonte, não como data de criação ou de acesso. |
++| `NOMINATIM_POLICY` | Última alteração de `policies/nominatim.md` no repositório oficial indicado pelo próprio site: 11/05/2026, commit `fd6937012a5b2d8f4c0255148342b97191c840e7`; conteúdos atual/datado idênticos | Ano 2026 com nota de atualização; sem inferir a data a partir do ano de acesso. |
++| `SENTINELHUB_NDMI` | Última alteração do README da documentação: 04/06/2026, commit `eec561588a5c5dcee3b7f25da6b2e39355f5c4eb`; conteúdos atual/datado idênticos | Ano 2026 com nota de atualização; não se confundem datas de imagens usadas como exemplo com a data da documentação. |
++| `BJARNASON2015` | Registro Crossref do DOI confirma local editorial Cham e ISBN eletrônico do livro `9783319186122` | Local e ISBN preenchidos; autores, título, ano, série, volume e páginas preservados. |
++| `VAITHILINGAM2022` | Registro Crossref distingue local da editora, New York, NY, USA, do local do evento, New Orleans | Local editorial preenchido sem confundir os dois; demais dados preservados. |
++| `GOTEL1994` | Registro DOI novamente consultado; metadados prévios preservados, sem importar automaticamente abreviações divergentes de autoria | Nenhuma substituição de autor ou título por dado não confirmado no texto primário. |
++
++### Datas que continuam sem confirmação exata
++
++As dez referências com datas genéricas foram investigadas individualmente;
++três foram resolvidas pelas versões datadas acima. Permanecem sete:
++
++- `USGS_NDMI`: consulta atual terminou em timeout; não foi estabelecida data
++  editorial exata a partir das evidências disponíveis.
++- `NIST_OUTLIERS` e `NIST_LOCATION`: as páginas específicas não informam data.
++  A página inicial do Handbook informa criação em 2003 e atualização em 2022,
++  mas isso não comprova a data de cada seção; não foi propagado o ano de 2022.
++- `NASA_POWER_METHOD` e `NASA_POWER_PARAMETERS`: não foi localizada data de
++  edição da página/dicionário. Datas de cobertura das séries e anos das versões
++  dos produtos não foram convertidos em datas dessas páginas.
++- `EOSDA_GUIDE`: acesso atual respondeu HTTP 403, sem data verificável.
++- `ONESOIL_PLATFORM_DETAIL`: página acessível, sem data editorial identificada.
++
++Nesses casos, a indicação aproximada anterior permanece explicitamente
++incerta; não se inventou um ano para eliminar visualmente a pendência.
++Datas de acesso efetivamente registradas foram preservadas.
++
++### Validação e preservação
++
++O artigo foi recompilado e todas as páginas foram inspecionadas por IA.
++Foram conferidos o uso efetivo de `dcu`, as citações, referências cruzadas,
++as 22 figuras, cinco tabelas, 14 expressões numeradas e a base de 32 respostas.
++O conteúdo científico, a declaração de IA e os arquivos de template foram
++comparados ao estado anterior, sem alteração. A inspeção não é aprovação
++humana ou prova física de impressão.
++
++Compilação, evidências bibliográficas, diferenças e preservação ficam em
++`evidencias/acabamento_definitivo/`. Não houve alteração do código funcional,
++dos dados, dos resultados, commit ou push.
++
++## Registro anterior — revisão de fidelidade ao template UPF
++
++**Registro da revisão anterior, complementado pelo acabamento definitivo acima.**
+ A normalização geral da ABNT passa a ser complementar à apresentação do
+ modelo do curso, conforme a nova orientação expressa do pesquisador.
+ Foram confrontadas a classe local, sua primeira versão no Git (`f4c46a7`),
+--- antes-acabamento/README.md
++++ acabamento-definitivo/README.md
+@@ -1,4 +1,15 @@
+ # Relatório final do TCC
++
++## Entrega vigente — acabamento final
++
++- [Artigo atualizado](Relatorio_Final.pdf), com conteúdo científico preservado.
++- [Template institucional definitivo](TEMPLATE_INSTITUCIONAL.md): padrão
++  oficial/default indicado pelo pesquisador, sem novas personalizações.
++- Removidas repetições visuais de endereços DOI/URL idênticos; três datas
++  genéricas resolvidas por evidência de atualização e metadados complementados.
++- [Auditoria vigente](AUDITORIA_ABNT.md) e
++  [compilação, inspeção e preservação](evidencias/acabamento_definitivo/README.md).
++- As seções seguintes são registros das etapas anteriores. Sem commit/push.
+ 
+ ## Versão vigente — fidelidade ao template UPF
+ 
+--- antes-acabamento/referencias_institucionais.bib
++++ acabamento-definitivo/referencias_institucionais.bib
+@@ -95,7 +95,7 @@
+     doi = "10.5281/zenodo.15871939",
+     url = "https://doi.org/10.5281/zenodo.15871939",
+     urldate = "16 nov. 2026",
+-    note = "DOI: \url{https://doi.org/10.5281/zenodo.15871939}. Acesso em: 16 nov. 2026."
++    note = "Acesso em: 16 nov. 2026."
+ }
+ 
+ @phdthesis{CHAVES2019,
+@@ -139,7 +139,7 @@
+     doi = "10.1016/S0034-4257(96)00067-3",
+     url = "https://doi.org/10.1016/S0034-4257(96)00067-3",
+     urldate = "16 nov. 2026",
+-    note = "DOI: \url{https://doi.org/10.1016/S0034-4257(96)00067-3}. Acesso em: 16 nov. 2026."
++    note = "Acesso em: 16 nov. 2026."
+ }
+ 
+ @article{PATRICIO2018,
+@@ -153,7 +153,7 @@
+     doi = "10.1016/j.compag.2018.08.001",
+     url = "https://doi.org/10.1016/j.compag.2018.08.001",
+     urldate = "16 nov. 2026",
+-    note = "DOI: \url{https://doi.org/10.1016/j.compag.2018.08.001}. Acesso em: 16 nov. 2026."
++    note = "Acesso em: 16 nov. 2026."
+ }
+ 
+ @article{GORELICK2017,
+@@ -167,7 +167,7 @@
+     doi = "10.1016/j.rse.2017.06.031",
+     url = "https://doi.org/10.1016/j.rse.2017.06.031",
+     urldate = "16 nov. 2026",
+-    note = "DOI: \url{https://doi.org/10.1016/j.rse.2017.06.031}. Acesso em: 16 nov. 2026."
++    note = "Acesso em: 16 nov. 2026."
+ }
+ 
+ @article{AMANI2020,
+@@ -181,7 +181,7 @@
+     doi = "10.1109/JSTARS.2020.3021052",
+     url = "https://doi.org/10.1109/JSTARS.2020.3021052",
+     urldate = "16 nov. 2026",
+-    note = "DOI: \url{https://doi.org/10.1109/JSTARS.2020.3021052}. Acesso em: 16 nov. 2026."
++    note = "Acesso em: 16 nov. 2026."
+ }
+ 
+ @article{WEISS2020,
+@@ -195,7 +195,7 @@
+     url = "https://doi.org/10.1016/j.rse.2019.111402",
+     urldate = "16 nov. 2026",
+     eid = "111402",
+-    note = "Identificador do artigo: 111402. DOI: \url{https://doi.org/10.1016/j.rse.2019.111402}. Acesso em: 16 nov. 2026."
++    note = "Identificador do artigo: 111402. Acesso em: 16 nov. 2026."
+ }
+ 
+ @article{PHIRI2020,
+@@ -209,7 +209,7 @@
+     doi = "10.3390/rs12142291",
+     url = "https://doi.org/10.3390/rs12142291",
+     eid = "2291",
+-    note = "Identificador do artigo: 2291. DOI: \url{https://doi.org/10.3390/rs12142291}."
++    note = "Identificador do artigo: 2291."
+ }
+ 
+ @book{WAZLAWICK2014,
+@@ -241,8 +241,7 @@
+     number = "7",
+     pages = "1425--1432",
+     doi = "10.1080/01431169608948714",
+-    url = "https://doi.org/10.1080/01431169608948714",
+-    note = "DOI: \url{https://doi.org/10.1080/01431169608948714}."
++    url = "https://doi.org/10.1080/01431169608948714"
+ }
+ 
+ @misc{USGS_NDMI,
+@@ -286,8 +285,9 @@
+     title = "Nominatim Usage Policy",
+     url = "https://operations.osmfoundation.org/policies/nominatim/",
+     urldate = "15 nov. 2026",
+-    year = "[20--?]",
+-    note = "Acesso em: 15 nov. 2026."
++    year = "2026",
++    updatedate = "2026-05-11",
++    note = "Arquivo-fonte atualizado em 11 maio 2026. Acesso em: 15 nov. 2026."
+ }
+ 
+ @inproceedings{ROUSE1974_NTRS,
+@@ -338,8 +338,7 @@
+     pages = "319--340",
+     year = "1989",
+     doi = "10.2307/249008",
+-    url = "https://doi.org/10.2307/249008",
+-    note = "DOI: \url{https://doi.org/10.2307/249008}."
++    url = "https://doi.org/10.2307/249008"
+ }
+ 
+ @article{SULLIVAN2013,
+@@ -353,7 +352,7 @@
+     doi = "10.4300/JGME-5-4-18",
+     url = "https://doi.org/10.4300/JGME-5-4-18",
+     urldate = "16 nov. 2026",
+-    note = "DOI: \url{https://doi.org/10.4300/JGME-5-4-18}. Acesso em: 16 nov. 2026."
++    note = "Acesso em: 16 nov. 2026."
+ }
+ 
+ @article{BRAUN2006,
+@@ -365,8 +364,7 @@
+     pages = "77--101",
+     year = "2006",
+     doi = "10.1191/1478088706qp063oa",
+-    url = "https://doi.org/10.1191/1478088706qp063oa",
+-    note = "DOI: \url{https://doi.org/10.1191/1478088706qp063oa}."
++    url = "https://doi.org/10.1191/1478088706qp063oa"
+ }
+ 
+ @misc{QGIS_VECTOR,
+@@ -422,8 +420,9 @@
+     title = "Normalized Difference Moisture Index ({NDMI})",
+     url = "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+     urldate = "15 nov. 2026",
+-    year = "[20--?]",
+-    note = "Acesso em: 15 nov. 2026."
++    year = "2026",
++    updatedate = "2026-06-04",
++    note = "Arquivo-fonte atualizado em 4 jun. 2026. Acesso em: 15 nov. 2026."
+ }
+ 
+ @book{HYNDMAN2021,
+@@ -512,7 +511,7 @@
+     doi = "10.31413/nat.v13i3.18592",
+     url = "https://doi.org/10.31413/nat.v13i3.18592",
+     urldate = "16 nov. 2026",
+-    note = "DOI: \url{https://doi.org/10.31413/nat.v13i3.18592}. Acesso em: 16 nov. 2026."
++    note = "Acesso em: 16 nov. 2026."
+ }
+ 
+ @article{IZQUIERDO2026,
+@@ -525,7 +524,7 @@
+     doi = "10.3390/agronomy16050541",
+     url = "https://doi.org/10.3390/agronomy16050541",
+     eid = "541",
+-    note = "Identificador do artigo: 541. DOI: \url{https://doi.org/10.3390/agronomy16050541}."
++    note = "Identificador do artigo: 541."
+ }
+ 
+ @misc{NASA_POWER_METHOD,
+@@ -596,8 +595,9 @@
+     title = "Specification-Driven Development ({SDD}): {Spec Kit}",
+     url = "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+     urldate = "15 nov. 2026",
+-    year = "[20--?]",
+-    note = "Acesso em: 15 nov. 2026."
++    year = "2026",
++    updatedate = "2026-06-23",
++    note = "Arquivo-fonte atualizado em 23 jun. 2026. Acesso em: 15 nov. 2026."
+ }
+ 
+ @misc{BOECKELER2025,
+@@ -658,6 +658,8 @@
+     volume = "212",
+     pages = "27--39",
+     publisher = "Springer",
++    address = "Cham",
++    isbn = "9783319186122",
+     doi = "10.1007/978-3-319-18612-2_3",
+     url = "https://arxiv.org/abs/2308.06509",
+     urldate = "16 nov. 2026",
+@@ -671,6 +673,7 @@
+     year = "2022",
+     pages = "1--7",
+     publisher = "ACM",
++    address = "New York, NY, USA",
+     doi = "10.1145/3491101.3519665",
+     url = "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
+     urldate = "16 nov. 2026",
+--- antes-acabamento/referencias_normalizadas.bib
++++ acabamento-definitivo/referencias_normalizadas.bib
+@@ -262,7 +262,9 @@
+     title = "Nominatim Usage Policy",
+     url = "https://operations.osmfoundation.org/policies/nominatim/",
+     urldate = "15 nov. 2026",
+-    year = "[20--?]"
++    year = "2026",
++    updatedate = "2026-05-11",
++    note = "Arquivo-fonte atualizado em 11 maio 2026."
+ }
+ 
+ @inproceedings{ROUSE1974_NTRS,
+@@ -385,7 +387,9 @@
+     title = "Normalized Difference Moisture Index (NDMI)",
+     url = "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+     urldate = "15 nov. 2026",
+-    year = "[20--?]"
++    year = "2026",
++    updatedate = "2026-06-04",
++    note = "Arquivo-fonte atualizado em 4 jun. 2026."
+ }
+ 
+ @book{HYNDMAN2021,
+@@ -543,7 +547,9 @@
+     title = "Specification-Driven Development ({SDD}): {Spec Kit}",
+     url = "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+     urldate = "15 nov. 2026",
+-    year = "[20--?]"
++    year = "2026",
++    updatedate = "2026-06-23",
++    note = "Arquivo-fonte atualizado em 23 jun. 2026."
+ }
+ 
+ @misc{BOECKELER2025,
+@@ -599,6 +605,8 @@
+     volume = "212",
+     pages = "27--39",
+     publisher = "Springer",
++    address = "Cham",
++    isbn = "9783319186122",
+     doi = "10.1007/978-3-319-18612-2_3",
+     url = "https://arxiv.org/abs/2308.06509",
+     urldate = "16 nov. 2026"
+@@ -611,6 +619,7 @@
+     year = "2022",
+     pages = "1--7",
+     publisher = "ACM",
++    address = "New York, NY, USA",
+     doi = "10.1145/3491101.3519665",
+     url = "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
+     urldate = "16 nov. 2026"
+--- antes-acabamento/scripts/preparar_bib_dcu.py
++++ acabamento-definitivo/scripts/preparar_bib_dcu.py
+@@ -3,6 +3,8 @@
+ Não gera bibitems, não modifica o .bst e não redefine autores/anos.
+ DOI, data de acesso, versão e identificador eletrônico são expostos em note
+ porque o dcu original não lê esses campos. URL usa o suporte nativo do estilo.
++Quando DOI e URL têm exatamente o mesmo endereço, só a URL nativa é exibida;
++os dois campos continuam preservados nos metadados.
+ """
+ 
+ from pathlib import Path
+@@ -44,7 +46,7 @@
+             if f.get("publisher"):
+                 notes.append((f["address"] + ": " if f.get("address") else "")
+                              + f["publisher"] + ".")
+-        if f.get("doi"):
++        if f.get("doi") and f.get("url") != "https://doi.org/" + f["doi"]:
+             notes.append(r"DOI: \url{https://doi.org/" + f["doi"] + "}.")
+         if f.get("urldate"):
+             notes.append("Acesso em: " + f["urldate"] + ".")
+--- /dev/null
++++ acabamento-definitivo/TEMPLATE_INSTITUCIONAL.md
+@@ -0,0 +1,47 @@
++# Padrão definitivo de apresentação
++
++Por determinação expressa do pesquisador, o novo template encaminhado pelo
++professor é o **padrão oficial e default deste trabalho**, não uma configuração
++provisória. A etapa de acabamento não reabre essa decisão.
++
++## Configuração preservada
++
++A referência operacional é a configuração ativa de `Relatorio_Final.tex`
++com `CC-EC_TF-TC.cls`, `autoria.tex`, `normalizacao.tex` e
++`figuras_relatorio.tex`. Seus hashes estão em
++`evidencias/acabamento_definitivo/template.json`.
++
++- Apresentação dos autores/orientador e filiação conforme a configuração vigente.
++- `natbib/dcu`, incluindo as conjunções geradas pelo estilo.
++- Abstract, Keywords, Resumo e Palavras-chave.
++- Legendas, fontes, notas, tipografia, margens, espaçamentos, duas colunas,
++  cabeçalhos, rodapés, logotipo e identidade visual preservados.
++- Nenhum retorno automático à bibliografia personalizada, legendas superiores,
++  travessões ou outras configurações das antigas rodadas de normalização.
++- A opção de coautoria permanece com o valor já vigente. A condição de
++  confirmação de coautoria não torna o template provisório e não foi alterada
++  nesta etapa de acabamento.
++
++Os apontamentos antigos sobre falta de comparação externa não reabrem a
++adoção do padrão informada pelo pesquisador. Esta etapa não declara ter
++recebido ou autenticado um pacote independente adicional: preserva os
++arquivos ativos identificados no manifesto, sem substituir a classe.
++
++## Manutenção bibliográfica
++
++`referencias_normalizadas.bib` é a base estruturada vigente;
++`scripts/preparar_bib_dcu.py` projeta esses dados para
++`referencias_institucionais.bib`, lido pelo BibTeX/dcu.
++O adaptador não modifica o estilo bibliográfico.
++
++Quando a URL é **exatamente** `https://doi.org/` seguida do DOI cadastrado,
++o endereço aparece uma única vez, na saída URL nativa do dcu.
++DOI e URL continuam armazenados na base; endereços distintos continuam
++apresentados separadamente. Não há deduplicação por aproximação.
++
++As correções de metadados devem ter evidência rastreável e não implicam
++mudanças de apresentação ou nova revisão científica.
++
++Mudanças futuras de template exigem nova instrução expressa ou novo modelo
++encaminhado pelo professor; não decorrem automaticamente de regras gerais
++de normalização.

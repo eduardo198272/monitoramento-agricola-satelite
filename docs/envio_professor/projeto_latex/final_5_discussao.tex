@@ -1,0 +1,77 @@
+\newpage
+\section{Discussão}\label{chap:discussao-final}
+
+\subsection{Atendimento aos objetivos}
+
+A integração entre seleção da área, processamento remoto, exploração e exportação responde ao problema de pesquisa no recorte computacional. A \cref{tab:objetivos-final} relaciona os objetivos às evidências produzidas. Os testes examinam regras delimitadas, enquanto a demonstração com serviços reais verifica sua articulação em um fluxo completo.
+
+\begin{table*}[htbp]
+\centering\small
+\caption{Objetivos e evidências de avaliação do artefato.}
+\label{tab:objetivos-final}
+\begin{tabular}{p{0.10\textwidth}p{0.20\textwidth}p{0.61\textwidth}}
+\hline
+\textbf{Objetivo} & \textbf{Situação} & \textbf{Evidência e alcance} \\ \hline
+OE1 & Implementado & Estrutura modular e métodos documentados; distinção entre fórmulas estabelecidas e parâmetros particulares. \\
+OE2 & Implementado & Busca, desenho, gravação e recuperação; sessão web não é persistência permanente. \\
+OE3 & Implementado & Filtros e fórmulas exercitados, demonstração remota executada; adequação histórica da máscara requer avaliação específica. \\
+OE4 & Implementado & Composição, média e consulta local; testes de grade, legenda e consulta por cursor/toque. \\
+OE5 & Implementado & Série, tendência e regra unilateral exercitadas com dados controlados; sem acurácia agronômica atribuída. \\
+OE6 & Implementado & Clima compartilhado, unidade normalizada e resumo propagado; ausência tratada explicitamente. \\
+OE7 & Implementado & PDF, XLSX, CSV ZIP e GeoJSON exercitados com entradas controladas; não equivalem a pacote completo de reprodução. \\
+OE8 & Verificação técnica realizada & 710 testes Python, três verificações JavaScript e demonstração com serviços reais; questionário exploratório complementar. \\ \hline
+\end{tabular}
+\fonteTCC{elaborado pelo autor a partir das evidências da pesquisa.}
+\end{table*}
+
+O desenvolvimento orientado a especificações tornou explícitos requisitos e critérios verificáveis. A rastreabilidade entre esses documentos, módulos e testes permite distinguir disponibilidade funcional e avaliação realizada, em consonância com a relação entre requisitos e verificação examinada por \citet{GOTEL1994,BJARNASON2015}. Essa é uma contribuição de processo documentada, não uma medida de ganho de produtividade de desenvolvimento ou comparação entre metodologias.
+
+\subsection{Contribuições de Engenharia de Software}
+
+O problema de integração não se limita a chamar APIs: envolve preservar o significado dos dados ao atravessar serviços e representações. O polígono é uma entidade vetorial; o mapa combina valores raster; a série organiza médias por aquisição; e o resumo meteorológico agrega dias válidos. A separação de responsabilidades, coerente com a perspectiva de \citet{PARNAS1972}, localiza essas regras em componentes distintos. A avaliação demonstra sua articulação, sem medir experimentalmente manutenibilidade.
+
+No armazenamento, um serviço comum aplica regras de nomes e importação a repositórios SQLite e de sessão. A substituição do mecanismo de persistência preserva o contrato funcional, embora as garantias de permanência sejam diferentes. Na exportação, o snapshot associa os produtos à configuração da análise. Invalidá-lo quando as entradas mudam estabelece uma fronteira verificável entre resultados reutilizáveis e resultados incompatíveis com a seleção atual.
+
+A consulta local estabelece um compromisso entre transferência inicial e interação posterior. O navegador recebe e mantém a grade para ler células sem uma consulta ao Earth Engine por evento. A diferença entre os tamanhos comprimidos das matrizes controladas mostra que regularidade dos valores influencia a transferência; Base64 acrescenta volume à representação comprimida. O limite de tamanho protege o caminho de extração, mas não substitui ensaios de latência e memória. Trata-se de uma decisão de implementação, não de exclusividade frente aos produtos relacionados.
+
+As exportações atendem a finalidades complementares: o PDF comunica uma síntese; XLSX e CSV permitem inspecionar observações; e GeoJSON transfere geometrias. O contexto comum evita reconstruir a análise para cada formato e permite testar a propagação dos mesmos valores. Essa interoperabilidade é de dados e arquivos, não integração comprovada com qualquer software agrícola. A reprodutibilidade integral exigiria acrescentar versões de catálogo, parâmetros e demais registros de proveniência.
+
+\subsection{Consistência das integrações e limites dos testes}
+
+Os resultados de cobertura precisam ser interpretados em conjunto com as expectativas dos testes. Como discute \citet{BENDER2020}, executar um caminho não assegura que seu comportamento esteja corretamente especificado. A verificação de radiação ilustra essa distinção: a expectativa depende da unidade declarada pelo serviço, não apenas do valor numérico. Testar metadados, conversão e propagação para os arquivos examina um contrato semântico que uma simples chamada bem-sucedida não cobre.
+
+O mesmo raciocínio se aplica às escalas de visualização. Compartilhar o intervalo entre tiles e legenda mantém a relação entre cor e valor no mapa interativo; a escala fixa do PDF oferece outra referência. Assim, consistência não exige identidade visual, mas correspondência explícita entre representação e significado.
+
+Nos dados temporais, a identificação por aquisição evita associar anomalias apenas pela data quando existem imagens distintas no mesmo dia. O compartilhamento do contexto meteorológico entre índices preserva o suporte comum da análise. Essas verificações aproximam os testes dos riscos de integração: associação incorreta de registros, divergência de unidades e reutilização de contexto inválido.
+
+A demonstração com duas aquisições confirma o encadeamento entre serviços e arquivos, mas não exercita a aplicação da regra de anomalias a partir da quarta observação. Esse comportamento foi verificado com entradas controladas. As capturas com séries mais extensas ilustram a interface, porém não possuem o conjunto de dados e metadados necessário para substituir essa demonstração como avaliação do detector.
+
+\subsection{Percepção de uso e prioridades de engenharia}
+
+O questionário acrescenta uma dimensão não examinada pelos testes: a relação entre disponibilidade de um recurso, sua execução autodeclarada e seu valor percebido. A distinção entre facilidade e utilidade \citep{DAVIS1989} é relevante porque um recurso pode ser considerado útil e ainda exigir orientação. A demarcação teve 19/32 conclusões sem ajuda, apesar de 24/26 conclusões entre tentativas; clima e exportação tiveram conclusão em todas as tentativas, mas parte delas com auxílio. A avaliação favorável, portanto, convive com barreiras de autonomia.
+
+A consulta por pixel ilustra esse contraste. Houve 21/24 respostas útil/muito útil entre as avaliações válidas, mas oito registros indicaram não conseguir avaliá-la e cinco declararam não tentar a atividade correspondente. Não conseguir avaliar, não tentar e atribuir uma avaliação neutra são respostas diferentes e foram mantidas separadas. Os resultados apontam a necessidade de investigar se o recurso é encontrado e compreendido e em quais condições é acessado.
+
+Os relatos também mostram a importância de explicar o que os mapas permitem interpretar. Fertilidade, compactação e diagnóstico aparecem nas respostas, mas o sistema não determina essas condições. Explicar quais bandas são comparadas, como funciona a janela de observações, de onde vêm os dados meteorológicos e como as escalas de cores variam pode ser mais relevante do que acrescentar classes que sugiram um diagnóstico. As sugestões sobre fenologia, manejo, formatos e acesso móvel são possibilidades para avaliar no desenvolvimento futuro, não funcionalidades existentes ou evidências de aumento de produtividade.
+
+Em conjunto, nota geral, intenção de uso e relatos apontam interesse no fluxo integrado e prioridades de interação: demarcação, descoberta da consulta por pixel e explicação de séries e alertas. Eles não estabelecem a causa das dificuldades nem medem o efeito dos ajustes posteriores, pois a versão pública da coleta difere da versão tecnicamente avaliada.
+
+\subsection{Limitações e alcance dos resultados}
+
+No processamento geoespacial, a QA60 possui restrições históricas e não inclui tratamento específico de sombras. O filtro de nuvens descreve o produto, não apenas o polígono. Uma grade de 10 m não acrescenta resolução física às bandas de 20 m, e a redução espacial sem CRS explícito pode diferir da grade UTM de consulta. Essas condições limitam comparações numéricas estritas entre produtos.
+
+A composição por mediana resume o período, mas não informa diretamente o momento de uma mudança nem a quantidade de contribuições por pixel. A série conserva aquisições, lacunas e datas repetidas; sua cobertura espacial válida pode variar entre imagens. A contagem de imagens não substitui uma medida dessa cobertura.
+
+A janela de três observações, o limiar $z<-1$ e os limites de inclinação $\pm0{,}01$ são heurísticos não calibrados. A janela não modela fenologia ou sazonalidade e não sinaliza quando sua dispersão é zero; a tendência usa ordem de observação, não tempo transcorrido. Em contraste com a referência histórica sazonal de \citet{MERONI2019}, a regra apenas destaca quedas locais. Sua acurácia agronômica não foi avaliada em campo.
+
+Na avaliação com usuários, a adesão voluntária, o predomínio de agrônomos e o autorrelato delimitam a generalização das \UsuariosN{} respostas. A análise qualitativa não teve segundo codificador independente; seus resultados descrevem padrões dos textos recebidos, não prevalências populacionais.
+
+Na operação, bibliotecas abertas não eliminam condições de acesso, elegibilidade e cotas de serviços externos \citep{GOOGLE_EE_NONCOMMERCIAL,NOMINATIM_POLICY}. Não foram medidos custo total, desempenho comparativo ou capacidade de atendimento simultâneo.
+
+O serviço público Nominatim limita o tráfego agregado da aplicação a uma requisição por segundo e proíbe autocomplete. O código utiliza busca explícita e identifica a aplicação, mas não implementa limitador global ou cache de buscas. A atribuição e as condições de acesso devem ser revistas antes de ampliar o número de visitantes; disponibilidade pública não implica capacidade ilimitada.
+
+Na web, visitantes compartilham a conta de serviço e o consumo de cotas, embora os registros estejam separados por sessão. GeoJSON e arquivos de resultados podem conter coordenadas sensíveis, e a privacidade dos arquivos transferidos fica sob responsabilidade de quem os armazena e compartilha. O isolamento de sessão não constitui sistema de autorização de propriedades.
+
+Não foram conduzidos testes de carga, ensaios representativos de latência ou avaliações sistemáticas de segurança e acessibilidade. A cobertura Python restringe-se aos módulos medidos e não inclui serviços remotos ou JavaScript; os testes independentes do navegador e a emulação móvel não constituem uma matriz de compatibilidade. As evidências sustentam os comportamentos testados e o fluxo demonstrado, não ausência de defeitos.
+
+O contraste de alguns textos em temas escuros e as barreiras relatadas de navegação delimitam prioridades de avaliação da interface. Alternativas à QA60, como classificação de cena SCL (\textit{Scene Classification Layer}) ou probabilidade de nuvens, também exigem comparação própria antes de modificar o processamento.

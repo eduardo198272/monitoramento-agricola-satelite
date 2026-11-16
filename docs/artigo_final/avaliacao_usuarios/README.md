@@ -1,9 +1,9 @@
 # Avaliação da plataforma com usuários
 
-**Terceira rodada:** coleta encerrada e participantes reais confirmados pelo pesquisador. As31 respostas analisadas, inclusive datas, coincidem integralmente com registros da [fonte pública](https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/edit?usp=sharing). Os40 itens/191 categorias,13 temas/142 células e estatísticas foram recalculados sem alterar dados ou resultados. A fonte tem32 registros; o adicional é elegível e sua ausência do arquivo de31 requer esclarecimento, não incorporação automática. Aprovação qualitativa anterior mantida; nova redação sujeita à leitura final. Admissibilidade ética e formalização deIA seguem para o orientador. Ver [pendências vigentes](../auditoria_cientifica/PENDENCIAS_AUTOR.md) e `../evidencias/terceira_rodada/`.
+**Quarta rodada:** conjunto definitivo de **32 respostas**, com coleta concluída. Fonte: snapshot público SHA-256 `c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34`, escolhido expressamente pelo pesquisador após comunicação de que a fonte dinâmica já continha 33 registros. Os 40 itens, 191 categorias, seis cruzamentos e nove gráficos foram reprocessados. Média 7,72, mediana 8, DP amostral 1,78. A resposta incluída não preencheu os campos abertos: 142 células e 13 temas mantidos após conferência, percentuais por 32 submissões. Ver `../evidencias/quarta_rodada/` e [pendências vigentes](../auditoria_cientifica/PENDENCIAS_AUTOR.md).
 
-Análise de **31 submissões elegíveis ao questionário de avaliação com usuários**,
-registradas em `docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx`.
+Análise de **32 submissões elegíveis ao questionário de avaliação com usuários**,
+preservadas em `privado/snapshot_publico_32.xlsx` (arquivo privado ignorado pelo Git).
 A versão pública avaliada antecede as correções locais. Os dados são
 apresentados de forma agregada, sem identificação individual.
 
@@ -26,7 +26,7 @@ Usar o ambiente do projeto com pandas, NumPy, openpyxl e Matplotlib:
 
 ```sh
 .venv/bin/python docs/artigo_final/avaliacao_usuarios/scripts/analisar_respostas.py \
-  --input "docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx"
+  --input "docs/artigo_final/avaliacao_usuarios/privado/snapshot_publico_32.xlsx"
 .venv/bin/python docs/artigo_final/avaliacao_usuarios/scripts/gerar_tabelas.py
 .venv/bin/python docs/artigo_final/avaliacao_usuarios/scripts/gerar_graficos.py
 .venv/bin/python docs/artigo_final/avaliacao_usuarios/scripts/validar_resultados.py
@@ -49,7 +49,7 @@ não remover as verificações.
 Um hash de fonte diferente do recorte confirmado interrompe a análise antes de
 sobrescrever resultados. Para uma fonte atualizada, usar
 `--confirmar-procedencia` **somente após nova confirmação do responsável**.
-Esse parâmetro controla a atualização da fonte utilizada na análise.
+Esse parâmetro controla a atualização da fonte utilizada na análise. O snapshot32 está preservado privadamente; uma nova exportação da fonte dinâmica pode conter mais respostas e não deve substituí-lo automaticamente.
 
 ## Retificação já executada — não repetir
 
@@ -60,8 +60,8 @@ carimbo, preservando horários e respostas. A cópia byte a byte recebida está 
 `privado/retificacao_datas.json`. Ambos os diretórios são ignorados por Git.
 O script se recusa a sobrescrever o backup e não é parte da rotina de análise.
 
-A fonte corrigida permanece no caminho solicitado pelo autor. Ela não foi
-adicionada ao índice Git. Não publicar planilhas ou auditorias individuais sem
+A antiga cópia de trabalho corrigida foi excluída por autorização do autor após
+a terceira rodada; o original privado permanece. Não publicar planilhas ou auditorias individuais sem
 revisão específica de privacidade; ausência de nome/e-mail não garante anonimato.
 
 ## Limites

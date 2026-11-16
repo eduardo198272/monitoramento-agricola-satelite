@@ -1,5 +1,9 @@
 # Auditoria matemática
 
+## Quarta rodada — preservação
+
+As expressões analíticas, a transformação de coordenadas e a regressão permanecem literalmente iguais à base `2ca848a`. A atualização estatística refere-se ao questionário, não aos algoritmos da aplicação. Janela3, divisorN, limiar estrito z<−1 e inclinação±0,01 preservados. Sem nova demonstração real fornecida, não se apresentam cálculos ou sinalizações adicionais como observados. A comparação de expressões e os hashes constam de `../evidencias/quarta_rodada/preservacao.json`.
+
 ## Terceira rodada — conferência final
 
 As 12 expressões analíticas, as três expressões de consulta à grade e o objetivo de mínimos quadrados foram reconferidos frente a `earth_engine.py`, `pipeline.py`, `time_series.py`, `anomalies.py`, `climate.py` e ao componente de consulta. Os oito ambientes `equation`/`align` permanecem literalmente iguais à base de 38 páginas, assim como o ajuste não numerado; o manifesto registra a comparação. A numeração inclui duas linhas adicionais da consulta à grade, não duas novas equações agronômicas.

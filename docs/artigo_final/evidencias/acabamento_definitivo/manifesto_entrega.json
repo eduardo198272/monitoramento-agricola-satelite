@@ -1,0 +1,23 @@
+{
+  "pdf_sha256": "d3b817cac5fdaa08fb8671f4ceb62e53df6d715c47ab9548c2bbe9bf7ab37896",
+  "pages": 32,
+  "template_definitive_and_unchanged": true,
+  "science_preserved": true,
+  "evidence_sha256": {
+    "Relatorio_Final.blg": "f4ea6c6f11747e752c472eda6d66ddd5605afd7d51ed2bdc86bc71f142049595",
+    "README.md": "dc8a50ac76f23b4988dd6bf0f383e4dd8397229411c0390a33b77636c44d2db8",
+    "template.json": "49eb2f44ff275531694f5a66f19d5c5b21433c209825c0aa9aeef0b2db7576da",
+    "Relatorio_Final.aux": "92b62f24ce2c0dd9d223881124b3276926e82dc93ee883a65766494ea71280f7",
+    "antes_depois.diff": "49af23713d4353a32b0c470b0cd993891f6698f75f725dfd66cf1e39ca68f99c",
+    "pdfinfo.txt": "205189f27a7bf50b7eb1082914a75a3438ed5950656bc52b957c29eb7e93b5d0",
+    "renderizacao.json": "26a5ceae6363dd500f75b6498d0d90a4618eb1410fcfe162acfb701c76d7c1ac",
+    "Relatorio_Final.log": "5ecba7aae09bb17fbe7a45013a3927a9e9885353d44443b591027fe52929c80d",
+    "preservacao.json": "526f40d5c583a26a2b34e504dff262ab75e2338ad92ba3646bd1da8a5b3f5a0f",
+    "compilacao.json": "4983faba54763278d093b47690cee5940d6b72ded4699a5d3b42f066e7808429",
+    "inspecao_visual.md": "d21ec31fa10556d27e49e8692850bead74d49e2b279e7391c139f405b48934f9",
+    "console.txt": "7990900944a55f4c9a07606861f229af40a99b2e4f67c2b24d8bbac3f108d6b5",
+    "Relatorio_Final.bbl": "caaa39c02269c1eda78d5ebbd793bf185238da326ed3451c98bb8fe695f2264a",
+    "bibliografia.json": "8462576305a492ce5e49064cbf48edcfed69c7e83d1de4cfbc68a8f078d242fd",
+    "consultas.json": "53344d576f5fe5c1c78349c786d500511b4944b67c2bfab9ebb784451bee4d4b"
+  }
+}

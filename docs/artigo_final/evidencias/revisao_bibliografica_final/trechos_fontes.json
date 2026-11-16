@@ -1,0 +1,133 @@
+{
+  "BIPM_citacao": {
+    "url": "https://www.bipm.org/en/si-brochure-9",
+    "sha256": "39a93090bfe6636c41e1b21b19b0b5f70a6873f996d1384d0e37a427b9d810d3",
+    "trechos": [
+      "Citation Bureau International des Poids et Mesures. (2026). Le Système international d'unités/The International System of Units [Brochure]. 9th edition. https://doi.org/10.59161/AUEZ1291 Abstract The International System of Units (SI) has been used around the world as the preferred system of units, the basic language for science, technology, industry and trade since it was established in 1960 by a resolution at the 11th meeting of the Conférence ",
+      "Published in May 2019 - Revised in June 2026 Citation Bureau International des Poids et Mesures. (2026). Le Système international d'unités/The International System of Units [Brochure]. 9th edition. https://doi.org/10.59161/AUEZ1291 Abstract The International System of Units (SI) has been used around the world as the preferred system of units, the basic language for science, technology, industry and trade since it was established in 1960 by a reso",
+      "4.01 June 2026 Revised description of the relationship between widely used non-SI units and the SI, editorial changes (marginal notes incorporated in the main text and index deleted) 3.02 August 2025 Revision of the value of the dalton, update of the list of binary prefixes 3.01 August 2024 Improvements to the descriptions of angle and quantities with the unit one 2.01 December 2022 Introduction of the new SI prefixes adopted by the CGPM at its 2"
+    ]
+  },
+  "EOSDA_especifico": {
+    "url": "https://eos.com/user-guide/crop-monitoring/",
+    "sha256": "0882fc0c4fa505ad713201a207fe4be6fc8a1b593f9569609b14ce390b636d0b",
+    "trechos": [
+      "When you hover the cursor over any point within the field, the values of the selected indices for this point will be displayed on the map synchronously on both screens. This allows you to compare the index values for the same point within the field but for different dates. For example, to see how the vegetation has been developing on your field, select NDVI for both viewers and switch between dates in the timeline. This way you can identify areas",
+      "Upload fields Custom upload (contact us) Start by clicking +ADD FIELD located in the right bottom corner of your screen. A window with available options should pop up. Upload fields Uploading fields without parameters This option allows you to upload files containing pre-drawn field contours to the system. Currently, EOSDA Crop Monitoring supports 4 different format types: .shp , .kml , .kmz , .geojson . You can either drag-and-drop files onto th",
+      "Account And Pricing To get access to the paid features of EOSDA Crop Monitoring, upgrade your plan to Essential or Professional . You can learn more about the specific functionality available within each subscription plan on our Pricing page . To view the Pricing page , click or tap on the arrow button in the bottom right corner of the screen. Plans If you’re using the Essential plan, you can monitor up to 1000 ha. For the Professional plan, you "
+    ]
+  },
+  "NASA_manager": {
+    "url": "https://power.larc.nasa.gov/docs/services/api/system/manager/",
+    "sha256": "6703284c773d54dc07cc0bc9018ef3a452e37fd9fe9649104a3a3dfd6d0ebafd",
+    "trechos": [
+      "Manager microservice API is used to sync settings information across all microservices. Its primary role is to sync the parameters and enable faster querying of the POWER Parameters Catalog. Moreover, the Manager API provides the custom surface aliases and the corresponding surface roughness exponents. Additionally, it is used for the grouping of parameters for the Data Access Viewer ( DAV ) . Formats ¶ The only response format for the Manager AP",
+      "only response format for the Manager API is JSON (except for the metrics endpoint). The response structure is different depending on the endpoint. Request Structure ¶ The request arguments can be in any order after the question mark. A single parameter or a list of parameters can be requested with one of the following list separators: ',' or '%2C'. To help construct and test your API requests, please use the API Pages for the Manager API ."
+    ]
+  },
+  "QGIS_roadmap": {
+    "url": "https://qgis.org/resources/roadmap/",
+    "sha256": "b00e1e31d41d0a5183fdef8f179f80dcfef2f15f6c8b92241e9465584543acf3",
+    "trechos": [
+      "Currently available binaries: LTR 3.44.15 and Latest 4.2.3 . Please see the download page . Current: 3.44.15 Long Term Release (LTR) Initial Release Our stable releases are created by periodically taking a development version and 'hardening' it by focussing only on bugfixes. Point Release: 3.44.16 Each month we create a new point release for our latest version. These releases contain no new features, only bug fixes. Packaging Here we tag the rele",
+      "Long Term Release (LTR) Initial Release Our stable releases are created by periodically taking a development version and 'hardening' it by focussing only on bugfixes. Point Release: 3.44.16 Each month we create a new point release for our latest version. These releases contain no new features, only bug fixes. Packaging Here we tag the release and make it available for packaging on different platforms. Installers available The exact period between"
+    ]
+  },
+  "QGIS_3.44_vector_data": {
+    "url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/vector_data.html",
+    "sha256": "6be5149bc1f5f6b18898e944f5237a0e5540af44bf13f235383899416c287fd9",
+    "trechos": [
+      "Vector data provide a way to represent real world features within the GIS\nenvironment. A feature is anything you can see on the landscape. Imagine you are\nstanding on the top of a hill. Looking down you can see houses, roads, trees,\nrivers, and so on (see Fig. 3.30 ). Each one of these things would be a feature when we represent them in a GIS Application. Vector features have attributes , which consist of text or numerical information that descri",
+      "enclosed polygon feature is formed (see illustration Fig. 3.33 ). Fig. 3.31 A point feature is described by its X, Y and optionally Z coordinate. The point\nattributes describe the point e.g. if it is a tree or a lamp post. ï Fig. 3.32 A polyline is a sequence of joined vertices. Each vertex has an X, Y (and\noptionally Z) coordinate. Attributes describe the polyline. ï Fig. 3.33 A polygon, like a polyline, is a sequence of vertices. However in"
+    ]
+  },
+  "QGIS_3.44_raster_data": {
+    "url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/raster_data.html",
+    "sha256": "c5297d672c5fa1531c146e64b52f2261ebe13b3abe532ce0543eb12e215f025c",
+    "trechos": [
+      "Rasters are made up of a matrix\nof pixels (also called cells), each containing a value that represents the\nconditions for the area covered by that cell (see Fig. 6.7 ). In this topic\nwe are going to take a closer look at raster data, when it is useful and when it\nmakes more sense to use vector data. Fig. 6.7 A raster dataset is composed of rows (running across) and columns (running\ndown) of pixels (also know as cells). Each pixel represents a geo"
+    ]
+  },
+  "QGIS_3.44_map_production": {
+    "url": "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/map_production.html",
+    "sha256": "cc10dd271ae04189d77c02af8439e33475576717d9b0adb3bc055d6dd700c677",
+    "trechos": [
+      "legend relates map symbols to the mapped data. 9.2. Title in detail ï The map title is very important because it is usually the first thing a reader\nwill look at on a map. It can be compared with a title in a newspaper. It should\nbe short but give the reader a first idea of what the map is about. 9.3. Map Border in detail ï The map border is a line that defines exactly the edges of the area shown on the\nmap. When printing a map with a graticu",
+      "a map legend is used to provide\na key to all the symbols used on the map. It is like a dictionary that allows you\nto understand the meaning of what the map shows. A map legend is usually shown as\na little box in a corner of the map. It contains icons, each of which will\nrepresent a type of feature. For example, a house icon will show you how to\nidentify houses on the map (see Fig. 9.43 ). Fig. 9.43 Two maps from the same area, both with a water b"
+    ]
+  },
+  "UPF_direto": {
+    "url": "https://www.upf.br//_uploads/Conteudo/IN%20n%C2%BA%2003_2026%20Uso%20de%20Intelig%C3%AAncia%20Artificial%20%28IA%29%20nas%20atividades%20acad%C3%AAmicas%20da%20UPF_docx%281%29.pdf",
+    "sha256": "d44a49e0e77f47339b812b3851a6f5f15877e89004ec646c8bbfe13b3143b28b",
+    "trechos": [
+      "INSTRUÇÃO NORMATIVA Nº 03/2026/PROACAD\nDispõe sobre o uso de Inteligência Artificial (IA) nas\natividades acadêmicas na Universidade de Passo Fundo\n(UPF) e dá outras providências.\nA Pró-Reitoria Acadêmica, no uso de suas atribuições e considerando:\na) o disposto no Estatuto e no Regimento Geral da Universidade de Passo Fundo e no Código de Ética\nda UPF;\nb) a crescente utilização da Inteligência Artificial;\nc) a necessidade de preservar a originali",
+      "Dispõe sobre o uso de Inteligência Artificial (IA) nas\natividades acadêmicas na Universidade de Passo Fundo\n(UPF) e dá outras providências.\nA Pró-Reitoria Acadêmica, no uso de suas atribuições e considerando:\na) o disposto no Estatuto e no Regimento Geral da Universidade de Passo Fundo e no Código de Ética\nda UPF;\nb) a crescente utilização da Inteligência Artificial;\nc) a necessidade de preservar a originalidade, a autoria intelectual e a credibi",
+      "Art. 4º É permitido o uso de IA como ferramenta de apoio nas atividades acadêmicas, desde que\nobservados os princípios desta IN e autorizado pelo docente/orientador responsável pelo componente\ncurricular.\n§ 1º Entende-se por atividade acadêmica toda e qualquer atividade que envolva produção de trabalhos\nacadêmicos nos cursos de graduação ou de pós-graduação, incluindo TCCs, Dissertações e Teses.\n§ 2º O professor/orientador responsável pelo compon",
+      "Art. 6º Quando o discente fizer uso de ferramentas de IA generativa nas atividades acadêmicas, a\nforma de uso deve estar descrita no trabalho, em conformidade com a Portaria CNPq nº 2.664/2026,\ne entregue em declaração específica, de acordo com modelo em anexo.\nArt. 7º O docente/orientador é responsável por acompanhar e orientar o processo de elaboração dos\ntextos de TCCs, Dissertação ou Tese e por verificar a conformidade do uso de IA com esta I",
+      "Art. 8º A banca examinadora de TCC, Dissertação ou Tese (qualificação ou defesa) deverá ser\ninformada sobre eventual uso de IA, conforme o Art. 6º desta IN.\nArt. 9º É vedada a inserção de projeto de pesquisa, TCC, Dissertação, Tese em ferramentas de IA para\na elaboração de pareceres.\n§ 1º O uso de ferramentas de IA na revisão, análise ou elaboração de pareceres será admitido como\nrecurso auxiliar, observados os princípios desta IN e as políticas ",
+      "Passo Fundo, 28 de outubro de 2026."
+    ]
+  },
+  "GOTEL_pdf": {
+    "url": "https://discovery.ucl.ac.uk/749/1/2.2_rtprob.pdf",
+    "sha256": "b0ed5a52f3f97e25b645ad63790f7c1ce2c1cabce9df876903516de3869c0919",
+    "trechos": [
+      "Orlena C. Z. Gotel & Anthony C. W. Finkelstein\nImperial College of Science, Technology & Medicine\nDepartment of Computing, 180 Queen's Gate\nLondon SW7 2BZ (oczg; acwf@doc.ic.ac.uk)\nAbstract\n\nIn this paper1, we investigate and discuss the underlying nature\nof the requirements traceability problem. Our work is based on\nempirical studies, involving over 100 practitioners, and an\nevaluation of current support. We introduce the distinction\nbetween pre",
+      "Anthony C. W. Finkelstein\nImperial College of Science, Technology & Medicine\nDepartment of Computing, 180 Queen's Gate\nLondon SW7 2BZ (oczg; acwf@doc.ic.ac.uk)\nAbstract\n\nIn this paper1, we investigate and discuss the underlying nature\nof the requirements traceability problem. Our work is based on\nempirical studies, involving over 100 practitioners, and an\nevaluation of current support. We introduce the distinction\nbetween pre-requirements specifi"
+    ]
+  },
+  "NASA_unidades": {
+    "dicionario": {
+      "PRECTOTCORR": {
+        "type": "METEOROLOGY",
+        "temporal": "DAILY",
+        "source": "SOURCE",
+        "community": "AG",
+        "calculated": false,
+        "inputs": null,
+        "units": "mm/day",
+        "name": "Precipitation Corrected",
+        "definition": "The average MERRA-2 bias corrected total precipitation at the surface of the earth."
+      },
+      "T2M": {
+        "type": "METEOROLOGY",
+        "temporal": "DAILY",
+        "source": "SOURCE",
+        "community": "AG",
+        "calculated": false,
+        "inputs": null,
+        "units": "C",
+        "name": "Temperature at 2 Meters",
+        "definition": "The average air (dry bulb) temperature at 2 meters above the surface of the earth."
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "type": "RADIATION",
+        "temporal": "DAILY",
+        "source": "SOURCE",
+        "community": "AG",
+        "calculated": false,
+        "inputs": null,
+        "units": "MJ/m^2/day",
+        "name": "All Sky Surface Shortwave Downward Irradiance",
+        "definition": "The total solar irradiance incident (direct plus diffuse) on a horizontal plane at the surface of the earth under all sky conditions. An alternative term for the total solar irradiance is the \"Global Horizontal Irradiance\" or GHI."
+      }
+    },
+    "resposta": {
+      "PRECTOTCORR": {
+        "units": "mm/day",
+        "longname": "Precipitation Corrected"
+      },
+      "T2M": {
+        "units": "C",
+        "longname": "Temperature at 2 Meters"
+      },
+      "ALLSKY_SFC_SW_DWN": {
+        "units": "MJ/m^2/day",
+        "longname": "All Sky Surface Shortwave Downward Irradiance"
+      }
+    },
+    "consulta": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=PRECTOTCORR,T2M,ALLSKY_SFC_SW_DWN&community=AG&longitude=-52.4&latitude=-28.2&start=20250101&end=20250102&format=JSON",
+    "time_standard": "LST",
+    "observacao": "Sondagem documental; não é resultado novo do TCC."
+  }
+}

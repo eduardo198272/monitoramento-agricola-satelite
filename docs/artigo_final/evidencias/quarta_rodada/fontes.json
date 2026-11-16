@@ -1,0 +1,48 @@
+[
+  {
+    "key": "GOTEL1994",
+    "pdf_url": "https://discovery.ucl.ac.uk/749/1/2.2_rtprob.pdf",
+    "pdf_sha256": "b0ed5a52f3f97e25b645ad63790f7c1ce2c1cabce9df876903516de3869c0919",
+    "doi": "10.1109/icre.1994.292398",
+    "title": [
+      "An analysis of the requirements traceability problem"
+    ],
+    "container": [
+      "Proceedings of IEEE International Conference on Requirements Engineering"
+    ],
+    "pages": "94-101",
+    "crossref_sha256": "cb12b672592c39830a82b88db8322ffd96c079ed1f5e02ecbb6199e6cef26e80",
+    "scope": "Texto primário e contexto metodológico consultados; localizadores no parecer bibliográfico; PDF mantido em cache privado"
+  },
+  {
+    "key": "BJARNASON2015",
+    "pdf_url": "https://arxiv.org/pdf/2308.06509",
+    "pdf_sha256": "9cf4a5fbf25797476c59ce3b430209b7f706acb2d91a1a0acaa061458e7f2fab",
+    "doi": "10.1007/978-3-319-18612-2_3",
+    "title": [
+      "An Industrial Case Study on Test Cases as Requirements"
+    ],
+    "container": [
+      "Lecture Notes in Business Information Processing",
+      "Agile Processes in Software Engineering and Extreme Programming"
+    ],
+    "pages": "27-39",
+    "crossref_sha256": "84cf4302f8374d71f5f927a6db95bea1ea858d2cab2c85464fbda62b8cfdb8e6",
+    "scope": "Texto primário e contexto metodológico consultados; localizadores no parecer bibliográfico; PDF mantido em cache privado"
+  },
+  {
+    "key": "VAITHILINGAM2022",
+    "pdf_url": "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
+    "pdf_sha256": "9eb74f23b8d0f3aa05b69076099c2897eeffd42f69111f7740ea48b6f21a47ca",
+    "doi": "10.1145/3491101.3519665",
+    "title": [
+      "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models"
+    ],
+    "container": [
+      "CHI Conference on Human Factors in Computing Systems Extended Abstracts"
+    ],
+    "pages": "1-7",
+    "crossref_sha256": "2d03bc869015a70c23f3e40bcf505c8d88497d63dcfd6375af85fed71129f58c",
+    "scope": "Texto primário e contexto metodológico consultados; localizadores no parecer bibliográfico; PDF mantido em cache privado"
+  }
+]

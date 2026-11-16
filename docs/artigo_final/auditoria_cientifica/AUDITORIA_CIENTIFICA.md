@@ -1,5 +1,80 @@
 # Auditoria científica — versão de trabalho
 
+## Relatório vigente — quarta rodada, 16/11/2026
+
+**Ajustes pontuais concluídos sobre a versão de32 páginas; demonstração complementar do detector aguardando evidências do pesquisador.** O artigo continua com32 páginas,22 figuras e cinco tabelas, sem alteração da estrutura, da classe, do código funcional ou dos parâmetros. Não houve commit/push/deploy. A nova redação permanece sujeita à leitura e aprovação substantiva do autor.
+
+### Conjunto definitivo e reprocessamento
+
+O pesquisador confirmou32 respostas. Durante a execução, a planilha pública já continha33 elegíveis, fato comunicado antes de qualquer seleção. Na pergunta de esclarecimento, escolheu **“Snapshot de 32 respostas”**. Foi recuperada a exportação pública anterior, hash `c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34`, e conferido que todas as32 linhas, incluindo carimbos, integram a exportação atual. Não se excluiu arbitrariamente uma linha da fonte atual para forçarN=32.
+
+As31 respostas do original privado correspondem ao snapshot sem alteração das respostas; as sete diferenças históricas de carimbo coincidem com a retificação documentada. Nenhuma retificação nesta rodada. O conjunto32 está preservado privadamente e ignorado pelo Git; não foi republicada planilha individual. A antiga pendência31/32 foi resolvida pela inclusão do registro e definição explícita da versão dos dados.
+
+| Indicador | Terceira rodada | Quarta rodada |
+|---|---:|---:|
+| Respostas elegíveis |31|32|
+| Nota média |7,74193548|7,71875|
+| Mediana / moda |8 /9|8 /9|
+| DP amostral |1,80679720|1,78224894|
+| Q1 /Q3 |7 /9|7 /9|
+| Demarcação sem ajuda |18/31|19/32|
+| Conclusão de demarcação entre tentativas |23/25|24/26|
+| Séries/anomalias: conclusão entre tentativas |23/28|24/29|
+| Intenção de uso (4–5) |24/30|24/31|
+| Consulta por pixel útil/muito útil |20/23|21/24|
+| Mediana da utilidade dos índices, demais áreas |5 (n13)|4,5 (n14)|
+| Mediana da nota, experiência poucas vezes/nunca |8 (n13)|7,5 (n14)|
+| Células discursivas preenchidas /temas |142 /13|142 /13|
+
+Todos os40 itens,191 categorias, seis cruzamentos, nota geral, contagens por perfil e qualitativo foram reprocessados. As32 submissões foram examinadas;31 contêm texto aberto. A incluída tem os cinco campos vazios: nenhum texto, interpretação ou tema foi imputado. São18 ausências entre160 campos, incluindo14 no comentário opcional. Os13 temas mantêm as contagens anteriores, com percentuais por32 submissões. O rótulo do gráfico temático explicita “n analisado”, evitando confundir32 unidades examinadas com31 unidades contendo texto.
+
+Os nove gráficos foram regenerados em PDF/SVG/PNG, as tabelas/macros refeitas e todos os números narrativos revistos. Corrigida também a afirmação de que os gráficos temporais teriam a menor proporção de utilidade4–5: a tabela não sustenta esse superlativo; o texto agora apresenta diretamente21/30. Não houve seleção somente de resultados favoráveis.
+
+### Ajustes científicos e editoriais
+
+- **Metodologia:** coleta concluída,32 elegíveis, participação voluntária, consentimento/maioridade autodeclarados e tratamento agregado. A fonte é um snapshot fixo, não uma promessa de que o endereço público continuará contendo32.
+- **Narrativa:** resultados sob perspectiva científica do pesquisador, sem suspeitas especulativas ou interlocução de auditor no artigo. Autorrelato, amostragem e ausência de validação agronômica permanecem limites do desenho.
+- **Ética:** eliminadas repetições no resumo, discussão e conclusão; informação material preservada uma vez nos métodos. Não se afirmou submissão, aprovação, dispensa ou regularização.
+- **IA:** declaração específica mantida integralmente no alcance das atividades; retiradas menções redundantes nos resumos, repetição final nos procedimentos de desenvolvimento e legenda temática. Permanecem os usos metodologicamente necessários no desenvolvimento e na codificação.
+- **SDD:** dois parágrafos de complemento e uma associação na discussão, com Gotel/Finkelstein1994 (requisitos/rastreabilidade), Bjarnason et al.2015 (critérios/testes/contexto) e Vaithilingam et al.2022 (geração de código/compreensão/verificação humana). Três entradas adicionadas, nenhuma removida ou substituída;63 entradas e54 chaves citadas. Textos primários e metadados conferidos, com limites registrados. Não se atribuiu BDD/ATDD, especificação formal ou ganho medido.
+- **Demonstração complementar:** não disponibilizada nesta execução. Preservada a distinção entre regra verificada com dados controlados e demonstração real anterior de duas aquisições. Nenhum novo experimento, observação ou sinalização foi produzido.
+
+### Validação técnica, estatística e visual
+
+O validador independente reproduziu frequências, percentuais, médias, medianas, quartis e DP, além dos nove denominadores de tarefas,13 contagens temáticas e seis cruzamentos (12 grupos). Os nove testes da rotina de análise passaram, incluindo tratamento de campos abertos vazios. São verificações do processamento estatístico, **não nova execução dos710 testes da aplicação**.
+
+Tectonic compilou artigo e declaração sem erros, citações/referências indefinidas, caixas `Overfull` ou aviso de bloco inicial `twocolumn too tall`. Permanecem avisos de caixas pouco preenchidas, substituição de tamanhos de fontes matemáticas da classe e compatibilidade epstopdf/driver, sem corte observado. Classe, equações, algoritmos, parâmetros, capturas e evidências anteriores preservados.
+
+As32 páginas foram renderizadas a1500px e inspecionadas individualmente porIA. Após a última correção pontual de redação, somente as páginas24 e27 mudaram e foram reexaminadas; as30 restantes permaneceram idênticas à inspeção inicial desta rodada. As duas páginas da declaração independente também foram inspecionadas. Não houve aprovação visual humana.
+
+| Páginas | Conferência visual |
+|---|---|
+|1|Cabeçalho,32 respostas, média7,72/mediana8 e equivalência entre resumos; sem bloco alto|
+|2–4|Objetivos, conceitos, bandas e equações preservados; títulos acompanhados|
+|5–8|Novo fundamento de SDD, citações, esquemas e tabela documental, sem corte ou sobreposição|
+|9–10|Fluxos, fórmulas e unidades legíveis; espaçamento vertical elástico da classe permanece, sem reduzir medidas institucionais|
+|11–12|Metodologia32, ausência de campos, consentimento/ética em um único trecho e arquitetura; sem texto órfão|
+|13–16|Componentes, persistência, consulta local e exportação preservados|
+|17–22|Capturas/QR e legendas preservados; a imagem59,00 permanece apenas ilustrativa|
+|23|Resultados técnicos e demonstração histórica de dois pontos sem valores alterados|
+|24–27|Perfil32, tarefas, experiência, tabela de utilidade, nota7,72/DP1,78 e temas; denominadores por item não confundidos comN total|
+|28–29|Objetivos, discussão, limites e conclusão32/intenção24 de31 válidas|
+|30–32|Declaração deIA e referências, incluindo as três novas entradas; última coluna residual sem excesso|
+|Declaração1–2|Campos institucionais e prompt desta rodada; assinatura em branco|
+
+Todos os nove gráficos foram conferidos por regeneração e correspondência com os CSV; os complementares não incluídos no artigo também foram examinados. Os manifestos de preservação, compilação, fontes e dados estão em `../evidencias/quarta_rodada/`. A comparação da rodada é contra `2ca848a` e o PDF de32 páginas, não contra a antiga base38.
+
+### Encaminhamentos e preparação de defesa atualizados
+
+1. **Qual conjunto foi analisado?** As32 respostas do snapshot público definitivo escolhido pelo pesquisador; a fonte dinâmica passou a conter33, sem mudar automaticamente a versão analisada.
+2. **Por que ainda aparecem denominadores31 ou30?** Porque “Não consegui avaliar” e ausências são excluídos conforme cada item;N total32 não é o denominador de todas as perguntas. Os31 textos abertos não significam31 participantes totais.
+3. **O que mudou?** Média7,72, DP1,78, intenção24/31 e distribuições atualizadas; algumas medianas dos cruzamentos também mudaram. Não se presumiu estabilidade dos resultados.
+4. **Como as ausências foram codificadas?** Não receberam tema; a submissão adicional tem mapa vazio. As142 células preenchidas permanecem efetivamente analisadas, sem criar novas respostas.
+5. **A fundamentação prova superioridade do SDD ou da ferramenta deIA?** Não. Apoia os conceitos de especificação, rastreabilidade, verificação e supervisão; o TCC não contém ensaio comparativo do processo.
+6. **Há nova demonstração real do detector?** Ainda não: aguardam-se área/período, série integral, índices, parâmetros e arquivos/capturas correspondentes fornecidos pelo pesquisador. Com esses dados, será possível conferir média móvel, dispersão, escore e marcações sem atribuir eficácia agronômica.
+
+Permanecem as decisões institucionais e a revisão humana final registradas em `PENDENCIAS_AUTOR.md`, além dos limites bibliográficos anteriores. **As seções seguintes são históricas**, inclusive a antiga pendência31/32 e as respostas de defesa sobre aquele estado; não prevalecem sobre este relatório.
+
 ## Relatório consolidado vigente — terceira rodada, 15–16/11/2026
 
 **Finalidade: versão consolidada para encaminhamento ao Prof. Rafael Rieder, não conformidade institucional definitiva.** A rodada parte do PDF de38 páginas (`ebf4e063…`) e das decisões PA01–PA18, sem reiniciar o trabalho. O protocolo autoral foi lido integralmente antes da atividade. As novas reformulações estão disponíveis para leitura e aprovação intelectual do pesquisador; a assistência substancial de IA permanece declarada.

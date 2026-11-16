@@ -89,6 +89,16 @@ def test_new_open_text_requires_manual_coding():
     assert themes.registros_com_tema.sum() == 0
 
 
+def test_empty_open_fields_receive_no_theme():
+    f = frame()
+    f.iloc[0,43:48] = ""
+    themes, quality = analysis.qualitative(f)
+    assert quality["registros_pendentes_codificacao"] == 0
+    assert quality["celulas_discursivas_codificadas"] == 0
+    assert themes.registros_com_tema.sum() == 0
+    assert all(themes.n_codificado == 1)
+
+
 def test_small_crossed_groups_are_suppressed():
     result = analysis.crossed(frame())
     assert all(result.estado.str.startswith("Suprimido"))

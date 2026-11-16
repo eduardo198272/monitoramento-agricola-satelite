@@ -1,0 +1,16 @@
+{
+  "status": "Padrão oficial definitivo informado pelo pesquisador; configuração ativa preservada.",
+  "changed": false,
+  "files_sha256": {
+    "Relatorio_Final.tex": "29f6c5ed8e399f66b25bd914213b0a5eba4f5267c938011efd35d29716bb8ea0",
+    "CC-EC_TF-TC.cls": "999d34203d7082ff5be5c48c665f4ff726a0dc359679c0cb3a4c67f0bb485a10",
+    "autoria.tex": "a0e658e4f83a3ad822a304c1be597a9948e3b0349384a1aed6efb07a5f49ab36",
+    "normalizacao.tex": "011943cf04396118f45ac0f1c3b780a6f96c3ec806b9924a8e973315b34ccb2c",
+    "figuras_relatorio.tex": "1bce69903e9d85c00e63b24f9a366ccdcb53a07f1e178639eaf34c5b30bfd857",
+    "upf-ccc.cls": "ee2b6005376f501e5613d47063ebd29dedf89c67e95d85d0520ca239d1282dd5",
+    "hyperref-compat.sty": "876af81858d4f7c80f470f32db400859e301e18b678832b8025558fb9956a2f8"
+  },
+  "bibliography": "natbib/dcu",
+  "coauthorship_option_unchanged": true,
+  "independent_new_template_package_downloaded": false
+}

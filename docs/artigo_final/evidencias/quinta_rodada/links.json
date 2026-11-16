@@ -1,0 +1,537 @@
+[
+  {
+    "key": "ESA_SENTINEL2",
+    "url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+    "http": 200,
+    "final_url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+    "access_date": "16 nov. 2026",
+    "sha256": "5674052397a2f4610edb29ad8cbfdf0ce5d555ca5415ada63b920e06216cfce7",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_S2_SR",
+    "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_EE_ND",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
+    "access_date": "16 nov. 2026",
+    "sha256": "e3cc3fe27a1d73b4c5b087aeab65dd2cdf1899a449999768e362529d831377d6",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_EE_DATE",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
+    "access_date": "16 nov. 2026",
+    "sha256": "c2cffc01c33667470f13f1dd4e1f9d93e557b73e13160cd8d4384d34710b3b3c",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_EE_SERVICE_ACCOUNT",
+    "url": "https://developers.google.com/earth-engine/guides/service_account",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/guides/service_account",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_EE_NONCOMMERCIAL",
+    "url": "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "STREAMLIT_CLOUD_SECRETS",
+    "url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
+    "http": 200,
+    "final_url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
+    "access_date": "16 nov. 2026",
+    "sha256": "e3ac7a6a545a2a0d7513e7b1a8415d4813fac7f4b7317a799676a86e3a39c5a4",
+    "consulta": true
+  },
+  {
+    "key": "SLAIFFER2023",
+    "url": "https://repositorio.ufsm.br/handle/1/29995",
+    "http": 403,
+    "final_url": "https://repositorio.ufsm.br/handle/1/29995",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "LOVATO2021",
+    "url": "https://repositorio.unesp.br/entities/publication/b9caa0ff-8be4-44b6-ba3d-e40bbfa7e275",
+    "http": 200,
+    "final_url": "https://repositorio.unesp.br/entities/publication/b9caa0ff-8be4-44b6-ba3d-e40bbfa7e275",
+    "access_date": "16 nov. 2026",
+    "sha256": "99047b4d8022fde0bec61638369049db2c61c00515acf3df1ffb4058fdcf8836",
+    "consulta": true
+  },
+  {
+    "key": "ARAUJO2025",
+    "url": "https://doi.org/10.5281/zenodo.15871939",
+    "http": 200,
+    "final_url": "https://zenodo.org/records/15871939",
+    "access_date": "16 nov. 2026",
+    "sha256": "816f07d601d4eb2ef0595397bd77f16ab63dff1f01862f79237d17ad6690a894",
+    "consulta": true
+  },
+  {
+    "key": "CHAVES2019",
+    "url": "https://repositorio.ufla.br/items/62ad79ab-a7b3-400b-ad28-5779e424f3d3",
+    "error": "HTTPSConnectionPool(host='repositorio.ufla.br', port=443): Max retries exceeded with url: /items/62ad79ab-a7b3-400b-ad28-5779e424f3d3 (Caused by ConnectTimeoutError(<HTTPSConnection(host='repositorio.ufla.br', port=443) at 0x79a6de5782d0>, 'Connection to repositorio.ufla.br timed out. (connect timeout=20)'))",
+    "consulta": false
+  },
+  {
+    "key": "NASA_POWER_DAILY",
+    "url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+    "http": 200,
+    "final_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+    "access_date": "16 nov. 2026",
+    "sha256": "d624945397c5fa517d5d8d63c3c802550869271d545c93f31c0e7e419cf4a9f6",
+    "consulta": true
+  },
+  {
+    "key": "ROUSE1973",
+    "url": null,
+    "consulta": false
+  },
+  {
+    "key": "GAO1996",
+    "url": "https://doi.org/10.1016/S0034-4257(96)00067-3",
+    "http": 200,
+    "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0034425796000673",
+    "access_date": "16 nov. 2026",
+    "sha256": "e56bcfd0a3908ff448073ab5a85f3004325e5d5fd9b94b9bc75f5e3c8013f49d",
+    "consulta": true
+  },
+  {
+    "key": "PATRICIO2018",
+    "url": "https://doi.org/10.1016/j.compag.2018.08.001",
+    "http": 200,
+    "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0168169918305829",
+    "access_date": "16 nov. 2026",
+    "sha256": "f2dd382a45d42b3aaa9c33cab9c0d4d8d73f5bdb8fd7209d15f5393cf0fbe031",
+    "consulta": true
+  },
+  {
+    "key": "GORELICK2017",
+    "url": "https://doi.org/10.1016/j.rse.2017.06.031",
+    "http": 200,
+    "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0034425717302900",
+    "access_date": "16 nov. 2026",
+    "sha256": "32f9cefa2b793b82720de5ffe18cb215352065270acd6e3b073325b2bd7510f0",
+    "consulta": true
+  },
+  {
+    "key": "AMANI2020",
+    "url": "https://doi.org/10.1109/JSTARS.2020.3021052",
+    "http": 202,
+    "final_url": "https://ieeexplore.ieee.org/document/9184118/",
+    "access_date": "16 nov. 2026",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "consulta": true
+  },
+  {
+    "key": "WEISS2020",
+    "url": "https://doi.org/10.1016/j.rse.2019.111402",
+    "http": 200,
+    "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0034425719304213",
+    "access_date": "16 nov. 2026",
+    "sha256": "c49f359a4f3f90db59d246b34ffd20ee03fa4c2eb3a76da849973e21020dec6c",
+    "consulta": true
+  },
+  {
+    "key": "PHIRI2020",
+    "url": "https://doi.org/10.3390/rs12142291",
+    "http": 403,
+    "final_url": "https://www.mdpi.com/2072-4292/12/14/2291",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "WAZLAWICK2014",
+    "url": null,
+    "consulta": false
+  },
+  {
+    "key": "WAZLAWICK2020",
+    "url": "https://integrada.minhabiblioteca.com.br/books/9788595157712",
+    "http": 200,
+    "final_url": "https://integrada.minhabiblioteca.com.br/#/books/9788595157712",
+    "access_date": "16 nov. 2026",
+    "sha256": "f3eb7a7e73ad19ea3bd0476cd32b44cb9884b4a71cc64b954e991593bbd65e86",
+    "consulta": true
+  },
+  {
+    "key": "MCFEETERS1996",
+    "url": "https://doi.org/10.1080/01431169608948714",
+    "http": 403,
+    "final_url": "https://www.tandfonline.com/doi/full/10.1080/01431169608948714",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "USGS_NDMI",
+    "url": "https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index",
+    "http": 200,
+    "final_url": "https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index",
+    "access_date": "16 nov. 2026",
+    "sha256": "1a9d83a85f1aad05c5f3e1579b0d4993e19d1220aeb0bb2dfcbd3d0baa2a6f30",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_EE_SAMPLE",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
+    "access_date": "16 nov. 2026",
+    "sha256": "43fa52037bca2a1c6f5874a8a9ebe5e9649a39d68fa58acadfdb1c4b159c30ff",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_EE_MEDIAN",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
+    "access_date": "16 nov. 2026",
+    "sha256": "496bffc67f755706af63b6fea7ace594178309ff0c1eaaa7d6af64331533d2df",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_EE_REDUCE",
+    "url": "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
+    "access_date": "16 nov. 2026",
+    "sha256": "cab7877bfae4b35807e75ff103232ce8f4dd5306952719f2d9c9d7b3e864d5ba",
+    "consulta": true
+  },
+  {
+    "key": "NOMINATIM_POLICY",
+    "url": "https://operations.osmfoundation.org/policies/nominatim/",
+    "http": 200,
+    "final_url": "https://operations.osmfoundation.org/policies/nominatim/",
+    "access_date": "16 nov. 2026",
+    "sha256": "96f1c62c2b6d886d2c525cb60b5d2fbc24532d25ef477bc0aaf31ce786f9ad74",
+    "consulta": true
+  },
+  {
+    "key": "ROUSE1974_NTRS",
+    "url": "https://ntrs.nasa.gov/citations/19740022614",
+    "http": 200,
+    "final_url": "https://ntrs.nasa.gov/citations/19740022614",
+    "access_date": "16 nov. 2026",
+    "sha256": "6c4099b8382b2c9776a1db8df36af74bd35fe4449f05cb08ef0390447772061d",
+    "consulta": true
+  },
+  {
+    "key": "EOSDA_PLATFORM",
+    "url": "https://eos.com/products/crop-monitoring/",
+    "http": 403,
+    "final_url": "https://eos.com/products/crop-monitoring/",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "ONESOIL_PLATFORM",
+    "url": "https://onesoil.ai/en/platform",
+    "http": 200,
+    "final_url": "https://onesoil.ai/en/platform",
+    "access_date": "16 nov. 2026",
+    "sha256": "b8f3f9e0c66e4f1a798fd5f3de67f418e4172d755efb36130f8a37d0fc98eea7",
+    "consulta": true
+  },
+  {
+    "key": "ISO9241_2018",
+    "url": "https://www.iso.org/standard/63500.html",
+    "http": 403,
+    "final_url": "https://www.iso.org/standard/63500.html",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "DAVIS1989",
+    "url": "https://doi.org/10.2307/249008",
+    "http": 403,
+    "final_url": "https://misq.umn.edu/misq/article/13/3/319/191/Perceived-Usefulness-Perceived-Ease-of-Use-and",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "SULLIVAN2013",
+    "url": "https://doi.org/10.4300/JGME-5-4-18",
+    "http": 200,
+    "final_url": "https://jgme.kglmeridian.com/view/journals/jgme/5/4/article-p541.xml",
+    "access_date": "16 nov. 2026",
+    "sha256": "4ab56907a06ddf02d87da26f6a79bc6dfd489589dcc618e4a576e2fec3b1a9c8",
+    "consulta": true
+  },
+  {
+    "key": "BRAUN2006",
+    "url": "https://doi.org/10.1191/1478088706qp063oa",
+    "http": 403,
+    "final_url": "https://www.tandfonline.com/doi/full/10.1191/1478088706qp063oa",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "QGIS_VECTOR",
+    "url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html",
+    "http": 200,
+    "final_url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "QGIS_RASTER",
+    "url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html",
+    "http": 200,
+    "final_url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "QGIS_MAP",
+    "url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html",
+    "http": 200,
+    "final_url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_EE_RESAMPLE",
+    "url": "https://developers.google.com/earth-engine/guides/resample",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/guides/resample",
+    "access_date": "16 nov. 2026",
+    "sha256": "831e0507f8b5a27c342c426e15879e7fa5d88c0aff69ecb784ca15d0187ee6a2",
+    "consulta": true
+  },
+  {
+    "key": "GOOGLE_EE_REGION",
+    "url": "https://developers.google.com/earth-engine/guides/reducers_reduce_region",
+    "http": 200,
+    "final_url": "https://developers.google.com/earth-engine/guides/reducers_reduce_region",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "SENTINELHUB_NDMI",
+    "url": "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+    "http": 200,
+    "final_url": "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+    "access_date": "16 nov. 2026",
+    "sha256": "5f80a2fb68ae700c68433620eb5354fae7407c1e12d0c2e3b667ef6c626b0da9",
+    "consulta": true
+  },
+  {
+    "key": "HYNDMAN2021",
+    "url": "https://otexts.com/fpp3/",
+    "http": 403,
+    "final_url": "https://otexts.com/fpp3/",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "NIST_OUTLIERS",
+    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
+    "http": 200,
+    "final_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
+    "access_date": "16 nov. 2026",
+    "sha256": "3ad4ca23b14a5588341ae48392ecd8fbe4421555904225efcafcc6d5b72fe117",
+    "consulta": true
+  },
+  {
+    "key": "NUMPY_STD",
+    "url": "https://numpy.org/doc/stable/reference/generated/numpy.std.html",
+    "http": 200,
+    "final_url": "https://numpy.org/doc/stable/reference/generated/numpy.std.html",
+    "access_date": "16 nov. 2026",
+    "sha256": "cdb1505c54eaed1fd8af8a53f2c005dabb716c7ef5efa0c8043f5d609b910c23",
+    "consulta": true
+  },
+  {
+    "key": "NUMPY_POLYFIT",
+    "url": "https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html",
+    "http": 200,
+    "final_url": "https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html",
+    "access_date": "16 nov. 2026",
+    "sha256": "5f24a818b18f68cc6bd25cc62c60d2cb7ebc04675163c9f0191b566c731df0c4",
+    "consulta": true
+  },
+  {
+    "key": "BIPM_SI",
+    "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+    "http": 200,
+    "final_url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+    "access_date": "16 nov. 2026",
+    "sha256": "1122cf38e25b23d780a30607c68f7350b2b6d1f9970a89947aaa87a45ecbb20a",
+    "consulta": true
+  },
+  {
+    "key": "BENDER2020",
+    "url": "https://abseil.io/resources/swe-book/html/ch11.html",
+    "http": 200,
+    "final_url": "https://abseil.io/resources/swe-book/html/ch11.html",
+    "access_date": "16 nov. 2026",
+    "sha256": "d2cd97dde24435eec69ff864633bb4f1c6bde45e10d4d76b3661736242124fcf",
+    "consulta": true
+  },
+  {
+    "key": "AAPOR2013",
+    "url": "https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf",
+    "http": 200,
+    "final_url": "https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "SLAIFFER2025",
+    "url": "https://doi.org/10.31413/nat.v13i3.18592",
+    "http": 200,
+    "final_url": "https://periodicoscientificos.ufmt.br/ojs/index.php/nativa/article/view/18592",
+    "access_date": "16 nov. 2026",
+    "sha256": "9118716bc8f576d2baab769019b0af14dab2df310850679e7f67a3d4bc7bea68",
+    "consulta": true
+  },
+  {
+    "key": "IZQUIERDO2026",
+    "url": "https://doi.org/10.3390/agronomy16050541",
+    "http": 403,
+    "final_url": "https://www.mdpi.com/2073-4395/16/5/541",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "NASA_POWER_METHOD",
+    "url": "https://power.larc.nasa.gov/docs/methodology/",
+    "http": 200,
+    "final_url": "https://power.larc.nasa.gov/docs/methodology/",
+    "access_date": "16 nov. 2026",
+    "sha256": "362dfb5cc59fb23b6a4f55e4a77326937132c67a33f00b972e6fe3a1567113e3",
+    "consulta": true
+  },
+  {
+    "key": "NASA_POWER_PARAMETERS",
+    "url": "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
+    "http": 200,
+    "final_url": "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "STREAMLIT_STATE",
+    "url": "https://docs.streamlit.io/develop/concepts/architecture/session-state",
+    "http": 200,
+    "final_url": "https://docs.streamlit.io/develop/concepts/architecture/session-state",
+    "access_date": "16 nov. 2026",
+    "sha256": "f1a81d38fb3acdc2151edb5bb91b003d9d2afc0f52ac41876bf410eb640efbd8",
+    "consulta": true
+  },
+  {
+    "key": "MERONI2019",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/",
+    "http": 200,
+    "final_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/",
+    "access_date": "16 nov. 2026",
+    "sha256": "2a2b9ee4a22993484d24f560e855a526cfa24273622be396d05941d68d622996",
+    "consulta": true
+  },
+  {
+    "key": "PARNAS1972",
+    "url": "https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf",
+    "http": 200,
+    "final_url": "https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf",
+    "access_date": "16 nov. 2026",
+    "consulta": true
+  },
+  {
+    "key": "NIST_LOCATION",
+    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+    "http": 200,
+    "final_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+    "access_date": "16 nov. 2026",
+    "sha256": "973db1b592ac327c44f1951b15a4478cb0ad596da68dc933c1085e5f39bdc5b6",
+    "consulta": true
+  },
+  {
+    "key": "GITHUB_SDD",
+    "url": "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+    "http": 200,
+    "final_url": "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+    "access_date": "16 nov. 2026",
+    "sha256": "43a3ef2a3e40d48f71dbcdfa13818f584392b6843467e6ecf4ffa65efb39fdc3",
+    "consulta": true
+  },
+  {
+    "key": "BOECKELER2025",
+    "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+    "http": 200,
+    "final_url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+    "access_date": "16 nov. 2026",
+    "sha256": "1b1fb76c908e9b1a0ed0b136eff8583a9cd39efcb91da21008236dbe4ab5f4bc",
+    "consulta": true
+  },
+  {
+    "key": "UPF_IA2026",
+    "url": "https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in",
+    "http": 200,
+    "final_url": "https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in",
+    "access_date": "16 nov. 2026",
+    "sha256": "41fda01fc8cb4d450c3ab23e4bb8e5ef271e29561781a5b36357c2987ae77ec8",
+    "consulta": true
+  },
+  {
+    "key": "EOSDA_GUIDE",
+    "url": "https://eos.com/user-guide/",
+    "http": 403,
+    "final_url": "https://eos.com/user-guide/",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "ONESOIL_PLATFORM_DETAIL",
+    "url": "https://onesoil.ai/en/platform",
+    "http": 200,
+    "final_url": "https://onesoil.ai/en/platform",
+    "access_date": "16 nov. 2026",
+    "sha256": "b8f3f9e0c66e4f1a798fd5f3de67f418e4172d755efb36130f8a37d0fc98eea7",
+    "consulta": true
+  },
+  {
+    "key": "GOTEL1994",
+    "url": "https://discovery.ucl.ac.uk/749/",
+    "http": 403,
+    "final_url": "https://discovery.ucl.ac.uk/749/",
+    "access_date": "16 nov. 2026",
+    "consulta": false
+  },
+  {
+    "key": "BJARNASON2015",
+    "url": "https://arxiv.org/abs/2308.06509",
+    "http": 200,
+    "final_url": "https://arxiv.org/abs/2308.06509",
+    "access_date": "16 nov. 2026",
+    "sha256": "8bad2255592532e68f37b814467a4ae4fb4643c2d8b104e1246f357a676edd83",
+    "consulta": true
+  },
+  {
+    "key": "VAITHILINGAM2022",
+    "url": "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
+    "http": 200,
+    "final_url": "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
+    "access_date": "16 nov. 2026",
+    "sha256": "9eb74f23b8d0f3aa05b69076099c2897eeffd42f69111f7740ea48b6f21a47ca",
+    "consulta": true
+  }
+]

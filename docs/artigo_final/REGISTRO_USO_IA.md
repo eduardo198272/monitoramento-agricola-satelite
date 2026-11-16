@@ -1,5 +1,15 @@
 # Registro de uso de inteligência artificial
 
+## Quarta rodada — 16/11/2026
+
+Assistência por GPT-6.1 Sol no OpenCode: conferência do snapshot público e original privado, reprocessamento quantitativo/qualitativo, geração de tabelas e gráficos, atualização pontual do artigo, pesquisa e confronto de três publicações primárias, revisão de declarações/documentos e validação de compilação/páginas. A assistência continua substantiva; não foi limitada à gramática.
+
+Instrução literal: “Não presumir que a inclusão da resposta adicional manterá os resultados anteriores.” A fonte pública passou a conter33, e a opção escolhida pelo pesquisador na pergunta de esclarecimento foi “Snapshot de 32 respostas”. Foi recuperada e validada a exportação anterior32, sem reconstruir ou editar a planilha.
+
+A atribuição temática adicional é vazia porque os cinco campos estão vazios; nenhuma resposta ou interpretação foi criada para preenchê-los. Categorias e atribuições anteriores foram preservadas; não se presumiu leitura/aprovação humana da nova redação. A declaração específica e as menções metodológicas necessárias foram mantidas; repetições foram removidas dos resumos e das legendas.
+
+Não foram executados novos experimentos da aplicação nem recebidas evidências complementares do detector. Houve somente validação documental e do código de análise estatística. Sem commit, push, deploy ou assinatura.
+
 ## Terceira rodada — 15–16/11/2026
 
 Continuidade por GPT-6.1 Sol no OpenCode: leitura integral do protocolo, documentos e artigo; confronto de código e evidências; consulta dirigida de fontes pendentes; recomputação do recorte público; **reformulação substancial de parágrafos e da discussão**, síntese de ressalvas, seleção editorial de figuras, tradução do resumo, atualização de declarações/auditorias e preparação assistida de banca/defesa. Compilação e inspeção de páginas são assistidas, não aprovação visual humana.

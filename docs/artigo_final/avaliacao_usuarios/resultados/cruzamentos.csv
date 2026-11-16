@@ -1,13 +1,13 @@
 cruzamento,grupo,estado,n_valido,media,mediana,dp_amostral,q1,q3,iiq,minimo,maximo,modas
 experiencia_vs_compreensao,Frequente/ocasional,Descritivo; sem inferência causal,17,4.117647058823529,4.0,0.8574929257125442,4.0,5.0,1.0,2.0,5.0,4
-experiencia_vs_compreensao,Poucas vezes/nunca,Descritivo; sem inferência causal,13,3.8461538461538463,4.0,1.0681880176381127,4.0,4.0,0.0,1.0,5.0,4
-area_vs_utilidade_indices,Demais áreas,Descritivo; sem inferência causal,13,4.230769230769231,5.0,1.0127393670836666,4.0,5.0,1.0,2.0,5.0,5
+experiencia_vs_compreensao,Poucas vezes/nunca,Descritivo; sem inferência causal,14,3.857142857142857,4.0,1.027105182026191,4.0,4.0,0.0,1.0,5.0,4
+area_vs_utilidade_indices,Demais áreas,Descritivo; sem inferência causal,14,4.142857142857143,4.5,1.0271051820261912,3.25,5.0,1.75,2.0,5.0,5
 area_vs_utilidade_indices,Agrônomo,Descritivo; sem inferência causal,17,3.588235294117647,4.0,1.227743027337753,3.0,4.0,1.0,1.0,5.0,4
-conhecimento_vs_autonomia,Básico/intermediário,Descritivo; sem inferência causal,12,3.9166666666666665,4.0,0.90033663737852,3.0,5.0,2.0,3.0,5.0,3
+conhecimento_vs_autonomia,Básico/intermediário,Descritivo; sem inferência causal,13,4.0,4.0,0.9128709291752769,3.0,5.0,2.0,3.0,5.0,3;5
 conhecimento_vs_autonomia,Avançado/especialista,Descritivo; sem inferência causal,17,3.9411764705882355,4.0,0.8993461677306267,4.0,4.0,0.0,2.0,5.0,4
 experiencia_vs_nota,Frequente/ocasional,Descritivo; sem inferência causal,18,7.888888888888889,8.0,1.4907119849998598,8.0,9.0,1.0,4.0,9.0,9
-experiencia_vs_nota,Poucas vezes/nunca,Descritivo; sem inferência causal,13,7.538461538461538,8.0,2.221687969967303,7.0,9.0,2.0,3.0,10.0,7;10
-compreensao_vs_intencao,Concorda (4–5),Descritivo; sem inferência causal,23,4.391304347826087,5.0,0.7827184815397383,4.0,5.0,1.0,2.0,5.0,5
+experiencia_vs_nota,Poucas vezes/nunca,Descritivo; sem inferência causal,14,7.5,7.5,2.139374459257443,7.0,9.0,2.0,3.0,10.0,7
+compreensao_vs_intencao,Concorda (4–5),Descritivo; sem inferência causal,24,4.333333333333333,4.5,0.816496580927726,4.0,5.0,1.0,2.0,5.0,5
 compreensao_vs_intencao,Discorda/neutro (1–3),Descritivo; sem inferência causal,6,3.3333333333333335,3.5,0.816496580927726,3.0,4.0,1.0,2.0,4.0,4
-utilidade_mapas_vs_nota,Útil/muito útil (4–5),Descritivo; sem inferência causal,24,8.416666666666666,8.5,1.0179547554081032,8.0,9.0,1.0,6.0,10.0,9
+utilidade_mapas_vs_nota,Útil/muito útil (4–5),Descritivo; sem inferência causal,25,8.36,8.0,1.0360180178613367,8.0,9.0,1.0,6.0,10.0,9
 utilidade_mapas_vs_nota,Nada/pouco/moderadamente útil (1–3),Descritivo; sem inferência causal,6,4.833333333333333,4.5,1.4719601443879746,4.0,5.75,1.75,3.0,7.0,4

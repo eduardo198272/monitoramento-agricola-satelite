@@ -1,0 +1,1534 @@
+{
+  "entradas": 63,
+  "citadas": 54,
+  "nao_citadas": [
+    "ARAUJO2025",
+    "CHAVES2019",
+    "EOSDA_PLATFORM",
+    "LOVATO2021",
+    "ONESOIL_PLATFORM",
+    "PHIRI2020",
+    "ROUSE1973",
+    "WAZLAWICK2014",
+    "WAZLAWICK2020"
+  ],
+  "duplicacoes_de_url": {
+    "https://onesoil.ai/en/platform": 2
+  },
+  "ordem": [
+    "AMANI2020",
+    "AAPOR2013",
+    "BENDER2020",
+    "BJARNASON2015",
+    "BOECKELER2025",
+    "BRAUN2006",
+    "BIPM_SI",
+    "DAVIS1989",
+    "EOSDA_GUIDE",
+    "ESA_SENTINEL2",
+    "GAO1996",
+    "GITHUB_SDD",
+    "GOOGLE_EE_DATE",
+    "GOOGLE_EE_SAMPLE",
+    "GOOGLE_EE_MEDIAN",
+    "GOOGLE_EE_RESAMPLE",
+    "GOOGLE_EE_ND",
+    "GOOGLE_EE_REDUCE",
+    "GOOGLE_S2_SR",
+    "GOOGLE_EE_NONCOMMERCIAL",
+    "GOOGLE_EE_SERVICE_ACCOUNT",
+    "GOOGLE_EE_REGION",
+    "GORELICK2017",
+    "GOTEL1994",
+    "HYNDMAN2021",
+    "ISO9241_2018",
+    "IZQUIERDO2026",
+    "MCFEETERS1996",
+    "MERONI2019",
+    "NASA_POWER_DAILY",
+    "NASA_POWER_METHOD",
+    "NASA_POWER_PARAMETERS",
+    "NIST_LOCATION",
+    "NIST_OUTLIERS",
+    "NUMPY_POLYFIT",
+    "NUMPY_STD",
+    "ONESOIL_PLATFORM_DETAIL",
+    "NOMINATIM_POLICY",
+    "PARNAS1972",
+    "PATRICIO2018",
+    "QGIS_MAP",
+    "QGIS_RASTER",
+    "QGIS_VECTOR",
+    "ROUSE1974_NTRS",
+    "SENTINELHUB_NDMI",
+    "SLAIFFER2023",
+    "SLAIFFER2025",
+    "STREAMLIT_STATE",
+    "STREAMLIT_CLOUD_SECRETS",
+    "SULLIVAN2013",
+    "USGS_NDMI",
+    "UPF_IA2026",
+    "VAITHILINGAM2022",
+    "WEISS2020"
+  ],
+  "entradas_auditadas": {
+    "ESA_SENTINEL2": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{Sentinel-2 Mission}",
+        "year": "2026",
+        "note": "Disponível em \\url{https://sentiwiki.copernicus.eu/web/s2-mission}. Acessado em 24 jun 2026"
+      },
+      "depois": {
+        "title": "{Sentinel-2 Mission}",
+        "year": "2026",
+        "url": "https://sentiwiki.copernicus.eu/web/s2-mission",
+        "urldate": "24 jun. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://sentiwiki.copernicus.eu/web/s2-mission}. Acessado em 24 jun 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GOOGLE_S2_SR": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{Harmonized Sentinel-2 MSI: MultiSpectral Instrument, Level-2A (SR)}",
+        "year": "2026",
+        "note": "Disponível em \\url{https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "{Harmonized Sentinel-2 MSI: MultiSpectral Instrument, Level-2A (SR)}",
+        "year": "2026",
+        "url": "https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GOOGLE_EE_ND": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{ee.Image.normalizedDifference}",
+        "year": "2026",
+        "note": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference}. Acessado em 24 jun 2026"
+      },
+      "depois": {
+        "title": "{ee.Image.normalizedDifference}",
+        "year": "2026",
+        "url": "https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference",
+        "urldate": "24 jun. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-image-normalizeddifference}. Acessado em 24 jun 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GOOGLE_EE_DATE": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{ee.Filter.date}",
+        "year": "2026",
+        "note": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-filter-date}. Acessado em 11 nov 2026"
+      },
+      "depois": {
+        "title": "{ee.Filter.date}",
+        "year": "2023",
+        "url": "https://developers.google.com/earth-engine/apidocs/ee-filter-date",
+        "urldate": "11 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-filter-date}. Acessado em 11 nov 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GOOGLE_EE_SERVICE_ACCOUNT": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Service Accounts: {Google Earth Engine}",
+        "year": "2026",
+        "note": "Disponível em \\url{https://developers.google.com/earth-engine/guides/service_account}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Service Accounts: {Google Earth Engine}",
+        "year": "2026",
+        "url": "https://developers.google.com/earth-engine/guides/service_account",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://developers.google.com/earth-engine/guides/service_account}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GOOGLE_EE_NONCOMMERCIAL": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Noncommercial tiers: {Google Earth Engine}",
+        "year": "2026",
+        "note": "Disponível em \\url{https://developers.google.com/earth-engine/guides/noncommercial_tiers}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Noncommercial tiers: {Google Earth Engine}",
+        "year": "2026",
+        "url": "https://developers.google.com/earth-engine/guides/noncommercial_tiers",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://developers.google.com/earth-engine/guides/noncommercial_tiers}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "STREAMLIT_CLOUD_SECRETS": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Secrets management for your Community Cloud app",
+        "year": "2026",
+        "note": "Disponível em \\url{https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Secrets management for your Community Cloud app",
+        "year": "c2026",
+        "url": "https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "SLAIFFER2023": {
+      "tipo": "mastersthesis",
+      "citada": true,
+      "antes": {
+        "title": "Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro",
+        "school": "Universidade Federal de Santa Maria",
+        "type": "Trabalho de Conclusão de Curso em Engenharia Agrícola",
+        "year": "2023",
+        "note": "Disponível em \\url{https://repositorio.ufsm.br/handle/1/29995}. Acesso em 11 nov. 2026"
+      },
+      "depois": {
+        "title": "Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro",
+        "school": "Universidade Federal de Santa Maria",
+        "type": "Trabalho de Conclusão de Curso em Engenharia Agrícola",
+        "year": "2023",
+        "url": "https://repositorio.ufsm.br/handle/1/29995",
+        "urldate": "11 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://repositorio.ufsm.br/handle/1/29995}. Acesso em 11 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Conferir grau, instituição/unidade e extensão no original"
+      ]
+    },
+    "LOVATO2021": {
+      "tipo": "mastersthesis",
+      "citada": false,
+      "antes": {
+        "title": "Identificação de áreas de renovação da cultura da cana-de-açúcar por meio de índice de vegetação e técnicas de sensoriamento remoto",
+        "school": "Universidade Estadual Paulista",
+        "type": "Trabalho de Conclusão de Curso em Engenharia Agronômica",
+        "year": "2021",
+        "address": "Jaboticabal",
+        "note": "Disponível em \\url{https://repositorio.unesp.br/entities/publication/b9caa0ff-8be4-44b6-ba3d-e40bbfa7e275}. Acesso em 11 nov. 2026"
+      },
+      "depois": {
+        "title": "Identificação de áreas de renovação da cultura da cana-de-açúcar por meio de índice de vegetação e técnicas de sensoriamento remoto",
+        "school": "Universidade Estadual Paulista",
+        "type": "Trabalho de Conclusão de Curso em Engenharia Agronômica",
+        "year": "2021",
+        "address": "Jaboticabal",
+        "url": "https://repositorio.unesp.br/entities/publication/b9caa0ff-8be4-44b6-ba3d-e40bbfa7e275",
+        "urldate": "11 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://repositorio.unesp.br/entities/publication/b9caa0ff-8be4-44b6-ba3d-e40bbfa7e275}. Acesso em 11 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Conferir grau, instituição/unidade e extensão no original"
+      ]
+    },
+    "ARAUJO2025": {
+      "tipo": "article",
+      "citada": false,
+      "antes": {
+        "title": "Utilização de imageamento multiespectral por satélite para monitoramento de ciclo fenológico da cultura da soja",
+        "journal": "Boletim de Conjuntura (BOCA)",
+        "volume": "23",
+        "number": "67",
+        "pages": "197--224",
+        "year": "2025",
+        "note": "\\url{https://doi.org/10.5281/zenodo.15871939}"
+      },
+      "depois": {
+        "title": "Utilização de imageamento multiespectral por satélite para monitoramento de ciclo fenológico da cultura da soja",
+        "journal": "Boletim de Conjuntura (BOCA)",
+        "volume": "23",
+        "number": "67",
+        "pages": "197--224",
+        "year": "2025",
+        "doi": "10.5281/zenodo.15871939",
+        "url": "https://doi.org/10.5281/zenodo.15871939",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "\\url{https://doi.org/10.5281/zenodo.15871939}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "CHAVES2019": {
+      "tipo": "phdthesis",
+      "citada": false,
+      "antes": {
+        "title": "Uso das séries temporais de índices de vegetação para o monitoramento agrícola no Estado de Mato Grosso",
+        "school": "Universidade Federal de Lavras",
+        "year": "2019",
+        "address": "Lavras",
+        "note": "Disponível em \\url{https://repositorio.ufla.br/items/62ad79ab-a7b3-400b-ad28-5779e424f3d3}. Acesso em 11 nov. 2026"
+      },
+      "depois": {
+        "title": "Uso das séries temporais de índices de vegetação para o monitoramento agrícola no Estado de Mato Grosso",
+        "school": "Universidade Federal de Lavras",
+        "year": "2019",
+        "address": "Lavras",
+        "url": "https://repositorio.ufla.br/items/62ad79ab-a7b3-400b-ad28-5779e424f3d3",
+        "urldate": "11 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://repositorio.ufla.br/items/62ad79ab-a7b3-400b-ad28-5779e424f3d3}. Acesso em 11 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Conferir grau, instituição/unidade e extensão no original"
+      ]
+    },
+    "NASA_POWER_DAILY": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{{NASA POWER}: Daily API}",
+        "year": "2026",
+        "note": "Disponível em \\url{https://power.larc.nasa.gov/docs/services/api/temporal/daily/}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "{{NASA POWER}: Daily API}",
+        "year": "2026",
+        "url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://power.larc.nasa.gov/docs/services/api/temporal/daily/}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "ROUSE1973": {
+      "tipo": "inproceedings",
+      "citada": false,
+      "antes": {
+        "title": "Monitoring Vegetation Systems in the Great Plains with {ERTS}",
+        "booktitle": "Third Earth Resources Technology Satellite Symposium",
+        "year": "1973",
+        "pages": "309--317",
+        "publisher": "NASA",
+        "address": "Washington, DC"
+      },
+      "depois": {
+        "title": "Monitoring Vegetation Systems in the Great Plains with {ERTS}",
+        "booktitle": "Third Earth Resources Technology Satellite Symposium",
+        "year": "1973",
+        "pages": "309--317",
+        "publisher": "NASA",
+        "address": "Washington, DC"
+      },
+      "nota_original": "",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": []
+    },
+    "GAO1996": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "{NDWI}: A Normalized Difference Water Index for Remote Sensing of Vegetation Liquid Water from Space",
+        "journal": "Remote Sensing of Environment",
+        "volume": "58",
+        "number": "3",
+        "pages": "257--266",
+        "year": "1996",
+        "note": "\\url{https://doi.org/10.1016/S0034-4257(96)00067-3}"
+      },
+      "depois": {
+        "title": "{NDWI}: A Normalized Difference Water Index for Remote Sensing of Vegetation Liquid Water from Space",
+        "journal": "Remote Sensing of Environment",
+        "volume": "58",
+        "number": "3",
+        "pages": "257--266",
+        "year": "1996",
+        "doi": "10.1016/S0034-4257(96)00067-3",
+        "url": "https://doi.org/10.1016/S0034-4257(96)00067-3",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "\\url{https://doi.org/10.1016/S0034-4257(96)00067-3}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "PATRICIO2018": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "Computer Vision and Artificial Intelligence in Precision Agriculture for Grain Crops: A Systematic Review",
+        "journal": "Computers and Electronics in Agriculture",
+        "volume": "153",
+        "pages": "69--81",
+        "year": "2018",
+        "publisher": "Elsevier",
+        "note": "\\url{https://doi.org/10.1016/j.compag.2018.08.001}"
+      },
+      "depois": {
+        "title": "Computer Vision and Artificial Intelligence in Precision Agriculture for Grain Crops: A Systematic Review",
+        "journal": "Computers and Electronics in Agriculture",
+        "volume": "153",
+        "pages": "69--81",
+        "year": "2018",
+        "publisher": "Elsevier",
+        "doi": "10.1016/j.compag.2018.08.001",
+        "url": "https://doi.org/10.1016/j.compag.2018.08.001",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "\\url{https://doi.org/10.1016/j.compag.2018.08.001}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GORELICK2017": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "{Google Earth Engine}: Planetary-scale geospatial analysis for everyone",
+        "journal": "Remote Sensing of Environment",
+        "volume": "202",
+        "pages": "18--27",
+        "year": "2017",
+        "publisher": "Elsevier",
+        "note": "\\url{https://doi.org/10.1016/j.rse.2017.06.031}"
+      },
+      "depois": {
+        "title": "{Google Earth Engine}: Planetary-scale geospatial analysis for everyone",
+        "journal": "Remote Sensing of Environment",
+        "volume": "202",
+        "pages": "18--27",
+        "year": "2017",
+        "publisher": "Elsevier",
+        "doi": "10.1016/j.rse.2017.06.031",
+        "url": "https://doi.org/10.1016/j.rse.2017.06.031",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "\\url{https://doi.org/10.1016/j.rse.2017.06.031}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "AMANI2020": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "{Google Earth Engine} Cloud Computing Platform for Remote Sensing Big Data Applications: A Comprehensive Review",
+        "journal": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
+        "volume": "13",
+        "pages": "5326--5350",
+        "year": "2020",
+        "publisher": "IEEE",
+        "note": "\\url{https://doi.org/10.1109/JSTARS.2020.3021052}"
+      },
+      "depois": {
+        "title": "{Google Earth Engine} Cloud Computing Platform for Remote Sensing Big Data Applications: A Comprehensive Review",
+        "journal": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
+        "volume": "13",
+        "pages": "5326--5350",
+        "year": "2020",
+        "publisher": "IEEE",
+        "doi": "10.1109/JSTARS.2020.3021052",
+        "url": "https://doi.org/10.1109/JSTARS.2020.3021052",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "\\url{https://doi.org/10.1109/JSTARS.2020.3021052}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "WEISS2020": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "Remote sensing for agricultural applications: A meta-review",
+        "journal": "Remote Sensing of Environment",
+        "volume": "236",
+        "pages": "111402",
+        "year": "2020",
+        "publisher": "Elsevier",
+        "note": "\\url{https://doi.org/10.1016/j.rse.2019.111402}"
+      },
+      "depois": {
+        "title": "Remote sensing for agricultural applications: A meta-review",
+        "journal": "Remote Sensing of Environment",
+        "volume": "236",
+        "year": "2020",
+        "publisher": "Elsevier",
+        "doi": "10.1016/j.rse.2019.111402",
+        "url": "https://doi.org/10.1016/j.rse.2019.111402",
+        "urldate": "16 nov. 2026",
+        "eid": "111402"
+      },
+      "nota_original": "\\url{https://doi.org/10.1016/j.rse.2019.111402}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "PHIRI2020": {
+      "tipo": "article",
+      "citada": false,
+      "antes": {
+        "title": "Sentinel-2 Data for Land Cover/Use Mapping: A Review",
+        "journal": "Remote Sensing",
+        "volume": "12",
+        "number": "14",
+        "pages": "2291",
+        "year": "2020",
+        "publisher": "MDPI",
+        "note": "\\url{https://doi.org/10.3390/rs12142291}"
+      },
+      "depois": {
+        "title": "Sentinel-2 Data for Land Cover/Use Mapping: A Review",
+        "journal": "Remote Sensing",
+        "volume": "12",
+        "number": "14",
+        "year": "2020",
+        "publisher": "MDPI",
+        "doi": "10.3390/rs12142291",
+        "url": "https://doi.org/10.3390/rs12142291",
+        "eid": "2291"
+      },
+      "nota_original": "\\url{https://doi.org/10.3390/rs12142291}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data efetiva de acesso não registrada na entrada"
+      ]
+    },
+    "WAZLAWICK2014": {
+      "tipo": "book",
+      "citada": false,
+      "antes": {
+        "title": "Metodologia de Pesquisa para Ciência da Computação",
+        "publisher": "Elsevier",
+        "year": "2014",
+        "edition": "2",
+        "address": "Rio de Janeiro"
+      },
+      "depois": {
+        "title": "Metodologia de Pesquisa para Ciência da Computação",
+        "publisher": "Elsevier",
+        "year": "2014",
+        "edition": "2",
+        "address": "Rio de Janeiro"
+      },
+      "nota_original": "",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": []
+    },
+    "WAZLAWICK2020": {
+      "tipo": "book",
+      "citada": false,
+      "antes": {
+        "title": "Metodologia de Pesquisa para Ciência da Computação",
+        "year": "2020",
+        "publisher": "Grupo GEN",
+        "edition": "3",
+        "note": "Disponível em \\url{https://integrada.minhabiblioteca.com.br/books/9788595157712}. Acessado em 31 mar 2025"
+      },
+      "depois": {
+        "title": "Metodologia de Pesquisa para Ciência da Computação",
+        "year": "2020",
+        "publisher": "Grupo GEN",
+        "edition": "3",
+        "url": "https://integrada.minhabiblioteca.com.br/books/9788595157712",
+        "urldate": "31 mar. 2025"
+      },
+      "nota_original": "Disponível em \\url{https://integrada.minhabiblioteca.com.br/books/9788595157712}. Acessado em 31 mar 2025",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "MCFEETERS1996": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "The use of the Normalized Difference Water Index ({NDWI}) in the delineation of open water features",
+        "journal": "International Journal of Remote Sensing",
+        "year": "1996",
+        "volume": "17",
+        "number": "7",
+        "pages": "1425--1432",
+        "note": "\\url{https://doi.org/10.1080/01431169608948714}"
+      },
+      "depois": {
+        "title": "The use of the Normalized Difference Water Index ({NDWI}) in the delineation of open water features",
+        "journal": "International Journal of Remote Sensing",
+        "year": "1996",
+        "volume": "17",
+        "number": "7",
+        "pages": "1425--1432",
+        "doi": "10.1080/01431169608948714",
+        "url": "https://doi.org/10.1080/01431169608948714"
+      },
+      "nota_original": "\\url{https://doi.org/10.1080/01431169608948714}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data efetiva de acesso não registrada na entrada"
+      ]
+    },
+    "USGS_NDMI": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Normalized Difference Moisture Index",
+        "note": "Disponível em \\url{https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index}. Acesso em 15 nov. 2026. Sem data de publicação identificada"
+      },
+      "depois": {
+        "title": "Normalized Difference Moisture Index",
+        "url": "https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "Disponível em \\url{https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index}. Acesso em 15 nov. 2026. Sem data de publicação identificada",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "GOOGLE_EE_SAMPLE": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{ee.Image.sampleRectangle}",
+        "note": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle}. Acesso em 15 nov. 2026. Sem data de publicação identificada"
+      },
+      "depois": {
+        "title": "{ee.Image.sampleRectangle}",
+        "url": "https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle",
+        "urldate": "15 nov. 2026",
+        "year": "2023"
+      },
+      "nota_original": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-image-samplerectangle}. Acesso em 15 nov. 2026. Sem data de publicação identificada",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GOOGLE_EE_MEDIAN": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{ee.ImageCollection.median}",
+        "note": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median}. Acesso em 15 nov. 2026. Sem data de publicação identificada"
+      },
+      "depois": {
+        "title": "{ee.ImageCollection.median}",
+        "url": "https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median",
+        "urldate": "15 nov. 2026",
+        "year": "2023"
+      },
+      "nota_original": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-imagecollection-median}. Acesso em 15 nov. 2026. Sem data de publicação identificada",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GOOGLE_EE_REDUCE": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{ee.Image.reduceRegion}",
+        "note": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion}. Acesso em 15 nov. 2026. Sem data de publicação identificada"
+      },
+      "depois": {
+        "title": "{ee.Image.reduceRegion}",
+        "url": "https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion",
+        "urldate": "15 nov. 2026",
+        "year": "2026"
+      },
+      "nota_original": "Disponível em \\url{https://developers.google.com/earth-engine/apidocs/ee-image-reduceregion}. Acesso em 15 nov. 2026. Sem data de publicação identificada",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "NOMINATIM_POLICY": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Nominatim Usage Policy",
+        "note": "Disponível em \\url{https://operations.osmfoundation.org/policies/nominatim/}. Acesso em 15 nov. 2026. Sem data de publicação identificada"
+      },
+      "depois": {
+        "title": "Nominatim Usage Policy",
+        "url": "https://operations.osmfoundation.org/policies/nominatim/",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "Disponível em \\url{https://operations.osmfoundation.org/policies/nominatim/}. Acesso em 15 nov. 2026. Sem data de publicação identificada",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "ROUSE1974_NTRS": {
+      "tipo": "inproceedings",
+      "citada": true,
+      "antes": {
+        "title": "Monitoring vegetation systems in the Great Plains with {ERTS}",
+        "booktitle": "Third Earth Resources Technology Satellite-1 Symposium, Volume 1, Section A",
+        "publisher": "NASA",
+        "year": "1974",
+        "note": "Registro NASA NTRS 19740022614. Disponível em \\url{https://ntrs.nasa.gov/citations/19740022614}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Monitoring vegetation systems in the Great Plains with {ERTS}",
+        "booktitle": "Third Earth Resources Technology Satellite-1 Symposium, Volume 1, Section A",
+        "publisher": "NASA",
+        "year": "1974",
+        "url": "https://ntrs.nasa.gov/citations/19740022614",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Registro NASA NTRS 19740022614. Disponível em \\url{https://ntrs.nasa.gov/citations/19740022614}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "EOSDA_PLATFORM": {
+      "tipo": "misc",
+      "citada": false,
+      "antes": {
+        "title": "{EOSDA Crop Monitoring}",
+        "year": "2026",
+        "note": "Disponível em \\url{https://eos.com/products/crop-monitoring/}. Acesso em: 15 nov. 2026"
+      },
+      "depois": {
+        "title": "{EOSDA Crop Monitoring}",
+        "year": "2026",
+        "url": "https://eos.com/products/crop-monitoring/",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://eos.com/products/crop-monitoring/}. Acesso em: 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "ONESOIL_PLATFORM": {
+      "tipo": "misc",
+      "citada": false,
+      "antes": {
+        "title": "{OneSoil} Platform",
+        "year": "2026",
+        "note": "Disponível em \\url{https://onesoil.ai/en/platform}. Acesso em: 15 nov. 2026"
+      },
+      "depois": {
+        "title": "{OneSoil} Platform",
+        "year": "2026",
+        "url": "https://onesoil.ai/en/platform",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Disponível em \\url{https://onesoil.ai/en/platform}. Acesso em: 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "ISO9241_2018": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{ISO 9241-11:2018}: Ergonomics of human-system interaction --- Part 11: Usability: Definitions and concepts",
+        "year": "2018",
+        "note": "Resumo e metadados disponíveis em \\url{https://www.iso.org/standard/63500.html}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "{ISO 9241-11:2018}: Ergonomics of human-system interaction --- Part 11: Usability: Definitions and concepts",
+        "year": "2018",
+        "url": "https://www.iso.org/standard/63500.html",
+        "urldate": "15 nov. 2026",
+        "publisher": "ISO"
+      },
+      "nota_original": "Resumo e metadados disponíveis em \\url{https://www.iso.org/standard/63500.html}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "DAVIS1989": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "Perceived Usefulness, Perceived Ease of Use, and User Acceptance of Information Technology",
+        "journal": "MIS Quarterly",
+        "volume": "13",
+        "number": "3",
+        "pages": "319--340",
+        "year": "1989",
+        "note": "\\url{https://doi.org/10.2307/249008}"
+      },
+      "depois": {
+        "title": "Perceived Usefulness, Perceived Ease of Use, and User Acceptance of Information Technology",
+        "journal": "MIS Quarterly",
+        "volume": "13",
+        "number": "3",
+        "pages": "319--340",
+        "year": "1989",
+        "doi": "10.2307/249008",
+        "url": "https://doi.org/10.2307/249008"
+      },
+      "nota_original": "\\url{https://doi.org/10.2307/249008}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data efetiva de acesso não registrada na entrada"
+      ]
+    },
+    "SULLIVAN2013": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "Analyzing and Interpreting Data From {Likert}-Type Scales",
+        "journal": "Journal of Graduate Medical Education",
+        "volume": "5",
+        "number": "4",
+        "pages": "541--542",
+        "year": "2013",
+        "note": "\\url{https://doi.org/10.4300/JGME-5-4-18}"
+      },
+      "depois": {
+        "title": "Analyzing and Interpreting Data From {Likert}-Type Scales",
+        "journal": "Journal of Graduate Medical Education",
+        "volume": "5",
+        "number": "4",
+        "pages": "541--542",
+        "year": "2013",
+        "doi": "10.4300/JGME-5-4-18",
+        "url": "https://doi.org/10.4300/JGME-5-4-18",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "\\url{https://doi.org/10.4300/JGME-5-4-18}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "BRAUN2006": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "Using thematic analysis in psychology",
+        "journal": "Qualitative Research in Psychology",
+        "volume": "3",
+        "number": "2",
+        "pages": "77--101",
+        "year": "2006",
+        "note": "\\url{https://doi.org/10.1191/1478088706qp063oa}"
+      },
+      "depois": {
+        "title": "Using thematic analysis in psychology",
+        "journal": "Qualitative Research in Psychology",
+        "volume": "3",
+        "number": "2",
+        "pages": "77--101",
+        "year": "2006",
+        "doi": "10.1191/1478088706qp063oa",
+        "url": "https://doi.org/10.1191/1478088706qp063oa"
+      },
+      "nota_original": "\\url{https://doi.org/10.1191/1478088706qp063oa}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data efetiva de acesso não registrada na entrada"
+      ]
+    },
+    "QGIS_VECTOR": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "A Gentle Introduction to GIS: Vector Data",
+        "note": "Documentação 3.40. \\url{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "A Gentle Introduction to GIS: Vector Data",
+        "url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html",
+        "urldate": "15 nov. 2026",
+        "year": "2026",
+        "version": "3.40"
+      },
+      "nota_original": "Documentação 3.40. \\url{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/vector_data.html}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "QGIS_RASTER": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "A Gentle Introduction to GIS: Raster Data",
+        "note": "Documentação 3.40. \\url{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "A Gentle Introduction to GIS: Raster Data",
+        "url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html",
+        "urldate": "15 nov. 2026",
+        "year": "2026",
+        "version": "3.40"
+      },
+      "nota_original": "Documentação 3.40. \\url{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/raster_data.html}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "QGIS_MAP": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "A Gentle Introduction to GIS: Map Production",
+        "note": "Documentação 3.40. \\url{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "A Gentle Introduction to GIS: Map Production",
+        "url": "https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html",
+        "urldate": "15 nov. 2026",
+        "year": "2026",
+        "version": "3.40"
+      },
+      "nota_original": "Documentação 3.40. \\url{https://docs.qgis.org/3.40/en/docs/gentle_gis_introduction/map_production.html}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GOOGLE_EE_RESAMPLE": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Resampling and Reducing Resolution",
+        "note": "\\url{https://developers.google.com/earth-engine/guides/resample}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Resampling and Reducing Resolution",
+        "url": "https://developers.google.com/earth-engine/guides/resample",
+        "urldate": "15 nov. 2026",
+        "year": "2024"
+      },
+      "nota_original": "\\url{https://developers.google.com/earth-engine/guides/resample}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "GOOGLE_EE_REGION": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Statistics of an Image Region",
+        "note": "\\url{https://developers.google.com/earth-engine/guides/reducers_reduce_region}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Statistics of an Image Region",
+        "url": "https://developers.google.com/earth-engine/guides/reducers_reduce_region",
+        "urldate": "15 nov. 2026",
+        "year": "2026"
+      },
+      "nota_original": "\\url{https://developers.google.com/earth-engine/guides/reducers_reduce_region}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "SENTINELHUB_NDMI": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Normalized Difference Moisture Index (NDMI)",
+        "note": "Custom Scripts. Texto e exemplos diferem na banda NIR. \\url{https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Normalized Difference Moisture Index (NDMI)",
+        "url": "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "Custom Scripts. Texto e exemplos diferem na banda NIR. \\url{https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/}. Acesso em 15 nov. 2026",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "HYNDMAN2021": {
+      "tipo": "book",
+      "citada": true,
+      "antes": {
+        "title": "Forecasting: Principles and Practice",
+        "edition": "3",
+        "publisher": "OTexts",
+        "address": "Melbourne",
+        "year": "2021",
+        "note": "Versão on-line, seções Moving averages e Least squares estimation. \\url{https://otexts.com/fpp3/}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Forecasting: Principles and Practice",
+        "edition": "3",
+        "publisher": "OTexts",
+        "address": "Melbourne",
+        "year": "2021",
+        "url": "https://otexts.com/fpp3/",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Versão on-line, seções Moving averages e Least squares estimation. \\url{https://otexts.com/fpp3/}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": []
+    },
+    "NIST_OUTLIERS": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "e-Handbook of Statistical Methods: Detection of Outliers",
+        "note": "Seção 1.3.5.17. \\url{https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "e-Handbook of Statistical Methods: Detection of Outliers",
+        "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "Seção 1.3.5.17. \\url{https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm}. Acesso em 15 nov. 2026",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "NUMPY_STD": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "numpy.std",
+        "note": "\\url{https://numpy.org/doc/stable/reference/generated/numpy.std.html}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "numpy.std",
+        "url": "https://numpy.org/doc/stable/reference/generated/numpy.std.html",
+        "urldate": "15 nov. 2026",
+        "year": "c2026"
+      },
+      "nota_original": "\\url{https://numpy.org/doc/stable/reference/generated/numpy.std.html}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "NUMPY_POLYFIT": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "numpy.polyfit",
+        "note": "\\url{https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "numpy.polyfit",
+        "url": "https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html",
+        "urldate": "15 nov. 2026",
+        "year": "c2026"
+      },
+      "nota_original": "\\url{https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "BIPM_SI": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "The International System of Units (SI)",
+        "note": "9. ed., versão on-line consultada. \\url{https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "The International System of Units (SI)",
+        "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf",
+        "urldate": "15 nov. 2026",
+        "year": "2019",
+        "address": "Sèvres",
+        "publisher": "BIPM",
+        "edition": "9",
+        "version": "4.01, jun. 2026",
+        "doi": "10.59161/AUEZ1291"
+      },
+      "nota_original": "9. ed., versão on-line consultada. \\url{https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": []
+    },
+    "BENDER2020": {
+      "tipo": "incollection",
+      "citada": true,
+      "antes": {
+        "title": "Testing Overview",
+        "booktitle": "Software Engineering at Google: Lessons Learned from Programming Over Time",
+        "publisher": "O'Reilly Media",
+        "year": "2020",
+        "note": "Cap. 11, versão on-line. \\url{https://abseil.io/resources/swe-book/html/ch11.html}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Testing Overview",
+        "booktitle": "Software Engineering at Google: Lessons Learned from Programming Over Time",
+        "publisher": "O'Reilly Media",
+        "year": "2020",
+        "url": "https://abseil.io/resources/swe-book/html/ch11.html",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Cap. 11, versão on-line. \\url{https://abseil.io/resources/swe-book/html/ch11.html}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "AAPOR2013": {
+      "tipo": "techreport",
+      "citada": true,
+      "antes": {
+        "title": "Report of the AAPOR Task Force on Non-Probability Sampling",
+        "institution": "AAPOR",
+        "year": "2013",
+        "note": "\\url{https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Report of the AAPOR Task Force on Non-Probability Sampling",
+        "institution": "AAPOR",
+        "year": "2013",
+        "url": "https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "\\url{https://aapor.org/wp-content/uploads/2022/11/NPS_TF_Report_Final_7_revised_FNL_6_22_13.pdf}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "SLAIFFER2025": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro",
+        "journal": "Nativa",
+        "volume": "13",
+        "number": "3",
+        "pages": "495--502",
+        "year": "2025",
+        "note": "\\url{https://doi.org/10.31413/nat.v13i3.18592}"
+      },
+      "depois": {
+        "title": "Índices de vegetação e sua correlação com a produtividade da cultura da soja em área irrigada e de sequeiro",
+        "journal": "Nativa",
+        "volume": "13",
+        "number": "3",
+        "pages": "495--502",
+        "year": "2025",
+        "doi": "10.31413/nat.v13i3.18592",
+        "url": "https://doi.org/10.31413/nat.v13i3.18592",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "\\url{https://doi.org/10.31413/nat.v13i3.18592}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "IZQUIERDO2026": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "Hybrid Physical--Machine Learning Soil Moisture Modeling at Orchard Scale in Irrigated Citrus Orchards Using Sentinel 1 and 2 and Agroclimatic Data",
+        "journal": "Agronomy",
+        "volume": "16",
+        "number": "5",
+        "pages": "541",
+        "year": "2026",
+        "note": "\\url{https://doi.org/10.3390/agronomy16050541}"
+      },
+      "depois": {
+        "title": "Hybrid Physical--Machine Learning Soil Moisture Modeling at Orchard Scale in Irrigated Citrus Orchards Using Sentinel 1 and 2 and Agroclimatic Data",
+        "journal": "Agronomy",
+        "volume": "16",
+        "number": "5",
+        "year": "2026",
+        "doi": "10.3390/agronomy16050541",
+        "url": "https://doi.org/10.3390/agronomy16050541",
+        "eid": "541"
+      },
+      "nota_original": "\\url{https://doi.org/10.3390/agronomy16050541}",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data efetiva de acesso não registrada na entrada"
+      ]
+    },
+    "NASA_POWER_METHOD": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "POWER Data Methodology",
+        "note": "\\url{https://power.larc.nasa.gov/docs/methodology/}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "POWER Data Methodology",
+        "url": "https://power.larc.nasa.gov/docs/methodology/",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "\\url{https://power.larc.nasa.gov/docs/methodology/}. Acesso em 15 nov. 2026",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "NASA_POWER_PARAMETERS": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "POWER Parameter Dictionary: Agricultural Community, Daily",
+        "note": "\\url{https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "POWER Parameter Dictionary: Agricultural Community, Daily",
+        "url": "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "\\url{https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY}. Acesso em 15 nov. 2026",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "STREAMLIT_STATE": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Add Statefulness to Apps: Session State",
+        "note": "\\url{https://docs.streamlit.io/develop/concepts/architecture/session-state}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Add Statefulness to Apps: Session State",
+        "url": "https://docs.streamlit.io/develop/concepts/architecture/session-state",
+        "urldate": "15 nov. 2026",
+        "year": "c2026"
+      },
+      "nota_original": "\\url{https://docs.streamlit.io/develop/concepts/architecture/session-state}. Acesso em 15 nov. 2026",
+      "data": "Atualização/copyright/edição verificados",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "MERONI2019": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "Near real-time vegetation anomaly detection with {MODIS NDVI}: Timeliness vs. accuracy and effect of anomaly computation options",
+        "journal": "Remote Sensing of Environment",
+        "year": "2019",
+        "volume": "221",
+        "pages": "508--521",
+        "doi": "10.1016/j.rse.2018.11.041",
+        "note": "Texto integral em \\url{https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Near real-time vegetation anomaly detection with {MODIS NDVI}: Timeliness vs. accuracy and effect of anomaly computation options",
+        "journal": "Remote Sensing of Environment",
+        "year": "2019",
+        "volume": "221",
+        "pages": "508--521",
+        "doi": "10.1016/j.rse.2018.11.041",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Texto integral em \\url{https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "PARNAS1972": {
+      "tipo": "article",
+      "citada": true,
+      "antes": {
+        "title": "On the Criteria To Be Used in Decomposing Systems into Modules",
+        "journal": "Communications of the ACM",
+        "year": "1972",
+        "volume": "15",
+        "number": "12",
+        "pages": "1053--1058",
+        "doi": "10.1145/361598.361623",
+        "note": "Texto consultado em \\url{https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "On the Criteria To Be Used in Decomposing Systems into Modules",
+        "journal": "Communications of the ACM",
+        "year": "1972",
+        "volume": "15",
+        "number": "12",
+        "pages": "1053--1058",
+        "doi": "10.1145/361598.361623",
+        "url": "https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Texto consultado em \\url{https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "NIST_LOCATION": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Measures of Location: {NIST/SEMATECH e-Handbook of Statistical Methods}",
+        "note": "Seção 1.3.5.1. Disponível em \\url{https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm}. Sem data editorial identificada. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Measures of Location: {NIST/SEMATECH e-Handbook of Statistical Methods}",
+        "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "Seção 1.3.5.1. Disponível em \\url{https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm}. Sem data editorial identificada. Acesso em 15 nov. 2026",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "GITHUB_SDD": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Specification-Driven Development ({SDD}): {Spec Kit}",
+        "note": "Documentação técnica, seções The SDD Workflow in Practice e Core Principles. Disponível em \\url{https://github.com/github/spec-kit/blob/main/spec-driven.md}. Sem data editorial identificada. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Specification-Driven Development ({SDD}): {Spec Kit}",
+        "url": "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "Documentação técnica, seções The SDD Workflow in Practice e Core Principles. Disponível em \\url{https://github.com/github/spec-kit/blob/main/spec-driven.md}. Sem data editorial identificada. Acesso em 15 nov. 2026",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "BOECKELER2025": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl",
+        "year": "2025",
+        "note": "Artigo técnico de 15 out. 2025. Disponível em \\url{https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl",
+        "year": "2025",
+        "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "Artigo técnico de 15 out. 2025. Disponível em \\url{https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "UPF_IA2026": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "Instrução Normativa nº 03/2026/PROACAD: Uso de Inteligência Artificial nas atividades acadêmicas",
+        "year": "2026",
+        "note": "28 out. 2026. Íntegra e anexo disponibilizados na seção Instrução Normativa PROACAD de \\url{https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in}. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "Instrução Normativa nº 03/2026/PROACAD: Uso de Inteligência Artificial nas atividades acadêmicas",
+        "year": "2026",
+        "url": "https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in",
+        "urldate": "15 nov. 2026"
+      },
+      "nota_original": "28 out. 2026. Íntegra e anexo disponibilizados na seção Instrução Normativa PROACAD de \\url{https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in}. Acesso em 15 nov. 2026",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "EOSDA_GUIDE": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{EOSDA Crop Monitoring User Guide}",
+        "note": "Seções Add field, Work With Crop Map, Monitoring, Weather e Account And Pricing. Disponível em \\url{https://eos.com/user-guide/}. Sem data editorial identificada. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "{EOSDA Crop Monitoring User Guide}",
+        "url": "https://eos.com/user-guide/",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "Seções Add field, Work With Crop Map, Monitoring, Weather e Account And Pricing. Disponível em \\url{https://eos.com/user-guide/}. Sem data editorial identificada. Acesso em 15 nov. 2026",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "ONESOIL_PLATFORM_DETAIL": {
+      "tipo": "misc",
+      "citada": true,
+      "antes": {
+        "title": "{OneSoil Platform}",
+        "note": "Seções funcionais e Frequently Asked Questions. Disponível em \\url{https://onesoil.ai/en/platform}. Sem data editorial identificada. Acesso em 15 nov. 2026"
+      },
+      "depois": {
+        "title": "{OneSoil Platform}",
+        "url": "https://onesoil.ai/en/platform",
+        "urldate": "15 nov. 2026",
+        "year": "[20--?]"
+      },
+      "nota_original": "Seções funcionais e Frequently Asked Questions. Disponível em \\url{https://onesoil.ai/en/platform}. Sem data editorial identificada. Acesso em 15 nov. 2026",
+      "data": "Século provável; confirmar data do documento",
+      "lacunas": [
+        "Local não identificado na entrada",
+        "Data apenas aproximada; século provável"
+      ]
+    },
+    "GOTEL1994": {
+      "tipo": "inproceedings",
+      "citada": true,
+      "antes": {
+        "title": "An Analysis of the Requirements Traceability Problem",
+        "booktitle": "Proceedings of the First International Conference on Requirements Engineering",
+        "year": "1994",
+        "pages": "94--101",
+        "publisher": "IEEE",
+        "doi": "10.1109/ICRE.1994.292398",
+        "url": "https://discovery.ucl.ac.uk/749/"
+      },
+      "depois": {
+        "title": "An Analysis of the Requirements Traceability Problem",
+        "booktitle": "Proceedings of the First International Conference on Requirements Engineering",
+        "year": "1994",
+        "pages": "94--101",
+        "publisher": "IEEE",
+        "doi": "10.1109/ICRE.1994.292398",
+        "url": "https://discovery.ucl.ac.uk/749/",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "BJARNASON2015": {
+      "tipo": "inproceedings",
+      "citada": true,
+      "antes": {
+        "title": "An Industrial Case Study on Test Cases as Requirements",
+        "booktitle": "Agile Processes in Software Engineering and Extreme Programming",
+        "year": "2015",
+        "series": "Lecture Notes in Business Information Processing",
+        "volume": "212",
+        "pages": "27--39",
+        "publisher": "Springer",
+        "doi": "10.1007/978-3-319-18612-2_3",
+        "url": "https://arxiv.org/abs/2308.06509"
+      },
+      "depois": {
+        "title": "An Industrial Case Study on Test Cases as Requirements",
+        "booktitle": "Agile Processes in Software Engineering and Extreme Programming",
+        "year": "2015",
+        "series": "Lecture Notes in Business Information Processing",
+        "volume": "212",
+        "pages": "27--39",
+        "publisher": "Springer",
+        "doi": "10.1007/978-3-319-18612-2_3",
+        "url": "https://arxiv.org/abs/2308.06509",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    },
+    "VAITHILINGAM2022": {
+      "tipo": "inproceedings",
+      "citada": true,
+      "antes": {
+        "title": "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models",
+        "booktitle": "CHI Conference on Human Factors in Computing Systems Extended Abstracts",
+        "year": "2022",
+        "pages": "1--7",
+        "publisher": "ACM",
+        "doi": "10.1145/3491101.3519665",
+        "url": "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf"
+      },
+      "depois": {
+        "title": "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models",
+        "booktitle": "CHI Conference on Human Factors in Computing Systems Extended Abstracts",
+        "year": "2022",
+        "pages": "1--7",
+        "publisher": "ACM",
+        "doi": "10.1145/3491101.3519665",
+        "url": "https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf",
+        "urldate": "16 nov. 2026"
+      },
+      "nota_original": "",
+      "data": "Ano anterior preservado; ver auditoria científica",
+      "lacunas": [
+        "Local não identificado na entrada"
+      ]
+    }
+  },
+  "limite": "Geração editorial local; não certifica cumprimento integral da NBR 6023."
+}

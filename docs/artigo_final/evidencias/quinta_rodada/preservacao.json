@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "comparison": "Snapshot local da quarta rodada, não HEAD",
+  "baseline_pdf_sha256": "fb80346d1ef3e71464aee9724b9a7babb8319f6e31aa1b9c0fb633b0623e70e1",
+  "final_pdf_sha256": "a548bc214e5740584b70aeaba34d0ebf3bbb51bafdd3fc4bf5517a000079738f",
+  "outside_article_tracked_unchanged": 221,
+  "historical_evidence_files_unchanged": 66,
+  "institutional_class_unchanged": true,
+  "original_bib_unchanged": true,
+  "ai_declarations_unchanged": true,
+  "numeric_csv_json_unchanged": true,
+  "table_bodies_literally_unchanged": true,
+  "image_files_unchanged": 71,
+  "equation_environments_literally_unchanged": 8,
+  "numbered_expressions_preserved": 14,
+  "workbooks": [
+    {
+      "arquivo": "avaliacao_usuarios/privado/snapshot_publico_32.xlsx",
+      "sha256": "c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34"
+    },
+    {
+      "arquivo": "avaliacao_usuarios/dados_originais/respostas_recebidas.xlsx",
+      "sha256": "d61b9f11514f8d42f276abdb3e4e173782955c468fb50d774680032d342ce48a"
+    }
+  ],
+  "application_experiments_run": false,
+  "application_suite_rerun": false,
+  "analysis_tests": "9 passed",
+  "commit_push": false,
+  "modified_tracked_since_fourth_round": [
+    "docs/artigo_final/README.md",
+    "docs/artigo_final/Relatorio_Final.pdf",
+    "docs/artigo_final/Relatorio_Final.tex",
+    "docs/artigo_final/avaliacao_usuarios/resultados/tabela_tarefas.tex",
+    "docs/artigo_final/avaliacao_usuarios/resultados/tabela_temas.tex",
+    "docs/artigo_final/avaliacao_usuarios/resultados/tabela_utilidade.tex",
+    "docs/artigo_final/avaliacao_usuarios/scripts/gerar_tabelas.py",
+    "docs/artigo_final/fig/conceitos.tex",
+    "docs/artigo_final/figuras_relatorio.tex",
+    "docs/artigo_final/final_0_resumo.tex",
+    "docs/artigo_final/final_1_introducao.tex",
+    "docs/artigo_final/final_2_fundamentacao.tex",
+    "docs/artigo_final/final_3_metodos.tex",
+    "docs/artigo_final/final_3a_implementacao.tex",
+    "docs/artigo_final/final_3b_plataforma.tex",
+    "docs/artigo_final/final_4_resultados.tex",
+    "docs/artigo_final/final_4a_usuarios.tex",
+    "docs/artigo_final/final_5_discussao.tex"
+  ],
+  "all_previous_evidence_files_unchanged_including_untracked_fourth_round": 80
+}

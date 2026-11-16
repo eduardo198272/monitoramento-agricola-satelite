@@ -1,0 +1,47 @@
+[
+  {
+    "grafico": "aplicabilidade",
+    "pixels_reproduzidos_identicos": true,
+    "sha256": "dfcd10f3f201445637e49d44e281e540af71231d7fb02cd96f217876dc980b6a"
+  },
+  {
+    "grafico": "experiencia",
+    "pixels_reproduzidos_identicos": true,
+    "sha256": "dd3b32c875142d5ca50e776be4a979630d947dfa7484e47e9319d7cbd99f6b55"
+  },
+  {
+    "grafico": "familiaridade",
+    "pixels_reproduzidos_identicos": true,
+    "sha256": "58ba52eb157236ae6ec6939038b0b1ef777919e6e42c1ef4551016d84de9b7aa"
+  },
+  {
+    "grafico": "nota_geral",
+    "pixels_reproduzidos_identicos": true,
+    "sha256": "d47d8c47f079acc36a9c37832c5c0b4806dedafbecd00c2f5c84dc767415228b"
+  },
+  {
+    "grafico": "perfil_profissional",
+    "pixels_reproduzidos_identicos": true,
+    "sha256": "37655565f206151a59e43a37dbd3bc969e37613e723d05602b4c8e40b97c093f"
+  },
+  {
+    "grafico": "tarefas",
+    "pixels_reproduzidos_identicos": true,
+    "sha256": "3aa3b80548365b2290fe19a5dee48d24a3a9f4e432ab8e097af0f573702dfb02"
+  },
+  {
+    "grafico": "temas",
+    "pixels_reproduzidos_identicos": true,
+    "sha256": "c3acc4da1294a36131ce1d7ae3c7db9b2690200a64f4a2e87903375a91048796"
+  },
+  {
+    "grafico": "usabilidade",
+    "pixels_reproduzidos_identicos": true,
+    "sha256": "e266d4d34a3762bcdce83be22d15ec98bcb93e6969fecfafcd1f1ddb8c960168"
+  },
+  {
+    "grafico": "utilidade",
+    "pixels_reproduzidos_identicos": true,
+    "sha256": "cc1fceea31814cb5666cd50e780c01162c2d2b8206f3cec9976737972f408574"
+  }
+]

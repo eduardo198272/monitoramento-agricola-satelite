@@ -1,0 +1,32 @@
+{
+  "pdf_sha256": "9dba3afa3e806a4f3d84742f16c73a4800bdad6de9dcc92c13aec02734b25041",
+  "pages": 32,
+  "status": "Apresentação restaurada conforme classe local; comparação externa bloqueada por Anubis; coautoria ainda não confirmada",
+  "sources_sha256": {
+    "Relatorio_Final.tex": "29f6c5ed8e399f66b25bd914213b0a5eba4f5267c938011efd35d29716bb8ea0",
+    "normalizacao.tex": "011943cf04396118f45ac0f1c3b780a6f96c3ec806b9924a8e973315b34ccb2c",
+    "autoria.tex": "a0e658e4f83a3ad822a304c1be597a9948e3b0349384a1aed6efb07a5f49ab36",
+    "final_0_resumo.tex": "b83de5ff4f20ff0c60299393cc62a33d8837f54f59ef282ccf2c865b3ce95460",
+    "referencias_normalizadas.bib": "ca552940ca7e075e332992686cd8180af56d95619f945c395fd67789cc20e53f",
+    "referencias_institucionais.bib": "bb6255f81a30add92ddb5d183667447fe23c511a2774d7f21f06a427c2560214",
+    "AUDITORIA_ABNT.md": "eefab3fe0bdbf57bb0fbdbc2d17b73d3a58ac75d2a1eefd306526cc06658830e",
+    "scripts/preparar_bib_dcu.py": "70d74fade90444e278f7a673b2a00b058b3aff7e99921a23499500c4b70d0e25"
+  },
+  "evidence_sha256": {
+    "Relatorio_Final.blg": "f4ea6c6f11747e752c472eda6d66ddd5605afd7d51ed2bdc86bc71f142049595",
+    "README.md": "579171f8d13e288e973c2001d24da7f1b1882a1df8453c98d1b14831491f99b1",
+    "Relatorio_Final.aux": "2cfa769fca8b18967d18c8ab99bc1bfd81f6fa59f353ded17ac3f07d1c4e4150",
+    "antes_depois.diff": "5f722965802bd2bcf744b4aca7649eba524b11f25b19a6acfbaed0deb9f229c3",
+    "pdfinfo.txt": "aed29d2857a107d9638c4f7073e493a3e6e97fab65e15dafcf346ae8a8544e5e",
+    "renderizacao.json": "65eb99439033917c5cf32800ccc342f18c020a81b2c36d7443e7984c9f7c7de1",
+    "comparacao.json": "2d87a95798c81fb2ed765a867780a6c3fd931701dc955bf032c8ca9c9617fbcf",
+    "Relatorio_Final.log": "afcada5b24c6ff10bd94881fc12913a5f179efe216dcf968727dd49a935df286",
+    "preservacao.json": "88da2b629dfcd26a639e6d564faadd2f5a9c29d3a98f2bfaad834b5aedddc9c7",
+    "compilacao.json": "b3ecd9a310bacc7047da4da8204d8c2a3eef3722fbf41542e0df8e8151783325",
+    "inspecao_visual.md": "a9f991382887bb7e669d3761d0a849a39d22122e6b168348a843156b3f4d5b13",
+    "console.txt": "d734e2e51cf295ba7025de456a15dfc1729a57ed9c3a4c6e8d8cfe28f5308fb4",
+    "Relatorio_Final.bbl": "bb413d5828a5b06a23274ead5e92186a0c53d0c6ecc162d5b8f19db0bc1232fc",
+    "consultas_repositorio.json": "fdb7aeb5af99325f9946fd975b3aae25971d7c764923aaf964ba75e26c6eda94",
+    "metadados_preservados.json": "fd72fbecd676fab0b3a30f1e7ffea405a7c349ccd16f0086985333199018f69e"
+  }
+}

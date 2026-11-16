@@ -21,9 +21,10 @@ OE6 & Implementado & Clima compartilhado, unidade normalizada e resumo propagado
 OE7 & Implementado & PDF, XLSX, CSV ZIP e GeoJSON exercitados com entradas controladas; não equivalem a pacote completo de reprodução. \\
 OE8 & Verificação técnica realizada & 710 testes Python, três verificações JavaScript e demonstração com serviços reais; questionário exploratório complementar. \\ \hline
 \end{tabular}
+\fonteTCC{elaborado pelo autor a partir das evidências da pesquisa.}
 \end{table*}
 
-O desenvolvimento orientado a especificações tornou explícitos requisitos e critérios verificáveis. A rastreabilidade entre esses documentos, módulos e testes permite distinguir disponibilidade funcional e avaliação realizada. Essa é uma contribuição de processo documentada, não uma medida de ganho de produtividade de desenvolvimento ou comparação entre metodologias.
+O desenvolvimento orientado a especificações tornou explícitos requisitos e critérios verificáveis. A rastreabilidade entre esses documentos, módulos e testes permite distinguir disponibilidade funcional e avaliação realizada, em consonância com a relação entre requisitos e verificação examinada por \citet{GOTEL1994,BJARNASON2015}. Essa é uma contribuição de processo documentada, não uma medida de ganho de produtividade de desenvolvimento ou comparação entre metodologias.
 
 \subsection{Contribuições de Engenharia de Software}
 
@@ -47,9 +48,9 @@ A demonstração com duas aquisições confirma o encadeamento entre serviços e
 
 \subsection{Percepção de uso e prioridades de engenharia}
 
-O questionário acrescenta uma dimensão não examinada pelos testes: a relação entre disponibilidade de um recurso, sua execução autodeclarada e seu valor percebido. A distinção entre facilidade e utilidade \citep{DAVIS1989} é relevante porque um recurso pode ser considerado útil e ainda exigir orientação. A demarcação teve 18/31 conclusões sem ajuda, apesar de 23/25 conclusões entre tentativas; clima e exportação tiveram conclusão em todas as tentativas, mas parte delas com auxílio. A avaliação favorável, portanto, convive com barreiras de autonomia.
+O questionário acrescenta uma dimensão não examinada pelos testes: a relação entre disponibilidade de um recurso, sua execução autodeclarada e seu valor percebido. A distinção entre facilidade e utilidade \citep{DAVIS1989} é relevante porque um recurso pode ser considerado útil e ainda exigir orientação. A demarcação teve 19/32 conclusões sem ajuda, apesar de 24/26 conclusões entre tentativas; clima e exportação tiveram conclusão em todas as tentativas, mas parte delas com auxílio. A avaliação favorável, portanto, convive com barreiras de autonomia.
 
-A consulta por pixel ilustra esse contraste. Houve 20/23 respostas útil/muito útil entre as avaliações válidas, mas oito registros indicaram não conseguir avaliá-la e cinco declararam não tentar a atividade correspondente. Não conseguir avaliar, não tentar e atribuir uma avaliação neutra são respostas diferentes e foram mantidas separadas. Os resultados apontam a necessidade de investigar se o recurso é encontrado e compreendido e em quais condições é acessado, sem presumir que todos tenham percebido ou utilizado a consulta local.
+A consulta por pixel ilustra esse contraste. Houve 21/24 respostas útil/muito útil entre as avaliações válidas, mas oito registros indicaram não conseguir avaliá-la e cinco declararam não tentar a atividade correspondente. Não conseguir avaliar, não tentar e atribuir uma avaliação neutra são respostas diferentes e foram mantidas separadas. Os resultados apontam a necessidade de investigar se o recurso é encontrado e compreendido e em quais condições é acessado.
 
 Os relatos também mostram a importância de explicar o que os mapas permitem interpretar. Fertilidade, compactação e diagnóstico aparecem nas respostas, mas o sistema não determina essas condições. Explicar quais bandas são comparadas, como funciona a janela de observações, de onde vêm os dados meteorológicos e como as escalas de cores variam pode ser mais relevante do que acrescentar classes que sugiram um diagnóstico. As sugestões sobre fenologia, manejo, formatos e acesso móvel são possibilidades para avaliar no desenvolvimento futuro, não funcionalidades existentes ou evidências de aumento de produtividade.
 
@@ -63,7 +64,7 @@ A composição por mediana resume o período, mas não informa diretamente o mom
 
 A janela de três observações, o limiar $z<-1$ e os limites de inclinação $\pm0{,}01$ são heurísticos não calibrados. A janela não modela fenologia ou sazonalidade e não sinaliza quando sua dispersão é zero; a tendência usa ordem de observação, não tempo transcorrido. Em contraste com a referência histórica sazonal de \citet{MERONI2019}, a regra apenas destaca quedas locais. Sua acurácia agronômica não foi avaliada em campo.
 
-Na avaliação com usuários, a adesão voluntária, o predomínio de agrônomos e o autorrelato limitam a generalização. A codificação assistida e conferida pelo pesquisador não teve segundo codificador independente. As estimativas descrevem o recorte de 31 respostas delimitado na metodologia, cuja admissibilidade ética permanece pendente.
+Na avaliação com usuários, a adesão voluntária, o predomínio de agrônomos e o autorrelato delimitam a generalização das \UsuariosN{} respostas. A análise qualitativa não teve segundo codificador independente; seus resultados descrevem padrões dos textos recebidos, não prevalências populacionais.
 
 Na operação, bibliotecas abertas não eliminam condições de acesso, elegibilidade e cotas de serviços externos \citep{GOOGLE_EE_NONCOMMERCIAL,NOMINATIM_POLICY}. Não foram medidos custo total, desempenho comparativo ou capacidade de atendimento simultâneo.
 

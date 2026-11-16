@@ -1,6 +1,6 @@
 {
-  "recebidos": 31,
-  "elegiveis": 31,
+  "recebidos": 32,
+  "elegiveis": 32,
   "duplicatas_exatas_excluidas": 0,
   "linhas_em_duplicatas_sem_carimbo_requerem_revisao": 0,
   "sem_consentimento": 0,
@@ -13,7 +13,7 @@
   "celulas_discursivas_codificadas": 142,
   "abas": {
     "Respostas ao formulário 1": [
-      31,
+      32,
       50
     ],
     "Página1": [
@@ -23,11 +23,10 @@
   },
   "colunas": 50,
   "original_sha256": "d61b9f11514f8d42f276abdb3e4e173782955c468fb50d774680032d342ce48a",
-  "analisado_sha256": "9adb66b330103ca858c37d7dc6cdb5e4e954f09f749a0c122fa6e6b2f4f5de59",
+  "analisado_sha256": "c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34",
   "retificacao_autorizada": {
-    "authorization": "Autor informou erro de digitação nos dias 16 e 17; solicitou retificação para dia 15, mantendo horários.",
-    "changed_cells": 7,
-    "answers_unchanged": true
+    "aplicada_nesta_analise": false,
+    "nota": "Snapshot público preservado sem alterações; retificações do original são históricas."
   },
   "periodo_carimbos_corrigidos": [
     "2026-11-06",
@@ -253,27 +252,27 @@
     {
       "coluna": 44,
       "pergunta": "Quais aspectos positivos você identificou na plataforma?",
-      "ausentes": 0
+      "ausentes": 1
     },
     {
       "coluna": 45,
       "pergunta": "Quais dificuldades você encontrou durante a utilização?",
-      "ausentes": 0
+      "ausentes": 1
     },
     {
       "coluna": 46,
       "pergunta": "Quais funcionalidades ou melhorias considera importantes para versões futuras?",
-      "ausentes": 0
+      "ausentes": 1
     },
     {
       "coluna": 47,
       "pergunta": "Em quais situações você considera que a plataforma poderia ser utilizada?",
-      "ausentes": 0
+      "ausentes": 1
     },
     {
       "coluna": 48,
       "pergunta": "Deseja acrescentar algum comentário ou sugestão?",
-      "ausentes": 13
+      "ausentes": 14
     },
     {
       "coluna": 49,
@@ -283,7 +282,7 @@
     {
       "coluna": 50,
       "pergunta": "Descreva o que impediu o acesso ou a exploração da plataforma.",
-      "ausentes": 31
+      "ausentes": 32
     }
   ],
   "sinteticos_comparados": {
@@ -299,12 +298,12 @@
   },
   "versao_publica": "Avaliou-se versão anterior às correções; commit e intervalo de publicação não fornecidos",
   "nota": {
-    "n_valido": 31,
+    "n_valido": 32,
     "ausentes": 0,
     "invalidas": 0,
-    "media": 7.741935483870968,
+    "media": 7.71875,
     "mediana": 8.0,
-    "dp_amostral": 1.806797201966025,
+    "dp_amostral": 1.7822489417369787,
     "q1": 7.0,
     "q3": 9.0,
     "iiq": 2.0,

@@ -1,0 +1,25 @@
+\begin{tikzpicture}[
+ box/.style={draw,rounded corners,align=center,text width=36mm,
+ minimum height=13mm,font=\small,fill=green!5},
+ link/.style={-{Stealth[length=2mm]},thick}]
+\node[box] (input) at (0,0) {Polígono, período\\e índices solicitados};
+\node[box] (query) at (4.8,0) {Coleção Sentinel-2\\interseção, datas\\e nuvens do produto};
+\node[box] (indices) at (9.6,0) {Máscara QA60\\diferença normalizada\\em cada aquisição};
+\node[box] (spatial) at (14.4,1.6) {Mediana temporal\\por pixel\\$C_k(p)$};
+\node[box] (mean) at (19.2,1.6) {Média espacial\\da composição\\$M_k$};
+\node[box] (series) at (14.4,-1.6) {Média espacial\\por imagem\\$S_k(t)$};
+\node[box] (anomaly) at (19.2,-1.6) {Série ordenada\\tendência e desvios\\sem diagnóstico};
+\node[box,fill=blue!5] (climate) at (4.8,-3.7) {Centroide\\NASA POWER\\tabela e resumo};
+\node[box] (output) at (14.4,-3.7) {Resultados por índice\\mapa, gráfico e snapshot\\para exportação};
+\draw[link] (input) -- (query);
+\draw[link] (query) -- (indices);
+\draw[link] (indices) -- (spatial);
+\draw[link] (spatial) -- (mean);
+\draw[link] (indices) -- (series);
+\draw[link] (series) -- (anomaly);
+\draw[link] (input.south) |- (climate.west);
+\draw[link] (climate) -- node[above,font=\scriptsize] {contexto compartilhado} (output);
+\draw[link] (anomaly.south) |- (output.east);
+\draw[link] (mean.east) -- ++(0.8,0) |- (output.south east);
+\draw[link] (spatial.south west) -- ++(-0.6,-1.4) -- (output.north west);
+\end{tikzpicture}

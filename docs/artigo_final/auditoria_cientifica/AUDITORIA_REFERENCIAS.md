@@ -1,5 +1,32 @@
 # Auditoria das referências
 
+## Complemento vigente — revisão bibliográfica final, 16/11/2026
+
+A auditoria consolidada desta etapa está em
+[`../AUDITORIA_REFERENCIAS.md`](../AUDITORIA_REFERENCIAS.md), com inventário
+das 63 entradas (54 citadas), estados de acesso discriminados e limitações
+individuais. Foram corrigidas oito entradas, sem novas fontes ou exclusões:
+guia EOSDA, PDF/ementa/órgão da UPF, nota da Manager API NASA, ano BIPM
+conforme citação oficial, versão 3.44 LTR das três páginas QGIS e páginas
+309–317 de Rouse. O corpo científico e o template não foram alterados.
+
+Evidências novas: `../evidencias/revisao_bibliografica_final/`.
+Os registros abaixo são históricos e não significam obtenção dos mesmos
+textos nesta rodada. As limitações de acesso/metadata não resolvidas
+permanecem explícitas no relatório atual. Sem commit ou push.
+
+## Estado vigente — quarta rodada, 16/11/2026
+
+Complemento dirigido à fundamentação do processo de desenvolvimento: **três entradas adicionadas; nenhuma removida ou substituída** (63 entradas no arquivo, 54 chaves citadas). A denominação operacional de SDD continua apoiada também nas fontes técnicas; os estudos científicos fundamentam requisitos, rastreabilidade, critérios/testes e supervisão da geração de código, não certificam um método único chamado SDD.
+
+| Entrada | Fonte primária e conferência | Conteúdo usado / limites |
+|---|---|---|
+| `GOTEL1994` | PDF integral no repositório UCL, `https://discovery.ucl.ac.uk/749/1/2.2_rtprob.pdf`; registro UCL e Crossref DOI `10.1109/ICRE.1994.292398`, conferência de requisitos, 1994, pp.94–101 | Definição e acompanhamento do requisito em §§1 e5.1–5.3; origem versus artefatos derivados. O Crossref abrevia incorretamente o prenome de Finkelstein; autoria por extenso conferida no PDF: Orlena C.Z. Gotel e Anthony C.W. Finkelstein. Não se atribui rastreabilidade integral automatizada ao TCC. |
+| `BJARNASON2015` | Manuscrito integral aberto `https://arxiv.org/pdf/2308.06509`, confrontado com registro Springer e Crossref DOI `10.1007/978-3-319-18612-2_3`; Elizabeth Bjarnason, Michael Unterkalmsteiner, Emelie Engström e Markus Borg; XP2015/LNBIP212, pp.27–39 | §§2,5.2,6.2–6.4: critérios de aceitação, resultados esperados, testes e preservação de contexto/vínculos. O depósito é de2023, a publicação citada é de2015. Não implica que o projeto adotou BDD/TCR/ATDD. |
+| `VAITHILINGAM2022` | PDF dos autores `https://tianyi-zhang.github.io/files/chi2022-lbw-copilot.pdf`; DOI `10.1145/3491101.3519665` e Crossref, CHI Extended Abstracts2022, pp.1–7, Priyan Vaithilingam, Tianyi Zhang e Elena L. Glassman | §§3–5: estudo com24 participantes; dificuldades de entender, editar e depurar sugestões. Apoia supervisão/verificação; não prova ganhos neste TCC, não é estudo de OpenCode/modelos atuais, nem artigo completo do volume principal deCHI. |
+
+PDFs e respostas Crossref em cache privado `/tmp/opencode/quarta-rodada/fontes`; hashes, URLs e localizadores em `../evidencias/quarta_rodada/fontes.json`. Lidos os trechos específicos e o contexto metodológico; nenhum número desses estudos foi apresentado como resultado próprio. As limitações das referências anteriormente auditadas permanecem, sem expansão adicional indiscriminada.
+
 ## Terceira rodada — 15–16/11/2026
 
 A retomada concentrou-se nas pendências citadas, sem expansão bibliográfica: **nenhuma entrada adicionada, removida ou substituída; 60 entradas preservadas**. As novas verificações abaixo sucedem os pareceres históricos de acesso, não alteram retrospectivamente o que foi lido antes.

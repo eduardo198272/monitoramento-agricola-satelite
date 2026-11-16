@@ -1,5 +1,17 @@
 # Qualidade, procedência e retificação dos dados
 
+## Conferência vigente — quarta rodada, 16/11/2026
+
+- Conjunto definitivo escolhido: **snapshot público32**, hash `c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34`, preservado sem alteração em `privado/snapshot_publico_32.xlsx`.
+- Consulta atual:33 registros; todos elegíveis. A escolha expressa do pesquisador foi manter o snapshot32 após comunicação da atualização. Os32 coincidem integralmente com a fonte atual, inclusive carimbos.
+- Original privado:31 correspondências integrais de respostas; sete diferenças históricas de carimbo conforme registro anterior. Nenhuma retificação nesta rodada.
+- Reprocessamento integral:32 elegíveis,40 itens,191 categorias, seis cruzamentos, nove gráficos, todas as tabelas e macros. Nenhuma exclusão por triagem ou duplicidade.
+- Nota: média7,71875; mediana8; moda9; DP amostral1,7822489417; Q1=7/Q3=9; extremos3–10.
+- Qualitativo:142 células preenchidas em31 submissões,13 categorias; adicional com cinco campos vazios. Percentuais temáticos usam32 submissões, sem tratar ausência como discordância ou ausência de barreira.
+- Conferência independente por Counter/statistics, denominadores das nove tarefas e contagens temáticas no validador atualizado. Resultados detalhados em `resultados/validacao.json`; evidências adicionais em `../evidencias/quarta_rodada/`.
+
+A diferença31/32 foi resolvida pela inclusão do registro no conjunto confirmado, não pela alteração de dados ou justificativa de exclusão inventada. A fonte dinâmica e o snapshot não são intercambiáveis. As seções seguintes são **históricas** e suas pendências superadas não se aplicam à apresentação atual.
+
 ## Conferência vigente — terceira rodada
 
 Fonte pública: `https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/edit?usp=sharing`. A exportaçãoXLSX respondeuHTTP200; a nova exportação foi preservada privadamente e possuiSHA-256 `c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34`.

@@ -1,0 +1,95 @@
+ M docs/artigo_final/DECLARACAO_USO_IA.pdf
+ M docs/artigo_final/DECLARACAO_USO_IA.tex
+ M docs/artigo_final/README.md
+ M docs/artigo_final/REGISTRO_USO_IA.md
+ M docs/artigo_final/Relatorio_Final.pdf
+ M docs/artigo_final/Relatorio_Final.tex
+ M docs/artigo_final/auditoria_cientifica/AUDITORIA_CIENTIFICA.md
+ M docs/artigo_final/auditoria_cientifica/AUDITORIA_EQUACOES.md
+ M docs/artigo_final/auditoria_cientifica/AUDITORIA_ORIGINALIDADE.md
+ M docs/artigo_final/auditoria_cientifica/AUDITORIA_REFERENCIAS.md
+ M docs/artigo_final/auditoria_cientifica/CHANGELOG_ARTIGO.md
+ M docs/artigo_final/auditoria_cientifica/MATRIZ_RASTREABILIDADE_CIENTIFICA.md
+ M docs/artigo_final/auditoria_cientifica/PENDENCIAS_AUTOR.md
+ M docs/artigo_final/auditoria_cientifica/README.md
+ M docs/artigo_final/avaliacao_usuarios/METODOLOGIA.md
+ M docs/artigo_final/avaliacao_usuarios/README.md
+ M docs/artigo_final/avaliacao_usuarios/RELATORIO_QUALIDADE_DADOS.md
+ M docs/artigo_final/avaliacao_usuarios/RESULTADOS.md
+ M docs/artigo_final/avaliacao_usuarios/VALIDACAO_FINAL.md
+ M docs/artigo_final/avaliacao_usuarios/codificacao.json
+ M docs/artigo_final/avaliacao_usuarios/figuras/aplicabilidade.pdf
+ M docs/artigo_final/avaliacao_usuarios/figuras/aplicabilidade.png
+ M docs/artigo_final/avaliacao_usuarios/figuras/aplicabilidade.svg
+ M docs/artigo_final/avaliacao_usuarios/figuras/experiencia.pdf
+ M docs/artigo_final/avaliacao_usuarios/figuras/experiencia.png
+ M docs/artigo_final/avaliacao_usuarios/figuras/experiencia.svg
+ M docs/artigo_final/avaliacao_usuarios/figuras/familiaridade.pdf
+ M docs/artigo_final/avaliacao_usuarios/figuras/familiaridade.png
+ M docs/artigo_final/avaliacao_usuarios/figuras/familiaridade.svg
+ M docs/artigo_final/avaliacao_usuarios/figuras/nota_geral.pdf
+ M docs/artigo_final/avaliacao_usuarios/figuras/nota_geral.png
+ M docs/artigo_final/avaliacao_usuarios/figuras/nota_geral.svg
+ M docs/artigo_final/avaliacao_usuarios/figuras/perfil_profissional.pdf
+ M docs/artigo_final/avaliacao_usuarios/figuras/perfil_profissional.png
+ M docs/artigo_final/avaliacao_usuarios/figuras/perfil_profissional.svg
+ M docs/artigo_final/avaliacao_usuarios/figuras/tarefas.pdf
+ M docs/artigo_final/avaliacao_usuarios/figuras/tarefas.png
+ M docs/artigo_final/avaliacao_usuarios/figuras/tarefas.svg
+ M docs/artigo_final/avaliacao_usuarios/figuras/temas.pdf
+ M docs/artigo_final/avaliacao_usuarios/figuras/temas.png
+ M docs/artigo_final/avaliacao_usuarios/figuras/temas.svg
+ M docs/artigo_final/avaliacao_usuarios/figuras/usabilidade.pdf
+ M docs/artigo_final/avaliacao_usuarios/figuras/usabilidade.png
+ M docs/artigo_final/avaliacao_usuarios/figuras/usabilidade.svg
+ M docs/artigo_final/avaliacao_usuarios/figuras/utilidade.pdf
+ M docs/artigo_final/avaliacao_usuarios/figuras/utilidade.png
+ M docs/artigo_final/avaliacao_usuarios/figuras/utilidade.svg
+ M docs/artigo_final/avaliacao_usuarios/resultados/aplicabilidade.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/avaliacao_geral.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/avaliacao_usabilidade.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/categorias_qualitativas.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/cruzamentos.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/distribuicao_notas.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/distribuicoes.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/estatisticas_descritivas.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/execucao_funcionalidades.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/indicadores.tex
+ M docs/artigo_final/avaliacao_usuarios/resultados/perfil_participantes.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/qualidade.json
+ M docs/artigo_final/avaliacao_usuarios/resultados/tabela_tarefas.tex
+ M docs/artigo_final/avaliacao_usuarios/resultados/tabela_temas.tex
+ M docs/artigo_final/avaliacao_usuarios/resultados/tabela_utilidade.tex
+ M docs/artigo_final/avaliacao_usuarios/resultados/utilidade_funcionalidades.csv
+ M docs/artigo_final/avaliacao_usuarios/resultados/validacao.json
+ M docs/artigo_final/avaliacao_usuarios/scripts/analisar_respostas.py
+ M docs/artigo_final/avaliacao_usuarios/scripts/gerar_graficos.py
+ M docs/artigo_final/avaliacao_usuarios/scripts/gerar_tabelas.py
+ M docs/artigo_final/avaliacao_usuarios/scripts/test_analise.py
+ M docs/artigo_final/avaliacao_usuarios/scripts/validar_resultados.py
+ M docs/artigo_final/fig/conceitos.tex
+ M docs/artigo_final/figuras_relatorio.tex
+ M docs/artigo_final/final_0_resumo.tex
+ M docs/artigo_final/final_1_introducao.tex
+ M docs/artigo_final/final_2_fundamentacao.tex
+ M docs/artigo_final/final_3_metodos.tex
+ M docs/artigo_final/final_3a_implementacao.tex
+ M docs/artigo_final/final_3b_plataforma.tex
+ M docs/artigo_final/final_4_resultados.tex
+ M docs/artigo_final/final_4a_usuarios.tex
+ M docs/artigo_final/final_5_discussao.tex
+ M docs/artigo_final/final_6_conclusao.tex
+ M docs/artigo_final/referencias.bib
+?? docs/artigo_final/AUDITORIA_ABNT.md
+?? docs/artigo_final/TEMPLATE_INSTITUCIONAL.md
+?? docs/artigo_final/autoria.tex
+?? docs/artigo_final/evidencias/acabamento_definitivo/
+?? docs/artigo_final/evidencias/fidelidade_template_upf/
+?? docs/artigo_final/evidencias/quarta_rodada/
+?? docs/artigo_final/evidencias/quinta_rodada/
+?? docs/artigo_final/normalizacao.tex
+?? docs/artigo_final/referencias_institucionais.bib
+?? docs/artigo_final/referencias_normalizadas.bib
+?? docs/artigo_final/referencias_normalizadas.tex
+?? docs/artigo_final/scripts/
+?? docs/envio_professor/

@@ -9,7 +9,7 @@ A análise da implementação utilizou o código-fonte, as especificações func
 
 O desenvolvimento adotou SDD, com especificações funcionais, critérios de aceitação e tarefas mantidos em \path{docs/specs}. As alterações foram organizadas em ramificações do controle de versão e integradas por revisão. As decisões técnicas e arquiteturais e a supervisão da assistência de IA permaneceram sob responsabilidade do pesquisador. As especificações orientaram a implementação e as verificações; o código e os testes registram o comportamento efetivamente disponibilizado.
 
-Os testes automatizados foram combinados com verificações manuais. Para as divergências dos contratos de dados, casos de regressão reproduziram o comportamento e verificaram os ajustes. A assistência de IA abrangeu especificação, implementação, testes e redação, conforme a declaração ao final do artigo.
+Os testes automatizados foram combinados com verificações manuais. Para as divergências dos contratos de dados, casos de regressão reproduziram o comportamento e verificaram os ajustes.
 
 \subsection{Materiais e ambiente}
 
@@ -61,8 +61,9 @@ Ao organizar a série em \texttt{time\_series.py}, o sistema omite os registros 
 \begin{figure*}[htbp]
 \centering
 \resizebox{0.96\textwidth}{!}{\input{fig/fluxo_analise}}
-\caption{Derivação dos produtos espaciais e temporais a partir da coleção filtrada. Fonte: elaborado pelo autor a partir de \texttt{pipeline.py} e \texttt{time\_series.py}.}
+\caption{Derivação dos produtos espaciais e temporais a partir da coleção filtrada.}
 \label{fig:fluxo-analise}
+\fonteTCC{elaborado pelo autor a partir de \texttt{pipeline.py} e \texttt{time\_series.py}.}
 \end{figure*}
 
 \subsection{Regra de detecção e tendência}\label{sec:anomalias-final}
@@ -86,15 +87,16 @@ A tendência é classificada como crescente se $a>0{,}01$, decrescente se $a<-0{
 \begin{figure*}[htbp]
 \centering
 \resizebox{0.92\textwidth}{!}{\input{fig/fluxo_anomalias}}
-\caption{Heurística unilateral de sinalização de desvios negativos. Fonte: elaborado pelo autor a partir de \texttt{anomalies.py}.}
+\caption{Heurística unilateral de sinalização de desvios negativos.}
 \label{fig:fluxo-anomalias}
+\fonteTCC{elaborado pelo autor a partir de \texttt{anomalies.py}.}
 \end{figure*}
 
 \subsection{Consulta e agregação meteorológica}\label{sec:clima-final}
 
 O contexto meteorológico é obtido por uma consulta diária da NASA POWER nas coordenadas do centroide calculado pelo Earth Engine. A requisição usa o serviço \texttt{/api/temporal/daily/point}, a comunidade agrícola \texttt{community=ag}, datas no formato \texttt{YYYYMMDD}, resposta JSON e tempo limite de 30 s. São solicitados os parâmetros \texttt{PRECTOTCORR}, \texttt{T2M} e \texttt{ALLSKY\_SFC\_SW\_DWN}. Embora o código contenha nomes internos para \texttt{T2M\_MAX} e \texttt{T2M\_MIN}, o fluxo padrão não consulta temperaturas máximas e mínimas.
 
-No catálogo diário da comunidade agrícola, \texttt{PRECTOTCORR} corresponde à precipitação corrigida, em mm/dia; \texttt{T2M}, à temperatura média do ar a 2 m, em °C; e \texttt{ALLSKY\_SFC\_SW\_DWN}, à energia solar de ondas curtas incidente em superfície horizontal sob todas as condições de céu, em MJ/m²/dia \citep{NASA_POWER_PARAMETERS}. Para a integração efetiva, prevalece a unidade declarada em cada resposta, especialmente na radiação.
+No catálogo diário da comunidade agrícola, \texttt{PRECTOTCORR} corresponde à precipitação corrigida, em mm/dia; \texttt{T2M}, à temperatura média do ar a 2~m, em °C; e \texttt{ALLSKY\_SFC\_SW\_DWN}, à energia solar de ondas curtas incidente em superfície horizontal sob todas as condições de céu, em \radiacaoTCC{} \citep{NASA_POWER_PARAMETERS}. Para a integração efetiva, prevalece a unidade declarada em cada resposta, especialmente na radiação.
 
 A resposta é organizada em uma tabela ordenada por data. O código $-999$, usado para indicar ausência de dado, não é tratado como uma medição. Para resumir o período, o sistema soma a precipitação e calcula as médias de temperatura e radiação, usando separadamente as observações válidas de cada variável. Esses conjuntos de dias são representados por $D_P$, $D_T$ e $D_R$:
 \begin{align}
@@ -102,7 +104,7 @@ A resposta é organizada em uma tabela ordenada por data. O código $-999$, usad
  \overline{T}&=\frac{1}{|D_T|}\sum_{d\in D_T}T_d,\\
  \overline{R}&=\frac{1}{|D_R|}\sum_{d\in D_R} f(u)R_d.\label{eq:radiacao-codigo}
 \end{align}
-Na \cref{eq:radiacao-codigo}, $f(u)=1$ para MJ/m²/dia e $f(u)=3{,}6$ para kWh/m²/dia, conforme a unidade declarada nos metadados. A conversão decorre de $1\ \mathrm{kWh}=1000\ \mathrm{J/s}\times3600\ \mathrm{s}=3{,}6\ \mathrm{MJ}$, pelas definições de watt e prefixos do SI \citep{BIPM_SI}. Unidade ausente ou desconhecida torna a radiação indisponível e gera aviso, sem inferência pela magnitude. Valores não finitos, booleanos, inválidos e a sentinela $-999$ são descartados. A coluna normalizada em MJ/m²/dia é compartilhada pelo resumo e pelas exportações.
+Na \cref{eq:radiacao-codigo}, $f(u)=1$ para \radiacaoTCC{} e $f(u)=3{,}6$ para \radiacaoKWhTCC{}, conforme a unidade declarada nos metadados. A conversão decorre de $1\ \mathrm{kWh}=1000\ \mathrm{J/s}\times3600\ \mathrm{s}=3{,}6\ \mathrm{MJ}$, pelas definições de watt e prefixos do SI \citep{BIPM_SI}. Unidade ausente ou desconhecida torna a radiação indisponível e gera aviso, sem inferência pela magnitude. Valores não finitos, booleanos, inválidos e a sentinela $-999$ são descartados. A coluna normalizada em \radiacaoTCC{} é compartilhada pelo resumo e pelas exportações.
 
 A soma da precipitação disponível não assegura cobertura integral do intervalo caso haja lacunas. A requisição define \texttt{time-standard=UTC}, mantendo as duas datas inclusivas em correspondência ao período espectral \citep{NASA_POWER_DAILY}. A consulta é compartilhada entre os índices da mesma análise. A apresentação conjunta fornece contexto, sem calcular correlação ou atribuir causalidade.
 
@@ -124,9 +126,9 @@ Como cada pessoa decidiu participar voluntariamente, a coleta caracteriza amostr
 
 A apresentação solicitou exploração prévia da plataforma e orientou evitar informações pessoais. O instrumento contém três itens de perfil, nove atividades, nove afirmações sobre uso, onze recursos avaliados quanto à utilidade, oito afirmações sobre compreensão e aplicabilidade, cinco campos discursivos e uma nota geral de 0 a 10. A estrutura exportada possui 50 colunas, incluindo carimbo e triagem. O conhecimento declarado refere-se à agricultura de precisão; a experiência prévia e sua frequência são captadas em um mesmo item.
 
-Antes dos cálculos, as respostas foram conferidas quanto à elegibilidade, ao preenchimento e à duplicidade. Os 31 registros indicam ``Sim'' na pergunta conjunta sobre maioridade, leitura e consentimento, e na declaração de exploração de ao menos um recurso. Não há duplicatas exatas, nem respostas integralmente iguais ao desconsiderar o carimbo. Não foram coletados identificadores individuais, e a unidade da análise descritiva é a submissão elegível ao questionário.
+Antes dos cálculos, as respostas foram conferidas quanto à elegibilidade, ao preenchimento e à duplicidade. Os \UsuariosN{} registros indicam ``Sim'' na pergunta conjunta sobre maioridade, leitura e consentimento, e na declaração de exploração de ao menos um recurso. Não há duplicatas exatas, nem respostas integralmente iguais ao desconsiderar o carimbo. Não foram coletados identificadores individuais, e a unidade da análise descritiva é a submissão elegível ao questionário.
 
-O conjunto analisado corresponde ao arquivo de 31 respostas preservado para a análise. Os registros coincidem integralmente, incluindo datas e respostas, com um subconjunto da \href{https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/edit?usp=sharing}{planilha pública da pesquisa}. Na conferência, a fonte pública continha 32 registros, incluindo um adicional elegível que não integra este recorte. A justificativa de sua diferença em relação ao arquivo analisado permanece a esclarecer; as estatísticas publicadas referem-se exclusivamente às 31 respostas preservadas.
+O conjunto definitivo compreende as \UsuariosN{} respostas do snapshot da \href{https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/edit?usp=sharing}{planilha pública da pesquisa} preservado ao término da coleta. A análise utiliza essa exportação fixa, sem incorporar registros acrescentados posteriormente à fonte pública.
 
 Nas tarefas, as categorias são ``Consegui sem ajuda'', ``Consegui com ajuda'', ``Tentei, mas não consegui'' e ``Não tentei''. A conclusão entre tentativas é a razão entre as duas primeiras e o total das três primeiras. O questionário agrega séries temporais e possíveis anomalias em uma atividade e reúne a exportação de relatório ou dados em outra; não se estimam taxas separadas para recursos que o instrumento não separou. Trata-se de autorrelato, sem observação controlada, cronometração ou inspeção dos logs de cada utilização.
 
@@ -138,8 +140,8 @@ Os quartis usam interpolação linear, e o intervalo interquartil é $Q_3-Q_1$. 
 
 A estratégia qualitativa foi prevista no planejamento e empregou codificação semântica multirrótulo, com categorias organizadas a partir do corpus. A identificação e organização de padrões foram orientadas conceitualmente por \citet{BRAUN2006}, sem adoção integral de seu protocolo. A IA executou a codificação e o agrupamento sob supervisão do pesquisador, que conferiu as treze categorias, suas atribuições e interpretações. Cada submissão conta uma vez em cada tema, mesmo quando o menciona em perguntas diferentes.
 
-Foram codificadas 142 células preenchidas; treze comentários opcionais estavam ausentes. O campo sobre impedimento de acesso estava vazio nos 31 registros, situação compatível com a triagem, não uma medida de dificuldade nula. Não houve dupla codificação independente ou medição de concordância.
+Foram codificadas 142 células preenchidas em 31 submissões; uma submissão deixou os cinco campos abertos vazios. Entre as 160 células possíveis, 18 estavam ausentes, incluindo catorze comentários opcionais. Ausências não receberam categorias nem foram interpretadas como ausência de dificuldade. As frequências temáticas por submissão usam as \UsuariosN{} respostas como denominador. Não houve dupla codificação independente ou medição de concordância.
 
 A versão pública permaneceu estável durante a coleta e antecede os ajustes de contratos consolidados em \texttt{28759bf}. Seu commit exato não está identificado. Por isso, o questionário e a avaliação técnica correspondem a versões distintas, sem associação causal entre dificuldades relatadas e ajustes posteriores.
 
-O formulário informou finalidade acadêmica, participação voluntária e consentimento conjunto com declaração de maioridade, sem solicitar nome ou e-mail. Textos abertos e combinações de perfil ainda podem permitir identificação indireta; os excertos foram limitados e desvinculados desses atributos. Não houve submissão ao Comitê de Ética em Pesquisa, e não se alega aprovação ou dispensa. A admissibilidade institucional do uso acadêmico dos resultados permanece pendente de encaminhamento do orientador à instância competente.
+O formulário informou finalidade acadêmica, participação voluntária e consentimento conjunto com declaração de maioridade, sem solicitar nome ou e-mail. Os resultados foram apresentados de forma agregada, e os excertos foram desvinculados dos atributos de perfil para reduzir a identificação indireta. Não houve submissão ao Comitê de Ética em Pesquisa; o enquadramento institucional permanece a apreciar.

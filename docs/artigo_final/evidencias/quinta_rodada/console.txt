@@ -1,0 +1,630 @@
+note: "version 2" Tectonic command-line interface activated
+note: Running TeX ...
+note: Rerunning TeX because "Relatorio_Final.out" changed ...
+note: Rerunning TeX because "Relatorio_Final.aux" changed ...
+note: Running xdvipdfmx ...
+note: Writing `/tmp/opencode/quinta-rodada/build/Relatorio_Final.out` (15.015625 KiB)
+note: Writing `/tmp/opencode/quinta-rodada/build/Relatorio_Final.aux` (29.5283203125 KiB)
+note: Writing `/tmp/opencode/quinta-rodada/build/Relatorio_Final.pdf` (5.0896100997924805 MiB)
+note: Writing `/tmp/opencode/quinta-rodada/build/Relatorio_Final.log` (86.6455078125 KiB)
+warning: merriweather.sty:224: 
+Requested font "[Merriweather-Regular.otf]/OT" at 9.99997pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Regular.otf]/OT" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-BoldItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.0pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Regular.otf]/OT" at 9.99997pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Regular.otf]/OT" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Regular.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Bold.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Italic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-BoldItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:321: Requested font "[Merriweather-Light.otf]/OT" at 9.99997pt
+warning: merriweather.sty:321: Requested font "[Merriweather-Light.otf]/OT" at 10.00003pt
+warning: merriweather.sty:321: Requested font "[Merriweather-Light.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:321: Requested font "[Merriweather-LightItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-Light.otf]/OT" at 9.99997pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-Light.otf]/OT" at 10.00003pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-Light.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-LightItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:336: Requested font "[Merriweather-Black.otf]/OT" at 9.99997pt
+warning: merriweather.sty:336: Requested font "[Merriweather-Black.otf]/OT" at 10.00003pt
+warning: merriweather.sty:336: Requested font "[Merriweather-Black.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:336: Requested font "[Merriweather-BlackItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBold.otf]/OT" at 9.99997pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBold.otf]/OT" at 10.00003pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBold.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBoldItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: CC-EC_TF-TC.cls:79: 
+Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: hyperref.sty:4873: Requested font "pzdr" at 0.00002pt
+warning: hyperref.sty:4873:  -> pzdr
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[lmmonolt10-bold]:" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmmi8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmmi8
+warning: Relatorio_Final.tex:39: Requested font "cmmi6" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmmi6
+warning: Relatorio_Final.tex:39: Requested font "cmsy8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmsy8
+warning: Relatorio_Final.tex:39: Requested font "cmsy6" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmsy6
+warning: Relatorio_Final.tex:39: Requested font "cmex8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmex8
+warning: Relatorio_Final.tex:39: Requested font "cmex7" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmex7
+warning: Relatorio_Final.tex:39: Requested font "cmex7" at 5.0pt
+warning: Relatorio_Final.tex:39:  -> cmex7
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmr8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmr8
+warning: Relatorio_Final.tex:39: 
+Requested font "cmr6" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmr6
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 7.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmmi9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmmi9
+warning: Relatorio_Final.tex:39: Requested font "cmsy9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmsy9
+warning: Relatorio_Final.tex:39: Requested font "cmex9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmex9
+warning: Relatorio_Final.tex:39: Requested font "cmex7" at 7.0pt
+warning: Relatorio_Final.tex:39:  -> cmex7
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 7.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmr9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmr9
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 7.5pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 16.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 13.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.83287pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.09996pt
+warning: Relatorio_Final.tex:44: Requested font "cmmi12" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmmi12
+warning: Relatorio_Final.tex:44: Requested font "cmmi10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmmi10
+warning: Relatorio_Final.tex:44: Requested font "cmsy10" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmsy10
+warning: Relatorio_Final.tex:44: Requested font "cmsy10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmsy10
+warning: Relatorio_Final.tex:44: Requested font "cmex10" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmex10
+warning: Relatorio_Final.tex:44: Requested font "cmex10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmex10
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 13.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.83287pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.09996pt
+warning: Relatorio_Final.tex:44: Requested font "cmr12" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmr12
+warning: Relatorio_Final.tex:44: Requested font "cmr10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmr10
+warning: final_0_resumo:2: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 11.0pt
+warning: final_0_resumo:5: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: final_1_introducao:25: Underfull \hbox (badness 2828) in paragraph at lines 24--25
+warning: final_1_introducao:27: Underfull \hbox (badness 1688) in paragraph at lines 26--27
+warning: final_1_introducao:28: Underfull \hbox (badness 1360) in paragraph at lines 27--28
+warning: final_2_fundamentacao:4: Underfull \hbox (badness 1205) in paragraph at lines 4--4
+warning: final_2_fundamentacao:12: Underfull \hbox (badness 10000) in paragraph at lines 12--12
+warning: final_2_fundamentacao:18: Requested font "[lmmono9-regular]:" at 9.0pt
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 10000) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 10000) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 1178) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 3449) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 1028) in paragraph at lines 18--19
+warning: final_2_fundamentacao:21: Underfull \hbox (badness 1009) in paragraph at lines 20--21
+warning: final_2_fundamentacao:32: Requested font "[Merriweather-BoldItalic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: final_2_fundamentacao:52: Underfull \hbox (badness 1237) in paragraph at lines 51--52
+warning: fig/conceitos:2: 
+Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.21255pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.84349pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.74875pt
+warning: fig/conceitos:67: Requested font "cmex7" at 6.84349pt
+warning: fig/conceitos:67:  -> cmex7
+warning: fig/conceitos:67: Requested font "cmex7" at 5.74875pt
+warning: fig/conceitos:67:  -> cmex7
+warning: fig/conceitos:67: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.21255pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.84349pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.74875pt
+warning: final_2_fundamentacao:110: Underfull \hbox (badness 1515) in paragraph at lines 108--110
+warning: final_2_fundamentacao:116: Underfull \hbox (badness 1205) in paragraph at lines 115--116
+warning: final_2_fundamentacao:133: Underfull \hbox (badness 10000) in paragraph at lines 133--133
+warning: final_2_fundamentacao:134: Underfull \hbox (badness 4454) in paragraph at lines 134--134
+warning: final_2_fundamentacao:135: Underfull \hbox (badness 2197) in paragraph at lines 135--135
+warning: final_2_fundamentacao:136: Underfull \hbox (badness 10000) in paragraph at lines 135--136
+warning: final_2_fundamentacao:136: Underfull \hbox (badness 3838) in paragraph at lines 136--136
+warning: final_2_fundamentacao:137: Underfull \hbox (badness 2818) in paragraph at lines 137--137
+warning: final_3_metodos:29: Underfull \hbox (badness 10000) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 10000) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 1552) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 1210) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 2653) in paragraph at lines 28--29
+warning: final_3_metodos:37: Underfull \hbox (badness 10000) in paragraph at lines 36--37
+warning: final_3_metodos:37: Underfull \hbox (badness 10000) in paragraph at lines 36--37
+warning: final_3_metodos:37: Underfull \hbox (badness 3471) in paragraph at lines 36--37
+warning: final_3_metodos:58: Underfull \hbox (badness 1199) in paragraph at lines 57--58
+warning: final_3_metodos:60: Underfull \hbox (badness 1005) in paragraph at lines 59--60
+warning: fig/fluxo_analise:21: 
+Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.00005pt
+warning: fig/fluxo_anomalias:13: 
+Requested font "[lmmono8-regular]:" at 8.21255pt
+warning: final_3_metodos:98: Underfull \hbox (badness 2096) in paragraph at lines 97--98
+warning: final_3_metodos:98: Underfull \hbox (badness 1286) in paragraph at lines 97--98
+warning: final_3_metodos:100: Underfull \hbox (badness 10000) in paragraph at lines 99--100
+warning: final_3_metodos:100: Underfull \hbox (badness 10000) in paragraph at lines 99--100
+warning: final_3_metodos:100: Underfull \hbox (badness 1852) in paragraph at lines 99--100
+warning: final_3_metodos:100: Underfull \hbox (badness 1043) in paragraph at lines 99--100
+warning: final_3_metodos:108: Underfull \hbox (badness 1077) in paragraph at lines 106--108
+warning: final_3_metodos:130: Underfull \hbox (badness 3068) in paragraph at lines 129--130
+warning: final_3a_implementacao:8: Underfull \hbox (badness 10000) in paragraph at lines 7--8
+warning: final_3a_implementacao:8: Underfull \hbox (badness 10000) in paragraph at lines 7--8
+warning: final_3a_implementacao:24: 
+Requested font "[lmmono8-regular]:" at 8.0pt
+warning: final_3a_implementacao:26: Underfull \hbox (badness 1546) in paragraph at lines 25--26
+warning: final_3a_implementacao:28: Underfull \hbox (badness 10000) in paragraph at lines 28--28
+warning: final_3a_implementacao:31: Underfull \hbox (badness 10000) in paragraph at lines 31--31
+warning: final_3a_implementacao:45: Underfull \hbox (badness 10000) in paragraph at lines 44--45
+warning: final_3a_implementacao:45: Underfull \hbox (badness 10000) in paragraph at lines 44--45
+warning: final_3a_implementacao:45: Underfull \hbox (badness 1472) in paragraph at lines 44--45
+warning: final_3a_implementacao:59: Underfull \hbox (badness 1917) in paragraph at lines 58--59
+warning: final_3a_implementacao:59: Underfull \hbox (badness 3838) in paragraph at lines 58--59
+warning: fig/classes_localizacao:6: 
+Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.21255pt
+warning: final_3a_implementacao:77: Underfull \hbox (badness 10000) in paragraph at lines 76--77
+warning: final_3a_implementacao:77: Underfull \hbox (badness 10000) in paragraph at lines 76--77
+warning: final_3a_implementacao:77: Underfull \hbox (badness 8113) in paragraph at lines 76--77
+warning: final_3a_implementacao:77: Underfull \hbox (badness 2293) in paragraph at lines 76--77
+warning: final_3a_implementacao:110: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: final_3a_implementacao:128: Underfull \hbox (badness 5681) in paragraph at lines 127--128
+warning: final_3a_implementacao:128: Underfull \hbox (badness 1264) in paragraph at lines 127--128
+warning: final_3a_implementacao:132: Underfull \hbox (badness 1953) in paragraph at lines 131--132
+warning: final_3a_implementacao:136: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: final_3a_implementacao:152: Underfull \hbox (badness 10000) in paragraph at lines 151--152
+warning: final_3b_plataforma:1: Underfull \hbox (badness 1048) in paragraph at lines 153--1
+warning: final_3b_plataforma:49: Underfull \hbox (badness 1622) in paragraph at lines 48--49
+warning: final_4_resultados:12: Underfull \hbox (badness 4328) in paragraph at lines 11--12
+warning: final_4_resultados:12: Underfull \hbox (badness 10000) in paragraph at lines 11--12
+warning: final_4_resultados:34: Underfull \hbox (badness 1038) in paragraph at lines 33--34
+warning: final_4_resultados:34: Underfull \hbox (badness 2205) in paragraph at lines 33--34
+warning: final_4a_usuarios:18: Underfull \hbox (badness 1348) in paragraph at lines 17--18
+warning: final_4a_usuarios:18: Underfull \hbox (badness 1596) in paragraph at lines 17--18
+warning: avaliacao_usuarios/resultados/tabela_temas:9: Underfull \hbox (badness 2735) in paragraph at lines 9--9
+warning: avaliacao_usuarios/resultados/tabela_temas:10: Underfull \hbox (badness 3417) in paragraph at lines 10--10
+warning: avaliacao_usuarios/resultados/tabela_temas:11: Underfull \hbox (badness 2689) in paragraph at lines 11--11
+warning: avaliacao_usuarios/resultados/tabela_temas:12: Underfull \hbox (badness 10000) in paragraph at lines 11--12
+warning: avaliacao_usuarios/resultados/tabela_temas:12: Underfull \hbox (badness 6708) in paragraph at lines 12--12
+warning: avaliacao_usuarios/resultados/tabela_temas:14: Underfull \hbox (badness 3219) in paragraph at lines 13--14
+warning: final_5_discussao:22: Underfull \hbox (badness 10000) in paragraph at lines 22--22
+warning: final_5_discussao:36: Underfull \hbox (badness 1546) in paragraph at lines 35--36
+warning: final_5_discussao:39: Underfull \hbox (badness 1014) in paragraph at lines 39--39
+warning: final_5_discussao:46: Underfull \hbox (badness 1325) in paragraph at lines 45--46
+warning: final_7_uso_ia:6: Underfull \hbox (badness 10000) in paragraph at lines 5--6
+warning: final_7_uso_ia:6: Underfull \hbox (badness 10000) in paragraph at lines 5--6
+warning: final_7_uso_ia:6: Underfull \hbox (badness 5331) in paragraph at lines 5--6
+warning: referencias_normalizadas:46: Underfull \vbox (badness 1983) has occurred while \output is active
+warning: referencias_normalizadas:138: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: referencias_normalizadas:224: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: referencias_normalizadas:300: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: referencias_normalizadas:391: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: merriweather.sty:224: 
+Requested font "[Merriweather-Regular.otf]/OT" at 9.99997pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Regular.otf]/OT" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-BoldItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.0pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Regular.otf]/OT" at 9.99997pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Regular.otf]/OT" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Regular.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Bold.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Italic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-BoldItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:321: Requested font "[Merriweather-Light.otf]/OT" at 9.99997pt
+warning: merriweather.sty:321: Requested font "[Merriweather-Light.otf]/OT" at 10.00003pt
+warning: merriweather.sty:321: Requested font "[Merriweather-Light.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:321: Requested font "[Merriweather-LightItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-Light.otf]/OT" at 9.99997pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-Light.otf]/OT" at 10.00003pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-Light.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-LightItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:336: Requested font "[Merriweather-Black.otf]/OT" at 9.99997pt
+warning: merriweather.sty:336: Requested font "[Merriweather-Black.otf]/OT" at 10.00003pt
+warning: merriweather.sty:336: Requested font "[Merriweather-Black.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:336: Requested font "[Merriweather-BlackItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBold.otf]/OT" at 9.99997pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBold.otf]/OT" at 10.00003pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBold.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBoldItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: CC-EC_TF-TC.cls:79: 
+Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: hyperref.sty:4873: Requested font "pzdr" at 0.00002pt
+warning: hyperref.sty:4873:  -> pzdr
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[lmmonolt10-bold]:" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmmi8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmmi8
+warning: Relatorio_Final.tex:39: Requested font "cmmi6" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmmi6
+warning: Relatorio_Final.tex:39: Requested font "cmsy8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmsy8
+warning: Relatorio_Final.tex:39: Requested font "cmsy6" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmsy6
+warning: Relatorio_Final.tex:39: Requested font "cmex8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmex8
+warning: Relatorio_Final.tex:39: Requested font "cmex7" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmex7
+warning: Relatorio_Final.tex:39: Requested font "cmex7" at 5.0pt
+warning: Relatorio_Final.tex:39:  -> cmex7
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmr8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmr8
+warning: Relatorio_Final.tex:39: 
+Requested font "cmr6" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmr6
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 7.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmmi9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmmi9
+warning: Relatorio_Final.tex:39: Requested font "cmsy9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmsy9
+warning: Relatorio_Final.tex:39: Requested font "cmex9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmex9
+warning: Relatorio_Final.tex:39: Requested font "cmex7" at 7.0pt
+warning: Relatorio_Final.tex:39:  -> cmex7
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 7.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmr9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmr9
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 7.5pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 16.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 13.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.83287pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.09996pt
+warning: Relatorio_Final.tex:44: Requested font "cmmi12" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmmi12
+warning: Relatorio_Final.tex:44: Requested font "cmmi10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmmi10
+warning: Relatorio_Final.tex:44: Requested font "cmsy10" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmsy10
+warning: Relatorio_Final.tex:44: Requested font "cmsy10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmsy10
+warning: Relatorio_Final.tex:44: Requested font "cmex10" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmex10
+warning: Relatorio_Final.tex:44: Requested font "cmex10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmex10
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 13.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.83287pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.09996pt
+warning: Relatorio_Final.tex:44: Requested font "cmr12" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmr12
+warning: Relatorio_Final.tex:44: Requested font "cmr10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmr10
+warning: final_0_resumo:2: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 11.0pt
+warning: final_0_resumo:5: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: final_1_introducao:25: Underfull \hbox (badness 2828) in paragraph at lines 24--25
+warning: final_1_introducao:27: Underfull \hbox (badness 1688) in paragraph at lines 26--27
+warning: final_1_introducao:28: Underfull \hbox (badness 1360) in paragraph at lines 27--28
+warning: final_2_fundamentacao:1: Underfull \hbox (badness 1127) in paragraph at lines 39--1
+warning: final_2_fundamentacao:4: Underfull \hbox (badness 1205) in paragraph at lines 4--4
+warning: final_2_fundamentacao:12: Underfull \hbox (badness 10000) in paragraph at lines 12--12
+warning: final_2_fundamentacao:18: Requested font "[lmmono9-regular]:" at 9.0pt
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 10000) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 10000) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 1178) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 3449) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 1028) in paragraph at lines 18--19
+warning: final_2_fundamentacao:21: Underfull \hbox (badness 1009) in paragraph at lines 20--21
+warning: final_2_fundamentacao:32: Requested font "[Merriweather-BoldItalic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: final_2_fundamentacao:52: Underfull \hbox (badness 1237) in paragraph at lines 51--52
+warning: final_2_fundamentacao:63: Underfull \hbox (badness 1472) in paragraph at lines 62--63
+warning: final_2_fundamentacao:105: Underfull \hbox (badness 1708) in paragraph at lines 104--105
+warning: fig/conceitos:2: 
+Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.21255pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.84349pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.74875pt
+warning: fig/conceitos:67: Requested font "cmex7" at 6.84349pt
+warning: fig/conceitos:67:  -> cmex7
+warning: fig/conceitos:67: Requested font "cmex7" at 5.74875pt
+warning: fig/conceitos:67:  -> cmex7
+warning: fig/conceitos:67: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.21255pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.84349pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.74875pt
+warning: final_2_fundamentacao:116: Underfull \hbox (badness 1596) in paragraph at lines 115--116
+warning: final_2_fundamentacao:133: Underfull \hbox (badness 10000) in paragraph at lines 133--133
+warning: final_2_fundamentacao:134: Underfull \hbox (badness 4454) in paragraph at lines 134--134
+warning: final_2_fundamentacao:135: Underfull \hbox (badness 2197) in paragraph at lines 135--135
+warning: final_2_fundamentacao:136: Underfull \hbox (badness 10000) in paragraph at lines 135--136
+warning: final_2_fundamentacao:136: Underfull \hbox (badness 3838) in paragraph at lines 136--136
+warning: final_2_fundamentacao:137: Underfull \hbox (badness 2818) in paragraph at lines 137--137
+warning: final_3_metodos:29: Underfull \hbox (badness 10000) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 10000) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 1552) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 1210) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 2653) in paragraph at lines 28--29
+warning: final_3_metodos:35: Underfull \hbox (badness 2245) in paragraph at lines 34--35
+warning: final_3_metodos:37: Underfull \hbox (badness 5622) in paragraph at lines 36--37
+warning: final_3_metodos:37: Underfull \hbox (badness 10000) in paragraph at lines 36--37
+warning: final_3_metodos:37: Underfull \hbox (badness 3471) in paragraph at lines 36--37
+warning: final_3_metodos:58: Underfull \hbox (badness 1199) in paragraph at lines 57--58
+warning: final_3_metodos:60: Underfull \hbox (badness 1005) in paragraph at lines 59--60
+warning: fig/fluxo_analise:21: 
+Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.00005pt
+warning: final_3_metodos:76: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: fig/fluxo_anomalias:13: 
+Requested font "[lmmono8-regular]:" at 8.21255pt
+warning: final_3_metodos:98: Underfull \hbox (badness 2096) in paragraph at lines 97--98
+warning: final_3_metodos:98: Underfull \hbox (badness 1286) in paragraph at lines 97--98
+warning: final_3_metodos:100: Underfull \hbox (badness 10000) in paragraph at lines 99--100
+warning: final_3_metodos:100: Underfull \hbox (badness 10000) in paragraph at lines 99--100
+warning: final_3_metodos:100: Underfull \hbox (badness 1852) in paragraph at lines 99--100
+warning: final_3_metodos:100: Underfull \hbox (badness 1043) in paragraph at lines 99--100
+warning: final_3_metodos:106: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: final_3_metodos:130: Underfull \hbox (badness 3068) in paragraph at lines 129--130
+warning: final_3a_implementacao:8: Underfull \hbox (badness 10000) in paragraph at lines 7--8
+warning: final_3a_implementacao:8: Underfull \hbox (badness 10000) in paragraph at lines 7--8
+warning: final_3a_implementacao:24: 
+Requested font "[lmmono8-regular]:" at 8.0pt
+warning: final_3a_implementacao:26: Underfull \hbox (badness 1546) in paragraph at lines 25--26
+warning: final_3a_implementacao:28: Underfull \hbox (badness 10000) in paragraph at lines 28--28
+warning: final_3a_implementacao:31: Underfull \hbox (badness 10000) in paragraph at lines 31--31
+warning: final_3a_implementacao:45: Underfull \hbox (badness 10000) in paragraph at lines 44--45
+warning: final_3a_implementacao:45: Underfull \hbox (badness 10000) in paragraph at lines 44--45
+warning: final_3a_implementacao:45: Underfull \hbox (badness 1472) in paragraph at lines 44--45
+warning: final_3a_implementacao:59: Underfull \hbox (badness 1917) in paragraph at lines 58--59
+warning: final_3a_implementacao:59: Underfull \hbox (badness 3838) in paragraph at lines 58--59
+warning: fig/classes_localizacao:6: 
+Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.21255pt
+warning: final_3a_implementacao:77: Underfull \hbox (badness 10000) in paragraph at lines 76--77
+warning: final_3a_implementacao:77: Underfull \hbox (badness 10000) in paragraph at lines 76--77
+warning: final_3a_implementacao:77: Underfull \hbox (badness 8113) in paragraph at lines 76--77
+warning: final_3a_implementacao:77: Underfull \hbox (badness 2293) in paragraph at lines 76--77
+warning: final_3a_implementacao:128: Underfull \hbox (badness 5681) in paragraph at lines 127--128
+warning: final_3a_implementacao:128: Underfull \hbox (badness 1264) in paragraph at lines 127--128
+warning: final_3a_implementacao:132: Underfull \hbox (badness 1953) in paragraph at lines 131--132
+warning: final_3a_implementacao:152: Underfull \hbox (badness 10000) in paragraph at lines 151--152
+warning: final_3b_plataforma:1: Underfull \hbox (badness 1048) in paragraph at lines 153--1
+warning: final_3b_plataforma:49: Underfull \hbox (badness 1622) in paragraph at lines 48--49
+warning: final_4_resultados:12: Underfull \hbox (badness 4328) in paragraph at lines 11--12
+warning: final_4_resultados:12: Underfull \hbox (badness 10000) in paragraph at lines 11--12
+warning: final_4_resultados:34: Underfull \hbox (badness 1038) in paragraph at lines 33--34
+warning: final_4_resultados:34: Underfull \hbox (badness 2205) in paragraph at lines 33--34
+warning: final_4a_usuarios:18: Underfull \hbox (badness 1348) in paragraph at lines 17--18
+warning: final_4a_usuarios:18: Underfull \hbox (badness 1596) in paragraph at lines 17--18
+warning: avaliacao_usuarios/resultados/tabela_temas:9: Underfull \hbox (badness 2735) in paragraph at lines 9--9
+warning: avaliacao_usuarios/resultados/tabela_temas:10: Underfull \hbox (badness 3417) in paragraph at lines 10--10
+warning: avaliacao_usuarios/resultados/tabela_temas:11: Underfull \hbox (badness 2689) in paragraph at lines 11--11
+warning: avaliacao_usuarios/resultados/tabela_temas:12: Underfull \hbox (badness 10000) in paragraph at lines 11--12
+warning: avaliacao_usuarios/resultados/tabela_temas:12: Underfull \hbox (badness 6708) in paragraph at lines 12--12
+warning: avaliacao_usuarios/resultados/tabela_temas:14: Underfull \hbox (badness 3219) in paragraph at lines 13--14
+warning: final_5_discussao:22: Underfull \hbox (badness 10000) in paragraph at lines 22--22
+warning: final_5_discussao:36: Underfull \hbox (badness 1546) in paragraph at lines 35--36
+warning: final_5_discussao:39: Underfull \hbox (badness 1014) in paragraph at lines 39--39
+warning: final_5_discussao:46: Underfull \hbox (badness 1325) in paragraph at lines 45--46
+warning: final_7_uso_ia:6: Underfull \hbox (badness 10000) in paragraph at lines 5--6
+warning: final_7_uso_ia:6: Underfull \hbox (badness 10000) in paragraph at lines 5--6
+warning: final_7_uso_ia:6: Underfull \hbox (badness 5331) in paragraph at lines 5--6
+warning: referencias_normalizadas:131: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: referencias_normalizadas:217: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: referencias_normalizadas:299: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: referencias_normalizadas:391: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: merriweather.sty:224: 
+Requested font "[Merriweather-Regular.otf]/OT" at 9.99997pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Regular.otf]/OT" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-BoldItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:224: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.0pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Regular.otf]/OT" at 9.99997pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Regular.otf]/OT" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Regular.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Bold.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-Italic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:298: Requested font "[MerriweatherSans-BoldItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:321: Requested font "[Merriweather-Light.otf]/OT" at 9.99997pt
+warning: merriweather.sty:321: Requested font "[Merriweather-Light.otf]/OT" at 10.00003pt
+warning: merriweather.sty:321: Requested font "[Merriweather-Light.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:321: Requested font "[Merriweather-LightItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-Light.otf]/OT" at 9.99997pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-Light.otf]/OT" at 10.00003pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-Light.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:329: Requested font "[MerriweatherSans-LightItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:336: Requested font "[Merriweather-Black.otf]/OT" at 9.99997pt
+warning: merriweather.sty:336: Requested font "[Merriweather-Black.otf]/OT" at 10.00003pt
+warning: merriweather.sty:336: Requested font "[Merriweather-Black.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:336: Requested font "[Merriweather-BlackItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBold.otf]/OT" at 9.99997pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBold.otf]/OT" at 10.00003pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBold.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: merriweather.sty:344: Requested font "[MerriweatherSans-ExtraBoldItalic.otf]/OT:script=latn;language=dflt;" at 10.00003pt
+warning: CC-EC_TF-TC.cls:79: 
+Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: hyperref.sty:4873: Requested font "pzdr" at 0.00002pt
+warning: hyperref.sty:4873:  -> pzdr
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[lmmonolt10-bold]:" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmmi8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmmi8
+warning: Relatorio_Final.tex:39: Requested font "cmmi6" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmmi6
+warning: Relatorio_Final.tex:39: Requested font "cmsy8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmsy8
+warning: Relatorio_Final.tex:39: Requested font "cmsy6" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmsy6
+warning: Relatorio_Final.tex:39: Requested font "cmex8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmex8
+warning: Relatorio_Final.tex:39: Requested font "cmex7" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmex7
+warning: Relatorio_Final.tex:39: Requested font "cmex7" at 5.0pt
+warning: Relatorio_Final.tex:39:  -> cmex7
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmr8" at 8.0pt
+warning: Relatorio_Final.tex:39:  -> cmr8
+warning: Relatorio_Final.tex:39: 
+Requested font "cmr6" at 6.0pt
+warning: Relatorio_Final.tex:39:  -> cmr6
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 7.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmmi9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmmi9
+warning: Relatorio_Final.tex:39: Requested font "cmsy9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmsy9
+warning: Relatorio_Final.tex:39: Requested font "cmex9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmex9
+warning: Relatorio_Final.tex:39: Requested font "cmex7" at 7.0pt
+warning: Relatorio_Final.tex:39:  -> cmex7
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 7.0pt
+warning: Relatorio_Final.tex:39: Requested font "cmr9" at 9.0pt
+warning: Relatorio_Final.tex:39:  -> cmr9
+warning: Relatorio_Final.tex:39: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 7.5pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 16.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 13.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.83287pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.09996pt
+warning: Relatorio_Final.tex:44: Requested font "cmmi12" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmmi12
+warning: Relatorio_Final.tex:44: Requested font "cmmi10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmmi10
+warning: Relatorio_Final.tex:44: Requested font "cmsy10" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmsy10
+warning: Relatorio_Final.tex:44: Requested font "cmsy10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmsy10
+warning: Relatorio_Final.tex:44: Requested font "cmex10" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmex10
+warning: Relatorio_Final.tex:44: Requested font "cmex10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmex10
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 13.0pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 10.83287pt
+warning: Relatorio_Final.tex:44: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.09996pt
+warning: Relatorio_Final.tex:44: Requested font "cmr12" at 12.0pt
+warning: Relatorio_Final.tex:44:  -> cmr12
+warning: Relatorio_Final.tex:44: Requested font "cmr10" at 10.95pt
+warning: Relatorio_Final.tex:44:  -> cmr10
+warning: final_0_resumo:2: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 11.0pt
+warning: final_0_resumo:5: Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: final_1_introducao:25: Underfull \hbox (badness 2828) in paragraph at lines 24--25
+warning: final_1_introducao:27: Underfull \hbox (badness 1688) in paragraph at lines 26--27
+warning: final_1_introducao:28: Underfull \hbox (badness 1360) in paragraph at lines 27--28
+warning: final_2_fundamentacao:1: Underfull \hbox (badness 1127) in paragraph at lines 39--1
+warning: final_2_fundamentacao:4: Underfull \hbox (badness 1205) in paragraph at lines 4--4
+warning: final_2_fundamentacao:12: Underfull \hbox (badness 10000) in paragraph at lines 12--12
+warning: final_2_fundamentacao:18: Requested font "[lmmono9-regular]:" at 9.0pt
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 10000) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 10000) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 1178) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 3449) in paragraph at lines 18--19
+warning: final_2_fundamentacao:19: Underfull \hbox (badness 1028) in paragraph at lines 18--19
+warning: final_2_fundamentacao:21: Underfull \hbox (badness 1009) in paragraph at lines 20--21
+warning: final_2_fundamentacao:32: Requested font "[Merriweather-BoldItalic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 9.0pt
+warning: final_2_fundamentacao:52: Underfull \hbox (badness 1237) in paragraph at lines 51--52
+warning: final_2_fundamentacao:63: Underfull \hbox (badness 1472) in paragraph at lines 62--63
+warning: final_2_fundamentacao:105: Underfull \hbox (badness 1708) in paragraph at lines 104--105
+warning: fig/conceitos:2: 
+Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.21255pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.84349pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.74875pt
+warning: fig/conceitos:67: Requested font "cmex7" at 6.84349pt
+warning: fig/conceitos:67:  -> cmex7
+warning: fig/conceitos:67: Requested font "cmex7" at 5.74875pt
+warning: fig/conceitos:67:  -> cmex7
+warning: fig/conceitos:67: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.21255pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.84349pt
+warning: fig/conceitos:67: Requested font "[Merriweather-Italic.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 5.74875pt
+warning: final_2_fundamentacao:116: Underfull \hbox (badness 1596) in paragraph at lines 115--116
+warning: final_2_fundamentacao:133: Underfull \hbox (badness 10000) in paragraph at lines 133--133
+warning: final_2_fundamentacao:134: Underfull \hbox (badness 4454) in paragraph at lines 134--134
+warning: final_2_fundamentacao:135: Underfull \hbox (badness 2197) in paragraph at lines 135--135
+warning: final_2_fundamentacao:136: Underfull \hbox (badness 10000) in paragraph at lines 135--136
+warning: final_2_fundamentacao:136: Underfull \hbox (badness 3838) in paragraph at lines 136--136
+warning: final_2_fundamentacao:137: Underfull \hbox (badness 2818) in paragraph at lines 137--137
+warning: final_3_metodos:29: Underfull \hbox (badness 10000) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 10000) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 1552) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 1210) in paragraph at lines 28--29
+warning: final_3_metodos:29: Underfull \hbox (badness 2653) in paragraph at lines 28--29
+warning: final_3_metodos:35: Underfull \hbox (badness 2245) in paragraph at lines 34--35
+warning: final_3_metodos:37: Underfull \hbox (badness 5622) in paragraph at lines 36--37
+warning: final_3_metodos:37: Underfull \hbox (badness 10000) in paragraph at lines 36--37
+warning: final_3_metodos:37: Underfull \hbox (badness 3471) in paragraph at lines 36--37
+warning: final_3_metodos:58: Underfull \hbox (badness 1199) in paragraph at lines 57--58
+warning: final_3_metodos:60: Underfull \hbox (badness 1005) in paragraph at lines 59--60
+warning: fig/fluxo_analise:21: 
+Requested font "[Merriweather-Regular.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 6.00005pt
+warning: final_3_metodos:76: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: fig/fluxo_anomalias:13: 
+Requested font "[lmmono8-regular]:" at 8.21255pt
+warning: final_3_metodos:98: Underfull \hbox (badness 2096) in paragraph at lines 97--98
+warning: final_3_metodos:98: Underfull \hbox (badness 1286) in paragraph at lines 97--98
+warning: final_3_metodos:100: Underfull \hbox (badness 10000) in paragraph at lines 99--100
+warning: final_3_metodos:100: Underfull \hbox (badness 10000) in paragraph at lines 99--100
+warning: final_3_metodos:100: Underfull \hbox (badness 1852) in paragraph at lines 99--100
+warning: final_3_metodos:100: Underfull \hbox (badness 1043) in paragraph at lines 99--100
+warning: final_3_metodos:106: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: final_3_metodos:130: Underfull \hbox (badness 3068) in paragraph at lines 129--130
+warning: final_3a_implementacao:8: Underfull \hbox (badness 10000) in paragraph at lines 7--8
+warning: final_3a_implementacao:8: Underfull \hbox (badness 10000) in paragraph at lines 7--8
+warning: final_3a_implementacao:24: 
+Requested font "[lmmono8-regular]:" at 8.0pt
+warning: final_3a_implementacao:26: Underfull \hbox (badness 1546) in paragraph at lines 25--26
+warning: final_3a_implementacao:28: Underfull \hbox (badness 10000) in paragraph at lines 28--28
+warning: final_3a_implementacao:31: Underfull \hbox (badness 10000) in paragraph at lines 31--31
+warning: final_3a_implementacao:45: Underfull \hbox (badness 10000) in paragraph at lines 44--45
+warning: final_3a_implementacao:45: Underfull \hbox (badness 10000) in paragraph at lines 44--45
+warning: final_3a_implementacao:45: Underfull \hbox (badness 1472) in paragraph at lines 44--45
+warning: final_3a_implementacao:59: Underfull \hbox (badness 1917) in paragraph at lines 58--59
+warning: final_3a_implementacao:59: Underfull \hbox (badness 3838) in paragraph at lines 58--59
+warning: fig/classes_localizacao:6: 
+Requested font "[Merriweather-Bold.otf]/OT:script=latn;language=dflt;+pnum;+onum;mapping=tex-text;" at 8.21255pt
+warning: final_3a_implementacao:77: Underfull \hbox (badness 10000) in paragraph at lines 76--77
+warning: final_3a_implementacao:77: Underfull \hbox (badness 10000) in paragraph at lines 76--77
+warning: final_3a_implementacao:77: Underfull \hbox (badness 8113) in paragraph at lines 76--77
+warning: final_3a_implementacao:77: Underfull \hbox (badness 2293) in paragraph at lines 76--77
+warning: final_3a_implementacao:128: Underfull \hbox (badness 5681) in paragraph at lines 127--128
+warning: final_3a_implementacao:128: Underfull \hbox (badness 1264) in paragraph at lines 127--128
+warning: final_3a_implementacao:132: Underfull \hbox (badness 1953) in paragraph at lines 131--132
+warning: final_3a_implementacao:152: Underfull \hbox (badness 10000) in paragraph at lines 151--152
+warning: final_3b_plataforma:1: Underfull \hbox (badness 1048) in paragraph at lines 153--1
+warning: final_3b_plataforma:49: Underfull \hbox (badness 1622) in paragraph at lines 48--49
+warning: final_4_resultados:12: Underfull \hbox (badness 4328) in paragraph at lines 11--12
+warning: final_4_resultados:12: Underfull \hbox (badness 10000) in paragraph at lines 11--12
+warning: final_4_resultados:34: Underfull \hbox (badness 1038) in paragraph at lines 33--34
+warning: final_4_resultados:34: Underfull \hbox (badness 2205) in paragraph at lines 33--34
+warning: final_4a_usuarios:18: Underfull \hbox (badness 1348) in paragraph at lines 17--18
+warning: final_4a_usuarios:18: Underfull \hbox (badness 1596) in paragraph at lines 17--18
+warning: avaliacao_usuarios/resultados/tabela_temas:9: Underfull \hbox (badness 2735) in paragraph at lines 9--9
+warning: avaliacao_usuarios/resultados/tabela_temas:10: Underfull \hbox (badness 3417) in paragraph at lines 10--10
+warning: avaliacao_usuarios/resultados/tabela_temas:11: Underfull \hbox (badness 2689) in paragraph at lines 11--11
+warning: avaliacao_usuarios/resultados/tabela_temas:12: Underfull \hbox (badness 10000) in paragraph at lines 11--12
+warning: avaliacao_usuarios/resultados/tabela_temas:12: Underfull \hbox (badness 6708) in paragraph at lines 12--12
+warning: avaliacao_usuarios/resultados/tabela_temas:14: Underfull \hbox (badness 3219) in paragraph at lines 13--14
+warning: final_5_discussao:22: Underfull \hbox (badness 10000) in paragraph at lines 22--22
+warning: final_5_discussao:36: Underfull \hbox (badness 1546) in paragraph at lines 35--36
+warning: final_5_discussao:39: Underfull \hbox (badness 1014) in paragraph at lines 39--39
+warning: final_5_discussao:46: Underfull \hbox (badness 1325) in paragraph at lines 45--46
+warning: final_7_uso_ia:6: Underfull \hbox (badness 10000) in paragraph at lines 5--6
+warning: final_7_uso_ia:6: Underfull \hbox (badness 10000) in paragraph at lines 5--6
+warning: final_7_uso_ia:6: Underfull \hbox (badness 5331) in paragraph at lines 5--6
+warning: referencias_normalizadas:131: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: referencias_normalizadas:217: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: referencias_normalizadas:299: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: referencias_normalizadas:391: Underfull \vbox (badness 10000) has occurred while \output is active
+warning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.

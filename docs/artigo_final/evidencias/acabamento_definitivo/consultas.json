@@ -1,0 +1,303 @@
+{
+  "receipts": [
+    {
+      "key": "USGS_NDMI",
+      "url": "https://www.usgs.gov/landsat-missions/normalized-difference-moisture-index",
+      "error": "HTTPSConnectionPool(host='www.usgs.gov', port=443): Read timed out. (read timeout=25)"
+    },
+    {
+      "key": "NOMINATIM_POLICY",
+      "url": "https://operations.osmfoundation.org/policies/nominatim/",
+      "http": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "96f1c62c2b6d886d2c525cb60b5d2fbc24532d25ef477bc0aaf31ce786f9ad74",
+      "dates": []
+    },
+    {
+      "key": "SENTINELHUB_NDMI",
+      "url": "https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-2/ndmi/",
+      "http": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "5f80a2fb68ae700c68433620eb5354fae7407c1e12d0c2e3b667ef6c626b0da9",
+      "dates": []
+    },
+    {
+      "key": "NIST_OUTLIERS",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h.htm",
+      "http": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "c058a58ba3a72f05c0662d8fc75d47ebed50ca0430cc2b71ac61612b479ec888",
+      "dates": []
+    },
+    {
+      "key": "NASA_POWER_METHOD",
+      "url": "https://power.larc.nasa.gov/docs/methodology/",
+      "http": 200,
+      "content_type": "text/html",
+      "sha256": "362dfb5cc59fb23b6a4f55e4a77326937132c67a33f00b972e6fe3a1567113e3",
+      "dates": []
+    },
+    {
+      "key": "NASA_POWER_PARAMETERS",
+      "url": "https://power.larc.nasa.gov/api/system/manager/parameters?community=AG&temporal=DAILY",
+      "http": 200,
+      "content_type": "application/json",
+      "sha256": "f4928676bfd19982eea63dcbc93c5652dac333dc450ea51c0372310606c28bab",
+      "dates": []
+    },
+    {
+      "key": "NIST_LOCATION",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+      "http": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "8de1de6a94e162d69299bbf9503825c68fd5e814d36fd3d6bb415545b85b2ba3",
+      "dates": []
+    },
+    {
+      "key": "GITHUB_SDD",
+      "url": "https://github.com/github/spec-kit/blob/main/spec-driven.md",
+      "http": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "7de7b1ffc3f59b277c7d51d29e523e1026e3452fa79186d92f096d820aca2b05",
+      "dates": []
+    },
+    {
+      "key": "EOSDA_GUIDE",
+      "url": "https://eos.com/user-guide/",
+      "http": 403,
+      "content_type": "text/html; charset=iso-8859-1",
+      "sha256": "ab768623070128ccef048c88def86155dbe776c3d8db423cc8fa89432673d8a8",
+      "dates": []
+    },
+    {
+      "key": "ONESOIL_PLATFORM_DETAIL",
+      "url": "https://onesoil.ai/en/platform",
+      "http": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "b8f3f9e0c66e4f1a798fd5f3de67f418e4172d755efb36130f8a37d0fc98eea7",
+      "dates": []
+    },
+    {
+      "key": "github-sdd-history",
+      "url": "https://api.github.com/repos/github/spec-kit/commits?path=spec-driven.md&per_page=1",
+      "http": 200,
+      "content_type": "application/json; charset=utf-8",
+      "sha256": "4de700d54de2ba21ef8de1d7edbe3aa3e879f221ddabf41f1cbed985776a5d6a",
+      "latest_source_change": {
+        "sha": "3cfc81ff316b3ccdca2aa80500b300787d20212e",
+        "url": "https://github.com/github/spec-kit/commit/3cfc81ff316b3ccdca2aa80500b300787d20212e",
+        "date": "2026-06-23T13:27:26Z"
+      }
+    },
+    {
+      "key": "nominatim-history",
+      "url": "https://api.github.com/repos/openstreetmap/owg-website/commits?path=policies/nominatim.md&per_page=1",
+      "http": 200,
+      "content_type": "application/json; charset=utf-8",
+      "sha256": "e541c72ea7866a53b064f5c827ab9f0c4191e354ce553c64ed3f7b0b050b8732",
+      "latest_source_change": {
+        "sha": "fd6937012a5b2d8f4c0255148342b97191c840e7",
+        "url": "https://github.com/openstreetmap/owg-website/commit/fd6937012a5b2d8f4c0255148342b97191c840e7",
+        "date": "2026-05-11T09:27:36Z"
+      }
+    },
+    {
+      "key": "sentinelhub-history",
+      "url": "https://api.github.com/repos/sentinel-hub/custom-scripts/commits?path=sentinel-2/ndmi/README.adoc&per_page=1",
+      "http": 200,
+      "content_type": "application/json; charset=utf-8",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "key": "NIST_HOME",
+      "url": "https://www.itl.nist.gov/div898/handbook/",
+      "http": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "ae9d3c4327c67004059b7520fcb183b64f4deb7b8f42f03db97b31fcc81b8691",
+      "dates": []
+    },
+    {
+      "key": "BJARNASON-crossref",
+      "url": "https://api.crossref.org/works/10.1007/978-3-319-18612-2_3",
+      "http": 200,
+      "content_type": "application/json",
+      "sha256": "c4abe7c437a9236b9253b45484aac760b8bd7e5d27d56527603228f4e456fed9",
+      "metadata": {
+        "title": [
+          "An Industrial Case Study on Test Cases as Requirements"
+        ],
+        "container-title": [
+          "Lecture Notes in Business Information Processing",
+          "Agile Processes in Software Engineering and Extreme Programming"
+        ],
+        "publisher": "Springer International Publishing",
+        "publisher-location": "Cham",
+        "volume": null,
+        "page": "27-39",
+        "article-number": null,
+        "editor": null,
+        "ISBN": [
+          "9783319186115",
+          "9783319186122"
+        ],
+        "event": null,
+        "published-print": {
+          "date-parts": [
+            [
+              2015
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "key": "VAITHILINGAM-crossref",
+      "url": "https://api.crossref.org/works/10.1145/3491101.3519665",
+      "http": 200,
+      "content_type": "application/json",
+      "sha256": "775e17c98147bd96fe13e6720f2dd7f320487d27c57f95c220f99245b3034ace",
+      "metadata": {
+        "title": [
+          "Expectation vs. Experience: Evaluating the Usability of Code Generation Tools Powered by Large Language Models"
+        ],
+        "container-title": [
+          "CHI Conference on Human Factors in Computing Systems Extended Abstracts"
+        ],
+        "publisher": "ACM",
+        "publisher-location": "New York, NY, USA",
+        "volume": null,
+        "page": "1-7",
+        "article-number": null,
+        "editor": null,
+        "ISBN": null,
+        "event": {
+          "name": "CHI '22: CHI Conference on Human Factors in Computing Systems",
+          "location": "New Orleans LA USA",
+          "acronym": "CHI '22",
+          "sponsor": [
+            "SIGCHI ACM Special Interest Group on Computer-Human Interaction"
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2022,
+              4,
+              27
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "key": "GOTEL-crossref",
+      "url": "https://api.crossref.org/works/10.1109/ICRE.1994.292398",
+      "http": 200,
+      "content_type": "application/json",
+      "sha256": "3b3f9091c7d15a49d07769a830dc1c346bb53b985c8d6fc88208df27acffdb50",
+      "metadata": {
+        "title": [
+          "An analysis of the requirements traceability problem"
+        ],
+        "container-title": [
+          "Proceedings of IEEE International Conference on Requirements Engineering"
+        ],
+        "publisher": "IEEE Comput. Soc. Press",
+        "publisher-location": null,
+        "volume": null,
+        "page": "94-101",
+        "article-number": null,
+        "editor": null,
+        "ISBN": null,
+        "event": {
+          "name": "IEEE International Conference on Requirements Engineering",
+          "location": "Colorado Springs, CO, USA",
+          "acronym": "ICRE-94"
+        },
+        "published-print": null
+      }
+    },
+    {
+      "key": "sentinelhub-files",
+      "url": "https://api.github.com/repos/sentinel-hub/custom-scripts/contents/sentinel-2/ndmi",
+      "http": 200,
+      "sha256": "f0459cd8ab14dc1b69e282980286283c295f9d024cc8aaae9915c1345b3b61a2"
+    },
+    {
+      "key": "github-sdd-current",
+      "url": "https://raw.githubusercontent.com/github/spec-kit/main/spec-driven.md",
+      "http": 200,
+      "sha256": "1517eba9868e7066541ffa484009d5eb9c7d8d04bf740dbfd86e5e88c396f0c6"
+    },
+    {
+      "key": "github-sdd-dated",
+      "url": "https://raw.githubusercontent.com/github/spec-kit/3cfc81ff316b3ccdca2aa80500b300787d20212e/spec-driven.md",
+      "http": 200,
+      "sha256": "1517eba9868e7066541ffa484009d5eb9c7d8d04bf740dbfd86e5e88c396f0c6"
+    },
+    {
+      "key": "nominatim-current",
+      "url": "https://raw.githubusercontent.com/openstreetmap/owg-website/master/policies/nominatim.md",
+      "http": 200,
+      "sha256": "f802152c4c878124f51d6660378d2655438fb91d3e4de3cca5a427ec33ae8576"
+    },
+    {
+      "key": "nominatim-dated",
+      "url": "https://raw.githubusercontent.com/openstreetmap/owg-website/fd6937012a5b2d8f4c0255148342b97191c840e7/policies/nominatim.md",
+      "http": 200,
+      "sha256": "f802152c4c878124f51d6660378d2655438fb91d3e4de3cca5a427ec33ae8576"
+    },
+    {
+      "key": "sentinelhub-history-md",
+      "url": "https://api.github.com/repos/sentinel-hub/custom-scripts/commits?path=sentinel-2/ndmi/README.md&per_page=1",
+      "http": 200,
+      "sha256": "f50577e3a412c14a1498bd5697c9062e3551f7978ee1f479bcaca2a6a2df0ec6",
+      "latest_source_change": {
+        "sha": "eec561588a5c5dcee3b7f25da6b2e39355f5c4eb",
+        "url": "https://github.com/sentinel-hub/custom-scripts/commit/eec561588a5c5dcee3b7f25da6b2e39355f5c4eb",
+        "date": "2026-06-04T11:34:44Z"
+      }
+    },
+    {
+      "key": "NIST_INDEX",
+      "url": "https://www.itl.nist.gov/div898/handbook/index2.htm",
+      "http": 200,
+      "sha256": "605bce2a981813c54e55a874932f07d76e7742146c18376e59e30ed0b33f2903",
+      "dates": [
+        "To reference the Handbook please use a citation of the form:",
+        "A <a href=\"changes.htm#Apr2012\">significant update</a> was made to ",
+        "the Handbook April, 2012",
+        "      Date created: 06/01/2003<br>",
+        "      Last updated: 04/27/2022</font><br>"
+      ]
+    },
+    {
+      "key": "NIST_TOOLAIDS",
+      "url": "https://www.itl.nist.gov/div898/handbook/toolaids.htm",
+      "http": 200,
+      "sha256": "bc476ec803208b4df4b03c8439ac4dafdbd6f56bbda251bf6bfaea062a5f4d33",
+      "dates": [
+        "    initial publication of CD on 6/2003)</a>"
+      ]
+    },
+    {
+      "key": "sentinelhub-current",
+      "url": "https://raw.githubusercontent.com/sentinel-hub/custom-scripts/master/sentinel-2/ndmi/README.md",
+      "http": 200,
+      "sha256": "10f2fe1018ee29cdf72d569104c90921af2060f303f03f9a9e624a11ae233373"
+    },
+    {
+      "key": "sentinelhub-dated",
+      "url": "https://raw.githubusercontent.com/sentinel-hub/custom-scripts/eec561588a5c5dcee3b7f25da6b2e39355f5c4eb/sentinel-2/ndmi/README.md",
+      "http": 200,
+      "sha256": "10f2fe1018ee29cdf72d569104c90921af2060f303f03f9a9e624a11ae233373"
+    }
+  ],
+  "limitations": {
+    "USGS_NDMI": "Timeout",
+    "EOSDA_GUIDE": "HTTP 403",
+    "NIST": "Datas da página inicial não atribuídas às seções individuais.",
+    "NASA_POWER": "Cobertura temporal dos produtos não é data editorial.",
+    "ONESOIL": "Sem data editorial identificada."
+  }
+}

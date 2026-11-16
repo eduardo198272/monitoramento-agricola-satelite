@@ -18,16 +18,14 @@
     {}{\PackageError{TCC}{Bloco institucional de cabecalho nao localizado}{Conferir a classe antes de ajustar o conteiner.}}}
 \makeatother
 
-\AtBeginDocument{\renewcommand{\harvardand}{e}}
+\input{normalizacao}
 \input{figuras_relatorio}
 \input{avaliacao_usuarios/resultados/indicadores}
-\hypersetup{pdftitle={Sistema de Monitoramento Agrícola por Imagens de Satélite},pdfauthor={Eduardo Steffens Hoppen},pdfsubject={Trabalho de Conclusão de Curso - Ciência da Computação - UPF}}
+\hypersetup{pdftitle={Sistema de Monitoramento Agrícola por Imagens de Satélite},pdfsubject={Trabalho de Conclusão de Curso - Ciência da Computação - UPF}}
 
 \title{Sistema de Monitoramento Agrícola por Imagens de Satélite}
 \titleother{Agricultural Monitoring System Using Satellite Imagery}
-\author[1]{Eduardo Steffens Hoppen}
-\affil[1]{Universidade de Passo Fundo, Instituto de Tecnologia, Curso de Ciência da Computação\\Orientador: Prof. Rafael Rieder}
-\runningauthor{Hoppen}
+\input{autoria}
 \titulores{Monitoramento agrícola por imagens de satélite}
 \papercat{Trabalho de Conclusão de Curso}
 \jyear{2026}
@@ -53,5 +51,5 @@
 \input{final_5_discussao}
 \input{final_6_conclusao}
 \input{final_7_uso_ia}
-\bibliography{referencias}
+\bibliography{referencias_institucionais}
 \end{document}
