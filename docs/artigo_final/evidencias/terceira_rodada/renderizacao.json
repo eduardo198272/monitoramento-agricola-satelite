@@ -1,0 +1,212 @@
+{
+  "pdf_sha256": "f9987ccd0c4ff4144af309c40f80ab79292e2531a31b74ba11cec2c8090c33a2",
+  "renderer": "pdftoppm / Poppler; scale-to1500",
+  "pages_rendered": 32,
+  "all_pages_individually_inspected_by_ai": true,
+  "human_visual_approval": false,
+  "initial_inspection_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "final_changed_pages_reinspected": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    15,
+    16,
+    22,
+    23,
+    24,
+    27,
+    28,
+    29,
+    30
+  ],
+  "final_identical_pages_to_initial_inspection": [
+    6,
+    14,
+    17,
+    18,
+    19,
+    20,
+    21,
+    25,
+    26,
+    31,
+    32
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "sha256": "ff7361e217e02f0eda22c67d2228f33c24ccfd6191548127957902c7ffbff4d1"
+    },
+    {
+      "page": 2,
+      "sha256": "a81ff6f386ad829f77209747091e596612dadfc55a9a59f25a24698b60da7bee"
+    },
+    {
+      "page": 3,
+      "sha256": "799b735057b877429159031492dee2a77c052936ceadc9ae4201b7840374c8f3"
+    },
+    {
+      "page": 4,
+      "sha256": "a00eaf4f4030aa4986a76424c24b95a280c9a21296b3ab702dc73a56ce4967b6"
+    },
+    {
+      "page": 5,
+      "sha256": "157916f89b9b2a56dc8d7d8781b6498260575d9e13c24c6f8f2bc04886fd9ca9"
+    },
+    {
+      "page": 6,
+      "sha256": "8cd8fc80f40133bde577fa3f67b41737d7dd89dc9c4e686898a1dbb3592b3568"
+    },
+    {
+      "page": 7,
+      "sha256": "8bbdc7f536f981f2f3abd8016d48303fbb7e1fde2ed83909f50158482023b543"
+    },
+    {
+      "page": 8,
+      "sha256": "2a3a7e49705607388802816636e6ee0f68219e6655ef45b845576280595c4bf4"
+    },
+    {
+      "page": 9,
+      "sha256": "711576b9ef89aca3eea2a890121217bd883aa77495e69fbacd9a7e24da30a16b"
+    },
+    {
+      "page": 10,
+      "sha256": "ec9e20d0a094af5dc3c512aa75f08db3faae8d202335054a93515df2009992f3"
+    },
+    {
+      "page": 11,
+      "sha256": "35073c6110110d16a44e6882a41957a21ded0df732a8e84be8602177ac553755"
+    },
+    {
+      "page": 12,
+      "sha256": "50ded080b1589a0a14ca3a25f9161121f3895ff1256de8c54b048309962bdd0d"
+    },
+    {
+      "page": 13,
+      "sha256": "fdebf183ce0aeb97a7d1346535286e850874f7fc03979481ec589d360a0f3a7f"
+    },
+    {
+      "page": 14,
+      "sha256": "645ca382b87b2cbba2c29cb66ad4ee7ea5982e1d6e8eb7bb0c8a6c6910c15634"
+    },
+    {
+      "page": 15,
+      "sha256": "2d552953b6e4912f843bbf27e23ecb908ad7969b5e8c14be64aebb77acb9ee6d"
+    },
+    {
+      "page": 16,
+      "sha256": "72b537daaf02324117da878a0b19738df00e8b19b572e91942f9675a6414e0fe"
+    },
+    {
+      "page": 17,
+      "sha256": "03e4aa4e29521db98cc0d415e49eec15be9553052ed3c830a9d6c761dcd54f18"
+    },
+    {
+      "page": 18,
+      "sha256": "891a8c446809d749ada3b14293d0fc926d4b52356a9086430cd868ada6da9068"
+    },
+    {
+      "page": 19,
+      "sha256": "a31538f4029e12949003c14897f639121ca5f54ccef445de97ba73d68c86a0a6"
+    },
+    {
+      "page": 20,
+      "sha256": "f3e6dc23252ba7d597e256183fbbf5421edb78987186823b640a9354434a1f56"
+    },
+    {
+      "page": 21,
+      "sha256": "d576aaf4ddd448823ac440795c943f67fd67d348ed70062812d28cb1801cbbb3"
+    },
+    {
+      "page": 22,
+      "sha256": "eaff4d06133fe8dce9dd9cdaaf5e53d1592574466f116da7c5325e5ec413c87d"
+    },
+    {
+      "page": 23,
+      "sha256": "0eecc3d65714b666f19f3b1066a34a53210cb51e7ac5eeb261cf2bb7ae6fa23c"
+    },
+    {
+      "page": 24,
+      "sha256": "30cbabf678ea2e71484fb69e061b519751803adfdbf263adfaf61c683852ea1e"
+    },
+    {
+      "page": 25,
+      "sha256": "47533c20327dbeab2cf8e95d41cb1e6a429b6202a2443697a141076b4ee8160c"
+    },
+    {
+      "page": 26,
+      "sha256": "a8be89ad582fe8da5700758fa330355f219863c7ad1d6486be079228ada630b3"
+    },
+    {
+      "page": 27,
+      "sha256": "def844a2c7c0a1c66ac7ebde1836cf11f7ed74acff541170a67946cb80922087"
+    },
+    {
+      "page": 28,
+      "sha256": "85c7244635009dc14efd50785177662dcedb066148af1392701284d9cc6c13f1"
+    },
+    {
+      "page": 29,
+      "sha256": "616acb648f50ad86706191c4edbece5754a5f59ca4d8fcb73468ab9d81bfc6f1"
+    },
+    {
+      "page": 30,
+      "sha256": "4a65c1c2b488b24374053ff6905f82295b625954513bbc96421f3f3c1cf3344c"
+    },
+    {
+      "page": 31,
+      "sha256": "c2f81f96df8a7263bb56c58715ff06ac2fa5cadda1e5bb2822447940e77dffa5"
+    },
+    {
+      "page": 32,
+      "sha256": "61edd184c2b8dbff1e8624962172362d69a1f3ee3b8a95afb90fb671c4e1223d"
+    }
+  ],
+  "declaration_pages_inspected": 2,
+  "cache": "/tmp/opencode/terceira-rodada",
+  "last_change_pages_reinspected": [
+    1
+  ]
+}

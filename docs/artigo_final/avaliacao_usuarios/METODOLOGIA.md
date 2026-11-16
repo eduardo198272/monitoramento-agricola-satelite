@@ -1,5 +1,21 @@
 # Metodologia da avaliação de usuários
 
+## Estado vigente — terceira rodada
+
+O procedimento abaixo continua aplicado ao recorte preservado de31 respostas, sem mudanças de triagem, escalas, quartis, atribuições qualitativas ou valores. O pesquisador confirmou participantes reais, coleta06–15/11/2026 emBrasíliaUTC−3, encerramento e estabilidade da versão pública. As categorias e interpretações qualitativas já foram aprovadas.
+
+A [planilha pública](https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/edit?usp=sharing) foi acessada e as31 linhas foram recuperadas por igualdade integral, independentemente da ordem. A recomputação do recorte reproduziu resultados quantitativos e contagens temáticas. Há32 registros públicos; o adicional também atende à triagem, portanto a diferença não foi justificada por inelegibilidade. O esclarecimento do recorte permanece necessário e está expresso no artigo.
+
+Disponibilidade e correspondência documental não constituem autenticação individual, mas sua ausência não foi utilizada como indício especulativo de falsidade. Não houve geração ou incorporação de dados sintéticos. Aprovação ética/dispensa e identificação do commit público continuam sem documentação; sua apreciação cabe ao orientador/instância competente.
+
+Davis e Braun/Clarke foram obtidos em PDF primário e confrontados no escopo conceitual utilizado, conforme a auditoria bibliográfica atualizada. A fonte e os cálculos não foram substituídos. Os estados de aprovação/fuso/acesso indicados no registro abaixo são **históricos**, superados apenas onde esta seção informa nova evidência.
+
+## Atualização PA01–PA18 — 15/11/2026
+
+O autor informa coleta de06 a15/11/2026, Brasília UTC−3, encerrada e com versão pública estável; aprova as13 categorias, a correspondência com as142 células e as interpretações anteriores. Essa aprovação substitui a pendência de apreciação pessoal, mas não certifica procedência independente. A exportação original independente do Forms, a prova administrativa de encerramento e o commit público exato não foram localizados. A análise descreve a planilha recebida, sem confirmação empírica definitiva.
+
+A estratégia qualitativa foi previamente definida, segundo o autor; as categorias foram organizadas a partir do corpus, conforme registro abaixo. Não se transforma planejamento da estratégia em pré-registro de categorias. IA executou codificação/agrupamento sob supervisão; não houve segundo avaliador independente. Ética e autorização institucional de IA continuam pendentes. O restante desta página descreve o procedimento histórico; afirmações de aprovação/fuso pendentes abaixo estão superadas por esta atualização apenas no nível da declaração autoral.
+
 ## Delineamento e versão
 
 Avaliação exploratória e descritiva do artefato, quantitativa e qualitativa, por

@@ -1,5 +1,26 @@
 # Qualidade, procedência e retificação dos dados
 
+## Conferência vigente — terceira rodada
+
+Fonte pública: `https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/edit?usp=sharing`. A exportaçãoXLSX respondeuHTTP200; a nova exportação foi preservada privadamente e possuiSHA-256 `c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34`.
+
+- 32 registros na fonte pública, com os mesmos 50 cabeçalhos; 31 correspondências integrais, incluindo datas, com o recorte local analisado.
+- Um registro adicional também elegível; não classificado como inválido, duplicado ou sintético sem fundamento. Sua diferença em relação ao recorte é pendência autoral explícita.
+- Recomputação a partir das 31 linhas recuperadas na fonte pública: 40 itens, 191 categorias de frequência, 13 temas e 142 células; zero pendências de atribuição temática. As contagens temáticas reaplicam o livro de códigos preservado, não nova classificação.
+- Estatísticas da nota: n=31, média 7,74193548, mediana 8, moda 9, DP amostral 1,80679720, Q1=7/Q3=9, extremos 3/10. CSVs descritivos, distribuições, categorias e nota coincidem; seis cruzamentos e partições dos denominadores são conferidos nos registros da rodada.
+- Validação independente por Counter/statistics executada em diretório novo, sem sobrescrever `resultados/validacao.json`.
+- Planilhas local e original, sete retificações históricas, códigos, gráficos e respostas preservados. Nenhuma nova retificação.
+
+Os metadados de exportações dinâmicas podem mudar o hashXLSX sem mudar as células. A comparação integral de registros é distinta da comparação binária. Não foram divulgados aqui registros individuais.
+
+O encerramento e a realidade dos participantes foram confirmados pelo pesquisador e acolhidos na narrativa científica. A fonte pública oferece rastreabilidade; não se alega autenticação de identidade. Não há evidência concreta apresentada de falsidade. As pendências atuais são o recorte31/32, o commit público e a admissibilidade institucional, não a repetição das declarações já dadas.
+
+As ressalvas de aprovação/fuso e disponibilidade da fonte nos itens seguintes pertencem ao **histórico**.
+
+## Atualização PA01–PA18 — 15/11/2026
+
+As contagens e os arquivos foram reconferidos sem alterações:31 registros,40 itens e191 categorias. A aprovação qualitativa e o período/fuso/encerramento informados pelo autor foram registrados. **A identidade dos arquivos e a separação das fixtures conhecidas não autenticam por si sós a exportação original nem a origem empírica das respostas.** A declaração de realidade dos registros não substituiu essa prova na revisão atual. Ver `../auditoria_cientifica/PENDENCIAS_AUTOR.md`, PA05/06/07/08. Não houve nova retificação dos carimbos; os registros abaixo são históricos.
+
 ## Fonte preservada e autorização
 
 Planilha recebida: `docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx`.

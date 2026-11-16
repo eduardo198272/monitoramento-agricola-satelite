@@ -80,7 +80,7 @@ def generate():
         rows.append(f"{tex(r.categoria)} & {int(r.registros_com_tema)} & "
                     f"``{tex(r.trecho_anonimizado)}'' & {tex(r.implicacao)}")
     (RESULTS/"tabela_temas.tex").write_text(table(
-        "Recorte da codificação temática assistida por IA, para validação do autor. "
+        "Categorias temáticas selecionadas da codificação assistida por IA e conferida pelo pesquisador. "
         "n conta registros que mencionam o tema em qualquer uma das cinco perguntas; "
         "categorias não exclusivas. Frequências completas, definições e exemplos estão no material complementar.",
         "tab:usuarios-temas", r"p{0.20\textwidth}cp{0.30\textwidth}p{0.34\textwidth}",

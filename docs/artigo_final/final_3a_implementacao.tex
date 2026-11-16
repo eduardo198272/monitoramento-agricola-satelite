@@ -2,7 +2,7 @@
 
 \subsection{Arquitetura e divisão de responsabilidades}
 
-A plataforma precisa receber as escolhas do usuário, consultar os serviços externos e apresentar os resultados. Essas tarefas são divididas entre módulos executados no mesmo processo Python. A parte de apresentação reúne os controles e exibe as informações; a de coordenação organiza a sequência de consultas e cálculos; e a de acesso a dados realiza a comunicação com as fontes externas. O Streamlit apresenta a interface e mantém informações durante a sessão, enquanto um componente JavaScript consulta os valores da grade no navegador. Essa divisão de responsabilidades não corresponde a microsserviços nem a um servidor independente com API REST.
+A arquitetura separa apresentação, coordenação analítica, acesso a serviços, persistência e exportação em módulos do mesmo processo Python. O Streamlit controla interface e sessão; o Earth Engine executa operações raster; e um componente JavaScript consulta a grade no navegador. As fronteiras delimitam responsabilidades e representações dos dados, sem constituir microsserviços ou uma API REST própria (\cref{fig:arquitetura-atual,tab:componentes-final}).
 
 A execução pode ser iniciada localmente por \texttt{src/app/main.py} ou, na versão web, por \texttt{streamlit\_app.py}. O arquivo web prepara o caminho de importação dos módulos, define o armazenamento por sessão, configura a autenticação por conta de serviço e carrega as configurações disponíveis nos Secrets. Depois, chama a mesma função principal. A conta de serviço permite que a aplicação se autentique no Earth Engine; ela não é uma autenticação individual do visitante \citep{GOOGLE_EE_SERVICE_ACCOUNT,STREAMLIT_CLOUD_SECRETS}.
 
@@ -31,11 +31,11 @@ Serviço e repositórios de localizações & Validação e operações de armaze
 \end{tabular}
 \end{table*}
 
-O desenvolvimento incremental ampliou o núcleo de mapas e séries com análise multiíndice, exportações e alternativas de armazenamento. A implementação avaliada foi registrada no commit \texttt{28759bf}, que reúne a base \texttt{b7c325c} e as correções de contratos e testes descritas na avaliação técnica. Os manifestos da demonstração preservam também os hashes dos arquivos executados, permitindo conferir sua correspondência com o código.
+O desenvolvimento incremental ampliou o núcleo de mapas e séries com análise multiíndice, exportações e alternativas de armazenamento. A implementação tecnicamente avaliada foi consolidada em \texttt{28759bf}; os manifestos preservam os hashes dos arquivos executados. As especificações de interação, exportação e localizações delimitam os respectivos critérios de aceitação.
 
 \subsection{Busca geográfica e mapa de seleção}
 
-Quando o usuário informa um nome de lugar, a aplicação consulta o Nominatim para obter uma posição e aproximar o mapa da região desejada. A busca usa o endereço público \texttt{/search}, com texto normalizado, resposta em \texttt{jsonv2}, limite de um resultado e espera máxima de 10 s. O retorno inclui descrição, latitude, longitude e uma caixa que delimita o enquadramento. A extensão dessa caixa orienta o zoom, limitado de 1 a 20. O resultado ajuda a navegar, mas não identifica automaticamente os limites de uma propriedade rural.
+A busca geográfica consulta o Nominatim em \texttt{/search}, com texto normalizado, resposta \texttt{jsonv2}, um resultado e tempo limite de 10 s. Coordenadas e caixa delimitadora orientam o enquadramento, com zoom entre 1 e 20. A busca localiza uma região; a demarcação do polígono define a área analítica.
 
 O mapa de seleção é construído com Folium, tiles Esri World Imagery e ferramenta de polígono do Leaflet Draw. São habilitadas edição e remoção de desenhos. A análise utiliza uma área ativa obtida do evento de desenho; a existência de múltiplos desenhos no componente não implementa comparação automática entre talhões.
 
@@ -43,23 +43,23 @@ Antes de enviar o desenho ao Earth Engine, a aplicação verifica se ele pode se
 
 \subsection{Estado da interface e coerência entre entradas e saídas}
 
-Durante o uso, a interface precisa lembrar a área escolhida e os resultados já calculados. Para isso, utiliza o estado de sessão do Streamlit, que preserva valores entre reexecuções do script, mas não é um armazenamento permanente \citep{STREAMLIT_STATE}. Nele ficam a área ativa, os parâmetros, os resultados por índice, a grade numérica, os endereços dos blocos de imagem do mapa e os arquivos preparados. Também é mantido um snapshot: um registro dos resultados e dos parâmetros de uma análise concluída.
+O estado de sessão do Streamlit preserva valores entre reexecuções do script \citep{STREAMLIT_STATE}. Reúne área ativa, parâmetros, resultados por índice, grade numérica, endereços dos blocos de imagem e arquivos preparados. Um snapshot associa os parâmetros aos resultados de uma análise concluída, permitindo verificar sua validade antes da apresentação e da exportação.
 
 A inicialização preserva esses valores entre reexecuções. A apresentação distingue espera, execução, sucesso, ausência de imagens e erro, para indicar em que situação a análise se encontra. Falhas de autenticação impedem a continuidade da interface principal. Já uma falha na consulta meteorológica é tratada pela coordenação da análise como indisponibilidade de informação complementar.
 
 Quando um desenho é aceito, a área é trocada ou uma busca é bem-sucedida, os resultados da seleção anterior deixam de ser válidos para apresentação. Se a busca não encontra um resultado, a seleção existente é preservada. Ao restaurar uma área salva, o sistema primeiro a valida e obtém suas medidas; não repete a busca por nome nem inicia uma análise automaticamente. O controle das revisões do mapa e dos eventos repetidos evita reaplicar um polígono excluído ou perder desenhos durante as reexecuções.
 
-O mesmo cuidado se aplica quando o usuário altera o período ou o conjunto de índices solicitado: os resultados anteriores, o snapshot e os arquivos preparados deixam de ser válidos para a nova configuração. Isso evita, por exemplo, associar o mapa de uma análise anterior a outra área selecionada. Porém, alternar a visualização entre índices que já foram calculados não muda as entradas da análise e não exige nova consulta remota. Antes de gerar um arquivo, a exportação confere novamente se os resultados correspondem aos parâmetros atuais.
+Alterações no período ou no conjunto solicitado de índices invalidam resultados, snapshot e arquivos preparados. Em contraste, alternar entre índices já calculados preserva a análise e dispensa nova consulta. Essa distinção entre mudança de entrada e mudança de visualização impede reutilizar resultados em um contexto incompatível.
 
 \subsection{Gerenciamento de localizações}
 
 Para reutilizar uma área sem desenhá-la novamente, o usuário pode salvá-la com um nome. O serviço \texttt{SavedLocationsService} verifica os dados e encaminha o registro para a alternativa de armazenamento em uso. A área é representada em GeoJSON, e o registro reúne identificador UUID, nome exibido, chave de comparação, geometria, coordenadas de enquadramento e datas UTC de criação e atualização.
 
-O nome aceita até 100 caracteres. Os espaços são normalizados, e a comparação usa \texttt{casefold} para não distinguir maiúsculas de minúsculas. Assim, diferenças apenas de caixa ou espaçamento não são suficientes para criar nomes considerados distintos pelo serviço.
+Os nomes aceitam até 100 caracteres e são comparados após normalização de espaços e \texttt{casefold}, rejeitando duplicatas que diferem apenas em caixa ou espaçamento.
 
 As coordenadas \texttt{center\_lat} e \texttt{center\_lon} persistidas correspondem ao ponto médio da caixa delimitadora, não ao centroide geométrico calculado no Earth Engine. A recuperação utiliza esse tipo de enquadramento para navegação, mas recalcula as métricas analíticas da área. Essa distinção evita confundir um centro de visualização com a coordenada da consulta climática.
 
-Na execução local com SQLite, a tabela \texttt{saved\_locations} guarda nomes, metadados e a geometria GeoJSON convertida em texto, operação chamada serialização. O caminho do banco pode ser definido por \texttt{SAVED\_LOCATIONS\_DB\_PATH}; por padrão, fica no diretório de dados do usuário. A inicialização pode ser repetida sem refazer a estrutura já criada, usa \texttt{PRAGMA user\_version=1} e rejeita uma versão futura de esquema incompatível. As gravações usam consultas parametrizadas, nomes normalizados únicos e transações. Esse armazenamento pertence à instância local da aplicação, sem autenticação e isolamento por pessoa.
+No modo local, o SQLite armazena nomes, metadados e geometria GeoJSON serializada. A inicialização é idempotente, mantém versão de esquema e rejeita versões futuras incompatíveis. Consultas parametrizadas, unicidade de nomes normalizados e transações preservam as regras de gravação. O banco pertence à instância local, sem autenticação e isolamento por pessoa.
 
 No modo web, o repositório recebe um dicionário da sessão Streamlit e retorna cópias independentes. Não utiliza banco externo nem promete recuperação após encerramento ou perda da sessão. O limite do conjunto é verificado para que as localizações possam ser transferidas em um arquivo aceito pelo importador.
 
@@ -83,7 +83,7 @@ Há operações de exclusão no serviço e nos repositórios, porém não há a�
 
 \subsection{Orquestração e análise multiíndice}
 
-Quando o usuário solicita mais de um índice, a área e o período continuam sendo os mesmos. Por isso, o sistema organiza uma etapa comum: consulta a coleção de imagens, aplica a máscara e busca as informações meteorológicas uma vez para a análise. Em seguida, produz os resultados de cada indicador. Essa coordenação é chamada de orquestração multiíndice. As análises de um ou de vários índices usam os mesmos métodos de cálculo, e nomes repetidos são removidos sem alterar a ordem. O compartilhamento não acrescenta treinamento de modelos, classificação de culturas ou diagnóstico causal.
+A orquestração multiíndice compartilha a coleção filtrada, a máscara e uma única consulta meteorológica para a mesma área e período. Em seguida, produz composições, séries e indicadores de cada índice pelos mesmos métodos do caminho individual. Nomes repetidos são eliminados sem alterar a ordem. Esse compartilhamento concentra regras comuns e mantém resultados específicos por indicador.
 
 Os objetos de imagem permanecem como referências a operações Earth Engine, enquanto estatísticas e séries são transferidas ao Python. Na série temporal, o resultado da redução de cada aquisição é recuperado por uma chamada individual dentro de uma iteração. Essa organização produz um registro por imagem, mas o número de requisições cresce com a coleção e pode aumentar a latência. Não há fila de tarefas, processamento distribuído próprio ou retomada persistente de uma análise interrompida.
 
@@ -97,7 +97,7 @@ Os valores são extraídos por \texttt{sampleRectangle}, que retorna uma matriz 
 
 Para transferir a grade, os números são armazenados em \texttt{float32}, formato de ponto flutuante de 32 bits, com ordem de bytes little-endian. As matrizes são comprimidas com zlib e codificadas em Base64. Junto com elas, são enviados o CRS, a transformação afim que relaciona coordenadas e células, a primeira linha e coluna, as dimensões e o marcador de ausência.
 
-No navegador, \texttt{DecompressionStream("deflate")} descomprime os bytes, e \texttt{Float32Array} permite acessar os valores por posição. O funcionamento depende da compatibilidade desses recursos e das bibliotecas carregadas por uma rede de distribuição de conteúdo (CDN). Essa compatibilidade ainda não foi avaliada em uma matriz de navegadores.
+No navegador, \texttt{DecompressionStream("deflate")} descomprime os bytes, e \texttt{Float32Array} permite acessar os valores por posição. O funcionamento depende da compatibilidade desses recursos e das bibliotecas carregadas por uma rede de distribuição de conteúdo (CDN).
 
 Para localizar um valor, o componente primeiro verifica se o ponto indicado pelo cursor ou toque pertence ao polígono. O teste de cruzamentos também exclui seus anéis internos. Depois, converte longitude e latitude para UTM com Proj4 e calcula a coluna $c$ e a linha $r$ da célula, a partir da escala e da origem da grade. Para uma grade sem rotação:
 \begin{align}
@@ -108,9 +108,7 @@ O valor $q$ transforma a linha e a coluna em uma posição na sequência de valo
 
 Com a grade transferida, o navegador acessa diretamente a célula correspondente à posição indicada, operação aqui denominada consulta local ou lookup. Assim, mover o cursor não gera uma chamada ao Earth Engine para obter o valor, embora os tiles do mapa-base e da camada temática ainda dependam da rede. A leitura representa uma célula reamostrada da composição mediana do período; não é uma observação de campo, uma aquisição individual ou a média espacial da área.
 
-Uma medição com dados controlados mostrou como o conteúdo da grade afeta o tamanho da transferência. Foram usadas três matrizes de $128\times128$ células, cada uma com 65.536 bytes em float32. Após compressão zlib, a matriz constante ocupou 89 bytes, o gradiente repetido 845 bytes e os valores pseudoaleatórios com semente 42 ocuparam 60.562 bytes. A codificação Base64 elevou esses tamanhos para 120, 1.128 e 80.752 bytes, respectivamente.
-
-Esses resultados mostram que a redução de tamanho pela compressão depende dos valores e que Base64 acrescenta volume. Não foram medidos o tráfego total, o tempo de resposta em produção ou a quantidade observada de chamadas evitadas. A ausência de uma consulta remota por evento decorre do funcionamento implementado: o valor é lido da grade já transferida.
+O tamanho dessa transferência foi avaliado com três matrizes controladas de $128\times128$ células: uma constante, um gradiente repetido e valores pseudoaleatórios com semente 42. Os resultados são apresentados na \cref{sec:transferencia-resultados}.
 
 \begin{figure*}[htbp]
 \centering
@@ -138,12 +136,12 @@ Ao exportar, o usuário precisa receber os resultados da análise que está cons
 \label{fig:fluxo-exportacao}
 \end{figure*}
 
-O PDF é gerado em memória com ReportLab em A4 paisagem, com uma página por índice presente no contexto, na ordem fornecida. Com os três índices, resulta em três páginas; com apenas um, em uma. Cada página reúne período, área, data de geração, média espacial da composição, tendência quando disponível, contagem de imagens quando fornecida, resumo meteorológico, série, anomalias e mapa estático. O nome da localização salva e coordenadas explícitas não são impressos automaticamente como identificação de propriedade. A lista de anomalias é resumida, exibindo até três ocorrências e indicação de excedentes. O PDF não substitui a saída tabular completa.
+O PDF é gerado em memória com ReportLab, em A4 paisagem, com uma página por índice. Reúne período, área, data de geração, média espacial da composição, tendência, contagem de imagens, contexto meteorológico, série e mapa estático, conforme os dados disponíveis. A lista de anomalias apresenta até três ocorrências e indica excedentes; as saídas tabulares preservam os registros completos.
 
 O XLSX contém \texttt{Resumo}, uma aba por índice selecionado, \texttt{Clima}, \texttt{Anomalias} e \texttt{Geografia}; são sete abas quando os três índices estão presentes. Nas abas espectrais, as colunas são \texttt{date}, \texttt{value}, \texttt{trend}, \texttt{anomaly} e \texttt{observation\_id}. A tendência é global à série. A marcação de anomalias utiliza o identificador de aquisição; registros legados sem identificador usam conjuntamente data e valor, não apenas data. A aba climática contém radiação normalizada, e a geográfica inclui área, centro, CRS e GeoJSON.
 
 A coluna \texttt{classification} existe na aba e no CSV de anomalias, mas permanece sem categoria agronômica no fluxo padrão, pois o detector não produz essa classificação. Os caminhos individual e multiíndice fornecem contagem, tendência e contexto meteorológico sob contratos harmonizados, mantendo a ausência explícita quando um serviço não está disponível.
 
-O ZIP é construído com \texttt{zipfile} e compressão DEFLATE. Contém \texttt{resumo.csv}, um CSV por índice, \texttt{clima.csv}, \texttt{anomalias.csv} e \texttt{geografia.csv}. Os arquivos usam UTF-8, separação por vírgula, cabeçalhos estáveis, datas ISO, booleanos textuais e campos vazios para ausência. Não são exportados rasters analíticos GeoTIFF nem todas as amostras por pixel. A transferência de localizações em GeoJSON é uma função separada da exportação de resultados.
+O ZIP contém \texttt{resumo.csv}, um CSV por índice, \texttt{clima.csv}, \texttt{anomalias.csv} e \texttt{geografia.csv}, com compressão DEFLATE. Os arquivos usam UTF-8, vírgulas, datas ISO, booleanos textuais e campos vazios para ausência. A transferência de localizações em GeoJSON é separada da exportação de resultados; não são exportados rasters analíticos GeoTIFF.
 
 Os arquivos estruturados permitem examinar os resultados e reutilizá-los em outras ferramentas. Isso favorece a transparência, mas não basta para repetir exatamente todo o processamento. O contexto exportado não inclui obrigatoriamente todos os identificadores de imagens, versões de catálogo, parâmetros de reprojeção, máscaras efetivas e respostas dos serviços. Portanto, as tabelas contribuem parcialmente para a reprodutibilidade, sem formar um pacote completo de reprodução da análise.

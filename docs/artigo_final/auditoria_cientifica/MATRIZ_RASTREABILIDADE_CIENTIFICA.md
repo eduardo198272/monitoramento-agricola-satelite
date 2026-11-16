@@ -1,5 +1,55 @@
 # Matriz de rastreabilidade científica
 
+## Matriz vigente — terceira rodada
+
+Base: PDF de38 páginas, SHA-256 `ebf4e063e32494b57e1b6ce1a363704edb51265181e24d19f631e2f36c46bf4f`, preservado antes das alterações. O diff em `../evidencias/terceira_rodada/antes_depois.diff` compara **essa cópia de trabalho**, não HEAD. Inventários anteriores abaixo permanecem históricos.
+
+| Grupo / localizador | Evidência verificada | Efeito editorial / alcance |
+|---|---|---|
+| Introdução/OE1–OE8 | Implementação, specs e decisões PA04/12 | Contribuição de integração, estado e contratos; sem inovação de índice ou mudança de escopo |
+| Fundamentos/índices | Fórmulas do código, Rouse/Gao/Izquierdo e catálogo; Sentinel Hub | Bandas e limites preservados; variável espacial/temporal definida; fonte científica B8A/B11 ainda parcial |
+| Métodos/SDD | `docs/specs/index.md`, specs16/17, histórico e decisões | Procedimento do pesquisador em voz direta; sem inventar adoção formal de DSR/TDD |
+| Desenvolvimento/estado e saídas | `main.invalidate_changed_analysis`, `build_export_context`, repositórios | Identificação do problema, contrato e mecanismo, sem ganho de desempenho presumido |
+| Grade/lookup | `maps.py`, HTML, teste Node e transferência controlada | Compromisso transferência/memória/consulta local; resultados de tamanhos movidos para Resultados |
+| Avaliação técnica | Logs originais710/100%/3; manifesto e exports reais | Resultados históricos mantidos, não reexecução nesta rodada |
+| Anomalias | `anomalies.py`, `demonstracao.xlsx`, docs/validation e capturas | Dois pontos não aplicam janela; telas longas não substituem série instrumentada |
+| Questionário | Fonte pública e local, análise e validação independente |31 correspondências integrais;32 públicos,1 adicional elegível; recorte explicitado, não exclusão por triagem inventada |
+| Qualitativo | Livro de códigos, funções de contagem, decisão PA06 e Braun pp.79/82–87 |13 categorias/142 células; aprovação preservada; não nova codificação |
+| Discussão | Parnas/Bender/Davis/Meroni e resultados próprios | Interpretação de compromissos e riscos; limites gerais consolidados |
+| Capturas | Hashes originais e caminho efetivo de inclusão | Quatro agrupamentos redundantes e QR isolado retirados da paginação; originais preservados; PDF59,00 só ilustrativo |
+| Resumo/conclusão | Testes, demonstração e recorte confirmado | Ênfase computacional e dados de uso, sem aceitação populacional ou eficácia agronômica |
+| IA/ética | IN03/2026 e decisões/documentos já consultados | Transparência completa e pendências materiais mantidas, sem aprovação simulada |
+
+## Matriz de alterações vigente — PA01–PA18
+
+15/11/2026, comparação `f31d0a5` → fontes atuais. Esta matriz liga as afirmações alteradas às evidências; não certifica suporte de cada frase não alterada. A matriz antiga de 197 blocos, preservada abaixo, contém transcrições anteriores e **não descreve literalmente a versão atual**. O diff integral e os hashes permitem localizar a mudança sem confundir paginações.
+
+| ID | Afirmação / localizador atual | Evidência / fonte e localização | Correção / limite | Status |
+|---|---|---|---|---|
+| N01 | Orientador/mês em `Relatorio_Final.tex` | Confirmação expressa do autor, PA09/10 | Rafael Rieder; dezembro2026; sem fingir aprovação formal do curso | Autorizada e implementada |
+| N02 | Escopo em introdução/discussão/conclusão | Decisão PA04 e implementação | Plataforma e verificação; sem exigir antigos estudos por cultura | Autorizada e implementada |
+| N03 | SDD em fundamentos/métodos | `docs/specs/index.md`; specs/tasks; commits `733e402`,`0c676d9`; GitHub *Workflow/Core Principles* e Böckeler *Definition* | Fluxo com specs; não adoção do toolkit nem superioridade demonstrada | Parcialmente resolvida |
+| N04 | Responsabilidades dos módulos | Parnas1972 p.1054 e comparação de decomposições; módulos existentes | Fundamento conceitual sem ganho de manutenção medido | Autorizada e implementada |
+| N05 | NDWI/NDMI e Eq.2 | Izquierdo2026 p.5/Tabela1; bandas do código | B8/B11 chamado NDMI na fonte; rótulo do software preservado | Autorizada e implementada |
+| N06 | NDMI B8A/B11 Eq.3 | Código e exemplo técnico Sentinel Hub | Sem afirmar validação externa específica; Pohjankukka não lido | Parcialmente resolvida |
+| N07 | Mediana Eq.4 | NIST1.3.5.1; API ImageCollection.median | Definição e menor sensibilidade; máscaras e viés persistente | Autorizada e implementada |
+| N08 | Médias Eq.5/6 | GEE `reducers_reduce_region`, *Pixels in the region* | Pesos/escala/CRS mantidos; nenhuma mudança de grade | Resolvida e verificada |
+| N09 | Média/desvio Eq.7/8 | NumPy `std`, código e registro matemático anterior | DivisorN, janela3 anterior; não população agrícola | Autorizada e implementada |
+| N10 | Escore/limiar Eq.9 | Meroni2019 Eq.1, §§3.1/3.2.3; Tabela2 | Referência sazonal histórica ≠3 observações; `<−1` local ≠fronteiras classificatórias | Autorizada e implementada |
+| N11 | Regressão e limiares | NumPy polyfit/Hyndman; código | Ordem das observações; ±0,01 heurístico; de Jong não lido | Parcialmente resolvida |
+| N12 | Clima Eq.10–12 | NASA/BIPM, código e evidência histórica | Dias válidos e unidades; sem nova consulta externa | Autorizada e implementada |
+| N13 | Planilha e resultados | Original/corrigido, 40 itens/191 categorias reconferidos | Cálculos confirmados não autenticam origem; submissões não certificadas como participantes independentes | Pendente de evidência |
+| N14 | Aprovação qualitativa | Decisão autoral PA06; mensagem histórica e livro de códigos | Estratégia prévia não implica pré-registro de 13 categorias | Parcialmente resolvida |
+| N15 | Consentimento e ética | Primeira etapa do Forms; triagem; CNS510 art.1º; declaração do autor | Sem CEP/dispensa; encaminhamento formal necessário | Pendente de validação institucional |
+| N16 | IA no artigo e documento independente | IN03/2026 integral/anexo, API local OpenCode, mensagens recuperadas | Geração substancial explícita; Terra/Sol registrados, Luna não vinculado | Pendente de validação institucional |
+| N17 | Matriz de produtos | EOSDA guia e planos; OneSoil Platform/FAQ; GEE documentação | Funções fonte a fonte; não desempenho ou exclusividade | Autorizada e implementada |
+| N18 | Figura espectral | Weiss não confirmado como origem específica; CCRS só parcial | Esquema anterior retirado, não substituído por curva sem evidência; reconstrução não concluída | Pendente de evidência |
+| N19 | Captura PDF | Hash original=cópia excluída; leitura59,00 | Não incluída; sem adulteração | Pendente de evidência |
+| N20 | Conclusão/resumo | Evidências técnicas históricas e limites da origem dos dados | Retirada conclusão empírica consolidada de aceitação | Autorizada e implementada |
+| N21 | Template / layout | Classe comparada byte a byte; link institucional mantido | Ajustes locais de quebra e altura do cabeçalho; inspeção assistida não aprovação humana | Pendente de aprovação humana |
+
+## Inventário histórico anterior à revisão didática e às decisões PA
+
 Inventário por bloco de prosa/ambiente, em ordem dos arquivos; localizadores por arquivo e linha evitam depender da paginação. Inclui transcrições completas dos blocos para não esconder subafirmações. **É uma matriz de triagem rastreável, não certificação de revisão semântica exaustiva.** Status parcial é intencional: citação presente não valida automaticamente todo o parágrafo. Corrigido identifica as intervenções localizadas conferidas; Validado nos ambientes matemáticos significa fidelidade da expressão e condições, não eficácia agronômica. A passagem definitiva para Validado exige resolver o problema indicado. Equações têm parecer específico no documento matemático. Página original de 28 páginas não foi reconstruída; números da solicitação são aproximados e não atribuídos artificialmente.
 
 | ID | Seção | Página original | Afirmação ou equação | Referência original/atual | Evidência verificada | Problema | Correção | Status |

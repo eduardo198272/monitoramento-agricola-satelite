@@ -1,5 +1,61 @@
 # Registro de alterações do artigo
 
+## Terceira rodada — consolidação científica e editorial, 15–16/11/2026
+
+Comparação exclusiva com a versão de38 páginas preservada em `/tmp/opencode/terceira-rodada/antes/`; não se atribuem a esta rodada todas as mudanças acumuladas desde HEAD.
+
+| Arquivo / seção | Alteração |
+|---|---|
+| Introdução | Contribuição formulada por problemas de integração, estado e representações; OE1–OE8 preservados com precisão do OE8; removido enquadramento de auditoria do questionário |
+| Fundamentação/relacionados | Simplificadas ressalvas repetidas e sínteses comparativas; preservadas definições, fontes e bandas; EO Browser e dificuldades de acesso permanecem apenas nos documentos internos |
+| Métodos | SDD, coleta e supervisão em perspectiva do pesquisador; recorte31/32 explicitado; amostragem, denominadores, codificação e ética preservados |
+| Desenvolvimento | Redução de inventário/manual em favor de responsabilidades e contratos; valores de compressão transferidos para Resultados |
+| Plataforma | Seleção de capturas necessárias; removidas da composição as figuras de configuração, busca, salvamento/listagem e restauração, redundantes com outras telas; QR integrado à figura móvel. Nenhum arquivo original excluído |
+| Diagrama e paginação | Desviado o conector de retorno Earth Engine/navegador para não atravessar a caixa de arquivos; alinhados os painéis móveis; quebras locais evitam títulos órfãos, sem alterar classe ou medidas tipográficas |
+| Resultados | Testes e unidades apresentados diretamente; compressão em subseção própria; resultados do questionário como dados da pesquisa, limitados ao recorte |
+| Discussão | Interpretação de modularidade, snapshots, transferência, oráculos de teste, identidade de aquisição e autonomia; consolidação de limitações |
+| Conclusão/resumo/abstract | Resposta direta ao problema e resultados proporcionais; pendência ética material mantida; removida narrativa de investigação da credibilidade |
+| Declarações de IA | Concisão sem omitir geração/reformulação substancial, análise, ferramentas, supervisão e pendências; acrescentado excerto real da instrução desta rodada na minuta |
+| Tabela temática/gerador | Só legenda editorial; nenhuma atribuição ou frequência alterada |
+| Auditorias | Pareceres atuais, PA01–PA18, rastreabilidade, bibliografia, originalidade, simulação de banca e preparação de defesa consolidados nos documentos existentes |
+
+**Preservação:** sem commit/push/deploy; sem mudança em código funcional, testes, parâmetros, dados, carimbos, categorias, gráficos, classe, margens ou fontes institucionais. Nenhuma referência adicionada, removida ou substituída. Candidatas não lidas não foram incorporadas.
+
+O diff integral, os hashes, a paginação antes/depois, a compilação, a conferência da fonte pública e a inspeção visual desta rodada estão em `../evidencias/terceira_rodada/`. As contagens e conclusões abaixo são históricas.
+
+## Rodada PA01–PA18 — 15/11/2026
+
+Linha de base fixa: `f31d0a5` (revisão didática já enviada anteriormente). A mensagem de execução final do autor autoriza as mudanças substantivas aqui descritas, não alega aprovação institucional e não autoriza commit/publicação desta rodada.
+
+| Arquivo / conjunto | Mudança e razão |
+|---|---|
+| `Relatorio_Final.tex` | Orientador/mês confirmados; declaração incluída; ajuste local do link, altura e contêiner do cabeçalho sem modificar o arquivo da classe institucional. A largura externa passa a corresponder à caixa interna já desenhada, sem deslocar ou alterar o conteúdo |
+| `final_0_resumo.tex` | Resumo/abstract alinhados ao SDD e aos limites de origem do questionário; não consolidam aceitação empírica |
+| `final_1_introducao.tex` | Objetivos definitivos computacionais; excluída cobrança de objetivos experimentais históricos |
+| `final_2_fundamentacao.tex` | B8/B11 com fonte exata; NIST para mediana; Meroni para escore/limiar; Parnas/SDD; trabalhos relacionados em seção própria e matriz documental reestruturada |
+| `final_3_metodos.tex` | SDD e supervisão; aprovação qualitativa declarada; coleta/fuso/encerramento informados pelo autor separados da prova; ética sem dispensa presumida |
+| `final_3b_plataforma.tex` | Retirada observação editorial de captura pendente; relatórios descritos pela função e evidência técnica |
+| `final_4_resultados.tex` / `final_4a_usuarios.tex` | Análise da planilha explicitamente não autenticada como coleta empírica; valores/denominadores/categorias preservados |
+| `avaliacao_usuarios/resultados/tabela_temas.tex` e gerador | Somente legenda: “para validação” substituído por “conferida”, conforme aprovação autoral; nenhuma célula, categoria, contagem ou regra de análise alterada |
+| `final_5_discussao.tex` / `final_6_conclusao.tex` | Escopo e conclusões limitados à evidência; aprovação qualitativa anterior reconhecida; sem inventar validação |
+| `final_7_uso_ia.tex` | Declaração de todas as etapas identificadas, incluindo geração/reformulação substancial |
+| `referencias.bib` | Oito adições; nenhuma remoção/substituição; Izquierdo existente usado com localização específica |
+| `fig/conceitos.tex` | Retirado somente o esquema das três curvas sem fonte específica; demais blocos mantidos. Reconstrução pendente, sem valores inventados |
+| `REGISTRO_USO_IA.md`, `DECLARACAO_USO_IA.tex`/PDF | Ferramentas, finalidades, etapas, prompts reais e campos do anexo; minuta não assinada |
+| Auditorias e evidências | Atualização das18 pendências, matriz ativa, originalidade e registros novos separados dos históricos |
+
+### Histórico da mudança de escopo
+
+O planejamento anterior previa estudos de soja, milho e pastagem. O autor confirmou que esses estudos não integram os objetivos definitivos deste artigo. Foram removidas cobranças de cumprimento no manuscrito, preservando a ausência de validação em campo como delimitação. Não se inventou data, justificativa retrospectiva ou aprovação formal do orientador. Proposta e registros históricos não foram reescritos.
+
+### Preservação
+
+Nenhuma modificação funcional em aplicação, algoritmos ou parâmetros. Nenhuma alteração nova nas planilhas, respostas, categorias ou carimbos. Equações numeradas preservadas literalmente. A captura de59,00 não foi incorporada. Os resultados de710 testes e demonstração permanecem históricos, sem alegação de nova execução nesta revisão documental.
+
+Diff contra `f31d0a5` e manifestos atuais: `../evidencias/revisao_final_pa/`. As seções seguintes pertencem à auditoria anterior.
+
+## Histórico anterior
+
 Comparação com a cópia de trabalho preservada antes desta auditoria, não com HEAD. Isso separa as revisões anteriores de redação dos novos ajustes científicos. Assistência: agente de IA, com ferramentas locais e fontes identificadas; aprovação substantiva do autor ainda pendente.
 
 ## docs/artigo_final/final_3a_implementacao.tex
@@ -290,4 +346,3 @@ Comparação com a cópia de trabalho preservada antes desta auditoria, não com
 + note = {\url{https://docs.streamlit.io/develop/concepts/architecture/session-state}. Acesso em 15 nov. 2026}
 +}
 ```
-

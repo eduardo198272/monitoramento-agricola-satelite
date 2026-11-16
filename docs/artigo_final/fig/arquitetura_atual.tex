@@ -24,6 +24,7 @@
 \draw[link] (pipeline) -- (export);
 \draw[link,<->] (locations) -- (files);
 \draw[link] (export.south) -- ++(0,-0.8) -| (files.south);
-\draw[link] (ee.south) -- ++(0,-4.1) -| (browser.south);
+\draw[link] (ee.south) -- ++(0,-4.1) -- (2.4,-4.1)
+ -- (2.4,-1.0) -| (browser.south);
 \node[font=\scriptsize,fill=white] at (9,-4.1) {tiles analíticos; grade entregue via servidor Python};
 \end{tikzpicture}

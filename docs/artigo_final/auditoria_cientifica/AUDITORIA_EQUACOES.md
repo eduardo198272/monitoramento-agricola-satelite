@@ -1,5 +1,33 @@
 # Auditoria matemática
 
+## Terceira rodada — conferência final
+
+As 12 expressões analíticas, as três expressões de consulta à grade e o objetivo de mínimos quadrados foram reconferidos frente a `earth_engine.py`, `pipeline.py`, `time_series.py`, `anomalies.py`, `climate.py` e ao componente de consulta. Os oito ambientes `equation`/`align` permanecem literalmente iguais à base de 38 páginas, assim como o ajuste não numerado; o manifesto registra a comparação. A numeração inclui duas linhas adicionais da consulta à grade, não duas novas equações agronômicas.
+
+- Acrescentada a definição de `p` (posição) e `t` (aquisição) antes das fórmulas espectrais. Bandas são reflectâncias escaladas; fator comum cancela na razão, não offsets.
+- Mediana do índice precede a média espacial; o denominador dos pesos deve ser positivo. Pesos padrão e CRS não explícito foram preservados, sem atribuir resolução física de10 m às bandas de20 m.
+- Janela retrospectiva3, divisorN (`ddof=0`), limiar estrito `<−1`, dispersão zero e três primeiras observações mantidos. A regressão usa ordem sequencial e limiares estritos ±0,01, não taxa diária.
+- Somas/médias climáticas usam dias válidos; a soma de registros diários integra implicitamente intervalos de um dia. Temperatura em°C e energia diária emMJ/m²/dia; `f(u)` permanece1 ou3,6 segundo metadados, com indisponibilidade para unidade não reconhecida.
+- NIST, Hyndman, NumPy, NASA, BIPM e fontes espectrais mantêm os escopos já registrados. Meroni é precedente de padronização histórica sazonal, não calibração da janela local.
+- O exemplo didático de agregação continua0,6 versus0,5. Para a janela[0,6;0,7;0,5], μ=0,6, σ≈0,08165 e z para0,2≈−4,899. Não são resultados agrícolas.
+
+**Parecer:** nenhuma alteração matemática ou funcional necessária nos contratos examinados. Fundamentação matemática e fidelidade operacional não significam calibração científica dos parâmetros ou validação agronômica; a pendência de fonte científica específica B8A/B11 permanece delimitada na auditoria bibliográfica.
+
+## Atualização PA01–PA18
+
+15/11/2026. As 12 equações analíticas, as três expressões de lookup e o ajuste linear foram preservados; a comparação automática desta rodada é contra `f31d0a5`. A confirmação do autor autoriza manter os parâmetros particulares, não converte heurísticas em calibração. Complementos:
+
+- **Eq. 2:** Tabela 1, p.5, de Izquierdo-Sanz e Moltó (2026), DOI `10.3390/agronomy16050541`, consultada em PDF integral do repositório IVIA, utiliza `(B8−B11)/(B8+B11)` sob o nome NDMI. É precedente exato de bandas, não validação de toda a aplicação.
+- **Eq. 3:** exemplo técnico Sentinel Hub B8A/B11 mantido com inconsistência entre prosa/código. Pohjankukka não foi utilizado, pois não se obteve texto integral verificável. Não se declara completa a busca científica dessa variante.
+- **Eq. 4:** NIST, *Measures of Location*, §1.3.5.1, fundamenta definição par/ímpar e menor sensibilidade da mediana a extremos. Earth Engine fundamenta a operação por pixel/banda e observações não mascaradas. “Pode reduzir interferências extremas” não significa eliminar nuvens ou sombras. Griffiths e Flood não foram confundidos com mediana convencional nem inseridos sem leitura.
+- **Eq. 5–6:** guia oficial `reducers_reduce_region`, subseção *Pixels in the region*, reconferido: peso mínimo entre máscara e fração aproximada, quantização em 8 bits, escala e projeção. Não há nova área física observada a 10 m em bandas nativas de 20 m.
+- **Eq. 7–8:** permanecem média retrospectiva de 3 observações e `np.std(..., ddof=0)`, com divisor N. Não foi alterado o conjunto de referência para alegar coincidência com literatura.
+- **Eq. 9:** Meroni et al. (2019), Eq.1/§3.1, padroniza NDVI pela média/desvio históricos do mesmo decêndio; §3.2.3 examina limiar −1 SD. São 14 anos de referência (2003–2016), dados MODIS e consolidação/sazonalidade. Tabela 2 inclui fronteira `≤−1`, enquanto o código deste TCC usa estritamente `<−1`. Não se afirma equivalência operacional, normalidade ou probabilidade de 15,9% na janela de três observações. Peters/Rembold continuam candidatos, não fontes primárias lidas nesta rodada.
+- **Regressão:** mínimos quadrados e NumPy mantidos. A consulta a de Jong não forneceu texto integral; nenhum limiar ±0,01 foi atribuído ao estudo.
+- **Eq. 10–12:** preservadas somas/médias sobre dias válidos e fator 3,6 baseado em unidades; fonte NASA e resposta histórica continuam delimitadas. Não se executou nova consulta meteorológica nem reprocessamento remoto nesta rodada.
+
+Os pareceres abaixo são o registro anterior, complementado e não substituído por uma alegação de validação integral.
+
 Data: 15/11/2026. Escopo: 12 equações analíticas, três expressões de lookup e ajuste linear não numerado. A numeração deve ser conferida no PDF compilado; os rótulos e arquivos são os localizadores estáveis. Fórmulas elementares não recebem autoria artificial.
 
 ## Convenções comuns

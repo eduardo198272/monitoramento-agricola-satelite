@@ -1,0 +1,48 @@
+{
+  "http_status": 200,
+  "source_url": "https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/export?format=xlsx",
+  "export_sha256": "c9c267230e803a8aa09073c438ff6264de3a597a3e7478aacfd979026c245a34",
+  "public_records": 32,
+  "analyzed_records": 31,
+  "exact_rows_including_timestamp_matched": 31,
+  "headers_equal": true,
+  "additional_public_records": 1,
+  "additional_records_eligible_by_existing_rules": 1,
+  "analyzed_period": [
+    "2026-11-06",
+    "2026-11-15"
+  ],
+  "recalculation_checks": {
+    "estatisticas_descritivas.csv": true,
+    "distribuicoes.csv": true,
+    "categorias_qualitativas.csv": true,
+    "avaliacao_geral.csv": true
+  },
+  "note": {
+    "n_valido": 31,
+    "ausentes": 0,
+    "invalidas": 0,
+    "media": 7.741935483870968,
+    "mediana": 8.0,
+    "dp_amostral": 1.806797201966025,
+    "q1": 7.0,
+    "q3": 9.0,
+    "iiq": 2.0,
+    "minimo": 3.0,
+    "maximo": 10.0,
+    "modas": "9"
+  },
+  "items": 40,
+  "frequency_categories": 191,
+  "themes": 13,
+  "qualitative": {
+    "registros_pendentes_codificacao": 0,
+    "celulas_discursivas_codificadas": 142
+  },
+  "source_local_sha256": "9adb66b330103ca858c37d7dc6cdb5e4e954f09f749a0c122fa6e6b2f4f5de59",
+  "scope": "Recorte publicado de 31 registros, reconstituído da fonte pública por correspondência integral; registro adicional não incorporado e decisão de recorte mantida.",
+  "crossings_identical": true,
+  "crossings_groups": 6,
+  "tasks_completion_denominators_independently_checked": 9,
+  "score_distribution_identical": true
+}

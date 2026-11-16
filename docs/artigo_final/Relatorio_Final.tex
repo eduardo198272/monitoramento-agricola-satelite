@@ -2,6 +2,21 @@
 \documentclass[alpha-refs,english,brazilian]{CC-EC_TF-TC}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric}
+\usepackage{etoolbox}
+\setlength{\headheight}{18.2pt}
+\addtolength{\topmargin}{-0.7pt}
+\let\TCCOriginalHref\href
+\renewcommand{\href}[3][]{%
+  \ifstrequal{#3}{https://repositorio.upf.br/handle/123456789/8754}
+    {\TCCOriginalHref[#1]{#2}{\nolinkurl{#3}}}
+    {\TCCOriginalHref[#1]{#2}{#3}}}
+\makeatletter
+\AtBeginDocument{%
+  \patchcmd{\@maketitle}
+    {\begin{textblock*}{\textwidth-21pc}(21pc,0pt)}
+    {\begin{textblock*}{\textwidth-21pc+4pc+6.64pt}(21pc,0pt)}
+    {}{\PackageError{TCC}{Bloco institucional de cabecalho nao localizado}{Conferir a classe antes de ajustar o conteiner.}}}
+\makeatother
 
 \AtBeginDocument{\renewcommand{\harvardand}{e}}
 \input{figuras_relatorio}
@@ -11,13 +26,12 @@
 \title{Sistema de Monitoramento Agrícola por Imagens de Satélite}
 \titleother{Agricultural Monitoring System Using Satellite Imagery}
 \author[1]{Eduardo Steffens Hoppen}
-\affil[1]{Universidade de Passo Fundo, Instituto de Tecnologia, Curso de Ciência da Computação\\Orientador: Prof. Carlos Amaral Holbig}
+\affil[1]{Universidade de Passo Fundo, Instituto de Tecnologia, Curso de Ciência da Computação\\Orientador: Prof. Rafael Rieder}
 \runningauthor{Hoppen}
 \titulores{Monitoramento agrícola por imagens de satélite}
 \papercat{Trabalho de Conclusão de Curso}
-% PENDENTE: confirmar mês e ano da defesa.
 \jyear{2026}
-\jmonth{} % Pendente administrativo: mês da defesa, confirmar antes da entrega.
+\jmonth{dezembro}
 \jcourse{Ciência da Computação}
 \setcounter{page}{1}
 \firstpage{1}
@@ -38,5 +52,6 @@
 \input{final_4_resultados}
 \input{final_5_discussao}
 \input{final_6_conclusao}
+\input{final_7_uso_ia}
 \bibliography{referencias}
 \end{document}

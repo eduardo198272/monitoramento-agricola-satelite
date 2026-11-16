@@ -1,5 +1,197 @@
 # Auditoria científica — versão de trabalho
 
+## Relatório consolidado vigente — terceira rodada, 15–16/11/2026
+
+**Finalidade: versão consolidada para encaminhamento ao Prof. Rafael Rieder, não conformidade institucional definitiva.** A rodada parte do PDF de38 páginas (`ebf4e063…`) e das decisões PA01–PA18, sem reiniciar o trabalho. O protocolo autoral foi lido integralmente antes da atividade. As novas reformulações estão disponíveis para leitura e aprovação intelectual do pesquisador; a assistência substancial de IA permanece declarada.
+
+### 1. Problemas tratados e alterações
+
+| Problema | Intervenção / seções | Resultado |
+|---|---|---|
+| Voz de auditor externo | Introdução, métodos, resultados, conclusão e IA | Pesquisa narrada sob responsabilidade do pesquisador; removidas expressões de suspeita não sustentada e histórico de revisão |
+| Contribuição diluída em inventário de funcionalidades | Introdução, desenvolvimento e discussão | Integração raster/vetor, responsabilidades, validade de estado, transferência servidor/navegador e contexto comum de exportação apresentados como contribuição própria |
+| Ressalvas repetidas | Fundamentos, plataforma e discussão | Delimitação geral na introdução; condições do algoritmo no método; dois pontos/indisponibilidade nos resultados; limites gerais na discussão |
+| Discussão descritiva | Discussão reestruturada | Compromissos transferência/memória, persistência local/sessão, testes/oráculos e síntese/saídas estruturadas interpretados com Parnas, Bender, Davis e Meroni |
+| Questionário tratado como investigação da honestidade | Métodos e avaliação exploratória | Declaração autoral acolhida;31 registros rastreados na fonte pública e cálculos reproduzidos; interpretações limitadas ao recorte, autorrelato e amostragem |
+| Diferença de tamanho da fonte | Metodologia e pendências |32 públicos versus31 analisados; adicional também elegível. Diferença explicitada sem exclusão por triagem inventada ou recálculo silencioso |
+| Excesso de telas intermediárias | Apresentação da plataforma | Retirados quatro agrupamentos redundantes da paginação e integrado QR à figura móvel; capturas originais preservadas |
+| Resultados de transferência na implementação | Desenvolvimento/resultados | Procedimento permanece na implementação; valores medidos movidos para subseção de resultados |
+| Pendências bibliográficas | Parecer bibliográfico | PDFs de Davis/Braun obtidos e confrontados no escopo citado; limitações restantes delimitadas; nenhuma nova referência |
+| Transparência de IA excessivamente burocrática | Declarações | Concisão sem omitir geração/reformulação substancial, análise, supervisão ou atos institucionais pendentes |
+
+Não foram alterados código funcional, testes, respostas, carimbos, atribuições temáticas, parâmetros, gráficos numéricos, equações ou classe. Não houve commit, push, deploy ou novo experimento da aplicação. A releitura não atribui DSR, TDD uniforme, calibração ou motivações históricas não documentadas.
+
+### 2. Comparação e evidências
+
+- Antes:38 páginas,27 figuras,5 tabelas; PDF e fontes preservados em `/tmp/opencode/terceira-rodada/antes/`.
+- Depois: **32 páginas, 22 figuras, cinco tabelas e 51 chaves citadas**, conforme `../evidencias/terceira_rodada/compilacao.json`. Redução de seis páginas (15,8%), sem reduzir fonte, margens ou espaçamentos institucionais.
+- Diferenças integrais contra a cópia de trabalho anterior em `antes_depois.diff`; a comparação com HEAD inclui revisões prévias e não deve ser confundida com o escopo desta rodada.
+- Os logs originais confirmam710 testes Python em11,73s,2.735 instruções/856 ramificações/100% no escopo medido e três verificações JavaScript aprovadas. Não são novos resultados desta rodada.
+- Demonstração preservada: área≈4,36ha; duas aquisições; médias0,7070/0,2140/0,2380;61 registros climáticos;635,56mm;16,24°C; radiação indisponível; três páginasPDF/sete abasXLSX/seteCSV; consultaNDMI0,3228.
+- A busca de séries extensas abrangeu `docs/validation`, manifestos, exports e capturas. Cenários por cultura são planejamento/script, não resultados executados comprovados. Capturas extensas não têm série/metadados completos que permitam avaliar o detector. Permanecem distintos testes controlados e demonstração real de dois pontos; nenhum novo experimento foi executado.
+- Conferência pública:31 linhas idênticas incluindo datas,40 itens/191 categorias,13 temas/142 células; notas e quartis reproduzidos. Validação independente por Counter/statistics também passou. A recomputação temática usa as atribuições preservadas, não nova codificação.
+- A planilha pública confirma disponibilidade/correspondência documental, não identidade dos participantes. A declaração de participantes reais e encerramento foi acolhida; não há evidência concreta apresentada de falsidade. O adicional elegível exige esclarecer o recorte, não imputar fraude.
+- Os nove gráficos foram regenerados em cache a partir dos CSV conferidos: os pixels dos nove PNG coincidiram integralmente com os gráficos preservados. Não foram substituídos os arquivos publicados. Os seis cruzamentos, a distribuição da nota e os nove denominadores de conclusão também coincidiram.
+
+### 2.1 Compilação e inspeção visual final
+
+Tectonic concluiu a compilação sem erros, referências/citações indefinidas ou excessos `Overfull hbox/vbox`. Permanecem avisos de caixas pouco preenchidas, substituições de tamanho de fontes matemáticas da classe e compatibilidade do pacote epstopdf com o driver, sem corte observado. O aviso de bloco inicial `twocolumn too tall` foi eliminado por síntese equivalente do resumo/abstract, sem reduzir fonte. A classe e a configuração tipográfica institucional foram preservadas. Foram feitas somente quebras locais para evitar títulos órfãos, alinhamento dos painéis móveis e desvio de um conector no diagrama.
+
+Todas as 32 páginas foram renderizadas a 1500 px de altura e examinadas individualmente pelo agente de IA. Após os ajustes visuais e a síntese final do resumo, as 32 foram renderizadas novamente: 21 diferem da primeira inspeção e foram reexaminadas; 11 permanecem pixel a pixel idênticas à leitura individual anterior. A última alteração afetou somente a página 1, novamente examinada. As duas páginas da declaração independente também foram examinadas. **Não houve aprovação visual humana.**
+
+| Página(s) | Itens conferidos / observações |
+|---|---|
+| 1 | Título, autor, orientador, mês, endereço institucional, resumo/abstract equivalentes e palavras-chave; sem transbordamento |
+| 2 | Problema, contribuição e oito objetivos; título da fundamentação deslocado para a página seguinte para evitar orfandade |
+| 3 | Conceitos e NDVI, definição prévia de posição/aquisição e primeira equação |
+| 4 | NDWI/NDMI, agregações e suas fontes, sem colisão das fórmulas |
+| 5 | Séries, Engenharia de Software, clima, avaliação de uso e início dos relacionados |
+| 6 | Quatro esquemas: bandas, raster/vetor, agregações e janela didática; sem curvas espectrais presumidas |
+| 7 | Tabela documental e transição para métodos; título acompanhado do texto |
+| 8 | Entradas, QA60, datas e agregações espaciais |
+| 9 | Fluxo de processamento e equações da janela, dispersão e escore |
+| 10 | Fluxo de anomalias, unidades e somas/médias climáticas |
+| 11 | Recorte31/32, escalas, qualitativo, ética e início da implementação |
+| 12 | Arquitetura e componentes; conector não atravessa a caixa de arquivos |
+| 13 | Estado, armazenamento e orquestração; identificadores longos causam alguns espaços amplos, sem excesso de caixa |
+| 14 | Diagramas de serviço/repositórios e fluxo de áreas |
+| 15 | Consulta local, transformação de coordenadas, escala e exportação |
+| 16 | Diagramas de lookup/exportação e fechamento da implementação; espaço residual mantido para não comprimir figuras |
+| 17 | Fluxo de apresentação, referências às capturas e distinção da imagem de radiação |
+| 18 | Telas inicial e polígono; detalhes pequenos dos originais continuam limitados em impressão |
+| 19 | Três painéis de importação GeoJSON com confirmações e avisos legíveis |
+| 20 | Mapa e painel/série; ausência do eixo temporal no original expressamente indicada |
+| 21 | Clima e captura do PDF, sem alteração de valores; Figura18 não usada como prova da radiação |
+| 22 | Duas capturas móveis e QR alinhados no topo, sem página exclusiva para QR |
+| 23 | Resultados técnicos e demonstração de duas aquisições; título da avaliação com usuários deslocado para a página seguinte |
+| 24 | Perfil e interpretação das tarefas com denominadores distintos |
+| 25 | Gráfico de tarefas e tabela de utilidade; linhas e percentuais preservados |
+| 26 | Gráfico ordinal de experiência, categorias e n válido, sem truncamento do eixo |
+| 27 | Tabela temática e transição para discussão sem título órfão |
+| 28 | Objetivos/evidências e discussão de contratos e autonomia |
+| 29 | Limitações, conclusão e início da declaração deIA |
+| 30–32 | Final da declaração e referências; URLs quebradas dentro das colunas, última página com continuação em uma coluna |
+| Declaração1–2 | Quatro campos do anexo, prompts reais e área de assinatura em branco |
+
+As capturas mantêm a resolução e o conteúdo originais. A leitura assistida de página não certifica conforto de leitura de todo detalhe em impressão nem acessibilidade do PDF. A imagem efetivamente embutida na página21 foi extraída com `pdfimages` e seus pixels conferem integralmente com o arquivo original.
+
+### 3. Figuras e matemática
+
+A representação de bandas/centros/resoluções é suficiente para explicar as combinações implementadas. Não foi inserida curva espectral sem fonte. Os demais esquemas identificam dados didáticos e não são apresentados como resultados empíricos.
+
+Originais, homônimos, datas, hashes e inclusão LaTeX da captura de59,00 foram conferidos. Não apareceu arquivo substituto de conteúdo diferente: original e cópias têm SHA-256 `6d91cb54…`. Conforme a decisão expressa posterior de mantê-la, a imagem permanece **como ilustração da organização do relatório**, não como evidência de radiação correta. A verificação de unidades usa a resposta NASA e regressões/arquivos instrumentados, não a captura. Isso concilia a preservação autoral com a exclusão dessa imagem do conjunto probatório de correção científica. O novo diretório de compilação e a conferência da imagem embutida evitam atribuir o resultado a cache antigo.
+
+As12 equações, três expressões de lookup e regressão foram examinadas; variáveis, unidades e condições permanecem explícitas. Janela3, z<−1 e inclinação±0,01 continuam heurísticos não calibrados. O relatório matemático delimita fontes e a pendência específica de precedente científico B8A/B11.
+
+### 4. Síntese bibliográfica e originalidade
+
+Nenhuma referência adicionada, removida ou substituída nesta rodada. Davis e Braun/Clarke passaram de acesso pendente a conteúdo primário conferido para as afirmações usadas. Gorelick teve resumo/autoria/veículo confirmados em fonte primária Google Research; texto integral, Amani e McFeeters permanecem parcialmente verificados. Não foram incorporadas candidatas sem leitura ou obras apenas para ampliar contagem.
+
+A revisão de originalidade confrontou definições, sínteses e atribuições com as fontes disponíveis. Não foram encontradas novas passagens literais não atribuídas nesse confronto dirigido, sem alegar busca universal ou percentual. Não foram utilizados detectores ou enviados manuscrito/respostas a serviços de similaridade. Ver `AUDITORIA_REFERENCIAS.md` e `AUDITORIA_ORIGINALIDADE.md`.
+
+### 5. Encaminhamento institucional e alternativa sem questionário
+
+O questionário integra a versão para apreciação, como solicitado. Permanecem a decisão institucional sobre admissibilidade ética, a formalização do uso de IA/dados inéditos e a ciência à banca. Não houve assinatura simulada ou contato automático com autoridades.
+
+Caso a UPF determine que os resultados do questionário não podem integrar o TCC, a alternativa preparada é:
+
+1. Manter problema, OE1–OE8, fundamentos espectrais, arquitetura, métodos de processamento, testes, transferência controlada e demonstração real.
+2. Retirar, **somente após essa decisão**, a subseção de avaliação com usuários dos métodos e a inclusão `final_4a_usuarios` nos resultados, preservando dados e histórico fora do artigo.
+3. Retirar gráficos/tabelas e discussão de percepções, bem como números do questionário do resumo e da conclusão.
+4. Manter na declaração de IA o tratamento e a análise efetivamente realizados, ainda que os resultados sejam retirados da apresentação científica.
+5. Apresentar avaliação observacional com usuários como trabalho futuro condicionado a protocolo e apreciação institucional, sem prometer execução.
+
+Essa alternativa é estrutural e está pronta para decisão do orientador; não foi ativada nem produzida uma exclusão definitiva nesta rodada.
+
+### 6. Simulação crítica de banca
+
+**Exercício assistido de preparação, não parecer de avaliadores reais nem previsão de aprovação.**
+
+| Perspectiva | Pontos fortes e evidências | Fragilidade / questionamento provável | Gravidade e encaminhamento |
+|---|---|---|---|
+| Engenharia de Software | Responsabilidades modularizadas, repositórios intercambiáveis, snapshot e identidade de aquisição; `main.py`, `export_context.py`, pipeline, specs16/17;710 testes e Node | “Se os índices já existem, o que foi desenvolvido?” A resposta deve explicar integração, contratos e fronteiras, não reivindicar método espectral novo | Média: narrativa fortalecida; preparar demonstração dos contratos |
+| Engenharia de Software | Gradefloat32/zlib/Base64 e consulta no navegador verificáveis | “Qual o custo em memória e qual o ganho de latência?” Há tamanhos controlados, não benchmark em produção; consultas por aquisição permanecem sequenciais | Alta para alegação de desempenho: não fazê-la; ensaios futuros |
+| Engenharia de Software | Testes têm escopos separados e arquivos reais são preservados | “100% significa que está correto?” Serviços substituídos e expectativas podem não abranger semântica; entrypoint/JavaScript fora da cobertura Python | Alta: escopo explícito; nenhuma garantia de ausência de defeitos |
+| Metodologia Científica | Questão e objetivos computacionais coerentes; rastreabilidade e métodos descritos | “Que método científico formal foi aplicado?” Construção e avaliação do artefato com consulta dirigida; não atribuir DSR retrospectivamente | Média: sustentar procedimento efetivo, não rótulo metodológico inventado |
+| Metodologia Científica | Fonte pública contém integralmente o recorte e cálculos são reproduzíveis | “Por que31 se a fonte tem32 elegíveis?” Justificativa ainda não documentada; não responder que o adicional falhou na triagem | Alta: decisão/explicação do recorte necessária antes da entrega definitiva |
+| Metodologia Científica | Consentimento informado e transparência de IA preservados | “Qual a aprovação ou dispensa ética e a autorização de IA?” Documentação formal não comprovada; declaração não substitui aprovação | Alta institucional: orientador/instância competente; alternativa estrutural acima |
+| Metodologia Científica | Frequências, denominadores e codificação multirrótulo explícitos | “Questionário mede usabilidade validada?” Autorrelato por adesão, sem controle/psicometria/dupla codificação; não inferir causalidade ou população | Média: limites e prioridade de avaliação observacional |
+| Sensoriamento/Geoespacial | Fórmulas e bandas explicitadas; ordem das agregações correta | “Por que NDWI e NDMI próximos?” Diferem emB8/B8A; não duas medições independentes de solo nem superioridade | Alta se interpretação errada: definições no texto e fonte técnica/científica delimitada |
+| Sensoriamento/Geoespacial | QA60, escala nativa e ponderação descritas | “Nuvens/sombras e CRS não fixado afetam a comparação?” Sim, além de cobertura variável por aquisição; grade10m não cria detalhe em20m | Alta para equivalência numérica irrestrita: limitar alcance; avaliação futura de máscaras/grades |
+| Sensoriamento/Geoespacial | Regra temporal reproduzível e exemplo didático explícito | “Qual sensibilidade/especificidade do detector?” Não medidas; janela não sazonal e demonstração com dois pontos não ativa regra | Alta para eficácia agronômica: não alegar; evidência atual é computacional |
+| Sensoriamento/Geoespacial | Unidades normalizadas por metadados e saída ausente preservada | “A captura59,00 prova que a radiação está correta?” Não: ilustração da interface, excluída da verificação científica do valor | Alta de comunicação: distinção explícita e captura sem adulteração |
+
+### 7. Perguntas de defesa e respostas fundamentadas
+
+1. **Qual a contribuição própria?** A integração modular de serviços, geometrias, grades, estado e formatos, com consulta local e contratos verificáveis. Não são novos índices ou um modelo agronômico. Evidência: arquitetura, pipeline, snapshot e exportadores.
+2. **Por que SDD?** O processo efetivamente utilizou especificações, critérios e tarefas para orientar implementação e testes. Não foi medido ganho sobre outros métodos e não se afirma uso do Spec Kit. Evidência: `docs/specs/index.md` e histórico.
+3. **Por que transferir a grade?** Para consultar células no navegador após a análise, sem nova requisição de valor ao Earth Engine por evento. O compromisso é transferência/memória inicial; a latência em produção não foi medida. Evidência: `preload_index_values`, HTML e teste Node.
+4. **O que os710 testes comprovam?** Aprovação dos comportamentos representados nos casos e cobertura de todos os caminhos medidos em `src/app`, no ambiente registrado. Não comprovam todos os usos, serviços externos ou correção de todas as expectativas. Evidência: log original e escopos dos testes.
+5. **Como evitar exportar resultados de outra área?** A mudança de parâmetros invalida o snapshot; a geração verifica correspondência e usa contexto comum normalizado. Evidência: `invalidate_changed_analysis` e `build_export_context`.
+6. **O mapa e a série deveriam ter a mesma média?** Não. O mapa é mediana por posição e depois média espacial; a série é média espacial por aquisição. A ordem das operações, máscaras e pesos muda o resultado. Evidência: equações e exemplo0,6/0,5.
+7. **NDWI mede água superficial ou umidade do solo?** O identificador do sistema usaB8/B11, varianteNIR–SWIR; não é o verde–NIR de McFeeters e não mede diretamente umidade do solo. O chamadoNDMI usaB8A/B11. Evidência: código, catálogo e fontes delimitadas.
+8. **Por que janela3 e−1?** São parâmetros heurísticos da implementação, sem calibração por cultura. A literatura oferece precedentes de padronização, não valida esses parâmetros locais. Não há justificativa histórica adicional comprovada. Evidência: código e auditoria matemática.
+9. **A demonstração validou as anomalias?** Validou o encadeamento e os arquivos, não a aplicação do escore: duas aquisições são insuficientes. Os casos de regra foram verificados com dados controlados. Evidência: XLSX/CSV real, manifesto e testes.
+10. **O que se conclui do questionário?** No recorte31 há média7,74, mediana8 e interesse declarado acompanhado de barreiras de autonomia; não uso continuado, representatividade ou eficácia agronômica. Evidência: distribuições e recomputação.
+11. **Por que o registro32 não foi incluído?** A diferença entre fonte pública e arquivo analisado foi identificada e explicitada; sua razão ainda precisa ser esclarecida pelo responsável. Não há resposta documental que permita alegar inelegibilidade ou outra justificativa. Evidência: conferência pública.
+12. **Houve aprovação ética e autorização formal de IA?** Não se apresenta aprovação ou dispensa ética, nem formalização de IA como comprovadas. O encaminhamento cabe ao orientador e àUPF. Há declarações transparentes e minuta sem assinatura, não regularização retrospectiva.
+13. **A IA participou só da gramática?** Não. Houve especificação, geração/revisão de código e testes, análise quantitativa, codificação qualitativa, diagramas, pesquisa e reformulação substancial do artigo. Supervisão e responsabilidade são do pesquisador. Evidência: registro e declarações.
+14. **Por que não comparar o sistema com plataformas comerciais em desempenho?** A comparação realizada é documental e por finalidade. Não houve benchmark; as plataformas podem ter recursos semelhantes, inclusive leitura por posição. Evidência: matriz e guias oficiais.
+15. **Qual a próxima avaliação prioritária?** Para software, desempenho/compatibilidade e observação de tarefas; para interpretação agronômica, protocolo de campo e calibração temporal. São propostas de continuidade, não resultados obtidos.
+
+### 8. Estado dos critérios e pendências
+
+A consolidação editorial, a apresentação da contribuição e a recomputação do recorte foram realizadas. A verificação técnica/visual final é registrada nos manifestos desta rodada, sem alegar inspeção humana. Permanecem **parciais** a verificação primária integral de algumas referências e a justificativa31/32; permanecem **pendentes de decisão humana/institucional** a leitura substantiva final, a admissibilidade ética e os atos formais deIA. Portanto, o artigo pode ser encaminhado para apreciação do orientador, mas não se declara aceite integral de todos os critérios ou regularidade institucional definitiva.
+
+Lista objetiva e classificação por responsabilidade em `PENDENCIAS_AUTOR.md`; alterações por arquivo em `CHANGELOG_ARTIGO.md`. As seções seguintes são histórico e não prevalecem sobre este parecer.
+
+## Parecer histórico — rodada PA01–PA18
+
+**15/11/2026, base `f31d0a5`: revisão implementada parcialmente; não concluída pelos critérios de aceite.** Todas as 18 decisões receberam encaminhamento em `PENDENCIAS_AUTOR.md`, mas autorização de execução não foi confundida com evidência ou aprovação institucional. A versão resultante é para revisão, não para entrega institucional definitiva.
+
+### Alterações realizadas
+
+- Orientador corrigido para Prof. Rafael Rieder; mês dezembro de 2026; classe institucional e endereço do repositório preservados.
+- Escopo definitivo computacional; retirada da cobrança de estudos agronômicos por cultura como objetivos atuais. O histórico permanece no Git e neste registro.
+- SDD descrito com especificações/tarefas/decisões/commits existentes e supervisão declarada pelo autor. Fontes técnicas de SDD distinguidas de publicações científicas.
+- Formulação B8/B11 conferida na Tabela 1 do PDF de Izquierdo-Sanz e Moltó; NIST acrescentado à mediana e Meroni ao escore/limiar, sem atribuir validação à janela3.
+- Fundamentos de responsabilidades de módulos, testes e limites da cobertura ampliados; sem atribuir um padrão arquitetural novo ao projeto.
+- Trabalhos relacionados em seção própria, com comparação por finalidade e funcionalidades verificadas em fontes oficiais; arquitetura local não apresentada como exclusividade.
+- Registro de aprovação qualitativa pelo autor e distinção entre estratégia, execução assistida e supervisão. Ausência de dupla codificação preservada.
+- Declaração de IA no artigo e minuta independente conforme o anexo da IN oficial, incluindo geração/reformulação substancial e auditorias posteriores.
+- Análise da planilha identificada como tal, sem consolidá-la como evidência empírica confirmada. Não houve alteração de respostas, carimbos ou categorias nesta rodada.
+- Auditoria preliminar de atribuição/originalidade criada, sem percentual inventado.
+
+### Integridade dos dados: resultado e impedimento
+
+As duas planilhas foram localizadas: original preservado (`d61b9f...`) e versão anteriormente corrigida (`9adb66...`). A conferência independente passou para 31 registros, 40 itens e 191 categorias; as 49 colunas de respostas permanecem idênticas, e somente os sete carimbos da retificação histórica diferem. Não houve retificação nova.
+
+O original recebido contém metadados openpyxl e sete carimbos posteriores à data de criação declarada. Isso **não prova fabricação**, mas impede usar metadados como autenticação de exportação original do Forms. As fixtures conhecidas em `tests/test_user_survey_analysis.py` e `avaliacao_usuarios/scripts/test_analise.py` são separadas da planilha; a ausência de seus textos não exclui toda possível origem sintética desconhecida.
+
+O autor declara dados reais, fuso Brasília e encerramento; são informações registradas como declaração. Não foram localizados exportação independente original do serviço, registro administrativo de encerramento ou commit exato público. A consulta passiva do formulário mostrou a primeira etapa e o orientador antigo; **não foi enviada resposta nem acionada a etapa seguinte**. A página, sozinha, não confirma nem refuta recebimento de novas respostas. O artigo mantém números para inspeção, mas não os apresenta como resultados empíricos confirmados, e não consolida aceitação na conclusão/resumo.
+
+### Ética, consentimento e IA
+
+A primeira etapa pública informa finalidade acadêmica, ausência de solicitação de nome/e-mail e participação voluntária, com pergunta conjunta de idade/leitura/consentimento. Não foi obtido histórico imutável completo das páginas do formulário em todas as datas da coleta. Idade é autodeclarada. Ausência de identificador direto não certifica anonimato, sobretudo em perfis pequenos e excertos literais.
+
+O autor informa não submissão ao CEP e ausência de orientação prévia sobre a necessidade. A Resolução CNS510/2016 foi obtida em fonte oficial: art.1º diferencia hipóteses e §1º não permite presumir que TCC seja simples atividade de ensino dispensada pelo incisoVIII. A hipótese de opinião pública do incisoI tampouco foi automaticamente aplicada a este instrumento. A investigação identificou também a necessidade de conferir o regime da Lei14.874/2024 e Decreto12.651/2025 e orientações de transição; não se concluiu parecer jurídico de enquadramento. Cabe à instância competente da UPF decidir o encaminhamento e a possibilidade de utilização dos resultados. O texto não regulariza retrospectivamente a pesquisa.
+
+A IN03/2026/PROACAD de 28/10/2026, obtida por link oficial público da UPF, foi lida integralmente (5 páginas e anexo). Art.4º exige autorização e limites em documento por canais formais; art.6º exige descrição no trabalho e declaração específica; art.8º exige ciência à banca; art.3ºVI protege dados inéditos. Os arts.5º/10/11 não são atendidos apenas pela existência de um PDF assinado: uso efetivo, transparência e responsabilidade precisam corresponder à prática. Não há documento de autorização, limites, dados inéditos ou comunicação à banca localizado. A minuta não foi assinada.
+
+### Impedimentos que permanecem
+
+1. PA05/07/08: procedência e decisões institucionais acima.
+2. PA11/12: validação bibliográfica integral e ampliação científica ainda parcial. Oito novas entradas estão individualmente delimitadas; fontes primárias bloqueadas não foram dadas como lidas.
+3. PA14: reconstrução das três curvas com fonte/direitos específicos não concluída. O esquema anterior foi retirado do PDF, com histórico preservado no Git; não se aceita atribuição genérica a Weiss como origem das três curvas. As outras quatro figuras conceituais foram preservadas.
+4. PA15: captura disponível é idêntica à excluída e ainda mostra radiação59,00 MJ/m²/dia. Não incorporada.
+5. PA18: leitura e aprovação humana da nova versão e da minuta, além da revisão direta das fontes pelo pesquisador.
+
+### Entrega e rastreabilidade
+
+Fontes/PDF atualizados, bibliografia, pareceres, matriz, originalidade, registro de IA, minuta independente, diff antes/depois, hashes, relatório de compilação e inspeção assistida ficam ligados por `evidencias/revisao_final_pa/README.md`. Os manifestos anteriores não foram sobrescritos. Não houve alteração funcional, novo deploy, commit, push ou contato com autoridades acadêmicas.
+
+## Registro histórico da auditoria anterior
+
 **Data:** 15/11/2026. **Parecer:** revisão parcial com correções fundamentadas; **não declarar conclusão integral**. A entrega reúne fontes/PDF revistos e os seis registros solicitados, mas a validação semântica exaustiva de todas as afirmações, a normalização institucional e decisões substantivas continuam abertas.
 
 ## 1. Escopo, versão e método

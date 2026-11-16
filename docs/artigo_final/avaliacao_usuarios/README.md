@@ -1,5 +1,7 @@
 # Avaliação da plataforma com usuários
 
+**Terceira rodada:** coleta encerrada e participantes reais confirmados pelo pesquisador. As31 respostas analisadas, inclusive datas, coincidem integralmente com registros da [fonte pública](https://docs.google.com/spreadsheets/d/1wQJfoqnhpUMK8nJkZCLo9wp2YA34BsBons0T_NRZNFw/edit?usp=sharing). Os40 itens/191 categorias,13 temas/142 células e estatísticas foram recalculados sem alterar dados ou resultados. A fonte tem32 registros; o adicional é elegível e sua ausência do arquivo de31 requer esclarecimento, não incorporação automática. Aprovação qualitativa anterior mantida; nova redação sujeita à leitura final. Admissibilidade ética e formalização deIA seguem para o orientador. Ver [pendências vigentes](../auditoria_cientifica/PENDENCIAS_AUTOR.md) e `../evidencias/terceira_rodada/`.
+
 Análise de **31 submissões elegíveis ao questionário de avaliação com usuários**,
 registradas em `docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx`.
 A versão pública avaliada antecede as correções locais. Os dados são

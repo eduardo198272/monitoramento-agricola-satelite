@@ -1,6 +1,12 @@
 # Auditoria científica — 15/11/2026
 
-**Estado: parcial; não aprovada para entrega final.** Fontes LaTeX e PDF foram atualizados, sem mudança no software ou nas respostas da avaliação.
+**Estado vigente: terceira rodada consolidada para apreciação do orientador, sem aprovação institucional definitiva.** O [relatório consolidado](AUDITORIA_CIENTIFICA.md) contém alterações, comparação, alternativa sem questionário, simulação das três perspectivas de banca e perguntas/respostas de defesa. Fontes/PDF foram atualizados sem mudança no software ou nos dados.
+
+**Validação atual:** `../evidencias/terceira_rodada/`. As decisõesPA01–PA18 e sua classificação vigente estão em [PENDENCIAS_AUTOR.md](PENDENCIAS_AUTOR.md). Os relatórios receberam complementos no início; osJSONs, logs e contagens anteriores foram preservados como históricos, sem identificar automaticamente o novoPDF.
+
+- [Originalidade preliminar](AUDITORIA_ORIGINALIDADE.md)
+- [Registro de IA](../REGISTRO_USO_IA.md)
+- [Minuta independente conforme anexo UPF](../DECLARACAO_USO_IA.tex)
 
 ## Documentos principais
 

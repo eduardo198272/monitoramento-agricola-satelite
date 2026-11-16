@@ -1,0 +1,1187 @@
+diff --git a/docs/artigo_final/README.md b/docs/artigo_final/README.md
+index caf410e..f386185 100644
+--- a/docs/artigo_final/README.md
++++ b/docs/artigo_final/README.md
+@@ -35,7 +35,9 @@ seção, conferência de fontes e pendências.
+ - [Avaliação com usuários: planilha, análise e gráficos](avaliacao_usuarios/README.md)
+ - [Capturas fornecidas pelo autor: substituição e validação atual do PDF](evidencias/capturas_autor/README.md)
+ - [Revisão anterior da redação da avaliação](evidencias/revisao_redacao_usuarios/README.md)
+-- [Auditoria científica parcial e pendências](auditoria_cientifica/README.md)
++- [Auditoria científica e encaminhamento PA01–PA18](auditoria_cientifica/AUDITORIA_CIENTIFICA.md)
++- [Pendências efetivamente remanescentes](auditoria_cientifica/PENDENCIAS_AUTOR.md)
++- [Registro de uso de IA](REGISTRO_USO_IA.md) e [minuta independente](DECLARACAO_USO_IA.tex)
+ - [Diagnóstico e aplicação da revisão didática](REVISAO_DIDATICA_ESCRITA.md)
+ - [Validação da revisão didática e compilação atual](evidencias/revisao_didatica/README.md)
+ 
+@@ -81,7 +83,7 @@ backup histórico, não a versão atual nem parte desta atualização versionada
+ ## Pendências acadêmicas
+ 
+ - Confirmar mês da defesa, formato de papel e endereço institucional do cabeçalho.
+-  O orientador informado pelo autor é Prof. Carlos Amaral Holbig.
++  O orientador confirmado na rodada PA01–PA18 é Prof. Rafael Rieder, com defesa em dezembro de 2026. Essa informação substitui as declarações anteriores; documentos históricos não foram reescritos como se a confirmação sempre tivesse existido.
+ - Conferir integralmente trabalhos relacionados e a referência específica de NDMI.
+ - Revisar com o orientador a mudança de escopo: estudos de soja, milho e pastagem
+   e experimentos de campo não foram realizados; não são resultados do artigo.
+diff --git a/docs/artigo_final/Relatorio_Final.pdf b/docs/artigo_final/Relatorio_Final.pdf
+index da80781..38d27b7 100644
+Binary files a/docs/artigo_final/Relatorio_Final.pdf and b/docs/artigo_final/Relatorio_Final.pdf differ
+diff --git a/docs/artigo_final/Relatorio_Final.tex b/docs/artigo_final/Relatorio_Final.tex
+index 2a3be08..dd5d48c 100644
+--- a/docs/artigo_final/Relatorio_Final.tex
++++ b/docs/artigo_final/Relatorio_Final.tex
+@@ -2,6 +2,21 @@
+ \documentclass[alpha-refs,english,brazilian]{CC-EC_TF-TC}
+ \usepackage{tikz}
+ \usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric}
++\usepackage{etoolbox}
++\setlength{\headheight}{18.2pt}
++\addtolength{\topmargin}{-0.7pt}
++\let\TCCOriginalHref\href
++\renewcommand{\href}[3][]{%
++  \ifstrequal{#3}{https://repositorio.upf.br/handle/123456789/8754}
++    {\TCCOriginalHref[#1]{#2}{\nolinkurl{#3}}}
++    {\TCCOriginalHref[#1]{#2}{#3}}}
++\makeatletter
++\AtBeginDocument{%
++  \patchcmd{\@maketitle}
++    {\begin{textblock*}{\textwidth-21pc}(21pc,0pt)}
++    {\begin{textblock*}{\textwidth-21pc+4pc+6.64pt}(21pc,0pt)}
++    {}{\PackageError{TCC}{Bloco institucional de cabecalho nao localizado}{Conferir a classe antes de ajustar o conteiner.}}}
++\makeatother
+ 
+ \AtBeginDocument{\renewcommand{\harvardand}{e}}
+ \input{figuras_relatorio}
+@@ -11,13 +26,12 @@
+ \title{Sistema de Monitoramento Agrícola por Imagens de Satélite}
+ \titleother{Agricultural Monitoring System Using Satellite Imagery}
+ \author[1]{Eduardo Steffens Hoppen}
+-\affil[1]{Universidade de Passo Fundo, Instituto de Tecnologia, Curso de Ciência da Computação\\Orientador: Prof. Carlos Amaral Holbig}
++\affil[1]{Universidade de Passo Fundo, Instituto de Tecnologia, Curso de Ciência da Computação\\Orientador: Prof. Rafael Rieder}
+ \runningauthor{Hoppen}
+ \titulores{Monitoramento agrícola por imagens de satélite}
+ \papercat{Trabalho de Conclusão de Curso}
+-% PENDENTE: confirmar mês e ano da defesa.
+ \jyear{2026}
+-\jmonth{} % Pendente administrativo: mês da defesa, confirmar antes da entrega.
++\jmonth{dezembro}
+ \jcourse{Ciência da Computação}
+ \setcounter{page}{1}
+ \firstpage{1}
+@@ -38,5 +52,6 @@
+ \input{final_4_resultados}
+ \input{final_5_discussao}
+ \input{final_6_conclusao}
++\input{final_7_uso_ia}
+ \bibliography{referencias}
+ \end{document}
+diff --git a/docs/artigo_final/auditoria_cientifica/AUDITORIA_CIENTIFICA.md b/docs/artigo_final/auditoria_cientifica/AUDITORIA_CIENTIFICA.md
+index 857b8aa..1b397ed 100644
+--- a/docs/artigo_final/auditoria_cientifica/AUDITORIA_CIENTIFICA.md
++++ b/docs/artigo_final/auditoria_cientifica/AUDITORIA_CIENTIFICA.md
+@@ -1,5 +1,52 @@
+ # Auditoria científica — versão de trabalho
+ 
++## Parecer vigente — rodada PA01–PA18
++
++**15/11/2026, base `f31d0a5`: revisão implementada parcialmente; não concluída pelos critérios de aceite.** Todas as 18 decisões receberam encaminhamento em `PENDENCIAS_AUTOR.md`, mas autorização de execução não foi confundida com evidência ou aprovação institucional. A versão resultante é para revisão, não para entrega institucional definitiva.
++
++### Alterações realizadas
++
++- Orientador corrigido para Prof. Rafael Rieder; mês dezembro de 2026; classe institucional e endereço do repositório preservados.
++- Escopo definitivo computacional; retirada da cobrança de estudos agronômicos por cultura como objetivos atuais. O histórico permanece no Git e neste registro.
++- SDD descrito com especificações/tarefas/decisões/commits existentes e supervisão declarada pelo autor. Fontes técnicas de SDD distinguidas de publicações científicas.
++- Formulação B8/B11 conferida na Tabela 1 do PDF de Izquierdo-Sanz e Moltó; NIST acrescentado à mediana e Meroni ao escore/limiar, sem atribuir validação à janela3.
++- Fundamentos de responsabilidades de módulos, testes e limites da cobertura ampliados; sem atribuir um padrão arquitetural novo ao projeto.
++- Trabalhos relacionados em seção própria, com comparação por finalidade e funcionalidades verificadas em fontes oficiais; arquitetura local não apresentada como exclusividade.
++- Registro de aprovação qualitativa pelo autor e distinção entre estratégia, execução assistida e supervisão. Ausência de dupla codificação preservada.
++- Declaração de IA no artigo e minuta independente conforme o anexo da IN oficial, incluindo geração/reformulação substancial e auditorias posteriores.
++- Análise da planilha identificada como tal, sem consolidá-la como evidência empírica confirmada. Não houve alteração de respostas, carimbos ou categorias nesta rodada.
++- Auditoria preliminar de atribuição/originalidade criada, sem percentual inventado.
++
++### Integridade dos dados: resultado e impedimento
++
++As duas planilhas foram localizadas: original preservado (`d61b9f...`) e versão anteriormente corrigida (`9adb66...`). A conferência independente passou para 31 registros, 40 itens e 191 categorias; as 49 colunas de respostas permanecem idênticas, e somente os sete carimbos da retificação histórica diferem. Não houve retificação nova.
++
++O original recebido contém metadados openpyxl e sete carimbos posteriores à data de criação declarada. Isso **não prova fabricação**, mas impede usar metadados como autenticação de exportação original do Forms. As fixtures conhecidas em `tests/test_user_survey_analysis.py` e `avaliacao_usuarios/scripts/test_analise.py` são separadas da planilha; a ausência de seus textos não exclui toda possível origem sintética desconhecida.
++
++O autor declara dados reais, fuso Brasília e encerramento; são informações registradas como declaração. Não foram localizados exportação independente original do serviço, registro administrativo de encerramento ou commit exato público. A consulta passiva do formulário mostrou a primeira etapa e o orientador antigo; **não foi enviada resposta nem acionada a etapa seguinte**. A página, sozinha, não confirma nem refuta recebimento de novas respostas. O artigo mantém números para inspeção, mas não os apresenta como resultados empíricos confirmados, e não consolida aceitação na conclusão/resumo.
++
++### Ética, consentimento e IA
++
++A primeira etapa pública informa finalidade acadêmica, ausência de solicitação de nome/e-mail e participação voluntária, com pergunta conjunta de idade/leitura/consentimento. Não foi obtido histórico imutável completo das páginas do formulário em todas as datas da coleta. Idade é autodeclarada. Ausência de identificador direto não certifica anonimato, sobretudo em perfis pequenos e excertos literais.
++
++O autor informa não submissão ao CEP e ausência de orientação prévia sobre a necessidade. A Resolução CNS510/2016 foi obtida em fonte oficial: art.1º diferencia hipóteses e §1º não permite presumir que TCC seja simples atividade de ensino dispensada pelo incisoVIII. A hipótese de opinião pública do incisoI tampouco foi automaticamente aplicada a este instrumento. A investigação identificou também a necessidade de conferir o regime da Lei14.874/2024 e Decreto12.651/2025 e orientações de transição; não se concluiu parecer jurídico de enquadramento. Cabe à instância competente da UPF decidir o encaminhamento e a possibilidade de utilização dos resultados. O texto não regulariza retrospectivamente a pesquisa.
++
++A IN03/2026/PROACAD de 28/10/2026, obtida por link oficial público da UPF, foi lida integralmente (5 páginas e anexo). Art.4º exige autorização e limites em documento por canais formais; art.6º exige descrição no trabalho e declaração específica; art.8º exige ciência à banca; art.3ºVI protege dados inéditos. Os arts.5º/10/11 não são atendidos apenas pela existência de um PDF assinado: uso efetivo, transparência e responsabilidade precisam corresponder à prática. Não há documento de autorização, limites, dados inéditos ou comunicação à banca localizado. A minuta não foi assinada.
++
++### Impedimentos que permanecem
++
++1. PA05/07/08: procedência e decisões institucionais acima.
++2. PA11/12: validação bibliográfica integral e ampliação científica ainda parcial. Oito novas entradas estão individualmente delimitadas; fontes primárias bloqueadas não foram dadas como lidas.
++3. PA14: reconstrução das três curvas com fonte/direitos específicos não concluída. O esquema anterior foi retirado do PDF, com histórico preservado no Git; não se aceita atribuição genérica a Weiss como origem das três curvas. As outras quatro figuras conceituais foram preservadas.
++4. PA15: captura disponível é idêntica à excluída e ainda mostra radiação59,00 MJ/m²/dia. Não incorporada.
++5. PA18: leitura e aprovação humana da nova versão e da minuta, além da revisão direta das fontes pelo pesquisador.
++
++### Entrega e rastreabilidade
++
++Fontes/PDF atualizados, bibliografia, pareceres, matriz, originalidade, registro de IA, minuta independente, diff antes/depois, hashes, relatório de compilação e inspeção assistida ficam ligados por `evidencias/revisao_final_pa/README.md`. Os manifestos anteriores não foram sobrescritos. Não houve alteração funcional, novo deploy, commit, push ou contato com autoridades acadêmicas.
++
++## Registro histórico da auditoria anterior
++
+ **Data:** 15/11/2026. **Parecer:** revisão parcial com correções fundamentadas; **não declarar conclusão integral**. A entrega reúne fontes/PDF revistos e os seis registros solicitados, mas a validação semântica exaustiva de todas as afirmações, a normalização institucional e decisões substantivas continuam abertas.
+ 
+ ## 1. Escopo, versão e método
+diff --git a/docs/artigo_final/auditoria_cientifica/AUDITORIA_EQUACOES.md b/docs/artigo_final/auditoria_cientifica/AUDITORIA_EQUACOES.md
+index a5ef5dc..d45bb54 100644
+--- a/docs/artigo_final/auditoria_cientifica/AUDITORIA_EQUACOES.md
++++ b/docs/artigo_final/auditoria_cientifica/AUDITORIA_EQUACOES.md
+@@ -1,5 +1,20 @@
+ # Auditoria matemática
+ 
++## Atualização PA01–PA18
++
++15/11/2026. As 12 equações analíticas, as três expressões de lookup e o ajuste linear foram preservados; a comparação automática desta rodada é contra `f31d0a5`. A confirmação do autor autoriza manter os parâmetros particulares, não converte heurísticas em calibração. Complementos:
++
++- **Eq. 2:** Tabela 1, p.5, de Izquierdo-Sanz e Moltó (2026), DOI `10.3390/agronomy16050541`, consultada em PDF integral do repositório IVIA, utiliza `(B8−B11)/(B8+B11)` sob o nome NDMI. É precedente exato de bandas, não validação de toda a aplicação.
++- **Eq. 3:** exemplo técnico Sentinel Hub B8A/B11 mantido com inconsistência entre prosa/código. Pohjankukka não foi utilizado, pois não se obteve texto integral verificável. Não se declara completa a busca científica dessa variante.
++- **Eq. 4:** NIST, *Measures of Location*, §1.3.5.1, fundamenta definição par/ímpar e menor sensibilidade da mediana a extremos. Earth Engine fundamenta a operação por pixel/banda e observações não mascaradas. “Pode reduzir interferências extremas” não significa eliminar nuvens ou sombras. Griffiths e Flood não foram confundidos com mediana convencional nem inseridos sem leitura.
++- **Eq. 5–6:** guia oficial `reducers_reduce_region`, subseção *Pixels in the region*, reconferido: peso mínimo entre máscara e fração aproximada, quantização em 8 bits, escala e projeção. Não há nova área física observada a 10 m em bandas nativas de 20 m.
++- **Eq. 7–8:** permanecem média retrospectiva de 3 observações e `np.std(..., ddof=0)`, com divisor N. Não foi alterado o conjunto de referência para alegar coincidência com literatura.
++- **Eq. 9:** Meroni et al. (2019), Eq.1/§3.1, padroniza NDVI pela média/desvio históricos do mesmo decêndio; §3.2.3 examina limiar −1 SD. São 14 anos de referência (2003–2016), dados MODIS e consolidação/sazonalidade. Tabela 2 inclui fronteira `≤−1`, enquanto o código deste TCC usa estritamente `<−1`. Não se afirma equivalência operacional, normalidade ou probabilidade de 15,9% na janela de três observações. Peters/Rembold continuam candidatos, não fontes primárias lidas nesta rodada.
++- **Regressão:** mínimos quadrados e NumPy mantidos. A consulta a de Jong não forneceu texto integral; nenhum limiar ±0,01 foi atribuído ao estudo.
++- **Eq. 10–12:** preservadas somas/médias sobre dias válidos e fator 3,6 baseado em unidades; fonte NASA e resposta histórica continuam delimitadas. Não se executou nova consulta meteorológica nem reprocessamento remoto nesta rodada.
++
++Os pareceres abaixo são o registro anterior, complementado e não substituído por uma alegação de validação integral.
++
+ Data: 15/11/2026. Escopo: 12 equações analíticas, três expressões de lookup e ajuste linear não numerado. A numeração deve ser conferida no PDF compilado; os rótulos e arquivos são os localizadores estáveis. Fórmulas elementares não recebem autoria artificial.
+ 
+ ## Convenções comuns
+diff --git a/docs/artigo_final/auditoria_cientifica/AUDITORIA_REFERENCIAS.md b/docs/artigo_final/auditoria_cientifica/AUDITORIA_REFERENCIAS.md
+index a17f568..6e4bb21 100644
+--- a/docs/artigo_final/auditoria_cientifica/AUDITORIA_REFERENCIAS.md
++++ b/docs/artigo_final/auditoria_cientifica/AUDITORIA_REFERENCIAS.md
+@@ -1,5 +1,39 @@
+ # Auditoria das referências
+ 
++## Atualização PA01–PA18 — novas consultas e alterações
++
++15/11/2026. Base `f31d0a5`, com 52 entradas; **oito entradas adicionadas, nenhuma removida ou substituída**. As entradas sem uso não foram apresentadas como fontes validadas por tema semelhante. Os pareceres individuais R01–R52 abaixo permanecem, com suas restrições; este complemento não os converte em leitura integral.
++
++| Chave / identificação | Acesso e localização efetiva | Afirmação inserida / limites |
++|---|---|---|
++| `MERONI2019` — Meroni, Fasbender, Rembold, Atzberger e Klisch; *Remote Sensing of Environment* 221, 508–521 (2019); DOI 10.1016/j.rse.2018.11.041 | Texto integral público PMC6360378, CC BY; §2, Eq.1/§3.1, Tabela2, §3.2.3 | Padronização de NDVI e limiar −1; referência histórica sazonal e estágios de consolidação diferem de janela3. Não valida heurística implementada. |
++| `PARNAS1972` — D. L. Parnas; *Communications of the ACM* 15(12), 1053–1058 (1972); DOI 10.1145/361598.361623 | PDF público em domínio universitário TU/e; p.1054, *What Is Modularization?*, e discussão das duas decomposições; resumo/critério de ocultação de decisões | Responsabilidades e fronteiras de módulos; não demonstra ganho de manutenibilidade medido no TCC. |
++| `NIST_LOCATION` — NIST, *Measures of Location*, e-Handbook; sem ano editorial identificado; sem DOI específico declarado | Página oficial integral §1.3.5.1, definições de média/mediana e exemplo Cauchy | Mediana par/ímpar e sensibilidade a extremos. Fonte técnica estatística, não estudo Sentinel-2. |
++| `GITHUB_SDD` — GitHub, *Specification-Driven Development*, documentação Spec Kit; sem ano editorial identificado; sem DOI | Markdown integral oficial, *The SDD Workflow in Practice* e *Core Principles* | Especificações como artefatos orientadores; fonte técnica, não validação experimental ou prova de uso do toolkit neste projeto. |
++| `BOECKELER2025` — Birgitta Böckeler, *Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl*, 15/10/2025; sem DOI | Artigo técnico integral no site de Martin Fowler; *Definition*, *What is a spec?*, *Observations and questions* | Diferentes níveis e riscos de SDD; não é artigo revisado por pares ou evidência de superioridade. |
++| `UPF_IA2026` — Universidade de Passo Fundo, IN nº03/2026/PROACAD, 28/10/2026; sem DOI | PDF oficial, 5 páginas, íntegra e anexo, obtido por link público da UPF | Arts.3–8/10–11; declaração e exigência de autorização/limites formais. Não comprova que o projeto recebeu essa autorização. |
++| `EOSDA_GUIDE` — EOS Data Analytics, *Crop Monitoring User Guide*, sem data editorial identificada/DOI | Guia oficial integral; seções *Add field*, *Work With Crop Map*, *Monitoring*, *Weather* e página *Account And Pricing* | Matriz por funcionalidade; origem/comercialidade documentada. Leitura por cursor existe no produto; arquitetura local não estabelecida. Promessas agronômicas comerciais não adotadas como resultados. |
++| `ONESOIL_PLATFORM_DETAIL` — OneSoil, *Platform*, sem data editorial identificada/DOI | Página detalhada integral; funcionalidades e FAQ de produtos, assinaturas, exportações e campos | Matriz de produto final, plataformas web/móvel, limites e assinaturas; não certifica desempenho nem equivalência das saídas. |
++| `IZQUIERDO2026` — entrada existente, DOI10.3390/agronomy16050541 | PDF integral público IVIA `2026_Izquierdo-Sanz_Hybrid.pdf`, p.5/Tabela1 e §§2.3–2.4 | Confirmada fórmula exata B8/B11 chamada NDMI; suporte específico ampliado, sem nova entrada duplicada. |
++| `ISO9241_2018` — entrada existente | Resumo oficial reconferido: quadro conceitual, usabilidade como resultado e ausência de método obrigatório; **não** texto integral pago | Afirmação atual restringe-se a esse conteúdo diretamente acessado; nenhuma definição normativa adicional foi atribuída. |
++
++URLs públicas estão nas entradas BibTeX e no registro de acessos da rodada. Hashes dos conteúdos obtidos são evidência de identidade do arquivo consultado, não prova isolada de leitura. PDFs científicos ficam em cache local, sem republicação automática.
++
++### Candidatas não incorporadas
++
++| Candidata | Consulta / decisão |
++|---|---|
++| Pohjankukka et al. (2025), *Geoderma*455,117216, DOI10.1016/j.geoderma.2025.117216 | Título e registro localizados: *Digital mapping of peat thickness and extent in Finland using remote sensing and machine learning*. Jukuri e Helda devolveram desafios anti-bot; editora não forneceu texto. Não confirmada fórmula B8A/B11; não inserida. Link legítimo: https://helda.helsinki.fi/items/1665caeb-2541-4f9e-88ba-f0752cf39e2d |
++| Peters et al. (2002), *Drought Monitoring with NDVI-Based Standardized Vegetation Index* | Registro e referências secundárias localizados, 68(1),71–75; URL tentada no ASPRS retornou404. Texto integral não lido; não transposto de Meroni como leitura primária. |
++| Griffiths et al. (2013), *A Pixel-Based Landsat Compositing Algorithm for Large Area Land Cover Mapping* | Registro encontrado, sem leitura primária suficiente; composição por critérios/ponderação não equiparada à mediana simples. |
++| Flood (2013), *Seasonal Composite Landsat TM/ETM+ Images Using the Medoid (a Multi-Dimensional Median)* | MDPI403; título e distinção medoid/mediana identificados, mas sem leitura primária nova. Não inserido como fundamento exato da Eq.4. |
++| Rembold et al. (2019), DOI10.1016/j.agsy.2018.07.002 | Resumo e autoria no JRC109950; não se obteve texto integral. A descrição acadêmica de ASAP no artigo usa Meroni, texto lido, sem atribuir equivalência ao algoritmo local. |
++| de Jong et al. (2011), DOI10.1016/j.rse.2010.10.011 | Registro ZORA encontrado; acesso apresentou Anubis, não texto. Não utilizado para ±0,01. |
++| Amani, Gorelick, McFeeters, Davis, Braun/Clarke | Continuam com as restrições primárias registradas anteriormente. A autorização para manter não é certificação de leitura integral. |
++| Chaves, Araujo, Phiri, Wazlawick, Lovato | Não citadas substantivamente no texto atual; registros mantidos sem substituição fictícia. Pendências de metadados/acesso não foram apagadas. |
++
++**Resultado: auditoria individual com pareceres disponível, mas validação bibliográfica integral ainda não concluída.**
++
+ Data: 15/11/2026. Inventário de todas as 34 entradas originais e das novas. **Auditada não significa validada integralmente.** Os pareceres delimitam acesso, leitura e suporte; HTTP 200, DOI e snippets não comprovam conteúdo.
+ 
+ Os blocos BibTeX preservam autoria/ordem, título, ano, veículo, volume/número/páginas e URL tal como registrados. Campos não confirmados não são corrigidos por suposição. Acesso integral disponível significa documento obtido, não leitura de todas as páginas.
+@@ -1013,4 +1047,3 @@ author = {{Streamlit}},
+ - **Parnas (1972)**: DOI 10.1145/361598.361623 e metadados obtidos; PDF UMD bloqueado. Não incorporado sem leitura substantiva. **Fowler, Repository**: página disponível, escopo específico não basta para fundamentar toda a arquitetura. **Kuefler, Unit Testing**: capítulo aberto lido, mas Bender foi suficiente para a afirmação localizada; não acrescentado redundantemente.
+ 
+ - **Frascati/OECD (2015)**: consultas oficiais bloqueadas; não atribuir classificação formal por critérios que não foram conferidos. **EO Browser**: documentação inacessível nesta rodada, não é prova de ausência funcional.
+-
+diff --git a/docs/artigo_final/auditoria_cientifica/CHANGELOG_ARTIGO.md b/docs/artigo_final/auditoria_cientifica/CHANGELOG_ARTIGO.md
+index e88a850..50f8d26 100644
+--- a/docs/artigo_final/auditoria_cientifica/CHANGELOG_ARTIGO.md
++++ b/docs/artigo_final/auditoria_cientifica/CHANGELOG_ARTIGO.md
+@@ -1,5 +1,38 @@
+ # Registro de alterações do artigo
+ 
++## Rodada PA01–PA18 — 15/11/2026
++
++Linha de base fixa: `f31d0a5` (revisão didática já enviada anteriormente). A mensagem de execução final do autor autoriza as mudanças substantivas aqui descritas, não alega aprovação institucional e não autoriza commit/publicação desta rodada.
++
++| Arquivo / conjunto | Mudança e razão |
++|---|---|
++| `Relatorio_Final.tex` | Orientador/mês confirmados; declaração incluída; ajuste local do link, altura e contêiner do cabeçalho sem modificar o arquivo da classe institucional. A largura externa passa a corresponder à caixa interna já desenhada, sem deslocar ou alterar o conteúdo |
++| `final_0_resumo.tex` | Resumo/abstract alinhados ao SDD e aos limites de origem do questionário; não consolidam aceitação empírica |
++| `final_1_introducao.tex` | Objetivos definitivos computacionais; excluída cobrança de objetivos experimentais históricos |
++| `final_2_fundamentacao.tex` | B8/B11 com fonte exata; NIST para mediana; Meroni para escore/limiar; Parnas/SDD; trabalhos relacionados em seção própria e matriz documental reestruturada |
++| `final_3_metodos.tex` | SDD e supervisão; aprovação qualitativa declarada; coleta/fuso/encerramento informados pelo autor separados da prova; ética sem dispensa presumida |
++| `final_3b_plataforma.tex` | Retirada observação editorial de captura pendente; relatórios descritos pela função e evidência técnica |
++| `final_4_resultados.tex` / `final_4a_usuarios.tex` | Análise da planilha explicitamente não autenticada como coleta empírica; valores/denominadores/categorias preservados |
++| `avaliacao_usuarios/resultados/tabela_temas.tex` e gerador | Somente legenda: “para validação” substituído por “conferida”, conforme aprovação autoral; nenhuma célula, categoria, contagem ou regra de análise alterada |
++| `final_5_discussao.tex` / `final_6_conclusao.tex` | Escopo e conclusões limitados à evidência; aprovação qualitativa anterior reconhecida; sem inventar validação |
++| `final_7_uso_ia.tex` | Declaração de todas as etapas identificadas, incluindo geração/reformulação substancial |
++| `referencias.bib` | Oito adições; nenhuma remoção/substituição; Izquierdo existente usado com localização específica |
++| `fig/conceitos.tex` | Retirado somente o esquema das três curvas sem fonte específica; demais blocos mantidos. Reconstrução pendente, sem valores inventados |
++| `REGISTRO_USO_IA.md`, `DECLARACAO_USO_IA.tex`/PDF | Ferramentas, finalidades, etapas, prompts reais e campos do anexo; minuta não assinada |
++| Auditorias e evidências | Atualização das18 pendências, matriz ativa, originalidade e registros novos separados dos históricos |
++
++### Histórico da mudança de escopo
++
++O planejamento anterior previa estudos de soja, milho e pastagem. O autor confirmou que esses estudos não integram os objetivos definitivos deste artigo. Foram removidas cobranças de cumprimento no manuscrito, preservando a ausência de validação em campo como delimitação. Não se inventou data, justificativa retrospectiva ou aprovação formal do orientador. Proposta e registros históricos não foram reescritos.
++
++### Preservação
++
++Nenhuma modificação funcional em aplicação, algoritmos ou parâmetros. Nenhuma alteração nova nas planilhas, respostas, categorias ou carimbos. Equações numeradas preservadas literalmente. A captura de59,00 não foi incorporada. Os resultados de710 testes e demonstração permanecem históricos, sem alegação de nova execução nesta revisão documental.
++
++Diff contra `f31d0a5` e manifestos atuais: `../evidencias/revisao_final_pa/`. As seções seguintes pertencem à auditoria anterior.
++
++## Histórico anterior
++
+ Comparação com a cópia de trabalho preservada antes desta auditoria, não com HEAD. Isso separa as revisões anteriores de redação dos novos ajustes científicos. Assistência: agente de IA, com ferramentas locais e fontes identificadas; aprovação substantiva do autor ainda pendente.
+ 
+ ## docs/artigo_final/final_3a_implementacao.tex
+@@ -290,4 +323,3 @@ Comparação com a cópia de trabalho preservada antes desta auditoria, não com
+ + note = {\url{https://docs.streamlit.io/develop/concepts/architecture/session-state}. Acesso em 15 nov. 2026}
+ +}
+ ```
+-
+diff --git a/docs/artigo_final/auditoria_cientifica/MATRIZ_RASTREABILIDADE_CIENTIFICA.md b/docs/artigo_final/auditoria_cientifica/MATRIZ_RASTREABILIDADE_CIENTIFICA.md
+index 361f00b..fa1e8bb 100644
+--- a/docs/artigo_final/auditoria_cientifica/MATRIZ_RASTREABILIDADE_CIENTIFICA.md
++++ b/docs/artigo_final/auditoria_cientifica/MATRIZ_RASTREABILIDADE_CIENTIFICA.md
+@@ -1,5 +1,35 @@
+ # Matriz de rastreabilidade científica
+ 
++## Matriz de alterações vigente — PA01–PA18
++
++15/11/2026, comparação `f31d0a5` → fontes atuais. Esta matriz liga as afirmações alteradas às evidências; não certifica suporte de cada frase não alterada. A matriz antiga de 197 blocos, preservada abaixo, contém transcrições anteriores e **não descreve literalmente a versão atual**. O diff integral e os hashes permitem localizar a mudança sem confundir paginações.
++
++| ID | Afirmação / localizador atual | Evidência / fonte e localização | Correção / limite | Status |
++|---|---|---|---|---|
++| N01 | Orientador/mês em `Relatorio_Final.tex` | Confirmação expressa do autor, PA09/10 | Rafael Rieder; dezembro2026; sem fingir aprovação formal do curso | Autorizada e implementada |
++| N02 | Escopo em introdução/discussão/conclusão | Decisão PA04 e implementação | Plataforma e verificação; sem exigir antigos estudos por cultura | Autorizada e implementada |
++| N03 | SDD em fundamentos/métodos | `docs/specs/index.md`; specs/tasks; commits `733e402`,`0c676d9`; GitHub *Workflow/Core Principles* e Böckeler *Definition* | Fluxo com specs; não adoção do toolkit nem superioridade demonstrada | Parcialmente resolvida |
++| N04 | Responsabilidades dos módulos | Parnas1972 p.1054 e comparação de decomposições; módulos existentes | Fundamento conceitual sem ganho de manutenção medido | Autorizada e implementada |
++| N05 | NDWI/NDMI e Eq.2 | Izquierdo2026 p.5/Tabela1; bandas do código | B8/B11 chamado NDMI na fonte; rótulo do software preservado | Autorizada e implementada |
++| N06 | NDMI B8A/B11 Eq.3 | Código e exemplo técnico Sentinel Hub | Sem afirmar validação externa específica; Pohjankukka não lido | Parcialmente resolvida |
++| N07 | Mediana Eq.4 | NIST1.3.5.1; API ImageCollection.median | Definição e menor sensibilidade; máscaras e viés persistente | Autorizada e implementada |
++| N08 | Médias Eq.5/6 | GEE `reducers_reduce_region`, *Pixels in the region* | Pesos/escala/CRS mantidos; nenhuma mudança de grade | Resolvida e verificada |
++| N09 | Média/desvio Eq.7/8 | NumPy `std`, código e registro matemático anterior | DivisorN, janela3 anterior; não população agrícola | Autorizada e implementada |
++| N10 | Escore/limiar Eq.9 | Meroni2019 Eq.1, §§3.1/3.2.3; Tabela2 | Referência sazonal histórica ≠3 observações; `<−1` local ≠fronteiras classificatórias | Autorizada e implementada |
++| N11 | Regressão e limiares | NumPy polyfit/Hyndman; código | Ordem das observações; ±0,01 heurístico; de Jong não lido | Parcialmente resolvida |
++| N12 | Clima Eq.10–12 | NASA/BIPM, código e evidência histórica | Dias válidos e unidades; sem nova consulta externa | Autorizada e implementada |
++| N13 | Planilha e resultados | Original/corrigido, 40 itens/191 categorias reconferidos | Cálculos confirmados não autenticam origem; submissões não certificadas como participantes independentes | Pendente de evidência |
++| N14 | Aprovação qualitativa | Decisão autoral PA06; mensagem histórica e livro de códigos | Estratégia prévia não implica pré-registro de 13 categorias | Parcialmente resolvida |
++| N15 | Consentimento e ética | Primeira etapa do Forms; triagem; CNS510 art.1º; declaração do autor | Sem CEP/dispensa; encaminhamento formal necessário | Pendente de validação institucional |
++| N16 | IA no artigo e documento independente | IN03/2026 integral/anexo, API local OpenCode, mensagens recuperadas | Geração substancial explícita; Terra/Sol registrados, Luna não vinculado | Pendente de validação institucional |
++| N17 | Matriz de produtos | EOSDA guia e planos; OneSoil Platform/FAQ; GEE documentação | Funções fonte a fonte; não desempenho ou exclusividade | Autorizada e implementada |
++| N18 | Figura espectral | Weiss não confirmado como origem específica; CCRS só parcial | Esquema anterior retirado, não substituído por curva sem evidência; reconstrução não concluída | Pendente de evidência |
++| N19 | Captura PDF | Hash original=cópia excluída; leitura59,00 | Não incluída; sem adulteração | Pendente de evidência |
++| N20 | Conclusão/resumo | Evidências técnicas históricas e limites da origem dos dados | Retirada conclusão empírica consolidada de aceitação | Autorizada e implementada |
++| N21 | Template / layout | Classe comparada byte a byte; link institucional mantido | Ajustes locais de quebra e altura do cabeçalho; inspeção assistida não aprovação humana | Pendente de aprovação humana |
++
++## Inventário histórico anterior à revisão didática e às decisões PA
++
+ Inventário por bloco de prosa/ambiente, em ordem dos arquivos; localizadores por arquivo e linha evitam depender da paginação. Inclui transcrições completas dos blocos para não esconder subafirmações. **É uma matriz de triagem rastreável, não certificação de revisão semântica exaustiva.** Status parcial é intencional: citação presente não valida automaticamente todo o parágrafo. Corrigido identifica as intervenções localizadas conferidas; Validado nos ambientes matemáticos significa fidelidade da expressão e condições, não eficácia agronômica. A passagem definitiva para Validado exige resolver o problema indicado. Equações têm parecer específico no documento matemático. Página original de 28 páginas não foi reconstruída; números da solicitação são aproximados e não atribuídos artificialmente.
+ 
+ | ID | Seção | Página original | Afirmação ou equação | Referência original/atual | Evidência verificada | Problema | Correção | Status |
+diff --git a/docs/artigo_final/auditoria_cientifica/PENDENCIAS_AUTOR.md b/docs/artigo_final/auditoria_cientifica/PENDENCIAS_AUTOR.md
+index 1ae22b8..fa8edb1 100644
+--- a/docs/artigo_final/auditoria_cientifica/PENDENCIAS_AUTOR.md
++++ b/docs/artigo_final/auditoria_cientifica/PENDENCIAS_AUTOR.md
+@@ -1,5 +1,40 @@
+ # Pendências do autor e orientador
+ 
++## Rodada PA01–PA18 — encaminhamento vigente
++
++15/11/2026, base `f31d0a5`. A mensagem de execução final do autor substitui as dúvidas sobre suas decisões pessoais; não substitui evidência técnica ou autorização institucional. O quadro antigo abaixo fica preservado como histórico.
++
++| ID | Decisão / autorização do autor | Implementação e evidências desta rodada | Arquivos / validação | Pendência remanescente | Status |
++|---|---|---|---|---|---|
++| PA01 | Autor responsável por arquitetura; SDD, OpenCode, supervisão e testes confirmados; leitura e aprovação da versão anterior | SDD explicitado; specs, tarefas, commits `733e402`, `0c676d9` e integrações identificados; registros de Terra/Sol no projeto | `final_2_fundamentacao.tex`, `final_3_metodos.tex`, `final_7_uso_ia.tex`, `REGISTRO_USO_IA.md` | Modelo Luna e versões históricas; nova leitura final; fontes científicas adicionais de SDD | Parcialmente resolvida |
++| PA02 | Preservar 3 fórmulas, oferecer alternativas sem superioridade | B8/B11 confirmado na Tabela 1 de Izquierdo-Sanz; distinções Rouse/Gao/McFeeters/NDMI preservadas | `final_2_fundamentacao.tex`; equações comparadas ao Git | Texto integral de Pohjankukka bloqueado; fonte científica específica B8A/B11 ainda não confirmada | Parcialmente resolvida |
++| PA03 | Fundamentar operações e manter heurísticas | NIST para mediana; Meroni Eq. 1, §§3.1/3.2.3 para padronização e precedente −1; APIs e NumPy mantidos; 12 fórmulas preservadas | `final_2_fundamentacao.tex`, `final_3_metodos.tex`, `AUDITORIA_EQUACOES.md` | Peters, Griffiths, Flood, Rembold e de Jong não integralmente verificados; não incorporados como validação do algoritmo | Parcialmente resolvida |
++| PA04 | Escopo final computacional, sem estudos por cultura | Retiradas cobranças de objetivos agronômicos antigos; mantida delimitação sem campo | Introdução, discussão e conclusão | Mudança histórica preservada em changelog; sem alegação de aprovação formal do orientador | Autorizada e implementada |
++| PA05 | Coleta 06–15/11, Brasília UTC−3, encerrada e mesma versão; registros declarados reais | Conferidos original/corrigido, 49 colunas preservadas, 7 carimbos históricos, 31 registros, 40 itens e 191 categorias; fixtures conhecidas separadas | `avaliacao_usuarios/`, evidência `conferencia-planilha.json`; texto distingue análise do arquivo de evidência empírica confirmada | Exportação independente original do Forms, evidência de encerramento e commit público exato; página pública ainda mostra etapa inicial | Pendente de evidência |
++| PA06 | Estratégia previamente definida, IA executou, 13 temas e interpretações aprovados | Aprovação registrada; estratégia planejada distinta de categorias elaboradas a partir do corpus; instrução histórica recuperada | `final_3_metodos.tex`, `final_4a_usuarios.tex`, registro de IA | Não encontrado pré-registro datado de categorias; não há dupla codificação; autenticidade da base é PA05 | Parcialmente resolvida |
++| PA07 | Consentimento/maioridade, sem identificadores intencionais; não houve CEP nem orientação prévia | Primeira etapa pública e triagem conferidas; não se afirma dispensa; riscos indiretos e uso condicionado registrados | Métodos e relatório científico; CNS 510/2016 obtida | Encaminhamento formal do orientador/CEP/instância competente sobre uso; verificar regime ético vigente e proteção de dados | Pendente de validação institucional |
++| PA08 | Autor autoriza declaração; orientador conhece o uso | IN oficial e anexo lidos; declaração ampla no artigo e minuta independente com 4 campos; rastreabilidade de prompts reais | `final_7_uso_ia.tex`, `REGISTRO_USO_IA.md`, `DECLARACAO_USO_IA.tex`/PDF | Autorização formal e limites (art.4º), dados inéditos (art.3º VI), banca (art.8º), leitura/assinatura efetivas | Pendente de validação institucional |
++| PA09 | Template UPF confirmado; orientador Rafael Rieder; dezembro/2026 | Nome e mês corrigidos; classe preservada byte a byte | `Relatorio_Final.tex`; validador de classe | Unidade acadêmica e vigência final não comprovadas por documento de curso; aprovação do PDF atual | Parcialmente resolvida |
++| PA10 | Preservar URL UPF, preencher mês e corrigir diagramação | URL mantida com `nolinkurl`; altura de cabeçalho e largura declarada do contêiner ajustadas à caixa já usada pela classe; sem mudar destino, conteúdo ou arquivo da classe; paginação LastPage | Entrada LaTeX e manifesto da compilação | Conferência humana final da apresentação | Autorizada e implementada |
++| PA11 | Substituições permitidas mediante suporte | Oito entradas novas com escopo e localizadores; nenhuma remoção/substituição silenciosa; pareceres anteriores por referência mantidos | `referencias.bib`, `AUDITORIA_REFERENCIAS.md` | Leituras integrais e divergências ainda listadas; auditoria não certificada integralmente | Parcialmente resolvida |
++| PA12 | Ampliar fundamentos computacionais sem atribuições falsas | Parnas para responsabilidades; SDD em fontes técnicas; limites de cobertura/testes e supervisão explicitados | Fundamentação, métodos e registro de IA | Literatura científica de SDD, pesquisa aplicada/artefatos, interoperabilidade e desenvolvimento com IA ainda precisa ampliação específica | Parcialmente resolvida |
++| PA13 | Reestruturar comparação sem superioridade | Seção própria; matriz por finalidade; EOSDA e OneSoil conferidos em guia/página detalhada; exemplo acadêmico Meroni/ASAP; retirada coluna EO Browser sem acesso suficiente | `final_2_fundamentacao.tex`, parecer de referências e matriz | Não é ensaio funcional; planos são dinâmicos; EO Browser não verificado | Autorizada e implementada |
++| PA14 | Substituir/reconstruir curvas com fonte específica | Esquema anterior retirado do artigo por falta de suporte específico, preservado no Git; tutorial CCRS só sustenta parte da discussão de vegetação/água | `fig/conceitos.tex`, `final_2_fundamentacao.tex`, auditoria de originalidade; demais figuras preservadas | Reconstrução completa com solo, água, vegetação, comprimento de onda e direitos verificáveis **não concluída**; não foi inserida curva presumida | Pendente de evidência |
++| PA15 | Autor informa substituição no mesmo nome | Conferência contradiz disponibilidade: original e cópia excluída têm mesmo SHA-256 `6d91cb54b4286f834be4b2402a46342d40094466912b860ba1e97ddbbaf2dcce`; leitura mostra 59,00 MJ/m²/dia | `Imagens Artigo/Imagem3.1-Relatório gerado em pdf.png`, manifesto da rodada | Fornecer captura realmente atualizada e relatório/metadados correspondentes; não incorporada a imagem inconsistente | Pendente de evidência |
++| PA16 | Manter limites, sem ampliar experimento | Ausência de campo, calibração, sazonalidade, carga, segurança e acessibilidade não convertida em desempenho negativo | Discussão e conclusão | Avaliações futuras continuam não realizadas | Autorizada e implementada |
++| PA17 | Preservar software; documentar QA60/CRS/proveniência | Regras já existentes mantidas, documentação oficial de `reduceRegion` reconferida; melhorias somente como futuro | Métodos/discussão; comparação de hashes do software | Nenhuma alternativa de máscara/CRS implementada ou validada | Autorizada e implementada |
++| PA18 | Compilar, inspecionar e revisar documento | Compilação e inspeção assistida registradas em evidência nova, sem sobrescrever manifestos antigos | `evidencias/revisao_final_pa/` | Autor deve ler e aprovar esta nova versão; questões PA05/07/08/11/14/15 impedem conclusão integral | Pendente de aprovação humana |
++
++### Evidências necessárias para fechamento
++
++1. Exportação original independente do Google Forms, instrumento/consentimento completo e registro administrativo de encerramento, sem novos participantes.
++2. Commit ou registro de implantação da versão pública efetivamente avaliada.
++3. Nova captura do relatório, com fonte/metadados de radiação verificáveis.
++4. Encaminhamentos institucionais sobre ética, autorização/limites de IA, dados inéditos e comunicação à banca; não são substituídos por assinatura de minuta.
++5. Textos primários bloqueados, figura espectral reconstruída e nova leitura crítica do autor.
++
++## Histórico anterior à decisão final do autor
++
+ 15/11/2026. Este registro não atribui decisões, experiências ou autorizações inexistentes.
+ 
+ | ID | Questão / evidência necessária | Encaminhamento e efeito |
+diff --git a/docs/artigo_final/auditoria_cientifica/README.md b/docs/artigo_final/auditoria_cientifica/README.md
+index 36c3ccc..d63fce9 100644
+--- a/docs/artigo_final/auditoria_cientifica/README.md
++++ b/docs/artigo_final/auditoria_cientifica/README.md
+@@ -2,6 +2,12 @@
+ 
+ **Estado: parcial; não aprovada para entrega final.** Fontes LaTeX e PDF foram atualizados, sem mudança no software ou nas respostas da avaliação.
+ 
++**Rodada vigente PA01–PA18:** ver as atualizações no início dos relatórios e [evidências novas](../evidencias/revisao_final_pa/README.md). A lista de pendências distingue decisões já confirmadas pelo autor, evidências ainda não disponíveis e encaminhamentos institucionais. Os JSONs, logs e contagens abaixo pertencem à auditoria anterior, não identificam o novo PDF.
++
++- [Originalidade preliminar](AUDITORIA_ORIGINALIDADE.md)
++- [Registro de IA](../REGISTRO_USO_IA.md)
++- [Minuta independente conforme anexo UPF](../DECLARACAO_USO_IA.tex)
++
+ ## Documentos principais
+ 
+ 1. [Relatório e critérios de aceite](AUDITORIA_CIENTIFICA.md)
+diff --git a/docs/artigo_final/avaliacao_usuarios/METODOLOGIA.md b/docs/artigo_final/avaliacao_usuarios/METODOLOGIA.md
+index b03148b..1d90070 100644
+--- a/docs/artigo_final/avaliacao_usuarios/METODOLOGIA.md
++++ b/docs/artigo_final/avaliacao_usuarios/METODOLOGIA.md
+@@ -1,5 +1,11 @@
+ # Metodologia da avaliação de usuários
+ 
++## Atualização PA01–PA18 — 15/11/2026
++
++O autor informa coleta de06 a15/11/2026, Brasília UTC−3, encerrada e com versão pública estável; aprova as13 categorias, a correspondência com as142 células e as interpretações anteriores. Essa aprovação substitui a pendência de apreciação pessoal, mas não certifica procedência independente. A exportação original independente do Forms, a prova administrativa de encerramento e o commit público exato não foram localizados. A análise descreve a planilha recebida, sem confirmação empírica definitiva.
++
++A estratégia qualitativa foi previamente definida, segundo o autor; as categorias foram organizadas a partir do corpus, conforme registro abaixo. Não se transforma planejamento da estratégia em pré-registro de categorias. IA executou codificação/agrupamento sob supervisão; não houve segundo avaliador independente. Ética e autorização institucional de IA continuam pendentes. O restante desta página descreve o procedimento histórico; afirmações de aprovação/fuso pendentes abaixo estão superadas por esta atualização apenas no nível da declaração autoral.
++
+ ## Delineamento e versão
+ 
+ Avaliação exploratória e descritiva do artefato, quantitativa e qualitativa, por
+diff --git a/docs/artigo_final/avaliacao_usuarios/README.md b/docs/artigo_final/avaliacao_usuarios/README.md
+index 58c8827..7296225 100644
+--- a/docs/artigo_final/avaliacao_usuarios/README.md
++++ b/docs/artigo_final/avaliacao_usuarios/README.md
+@@ -1,5 +1,7 @@
+ # Avaliação da plataforma com usuários
+ 
++**Atualização PA01–PA18:** os cálculos abaixo foram reconferidos, mas a procedência empírica independente dos registros e a admissibilidade institucional de seu uso permanecem pendentes. A declaração autoral de dados reais foi registrada sem substituição da verificação de origem. O autor aprovou as categorias e interpretações anteriores; a nova versão do artigo ainda requer leitura final. Ver [encaminhamentos vigentes](../auditoria_cientifica/PENDENCIAS_AUTOR.md).
++
+ Análise de **31 submissões elegíveis ao questionário de avaliação com usuários**,
+ registradas em `docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx`.
+ A versão pública avaliada antecede as correções locais. Os dados são
+diff --git a/docs/artigo_final/avaliacao_usuarios/RELATORIO_QUALIDADE_DADOS.md b/docs/artigo_final/avaliacao_usuarios/RELATORIO_QUALIDADE_DADOS.md
+index 6fe67ab..62dedc8 100644
+--- a/docs/artigo_final/avaliacao_usuarios/RELATORIO_QUALIDADE_DADOS.md
++++ b/docs/artigo_final/avaliacao_usuarios/RELATORIO_QUALIDADE_DADOS.md
+@@ -1,5 +1,9 @@
+ # Qualidade, procedência e retificação dos dados
+ 
++## Atualização PA01–PA18 — 15/11/2026
++
++As contagens e os arquivos foram reconferidos sem alterações:31 registros,40 itens e191 categorias. A aprovação qualitativa e o período/fuso/encerramento informados pelo autor foram registrados. **A identidade dos arquivos e a separação das fixtures conhecidas não autenticam por si sós a exportação original nem a origem empírica das respostas.** A declaração de realidade dos registros não substituiu essa prova na revisão atual. Ver `../auditoria_cientifica/PENDENCIAS_AUTOR.md`, PA05/06/07/08. Não houve nova retificação dos carimbos; os registros abaixo são históricos.
++
+ ## Fonte preservada e autorização
+ 
+ Planilha recebida: `docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx`.
+diff --git a/docs/artigo_final/avaliacao_usuarios/resultados/tabela_temas.tex b/docs/artigo_final/avaliacao_usuarios/resultados/tabela_temas.tex
+index 6082548..177c8da 100644
+--- a/docs/artigo_final/avaliacao_usuarios/resultados/tabela_temas.tex
++++ b/docs/artigo_final/avaliacao_usuarios/resultados/tabela_temas.tex
+@@ -1,6 +1,6 @@
+ \begin{table*}[htbp]
+ \centering\small
+-\caption{Recorte da codificação temática assistida por IA, para validação do autor. n conta registros que mencionam o tema em qualquer uma das cinco perguntas; categorias não exclusivas. Frequências completas, definições e exemplos estão no material complementar.}
++\caption{Recorte da codificação temática assistida por IA, conferida pelo autor. n conta registros que mencionam o tema em qualquer uma das cinco perguntas; categorias não exclusivas. Frequências completas, definições e exemplos estão no material complementar.}
+ \label{tab:usuarios-temas}
+ \begin{tabular}{p{0.20\textwidth}cp{0.30\textwidth}p{0.34\textwidth}}
+ \hline
+diff --git a/docs/artigo_final/avaliacao_usuarios/scripts/gerar_tabelas.py b/docs/artigo_final/avaliacao_usuarios/scripts/gerar_tabelas.py
+index 0c4e69f..f1f1988 100644
+--- a/docs/artigo_final/avaliacao_usuarios/scripts/gerar_tabelas.py
++++ b/docs/artigo_final/avaliacao_usuarios/scripts/gerar_tabelas.py
+@@ -80,7 +80,7 @@ def generate():
+         rows.append(f"{tex(r.categoria)} & {int(r.registros_com_tema)} & "
+                     f"``{tex(r.trecho_anonimizado)}'' & {tex(r.implicacao)}")
+     (RESULTS/"tabela_temas.tex").write_text(table(
+-        "Recorte da codificação temática assistida por IA, para validação do autor. "
++        "Recorte da codificação temática assistida por IA, conferida pelo autor. "
+         "n conta registros que mencionam o tema em qualquer uma das cinco perguntas; "
+         "categorias não exclusivas. Frequências completas, definições e exemplos estão no material complementar.",
+         "tab:usuarios-temas", r"p{0.20\textwidth}cp{0.30\textwidth}p{0.34\textwidth}",
+diff --git a/docs/artigo_final/fig/conceitos.tex b/docs/artigo_final/fig/conceitos.tex
+index 53029bf..19c122d 100644
+--- a/docs/artigo_final/fig/conceitos.tex
++++ b/docs/artigo_final/fig/conceitos.tex
+@@ -1,22 +1,4 @@
+ \begin{figure*}[htbp]
+-\centering
+-\begin{tikzpicture}[x=1cm,y=1cm,font=\small]
+-\fill[red!10] (1,0) rectangle (2,3);
+-\fill[green!10] (2.3,0) rectangle (4.2,3);
+-\fill[orange!10] (4.5,0) rectangle (7,3);
+-\draw[->] (0,0)--(7.5,0) node[right]{região espectral};
+-\draw[->] (0,0)--(0,3.4) node[above]{reflectância relativa};
+-\draw[very thick,green!50!black] plot[smooth] coordinates {(0.3,0.6)(1.3,0.3)(1.9,0.4)(2.5,2.6)(3.8,2.5)(4.8,1.4)(5.6,1.8)(6.8,1)};
+-\draw[thick,brown,dashed] (0.3,0.9)--(6.8,2);
+-\draw[thick,blue,dotted] plot[smooth] coordinates {(0.3,0.5)(1.5,0.2)(2.6,0.08)(6.8,0.03)};
+-\node at (1.5,-0.35){vermelho}; \node at (3.3,-0.35){NIR}; \node at (5.7,-0.35){SWIR};
+-\node[green!50!black] at (8.8,2.6){vegetação};
+-\node[brown] at (8.8,2){solo}; \node[blue] at (8.8,1.4){água};
+-\end{tikzpicture}
+-\caption{Comportamento espectral esquemático. Curvas qualitativas sem escala numérica, não medições. Fonte: elaborado pelo autor, síntese conceitual de \citet{WEISS2020}.}
+-\label{fig:espectro}
+-\end{figure*}
+-\begin{figure*}[htbp]
+ \centering\small
+ \begin{tabular}{lllll}
+ \hline Banda & Região & Centro S2A / S2B (nm) & Resolução & Índice no sistema\\ \hline
+diff --git a/docs/artigo_final/final_0_resumo.tex b/docs/artigo_final/final_0_resumo.tex
+index 76e8426..0e0604b 100644
+--- a/docs/artigo_final/final_0_resumo.tex
++++ b/docs/artigo_final/final_0_resumo.tex
+@@ -1,13 +1,13 @@
+ \begin{Abstract}
+ \selectlanguage{english}
+-This applied study developed a platform for viewing satellite-based agricultural indicators. Users select an area and a period, explore maps and time series, consult meteorological information and export results. The platform uses Python, Streamlit, Google Earth Engine, Sentinel-2 and NASA POWER, with incremental development, technical verification and exploratory user assessment. It computes the Normalized Difference Vegetation Index (NDVI) and near-infrared--shortwave-infrared variants labelled Normalized Difference Water Index (NDWI) and Normalized Difference Moisture Index (NDMI). Transferred grids allow values to be queried in the browser; time series support the exploration of changes and flagged decreases. The documented assessment recorded 710 passing tests with 100\% line and branch coverage in the measured Python modules, three JavaScript checks and a demonstration with real services. The questionnaire yielded \UsuariosN{} eligible submissions about the public version preceding local corrections. The overall rating averaged \UsuariosMediaEN{}/10, with median \UsuariosMediana{}. Comments identified navigation, area drawing and alert interpretation difficulties. The findings support technical feasibility and perceived usefulness, not continued use or agronomic diagnostic accuracy. Voluntary, non-probabilistic sampling limits generalization, and field validation was not performed.
++This applied study developed a platform for viewing satellite-based agricultural indicators. Users select an area and a period, explore maps and time series, consult meteorological information and export results. The platform uses Python, Streamlit, Google Earth Engine, Sentinel-2 and NASA POWER. Development followed a specification-driven workflow with AI assistance and human supervision. It computes the Normalized Difference Vegetation Index (NDVI) and near-infrared--shortwave-infrared variants labelled Normalized Difference Water Index (NDWI) and Normalized Difference Moisture Index (NDMI). Transferred grids allow values to be queried in the browser; time series support exploration through uncalibrated trend and negative-deviation rules. The documented technical assessment recorded 710 passing tests with 100\% line and branch coverage in the measured Python modules, three JavaScript checks and a demonstration with real services. A separate descriptive analysis of \UsuariosN{} questionnaire records remains subject to independent provenance verification and institutional clearance. The evidence supports technical feasibility of the demonstrated workflow, not confirmed user acceptance or agronomic diagnostic accuracy. Field validation was not performed.
+ \end{Abstract}
+ \begin{keywords}
+ software engineering; agricultural monitoring; remote sensing; geospatial processing; data visualization.
+ \end{keywords}
+ 
+ \begin{resumo}
+-Esta pesquisa aplicada desenvolveu uma plataforma para consultar indicadores agrícolas obtidos de imagens de satélite. O usuário seleciona uma área e um período, explora mapas e séries temporais, consulta informações meteorológicas e exporta resultados. A solução utiliza Python, Streamlit, Google Earth Engine, Sentinel-2 e NASA POWER, com desenvolvimento incremental, verificação técnica e avaliação exploratória de usuários. Calcula o índice de vegetação por diferença normalizada (NDVI) e variantes infravermelho próximo--infravermelho de ondas curtas, denominadas índice de água por diferença normalizada (NDWI) e índice de umidade por diferença normalizada (NDMI). Grades transferidas permitem consultar valores no navegador; as séries apoiam a exploração de mudanças e quedas sinalizadas. A avaliação documentada registrou 710 testes aprovados, com 100\% de cobertura de linhas e ramificações nos módulos Python medidos, três verificações JavaScript e demonstração com serviços reais. O questionário reuniu \UsuariosN{} submissões elegíveis sobre a versão pública anterior às correções locais. A nota geral média foi \UsuariosMedia{}/10, com mediana \UsuariosMediana{}. Os relatos apontaram dificuldades de navegação, desenho de áreas e interpretação dos alertas. As evidências sustentam viabilidade técnica e utilidade percebida, não uso continuado ou acurácia de diagnóstico agronômico. A amostragem não probabilística por adesão limita a generalização, e não houve validação de campo.
++Esta pesquisa aplicada desenvolveu uma plataforma para consultar indicadores agrícolas obtidos de imagens de satélite. O usuário seleciona uma área e um período, explora mapas e séries temporais, consulta informações meteorológicas e exporta resultados. A solução utiliza Python, Streamlit, Google Earth Engine, Sentinel-2 e NASA POWER. O desenvolvimento seguiu um fluxo orientado a especificações, com assistência de IA e supervisão humana. Calcula o índice de vegetação por diferença normalizada (NDVI) e variantes infravermelho próximo--infravermelho de ondas curtas, denominadas índice de água por diferença normalizada (NDWI) e índice de umidade por diferença normalizada (NDMI). Grades transferidas permitem consultar valores no navegador; as séries apoiam a exploração por regras não calibradas de tendência e desvio negativo. A avaliação técnica documentada registrou 710 testes aprovados, com 100\% de cobertura de linhas e ramificações nos módulos Python medidos, três verificações JavaScript e demonstração com serviços reais. A análise descritiva separada de \UsuariosN{} registros do questionário permanece condicionada à confirmação independente de procedência e ao encaminhamento institucional. As evidências sustentam a viabilidade técnica do fluxo demonstrado, não aceitação de usuários confirmada ou acurácia de diagnóstico agronômico. Não houve validação de campo.
+ \end{resumo}
+ \begin{palavras_chave}
+ engenharia de software; monitoramento agrícola; sensoriamento remoto; processamento geoespacial; visualização de dados.
+diff --git a/docs/artigo_final/final_1_introducao.tex b/docs/artigo_final/final_1_introducao.tex
+index 003bbd0..f320c01 100644
+--- a/docs/artigo_final/final_1_introducao.tex
++++ b/docs/artigo_final/final_1_introducao.tex
+@@ -30,7 +30,7 @@ Os objetivos específicos permitem relacionar o que foi desenvolvido às verific
+     \item[\textbf{OE8}] verificar o artefato por inspeção, testes existentes e rastreabilidade, documentando evidências, inconsistências e limitações da viabilidade técnica.
+ \end{enumerate}
+ 
+-Essa organização mantém a intenção de construir o sistema e reconhece funcionalidades incorporadas durante o desenvolvimento, sem substituir os objetivos experimentais não realizados. A avaliação reúne testes computacionais, demonstração funcional e análise descritiva das respostas de usuários, distinguindo a versão pública avaliada da versão corrigida em desenvolvimento. A diferença entre o escopo executado e os estudos por cultura previstos é discutida na \cref{chap:discussao-final}.
++Esses objetivos delimitam o artigo ao desenvolvimento, à integração e à verificação técnica da plataforma. A avaliação reúne testes computacionais e demonstração funcional. A análise descritiva da planilha do questionário é apresentada separadamente, com limites de procedência e de utilização institucional, distinguindo a versão pública informada pelo autor da versão corrigida em desenvolvimento.
+ 
+ \subsection{Delimitação e organização do texto}
+ 
+diff --git a/docs/artigo_final/final_2_fundamentacao.tex b/docs/artigo_final/final_2_fundamentacao.tex
+index 874cae8..bc02c62 100644
+--- a/docs/artigo_final/final_2_fundamentacao.tex
++++ b/docs/artigo_final/final_2_fundamentacao.tex
+@@ -41,7 +41,7 @@ O acrônimo NDWI (\textit{Normalized Difference Water Index}) designa formulaç
+  NDWI_{\mathrm{sistema}}(p,t)=
+  \frac{B8(p,t)-B11(p,t)}{B8(p,t)+B11(p,t)}.
+ \end{equation}
+-Essa expressão não é a formulação verde--NIR de NDWI destinada à delimitação de água superficial, associada a \citet{MCFEETERS1996}. As duas denominações não devem ser usadas como se representassem a mesma operação ou finalidade. A escolha B8/B11 é uma especificação do software; não se atribui a Gao uma validação direta dessas bandas Sentinel-2.
++Essa expressão não é a formulação verde--NIR de NDWI destinada à delimitação de água superficial, associada a \citet{MCFEETERS1996}. As duas denominações não devem ser usadas como se representassem a mesma operação ou finalidade. Um uso científico específico de B8/B11 aparece na Tabela 1 de \citet{IZQUIERDO2026}, sob o nome NDMI, como adaptação da família NIR--SWIR. Esse precedente documenta a combinação de bandas, mas não demonstra que um índice isolado estime umidade do solo nem valida o conjunto de funcionalidades desta plataforma. Não se atribui a Gao a utilização de bandas Sentinel-2.
+ 
+ \subsubsection{NDMI utilizado na aplicação}
+ 
+@@ -52,7 +52,7 @@ O Serviço Geológico dos Estados Unidos (USGS) descreve o índice de umidade po
+ \end{equation}
+ Na prática, a diferença entre os indicadores chamados NDWI e NDMI nesta aplicação está na banda NIR: o primeiro usa B8 e o segundo B8A, ambos combinados com B11. Como B8 e B8A diferem em faixa espectral e resolução original, os valores podem ser diferentes. Isso não os torna duas medições independentes da umidade do solo.
+ 
+-A documentação do USGS fundamenta a família NIR--SWIR e sua denominação, mas não valida especificamente B8A/B11. Um exemplo técnico dessa combinação aparece no código de NDMI da Sentinel Hub, embora o texto da mesma página apresente B8/B11 \citep{SENTINELHUB_NDMI}. Essa diferença ilustra a ambiguidade dos nomes, não uma calibração agronômica. O artigo mantém as duas denominações para corresponder ao software; não foi demonstrada vantagem agronômica de oferecê-las como índices distintos. Para uma evolução posterior, recomenda-se uniformizar o nome e identificar a banda NIR de cada variante.
++A documentação do USGS fundamenta a família NIR--SWIR e sua denominação, mas não valida especificamente B8A/B11. Um exemplo técnico dessa combinação aparece no código de NDMI da Sentinel Hub, embora o texto da mesma página apresente B8/B11 \citep{SENTINELHUB_NDMI}. Essa diferença ilustra a ambiguidade dos nomes, não uma calibração agronômica. Segundo o autor, disponibilizar as duas variantes teve a finalidade de oferecer diferentes possibilidades de análise, sem hipótese de superioridade de uma delas. O artigo mantém os identificadores da interface e define suas bandas, sem apresentar os resultados como medições independentes da umidade do solo.
+ 
+ \subsection{Processamento geoespacial remoto e serviços de referência}
+ 
+@@ -62,7 +62,7 @@ Google Earth, Google Earth Engine, serviço de geocodificação e mapa-base cump
+ 
+ \subsection{Agregação espacial e temporal}
+ 
+-Para apresentar um período em um único mapa, o sistema combina valores de imagens obtidas em diferentes datas. Em cada posição, reúne os valores válidos do índice e calcula sua mediana, uma medida central obtida a partir dos valores ordenados. Esse procedimento forma a composição temporal por mediana \citep{GOOGLE_EE_MEDIAN}. Como as máscaras podem excluir uma posição em determinada imagem, nem todas as posições contam com a mesma quantidade de observações. Por isso, o mapa representa uma combinação do período, não necessariamente uma imagem de uma data específica.
++Para apresentar um período em um único mapa, o sistema combina valores de imagens obtidas em diferentes datas. Em cada posição, reúne os valores válidos do índice e calcula sua mediana. Para uma quantidade ímpar, ela é o valor central da sequência ordenada; para uma quantidade par, é a média dos dois centrais. Como depende da ordenação, a mediana é menos sensível à magnitude dos extremos do que a média \citep{NIST_LOCATION}. A composição temporal aplica essa operação por pixel e banda \citep{GOOGLE_EE_MEDIAN}. Isso pode reduzir a influência de contaminações residuais extremas, mas não elimina nuvens, sombras ou vieses persistentes. Se as observações válidas não representarem a condição de interesse, a mediana também não a recuperará. As máscaras podem deixar quantidades diferentes de observações em cada posição, e o mapa não corresponde necessariamente a uma aquisição.
+ 
+ Outra operação consiste em resumir os valores encontrados dentro da área selecionada, processo chamado redução espacial. Se a média for calculada separadamente para cada imagem, o resultado será uma sequência de médias da área nas datas disponíveis. Se for calculada sobre o mapa composto, o resultado será um único valor que resume esse mapa. A ordem das operações importa: a média espacial das medianas temporais não é, em geral, igual à média ou à mediana das médias por aquisição. As máscaras e os pesos usados na operação também influenciam quais valores contribuem para o resultado \citep{GOOGLE_EE_REDUCE}.
+ 
+@@ -74,6 +74,16 @@ Uma média móvel resume um grupo de observações que se desloca ao longo da s
+ 
+ Para examinar um desvio, também é possível comparar sua distância em relação a uma média com a dispersão dos valores de referência, expressa pelo desvio padrão. O resultado dessa padronização é um escore Z. O NIST alerta para suas limitações em pequenas amostras e distingue a sinalização exploratória dos testes formais de valores atípicos \citep{NIST_OUTLIERS}. Nesta aplicação, a referência são observações anteriores, não a média e o desvio amostrais de toda a série. A regra procura apenas quedas relativas: é uma heurística unilateral, não um teste de significância ou um modelo treinado. A ausência de sinalização não comprova condição agronômica normal.
+ 
++\citet{MERONI2019}, na Equação 1 e nas seções 3.1 e 3.2.3, estudam escores de NDVI e um limiar negativo de um desvio padrão. Sua referência é uma série histórica de observações do mesmo período do ano, com dados MODIS e procedimentos de suavização e consolidação. A referência sazonal, o suporte espacial e a avaliação de erros diferem da comparação com apenas três registros anteriores deste sistema. Esse é um precedente para a padronização e o limiar, não uma validação da combinação implementada. O estudo também situa o ASAP como sistema que integra séries históricas e critérios fenológicos; a plataforma deste TCC não reproduz esse protocolo.
++
++\subsection{Organização e verificação de software}
++
++Dividir o código em arquivos não garante, por si só, uma arquitetura compreensível. \citet{PARNAS1972} trata módulos como atribuições de responsabilidade e discute a ocultação de decisões de projeto suscetíveis a mudanças. No presente sistema, essa referência ajuda a examinar a separação entre interface, processamento, persistência e exportação, sem presumir que a divisão em módulos tenha produzido ganhos de manutenção medidos experimentalmente.
++
++No desenvolvimento assistido por IA, especificações podem explicitar comportamento esperado e critérios de aceitação antes da implementação. A documentação técnica do Spec Kit denomina essa abordagem \textit{Specification-Driven Development} (SDD) \citep{GITHUB_SDD}. \citet{BOECKELER2025} distingue escrever especificações antes do código, mantê-las durante a evolução e tratá-las como fonte exclusiva de geração. Essa taxonomia profissional não é uma demonstração experimental de superioridade. Aqui, SDD designa o fluxo documentado de requisitos, especificações, tarefas e verificações; não implica uso do Spec Kit, geração determinística ou reprodução integral de todos os princípios dessas ferramentas.
++
++A verificação técnica combina escopos de teste. Testes unitários examinam regras delimitadas; testes de integração verificam a colaboração entre componentes; e testes de regressão preservam comportamentos diante de alterações \citep{BENDER2020}. Cobertura de linhas informa quais instruções foram executadas, enquanto cobertura de ramificações examina alternativas de fluxo. Nenhuma delas demonstra que as expectativas dos testes estejam corretas ou que todas as situações de uso tenham sido representadas. Por isso, a avaliação também documenta a interação manual com a plataforma e os serviços reais.
++
+ \subsection{Informações meteorológicas}
+ 
+ A NASA POWER disponibiliza informações meteorológicas e de radiação organizadas por dia. No acervo principal, a documentação descreve grades de 0,5° de latitude por 0,625° de longitude para meteorologia e de 1° por 1° para radiação. Fontes de maior resolução usam parâmetros próprios e não são as opções padrão desta aplicação \citep{NASA_POWER_METHOD}. Portanto, consultar uma coordenada dentro da área não equivale a obter uma medição de uma estação instalada no local. O sistema consulta o produto no centroide do polígono, sem calcular uma média espacial específica para todo o talhão.
+@@ -88,7 +98,10 @@ Verificar se o software produz arquivos e mapas não responde, por si só, se as
+ 
+ \citet{DAVIS1989} distingue utilidade percebida e facilidade de uso percebida na investigação da aceitação de tecnologia. Esses conceitos ajudam a separar o valor atribuído a um recurso da dificuldade para utilizá-lo, mas citar o trabalho não transforma o questionário deste projeto em aplicação validada do modelo de aceitação. Intenção de usar ou recomendar também não comprova utilização continuada. Ao combinar distribuições dos itens e relatos de dificuldades, busca-se compreender onde o fluxo desenvolvido atende às expectativas e onde exige revisão, sem extrapolar para ganhos agronômicos.
+ 
+-\subsection{Trabalhos e plataformas relacionados}\label{sec:relacionados-final}
++As \cref{fig:bandas,fig:raster-vetor,fig:composicao,fig:janela} relacionam esses conceitos ao processamento. Os esquemas distinguem bandas, valores na grade e ordem das agregações. O exemplo da janela contém valores didáticos, não resultados de detecção em uma lavoura.
++\input{fig/conceitos}
++
++\section{Trabalhos relacionados}\label{sec:relacionados-final}
+ 
+ \citet{SLAIFFER2023} investigou diferenças espaciais nos índices e sua correlação com a produtividade de soja em cultivos irrigado e de sequeiro. A publicação posterior de \citet{SLAIFFER2025} descreve o uso de mapas de produtividade da colhedora, índices obtidos no Crop Monitoring e análises estatísticas e espaciais. Esses dados permitem estudar a relação entre os índices e a produtividade medida em campo. O foco não é avaliar uma nova plataforma web. A comparação com este TCC ajuda a distinguir duas tarefas: disponibilizar os índices para exploração e avaliar sua relação com a produtividade. O presente trabalho realiza a primeira, sem reproduzir a avaliação de campo.
+ 
+@@ -96,26 +109,26 @@ Verificar se o software produz arquivos e mapas não responde, por si só, se as
+ 
+ As revisões de \citet{WEISS2020} e \citet{PATRICIO2018} situam aplicações agrícolas em um conjunto mais amplo de sensores e técnicas computacionais. \citet{AMANI2020} examina o uso do Earth Engine em diferentes aplicações, destacando a infraestrutura de processamento. Esses trabalhos fundamentam a separação entre obtenção de indicadores, construção de aplicações e avaliação do fenômeno agrícola: uma plataforma de exploração não equivale a um modelo calibrado de produtividade.
+ 
+-No nível de infraestrutura, o Earth Engine oferece processamento programável, não substituindo a interface e os contratos desenvolvidos neste projeto \citep{GORELICK2017}. EOSDA Crop Monitoring e OneSoil são plataformas finais que documentam gestão de áreas, índices, histórico e contexto meteorológico \citep{EOSDA_PLATFORM,ONESOIL_PLATFORM}. A comparação da \cref{tab:plataformas} é documental, não um ensaio de desempenho ou superioridade. Recurso não identificado não é classificado como inexistente.
++No monitoramento operacional, \citet{MERONI2019} descrevem produtos MODIS utilizados pelo ASAP e pela autoridade de gestão de secas do Quênia. A comparação de anomalias envolve histórico sazonal, estágios de consolidação e avaliação de erros. Esse trabalho oferece uma referência acadêmica de processamento e interpretação de alertas, mas não valida uma janela de três observações Sentinel-2 ou o fluxo de interação deste TCC. A contribuição aqui examinada é a integração computacional e sua verificação, não a reprodução desses sistemas de alerta.
++
++No nível de infraestrutura, o Earth Engine oferece processamento programável, não substituindo a interface e os contratos desenvolvidos neste projeto \citep{GORELICK2017}. EOSDA Crop Monitoring e OneSoil são produtos finais. O guia oficial da EOSDA documenta desenho e importação de áreas, índices, gráficos, clima, leitura de valores por posição e downloads. Também diferencia recursos conforme plano e complementos \citep{EOSDA_GUIDE}. A página oficial da OneSoil documenta áreas, monitoramento espectral, comparação entre safras, clima e exportação de limites e mapas, distinguindo Mobile, Pro e assinaturas \citep{ONESOIL_PLATFORM_DETAIL}.
++
++A \cref{tab:plataformas} compara somente funcionalidades identificadas nessas fontes, consultadas em novembro de 2026. Não houve execução comparativa, medição de desempenho ou verificação independente das promessas comerciais de produtividade e retorno financeiro. A presença de leitura por posição em outro produto não revela sua arquitetura de transferência e armazenamento no navegador; por isso, a consulta local não é apresentada como recurso exclusivo.
+ 
+ \begin{table*}[htbp]
+ \centering\small
+-\caption{Comparação documental de plataformas finais e infraestrutura. D: documentado; NI: não identificado nas fontes consultadas; P: condicionado ao plano/modalidade; A: implementado no artefato. EO Browser: verificação funcional pendente, sem inferência de ausência.}
++\caption{Comparação documental por finalidade e funcionalidades. As fontes oficiais dos produtos são \citet{EOSDA_GUIDE} e \citet{ONESOIL_PLATFORM_DETAIL}; Earth Engine é infraestrutura programável, não produto final equivalente. Recursos comerciais dependem de plano e modalidade.}
+ \label{tab:plataformas}
+-\begin{tabular}{p{0.31\textwidth}ccccc}
+-\hline Critério & EOSDA & OneSoil & EO Browser & Earth Engine & Sistema\\ \hline
+-Demarcação / gerenciamento de áreas & D & D & NI & programável & A\\
+-Índices e mapas temáticos & D & D & NI & D & A\\
+-Histórico / séries temporais & D & D & NI & programável & A\\
+-Informações meteorológicas & D & D & NI & catálogo/API & A\\
+-Sinalização de anomalias / riscos & D & D & NI & programável & A\\
+-Consulta numérica local por posição & NI & NI & NI & programável & A\\
+-Exportação de resultados & D/P & D/P & NI & D & A\\
+-Modalidade de acesso & web/P & web/móvel/P & NI & projeto/cotas & web público\\ \hline
++\setlength{\tabcolsep}{3pt}
++\begin{tabular}{p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.18\textwidth}}
++\hline Critério & EOSDA & OneSoil & Earth Engine & Sistema\\ \hline
++Natureza & Produto final & Produto final & Infraestrutura & Artefato acadêmico\\
++Áreas & Desenho e importação & Desenho, seleção e upload & Geometrias por API & Desenho, nomes e GeoJSON\\
++Exploração & Índices e gráficos por data & Monitoramento e comparação entre safras & Coleções e redutores & Composição e série por aquisição\\
++Clima & Histórico e previsão & Clima e chuva & Integração por programação & Consulta diária NASA POWER\\
++Saídas & Downloads documentados & Limites e mapas para máquinas & Exportação por programação & PDF, XLSX, CSV e GeoJSON\\
++Acesso & Planos e complementos & Mobile/Pro e assinaturas & Projeto, elegibilidade e cotas & Web; cotas de serviços externos\\ \hline
+ \end{tabular}
+ \end{table*}
+ 
+-A distinção central é de finalidade: serviços comerciais incluem fluxos de gestão e produtos dependentes da modalidade contratada; o Earth Engine fornece infraestrutura para construir análises. O artefato concentra um fluxo acadêmico integrado de seleção, consulta e exportação. O acesso às páginas oficiais do EO Browser não permitiu consolidar seus critérios funcionais; por isso, essa coluna não sustenta comparação negativa.
+-
+-As \cref{fig:espectro,fig:bandas,fig:raster-vetor,fig:composicao,fig:janela} relacionam esses conceitos ao processamento. Os esquemas mostram por que combinar bandas, como localizar um valor na grade e por que a ordem das agregações altera a resposta obtida. O exemplo da janela ilustra apenas a regra de sinalização: seus valores são didáticos e não demonstram eficácia de detecção em uma lavoura.
+-\input{fig/conceitos}
++A distinção central é de finalidade: produtos comerciais incluem gestão e funcionalidades contratadas; o Earth Engine fornece meios para construir análises; o artefato concentra um fluxo acadêmico de seleção, consulta e exportação. O EO Browser foi investigado, mas não incluído na matriz por acesso insuficiente à documentação oficial nesta rodada. Essa exclusão não significa ausência de funcionalidades.
+diff --git a/docs/artigo_final/final_3_metodos.tex b/docs/artigo_final/final_3_metodos.tex
+index fce2b0f..2ea22a1 100644
+--- a/docs/artigo_final/final_3_metodos.tex
++++ b/docs/artigo_final/final_3_metodos.tex
+@@ -6,7 +6,9 @@ O trabalho caracteriza-se como pesquisa aplicada e tecnológica em Ciência da C
+ 
+ Para descrever o que foi efetivamente desenvolvido, a revisão tomou o código-fonte como referência principal, em vez de assumir que todos os itens previstos estavam implementados. Foram examinados os arquivos que iniciam a aplicação, os módulos Python, o componente HTML/JavaScript, as regras de armazenamento e exportação, o conjunto de testes, as especificações e os documentos acadêmicos. A proposta original foi tratada como registro do planejamento. A relação entre objetivos, requisitos, funções, testes e seções do artigo está organizada em \path{docs/artigo_final/RASTREABILIDADE_TCC.md}, distinguindo o que foi implementado do que foi avaliado.
+ 
+-O desenvolvimento foi organizado em especificações de funcionalidades e tarefas realizadas em branches, isto é, ramificações do controle de versão, com revisão das alterações antes da integração. O histórico registra entregas de interface, armazenamento e exportação acompanhadas por testes. Na correção dos contratos de dados, novos testes foram executados antes das mudanças para reproduzir as divergências e, depois, verificar se haviam sido corrigidas. Esse procedimento localizado não permite afirmar que todo o projeto seguiu desenvolvimento orientado a testes (TDD, \textit{Test-Driven Development}). O controle das dependências e a divisão de responsabilidades entre módulos apoiaram a evolução incremental; não foi identificada configuração de integração contínua no repositório.
++O desenvolvimento adotou SDD, com especificações funcionais, critérios de aceitação e decomposição em tarefas mantidos em \path{docs/specs}. O índice relaciona requisitos às especificações, e os documentos de decisões de arquitetura registram escolhas de implementação. As tarefas foram organizadas em branches, isto é, ramificações do controle de versão, e o histórico Git registra integrações por revisão de alterações. O autor definiu as decisões técnicas e arquiteturais e supervisionou o uso do OpenCode na elaboração de especificações, implementação e testes. A presença desses registros sustenta a descrição do processo, mas não demonstra observância uniforme de cada procedimento em todas as mudanças.
++
++Foram realizados testes automatizados e verificações manuais da plataforma. Na correção dos contratos de dados, novos testes foram executados antes das mudanças para reproduzir divergências e, depois, verificar sua correção. Esse procedimento localizado não permite afirmar que todo o projeto seguiu desenvolvimento orientado a testes (TDD, \textit{Test-Driven Development}). Não foi identificada configuração de integração contínua no repositório. As etapas de assistência de IA e os limites de responsabilidade estão discriminados na declaração ao final do artigo.
+ 
+ \subsection{Materiais e ambiente}
+ 
+@@ -123,7 +125,7 @@ A apresentação solicita exploração prévia da plataforma, estima de 5 a 8 mi
+ 
+ Antes dos cálculos, as respostas foram conferidas quanto à elegibilidade, ao preenchimento e à duplicidade. Os 31 registros indicam ``Sim'' na pergunta conjunta sobre maioridade, leitura e consentimento, e na declaração de exploração de ao menos um recurso. Não há duplicatas exatas, nem respostas integralmente iguais ao desconsiderar o carimbo. Não foram coletados identificadores individuais, e a unidade da análise descritiva é a submissão elegível ao questionário.
+ 
+-O conjunto analisado abrange respostas registradas entre 06 e 15 de novembro de 2026.
++Segundo o autor, a coleta ocorreu entre 06 e 15 de novembro de 2026, no horário de Brasília (UTC$-3$), foi encerrada e utilizou a mesma versão pública durante todo o período. A planilha preservada permite conferir o conteúdo e os cálculos, mas sua origem não foi confirmada por exportação independente do serviço nem por registro administrativo de encerramento. As entradas sintéticas conhecidas dos testes permanecem separadas e não correspondem aos textos usados na análise. Essa separação não autentica individualmente as submissões. Os resultados são, portanto, descrições da planilha fornecida, cuja confirmação como evidência empírica da coleta permanece pendente.
+ 
+ Nas tarefas, as categorias são ``Consegui sem ajuda'', ``Consegui com ajuda'', ``Tentei, mas não consegui'' e ``Não tentei''. A conclusão entre tentativas é a razão entre as duas primeiras e o total das três primeiras. O questionário agrega séries temporais e possíveis anomalias em uma atividade e reúne a exportação de relatório ou dados em outra; não se estimam taxas separadas para recursos que o instrumento não separou. Trata-se de autorrelato, sem observação controlada, cronometração ou inspeção dos logs de cada utilização.
+ 
+@@ -133,8 +135,10 @@ A base de cálculo depende da pergunta. ``Não consegui avaliar'', ausências e
+ 
+ Os quartis usam interpolação linear, e o intervalo interquartil é $Q_3-Q_1$. Médias e desvios padrão amostrais dos códigos ordinais são disponibilizados somente como descrições complementares; a nota geral recebe também moda, extremos e distribuição. Não se construíram escores agregados de usabilidade ou aceitação, nem se denominou o instrumento SUS, TAM, UTAUT ou NPS. Seis cruzamentos descritivos usam agrupamentos amplos, com supressão de grupos com menos de cinco respostas válidas, sem testes de hipótese ou conclusões causais. Isso reduz a exposição de pequenos grupos, mas não certifica anonimato.
+ 
+-As respostas abertas foram lidas integralmente e organizadas por temas, em diálogo com a referência de análise temática de \citet{BRAUN2006}. Foram identificados trechos com significado relevante, atribuídas categorias conforme seu conteúdo e revistos os agrupamentos. Uma resposta podia receber mais de uma categoria. Cada registro, porém, conta apenas uma vez em cada tema, mesmo quando o menciona em perguntas diferentes.
++Segundo o autor, a estratégia de classificação temática foi definida durante o planejamento. As instruções recuperadas solicitam análise qualitativa dos textos, e o livro de códigos registra a execução semântica multirrótulo. A IA realizou a codificação e o agrupamento, com supervisão humana; o autor confirmou a conferência das treze categorias, a correspondência com as respostas e a aprovação das interpretações. A referência de \citet{BRAUN2006} é conceitual: não se afirma reprodução integral de todas as etapas de seu método. Uma resposta podia receber mais de uma categoria; cada registro conta apenas uma vez em cada tema, mesmo quando o menciona em perguntas diferentes.
++
++Foram codificadas 142 células preenchidas, e treze comentários opcionais estavam ausentes. O campo sobre impedimento de acesso estava vazio nos 31 registros; essa ausência foi considerada compatível com a triagem do formulário, não uma medição de dificuldade igual a zero. A aprovação autoral da codificação não constitui conferência por segundo avaliador independente nem autentica a origem dos registros. Não houve dupla codificação independente ou medição de concordância.
+ 
+-Foram codificadas 142 células preenchidas, e treze comentários opcionais estavam ausentes. O campo sobre impedimento de acesso estava vazio nos 31 registros; essa ausência foi considerada compatível com a triagem do formulário, não uma medição de dificuldade igual a zero. A codificação teve assistência de IA, e seus critérios e trechos literais sem identificação permanecem disponíveis para validação do autor. Não houve codificação independente por dois avaliadores nem medição de concordância entre eles.
++A versão pública informada antecede as correções de radiação, legenda, clima multiíndice, intervalos, invalidação e identificadores de aquisição. O commit exato da versão avaliada não foi estabelecido, e as respostas não são atribuídas à versão corrigida consolidada em \texttt{28759bf}.
+ 
+-A coleta utiliza a versão pública anterior às correções de radiação, legenda, clima multiíndice, intervalos, invalidação e IDs de aquisição. Por decisão do autor, essa versão foi mantida durante a coleta, sem implantação das alterações locais. As percepções dos respondentes não são atribuídas à versão aprimorada, consolidada no commit \texttt{28759bf}. A documentação da análise distingue essas versões; o commit exato da versão pública permanece pendente. A confirmação dos procedimentos éticos institucionais cabe ao autor e ao orientador; não se atribui aprovação ou dispensa formal sem documento.
++O formulário informa finalidade acadêmica e participação voluntária, orienta evitar dados pessoais e solicita aceitação conjunta de maioridade, leitura e consentimento. A resposta afirmativa é autodeclaração, não verificação documental de idade. Não há solicitação intencional de nome ou e-mail, mas textos abertos e combinações de perfil podem permitir identificação indireta. O autor informa que não houve submissão ao Comitê de Ética em Pesquisa nem orientação prévia sobre sua necessidade. Não se alega aprovação, dispensa ou autorização ética. A utilização acadêmica dos resultados depende de encaminhamento formal do orientador à instância institucional competente; consentimento e ausência de identificadores diretos não resolvem automaticamente essa questão.
+diff --git a/docs/artigo_final/final_3b_plataforma.tex b/docs/artigo_final/final_3b_plataforma.tex
+index efd4caa..8fadda9 100644
+--- a/docs/artigo_final/final_3b_plataforma.tex
++++ b/docs/artigo_final/final_3b_plataforma.tex
+@@ -106,7 +106,7 @@ O gráfico climático combina precipitação em barras e temperatura média em l
+ 
+ Para obter os arquivos, o usuário primeiro solicita sua preparação e depois realiza o download. O PDF reúne uma síntese visual, o XLSX organiza os dados em abas e o ZIP contém tabelas CSV. Todos são gerados a partir do registro da análise concluída, sem recalcular os índices para cada formato. No PDF, o mapa usa escala fixa $[-1,1]$, indicada na legenda; por isso, seu contraste pode ser diferente do mapa interativo, cuja escala é ajustada aos valores encontrados.
+ 
+-A nova captura do relatório PDF aguarda substituição após atualização da versão pública e conferência da radiação. Por isso, não é incluída como evidência visual validada nesta versão do artigo. As saídas permitem conferir e reutilizar informações fora da interface, mas não incluem raster GeoTIFF nem toda a proveniência necessária para reconstruir exatamente o processamento remoto. Os arquivos PDF, XLSX e ZIP da demonstração anterior permanecem preservados; XLSX e ZIP foram verificados programaticamente, mas suas capturas em visualizadores próprios continuam pendentes.
++As saídas permitem conferir e reutilizar informações fora da interface, mas não incluem raster GeoTIFF nem toda a proveniência necessária para reconstruir exatamente o processamento remoto. Os arquivos PDF, XLSX e ZIP da demonstração funcional preservam a análise apresentada nos resultados. A interpretação de unidades e a correspondência entre esses arquivos são verificadas separadamente da aparência de capturas de tela.
+ 
+ \subsection{Adaptabilidade e acesso público}
+ 
+diff --git a/docs/artigo_final/final_4_resultados.tex b/docs/artigo_final/final_4_resultados.tex
+index 39b0e44..4f21103 100644
+--- a/docs/artigo_final/final_4_resultados.tex
++++ b/docs/artigo_final/final_4_resultados.tex
+@@ -34,6 +34,6 @@ O PDF baixado contém três páginas com mapas estáticos, o XLSX possui sete ab
+ 
+ O endereço público respondeu HTTP 200 e apresentou a interface Streamlit em navegador. Essa verificação não estabelece equivalência entre versão publicada e alterações locais nem disponibilidade contínua. As evidências da demonstração instrumentada correspondem à execução local corrigida; manifestos e arquivos preservam o vínculo com os parâmetros. As capturas fornecidas posteriormente pelo autor, usadas na apresentação da plataforma, ilustram outros exemplos de interface e não substituem os valores e arquivos dessa demonstração.
+ 
+-\subsection{Avaliação com usuários}
++\subsection{Análise descritiva da planilha de avaliação}
+ 
+ \input{final_4a_usuarios}
+diff --git a/docs/artigo_final/final_4a_usuarios.tex b/docs/artigo_final/final_4a_usuarios.tex
+index d578c1f..640f5f1 100644
+--- a/docs/artigo_final/final_4a_usuarios.tex
++++ b/docs/artigo_final/final_4a_usuarios.tex
+@@ -1,5 +1,7 @@
+ \subsubsection{Recorte analisado e perfil}
+ 
++A análise desta subseção descreve exclusivamente a planilha fornecida pelo autor. Os cálculos e a separação das entradas sintéticas conhecidas foram conferidos; a procedência independente da exportação e a admissibilidade institucional do uso dos resultados não foram estabelecidas. Por isso, as distribuições e os relatos seguintes não são apresentados como resultados empíricos confirmados da coleta.
++
+ A avaliação reuniu \UsuariosN{} submissões elegíveis ao questionário, examinadas conforme a \cref{sec:pesquisa-usuarios}. Os resultados descrevem o conjunto de respostas analisado. Há 18 registros de engenheiros agrônomos (58,1\%), três de produtores rurais e três de técnicos agrícolas (9,7\% cada), dois de pesquisadores, dois de profissionais ou estudantes de tecnologia e dois de outra área (6,5\% cada), além de um estudante de agronomia ou áreas relacionadas (3,2\%). A predominância de agrônomos aproxima parte das respostas do público técnico, mas não representa proporcionalmente todos os públicos previstos.
+ 
+ O conhecimento em agricultura de precisão foi declarado avançado em 14 registros (45,2\%), intermediário em oito (25,8\%), especialista em cinco (16,1\%) e básico em quatro (12,9\%). Quanto ao uso anterior de ferramentas de monitoramento por satélite, onze indicaram uso ocasional, onze poucas vezes (35,5\% cada), sete frequente (22,6\%) e dois nunca (6,5\%). Não se infere desse perfil uma formação acadêmica ou experiência específica além das categorias perguntadas. As três distribuições completas e seus gráficos estão no material complementar.
+@@ -51,7 +53,7 @@ A nota geral teve média \UsuariosMedia{}, mediana \UsuariosMediana{}, moda \Usu
+ 
+ As 142 respostas discursivas preenchidas foram organizadas em treze categorias, podendo uma mesma resposta contribuir para mais de um tema. O apoio à atividade de campo e à comunicação técnica apareceu em 30 registros, a reutilização/interoperabilidade em 19 e a relação temporal/meteorológica em 18. Esses totais incluem propostas de aplicação e de melhoria, não apenas elogios.
+ 
+-Entre as dificuldades, treze registros mencionaram navegação, desenho ou orientação; oito, transparência dos alertas; cinco, qualidade/proveniência dos dados; e três, latência/conectividade. Dois declararam ausência de barreira relevante. A \cref{tab:usuarios-temas} apresenta exemplos das categorias e de suas implicações; a codificação completa permanece disponível para validação do autor.
++Entre as dificuldades, treze registros mencionaram navegação, desenho ou orientação; oito, transparência dos alertas; cinco, qualidade/proveniência dos dados; e três, latência/conectividade. Dois declararam ausência de barreira relevante. A \cref{tab:usuarios-temas} apresenta exemplos das categorias e de suas implicações. O autor confirmou a conferência da codificação e a aprovação dessas interpretações; isso não substitui validação independente ou comprovação de procedência.
+ 
+ \input{avaliacao_usuarios/resultados/tabela_temas}
+ 
+diff --git a/docs/artigo_final/final_5_discussao.tex b/docs/artigo_final/final_5_discussao.tex
+index f96c0dd..d42e336 100644
+--- a/docs/artigo_final/final_5_discussao.tex
++++ b/docs/artigo_final/final_5_discussao.tex
+@@ -1,6 +1,6 @@
+ \section{Discussão}\label{chap:discussao-final}
+ 
+-\subsection{Atendimento aos objetivos e evolução do escopo}
++\subsection{Atendimento aos objetivos}
+ 
+ O sistema reúne os recursos previstos para selecionar áreas, consultar índices, apresentar mapas e séries e exportar resultados. A \cref{tab:objetivos-final} relaciona esses objetivos ao que foi implementado e avaliado. Essa distinção é importante porque verificar o funcionamento de um recurso não equivale a demonstrar sua validade agronômica.
+ 
+@@ -11,20 +11,18 @@ O sistema reúne os recursos previstos para selecionar áreas, consultar índice
+ \begin{tabular}{p{0.10\textwidth}p{0.20\textwidth}p{0.61\textwidth}}
+ \hline
+ \textbf{Objetivo} & \textbf{Situação} & \textbf{Fundamento e ressalva} \\ \hline
+-OE1 & Implementado & Estrutura modular e métodos documentados; bibliografia com pendências explícitas. \\
++OE1 & Implementado & Estrutura modular e métodos documentados; distinção entre fórmulas estabelecidas e parâmetros particulares. \\
+ OE2 & Implementado & Busca, desenho, gravação e recuperação; sessão web não é persistência permanente. \\
+ OE3 & Implementado & Filtros e fórmulas exercitados, demonstração remota executada; adequação histórica da máscara requer avaliação específica. \\
+ OE4 & Implementado & Composição, média e consulta local; contrato de escala corrigido e testado. \\
+ OE5 & Implementado & Série, tendência e regra unilateral exercitadas com dados controlados; sem acurácia agronômica atribuída. \\
+ OE6 & Implementado & Clima compartilhado, unidade normalizada e resumo propagado; ausência tratada explicitamente. \\
+ OE7 & Implementado & PDF, XLSX, CSV ZIP e GeoJSON exercitados com entradas controladas; não equivalem a pacote completo de reprodução. \\
+-OE8 & Parcialmente concluído & Suíte, demonstração e análise de 31 submissões ao questionário; avaliação de uso descritiva e estudos por cultura não realizados. \\ \hline
++OE8 & Verificação técnica realizada & Suíte e demonstração documentadas; análise descritiva de 31 registros separada da confirmação de procedência e da autorização institucional. \\ \hline
+ \end{tabular}
+ \end{table*}
+ 
+-Na proposta, NDVI e NDWI eram o foco, e NDMI aparecia como evolução futura. Ao longo do desenvolvimento, foram incorporados NDMI, consulta numérica no navegador, alternativas de armazenamento e exportações estruturadas. O planejamento sem banco de dados deu lugar ao SQLite local e, posteriormente, ao armazenamento por sessão no ponto de entrada web. Essas ampliações produziram recursos de engenharia, mas não evidências adicionais sobre o comportamento de culturas.
+-
+-Os estudos de soja, milho e pastagem, experimentos controlados e coleta em campo previstos não foram realizados. A avaliação concentrou-se no artefato computacional. Essa delimitação mantém a contribuição de engenharia, mas não substitui o objetivo experimental original e requer apreciação do orientador.
++O escopo definitivo concentra-se na integração e na verificação do artefato computacional. Disponibilizar índices, consulta numérica, armazenamento e exportações oferece meios de exploração, mas não produz, por si só, evidências sobre produtividade ou comportamento de culturas. A ausência de validação em campo é uma delimitação da avaliação, não um resultado agronômico negativo.
+ 
+ Outros requisitos das especificações também exigem distinção. O fluxo atual mostra área em hectares, sem seletor de acres, e não implementa bloqueio/liberação explícitos de navegação como descrito em especificações anteriores. A exclusão de localizações está no serviço, mas não na interface. Descrever esses itens como integralmente disponíveis apenas porque constam no planejamento produziria uma representação inadequada do sistema.
+ 
+@@ -50,7 +48,7 @@ Quando o usuário altera a área, o período ou o conjunto de índices solicitad
+ 
+ \subsection{Percepção de uso e prioridades de engenharia}
+ 
+-As avaliações respondem a perguntas diferentes. Os testes verificam regras computacionais; a demonstração mostra um fluxo em funcionamento; e o questionário reúne percepções e tarefas que os respondentes disseram ter realizado. Mesmo com a cobertura registrada nos testes, foram relatadas dificuldades de demarcação, navegação e consulta de séries/anomalias. Portanto, verificar a implementação não garante que seu uso seja compreendido. A distinção entre facilidade e utilidade percebidas \citep{DAVIS1989} ajuda a interpretar esse resultado: alguém pode considerar um recurso útil e, ainda assim, ter dificuldade para utilizá-lo ou entendê-lo.
++As avaliações respondem a perguntas diferentes. Os testes verificam regras computacionais; a demonstração mostra um fluxo em funcionamento; e a planilha do questionário contém declarações sobre uso. A interpretação desta última permanece condicionada à confirmação de procedência e à decisão institucional sobre sua utilização. Os relatos de dificuldades de demarcação, navegação e séries/anomalias sugerem pontos a investigar, sem que a cobertura de código garanta compreensão do fluxo. A distinção conceitual entre facilidade e utilidade percebidas \citep{DAVIS1989} permite formular essa investigação, sem caracterizar o instrumento como validação formal do TAM.
+ 
+ A consulta por pixel ilustra esse contraste. Houve 20/23 respostas útil/muito útil entre as avaliações válidas, mas oito registros indicaram não conseguir avaliá-la e cinco declararam não tentar a atividade correspondente. Não conseguir avaliar, não tentar e atribuir uma avaliação neutra são respostas diferentes e foram mantidas separadas. Os resultados apontam a necessidade de investigar se o recurso é encontrado e compreendido e em quais condições é acessado, sem presumir que todos tenham percebido ou utilizado a consulta local.
+ 
+@@ -76,7 +74,7 @@ O serviço público Nominatim limita o tráfego agregado da aplicação a uma re
+ 
+ Na web, visitantes compartilham a conta de serviço e o consumo de cotas, embora os registros estejam separados por sessão. GeoJSON e arquivos de resultados podem conter coordenadas sensíveis, e a privacidade dos arquivos transferidos fica sob responsabilidade de quem os armazena e compartilha. O isolamento de sessão não constitui sistema de autorização de propriedades.
+ 
+-Não foram conduzidos testes de carga, ensaios representativos de latência, comparação quantitativa com plataformas ou avaliação de campo. A pesquisa por adesão descreve o conjunto de respostas coletadas e não permite generalização populacional. A codificação qualitativa assistida por IA requer apreciação substantiva do autor e não oferece concordância independente entre avaliadores. Assim, as evidências sustentam o fluxo demonstrado, as regras testadas e as percepções registradas, não a adequação a qualquer condição operacional.
++Não foram conduzidos testes de carga, ensaios representativos de latência, comparação quantitativa com plataformas ou avaliação de campo. A análise do questionário limita-se ao conjunto fornecido, sem generalização populacional ou confirmação independente de procedência. O autor aprovou a codificação qualitativa assistida por IA e suas interpretações, mas não houve concordância independente entre avaliadores. As evidências técnicas sustentam o fluxo demonstrado e as regras testadas, não a adequação a qualquer condição operacional.
+ 
+ A substituição da QA60 pela classificação de cena SCL (\textit{Scene Classification Layer}) ou por probabilidade de nuvens também requer avaliação própria: é necessário verificar classes, sombras, disponibilidade histórica e efeitos nos resultados antes de alterar o processamento.
+ 
+diff --git a/docs/artigo_final/final_6_conclusao.tex b/docs/artigo_final/final_6_conclusao.tex
+index a4a5fe4..c609e43 100644
+--- a/docs/artigo_final/final_6_conclusao.tex
++++ b/docs/artigo_final/final_6_conclusao.tex
+@@ -4,10 +4,10 @@ O trabalho desenvolveu e verificou tecnicamente uma plataforma que reúne imagen
+ 
+ A execução documentada reuniu 710 testes aprovados, com cobertura integral das linhas e ramificações dos módulos Python medidos, além de três verificações JavaScript independentes. A demonstração em navegador complementou os testes ao usar serviços reais e gerar arquivos. A revisão das integrações também mostrou por que a cobertura não basta: foi necessário corrigir a interpretação de unidades, o tratamento das datas, a legenda, os metadados e o controle dos resultados após mudanças nas entradas. Em conjunto, essas verificações sustentam a viabilidade técnica do fluxo demonstrado, sem garantir ausência de defeitos ou desempenho em qualquer condição.
+ 
+-Os recursos desenvolvidos e as evidências apresentadas concretizam o escopo computacional executado. A análise de \UsuariosN{} submissões elegíveis ao questionário acrescentou a percepção de uso da versão pública anterior às correções. A nota geral média foi \UsuariosMedia{}, com mediana \UsuariosMediana{}, e 24 de 30 respostas válidas indicaram intenção de uso profissional ou acadêmico. Ao mesmo tempo, houve dificuldades de navegação, desenho e interpretação dos alertas, além de recursos que não puderam ser avaliados. Assim, o interesse declarado não significa uso autônomo ou continuado. Como a participação foi por adesão e as tarefas foram informadas pelos próprios respondentes, as conclusões se limitam ao conjunto analisado.
++Os recursos desenvolvidos e as evidências apresentadas concretizam o escopo computacional executado. Na planilha fornecida, a análise de \UsuariosN{} submissões elegíveis resultou em nota geral média \UsuariosMedia{}, mediana \UsuariosMediana{} e 24 de 30 respostas válidas com intenção de uso profissional ou acadêmico. Também foram registrados obstáculos de navegação, desenho e interpretação dos alertas. Esses valores descrevem o arquivo recebido: não constituem confirmação independente de uma avaliação empírica enquanto sua procedência e admissibilidade institucional permanecerem sem comprovação. Não sustentam, portanto, conclusão consolidada de aceitação, autonomia ou uso continuado.
+ 
+-Os estudos específicos de soja, milho e pastagem originalmente previstos não foram realizados, configurando diferença entre planejamento e escopo executado a ser apreciada pelo orientador. Nem o questionário nem a demonstração substituem essa avaliação. A solução não é apresentada como sistema de diagnóstico agronômico validado.
++A validação agronômica em campo não integra a avaliação realizada. Nem os testes, nem a demonstração ou o questionário transformam a solução em sistema de diagnóstico agronômico validado.
+ 
+-Para dar continuidade ao trabalho, a primeira prioridade é validar com o autor a codificação das respostas e suas interpretações, documentar a versão pública e consolidar os procedimentos institucionais da coleta. Os relatos também orientam a investigação de um fluxo guiado, da edição de áreas e de explicações sobre índices, dados meteorológicos e alertas. A eficácia dessas mudanças precisa ser avaliada, não presumida.
++Antes da utilização definitiva dos resultados do questionário, é necessário comprovar a procedência dos registros, identificar a versão pública e obter o encaminhamento institucional sobre ética e uso de IA. A codificação e as interpretações anteriores foram aprovadas pelo autor; a presente revisão ainda requer leitura final. Como continuidade técnica, os relatos podem orientar a investigação de um fluxo guiado, da edição de áreas e de explicações sobre índices, dados meteorológicos e alertas. A eficácia dessas mudanças precisa ser avaliada, não presumida.
+ 
+ No processamento, permanecem a revisão de nuvens e sombras, a comparação entre grades e a ampliação dos registros de origem dos dados e das exportações georreferenciadas. Na utilização, faltam ensaios de acessibilidade, dispositivos e desempenho. Armazenamento permanente, dados de campo, fenologia e comparação entre safras exigem requisitos e protocolos próprios. Drones e sensores de Internet das Coisas (IoT) permanecem como possibilidades futuras.
+diff --git a/docs/artigo_final/referencias.bib b/docs/artigo_final/referencias.bib
+index b5461c7..ed185bd 100644
+--- a/docs/artigo_final/referencias.bib
++++ b/docs/artigo_final/referencias.bib
+@@ -400,3 +400,61 @@
+  title = {Add Statefulness to Apps: Session State},
+  note = {\url{https://docs.streamlit.io/develop/concepts/architecture/session-state}. Acesso em 15 nov. 2026}
+ }
++@article{MERONI2019,
++  author = {Meroni, Michele and Fasbender, Dominique and Rembold, Felix and Atzberger, Clement and Klisch, Anja},
++  title = {Near real-time vegetation anomaly detection with {MODIS NDVI}: Timeliness vs. accuracy and effect of anomaly computation options},
++  journal = {Remote Sensing of Environment},
++  year = {2019},
++  volume = {221},
++  pages = {508--521},
++  doi = {10.1016/j.rse.2018.11.041},
++  note = {Texto integral em \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC6360378/}. Acesso em 15 nov. 2026}
++}
++
++@article{PARNAS1972,
++  author = {Parnas, D. L.},
++  title = {On the Criteria To Be Used in Decomposing Systems into Modules},
++  journal = {Communications of the ACM},
++  year = {1972},
++  volume = {15},
++  number = {12},
++  pages = {1053--1058},
++  doi = {10.1145/361598.361623},
++  note = {Texto consultado em \url{https://wstomv.win.tue.nl/edu/2ip30/references/criteria_for_modularization.pdf}. Acesso em 15 nov. 2026}
++}
++
++@misc{NIST_LOCATION,
++  author = {{National Institute of Standards and Technology}},
++  title = {Measures of Location: {NIST/SEMATECH e-Handbook of Statistical Methods}},
++  note = {Seção 1.3.5.1. Disponível em \url{https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm}. Sem data editorial identificada. Acesso em 15 nov. 2026}
++}
++
++@misc{GITHUB_SDD,
++  author = {{GitHub}},
++  title = {Specification-Driven Development ({SDD}): {Spec Kit}},
++  note = {Documentação técnica, seções The SDD Workflow in Practice e Core Principles. Disponível em \url{https://github.com/github/spec-kit/blob/main/spec-driven.md}. Sem data editorial identificada. Acesso em 15 nov. 2026}
++}
++
++@misc{BOECKELER2025,
++  author = {Böckeler, Birgitta},
++  title = {Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl},
++  year = {2025},
++  note = {Artigo técnico de 15 out. 2025. Disponível em \url{https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html}. Acesso em 15 nov. 2026}
++}
++
++@misc{UPF_IA2026,
++  author = {{Universidade de Passo Fundo}},
++  title = {Instrução Normativa nº 03/2026/PROACAD: Uso de Inteligência Artificial nas atividades acadêmicas},
++  year = {2026},
++  note = {28 out. 2026. Íntegra e anexo disponibilizados na seção Instrução Normativa PROACAD de \url{https://www.upf.br/ppgodonto/normas-regimentos-formularios-e-in}. Acesso em 15 nov. 2026}
++}
++@misc{EOSDA_GUIDE,
++  author = {{EOS Data Analytics}},
++  title = {{EOSDA Crop Monitoring User Guide}},
++  note = {Seções Add field, Work With Crop Map, Monitoring, Weather e Account And Pricing. Disponível em \url{https://eos.com/user-guide/}. Sem data editorial identificada. Acesso em 15 nov. 2026}
++}
++@misc{ONESOIL_PLATFORM_DETAIL,
++  author = {{OneSoil}},
++  title = {{OneSoil Platform}},
++  note = {Seções funcionais e Frequently Asked Questions. Disponível em \url{https://onesoil.ai/en/platform}. Sem data editorial identificada. Acesso em 15 nov. 2026}
++}
+
+--- /dev/null
++++ docs/artigo_final/DECLARACAO_USO_IA.tex
+@@ -0,0 +1,69 @@
++\documentclass[11pt,a4paper]{article}
++\usepackage[margin=2.5cm]{geometry}
++\usepackage{fontspec}
++\usepackage[brazilian]{babel}
++\usepackage{hyperref}
++\setlength{\parindent}{0pt}
++\setlength{\parskip}{0.6em}
++\setlength{\emergencystretch}{2em}
++\begin{document}
++\begin{center}
++{\large Universidade de Passo Fundo}\\
++Curso de Ciência da Computação\\[1em]
++{\Large Declaração de uso de inteligência artificial}\\
++\textbf{Minuta para revisão e assinatura -- não assinada}
++\end{center}
++
++\textbf{Trabalho:} Sistema de Monitoramento Agrícola por Imagens de Satélite.\\
++\textbf{Autor:} Eduardo Steffens Hoppen.\\
++\textbf{Orientador:} Prof. Rafael Rieder.
++
++Esta minuta segue os quatro campos do anexo da IN nº 03/2026/PROACAD, de 28 de outubro de 2026. Seu preenchimento não certifica autorização institucional, aprovação ética ou validação final da revisão atual.
++
++Declaro, para os devidos fins, que este trabalho utilizou ferramentas de Inteligência Artificial nas seguintes condições:
++
++\section*{1. Ferramentas utilizadas}
++OpenCode, com modelos identificados nos registros locais como \nolinkurl{openai/gpt-6.1-terra} e \nolinkurl{openai/gpt-6.1-sol}. A instalação consultada nesta revisão informa OpenCode v2.3.0; a versão de cada sessão histórica não foi estabelecida. O autor também informa uso de ``ChatGPT 6 -- Luna'', sem vínculo histórico confirmado com as sessões recuperadas deste projeto. Os nomes informados não foram convertidos em versões comerciais presumidas.
++
++\section*{2. Finalidade do uso}
++Auxílio na elaboração de especificações e tarefas; geração e revisão de código e testes; documentação técnica; execução de verificações por ferramentas; pesquisa, organização e conferência assistida de referências; revisão científica e matemática; geração e reformulação substancial de trechos do artigo; revisão gramatical e didática; tradução do resumo; elaboração de diagramas e scripts; análise quantitativa assistida, codificação e agrupamento qualitativo; compilação e inspeção visual assistida.
++
++A IA não substitui o contato direto do pesquisador com as fontes nem sua responsabilidade sobre as decisões de arquitetura, o conteúdo e as conclusões. Os resultados técnicos gerados pelas ferramentas e as aprovações humanas são registrados separadamente.
++
++\section*{3. Etapas da atividade acadêmica}
++Planejamento e especificação de funcionalidades; implementação e revisão do artefato; preparação e execução de testes; documentação de demonstrações manuais; tratamento e análise do arquivo do questionário; elaboração, revisão bibliográfica, científica e editorial do artigo; preparação de figuras, arquivos LaTeX e PDF; revisão final ainda sujeita à aprovação do autor.
++
++O autor confirma supervisão humana, responsabilidade pelas decisões técnicas e arquiteturais e aprovação das treze categorias temáticas e das interpretações da versão anterior. A aprovação daquela versão não equivale à aprovação de alterações posteriores.
++
++\section*{4. Prompts relevantes}
++Os seguintes excertos são literais de mensagens recuperadas do projeto no OpenCode, e não reconstruções de prompts:
++
++\begin{quote}
++``Antes de consolidar os resultados, verifique a procedência dos registros e eventuais correspondências com bases sintéticas existentes no projeto. Separe registros comprovadamente reais, sintéticos e de procedência não confirmada.''
++\end{quote}
++Mensagem \texttt{msg\_1e0f1bee5001QnNu3YHb8uvtC7}, sobre a avaliação de usuários.
++
++\begin{quote}
++``Não atribuir esses limiares a de Jong et al.''
++\end{quote}
++Mensagem de execução final, seção de regressão linear, \texttt{msg\_1e1f9356f001lL77wG8k7hQ4Rx}.
++
++O registro complementar \texttt{REGISTRO\_USO\_IA.md} relaciona as sessões, as especificações, as finalidades e as evidências. Os exemplos acima não representam um histórico completo. Os prompts integrais devem ser disponibilizados ao orientador por canal adequado, após revisão de privacidade; não se publicam automaticamente dados inéditos ou respostas individuais.
++
++\section*{Declaração autoral para assinatura}
++O texto abaixo somente deve ser subscrito após a leitura e validação efetivas da versão entregue:
++
++Declaro que todo o conteúdo gerado com auxílio de IA foi criticamente revisado, validado e, quando necessário, substancialmente reformulado por mim, e que assumo integral responsabilidade pela originalidade, veracidade e integridade científica do trabalho apresentado.
++
++Declaro, ainda, ter conhecimento de que a omissão ou a falsificação desta declaração configura infração e poderá ser equiparada à má conduta científica, nos termos do Código de Ética, do Regimento Geral da Universidade de Passo Fundo e da Portaria CNPq nº 2.664/2026.
++
++\vspace{1em}
++Passo Fundo, \rule{1cm}{0.4pt} de \rule{4cm}{0.4pt} de \rule{1.5cm}{0.4pt}.
++
++\vspace{2em}
++\begin{center}
++\rule{10cm}{0.4pt}\\
++Eduardo Steffens Hoppen\\
++Nome e assinatura
++\end{center}
++\end{document}
+
+--- /dev/null
++++ docs/artigo_final/REGISTRO_USO_IA.md
+@@ -0,0 +1,60 @@
++# Registro de uso de inteligência artificial
++
++Atualização: 15/11/2026. **Registro retrospectivo baseado em evidências existentes e declaração do autor; não é um diário contemporâneo completo.** A revisão atual ainda exige leitura e aprovação humana. A assinatura não foi simulada.
++
++## Ferramentas e identificadores
++
++Foi consultada a API local do OpenCode (`GET /api/session`, filtrada pelo diretório deste projeto), usando a documentação oficial de API. A instalação responde `opencode v2.3.0`; isso não determina versões históricas.
++
++| Evidência | Identificador registrado | Alcance |
++|---|---|---|
++| `ses_e34528856ffe6NfqlLR6yl60oo` | `openai/gpt-6.1-terra` | Sessão do projeto: verificação de material para artigo |
++| `ses_e2e01a217ffekAm1RXafBH8cb0` | `openai/gpt-6.1-terra` | Sessão do projeto: organização de pastas |
++| `ses_e2a5885b7ffelMbnE0RLzCNHJD` | `openai/gpt-6.1-sol` | Sessão do projeto: aplicação |
++| `ses_e20ba7f84ffeHY9BMnCHj89NXj` | `openai/gpt-6.1-sol` | Sessão com revisão do artigo e execução atual |
++| Declaração do autor nesta rodada | “ChatGPT 6 - Luna” | Não localizado vínculo do modelo com sessão deste projeto no recorte consultado |
++
++Os metadados de sessão não provam que somente o modelo atual da sessão foi utilizado em todo seu histórico. Não certificam o nome comercial do fornecedor. Os registros completos permanecem locais para preservar dados e instruções privadas.
++
++## Finalidades e resultados
++
++| Etapa | Assistência efetivamente registrada | Supervisão / evidência |
++|---|---|---|
++| Requisitos e SDD | Especificações, critérios, planos e decomposição de tarefas | `docs/specs/index.md`, `spec-*.md`, `tasks-*.md`; commit `733e402` introduz estrutura SDD; `0c676d9` registra especificações de exportação e áreas salvas |
++| Implementação | Geração/revisão de código, testes e documentação | Histórico Git, PRs de integração, `docs/validation/`; autor confirma decisões técnicas e arquiteturais |
++| Verificação | Execução assistida de suíte, regressões, serviços reais e navegador | Evidências históricas distinguem simulações e demonstração real; não foram criados novos resultados de execução da aplicação nesta rodada |
++| Questionário | Scripts quantitativos, leitura e codificação multirrótulo, agrupamento, tabelas e gráficos | `avaliacao_usuarios/scripts/`, `codificacao.json`; 142 células / 13 temas; aprovação qualitativa declarada pelo autor nesta rodada |
++| Artigo | Geração e reformulação substancial, organização, revisão gramatical/didática e tradução do resumo | Diffs Git `1862dd7`, `f31d0a5`; não se reduz o uso a correção ortográfica |
++| Auditoria | Pesquisa bibliográfica, conferência assistida de fontes/equações, originalidade preliminar, registro de lacunas | `auditoria_cientifica/`; os acessos de IA não certificam leitura direta de todas as fontes pelo pesquisador |
++| Figuras e PDF | Diagramas, preparação de capturas, compilação e triagem visual | Fontes TikZ, scripts e manifestos; capturas fornecidas pelo autor não são imagens sintéticas |
++
++## Prompts recuperados
++
++Fonte: mensagens `type=user` da sessão do projeto. Excertos literais, com identificador para recuperação; não reconstruídos a partir de respostas da IA:
++
++1. `msg_1e0f1bee5001QnNu3YHb8uvtC7`:
++   > Antes de consolidar os resultados, verifique a procedência dos registros e eventuais correspondências com bases sintéticas existentes no projeto. Separe registros comprovadamente reais, sintéticos e de procedência não confirmada.
++2. Mesma mensagem:
++   > Diferenciar execução autodeclarada de uma avaliação observacional conduzida em ambiente controlado.
++3. `msg_1e1f9356f001lL77wG8k7hQ4Rx`, PA03:
++   > Não atribuir esses limiares a de Jong et al.
++4. Mesma mensagem, restrições:
++   > Não converter automaticamente os nomes informados pelo autor em nomes comerciais oficiais sem evidências.
++
++A mensagem sobre avaliação já solicita análise quantitativa e qualitativa, critérios e limites; não comprova que as treze categorias específicas tenham sido fixadas antes da leitura do corpus. A metodologia histórica registra agrupamentos definidos a partir dele. O autor confirma planejamento prévio da **estratégia**, não se converte isso em pré-registro das categorias. Não se encontrou protocolo datado que certificasse pré-registro.
++
++## Normativa e encaminhamentos
++
++Íntegra da IN nº 03/2026/PROACAD e anexo obtidos no portal oficial da UPF. URL e hash constam da evidência da rodada; cópia de consulta em `/tmp/opencode/revisao-final-pa/IN_03_2026_PROACAD.pdf`. A minuta `DECLARACAO_USO_IA.tex` usa os quatro campos do anexo e os dois parágrafos finais de declaração, sem assinatura.
++
++| Artigos | Ação / evidência | Ainda necessário |
++|---|---|---|
++| 3º | Registro de ferramentas, limites e responsabilidade; nenhuma nova resposta gerada | Consulta direta e revisão crítica pelo autor; comprovação de autorização para dados inéditos e avaliação de privacidade |
++| 4º | Autor relata ciência do orientador e orientações institucionais | Documento formal estabelecendo autorização, finalidades, limites e condições |
++| 5º e 10 | Declaração explicita geração/reformulação substancial e análise; não apresenta como redação humana sem assistência | Conferência de completude pelo autor e orientador |
++| 6º | Declaração no artigo e minuta independente conforme anexo | Revisar, completar e assinar após aprovação real |
++| 7º | Responsabilidade do autor preservada | Acompanhamento e validação institucional do orientador |
++| 8º | Preparada informação a ser entregue | Comprovante de comunicação à banca |
++| 11 | Sem afirmação de regularidade automática | Eventual apreciação cabe à UPF, não ao agente |
++
++Não houve contato com orientador, CEP, ProAcad ou banca por esta ferramenta. Nenhum manuscrito ou resposta individual foi enviado a ferramentas antiplágio. As consultas bibliográficas usaram temas, títulos, DOIs e URLs públicos, não o manuscrito inédito completo.
+
+--- /dev/null
++++ docs/artigo_final/auditoria_cientifica/AUDITORIA_ORIGINALIDADE.md
+@@ -0,0 +1,34 @@
++# Auditoria preliminar de originalidade e atribuição
++
++15/11/2026, rodada PA01–PA18, base `f31d0a5`. **Não é laudo antiplágio ou certificação de autoria.** Não houve execução de Turnitin, iThenticate, CopySpider ou ferramenta equivalente; não há percentual de similaridade.
++
++## Procedimento e corpus
++
++Revisão dirigida das passagens alteradas frente aos textos efetivamente acessados: Meroni et al. (2019), Parnas (1972), Izquierdo-Sanz e Moltó (2026), documentação Spec Kit, artigo técnico de Böckeler, NIST sobre medidas de localização e normativa UPF. Foram examinadas a origem dos conceitos, a finalidade das equações, a redação das sínteses e a natureza de figuras e exemplos. Não se confrontou cada frase do artigo com todas as publicações existentes; traduções e paráfrases sem correspondência literal não podem ser descartadas por busca mecânica.
++
++| Conteúdo | Atribuição e conclusão delimitada |
++|---|---|
++| Índices e bandas | Rouse é base histórica; Gao não utilizou B11 Sentinel-2; McFeeters não fundamenta a razão NIR–SWIR; Tabela 1 de Izquierdo-Sanz documenta B8/B11. Não se atribui a esses autores criação do sistema. |
++| Mediana / média / desvio | Fórmulas elementares explicitadas, sem autoria artificial. NIST e APIs fundamentam definições e comportamento técnico. |
++| Escore / limiar | Meroni, Eq. 1 e §§3.1/3.2.3, citado com diferenças de base histórica e sazonalidade; nenhum empréstimo de suposta validação da janela 3. |
++| Modularização | Síntese própria das responsabilidades e ocultação de decisões de Parnas, com citação. Não se reproduzem seus exemplos KWIC como se pertencessem ao projeto. |
++| SDD | Fontes técnicas identificadas como tais; não se reproduzem promessas de eliminação de erros, ganhos de tempo ou ferramentas não empregadas. |
++| Produtos comerciais | Descrições documentais com fonte; evitadas promessas comerciais e falsa exclusividade da consulta por posição. |
++| Resumo em inglês | Tradução assistida declarada; não é tradução de resumo de outra publicação. |
++| Normativa | Dois parágrafos finais da minuta independente seguem literalmente o anexo oficial; atribuição e natureza de minuta expressas. Não são contribuição científica original. |
++| Citações de respostas | Trechos curtos do arquivo de análise, não invenções; procedência empírica e risco de identificação indireta ainda precisam de confirmação. |
++| Diagramas de fluxo | Sínteses da implementação; não apresentam método agronômico novo. |
++| Figura espectral anterior | Origem específica das três curvas não comprovada; esquema retirado do artigo e preservado no Git. Não é aceito como derivação verificada de Weiss. Reconstrução PA14 permanece aberta. |
++
++## Correções nesta rodada
++
++- Declaração de IA ampliada para geração/reformulação substancial, revisão científica, bibliográfica, matemática, código, análise e figuras.
++- Fonte específica B8/B11 incorporada com localizador.
++- Método da janela e critérios de tendência preservados como escolhas de implementação.
++- Comparação comercial deixa de sugerir exclusividade de consulta numérica por posição.
++- Minuta independente atribui o texto institucional ao anexo.
++- Nenhum texto foi alterado para manipular detector de IA ou índice de similaridade.
++
++## Limites e revisão humana necessária
++
++Não foi feita investigação exaustiva de todas as fontes das versões iniciais nem autenticação autoral por estilometria. Acesso bloqueado a fontes impede confrontos integrais; o parecer bibliográfico mantém essa limitação. A revisão direta das fontes e a aprovação final pertencem ao autor. Antes de usar serviço externo de similaridade, obter autorização e avaliar privacidade do manuscrito inédito. Não foi enviado o artigo completo a mecanismo de busca ou serviço antiplágio.
+
+--- /dev/null
++++ docs/artigo_final/auditoria_cientifica/validar_rodada_pa.py
+@@ -0,0 +1,188 @@
++"""Valida preservação da rodada PA; não certifica procedência, ciência ou aprovação."""
++
++import argparse
++from collections import Counter
++import difflib
++import hashlib
++import json
++from pathlib import Path
++import re
++import subprocess
++
++ARTICLE = Path(__file__).resolve().parents[1]
++ROOT = ARTICLE.parents[1]
++OUT = ARTICLE / "evidencias/revisao_final_pa"
++BASELINE = "f31d0a5"
++
++
++def git(*args, binary=False):
++    return subprocess.check_output(
++        ["git", "-c", "core.quotepath=false", *args], cwd=ROOT, text=not binary
++    )
++
++
++def digest(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--build-dir", type=Path, required=True)
++    parser.add_argument("--cache-dir", type=Path)
++    args = parser.parse_args()
++    OUT.mkdir(parents=True, exist_ok=True)
++    before = git("rev-parse", BASELINE).strip()
++    paths = git("ls-tree", "-r", "--name-only", BASELINE).splitlines()
++    protected = []
++    for relative in paths:
++        # Todos os arquivos fora do artigo, resultados, figuras e scripts antigos
++        # da avaliação são protegidos; somente documentação/LaTeX da rodada muda.
++        protect = not relative.startswith("docs/artigo_final/") or any(
++            relative.startswith(f"docs/artigo_final/{directory}/")
++            for directory in (
++                "avaliacao_usuarios/resultados", "avaliacao_usuarios/figuras",
++                "avaliacao_usuarios/scripts", "fig", "evidencias",
++            )
++        ) or relative.endswith(".cls")
++        if relative == "docs/artigo_final/fig/conceitos.tex":
++            old = git("show", f"{BASELINE}:{relative}")
++            new = (ROOT / relative).read_text()
++            # Apenas a primeira figura não fundamentada foi retirada.
++            assert old.split("\\end{figure*}", 1)[1].strip() == new.strip()
++            protect = False
++        if relative in {
++            "docs/artigo_final/avaliacao_usuarios/scripts/gerar_tabelas.py",
++            "docs/artigo_final/avaliacao_usuarios/resultados/tabela_temas.tex",
++        }:
++            old = git("show", f"{BASELINE}:{relative}")
++            assert old.replace(
++                "para validação do autor", "conferida pelo autor"
++            ) == (ROOT / relative).read_text()
++            protect = False
++        if protect:
++            assert git("show", f"{BASELINE}:{relative}", binary=True) == (
++                ROOT / relative
++            ).read_bytes(), f"Arquivo protegido alterado: {relative}"
++            protected.append(relative)
++    equation_pattern = r"\\begin\{(?:equation|align)\}.*?\\end\{(?:equation|align)\}"
++    equations = {}
++    for name in (
++        "final_2_fundamentacao.tex", "final_3_metodos.tex",
++        "final_3a_implementacao.tex",
++    ):
++        old = git("show", f"{BASELINE}:docs/artigo_final/{name}")
++        new = (ARTICLE / name).read_text()
++        a = re.findall(equation_pattern, old, re.S)
++        b = re.findall(equation_pattern, new, re.S)
++        assert a == b, f"Equações alteradas: {name}"
++        equations[name] = len(b)
++    source = next((ROOT / "docs").glob("Respostas*.xlsx"))
++    original = ARTICLE / "avaliacao_usuarios/dados_originais/respostas_recebidas.xlsx"
++    assert digest(source) == "9adb66b330103ca858c37d7dc6cdb5e4e954f09f749a0c122fa6e6b2f4f5de59"
++    assert digest(original) == "d61b9f11514f8d42f276abdb3e4e173782955c468fb50d774680032d342ce48a"
++    import openpyxl
++
++    a = list(openpyxl.load_workbook(original, data_only=True).worksheets[0].values)
++    b = list(openpyxl.load_workbook(source, data_only=True).worksheets[0].values)
++    assert len(a) == len(b) == 32
++    assert all(x[1:] == y[1:] for x, y in zip(a, b))
++    assert sum(x[0] != y[0] for x, y in zip(a[1:], b[1:])) == 7
++    assert sum(bool(str(row[i] or "").strip()) for row in b[1:] for i in range(43, 48)) == 142
++    codes = json.loads((ARTICLE / "avaliacao_usuarios/codificacao.json").read_text())
++    assert len(codes["temas"]) == 13 and len(codes["registros"]) == 31
++    assert sum(len(record["codigos"]) for record in codes["registros"]) == 142
++    fixture_texts = ("Comentário sintético", "Texto sintético apenas para teste")
++    assert not any(
++        str(cell or "").strip() in fixture_texts
++        for row in b[1:] for cell in row
++    )
++    screen = ROOT / "Imagens Artigo/Imagem3.1-Relatório gerado em pdf.png"
++    excluded = ARTICLE / "evidencias/capturas_autor/relatorio_pdf_pendente.png"
++    same_capture = digest(screen) == digest(excluded)
++    # O manifesto registra a disponibilidade observada, sem presumir mudança.
++    entries = re.findall(r"@\w+\{([^,]+),", (ARTICLE / "referencias.bib").read_text())
++    old_entries = re.findall(
++        r"@\w+\{([^,]+),",
++        git("show", f"{BASELINE}:docs/artigo_final/referencias.bib"),
++    )
++    assert all(n == 1 for n in Counter(entries).values())
++    added = sorted(set(entries) - set(old_entries))
++    removed = sorted(set(old_entries) - set(entries))
++    assert len(added) == 8 and not removed
++    current_pa = (ARTICLE / "auditoria_cientifica/PENDENCIAS_AUTOR.md").read_text().split(
++        "## Histórico anterior"
++    )[0]
++    assert len(re.findall(r"^\| PA\d\d \|", current_pa, re.M)) == 18
++    changed = git("diff", BASELINE, "--name-only").splitlines()
++    assert all(p.startswith("docs/artigo_final/") for p in changed)
++    diffs = [git("diff", "--no-ext-diff", BASELINE, "--", "docs/artigo_final")]
++    for relative in git("ls-files", "--others", "--exclude-standard", "docs/artigo_final").splitlines():
++        path = ROOT / relative
++        if path.suffix in {".tex", ".md", ".py"} and "evidencias/revisao_final_pa" not in relative:
++            diffs.append("".join(difflib.unified_diff(
++                [], path.read_text().splitlines(True), fromfile="/dev/null", tofile=relative
++            )))
++    (OUT / "comparacao.diff").write_text("\n".join(diffs))
++    compilation = json.loads((OUT / "compilacao.json").read_text())
++    assert compilation["passed"] and not compilation["undefined"]
++    assert digest(args.build_dir / "Relatorio_Final.pdf") == compilation["pdf_sha256"]
++    result = {
++        "baseline": before,
++        "mechanical_checks_passed": True,
++        "scientific_acceptance_complete": False,
++        "human_approval_of_current_revision": False,
++        "protected_tracked_files_unchanged": len(protected),
++        "equation_environments_unchanged": equations,
++        "responses_unchanged": True,
++        "source_sha256": digest(source),
++        "original_sha256": digest(original),
++        "historical_timestamp_differences": 7,
++        "new_timestamp_changes": 0,
++        "records": 31,
++        "nonempty_discursive_cells": 142,
++        "themes": 13,
++        "known_synthetic_fixtures_found": 0,
++        "independent_empirical_authentication": False,
++        "pdf_capture_same_as_previously_excluded": same_capture,
++        "pdf_capture_sha256": digest(screen),
++        "pdf_capture_incorporated": False,
++        "bibliography": {"entries": len(entries), "added": added, "removed": removed},
++        "pa_items_documented": 18,
++        "pdf_sha256": compilation["pdf_sha256"],
++        "artifact_hashes": {
++            name: digest(ARTICLE / name)
++            for name in (
++                "Relatorio_Final.pdf", "DECLARACAO_USO_IA.pdf",
++                "DECLARACAO_USO_IA.tex", "referencias.bib", "REGISTRO_USO_IA.md",
++            )
++        },
++        "no_new_application_tests_or_deployment_claimed": True,
++        "remaining": [
++            "independent source/export and closure of questionnaire",
++            "exact public commit", "ethics and formal AI authorization",
++            "primary-source verification", "spectral figure reconstruction",
++            "updated report screenshot", "human final review and signature",
++        ],
++    }
++    if args.cache_dir:
++        cache = args.cache_dir
++        result["source_cache_hashes"] = {
++            name: digest(cache / name)
++            for name in (
++                "IN_03_2026_PROACAD.pdf", "CNS_510_2016.pdf", "izquierdo2026.pdf",
++                "meroni2019.html", "parnas1972.pdf", "sdd.md",
++                "nist-location.html", "boeckeler2025.html", "eosda-guide.html",
++                "eosda-pricing.html", "onesoil-platform.html", "formulario.html",
++            ) if (cache / name).exists()
++        }
++        result["new_http_accesses"] = json.loads((cache / "novos-acessos.json").read_text())
++        if (cache / "conferencia-planilha.json").exists():
++            (OUT / "conferencia-planilha.json").write_bytes(
++                (cache / "conferencia-planilha.json").read_bytes()
++            )
++    (OUT / "validacao.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
++    print(json.dumps(result, ensure_ascii=False, indent=2))
++
++
++if __name__ == "__main__":
++    main()
+
+--- /dev/null
++++ docs/artigo_final/final_7_uso_ia.tex
+@@ -0,0 +1,7 @@
++\section*{Declaração de uso de inteligência artificial}
++
++O trabalho utilizou inteligência artificial generativa por meio do OpenCode no desenvolvimento de especificações, no planejamento de tarefas, na geração e revisão de código e testes e na preparação de documentação. Na elaboração do artigo, a assistência incluiu geração e reformulação substancial de trechos, revisão gramatical e didática, tradução do resumo, pesquisa e organização bibliográfica, conferência assistida de afirmações e equações, preparação de diagramas, scripts de análise e verificações de compilação. A IA também executou a codificação e o agrupamento das respostas abertas sob supervisão do autor. A assistência não se limitou a sugestões pontuais de redação.
++
++O autor declara ter definido as decisões técnicas e arquiteturais, supervisionado o desenvolvimento e aprovado a codificação e as interpretações qualitativas da versão anterior. Os registros consultados identificam os modelos \texttt{openai/gpt-6.1-terra} e \texttt{openai/gpt-6.1-sol}. O autor também informa uso de um modelo denominado ``ChatGPT 6 -- Luna'', cujo vínculo com as sessões deste projeto ainda não foi documentalmente estabelecido. Esses identificadores são registros da ferramenta, não uma certificação independente de nomes comerciais.
++
++A responsabilidade intelectual e científica permanece com o autor: a assistência não substitui a consulta direta às fontes, a compreensão dos procedimentos ou a revisão crítica dos resultados. A declaração independente discrimina ferramentas, etapas, instruções rastreáveis e limites de verificação. Nos termos da IN nº 03/2026/PROACAD, a autorização formal de uso, suas condições, o tratamento de dados inéditos e a comunicação à banca dependem de documentação institucional; conhecimento do orientador e autorização do autor não são apresentados como aprovação institucional \citep{UPF_IA2026}.

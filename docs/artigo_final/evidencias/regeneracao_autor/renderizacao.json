@@ -1,0 +1,160 @@
+{
+  "pages": 38,
+  "pdf_report_figure_pages": [
+    25
+  ],
+  "rendered_pages": [
+    {
+      "file": "pagina-01.png",
+      "sha256": "83e975d92ec40a6897b980b33407a0568fc394abb18580b0a197439d5245a142"
+    },
+    {
+      "file": "pagina-02.png",
+      "sha256": "ce36662ed8befb58c59f17fe23971e84a3083c5ef99dbecf82e34770645a4e83"
+    },
+    {
+      "file": "pagina-03.png",
+      "sha256": "1ab2946863d58f9ef1d5b7772cb5051bc41d142517b7bec9adc59555d075d43b"
+    },
+    {
+      "file": "pagina-04.png",
+      "sha256": "4b53ade5e1fba306e1bf151c17f8389098028e9fa978b1ee492e7015f461c2fc"
+    },
+    {
+      "file": "pagina-05.png",
+      "sha256": "80a6db9814042facc1ce24fecabcde8ea716b18b2c3abd6f4b65a53b30942df5"
+    },
+    {
+      "file": "pagina-06.png",
+      "sha256": "be998299aaf0e5475a9d5c8ff696e47a0f8439cf9313df717d9a818f77c95a56"
+    },
+    {
+      "file": "pagina-07.png",
+      "sha256": "3a9c1a229e3210e89bbcba1ebd2906885ad4a803af5d52b9baef2bd0df193941"
+    },
+    {
+      "file": "pagina-08.png",
+      "sha256": "06da341b38bf0b3f49f5104a433bcb78cf7fdf56be30cc31cfd358c095a2c5ec"
+    },
+    {
+      "file": "pagina-09.png",
+      "sha256": "f6dea020eab89143c2d3bd2c2ec3201dce98d3ff5798cac2b475148f5f62e137"
+    },
+    {
+      "file": "pagina-10.png",
+      "sha256": "b92e3a814a04953cd5f65155ee949d0512bfab2a9812de6c30ce27d7e066b386"
+    },
+    {
+      "file": "pagina-11.png",
+      "sha256": "5486aff6fe703b8fe97cf472c1db2d3fa9dbcdfbb430e7921c4ad8e86dd73aa7"
+    },
+    {
+      "file": "pagina-12.png",
+      "sha256": "01937db33f1dd49579cbe6531ede759c58bf756ba64f7869596c48696d2e5636"
+    },
+    {
+      "file": "pagina-13.png",
+      "sha256": "1249c4656afb5598e070d210fdf3cbcaf1bb2a1e19ca7021ad39993cf3097921"
+    },
+    {
+      "file": "pagina-14.png",
+      "sha256": "2188ea0f27cdf6e54060b1ed062399fdb5fe82d970d0e027cca30a1894ad884d"
+    },
+    {
+      "file": "pagina-15.png",
+      "sha256": "60f228944577e2a87c6de9e936c8beedc23d042f097b0dd920f5ffa0f54dc73d"
+    },
+    {
+      "file": "pagina-16.png",
+      "sha256": "d26b7992779d9c53feb8756c6261e2f63e12f839c4c2e729702afb2736e87b43"
+    },
+    {
+      "file": "pagina-17.png",
+      "sha256": "c29d16da4fc2c1b63ec736a8d3615184bdc56ea13102a191c62cfedd2203ba81"
+    },
+    {
+      "file": "pagina-18.png",
+      "sha256": "8fe37dbf3311891b854aa820b5448b1ac54daf8d2799b6e8ef192f407a11aeeb"
+    },
+    {
+      "file": "pagina-19.png",
+      "sha256": "52bba7ca00ac7fadc67ef07471f98dfc038a07ea5c29b828871784ace8239a6a"
+    },
+    {
+      "file": "pagina-20.png",
+      "sha256": "828602c0c26e5f366f381edcc8fbeccdffa73fd94a6d21a429c0f0a4e44d8874"
+    },
+    {
+      "file": "pagina-21.png",
+      "sha256": "f321bc1187e068eb661b9ce30e88641140e31c593dfc65de525f27403a578529"
+    },
+    {
+      "file": "pagina-22.png",
+      "sha256": "64acd9cefebae3cf654a647dc191728594410ba2b12a7e111b01049f85143eec"
+    },
+    {
+      "file": "pagina-23.png",
+      "sha256": "976d558b0506a35f0990fadde75467cfc8d3dd74202932d6236dbc160ba9784c"
+    },
+    {
+      "file": "pagina-24.png",
+      "sha256": "741db8cf9e7d1d75ace880b9a49ff14a23deb4f8cc2593b8b792d914946b61f3"
+    },
+    {
+      "file": "pagina-25.png",
+      "sha256": "e08031819669272b6c2ecfbc321bce445bf8f047ce79890f8e98c067770325d2"
+    },
+    {
+      "file": "pagina-26.png",
+      "sha256": "24b7741491402a7e89d64c6d781745f59186cd0c4b2bfa506dc3d5cba9c8e3a9"
+    },
+    {
+      "file": "pagina-27.png",
+      "sha256": "efd89c49ac6e941fbb9cf2a5898334c3b77e788dfb4809e9238480238fef0f57"
+    },
+    {
+      "file": "pagina-28.png",
+      "sha256": "cdc89016832faf715a0c71b9933d4276555a03324aa0dcb409d2455c14a4eecc"
+    },
+    {
+      "file": "pagina-29.png",
+      "sha256": "1251a29c5dc61d94c28aec63b2003672d3c579ba22d7bb3104d6c1db0fe95b81"
+    },
+    {
+      "file": "pagina-30.png",
+      "sha256": "6eaf7c55967df6a7a90c84a090b9a1f9e23f998fd46a19bd5620c18e3daf294b"
+    },
+    {
+      "file": "pagina-31.png",
+      "sha256": "0f6bc97021c58cec326224b3cd66c1d523bd134ca30694b90e1425a4dfdabcda"
+    },
+    {
+      "file": "pagina-32.png",
+      "sha256": "e5933354ed6fe7ec8e744992349048f237c9a0bd93f907c159bf4dcffb6746fc"
+    },
+    {
+      "file": "pagina-33.png",
+      "sha256": "fe096b27bbb4cfef4fd773d3f78b894b6c06df3d01ba9ba185259c29483fac24"
+    },
+    {
+      "file": "pagina-34.png",
+      "sha256": "a4dc886b536ba2bc717cdbe8e58a68d1b6597fb6eb464affe913140d46e25015"
+    },
+    {
+      "file": "pagina-35.png",
+      "sha256": "0aa22f260830132004df8fe8d56675a79ae4fa26fbb0d842743f2a5ad5d626a3"
+    },
+    {
+      "file": "pagina-36.png",
+      "sha256": "e5530c36f2bdd75dc316d6887870f5c7fe9c0c221919842e2fd7245399d4daf0"
+    },
+    {
+      "file": "pagina-37.png",
+      "sha256": "c44aef71e3e0fc8ecc47dc4de4910ef7a7f370d8b03e96e873d234a9416316e7"
+    },
+    {
+      "file": "pagina-38.png",
+      "sha256": "2ae2acf50d96a76ea9f142c9e32d8007950f0f31aaea4f28802cb9a8aa70593c"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+ docs/artigo_final/README.md                        |  18 +-
+ docs/artigo_final/Relatorio_Final.pdf              | Bin 7865363 -> 5337292 bytes
+ docs/artigo_final/Relatorio_Final.tex              |  21 ++-
+ .../auditoria_cientifica/AUDITORIA_CIENTIFICA.md   | 192 +++++++++++++++++++++
+ .../auditoria_cientifica/AUDITORIA_EQUACOES.md     |  28 +++
+ .../auditoria_cientifica/AUDITORIA_REFERENCIAS.md  |  52 +++++-
+ .../auditoria_cientifica/CHANGELOG_ARTIGO.md       |  57 +++++-
+ .../MATRIZ_RASTREABILIDADE_CIENTIFICA.md           |  50 ++++++
+ .../auditoria_cientifica/PENDENCIAS_AUTOR.md       |  70 ++++++++
+ docs/artigo_final/auditoria_cientifica/README.md   |   8 +-
+ .../artigo_final/avaliacao_usuarios/METODOLOGIA.md |  16 ++
+ docs/artigo_final/avaliacao_usuarios/README.md     |   2 +
+ .../RELATORIO_QUALIDADE_DADOS.md                   |  21 +++
+ .../avaliacao_usuarios/resultados/tabela_temas.tex |   2 +-
+ .../avaliacao_usuarios/scripts/gerar_tabelas.py    |   2 +-
+ docs/artigo_final/fig/arquitetura_atual.tex        |   3 +-
+ docs/artigo_final/fig/conceitos.tex                |  18 --
+ docs/artigo_final/figuras_relatorio.tex            |   2 +-
+ docs/artigo_final/final_0_resumo.tex               |   4 +-
+ docs/artigo_final/final_1_introducao.tex           |  10 +-
+ docs/artigo_final/final_2_fundamentacao.tex        |  66 ++++---
+ docs/artigo_final/final_3_metodos.tex              |  33 ++--
+ docs/artigo_final/final_3a_implementacao.tex       |  26 ++-
+ docs/artigo_final/final_3b_plataforma.tex          |  91 ++++------
+ docs/artigo_final/final_4_resultados.tex           |  17 +-
+ docs/artigo_final/final_4a_usuarios.tex            |  12 +-
+ docs/artigo_final/final_5_discussao.tex            |  61 +++----
+ docs/artigo_final/final_6_conclusao.tex            |  10 +-
+ docs/artigo_final/referencias.bib                  |  58 +++++++
+ 29 files changed, 747 insertions(+), 203 deletions(-)

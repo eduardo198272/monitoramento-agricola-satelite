@@ -1,0 +1,122 @@
+{
+  "baseline": "f31d0a5924b1e082525e2b59188f8fc8996653ed",
+  "mechanical_checks_passed": true,
+  "scientific_acceptance_complete": false,
+  "human_approval_of_current_revision": false,
+  "protected_tracked_files_unchanged": 359,
+  "equation_environments_unchanged": {
+    "final_2_fundamentacao.tex": 3,
+    "final_3_metodos.tex": 4,
+    "final_3a_implementacao.tex": 1
+  },
+  "responses_unchanged": true,
+  "source_sha256": "9adb66b330103ca858c37d7dc6cdb5e4e954f09f749a0c122fa6e6b2f4f5de59",
+  "original_sha256": "d61b9f11514f8d42f276abdb3e4e173782955c468fb50d774680032d342ce48a",
+  "historical_timestamp_differences": 7,
+  "new_timestamp_changes": 0,
+  "records": 31,
+  "nonempty_discursive_cells": 142,
+  "themes": 13,
+  "known_synthetic_fixtures_found": 0,
+  "independent_empirical_authentication": false,
+  "pdf_capture_same_as_previously_excluded": true,
+  "pdf_capture_sha256": "6d91cb54b4286f834be4b2402a46342d40094466912b860ba1e97ddbbaf2dcce",
+  "pdf_capture_incorporated": false,
+  "bibliography": {
+    "entries": 60,
+    "added": [
+      "BOECKELER2025",
+      "EOSDA_GUIDE",
+      "GITHUB_SDD",
+      "MERONI2019",
+      "NIST_LOCATION",
+      "ONESOIL_PLATFORM_DETAIL",
+      "PARNAS1972",
+      "UPF_IA2026"
+    ],
+    "removed": []
+  },
+  "pa_items_documented": 18,
+  "pdf_sha256": "74eaf2fb3f9f3683e16f3a740361b9357b7b011f22f8a409e79a54467f1fa994",
+  "artifact_hashes": {
+    "Relatorio_Final.pdf": "74eaf2fb3f9f3683e16f3a740361b9357b7b011f22f8a409e79a54467f1fa994",
+    "DECLARACAO_USO_IA.pdf": "72e96c3494d4367e354168613d43da4bcd21e35f828660e9cf1aa159b0c850ad",
+    "DECLARACAO_USO_IA.tex": "2312efbf28bca77a0e754f2f3e541cd74981c2344b09025c52eb7d45f1d88df2",
+    "referencias.bib": "e333fd0001f4ef43c65dacdeaa0d79f63ae01ba79357e6bd7d4a13cf0a553c0f",
+    "REGISTRO_USO_IA.md": "17976d7d654668c711329dfefb261caf6fe50035bf8fa749e39c594e2f7b6ce2"
+  },
+  "no_new_application_tests_or_deployment_claimed": true,
+  "remaining": [
+    "independent source/export and closure of questionnaire",
+    "exact public commit",
+    "ethics and formal AI authorization",
+    "primary-source verification",
+    "spectral figure reconstruction",
+    "updated report screenshot",
+    "human final review and signature"
+  ],
+  "source_cache_hashes": {
+    "IN_03_2026_PROACAD.pdf": "d44a49e0e77f47339b812b3851a6f5f15877e89004ec646c8bbfe13b3143b28b",
+    "CNS_510_2016.pdf": "4db41d069420388a93346512a5c43b31f8cf17e1bd2cca9098793f1d67200915",
+    "izquierdo2026.pdf": "4a80dcb14e6415f293593349cabd9e057b3db1d66d3f1fc211f55fc16fe7202f",
+    "meroni2019.html": "25b3a8d17dbe3c17c59d8d40764084df83f1d1b882bb723d410a2fe00e886e6a",
+    "parnas1972.pdf": "7008fd6abc833ded750e52dbac4968e8eda339f66b462ca4427f1953f98df9c4",
+    "sdd.md": "1517eba9868e7066541ffa484009d5eb9c7d8d04bf740dbfd86e5e88c396f0c6",
+    "nist-location.html": "79ed73bc4b9b084aeb4ac4352f81678ff38e10796c767822a4d26c6754ac9872",
+    "boeckeler2025.html": "1b1fb76c908e9b1a0ed0b136eff8583a9cd39efcb91da21008236dbe4ab5f4bc",
+    "eosda-guide.html": "e9bfd0cf42e301ec669669dad67c83d34eb7efe24d15e4847d123fda1b193571",
+    "eosda-pricing.html": "a72dcb052bfa0243970aa708509f619842c7be6fb3cd4e72c0b93a859b8e3ac6",
+    "onesoil-platform.html": "b8f3f9e0c66e4f1a798fd5f3de67f418e4172d755efb36130f8a37d0fc98eea7",
+    "formulario.html": "1f964d4b291e3eebfcf6a11980a67a7202993dfd94070a8311526bd471a41751"
+  },
+  "new_http_accesses": [
+    {
+      "file": "nist-location.html",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+      "final_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm",
+      "http_status": 200,
+      "sha256": "79ed73bc4b9b084aeb4ac4352f81678ff38e10796c767822a4d26c6754ac9872",
+      "bytes": 17173
+    },
+    {
+      "file": "boeckeler2025.html",
+      "url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+      "final_url": "https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html",
+      "http_status": 200,
+      "sha256": "1b1fb76c908e9b1a0ed0b136eff8583a9cd39efcb91da21008236dbe4ab5f4bc",
+      "bytes": 39774
+    },
+    {
+      "file": "eosda-guide.html",
+      "url": "https://eos.com/user-guide/",
+      "final_url": "https://eos.com/user-guide/crop-monitoring/",
+      "http_status": 200,
+      "sha256": "e9bfd0cf42e301ec669669dad67c83d34eb7efe24d15e4847d123fda1b193571",
+      "bytes": 405948
+    },
+    {
+      "file": "eosda-pricing.html",
+      "url": "https://eos.com/user-guide/crop-monitoring/account-and-pricing/",
+      "final_url": "https://eos.com/user-guide/crop-monitoring/account-and-pricing/",
+      "http_status": 200,
+      "sha256": "a72dcb052bfa0243970aa708509f619842c7be6fb3cd4e72c0b93a859b8e3ac6",
+      "bytes": 116528
+    },
+    {
+      "file": "onesoil-platform.html",
+      "url": "https://onesoil.ai/en/platform",
+      "final_url": "https://onesoil.ai/en/platform",
+      "http_status": 200,
+      "sha256": "b8f3f9e0c66e4f1a798fd5f3de67f418e4172d755efb36130f8a37d0fc98eea7",
+      "bytes": 635708
+    },
+    {
+      "file": "formulario.html",
+      "url": "https://forms.gle/VXqtdCgH9us774VE6",
+      "final_url": "https://docs.google.com/forms/d/e/1FAIpQLScEVvCsjiwnBVz0HERDoSsQITzJOyEoBvII84uPOY6aixpZMQ/viewform?usp=send_form",
+      "http_status": 200,
+      "sha256": "1f964d4b291e3eebfcf6a11980a67a7202993dfd94070a8311526bd471a41751",
+      "bytes": 106790
+    }
+  ]
+}

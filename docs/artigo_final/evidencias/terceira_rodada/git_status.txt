@@ -1,0 +1,41 @@
+ M docs/artigo_final/README.md
+ M docs/artigo_final/Relatorio_Final.pdf
+ M docs/artigo_final/Relatorio_Final.tex
+ M docs/artigo_final/auditoria_cientifica/AUDITORIA_CIENTIFICA.md
+ M docs/artigo_final/auditoria_cientifica/AUDITORIA_EQUACOES.md
+ M docs/artigo_final/auditoria_cientifica/AUDITORIA_REFERENCIAS.md
+ M docs/artigo_final/auditoria_cientifica/CHANGELOG_ARTIGO.md
+ M docs/artigo_final/auditoria_cientifica/MATRIZ_RASTREABILIDADE_CIENTIFICA.md
+ M docs/artigo_final/auditoria_cientifica/PENDENCIAS_AUTOR.md
+ M docs/artigo_final/auditoria_cientifica/README.md
+ M docs/artigo_final/avaliacao_usuarios/METODOLOGIA.md
+ M docs/artigo_final/avaliacao_usuarios/README.md
+ M docs/artigo_final/avaliacao_usuarios/RELATORIO_QUALIDADE_DADOS.md
+ M docs/artigo_final/avaliacao_usuarios/resultados/tabela_temas.tex
+ M docs/artigo_final/avaliacao_usuarios/scripts/gerar_tabelas.py
+ M docs/artigo_final/fig/arquitetura_atual.tex
+ M docs/artigo_final/fig/conceitos.tex
+ M docs/artigo_final/figuras_relatorio.tex
+ M docs/artigo_final/final_0_resumo.tex
+ M docs/artigo_final/final_1_introducao.tex
+ M docs/artigo_final/final_2_fundamentacao.tex
+ M docs/artigo_final/final_3_metodos.tex
+ M docs/artigo_final/final_3a_implementacao.tex
+ M docs/artigo_final/final_3b_plataforma.tex
+ M docs/artigo_final/final_4_resultados.tex
+ M docs/artigo_final/final_4a_usuarios.tex
+ M docs/artigo_final/final_5_discussao.tex
+ M docs/artigo_final/final_6_conclusao.tex
+ M docs/artigo_final/referencias.bib
+?? "docs/Respostas \342\200\223 Avalia\303\247\303\243o da plataforma agr\303\255cola \342\200\223 TCC UPF.xlsx"
+?? docs/artigo_final/DECLARACAO_USO_IA.pdf
+?? docs/artigo_final/DECLARACAO_USO_IA.tex
+?? docs/artigo_final/REGISTRO_USO_IA.md
+?? docs/artigo_final/Relatorio_Final-modelo-anterior.pdf
+?? docs/artigo_final/auditoria_cientifica/AUDITORIA_ORIGINALIDADE.md
+?? docs/artigo_final/auditoria_cientifica/validar_rodada_pa.py
+?? docs/artigo_final/evidencias/regeneracao_autor/
+?? docs/artigo_final/evidencias/revisao_final_pa/
+?? docs/artigo_final/evidencias/terceira_rodada/
+?? docs/artigo_final/fig/capturas_autor/relatorio_pdf.png
+?? docs/artigo_final/final_7_uso_ia.tex

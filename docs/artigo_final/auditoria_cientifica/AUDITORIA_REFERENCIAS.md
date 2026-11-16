@@ -1,5 +1,56 @@
 # Auditoria das referências
 
+## Terceira rodada — 15–16/11/2026
+
+A retomada concentrou-se nas pendências citadas, sem expansão bibliográfica: **nenhuma entrada adicionada, removida ou substituída; 60 entradas preservadas**. As novas verificações abaixo sucedem os pareceres históricos de acesso, não alteram retrospectivamente o que foi lido antes.
+
+| Referência | Acesso efetivo e localizador | Correspondência com a redação atual |
+|---|---|---|
+| Davis (1989), DOI 10.2307/249008 | PDF de 23 páginas, incluindo capa JSTOR, disponibilizado pela Universität Potsdam: `https://openup.uni-potsdam.de/pluginfile.php/210025/mod_folder/content/0/Davis1989.pdf?forcedownload=1`. Autoria, *MIS Quarterly* 13(3),319–340 e título conferidos. Lidos resumo, definições p.320 e discussão/limitações p.333–334. SHA-256 `c3d1633543e23cda23cd577fd80f6796742853ab3b3c9b0c2f08bab1dfc444e7` | Resolvida a pendência de acesso para o escopo utilizado: utilidade percebida ≠ facilidade percebida; intenção/autorrelato ≠ uso observado. O questionário não foi convertido em TAM validado e não reproduz as escalas de seis itens do estudo. |
+| Braun e Clarke (2006), DOI 10.1191/1478088706qp063oa | PDF integral de 25 páginas em domínio UWE: `https://www2.uwe.ac.uk/services/Marketing/students/Newstudents/HAS/Using%20thematic%20analysis%20in%20psychology.pdf`. Autoras, periódico 3,77–101 e DOI conferidos. Lidos definição p.79, prevalência pp.82–83, indução/semântica pp.83–84 e Tabela1/p.87. SHA-256 `722a8f1350d575169fc4d3bf4835a8ca290afbf0471f61469da4b521092e3b48` | Resolvida a pendência de acesso para a referência conceitual. O artigo descreve codificação semântica assistida, categorias do corpus e contagem por submissão. Não alega execução integral das seis fases, saturação ou dupla codificação. Frequência não foi equiparada a importância analítica. |
+| Gorelick et al. (2017), DOI 10.1016/j.rse.2017.06.031 | Página Google Research efetivamente lida: `https://research.google/pubs/google-earth-engine-planetary-scale-geospatial-analysis-for-everyone/`, com seis autores, *RSE*202,18–27 e resumo. Manuscrito aberto da editora retornou403 | Confirmação primária do escopo geral da infraestrutura em nuvem; leitura integral continua pendente. Sem importação de alegações de desempenho. Contratos operacionais são sustentados pela documentação oficial já examinada. |
+| Amani et al. (2020), DOI 10.1109/JSTARS.2020.3021052 | Retomada da busca e tentativa IEEE sem obtenção de texto verificável; o endpoint consultado não constitui validação do identificador do documento | Mantido parecer parcial. A menção foi limitada ao tema da revisão, sem resultados quantitativos ou características não conferidas atribuídas a ela. |
+| McFeeters (1996), DOI 10.1080/01431169608948714 | Novo acesso à página DOI da editora retornou403; buscas recuperaram registro/resumo, não texto primário integral | Parecer parcial preservado. A distinção de finalidade água superficial permanece; a formulação NIR–SWIR da plataforma não é atribuída ao estudo. Conferência direta da fórmula verde–NIR no original ainda necessária. |
+| ISO 9241-11:2018 | Mantido escopo já verificado no resumo oficial, sem nova alegação de leitura do texto pago | Quadro conceitual, não certificação normativa de usabilidade ou método obrigatório. |
+
+Os PDFs científicos permaneceram em cache privado, sem republicação. O registro de consultas desta rodada está em `../evidencias/terceira_rodada/consultas_fontes.json`. Não foram inseridas Peters, Griffiths, Flood, Rembold, de Jong ou Pohjankukka como se tivessem sido lidas ou validassem os parâmetros. O precedente científico específico B8A/B11 continua pendente; o exemplo técnico e a definição operacional são explicitados.
+
+O histórico sobre indisponibilidade bibliográfica e exclusão do EO Browser foi retirado do artigo e mantido aqui. A representação atual de centros de bandas dispensa reconstruir curvas de alvos sem fonte específica. O conjunto citado é coerente no escopo delimitado; **não se declara validação primária integral de todas as referências**.
+
+## Atualização PA01–PA18 — novas consultas e alterações
+
+15/11/2026. Base `f31d0a5`, com 52 entradas; **oito entradas adicionadas, nenhuma removida ou substituída**. As entradas sem uso não foram apresentadas como fontes validadas por tema semelhante. Os pareceres individuais R01–R52 abaixo permanecem, com suas restrições; este complemento não os converte em leitura integral.
+
+| Chave / identificação | Acesso e localização efetiva | Afirmação inserida / limites |
+|---|---|---|
+| `MERONI2019` — Meroni, Fasbender, Rembold, Atzberger e Klisch; *Remote Sensing of Environment* 221, 508–521 (2019); DOI 10.1016/j.rse.2018.11.041 | Texto integral público PMC6360378, CC BY; §2, Eq.1/§3.1, Tabela2, §3.2.3 | Padronização de NDVI e limiar −1; referência histórica sazonal e estágios de consolidação diferem de janela3. Não valida heurística implementada. |
+| `PARNAS1972` — D. L. Parnas; *Communications of the ACM* 15(12), 1053–1058 (1972); DOI 10.1145/361598.361623 | PDF público em domínio universitário TU/e; p.1054, *What Is Modularization?*, e discussão das duas decomposições; resumo/critério de ocultação de decisões | Responsabilidades e fronteiras de módulos; não demonstra ganho de manutenibilidade medido no TCC. |
+| `NIST_LOCATION` — NIST, *Measures of Location*, e-Handbook; sem ano editorial identificado; sem DOI específico declarado | Página oficial integral §1.3.5.1, definições de média/mediana e exemplo Cauchy | Mediana par/ímpar e sensibilidade a extremos. Fonte técnica estatística, não estudo Sentinel-2. |
+| `GITHUB_SDD` — GitHub, *Specification-Driven Development*, documentação Spec Kit; sem ano editorial identificado; sem DOI | Markdown integral oficial, *The SDD Workflow in Practice* e *Core Principles* | Especificações como artefatos orientadores; fonte técnica, não validação experimental ou prova de uso do toolkit neste projeto. |
+| `BOECKELER2025` — Birgitta Böckeler, *Understanding Spec-Driven-Development: Kiro, spec-kit, and Tessl*, 15/10/2025; sem DOI | Artigo técnico integral no site de Martin Fowler; *Definition*, *What is a spec?*, *Observations and questions* | Diferentes níveis e riscos de SDD; não é artigo revisado por pares ou evidência de superioridade. |
+| `UPF_IA2026` — Universidade de Passo Fundo, IN nº03/2026/PROACAD, 28/10/2026; sem DOI | PDF oficial, 5 páginas, íntegra e anexo, obtido por link público da UPF | Arts.3–8/10–11; declaração e exigência de autorização/limites formais. Não comprova que o projeto recebeu essa autorização. |
+| `EOSDA_GUIDE` — EOS Data Analytics, *Crop Monitoring User Guide*, sem data editorial identificada/DOI | Guia oficial integral; seções *Add field*, *Work With Crop Map*, *Monitoring*, *Weather* e página *Account And Pricing* | Matriz por funcionalidade; origem/comercialidade documentada. Leitura por cursor existe no produto; arquitetura local não estabelecida. Promessas agronômicas comerciais não adotadas como resultados. |
+| `ONESOIL_PLATFORM_DETAIL` — OneSoil, *Platform*, sem data editorial identificada/DOI | Página detalhada integral; funcionalidades e FAQ de produtos, assinaturas, exportações e campos | Matriz de produto final, plataformas web/móvel, limites e assinaturas; não certifica desempenho nem equivalência das saídas. |
+| `IZQUIERDO2026` — entrada existente, DOI10.3390/agronomy16050541 | PDF integral público IVIA `2026_Izquierdo-Sanz_Hybrid.pdf`, p.5/Tabela1 e §§2.3–2.4 | Confirmada fórmula exata B8/B11 chamada NDMI; suporte específico ampliado, sem nova entrada duplicada. |
+| `ISO9241_2018` — entrada existente | Resumo oficial reconferido: quadro conceitual, usabilidade como resultado e ausência de método obrigatório; **não** texto integral pago | Afirmação atual restringe-se a esse conteúdo diretamente acessado; nenhuma definição normativa adicional foi atribuída. |
+
+URLs públicas estão nas entradas BibTeX e no registro de acessos da rodada. Hashes dos conteúdos obtidos são evidência de identidade do arquivo consultado, não prova isolada de leitura. PDFs científicos ficam em cache local, sem republicação automática.
+
+### Candidatas não incorporadas
+
+| Candidata | Consulta / decisão |
+|---|---|
+| Pohjankukka et al. (2025), *Geoderma*455,117216, DOI10.1016/j.geoderma.2025.117216 | Título e registro localizados: *Digital mapping of peat thickness and extent in Finland using remote sensing and machine learning*. Jukuri e Helda devolveram desafios anti-bot; editora não forneceu texto. Não confirmada fórmula B8A/B11; não inserida. Link legítimo: https://helda.helsinki.fi/items/1665caeb-2541-4f9e-88ba-f0752cf39e2d |
+| Peters et al. (2002), *Drought Monitoring with NDVI-Based Standardized Vegetation Index* | Registro e referências secundárias localizados, 68(1),71–75; URL tentada no ASPRS retornou404. Texto integral não lido; não transposto de Meroni como leitura primária. |
+| Griffiths et al. (2013), *A Pixel-Based Landsat Compositing Algorithm for Large Area Land Cover Mapping* | Registro encontrado, sem leitura primária suficiente; composição por critérios/ponderação não equiparada à mediana simples. |
+| Flood (2013), *Seasonal Composite Landsat TM/ETM+ Images Using the Medoid (a Multi-Dimensional Median)* | MDPI403; título e distinção medoid/mediana identificados, mas sem leitura primária nova. Não inserido como fundamento exato da Eq.4. |
+| Rembold et al. (2019), DOI10.1016/j.agsy.2018.07.002 | Resumo e autoria no JRC109950; não se obteve texto integral. A descrição acadêmica de ASAP no artigo usa Meroni, texto lido, sem atribuir equivalência ao algoritmo local. |
+| de Jong et al. (2011), DOI10.1016/j.rse.2010.10.011 | Registro ZORA encontrado; acesso apresentou Anubis, não texto. Não utilizado para ±0,01. |
+| Amani, Gorelick, McFeeters, Davis, Braun/Clarke | Continuam com as restrições primárias registradas anteriormente. A autorização para manter não é certificação de leitura integral. |
+| Chaves, Araujo, Phiri, Wazlawick, Lovato | Não citadas substantivamente no texto atual; registros mantidos sem substituição fictícia. Pendências de metadados/acesso não foram apagadas. |
+
+**Resultado: auditoria individual com pareceres disponível, mas validação bibliográfica integral ainda não concluída.**
+
 Data: 15/11/2026. Inventário de todas as 34 entradas originais e das novas. **Auditada não significa validada integralmente.** Os pareceres delimitam acesso, leitura e suporte; HTTP 200, DOI e snippets não comprovam conteúdo.
 
 Os blocos BibTeX preservam autoria/ordem, título, ano, veículo, volume/número/páginas e URL tal como registrados. Campos não confirmados não são corrigidos por suposição. Acesso integral disponível significa documento obtido, não leitura de todas as páginas.
@@ -1013,4 +1064,3 @@ author = {{Streamlit}},
 - **Parnas (1972)**: DOI 10.1145/361598.361623 e metadados obtidos; PDF UMD bloqueado. Não incorporado sem leitura substantiva. **Fowler, Repository**: página disponível, escopo específico não basta para fundamentar toda a arquitetura. **Kuefler, Unit Testing**: capítulo aberto lido, mas Bender foi suficiente para a afirmação localizada; não acrescentado redundantemente.
 
 - **Frascati/OECD (2015)**: consultas oficiais bloqueadas; não atribuir classificação formal por critérios que não foram conferidos. **EO Browser**: documentação inacessível nesta rodada, não é prova de ausência funcional.
-

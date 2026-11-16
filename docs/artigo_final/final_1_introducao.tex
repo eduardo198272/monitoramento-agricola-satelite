@@ -10,15 +10,15 @@ O problema de pesquisa foi delimitado pela seguinte questão: como construir e v
 
 O Google Earth Engine permite consultar catálogos e processar imagens em sua infraestrutura remota. Já o projeto Prediction Of Worldwide Energy Resources (POWER), da NASA, disponibiliza informações meteorológicas e de radiação que podem ser consultadas pelo software \citep{GORELICK2017,NASA_POWER_DAILY}. Com esses serviços, a aplicação não precisa manter uma infraestrutura própria de distribuição de imagens. Ainda assim, precisa organizar as consultas, tratar a indisponibilidade dos serviços e apresentar cada resultado junto da área, do período e dos parâmetros usados para produzi-lo.
 
-A contribuição deste trabalho consiste em reunir técnicas já conhecidas em uma plataforma e documentar como elas são integradas. O usuário delimita uma área no mapa por meio de um polígono, escolhe o período e consulta os índices. A partir desses resultados, pode observar diferenças dentro da área, acompanhar sua evolução nos gráficos, examinar quedas sinalizadas na série e consultar informações meteorológicas. Também pode exportar os resultados e salvar a área para utilizá-la novamente. A contribuição em Ciência da Computação está na organização dessas etapas e na integração entre componentes, serviços e formatos de arquivo, com métodos e limites de processamento explícitos.
+A contribuição em Ciência da Computação consiste na construção e verificação de um fluxo integrado entre serviços geoespaciais, processamento Python e interação no navegador. A solução articula dados vetoriais e raster, preserva o vínculo entre parâmetros e resultados, transfere grades para consulta local e gera diferentes formatos de saída a partir de um contexto comum. Os índices e métodos estatísticos são estabelecidos; a contribuição própria está nos mecanismos de integração, gerenciamento de estado e consistência dos produtos do artefato.
 
-Não se propõem novos índices espectrais, uma nova metodologia de diagnóstico agronômico ou a revalidação dos sensores orbitais e produtos meteorológicos. A disponibilidade pública dos dados e o uso de bibliotecas abertas também não demonstram, isoladamente, menor custo total, acessibilidade universal, facilidade de uso ou superioridade frente a sistemas comerciais. Essas afirmações exigiriam avaliações específicas.
+A avaliação combina testes automatizados, demonstração com serviços reais e questionário exploratório com potenciais usuários. Esse recorte permite examinar o funcionamento computacional e as percepções de uso, sem atribuir ao sistema validação agronômica ou superioridade sobre outras plataformas.
 
 \subsection{Objetivo geral e objetivos específicos}
 
 O objetivo geral foi desenvolver e verificar tecnicamente uma plataforma computacional integrada de apoio ao monitoramento agrícola por imagens de satélite, disponibilizando processamento geoespacial, análise espacial e temporal, contexto meteorológico e exportação de informações.
 
-Os objetivos específicos permitem relacionar o que foi desenvolvido às verificações apresentadas no trabalho:
+Os objetivos específicos foram:
 \begin{enumerate}[leftmargin=3em]
     \item[\textbf{OE1}] fundamentar os métodos espectrais e definir uma organização modular para integrar interface, processamento e fontes externas;
     \item[\textbf{OE2}] disponibilizar busca geográfica, demarcação, armazenamento e recuperação de polígonos, distinguindo persistência local e armazenamento por sessão;
@@ -27,10 +27,10 @@ Os objetivos específicos permitem relacionar o que foi desenvolvido às verific
     \item[\textbf{OE5}] organizar séries temporais e aplicar procedimentos explícitos de classificação de tendência e sinalização de desvios negativos;
     \item[\textbf{OE6}] integrar informações meteorológicas e explicitar suas agregações, unidades e limites de interpretação;
     \item[\textbf{OE7}] gerar relatórios PDF e dados estruturados em XLSX e CSV ZIP, além de transferir localizações em GeoJSON;
-    \item[\textbf{OE8}] verificar o artefato por inspeção, testes existentes e rastreabilidade, documentando evidências, inconsistências e limitações da viabilidade técnica.
+    \item[\textbf{OE8}] verificar o artefato por inspeção, testes automatizados e demonstração funcional, com rastreabilidade entre requisitos, implementação e evidências.
 \end{enumerate}
 
-Essa organização mantém a intenção de construir o sistema e reconhece funcionalidades incorporadas durante o desenvolvimento, sem substituir os objetivos experimentais não realizados. A avaliação reúne testes computacionais, demonstração funcional e análise descritiva das respostas de usuários, distinguindo a versão pública avaliada da versão corrigida em desenvolvimento. A diferença entre o escopo executado e os estudos por cultura previstos é discutida na \cref{chap:discussao-final}.
+O questionário complementa a verificação técnica ao identificar percepções e obstáculos de interação na versão pública utilizada durante a coleta. Sua análise descritiva é apresentada separadamente dos testes de software.
 
 \subsection{Delimitação e organização do texto}
 

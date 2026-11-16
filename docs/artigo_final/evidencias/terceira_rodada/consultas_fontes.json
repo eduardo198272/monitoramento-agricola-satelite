@@ -1,0 +1,46 @@
+[
+  {
+    "key": "BRAUN2006",
+    "url": "https://www2.uwe.ac.uk/services/Marketing/students/Newstudents/HAS/Using%20thematic%20analysis%20in%20psychology.pdf",
+    "status": 200,
+    "pdf": true,
+    "bytes": 334549,
+    "sha256": "722a8f1350d575169fc4d3bf4835a8ca290afbf0471f61469da4b521092e3b48"
+  },
+  {
+    "key": "BRAUN2006_UAMS",
+    "url": "https://educationaldevelopment.uams.edu/wp-content/uploads/sites/57/2025/01/9-Thematic_analysis.pdf",
+    "status": 200,
+    "pdf": true,
+    "bytes": 486913,
+    "sha256": "6fc805a2a0a206f40f882286e839e82ef0d11fb4fab27f490fff3bc1b079f897"
+  },
+  {
+    "key": "DAVIS1989",
+    "url": "https://openup.uni-potsdam.de/pluginfile.php/210025/mod_folder/content/0/Davis1989.pdf?forcedownload=1",
+    "status": 200,
+    "pdf": true,
+    "bytes": 930652,
+    "sha256": "c3d1633543e23cda23cd577fd80f6796742853ab3b3c9b0c2f08bab1dfc444e7"
+  },
+  {
+    "key": "GORELICK2017",
+    "url": "https://www.sciencedirect.com/science/article/am/pii/S0034425717302900",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "key": "AMANI2020",
+    "url": "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9181852",
+    "error": "HTTP Error 418: Unknown Code"
+  },
+  {
+    "key": "GORELICK2017_GOOGLE",
+    "url": "https://research.google/pubs/google-earth-engine-planetary-scale-geospatial-analysis-for-everyone/",
+    "access": "Página primária lida por webfetch; autores, veículo e resumo; sem texto integral ou hash de cache"
+  },
+  {
+    "key": "MCFEETERS1996",
+    "url": "https://www.tandfonline.com/doi/abs/10.1080/01431169608948714",
+    "error": "HTTP403; texto integral não obtido"
+  }
+]

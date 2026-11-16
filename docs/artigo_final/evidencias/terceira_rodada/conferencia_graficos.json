@@ -1,0 +1,74 @@
+[
+  {
+    "figure": "aplicabilidade",
+    "same_pixels": true,
+    "dimensions": [
+      3480,
+      2097
+    ]
+  },
+  {
+    "figure": "experiencia",
+    "same_pixels": true,
+    "dimensions": [
+      2594,
+      1165
+    ]
+  },
+  {
+    "figure": "familiaridade",
+    "same_pixels": true,
+    "dimensions": [
+      2519,
+      1163
+    ]
+  },
+  {
+    "figure": "nota_geral",
+    "same_pixels": true,
+    "dimensions": [
+      2077,
+      1199
+    ]
+  },
+  {
+    "figure": "perfil_profissional",
+    "same_pixels": true,
+    "dimensions": [
+      3168,
+      1553
+    ]
+  },
+  {
+    "figure": "tarefas",
+    "same_pixels": true,
+    "dimensions": [
+      3521,
+      2263
+    ]
+  },
+  {
+    "figure": "temas",
+    "same_pixels": true,
+    "dimensions": [
+      3554,
+      2124
+    ]
+  },
+  {
+    "figure": "usabilidade",
+    "same_pixels": true,
+    "dimensions": [
+      3076,
+      2263
+    ]
+  },
+  {
+    "figure": "utilidade",
+    "same_pixels": true,
+    "dimensions": [
+      2726,
+      2591
+    ]
+  }
+]

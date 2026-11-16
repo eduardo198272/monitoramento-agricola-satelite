@@ -1,5 +1,17 @@
 # Relatório final do TCC
 
+## Versão consolidada para o orientador — terceira rodada
+
+- [Artigo atualizado, 32 páginas](Relatorio_Final.pdf) e fontes `Relatorio_Final.tex`/`final_*.tex`: consolidação da versão de 38 páginas, sem mudança no código ou nos dados.
+- [Relatório consolidado, comparação e simulação de banca/defesa](auditoria_cientifica/AUDITORIA_CIENTIFICA.md).
+- [Pendências atuais por responsabilidade](auditoria_cientifica/PENDENCIAS_AUTOR.md), [bibliografia](auditoria_cientifica/AUDITORIA_REFERENCIAS.md) e [originalidade](auditoria_cientifica/AUDITORIA_ORIGINALIDADE.md).
+- [Declaração de IA](DECLARACAO_USO_IA.pdf), sem assinatura, e [registro detalhado](REGISTRO_USO_IA.md).
+- Compilação, preservação, conferência pública e diff antes/depois em `evidencias/terceira_rodada/`.
+
+As 31 respostas analisadas coincidem integralmente com o subconjunto da fonte pública; o adicional elegível (32º registro) não foi incorporado automaticamente e o recorte precisa ser esclarecido. A pesquisa integra esta versão, com limites exploratórios e admissibilidade ética pendente. A captura do relatório foi mantida por decisão expressa como ilustração, não como evidência de radiação correta.
+
+Os registros abaixo descrevem a evolução anterior e não substituem o parecer vigente. Orientador e defesa já confirmados: Prof. Rafael Rieder, dezembro de 2026. A versão é para apreciação, sem alegação de aprovação institucional definitiva e sem commit/push/deploy.
+
 O padrão para o relatório final é o modelo institucional `CC-EC_TF-TC.cls`,
 com entrada em `Relatorio_Final.tex`. Os arquivos `final_*.tex` contêm o texto,
 `referencias.bib` contém a bibliografia e `logoColorHorizontalComplemento.png`
@@ -35,7 +47,9 @@ seção, conferência de fontes e pendências.
 - [Avaliação com usuários: planilha, análise e gráficos](avaliacao_usuarios/README.md)
 - [Capturas fornecidas pelo autor: substituição e validação atual do PDF](evidencias/capturas_autor/README.md)
 - [Revisão anterior da redação da avaliação](evidencias/revisao_redacao_usuarios/README.md)
-- [Auditoria científica parcial e pendências](auditoria_cientifica/README.md)
+- [Auditoria científica e encaminhamento PA01–PA18](auditoria_cientifica/AUDITORIA_CIENTIFICA.md)
+- [Pendências efetivamente remanescentes](auditoria_cientifica/PENDENCIAS_AUTOR.md)
+- [Registro de uso de IA](REGISTRO_USO_IA.md) e [minuta independente](DECLARACAO_USO_IA.tex)
 - [Diagnóstico e aplicação da revisão didática](REVISAO_DIDATICA_ESCRITA.md)
 - [Validação da revisão didática e compilação atual](evidencias/revisao_didatica/README.md)
 
@@ -81,7 +95,7 @@ backup histórico, não a versão atual nem parte desta atualização versionada
 ## Pendências acadêmicas
 
 - Confirmar mês da defesa, formato de papel e endereço institucional do cabeçalho.
-  O orientador informado pelo autor é Prof. Carlos Amaral Holbig.
+  O orientador confirmado na rodada PA01–PA18 é Prof. Rafael Rieder, com defesa em dezembro de 2026. Essa informação substitui as declarações anteriores; documentos históricos não foram reescritos como se a confirmação sempre tivesse existido.
 - Conferir integralmente trabalhos relacionados e a referência específica de NDMI.
 - Revisar com o orientador a mudança de escopo: estudos de soja, milho e pastagem
   e experimentos de campo não foram realizados; não são resultados do artigo.
