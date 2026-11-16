@@ -1,5 +1,9 @@
 # Substituição das capturas da plataforma
 
+> Registro da troca de capturas. A revisão posterior da redação da avaliação
+> e o hash do PDF atualizado estão em
+> [`../revisao_redacao_usuarios/README.md`](../revisao_redacao_usuarios/README.md).
+
 Revisão de 15/11/2026, sobre `dev` em `d4bc63d`, a pedido do autor.
 Protocolo autoral lido integralmente antes da atividade.
 

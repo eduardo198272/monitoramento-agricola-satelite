@@ -15,7 +15,7 @@ Proposta e seus capítulos originais não foram modificados.
 | OE5 Séries e desvios | `time_series.py`, `anomalies.py` | Janelas/tendência/IDs por aquisição | Métodos; heurística, não diagnóstico |
 | OE6 Clima | `climate.py`, metadados compartilhados | Resposta NASA preservada, unidades MJ/kWh/desconhecida, resumo multi | Métodos/resultados; corrigido |
 | OE7 Saídas portáveis | `export_context.py`, `export_*`, GeoJSON | PDF/XLSX/CSV e isolamento de snapshots; downloads reais e estruturas conferidas | Desenvolvimento; implementado, proveniência parcial |
-| OE8 Avaliação | Suíte, Node, navegador e questionário | 710 Python, 3 Node históricos; 31 submissões declaradas reais; 8 testes sintéticos da análise e conferência independente | Resultados; avaliação descritiva executada, independência/versão pública/ética com pendências |
+| OE8 Avaliação | Suíte, Node, navegador e questionário | 710 Python, 3 Node históricos; 31 submissões elegíveis ao questionário; 8 testes sintéticos da análise e conferência independente | Resultados; avaliação descritiva executada, versão pública/ética com pendências |
 | O10 original: soja/milho/pastagem | Protocolo histórico, não estudo executado | Testes do script não são dados de cultura | Discussão; não realizado, apreciação do orientador |
 
 ## Correções e requisitos de coerência
@@ -47,7 +47,7 @@ não substituem retroativamente o estudo agronômico originalmente planejado.
 | Aplicabilidade/intenção | Oito afirmações, colunas 36–43 | `aplicabilidade.csv`, gráfico e cruzamentos sem inferência causal |
 | Geral | Coluna 49 | `avaliacao_geral.csv`, `distribuicao_notas.csv`, histograma 0–10; não NPS |
 | Discursivas | Cinco perguntas, colunas 44–48 | `categorias_qualitativas.csv`, livro de códigos e tabela de trechos |
-| Triagem | Consentimento col. 2, exploração col. 15, impedimento col. 50 | `qualidade.json`, 31 submissões elegíveis; não identidades verificadas |
+| Triagem | Consentimento col. 2, exploração col. 15, impedimento col. 50 | `qualidade.json`, 31 submissões elegíveis, sem identificação individual |
 | Versão | Declaração do autor e código inspecionado | Pública anterior às correções versus desenvolvimento `28759bf`; não houve deploy |
 
 As contagens de testes da aplicação são históricas e não foram substituídas

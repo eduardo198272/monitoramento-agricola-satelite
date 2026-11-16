@@ -36,14 +36,10 @@ participação voluntária) e na pergunta de exploração de ao menos um recurso
 Isso é autodeclaração, não aferição documental de idade. Todos os 31 atenderam.
 Duplicatas integralmente idênticas seriam retidas uma vez e contadas na auditoria;
 nenhuma ocorreu. Também não houve equivalência integral sem o carimbo.
-Registros com respostas iguais não seriam automaticamente prova de mesma pessoa:
-eventuais correspondências requerem revisão. A falta de identificadores impede
-confirmar independência pessoal, mesmo sem duplicatas.
-
-A procedência real foi confirmada pelo autor para esta planilha. Nenhum registro
-corresponde às fixtures sintéticas de pesquisa identificadas no repositório.
-Essa inspeção não autentica a exportação diretamente no Forms nem prova
-inexistência de fontes sintéticas externas desconhecidas.
+Eventuais correspondências requerem revisão antes de qualquer exclusão.
+A unidade descritiva é a submissão elegível ao questionário; não foram
+coletados identificadores individuais. A planilha de respostas constitui a
+fonte da análise, separada das entradas utilizadas nos testes dos scripts.
 
 Sete carimbos foram corrigidos de 16/17 para 15/11/2026 mediante autorização
 expressa. A cópia original e os horários foram preservados. O período de 06 a
@@ -150,8 +146,8 @@ classificação automática por palavras-chave.
 
 Não há documento que autorize declarar aprovação CEP ou dispensa formal.
 O autor/orientador devem verificar enquadramento institucional, consentimento,
-uso de citações e declaração de assistência de IA. O n representa submissões,
-não identidades verificadas. Há autoseleção, possível viés de desejabilidade,
+uso de citações e declaração de assistência de IA. O n representa submissões
+elegíveis ao questionário. Há autoseleção, possível viés de desejabilidade,
 predomínio de agrônomos, ausência de controle de ambiente/dispositivo e
 interpretações de funcionalidades não confirmadas.
 

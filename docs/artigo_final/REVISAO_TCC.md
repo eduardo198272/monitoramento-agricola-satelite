@@ -41,7 +41,7 @@ de gerar placeholders no PDF, mantendo o plano no inventário.
 O mês da defesa foi retirado do campo visível e continua pendente, não inventado.
 Não há identificador institucional de publicação confirmado.
 Revisão final institucional e apreciação da mudança de escopo dependem do autor
-e do orientador. Resultados da pesquisa só poderão ser inseridos após dados reais.
+e do orientador. Resultados da pesquisa só poderão ser inseridos após o recebimento dos dados coletados.
 
 O relatório da primeira rodada foi preservado em
 `evidencias/historico_primeira_rodada/REVISAO_TCC.md`.

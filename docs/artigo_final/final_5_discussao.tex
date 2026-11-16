@@ -18,7 +18,7 @@ OE4 & Implementado & Composição, média e consulta local; contrato de escala c
 OE5 & Implementado & Série, tendência e regra unilateral exercitadas com dados controlados; sem acurácia agronômica atribuída. \\
 OE6 & Implementado & Clima compartilhado, unidade normalizada e resumo propagado; ausência tratada explicitamente. \\
 OE7 & Implementado & PDF, XLSX, CSV ZIP e GeoJSON exercitados com entradas controladas; não equivalem a pacote completo de reprodução. \\
-OE8 & Parcialmente concluído & Suíte, demonstração e análise de 31 submissões declaradas reais; independência pessoal não autenticada e estudos por cultura não realizados. \\ \hline
+OE8 & Parcialmente concluído & Suíte, demonstração e análise de 31 submissões ao questionário; avaliação de uso descritiva e estudos por cultura não realizados. \\ \hline
 \end{tabular}
 \end{table*}
 
@@ -52,7 +52,7 @@ A consulta por pixel ilustra esse contraste. Entre quem a avaliou, houve 20/23 r
 
 Os relatos também delimitam a comunicação científica da interface. Termos como fertilidade, compactação e diagnóstico surgem nas respostas, mas o sistema não produz essas inferências. Explicar bandas, janela estatística, suporte meteorológico e diferenças de escala pode ser mais relevante do que acrescentar classes de cores que reforcem interpretações indevidas. As sugestões sobre fenologia, manejo, formatos e acesso móvel devem ser tratadas como requisitos candidatos, não funcionalidades já implementadas ou evidência de ganhos de produtividade.
 
-As respostas referem-se à versão pública anterior às correções locais. Portanto, não demonstram satisfação com a legenda harmonizada, a normalização de radiação, o resumo climático multiíndice ou os demais contratos corrigidos. A associação entre uma dificuldade relatada e um defeito específico exige reprodução na versão efetivamente acessada. Como seu commit e os logs individuais não estão disponíveis, não se atribui causalidade a uma correção. Os cruzamentos também não sustentam diferenças populacionais: há predomínio de agrônomos, grupos pequenos, autoavaliação e independência pessoal não verificável.
+As respostas referem-se à versão pública anterior às correções locais. Portanto, não demonstram satisfação com a legenda harmonizada, a normalização de radiação, o resumo climático multiíndice ou os demais contratos corrigidos. A associação entre uma dificuldade relatada e um defeito específico exige reprodução na versão efetivamente acessada. Como seu commit e os logs individuais não estão disponíveis, não se atribui causalidade a uma correção. Os cruzamentos também não sustentam diferenças populacionais: há predomínio de agrônomos, grupos pequenos, autoavaliação e amostragem por adesão.
 
 \subsection{Limitações espaciais, temporais e estatísticas}
 
@@ -70,7 +70,7 @@ O serviço público Nominatim limita o tráfego agregado da aplicação a uma re
 
 Na web, visitantes compartilham a conta de serviço e o consumo de cotas, embora os registros estejam separados por sessão. GeoJSON e arquivos de resultados podem conter coordenadas sensíveis, e a privacidade dos arquivos transferidos fica sob responsabilidade de quem os armazena e compartilha. O isolamento de sessão não constitui sistema de autorização de propriedades.
 
-Não foram conduzidos testes de carga, ensaios representativos de latência, comparação quantitativa com plataformas ou avaliação de campo. A pesquisa por adesão descreve o recorte recebido, com procedência declarada pelo autor, e não permite generalização populacional. A retificação autorizada de sete carimbos preservou as respostas, mas o fuso, o encerramento formal da coleta e o identificador da versão publicada permanecem pendentes. A codificação qualitativa assistida por IA requer apreciação substantiva do autor e não oferece concordância independente entre avaliadores. Assim, as evidências sustentam o fluxo demonstrado, as regras testadas e as percepções registradas, não a adequação a qualquer condição operacional.
+Não foram conduzidos testes de carga, ensaios representativos de latência, comparação quantitativa com plataformas ou avaliação de campo. A pesquisa por adesão descreve o conjunto de respostas coletadas e não permite generalização populacional. A codificação qualitativa assistida por IA requer apreciação substantiva do autor e não oferece concordância independente entre avaliadores. Assim, as evidências sustentam o fluxo demonstrado, as regras testadas e as percepções registradas, não a adequação a qualquer condição operacional.
 
 A substituição da QA60 pela classificação de cena SCL (\textit{Scene Classification Layer}) ou por probabilidade de nuvens também requer avaliação própria: é necessário verificar classes, sombras, disponibilidade histórica e efeitos nos resultados antes de alterar o processamento.
 

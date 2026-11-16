@@ -16,7 +16,7 @@
 | Cinco esquemas científicos | Concluída | `fig/conceitos.tex`, explícitos como ilustrações |
 | Comparação de plataformas | Parcialmente concluída | EOSDA/OneSoil/fontes oficiais; EO Browser HTTP 403 |
 | Resumo, discussão e conclusão | Concluída | Dados atuais, sem resultados fictícios |
-| Compilar e inspecionar PDF | Atualizada na troca de capturas | 33 páginas, 27 figuras, cinco tabelas; `evidencias/capturas_autor/README.md`; validações anteriores são históricas |
+| Compilar e inspecionar PDF | Atualizada na revisão da redação da avaliação | 33 páginas, 27 figuras, cinco tabelas; `evidencias/revisao_redacao_usuarios/README.md`; validações anteriores são históricas |
 | Avisos institucionais de cabeçalho | Pendente de verificação | Classe preservada; overfull/headheight registrados |
 | Contraste de alguns widgets | Pendente de verificação | Identificado em capturas; revisão de acessibilidade recomendada |
 | Capturas CAP-01–17 anteriores | Preservadas como histórico | Não são mais as ilustrações da apresentação; evidências e parâmetros mantidos |
@@ -25,9 +25,9 @@
 | Capturas Excel e ZIP em visualizador | Pendente de verificação | Conteúdo validado programaticamente; CAP-18/19 mantidas no plano |
 | Link público e QR | Concluída | HTTP 200 em Chrome; QR decodificado |
 | Protocolo e script da pesquisa | Concluída | Documento/config/template/testes sintéticos separados |
-| Cabeçalhos/escalas e respostas | Concluída no nível da planilha | 50 colunas mapeadas; 31 submissões declaradas reais; lógica completa do Forms não autenticada |
+| Cabeçalhos/escalas e respostas | Concluída no nível da planilha | 50 colunas mapeadas e 31 submissões elegíveis ao questionário |
 | Retificação de datas | Concluída com autorização | Sete carimbos 16/17→15; horários e respostas inalterados; backup privado |
-| Procedência e independência | Documentadas com limites | Sem correspondência com fixtures; declaração do autor não autentica identidades |
+| Fonte e unidade de análise | Documentadas | Planilha de respostas ao questionário; unidade descritiva por submissão, sem identificação individual |
 | Análise quantitativa | Concluída | 40 itens fechados, nota geral, distribuições completas e seis cruzamentos descritivos |
 | Análise temática | Executada, aprovação pendente | 142 células, treze temas multirrótulo; assistência de IA declarada, sem dupla codificação |
 | Gráficos e tabelas da pesquisa | Concluída | Nove gráficos PDF/SVG/PNG; CSV, tabelas LaTeX e indicadores gerados |

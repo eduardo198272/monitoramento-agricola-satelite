@@ -1,0 +1,79 @@
+[
+  {
+    "id": "slaiffer2025_pdf",
+    "url": "https://periodicoscientificos.ufmt.br/ojs/index.php/nativa/article/download/18592/14926",
+    "final_url": "https://periodicoscientificos.ufmt.br/ojs/index.php/nativa/article/download/18592/14926",
+    "status": 200,
+    "pdf": true,
+    "sha256": "6b92c357289eec21f8e1a88d29259a5d278ab3bc434f4427a6d3b9ca7c21928a",
+    "bytes": 1021400,
+    "cache": "/tmp/opencode/auditoria-cientifica/fontes/slaiffer2025_pdf.pdf",
+    "scope": "Consulta técnica registrada; leitura e pertinência na auditoria de referências"
+  },
+  {
+    "id": "izquierdo2026_pdf",
+    "url": "https://redivia.gva.es/bitstream/20.500.11939/9107/5/2026_Izquierdo-Sanz_Hybrid.pdf",
+    "final_url": "https://redivia.gva.es/bitstream/handle/20.500.11939/9107/2026_Izquierdo-Sanz_Hybrid.pdf;jsessionid=377B5D11A3C32EABE02895AFBF33E2E8?sequence=5",
+    "status": 200,
+    "pdf": true,
+    "sha256": "4a80dcb14e6415f293593349cabd9e057b3db1d66d3f1fc211f55fc16fe7202f",
+    "bytes": 4928206,
+    "cache": "/tmp/opencode/auditoria-cientifica/fontes/izquierdo2026_pdf.pdf",
+    "scope": "Consulta técnica registrada; leitura e pertinência na auditoria de referências"
+  },
+  {
+    "id": "pohjankukka2025_pdf",
+    "url": "https://jukuri.luke.fi/bitstreams/13de6261-6b52-447b-91f1-3b0e6df95864/download",
+    "final_url": "https://jukuri.luke.fi/bitstreams/13de6261-6b52-447b-91f1-3b0e6df95864/download",
+    "status": 200,
+    "pdf": false,
+    "sha256": "f466a55ed7a95f3eaa3197f3c70de12723c606ba840ce0f4385d73ecc4ac6d93",
+    "bytes": 348445,
+    "cache": "/tmp/opencode/auditoria-cientifica/fontes/pohjankukka2025_pdf.html",
+    "scope": "Consulta técnica registrada; leitura e pertinência na auditoria de referências"
+  },
+  {
+    "id": "google_testing",
+    "url": "https://abseil.io/resources/swe-book/html/ch11.html",
+    "final_url": "https://abseil.io/resources/swe-book/html/ch11.html",
+    "status": 200,
+    "pdf": false,
+    "sha256": "d2cd97dde24435eec69ff864633bb4f1c6bde45e10d4d76b3661736242124fcf",
+    "bytes": 76730,
+    "cache": "/tmp/opencode/auditoria-cientifica/fontes/google_testing.html",
+    "scope": "Consulta técnica registrada; leitura e pertinência na auditoria de referências"
+  },
+  {
+    "id": "google_modular",
+    "url": "https://abseil.io/resources/swe-book/html/ch12.html",
+    "final_url": "https://abseil.io/resources/swe-book/html/ch12.html",
+    "status": 200,
+    "pdf": false,
+    "sha256": "e0269a0f2ad2b107d1fefc2bac75de0459a54fa3af1663852844c396b4cb5107",
+    "bytes": 84935,
+    "cache": "/tmp/opencode/auditoria-cientifica/fontes/google_modular.html",
+    "scope": "Consulta técnica registrada; leitura e pertinência na auditoria de referências"
+  },
+  {
+    "id": "oecd_summary",
+    "url": "https://www.oecd.org/en/publications/frascati-manual-2015_9789264239012-en.html",
+    "final_url": "https://www.oecd.org/en/publications/frascati-manual-2015_9789264239012-en.html",
+    "status": 403,
+    "pdf": false,
+    "sha256": "68cf6d5d258b18f697211001cf4190995e6dd643e8fc64816c0019c10d83077c",
+    "bytes": 5673,
+    "cache": "/tmp/opencode/auditoria-cientifica/fontes/oecd_summary.html",
+    "scope": "Consulta técnica registrada; leitura e pertinência na auditoria de referências"
+  },
+  {
+    "id": "streamlit_state",
+    "url": "https://docs.streamlit.io/develop/concepts/architecture/session-state",
+    "final_url": "https://docs.streamlit.io/develop/concepts/architecture/session-state",
+    "status": 200,
+    "pdf": false,
+    "sha256": "f1a81d38fb3acdc2151edb5bb91b003d9d2afc0f52ac41876bf410eb640efbd8",
+    "bytes": 218455,
+    "cache": "/tmp/opencode/auditoria-cientifica/fontes/streamlit_state.html",
+    "scope": "Consulta técnica registrada; leitura e pertinência na auditoria de referências"
+  }
+]

@@ -1,0 +1,45 @@
+........................................................................ [ 10%]
+........................................................................ [ 20%]
+........................................................................ [ 30%]
+........................................................................ [ 40%]
+........................................................................ [ 50%]
+........................................................................ [ 60%]
+........................................................................ [ 70%]
+........................................................................ [ 81%]
+........................................................................ [ 91%]
+..............................................................           [100%]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.14.4-final-0 ________________
+
+Name                                    Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------------------------
+src/app/__init__.py                         5      0      0      0   100%
+src/app/anomalies.py                       42      0     18      0   100%
+src/app/climate.py                        117      0     54      0   100%
+src/app/config.py                          21      0      6      0   100%
+src/app/earth_engine.py                    40      0      8      0   100%
+src/app/ee_auth.py                         21      0      8      0   100%
+src/app/export_context.py                 116      0     72      0   100%
+src/app/export_csv.py                     102      0     42      0   100%
+src/app/export_maps.py                    165      0     32      0   100%
+src/app/export_pdf.py                     246      0     78      0   100%
+src/app/export_xlsx.py                    180      0     60      0   100%
+src/app/locations_geojson.py               44      0     20      0   100%
+src/app/locations_transfer_ui.py           25      0      6      0   100%
+src/app/main.py                           559      0    156      0   100%
+src/app/map_interaction.py                  8      0      0      0   100%
+src/app/maps.py                           273      0    120      0   100%
+src/app/pipeline.py                        85      0     20      0   100%
+src/app/saved_locations_repository.py      93      0     20      0   100%
+src/app/saved_locations_service.py         73      0     16      0   100%
+src/app/saved_locations_session.py         38      0      6      0   100%
+src/app/saved_locations_validation.py      64      0     36      0   100%
+src/app/styles.py                           7      0      0      0   100%
+src/app/time_series.py                     35      0     12      0   100%
+src/app/utils.py                           15      0      8      0   100%
+src/app/validate_apis.py                  146      0     26      0   100%
+src/app/validate_scenarios.py             215      0     32      0   100%
+-----------------------------------------------------------------------------------
+TOTAL                                    2735      0    856      0   100%
+Required test coverage of 100% reached. Total coverage: 100.00%
+710 passed in 12.29s

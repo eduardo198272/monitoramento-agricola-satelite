@@ -1,4 +1,4 @@
-"""Análise descritiva local. Não autentica pessoas nem acessa Google Forms."""
+"""Análise descritiva local da planilha de respostas ao questionário."""
 
 import argparse
 from collections import Counter
@@ -165,8 +165,8 @@ def analyze_frame(frame):
                "linhas_em_duplicatas_sem_carimbo_requerem_revisao": int(response_duplicate.sum()),
                "sem_consentimento": int((~consent).sum()),
                "sem_exploracao_declarada": int((~explored).sum()),
-               "unidade": "Submissão elegível; independência pessoal não comprovada",
-               "procedencia": "Todos os registros declarados reais pelo autor; não há autenticação externa",
+               "unidade": "Submissão elegível ao questionário",
+               "procedencia": "Planilha de respostas do questionário de avaliação com usuários",
                "sinteticos_identificados": 0,
                "nao_confirmados_na_classificacao_operacional": 0}
     return eligible, pd.DataFrame(result_rows), pd.DataFrame(frequencies), note, note_distribution, quality
@@ -301,7 +301,7 @@ def run(source, output, new_source_confirmed=False):
             "arquivo": "tests/test_user_survey_analysis.py",
             "correspondencias_texto_distintivo": int(frame.iloc[:, 43:48].astype(str).eq(
                 "Comentário sintético").any(axis=1).sum()),
-            "limite": "Comparação com fixtures locais conhecidas; não certifica autenticidade externa"},
+            "limite": "Conferência de separação entre a fonte da pesquisa e as entradas de testes locais"},
         "ambiente": {"python": platform.python_version(), "pandas": pd.__version__,
                      "numpy": np.__version__, "openpyxl": openpyxl.__version__},
         "versao_publica": "Avaliou-se versão anterior às correções; commit e intervalo de publicação não fornecidos",

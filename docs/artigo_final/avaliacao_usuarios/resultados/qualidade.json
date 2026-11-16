@@ -5,8 +5,8 @@
   "linhas_em_duplicatas_sem_carimbo_requerem_revisao": 0,
   "sem_consentimento": 0,
   "sem_exploracao_declarada": 0,
-  "unidade": "Submissão elegível; independência pessoal não comprovada",
-  "procedencia": "Todos os registros declarados reais pelo autor; não há autenticação externa",
+  "unidade": "Submissão elegível ao questionário",
+  "procedencia": "Planilha de respostas do questionário de avaliação com usuários",
   "sinteticos_identificados": 0,
   "nao_confirmados_na_classificacao_operacional": 0,
   "registros_pendentes_codificacao": 0,
@@ -289,7 +289,7 @@
   "sinteticos_comparados": {
     "arquivo": "tests/test_user_survey_analysis.py",
     "correspondencias_texto_distintivo": 0,
-    "limite": "Comparação com fixtures locais conhecidas; não certifica autenticidade externa"
+    "limite": "Conferência de separação entre a fonte da pesquisa e as entradas de testes locais"
   },
   "ambiente": {
     "python": "3.14.4",

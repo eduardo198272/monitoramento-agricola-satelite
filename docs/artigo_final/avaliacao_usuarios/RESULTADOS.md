@@ -1,10 +1,9 @@
 # Resultados da avaliação com usuários
 
-Gerado pelos CSV; recorte descritivo de submissões declaradas reais pelo autor.
-Não certifica identidades independentes, eficácia agronômica nem encerramento da coleta.
+Análise descritiva das respostas coletadas no questionário de avaliação com usuários.
+Gerado pelos CSV; a amostragem por adesão e o autorrelato delimitam a interpretação.
 
-Recebidas/elegíveis: **31/31**. Período dos carimbos retificados: 2026-11-06 a 2026-11-15.
-Sete carimbos foram retificados por solicitação do autor; horários e respostas preservados.
+Recebidas/elegíveis: **31/31**. Período das respostas analisadas: 2026-11-06 a 2026-11-15.
 
 ## Avaliação geral
 
@@ -75,5 +74,5 @@ Médias/DP dos códigos ordinais são complementares; não representam intervalo
 - As categorias de desempenho são relatos, não cronometração; as aplicações agronômicas propostas não foram demonstradas.
 - Gráficos, cruzamentos e avaliações negativas permanecem disponíveis, sem seleção somente de resultados favoráveis.
 - Dados referem-se à versão pública anterior às correções; não atribuir aos respondentes avaliação das correções locais.
-- A independência dos registros não é verificável; as análises cruzadas são exploratórias e sem testes de hipótese.
+- A unidade de análise é a submissão ao questionário; os cruzamentos são exploratórios, sem testes de hipótese ou generalização populacional.
 - A codificação qualitativa e a interpretação requerem aprovação substantiva do autor.

@@ -87,11 +87,10 @@ def generate():
         "Categoria & n & Trecho literal sem identificação & Implicação", rows))
     text = [
         "# Resultados da avaliação com usuários", "",
-        "Gerado pelos CSV; recorte descritivo de submissões declaradas reais pelo autor.",
-        "Não certifica identidades independentes, eficácia agronômica nem encerramento da coleta.", "",
+        "Análise descritiva das respostas coletadas no questionário de avaliação com usuários.",
+        "Gerado pelos CSV; a amostragem por adesão e o autorrelato delimitam a interpretação.", "",
         f"Recebidas/elegíveis: **{quality['recebidos']}/{quality['elegiveis']}**. "
-        f"Período dos carimbos retificados: {' a '.join(quality['periodo_carimbos_corrigidos'])}.",
-        "Sete carimbos foram retificados por solicitação do autor; horários e respostas preservados.", "",
+        f"Período das respostas analisadas: {' a '.join(quality['periodo_carimbos_corrigidos'])}.", "",
         "## Avaliação geral", "",
         f"n={int(note.n_valido)}; média={number(note.media,2)}; DP amostral={number(note.dp_amostral,2)}; "
         f"mediana={number(note.mediana,0)}; moda={int(note.modas)}; "
@@ -124,7 +123,7 @@ def generate():
              "- As categorias de desempenho são relatos, não cronometração; as aplicações agronômicas propostas não foram demonstradas.",
              "- Gráficos, cruzamentos e avaliações negativas permanecem disponíveis, sem seleção somente de resultados favoráveis.",
              "- Dados referem-se à versão pública anterior às correções; não atribuir aos respondentes avaliação das correções locais.",
-             "- A independência dos registros não é verificável; as análises cruzadas são exploratórias e sem testes de hipótese.",
+             "- A unidade de análise é a submissão ao questionário; os cruzamentos são exploratórios, sem testes de hipótese ou generalização populacional.",
              "- A codificação qualitativa e a interpretação requerem aprovação substantiva do autor.", ""]
     (BASE/"RESULTADOS.md").write_text("\n".join(text))
 

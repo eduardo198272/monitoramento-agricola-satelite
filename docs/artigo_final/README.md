@@ -30,10 +30,11 @@ seção, conferência de fontes e pendências.
 - [Relatório de alterações, referências e pendências](REVISAO_TCC.md)
 
 - [Correções técnicas e testes de regressão](CORRECOES_TECNICAS.md)
-- [Pesquisa com usuários e incorporação de respostas reais](PESQUISA_USUARIOS.md)
+- [Pesquisa com usuários e análise das respostas coletadas](PESQUISA_USUARIOS.md)
 - [Checklist de entrega](CHECKLIST_ENTREGA.md)
 - [Avaliação com usuários: planilha, análise e gráficos](avaliacao_usuarios/README.md)
 - [Capturas fornecidas pelo autor: substituição e validação atual do PDF](evidencias/capturas_autor/README.md)
+- [Revisão da redação da avaliação e compilação mais recente](evidencias/revisao_redacao_usuarios/README.md)
 
 Na apresentação atual foram usadas 16 capturas fornecidas pelo autor,
 agrupadas em onze figuras; o PDF permanece com 33 páginas. A imagem nova do

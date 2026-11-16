@@ -185,7 +185,7 @@ retornos 429 foram complementados por consultas DOI nesta sessão, não apagados
    para trabalhos futuros. A revisão não certifica identidade linguística.
 2. `[VALIDAR COM AUTOR]` Apreciar com o orientador a diferença entre os estudos
    de soja, milho e pastagem planejados e a avaliação computacional executada.
-3. `[EVIDÊNCIA NECESSÁRIA]` Disponibilizar instrumento completo e respostas reais
+3. `[EVIDÊNCIA NECESSÁRIA]` Disponibilizar instrumento completo e respostas coletadas
    da pesquisa; confirmar divulgação, período efetivo de coleta e procedimentos
    éticos. Não há estatísticas nem depoimentos de participantes nesta revisão.
 4. `[VALIDAR COM AUTOR]` Confirmar mês da defesa, identificador/link institucional,

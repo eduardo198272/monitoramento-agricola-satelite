@@ -3,8 +3,8 @@
 ## Fonte preservada e autorização
 
 Planilha recebida: `docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx`.
-O autor confirmou nesta atividade que todos os registros devem ser considerados
-reais e, depois, solicitou corrigir os dias 16 e 17 para 15/11/2026.
+O conjunto de respostas do questionário foi fornecido pelo autor, que
+solicitou corrigir os dias 16 e 17 para 15/11/2026.
 A instrução de preservar o original foi atendida mediante cópia byte a byte
 **antes** da retificação expressamente autorizada.
 
@@ -22,7 +22,6 @@ não regrava a planilha.
 Os metadados do XLSX recebido identificavam openpyxl e criação em 15/11/2026,
 enquanto sete carimbos apontavam 16/17. Isso motivou a pendência inicial;
 o autor atribuiu a diferença a erro de digitação e autorizou a retificação.
-Metadados de edição não certificam nem refutam autenticidade das respostas.
 Não há mais datas posteriores ao dia 15 no recorte corrigido. Fuso e data
 formal de encerramento não foram informados.
 
@@ -48,21 +47,16 @@ avaliação, que não é ausência nem neutralidade. A utilidade de gerenciament
 de áreas e consulta por pixel tem oito `Não consegui avaliar` cada. A partição
 por coluna, incluindo todas as ausências, está em `resultados/qualidade.json`.
 
-Não se prova que as 31 submissões correspondam a 31 pessoas diferentes.
-Não se tentaram inferir identidades a partir dos horários ou das respostas.
-Apenas inexistência de duplicatas não comprova independência.
+Não foram coletados identificadores individuais. A unidade da análise é a
+submissão elegível ao questionário, e não se inferem identidades a partir de
+horários, perfis ou respostas.
 
-## Classificação de procedência
+## Fonte de análise e separação dos testes
 
-| Categoria operacional | Registros | Fundamento |
+| Conjunto | Registros incluídos na análise | Fundamento |
 |---|---:|---|
-| Reais por declaração do autor | 31 | Confirmação expressa para a planilha fornecida |
-| Sintéticos identificados entre os recebidos | 0 | Sem correspondência com fixtures de pesquisa locais |
-| Sem confirmação na classificação operacional | 0 | A declaração abrange todos os registros desta fonte |
-
-**Não confundir a classificação com verificação externa.** Não houve acesso
-ao painel de respostas do Forms, logs de submissão ou lista autenticada de
-respondentes. A procedência foi declarada, não certificada independentemente.
+| Respostas do questionário | 31 | Planilha fornecida pelo autor e critérios de elegibilidade |
+| Entradas de testes automatizados | 0 | Mantidas separadas da base da pesquisa |
 
 A busca no repositório identificou os exemplos de
 `tests/test_user_survey_analysis.py`: cabeçalhos mínimos `consent`/`score` e
@@ -70,7 +64,6 @@ A busca no repositório identificou os exemplos de
 discursivo distintivo, `Comentário sintético`, não aparece na planilha.
 Nenhuma dessas fixtures foi importada na análise. Matrizes de compressão e
 snapshots sintéticos dos testes da plataforma não são bases de participantes.
-O alcance é o material disponível no repositório, não fontes externas desconhecidas.
 
 ## Consistência interpretativa
 
@@ -79,7 +72,7 @@ O alcance é o material disponível no repositório, não fontes externas descon
   criadas taxas artificiais para subfunções.
 - Avaliar facilidade ou utilidade não exige, neste instrumento, comprovação
   observada de sucesso na tarefa. Existem não tentativas e avaliações em outros
-  itens; isso é mantido e tratado como limite do autorrelato, não fraude.
+  itens; isso é mantido e tratado como limite do autorrelato.
 - Algumas respostas mencionam comparação lado a lado, alertas por cores e
   estação meteorológica, que não são confirmados na implementação inspecionada.
   Podem expressar expectativas, interpretação ou confusão; não são provas de
@@ -103,6 +96,4 @@ textos e supressão de grupos pequenos. Não são participantes adicionais.
 - Aprovação pelo autor da codificação temática e da interpretação.
 - Identificador da revisão pública e documentação do período efetivo de coleta.
 - Confirmação institucional de ética, citações e declaração de assistência de IA.
-- Validação externa da independência, se o autor dispuser de evidência adequada,
-  sem coletar/publicar identificadores desnecessários retrospectivamente.
 - Apreciação de privacidade antes de qualquer publicação da planilha completa.

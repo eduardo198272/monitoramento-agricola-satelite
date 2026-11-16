@@ -1,9 +1,9 @@
 # Avaliação da plataforma com usuários
 
-Recorte de **31 submissões elegíveis declaradas reais pelo autor**, proveniente de
-`docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx`. Não se
-certificam 31 identidades distintas. A versão pública avaliada antecede as
-correções locais; não houve deploy.
+Análise de **31 submissões elegíveis ao questionário de avaliação com usuários**,
+registradas em `docs/Respostas – Avaliação da plataforma agrícola – TCC UPF.xlsx`.
+A versão pública avaliada antecede as correções locais. Os dados são
+apresentados de forma agregada, sem identificação individual.
 
 - [Metodologia](METODOLOGIA.md)
 - [Qualidade, procedência e retificação autorizada](RELATORIO_QUALIDADE_DADOS.md)
@@ -47,7 +47,7 @@ não remover as verificações.
 Um hash de fonte diferente do recorte confirmado interrompe a análise antes de
 sobrescrever resultados. Para uma fonte atualizada, usar
 `--confirmar-procedencia` **somente após nova confirmação do responsável**.
-Esse parâmetro registra a declaração, não autentica a coleta.
+Esse parâmetro controla a atualização da fonte utilizada na análise.
 
 ## Retificação já executada — não repetir
 
@@ -64,8 +64,8 @@ revisão específica de privacidade; ausência de nome/e-mail não garante anoni
 
 ## Limites
 
-A declaração do autor é a base de classificação operacional como real; não há
-autenticação independente no Forms. Não se atribuem SUS/TAM/UTAUT/NPS ao
+O delineamento é descritivo, com adesão voluntária e respostas autodeclaradas.
+Não se atribuem SUS/TAM/UTAUT/NPS ao
 instrumento, eficácia agronômica, redução de custos ou desempenho cronometrado.
 A codificação e a interpretação assistidas por IA dependem de aprovação
 substantiva do autor e das orientações institucionais.

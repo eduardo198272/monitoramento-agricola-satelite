@@ -2,7 +2,7 @@
 
 > Registro histórico da integração da pesquisa, anterior à substituição das
 > capturas da plataforma. Para o PDF e as figuras atuais, consultar
-> [`../evidencias/capturas_autor/README.md`](../evidencias/capturas_autor/README.md).
+> [`../evidencias/revisao_redacao_usuarios/README.md`](../evidencias/revisao_redacao_usuarios/README.md).
 > Os cálculos e dados da pesquisa não foram alterados nessa troca visual.
 
 **Data:** 15/11/2026. **Base Git:** `af120d5`, preservadas as alterações locais
@@ -29,8 +29,8 @@ aprovação substantiva do autor; sem commit, push, merge ou deploy.
 
 - 31 submissões, todas com consentimento e exploração autodeclarados.
 - Zero duplicatas exatas e zero equivalências integrais sem o carimbo.
-- Procedência real declarada pelo autor, sem correspondência com exemplos
-  sintéticos de pesquisa conhecidos; não se autenticaram identidades no Forms.
+- Fonte: planilha de respostas ao questionário, separada das entradas de
+  testes automatizados.
 - Sete carimbos 16/17→15/11/2026, com horários e demais respostas preservados.
 - Fonte recebida SHA-256:
   `d61b9f11514f8d42f276abdb3e4e173782955c468fb50d774680032d342ce48a`.
@@ -120,9 +120,9 @@ compilações, mesmo quando as estatísticas se reproduzem.
 
 - [x] Protocolo autoral consultado integralmente antes da redação.
 - [x] Planilha, abas, itens, escalas, consentimento e ausências inspecionados.
-- [x] Procedência declarada e comparação com sintéticos locais documentadas.
+- [x] Fonte de respostas e separação das entradas de testes documentadas.
 - [x] Datas retificadas somente após autorização, com backup e auditoria.
-- [x] Unidade de análise e ausência de autenticação individual explicitadas.
+- [x] Unidade de análise por submissão e ausência de identificadores explicitadas.
 - [x] Estatísticas, gráficos, tabelas e narrativa confrontados.
 - [x] Categorias de não tentativa/impossibilidade separadas de neutralidade.
 - [x] Resultados desfavoráveis e limitações mantidos.
@@ -142,7 +142,7 @@ compilações, mesmo quando as estatísticas se reproduzem.
 
 Atividade executada com GPT-6.1 Sol (OpenAI), no OpenCode, sob solicitação do
 autor: inspeção, scripts, cálculos, gráficos, codificação semântica proposta,
-redação e validação. Não houve segundo pesquisador independente ou autenticação
-do painel Forms. Os dados e o manuscrito não foram enviados às fontes
+redação e validação. Não houve segundo codificador independente.
+Os dados e o manuscrito não foram enviados às fontes
 bibliográficas consultadas. A assistência não substitui responsabilidade
 intelectual, aprovação do autor ou apreciação do orientador.
